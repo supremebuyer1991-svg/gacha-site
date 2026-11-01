@@ -1,4 +1,21 @@
 {
- "updated_at": null,
- "stock": []
+ "updated_at": "2026-11-01T12:56:49.470Z",
+ "source": "ガシャポンどこ？（バンダイ公式）",
+ "stock": [
+  {
+   "item_id": "bandai-gundam-robot-damashii-miniature-2026-11",
+   "store_id": "g-s90000132",
+   "status": "in_stock"
+  },
+  {
+   "item_id": "bandai-gundam-robot-damashii-miniature-2026-11",
+   "store_id": "g-s90000042",
+   "status": "in_stock"
+  },
+  {
+   "item_id": "bandai-gundam-robot-damashii-miniature-2026-11",
+   "store_id": "g-s90001333",
+   "status": "in_stock"
+  }
+ ]
 }

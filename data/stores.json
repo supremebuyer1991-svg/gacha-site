@@ -1,1 +1,38 @@
-[]
+[
+  {
+    "id": "g-s90000132",
+    "name": "＃C-plaあべのキューズモール",
+    "name_en": "",
+    "prefecture": "大阪府",
+    "address": "大阪府大阪市阿倍野区阿倍野筋一丁目6番1号",
+    "address_en": "",
+    "lat": 34.6450456,
+    "lng": 135.5117274,
+    "geo": "official",
+    "source_url": "https://gashapon.jp/shop/shop.php?shop_code=S90000132"
+  },
+  {
+    "id": "g-s90000042",
+    "name": "ELM",
+    "name_en": "",
+    "prefecture": "青森県",
+    "address": "青森県五所川原市大字唐笠柳字藤巻517-1",
+    "address_en": "",
+    "lat": 40.79874579642538,
+    "lng": 140.4542324603045,
+    "geo": "official",
+    "source_url": "https://gashapon.jp/shop/shop.php?shop_code=S90000042"
+  },
+  {
+    "id": "g-s90001333",
+    "name": "FESTA山鹿店",
+    "name_en": "",
+    "prefecture": "熊本県",
+    "address": "熊本県山鹿市方保田字鳥越3468-1",
+    "address_en": "",
+    "lat": 33.00471672221057,
+    "lng": 130.72303806718762,
+    "geo": "official",
+    "source_url": "https://gashapon.jp/shop/shop.php?shop_code=S90001333"
+  }
+]
