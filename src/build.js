@@ -279,6 +279,12 @@ for (const it of items) {
   }));
 }
 
+// デザイン・動きのファイルが変わったら、ブラウザに古いものが残らないよう番号を付ける
+const crypto = require("crypto");
+const ver = (f) => crypto.createHash("md5").update(fs.readFileSync(path.join(__dirname, f))).digest("hex").slice(0, 8);
+const CSS_V = ver("style.css");
+const JS_V = ver("app.js");
+
 const FONTS = "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700;900&display=swap";
 
 /* ================= 言語ごとにページを作る ================= */
@@ -341,7 +347,7 @@ ${site.x_account ? `<meta name="twitter:site" content="@${esc(site.x_account.rep
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="${FONTS}">
-<link rel="stylesheet" href="${c.R}assets/style.css">
+<link rel="stylesheet" href="${c.R}assets/style.css?v=${CSS_V}">
 ${ld}`;
     const content = `${site.sample_mode ? `<div class="sample-bar">${t.sampleBar}</div>` : ""}
 <header class="site-header"><div class="wrap">
@@ -359,7 +365,7 @@ ${ld}`;
   <nav aria-label="${t.footAria}"><a href="${c.H}faq.html">${t.nav.faq}</a><a href="${c.H}about.html">${t.about}</a><a href="${c.H}calendar.html">${t.nav.calendar}</a><a href="${switchHref}" hreflang="${other}" lang="${other}">${t.switchLabel}</a></nav>
   <p class="disclosure">${t.disclosure}</p>
 </div></footer>
-<script src="${c.R}assets/app.js" defer></script>`;
+<script src="${c.R}assets/app.js?v=${JS_V}" defer></script>`;
     const html = fragment ? `${head}\n${content}` : `<!doctype html>
 <html lang="${t.htmlLang}">
 <head>
