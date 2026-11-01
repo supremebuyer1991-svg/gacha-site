@@ -90,6 +90,7 @@ const T = {
     empty: "まだ掲載している商品はありません。",
     calTitle: "ガチャガチャ発売カレンダー", calH1: "発売カレンダー", calLead: "月ごとの発売予定です。発売時期は地域や店舗によって前後することがあります。",
     calDesc: "新作ガチャガチャの発売予定を月ごとに一覧できるカレンダー。価格・種類数・メーカーもまとめて確認できます。",
+    calPast: "過去の発売", calMonthTitle: (y, m) => `${y}年${m}月発売のガチャガチャ`,
     thisMonth: "今月", calMonth: (y, m, n) => `${y}年${m}月<br>${n}シリーズ`,
     faqTitle: "よくある質問", faqLead: "在庫情報の見方や、通販での購入についてまとめました。",
     faqDesc: "在庫情報の精度、位置情報の扱い、通販での購入方法など、よくある質問への回答です。",
@@ -156,6 +157,7 @@ const T = {
     empty: "No items listed yet.",
     calTitle: "Gacha release calendar", calH1: "Release calendar", calLead: "Upcoming capsule toys by month. Actual arrival in shops can vary by area and store.",
     calDesc: "Monthly calendar of new Japanese capsule toy (gacha) releases with prices, number of designs and makers.",
+    calPast: "Past releases", calMonthTitle: (y, m) => `Gacha released in ${MONTH_EN[m - 1]} ${y}`,
     thisMonth: "This month", calMonth: (y, m, n) => `${MONTH_EN[m - 1]} ${y}<br>${n} series`,
     faqTitle: "FAQ", faqLead: "How to read stock information and how to buy online.",
     faqDesc: "Answers about stock accuracy, location privacy, buying gacha online and visiting shops in Japan.",
@@ -601,20 +603,44 @@ ${content}
     listPage(`maker/${makerSlug(maker)}.html`, { title: t.makerPage(label), lead: t.makerLead(label, list.length), list });
   }
 
-  /* ---------- 発売カレンダー ---------- */
+  /* ---------- 発売カレンダー（先月以降）と、過去の月ごとのページ ---------- */
   {
-    const c = ctx("calendar.html");
-    const months = [...new Set(items.map((it) => it.release))].sort();
-    const body = `<div class="wrap">
-  <header class="page-head"><h1>${t.calH1}</h1><p class="lead">${t.calLead}</p></header>
-  <div class="section" style="padding-top:40px">${months.map((m) => {
-    const [y, mo] = m.split("-");
-    const list = items.filter((it) => it.release === m).sort(byPopular);
-    return `<section class="month" id="m${m}"><div class="month-label"><b>${mo}</b><span>${t.calMonth(y, Number(mo), list.length)}</span>${m === thisMonth ? `<br><span class="now">${t.thisMonth}</span>` : ""}</div>
+    const allMonths = [...new Set(items.map((it) => it.release))].sort();
+    const prevMonth = new Date(Date.UTC(nowJST.getUTCFullYear(), nowJST.getUTCMonth() - 1, 1)).toISOString().slice(0, 7);
+    const recent = allMonths.filter((m) => m >= prevMonth);
+    const past = allMonths.filter((m) => m < prevMonth).reverse();
+    const monthBlock = (m, c) => {
+      const [y, mo] = m.split("-");
+      const list = items.filter((it) => it.release === m).sort(byPopular);
+      return `<section class="month" id="m${m}"><div class="month-label"><b>${mo}</b><span>${t.calMonth(y, Number(mo), list.length)}</span>${m === thisMonth ? `<br><span class="now">${t.thisMonth}</span>` : ""}</div>
       <div class="grid">${list.map((it) => card(it, c)).join("")}</div></section>`;
-  }).join("")}</div>
+    };
+    const archiveNav = (c) => past.length ? `<nav class="archive" aria-label="${t.calPast}"><h2>${t.calPast}</h2><div class="archive-list">${past.map((m) => {
+      const [y, mo] = m.split("-");
+      return `<a href="${c.H}calendar/${m}.html">${t.calMonth(y, Number(mo), items.filter((it) => it.release === m).length).replace("<br>", " ")}</a>`;
+    }).join("")}</div></nav>` : "";
+    {
+      const c = ctx("calendar.html");
+      const body = `<div class="wrap">
+  <header class="page-head"><h1>${t.calH1}</h1><p class="lead">${t.calLead}</p></header>
+  <div class="section" style="padding-top:40px">${recent.map((m) => monthBlock(m, c)).join("")}</div>
+  ${archiveNav(c)}
 </div>`;
-    layout({ rel: "calendar.html", title: t.calTitle, description: t.calDesc, body, current: "calendar" });
+      layout({ rel: "calendar.html", title: t.calTitle, description: t.calDesc, body, current: "calendar" });
+    }
+    for (const m of past) {
+      const rel = `calendar/${m}.html`;
+      const c = ctx(rel);
+      const [y, mo] = m.split("-");
+      const title = t.calMonthTitle(y, Number(mo));
+      const body = `<div class="wrap">
+  <nav class="breadcrumb" aria-label="breadcrumb"><a href="${c.H}index.html">${t.home}</a><span>/</span><a href="${c.H}calendar.html">${t.calH1}</a><span>/</span><span>${esc(title)}</span></nav>
+  <header class="page-head"><h1>${esc(title)}</h1></header>
+  <div class="section" style="padding-top:24px">${monthBlock(m, c)}</div>
+  ${archiveNav(c)}
+</div>`;
+      layout({ rel, title, description: title, body, current: "calendar" });
+    }
   }
 
   /* ---------- よくある質問 ---------- */

@@ -12,6 +12,7 @@ if (process.argv[2] === "--vocab") {
   for (const g of site.quiz_groups) console.log(`  ${g.label}: ` + g.subs.map((x) => `${g.slug}:${x.slug}（${x.label}）`).join(" "));
   process.exit(0);
 }
-const todo = items.filter((it) => it.tags_auto);
-for (const it of todo) console.log([it.id, it.name, (it.q_ages || []).join(","), (it.q_genders || []).join(","), (it.q_subs || []).join(",")].join("\t"));
-console.error(`見直しが必要な商品：${todo.length}件（使えるタグは node src/tags-missing.js --vocab）`);
+const LIMIT = 120; // 1回に扱うのは新しい商品から120件まで（使用量を抑えるため）
+const todo = items.filter((it) => it.tags_auto).sort((a, b) => (b.release || "").localeCompare(a.release || ""));
+for (const it of todo.slice(0, LIMIT)) console.log([it.id, it.name, (it.q_ages || []).join(","), (it.q_genders || []).join(","), (it.q_subs || []).join(",")].join("\t"));
+console.error(`見直しが必要な商品：${todo.length}件・今回は${Math.min(LIMIT, todo.length)}件（使えるタグは node src/tags-missing.js --vocab）`);

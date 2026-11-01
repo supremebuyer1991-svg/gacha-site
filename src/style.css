@@ -332,3 +332,8 @@ main { padding-block: 0 96px; }
 
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 @media (max-width: 900px) { .quiz-nav { flex-wrap: nowrap; } .quiz-nav .btn-gold { width: auto; flex: 1 1 auto; } }
+.archive { margin-top: 56px; padding-top: 32px; border-top: 1px solid var(--line); }
+.archive h2 { font-size: 20px; margin-bottom: 16px; }
+.archive-list { display: flex; flex-wrap: wrap; gap: 8px; }
+.archive-list a { padding: 8px 14px; border: 1px solid var(--line); border-radius: var(--radius); font-size: 13px; color: var(--muted); }
+.archive-list a:hover { border-color: var(--gold); color: var(--text); }

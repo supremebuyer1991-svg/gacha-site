@@ -23,7 +23,7 @@ const stores = fs.existsSync(storesPath) ? read("stores.json") : [];
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const UA = "Mozilla/5.0 (compatible; GachaSiteBot/1.0; +" + (process.env.SITE_URL || site.url) + ")";
 const WAIT_MS = 2000;
-const MAX_IMAGES_PER_RUN = 60;
+const MAX_IMAGES_PER_RUN = 100;
 
 // 比べるために、空白・記号・全角半角の違いをなくす
 const norm = (s) => String(s || "")
@@ -100,9 +100,9 @@ async function importImages() {
       const buf = Buffer.from(await res.arrayBuffer());
       if (await isPlaceholder(sharp, buf)) { console.log(`- ${it.id}: 公式画像がまだ「準備中」なので、次回また確認します`); await sleep(WAIT_MS); continue; }
       await sharp(buf)
-        .resize(800, 800, { fit: "contain", background: "#ffffff" })
+        .resize(640, 640, { fit: "contain", background: "#ffffff" })
         .flatten({ background: "#ffffff" })
-        .webp({ quality: 80 })
+        .webp({ quality: 76 })
         .toFile(path.join(ROOT, "images", `${it.id}.webp`));
       console.log(`✔ ${it.id}: 画像を取り込みました`);
       done++;
@@ -151,7 +151,10 @@ async function geocodeStores() {
  *    発売前でマシンに入っていない商品は 0件になる（発売後に自動で出てくる）。
  */
 async function importStock() {
-  const targets = items.filter((it) => /gashapon\.jp\/products\/detail\.php\?jan_code=\d{13}/.test(it.official_url || ""));
+  // 在庫は最近2か月と発売前の商品だけ確認する（公式サイトへの負担を抑えるため）
+  const nowJ = new Date(Date.now() + 9 * 3600e3);
+  const fromYm = new Date(Date.UTC(nowJ.getUTCFullYear(), nowJ.getUTCMonth() - 1, 1)).toISOString().slice(0, 7);
+  const targets = items.filter((it) => it.release >= fromYm && /gashapon\.jp\/products\/detail\.php\?jan_code=\d{13}/.test(it.official_url || ""));
   if (!targets.length) return { stores: 0, rows: 0 };
   const storeMap = new Map(stores.filter((s) => !String(s.id).startsWith("g-")).map((s) => [s.id, s])); // 手入力の店舗は残す
   const stockPath = path.join(ROOT, "data", "stock.json");

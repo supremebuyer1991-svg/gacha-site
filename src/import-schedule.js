@@ -50,17 +50,25 @@ async function main() {
   const months = [ym(now), ym(new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + 1, 1)))];
   const today = now.toISOString().slice(0, 10);
 
+  // 過去分のさかのぼり：1回の実行で1か月ずつ（data/backfill.json に次に読む月を記録）
+  const bfPath = path.join(ROOT, "data", "backfill.json");
+  const bf = fs.existsSync(bfPath) ? JSON.parse(fs.readFileSync(bfPath, "utf8")) : { next: null, until: null };
+  if (!bf.next) bf.next = ym(new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - 1, 1)));
+  if (!bf.until) bf.until = ym(new Date(Date.UTC(now.getUTCFullYear() - 1, now.getUTCMonth(), 1)));
+  const backMonth = bf.next >= bf.until ? bf.next : null;
+  if (backMonth) months.push(backMonth);
+
   const found = [];
   for (const m of months) {
     let html;
     try { html = await getText(`https://gashapon.jp/schedule/?ym=${m}`); } catch (e) { console.log(`⚠ スケジュール ${m} を読めませんでした（${e.message}）`); continue; }
     // 公開されていない月は「未定」だけのページになるので、ページ内の月メニューに含まれているか確かめる
-    if (!html.includes(`?ym=${m}"`) && m !== months[0]) { console.log(`- ${m}：まだ公開されていません`); await sleep(WAIT_MS); continue; }
+    if (!html.includes(`?ym=${m}"`) && m !== months[0] && m !== backMonth) { console.log(`- ${m}：まだ公開されていません`); await sleep(WAIT_MS); continue; }
     for (const w of html.split('<div class="week">').slice(1)) {
       const week = ((w.match(/pg-tit__week">([\s\S]*?)<(?:br|small)/) || [])[1] || "").replace(/<[^>]+>/g, "").trim();
       const re = /detail\.php\?jan_code=(\d+)" alt="([^"]*)"[\s\S]*?price--main">([\d,]+)/g;
       let x;
-      while ((x = re.exec(w))) found.push({ jan: x[1], name: decode(x[2]).trim(), price: Number(x[3].replace(/,/g, "")), month: `${m.slice(0, 4)}-${m.slice(4)}`, week });
+      while ((x = re.exec(w))) found.push({ jan: x[1], name: decode(x[2]).trim(), price: Number(x[3].replace(/,/g, "")), month: `${m.slice(0, 4)}-${m.slice(4)}`, week, past: m === backMonth });
     }
     await sleep(WAIT_MS);
   }
@@ -83,13 +91,24 @@ async function main() {
       price: f.price, release: f.month, release_note: f.week && f.week !== "未定" ? f.week : "",
       genre: guessGenre(f.name), moods: guessMoods(f.name), tags: [], tags_en: [], lineup,
       image: "", official_url: url, store_search_url: `https://gashapon.jp/shop/gplus_list.php?product_code=${jan13}`,
-      popularity: 50, added: today, description: "", description_en: "", auto: true,
+      popularity: 50, added: f.past ? `${f.month}-01` : today, description: "", description_en: "", auto: true,
     });
     added++;
     console.log(`✔ 追加：${f.name}（${f.month} ${f.week}）`);
     await sleep(WAIT_MS);
   }
   if (added) fs.writeFileSync(itemsPath, JSON.stringify(items, null, 2) + "\n");
+  if (backMonth) {
+    const left = found.filter((f) => f.past && !known.has(f.jan.slice(0, 13))).length;
+    const got = found.filter((f) => f.past).length;
+    if (!left) {
+      const [y, mo] = [Number(backMonth.slice(0, 4)), Number(backMonth.slice(4))];
+      bf.next = ym(new Date(Date.UTC(y, mo - 2, 1)));
+      if (!got) { console.log(`- ${backMonth}：公式に掲載がないので、さかのぼりを終わります`); bf.next = "000000"; }
+    }
+    fs.writeFileSync(bfPath, JSON.stringify(bf, null, 2) + "\n");
+    console.log(`さかのぼり：${backMonth}（${got}件）→ 次は ${bf.next >= bf.until ? bf.next : "完了"}`);
+  }
   console.log(`スケジュール取り込み：公式に${found.length}件、新しく${added}件を追加`);
 }
 module.exports = main;
