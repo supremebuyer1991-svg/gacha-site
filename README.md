@@ -18,7 +18,7 @@ Geminiへの説明は `GEMINI_GUIDE.md` にまとまっています。
 
 ## 最初の設定（1回だけ）
 
-1. Cloudflare で Pages のプロジェクトを作る（名前の例：`gacha-site`）
+1. （Cloudflare の Pages プロジェクトは初回公開時に自動で作られる）
 2. GitHub のリポジトリ → Settings → Secrets and variables → Actions で次を登録
    - Secrets：`CLOUDFLARE_API_TOKEN`、`CLOUDFLARE_ACCOUNT_ID`（抽選ナビと同じ値でOK）
    - Variables：`CF_PROJECT_NAME`（1で付けた名前）、`SITE_URL`（例：`https://gacha-site.pages.dev`）

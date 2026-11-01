@@ -35,4 +35,6 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          # 初回だけ Pages のプロジェクトを作る（すでにあれば何もしない）
+          preCommands: npx wrangler pages project create ${{ vars.CF_PROJECT_NAME }} --production-branch=main || true
           command: pages deploy dist --project-name=${{ vars.CF_PROJECT_NAME }} --branch=main
