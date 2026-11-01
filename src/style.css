@@ -116,11 +116,10 @@ main { padding-block: 0 96px; }
 .badge-new { position: absolute; top: 8px; left: 8px; font: italic 600 12px/1 var(--font-latin); letter-spacing: .14em; color: #17140a; background: var(--gold); padding: 4px 8px; border-radius: 2px; }
 
 /* ---------- hero + diagnosis ---------- */
-.hero { padding-top: 64px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 460px); gap: 56px; align-items: start; }
-@media (max-width: 900px) { .hero { grid-template-columns: minmax(0, 1fr); gap: 36px; padding-top: 40px; } }
-.hero h1 { font-size: clamp(30px, 4.2vw, 46px); font-weight: 800; letter-spacing: .02em; }
-.hero .lead { margin-top: 20px; font-size: 15px; }
-.hero-count { margin-top: 28px; font-size: 13px; color: var(--muted); }
+.hero { padding-top: 48px; display: flex; flex-direction: column; gap: 28px; max-width: 760px; }
+@media (max-width: 900px) { .hero { padding-top: 32px; gap: 22px; } }
+.hero-lead { font-family: var(--font-display); font-weight: 700; font-size: clamp(19px, 2.4vw, 24px); line-height: 1.7; color: var(--text); margin: 0; text-wrap: pretty; }
+.hero-count { margin-top: 10px; font-size: 13px; color: var(--muted); }
 .hero-count b { font: 600 22px/1 var(--font-latin); color: var(--gold); font-variant-numeric: tabular-nums; margin: 0 2px; }
 
 .quiz { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; display: flex; flex-direction: column; gap: 22px; }

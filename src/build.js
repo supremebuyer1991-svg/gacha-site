@@ -51,7 +51,7 @@ const T = {
     htmlLang: "ja", ogLocale: "ja_JP", switchLabel: "EN", switchAria: "English version",
     tagline: site.tagline, description: site.description,
     sampleBar: "ただいまサンプルデータを表示しています。商品・店舗・在庫はすべて架空です。",
-    nav: { new: "新着", ranking: "ランキング", calendar: "発売カレンダー", genre: "ジャンル", faq: "よくある質問" },
+    nav: { new: "新着", ranking: "注目", calendar: "発売カレンダー", genre: "ジャンル", faq: "よくある質問" },
     navAria: "メインメニュー", footAria: "サイト情報", about: "運営者情報・お問い合わせ",
     disclosure: "当サイトはAmazonアソシエイト・楽天アフィリエイトなどの広告プログラムに参加しています。掲載商品の画像・名称の権利は各メーカーに帰属します。",
     month: (ym) => { const [y, m] = ym.split("-"); return `${y}年${Number(m)}月`; },
@@ -108,7 +108,7 @@ const T = {
     htmlLang: "en", ogLocale: "en_US", switchLabel: "日本語", switchAria: "日本語版",
     tagline: site.tagline_en, description: site.description_en,
     sampleBar: "Showing sample data. All items, stores and stock levels are fictional.",
-    nav: { new: "New", ranking: "Ranking", calendar: "Calendar", genre: "Genres", faq: "FAQ" },
+    nav: { new: "New", ranking: "Picks", calendar: "Calendar", genre: "Genres", faq: "FAQ" },
     navAria: "Main menu", footAria: "Site information", about: "About & contact",
     disclosure: "As an Amazon Associate and Rakuten affiliate, we earn from qualifying purchases. Product images and names belong to their respective makers.",
     month: (ym) => { const [y, m] = ym.split("-"); return `${MONTH_EN[Number(m) - 1]} ${y}`; },
@@ -376,9 +376,8 @@ ${content}
     const body = `
 <div class="wrap">
   <section class="hero">
-    <div>
-      <h1>${t.heroH1}</h1>
-      <p class="lead">${t.heroLead}</p>
+    <div class="hero-intro">
+      <h1 class="hero-lead">${t.heroLead}</h1>
       <p class="hero-count">${t.heroCount(items.length, upcoming)}</p>
     </div>
     <form class="quiz" id="quiz" aria-labelledby="quiz-title">
