@@ -67,8 +67,10 @@ const T = {
     ages: [["10", "10代"], ["20", "20代"], ["30", "30代"], ["40", "40代"], ["50", "50代以上"]],
     next: "次へ", skip: "こだわらない", back: "戻る",
     searchPh: "商品名・作品名で探す", searchAria: "商品を検索", searchTitle: "検索結果", searchNone: "見つかりませんでした。ことばを短くするか、ひらがな・カタカナを変えてみてください。", searchCount: "件",
+    leafPrefix: (n) => `「${n}」からさらに選ぶ`,
+    sortAria: "並び替え", sorts: [["match", "相性順"], ["new", "新着順"], ["popular", "人気順"], ["release", "発売日順"], ["cheap", "安い順"]], showMore: "もっと見る",
     qGroups: "好きな系統は？（いくつでも）", more: "さらに詳しく選ぶ", less: "閉じる",
-    groupsHint: "詳しく選ばない場合は、その系統のすべてが対象になります。",
+    groupsHint: "詳しく選ばない場合は、その系統のすべてが対象になります。詳しい項目を選ぶと、さらに細かい項目が出てきます。",
     budgets: [["any", "こだわらない"], ["300", "300円まで"], ["500", "400〜500円"], ["premium", "600円以上"]],
     quizBtn: "診断する", results: "診断結果",
     newTitle: "新着ガチャ", toCalendar: "発売カレンダーを見る", rankTitle: "注目のガチャ", genreTitle: "ジャンルから探す",
@@ -131,8 +133,10 @@ const T = {
     ages: [["10", "Teens"], ["20", "20s"], ["30", "30s"], ["40", "40s"], ["50", "50+"]],
     next: "Next", skip: "No preference", back: "Back",
     searchPh: "Search items or series", searchAria: "Search items", searchTitle: "Search results", searchNone: "No results. Try a shorter word.", searchCount: " results",
+    leafPrefix: (n) => `Narrow down ${n}`,
+    sortAria: "Sort", sorts: [["match", "Best match"], ["new", "Newest"], ["popular", "Popular"], ["release", "Release date"], ["cheap", "Lowest price"]], showMore: "Show more",
     qGroups: "What do you like? (pick any)", more: "Narrow it down", less: "Close",
-    groupsHint: "If you don't narrow it down, everything in that group counts.",
+    groupsHint: "If you don't narrow it down, everything in that group counts. Pick a detail to see even finer options.",
     budgets: [["any", "Any"], ["300", "Up to ¥300"], ["500", "¥400–500"], ["premium", "¥600+"]],
     quizBtn: "Show my matches", results: "Your matches",
     newTitle: "New arrivals", toCalendar: "See release calendar", rankTitle: "Editor's picks", genreTitle: "Browse by genre",
@@ -256,6 +260,14 @@ const affiliate = (it) => {
     : rakutenSearch;
   return { amazon, rakuten };
 };
+
+/* ---------- 診断：商品が1件もない項目は出さない ---------- */
+const hasSub = (key) => items.some((it) => (it.q_subs || []).includes(key));
+const liveSubs = (g) => g.subs.filter((x) => hasSub(`${g.slug}:${x.slug}`));
+const liveLeaves = (g, x) => (x.leaves || []).filter((l) => {
+  const rx = new RegExp(l.match, "i");
+  return items.some((it) => (it.q_subs || []).includes(`${g.slug}:${x.slug}`) && rx.test(it.name));
+});
 
 /* ---------- 書き出し ---------- */
 const pages = []; // サイトマップ用 [lang, rel]
@@ -390,10 +402,10 @@ ${content}
     const stockedStores = new Set([...stockByItem.values()].flat().map((s) => s.name + s.address)).size;
     const embed = {
       home: c.H, root: c.R,
-      groups: (site.quiz_groups || []).map((g) => ({ slug: g.slug, subs: g.subs.map((x) => ({ slug: x.slug, match: x.match })) })),
+      groups: (site.quiz_groups || []).map((g) => ({ slug: g.slug, subs: g.subs.map((x) => ({ slug: x.slug, leaves: (x.leaves || []).map((l) => ({ slug: l.slug, match: l.match })) })) })),
       items: items.map((it) => ({
         id: it.id, name: nameOf(it, lang), jn: it.name, price: it.price, lineup: it.lineup, genre: it.genre, genre_label: genreLabel(genreOf(it.genre), lang),
-        moods: it.moods, popularity: it.popularity, qa: it.q_ages || [], qg: it.q_genders || [], qs: it.q_subs || [], image: it.image, release_label: t.month(it.release),
+        moods: it.moods, popularity: it.popularity, ad: it.added, rl: it.release, qa: it.q_ages || [], qg: it.q_genders || [], qs: it.q_subs || [], image: it.image, release_label: t.month(it.release),
       })),
     };
     const opt = (name, type, value, label, checked) =>
@@ -430,7 +442,13 @@ ${content}
         <div class="groups">${(site.quiz_groups || []).map((g) => `<div class="grp" data-group="${g.slug}">
           <label class="grp-main"><input type="checkbox" name="group" value="${g.slug}"><span>${lang === "en" ? g.en : g.label}</span></label>
           <button type="button" class="grp-more" aria-expanded="false" aria-controls="sub-${g.slug}" data-more="${t.more}" data-less="${t.less}">${t.more}</button>
-          <div class="grp-subs opts" id="sub-${g.slug}" hidden>${g.subs.map((x) => opt("sub", "checkbox", `${g.slug}:${x.slug}`, lang === "en" ? x.en : x.label)).join("")}</div>
+          <div class="grp-subs" id="sub-${g.slug}" hidden>
+            <div class="opts">${liveSubs(g).map((x) => opt("sub", "checkbox", `${g.slug}:${x.slug}`, lang === "en" ? x.en : x.label)).join("")}</div>
+            ${liveSubs(g).map((x) => ({ x, leaves: liveLeaves(g, x) })).filter((v) => v.leaves.length > 1).map(({ x, leaves }) => `<div class="leaf-row" data-sub="${g.slug}:${x.slug}" hidden>
+              <span class="leaf-label">${t.leafPrefix(lang === "en" ? x.en : x.label)}</span>
+              <div class="opts opts-sm">${leaves.map((l) => opt("leaf", "checkbox", `${g.slug}:${x.slug}:${l.slug}`, lang === "en" ? l.en : l.label)).join("")}</div>
+            </div>`).join("")}
+          </div>
         </div>`).join("")}</div>
       </fieldset>
       </div>
@@ -443,9 +461,12 @@ ${content}
   </section>
 
   <section class="section" id="results" hidden aria-live="polite">
-    <div class="section-head"><h2>${t.results}</h2></div>
+    <div class="section-head"><h2>${t.results}</h2>
+      <div class="sortbar" role="group" aria-label="${t.sortAria}">${t.sorts.map(([v, l], i) => `<button type="button" class="sort${i === 0 ? " is-on" : ""}" data-sort="${v}" aria-pressed="${i === 0}">${l}</button>`).join("")}</div>
+    </div>
     <p class="results-note" id="results-note"></p>
     <div class="grid" id="results-grid"></div>
+    <p class="more-wrap"><button type="button" class="btn" id="results-more" hidden>${t.showMore}</button></p>
   </section>
 
   <section class="section" id="new">

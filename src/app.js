@@ -7,7 +7,7 @@
   var EN = LANG === "en";
   var M = EN ? {
     none: "No matches. Try adding more groups or clearing the detailed picks.",
-    found: function (n) { return n + " matches, best first."; },
+    found: function (n) { return n + " matches."; },
     next: "Next", skip: "No preference",
     searchNone: "No results. Try a shorter word.", searchCount: " results.",
     searchAll: function (n) { return "See all " + n + " results"; },
@@ -27,7 +27,7 @@
     count: function (n) { return n + " shops have it in stock. Tap \u201cUse my location\u201d to sort by distance."; }
   } : {
     none: "条件に合うガチャが見つかりませんでした。系統を増やすか、詳しい項目を外してみてください。",
-    found: function (n) { return n + "件が見つかりました。相性の高い順に表示しています。"; },
+    found: function (n) { return n + "件が見つかりました。"; },
     next: "次へ", skip: "こだわらない",
     searchNone: "見つかりませんでした。ことばを短くするか、ひらがな・カタカナを変えてみてください。", searchCount: "件見つかりました。",
     searchAll: function (n) { return n + "件すべて見る"; },
@@ -163,12 +163,27 @@
         more.textContent = open ? more.getAttribute("data-less") : more.getAttribute("data-more");
         g.classList.toggle("is-open", open);
       });
-      subs.addEventListener("change", function () {
+      // 詳しい項目を選ぶと、その下の細かい項目の段が出る
+      var syncLeaves = function () {
+        [].forEach.call(subs.querySelectorAll(".leaf-row"), function (row) {
+          var sub = subs.querySelector('input[name="sub"][value="' + row.getAttribute("data-sub") + '"]');
+          row.hidden = !(sub && sub.checked);
+          if (row.hidden) [].forEach.call(row.querySelectorAll("input"), function (x) { x.checked = false; });
+        });
+      };
+      subs.addEventListener("change", function (e) {
+        if (e.target.name === "leaf" && e.target.checked) {
+          var key = e.target.value.split(":").slice(0, 2).join(":");
+          var sub = subs.querySelector('input[name="sub"][value="' + key + '"]');
+          if (sub) sub.checked = true;
+        }
         if (subs.querySelector("input:checked")) main.checked = true;
+        syncLeaves();
         g.classList.toggle("is-on", main.checked);
       });
       main.addEventListener("change", function () {
         if (!main.checked) [].forEach.call(subs.querySelectorAll("input"), function (x) { x.checked = false; });
+        syncLeaves();
         g.classList.toggle("is-on", main.checked);
       });
     });
@@ -176,8 +191,44 @@
     var val = function (n) { return (quiz.querySelector('input[name="' + n + '"]:checked') || {}).value || ""; };
     var vals = function (n) { return [].map.call(quiz.querySelectorAll('input[name="' + n + '"]:checked'), function (x) { return x.value; }); };
     var GROUPS = (data.groups || []).map(function (g) {
-      return { slug: g.slug, subs: g.subs.map(function (x) { return { slug: x.slug, rx: new RegExp(x.match, "i") }; }) };
+      return { slug: g.slug, subs: g.subs.map(function (x) {
+        return { slug: x.slug, leaves: (x.leaves || []).map(function (l) { return { slug: l.slug, rx: new RegExp(l.match, "i") }; }) };
+      }) };
     });
+
+    /* 診断結果の並び替え・もっと見る */
+    var lastResults = [], lastMax = 1, lastAny = false, lastRelaxed = false, shown = 12, sortKey = "match";
+    var moreBtn = document.getElementById("results-more");
+    var SORTS = {
+      match: function (a, b) { return b.s - a.s || b.it.popularity - a.it.popularity; },
+      "new": function (a, b) { return (b.it.ad || "").localeCompare(a.it.ad || "") || (b.it.rl || "").localeCompare(a.it.rl || "") || b.s - a.s; },
+      popular: function (a, b) { return b.it.popularity - a.it.popularity || b.s - a.s; },
+      release: function (a, b) { return (a.it.rl || "").localeCompare(b.it.rl || "") || b.s - a.s; },
+      cheap: function (a, b) { return a.it.price - b.it.price || b.s - a.s; }
+    };
+    function drawResults() {
+      var list = lastResults.slice().sort(SORTS[sortKey]);
+      if (!list.length) { note.textContent = M.none; grid.innerHTML = ""; moreBtn.hidden = true; return; }
+      note.textContent = lastRelaxed ? M.relaxed(list.length) : M.found(list.length);
+      grid.innerHTML = list.slice(0, shown).map(function (x) {
+        var pct = Math.min(99, Math.round((x.s / lastMax) * 100) - (lastRelaxed ? 20 : 0));
+        return cardHTML(x.it, data, lastAny ? pct : null);
+      }).join("");
+      moreBtn.hidden = list.length <= shown;
+    }
+    function setSort(k) {
+      sortKey = k;
+      [].forEach.call(document.querySelectorAll(".sortbar .sort"), function (b) {
+        var on = b.getAttribute("data-sort") === k;
+        b.classList.toggle("is-on", on); b.setAttribute("aria-pressed", on ? "true" : "false");
+      });
+      results.hidden = false;
+      drawResults();
+    }
+    [].forEach.call(document.querySelectorAll(".sortbar .sort"), function (b) {
+      b.addEventListener("click", function () { shown = 12; setSort(b.getAttribute("data-sort")); });
+    });
+    moreBtn.addEventListener("click", function () { shown += 12; drawResults(); });
 
     quiz.addEventListener("submit", function (e) {
       e.preventDefault();
@@ -185,20 +236,28 @@
       var chosen = vals("group");
       var chosenSubs = vals("sub");
       // 系統ごとに、細かい項目を選んでいればそれだけ、選んでいなければ全部を対象にする
-      // 細かい項目を選んだ系統は、その項目だけ（強め）。選んでいない系統は全部（ふつう）
-      var targets = GROUPS.filter(function (g) { return chosen.indexOf(g.slug) !== -1; }).map(function (g) {
+      var chosenLeaves = vals("leaf");
+      // 条件を作る：系統だけ→その系統全部（3点）、詳しい項目→その項目（6点）、さらに細かい項目→その中の作品・キャラ（9点）
+      var conds = [];
+      GROUPS.forEach(function (g) {
+        if (chosen.indexOf(g.slug) === -1) return;
         var picked = g.subs.filter(function (x) { return chosenSubs.indexOf(g.slug + ":" + x.slug) !== -1; });
-        return { slug: g.slug, subs: picked.length ? picked : g.subs, weight: picked.length ? 6 : 3 };
+        if (!picked.length) {
+          conds.push({ w: 3, test: function (it) { return it.qs.some(function (k) { return k.indexOf(g.slug + ":") === 0; }); } });
+          return;
+        }
+        picked.forEach(function (x) {
+          var key = g.slug + ":" + x.slug;
+          var leaves = x.leaves.filter(function (l) { return chosenLeaves.indexOf(key + ":" + l.slug) !== -1; });
+          if (leaves.length) conds.push({ w: 9, test: function (it) { return it.qs.indexOf(key) !== -1 && leaves.some(function (l) { return l.rx.test(it.jn); }); } });
+          else conds.push({ w: 6, test: function (it) { return it.qs.indexOf(key) !== -1; } });
+        });
       });
-
-      // 選んだ系統（細かい項目）のタグが付いた商品だけを候補にする
       var cands = data.items.map(function (it) {
         var s = 0;
-        targets.forEach(function (t) {
-          if (t.subs.some(function (x) { return it.qs.indexOf(t.slug + ":" + x.slug) !== -1; })) s += t.weight;
-        });
+        conds.forEach(function (c) { if (c.test(it)) s += c.w; });
         return { it: it, s: s };
-      }).filter(function (x) { return !targets.length || x.s > 0; });
+      }).filter(function (x) { return !conds.length || x.s > 0; });
       // 年代・性別のタグが当てはまる商品だけに絞る（0件になるときは絞らずに出す）
       var fit = function (x) {
         return (!age || x.it.qa.indexOf(age) !== -1) && (!(gender === "male" || gender === "female") || x.it.qg.indexOf(gender) !== -1);
@@ -206,20 +265,10 @@
       var strict = cands.filter(fit);
       var relaxed = !strict.length && cands.length && (age || gender === "male" || gender === "female");
       var scored = (strict.length ? strict : cands).sort(function (a, b) { return b.s - a.s || b.it.popularity - a.it.popularity; });
-      var max = targets.reduce(function (a, t) { return Math.max(a, t.weight); }, 0) || 1;
-      var anyChoice = targets.length;
-      var top = scored.slice(0, 8);
-      results.hidden = false;
-      if (!top.length) {
-        note.textContent = M.none;
-        grid.innerHTML = "";
-      } else {
-        note.textContent = relaxed ? M.relaxed(scored.length) : M.found(scored.length);
-        grid.innerHTML = top.map(function (x) {
-          var pct = Math.min(99, Math.round((x.s / max) * 100) - (relaxed ? 20 : 0));
-          return cardHTML(x.it, data, anyChoice ? pct : null);
-        }).join("");
-      }
+      var max = conds.reduce(function (a, c) { return Math.max(a, c.w); }, 0) || 1;
+      var anyChoice = conds.length;
+      lastResults = scored; lastMax = max; lastAny = anyChoice; lastRelaxed = relaxed; shown = 12;
+      setSort("match");
       results.scrollIntoView({ behavior: calm ? "auto" : "smooth", block: "start" });
     });
   }
