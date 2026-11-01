@@ -1,372 +1,627 @@
 [
   {
-    "id": "sample-kissaten-mini",
-    "name": "【サンプル】純喫茶メニューミニチュアコレクション",
-    "name_en": "[Sample] Retro Café Menu Miniatures",
-    "maker": "サンプルメーカーA",
-    "maker_en": "Sample Maker A",
-    "price": 400,
-    "release": "2026-11",
-    "genre": "miniature",
-    "moods": [
-      "real"
-    ],
-    "tags": [
-      "食品サンプル",
-      "純喫茶",
-      "クリームソーダ",
-      "大人向け"
-    ],
-    "tags_en": [
-      "food replica",
-      "retro café",
-      "cream soda"
-    ],
-    "lineup": 6,
-    "image": "",
-    "official_url": "",
-    "store_search_url": "",
-    "popularity": 92,
-    "added": "2026-10-30",
-    "description": "クリームソーダやナポリタンなど、昔ながらの喫茶店メニューを手のひらサイズで再現したシリーズ。",
-    "description_en": "Cream soda, Napolitan spaghetti and other classic Japanese café dishes in palm-sized miniature."
-  },
-  {
-    "id": "sample-sleepy-cats",
-    "name": "【サンプル】おやすみねこ ふわふわマスコット",
-    "name_en": "[Sample] Sleepy Cats Plush Mascots",
-    "maker": "サンプルメーカーB",
-    "maker_en": "Sample Maker B",
-    "price": 300,
-    "release": "2026-11",
-    "genre": "animal",
-    "moods": [
-      "kawaii"
-    ],
-    "tags": [
-      "ねこ",
-      "マスコット",
-      "癒し"
-    ],
-    "tags_en": [
-      "cats",
-      "mascot",
-      "cozy"
-    ],
-    "lineup": 5,
-    "image": "",
-    "official_url": "",
-    "store_search_url": "",
-    "popularity": 88,
-    "added": "2026-10-29",
-    "description": "丸まって眠るねこたちのふわふわマスコット。バッグチャーム金具つき。",
-    "description_en": "Fluffy mascots of curled-up sleeping cats, with a bag-charm clip."
-  },
-  {
-    "id": "sample-showa-tv",
-    "name": "【サンプル】昭和の家電 ミニチュアブラウン管テレビ",
-    "name_en": "[Sample] Showa-Era CRT Television Miniatures",
-    "maker": "サンプルメーカーA",
-    "maker_en": "Sample Maker A",
+    "id": "tarts-nightmare-before-christmas-playback-2026-11",
+    "name": "プレイバックムービー ナイトメア・ビフォア・クリスマス",
+    "name_en": "Playback Movie: The Nightmare Before Christmas",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
     "price": 500,
     "release": "2026-11",
-    "genre": "retro",
-    "moods": [
-      "real",
-      "cool"
-    ],
-    "tags": [
-      "昭和レトロ",
-      "家電",
-      "ブラウン管"
-    ],
-    "tags_en": [
-      "Showa retro",
-      "appliance",
-      "CRT TV"
-    ],
-    "lineup": 4,
-    "image": "",
-    "official_url": "",
-    "store_search_url": "",
-    "popularity": 95,
-    "added": "2026-10-28",
-    "description": "ダイヤル式チャンネルまで再現した昭和のテレビ。画面シールの差し替えができる。",
-    "description_en": "A Showa-era TV down to the rotary channel dial. The screen sticker can be swapped."
-  },
-  {
-    "id": "sample-robo-pilot",
-    "name": "【サンプル】メカパイロット アクションフィギュア",
-    "name_en": "[Sample] Mecha Pilot Action Figures",
-    "maker": "サンプルメーカーC",
-    "maker_en": "Sample Maker C",
-    "price": 500,
-    "release": "2026-12",
     "genre": "anime",
     "moods": [
       "cool"
     ],
     "tags": [
-      "ロボット",
-      "可動フィギュア"
+      "ディズニー",
+      "映画",
+      "ナイトメア・ビフォア・クリスマス"
     ],
     "tags_en": [
-      "robot",
-      "posable figure"
+      "Disney",
+      "movie",
+      "Nightmare Before Christmas"
+    ],
+    "lineup": 3,
+    "image": "",
+    "official_url": "",
+    "store_search_url": "",
+    "popularity": 88,
+    "added": "2026-11-01",
+    "description": "",
+    "description_en": ""
+  },
+  {
+    "id": "tarts-mugyutto-godzilla-2026-11",
+    "name": "むぎゅっと! ゴジラ",
+    "name_en": "Mugyutto! Godzilla",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-11",
+    "genre": "anime",
+    "moods": [
+      "kawaii",
+      "funny"
+    ],
+    "tags": [
+      "ゴジラ",
+      "怪獣",
+      "特撮"
+    ],
+    "tags_en": [
+      "Godzilla",
+      "kaiju",
+      "tokusatsu"
+    ],
+    "lineup": 4,
+    "image": "",
+    "official_url": "",
+    "store_search_url": "",
+    "popularity": 82,
+    "added": "2026-11-01",
+    "description": "",
+    "description_en": ""
+  },
+  {
+    "id": "tarts-super-mario-bottlecap-2026-11",
+    "name": "スーパーマリオ ボトルキャップコレクション",
+    "name_en": "Super Mario Bottle Cap Collection",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-11",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [
+      "スーパーマリオ",
+      "任天堂",
+      "ゲーム"
+    ],
+    "tags_en": [
+      "Super Mario",
+      "Nintendo",
+      "video games"
+    ],
+    "lineup": 7,
+    "image": "",
+    "official_url": "",
+    "store_search_url": "",
+    "popularity": 85,
+    "added": "2026-11-01",
+    "description": "",
+    "description_en": ""
+  },
+  {
+    "id": "tarts-pokemon-30th-metal-charm-eevee-2026-11",
+    "name": "ポケモン 30周年 メタルチャームマスコット イーブイフレンズ",
+    "name_en": "Pokémon 30th Anniversary Metal Charm Mascot: Eevee Friends",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-11",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [
+      "ポケモン",
+      "イーブイ",
+      "30周年",
+      "チャーム"
+    ],
+    "tags_en": [
+      "Pokémon",
+      "Eevee",
+      "30th anniversary",
+      "charm"
+    ],
+    "lineup": 9,
+    "image": "",
+    "official_url": "",
+    "store_search_url": "",
+    "popularity": 90,
+    "added": "2026-11-01",
+    "description": "",
+    "description_en": ""
+  },
+  {
+    "id": "bushiroad-bocchi-figure-vol3-2026-11",
+    "name": "ぼっち・ざ・ろっく！ ぼっちちゃんがいっぱいフィギュアvol.3",
+    "name_en": "Bocchi the Rock! Lots of Bocchi-chan Figures vol.3",
+    "maker": "ブシロード",
+    "maker_en": "Bushiroad",
+    "price": 500,
+    "release": "2026-11",
+    "genre": "anime",
+    "moods": [
+      "funny"
+    ],
+    "tags": [
+      "ぼっち・ざ・ろっく！",
+      "アニメ",
+      "フィギュア"
+    ],
+    "tags_en": [
+      "Bocchi the Rock!",
+      "anime",
+      "figure"
     ],
     "lineup": 5,
     "image": "",
     "official_url": "",
     "store_search_url": "",
-    "popularity": 76,
-    "added": "2026-10-27",
-    "description": "肘と膝が動く小さなパイロットフィギュア。シリーズのメカと組み合わせて飾れる。",
-    "description_en": "Tiny pilot figures with movable elbows and knees, made to pair with the series' mechs."
+    "popularity": 80,
+    "added": "2026-11-01",
+    "description": "",
+    "description_en": ""
   },
   {
-    "id": "sample-penguin-office",
-    "name": "【サンプル】はたらくペンギン オフィスフィギュア",
-    "name_en": "[Sample] Office Worker Penguins",
-    "maker": "サンプルメーカーB",
-    "maker_en": "Sample Maker B",
-    "price": 300,
+    "id": "bushiroad-mygo-frame-art-2026-11",
+    "name": "MyGO!!!!! 額縁アートコレクション",
+    "name_en": "MyGO!!!!! Framed Art Collection",
+    "maker": "ブシロード",
+    "maker_en": "Bushiroad",
+    "price": 400,
     "release": "2026-11",
-    "genre": "animal",
+    "genre": "anime",
     "moods": [
-      "funny",
-      "kawaii"
+      "cool"
     ],
     "tags": [
-      "ペンギン",
-      "サラリーマン",
-      "ネタ系"
+      "バンドリ！",
+      "MyGO!!!!!",
+      "アート"
     ],
     "tags_en": [
-      "penguin",
-      "office worker",
-      "funny"
+      "BanG Dream!",
+      "MyGO!!!!!",
+      "art"
     ],
-    "lineup": 6,
+    "lineup": 5,
     "image": "",
     "official_url": "",
     "store_search_url": "",
-    "popularity": 81,
-    "added": "2026-10-26",
-    "description": "残業や会議にのぞむペンギンたち。デスクに置いておきたいシリーズ。",
-    "description_en": "Penguins working overtime and sitting in meetings. Made for your desk."
+    "popularity": 72,
+    "added": "2026-11-01",
+    "description": "",
+    "description_en": ""
   },
   {
-    "id": "sample-ekiben",
-    "name": "【サンプル】日本の駅弁ミニチュア",
-    "name_en": "[Sample] Japanese Ekiben Miniatures",
-    "maker": "サンプルメーカーD",
-    "maker_en": "Sample Maker D",
+    "id": "bushiroad-yeastken-bread-basket-2026-11",
+    "name": "いーすとけん。 パンのかご入りフィギュア",
+    "name_en": "Yeast Ken. Bread Basket Figures",
+    "maker": "ブシロード",
+    "maker_en": "Bushiroad",
     "price": 400,
-    "release": "2026-12",
-    "genre": "miniature",
+    "release": "2026-11",
+    "genre": "animal",
     "moods": [
-      "real"
+      "kawaii"
     ],
     "tags": [
-      "駅弁",
-      "食品サンプル",
-      "旅"
+      "いーすとけん。",
+      "パン",
+      "いぬ"
     ],
     "tags_en": [
-      "ekiben",
-      "food replica",
-      "travel"
+      "Yeast Ken",
+      "bread",
+      "dogs"
     ],
     "lineup": 5,
     "image": "",
     "official_url": "",
     "store_search_url": "",
     "popularity": 70,
-    "added": "2026-10-25",
-    "description": "各地の名物駅弁を、ふたの開け閉めまで再現。",
-    "description_en": "Famous regional train-station bento boxes, lids and all."
+    "added": "2026-11-01",
+    "description": "",
+    "description_en": ""
   },
   {
-    "id": "sample-retro-sign",
-    "name": "【サンプル】レトロ看板 ミニチュアプレート",
-    "name_en": "[Sample] Retro Enamel Sign Plates",
-    "maker": "サンプルメーカーD",
-    "maker_en": "Sample Maker D",
-    "price": 300,
-    "release": "2026-10",
-    "genre": "retro",
-    "moods": [
-      "cool"
-    ],
-    "tags": [
-      "ホーロー看板",
-      "昭和レトロ"
-    ],
-    "tags_en": [
-      "enamel sign",
-      "Showa retro"
-    ],
-    "lineup": 8,
-    "image": "",
-    "official_url": "",
-    "store_search_url": "",
-    "popularity": 64,
-    "added": "2026-10-20",
-    "description": "街角で見かけたホーロー看板を金属プレートで再現。マグネットつき。",
-    "description_en": "Classic Japanese enamel street signs as metal plates with magnets."
-  },
-  {
-    "id": "sample-magical-charm",
-    "name": "【サンプル】マジカルステッキ チャームコレクション",
-    "name_en": "[Sample] Magical Wand Charm Collection",
-    "maker": "サンプルメーカーC",
-    "maker_en": "Sample Maker C",
-    "price": 400,
-    "release": "2026-10",
+    "id": "bushiroad-haikyu-miagete-aoba-shiratori-2026-11",
+    "name": "ハイキュー!! みあげてすたぁマスコット 青葉城西・白鳥沢",
+    "name_en": "Haikyu!! Miagete Star Mascot: Aoba Johsai & Shiratorizawa",
+    "maker": "ブシロード",
+    "maker_en": "Bushiroad",
+    "price": 500,
+    "release": "2026-11",
     "genre": "anime",
     "moods": [
       "kawaii"
     ],
     "tags": [
-      "魔法少女",
-      "チャーム",
-      "大人向け"
+      "ハイキュー!!",
+      "アニメ",
+      "マスコット"
     ],
     "tags_en": [
-      "magical girl",
-      "charm"
+      "Haikyu!!",
+      "anime",
+      "mascot"
+    ],
+    "lineup": 4,
+    "image": "",
+    "official_url": "",
+    "store_search_url": "",
+    "popularity": 78,
+    "added": "2026-11-01",
+    "description": "",
+    "description_en": ""
+  },
+  {
+    "id": "bandai-pokemon-swing-water-2026-11",
+    "name": "ポケットモンスター スイングコレクションType:Water",
+    "name_en": "Pokémon Swing Collection Type: Water",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-11",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [
+      "ポケモン",
+      "みずタイプ",
+      "スイング"
+    ],
+    "tags_en": [
+      "Pokémon",
+      "Water type",
+      "keychain"
     ],
     "lineup": 5,
+    "image": "",
+    "official_url": "",
+    "store_search_url": "",
+    "popularity": 84,
+    "added": "2026-11-01",
+    "description": "",
+    "description_en": ""
+  },
+  {
+    "id": "bandai-onepiece-wanpi-no-mi-27-2026-11",
+    "name": "ONE PIECE ワンピの実 第二十七海戦",
+    "name_en": "ONE PIECE Wanpi no Mi Vol.27",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-11",
+    "genre": "anime",
+    "moods": [
+      "cool"
+    ],
+    "tags": [
+      "ワンピース",
+      "アニメ",
+      "フィギュア"
+    ],
+    "tags_en": [
+      "One Piece",
+      "anime",
+      "figure"
+    ],
+    "lineup": 6,
     "image": "",
     "official_url": "",
     "store_search_url": "",
     "popularity": 86,
-    "added": "2026-10-18",
-    "description": "変身ステッキをモチーフにしたメタリック塗装のチャーム。",
-    "description_en": "Metallic charms inspired by magical-girl transformation wands."
+    "added": "2026-11-01",
+    "description": "",
+    "description_en": ""
   },
   {
-    "id": "sample-deepsea",
-    "name": "【サンプル】深海生物 精密フィギュア",
-    "name_en": "[Sample] Deep-Sea Creatures Detailed Figures",
-    "maker": "サンプルメーカーA",
-    "maker_en": "Sample Maker A",
+    "id": "bandai-chiikawa-pondecouleur-powder-2026-11",
+    "name": "ポンデクルール ちいかわ マルチカラーパウダー",
+    "name_en": "Pondecouleur Chiikawa Multi-Color Powder",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
     "price": 500,
-    "release": "2026-12",
-    "genre": "animal",
+    "release": "2026-11",
+    "genre": "anime",
     "moods": [
+      "kawaii"
+    ],
+    "tags": [
+      "ちいかわ",
+      "コスメ",
+      "大人向け"
+    ],
+    "tags_en": [
+      "Chiikawa",
+      "cosmetics",
+      "for adults"
+    ],
+    "lineup": 10,
+    "image": "",
+    "official_url": "",
+    "store_search_url": "",
+    "popularity": 83,
+    "added": "2026-11-01",
+    "description": "",
+    "description_en": ""
+  },
+  {
+    "id": "bandai-gundam-robot-damashii-miniature-2026-11",
+    "name": "機動戦士ガンダム ROBOT魂 ミニチュアコレクション（再販）",
+    "name_en": "Mobile Suit Gundam ROBOT Spirits Miniature Collection (Reissue)",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-11",
+    "genre": "miniature",
+    "moods": [
+      "cool",
       "real"
     ],
     "tags": [
-      "深海",
-      "生き物",
-      "精密"
+      "ガンダム",
+      "ミニチュア",
+      "再販"
     ],
     "tags_en": [
-      "deep sea",
-      "creatures",
-      "detailed"
+      "Gundam",
+      "miniature",
+      "reissue"
+    ],
+    "lineup": 4,
+    "image": "",
+    "official_url": "",
+    "store_search_url": "",
+    "popularity": 76,
+    "added": "2026-11-01",
+    "description": "",
+    "description_en": ""
+  },
+  {
+    "id": "bandai-shinchan-machibouke-8-2026-11",
+    "name": "クレヨンしんちゃん まちぼうけ8",
+    "name_en": "Crayon Shin-chan Machibouke 8",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-11",
+    "genre": "anime",
+    "moods": [
+      "funny"
+    ],
+    "tags": [
+      "クレヨンしんちゃん",
+      "まちぼうけ",
+      "フィギュア"
+    ],
+    "tags_en": [
+      "Crayon Shin-chan",
+      "Machibouke",
+      "figure"
     ],
     "lineup": 5,
     "image": "",
     "official_url": "",
     "store_search_url": "",
-    "popularity": 79,
-    "added": "2026-10-24",
-    "description": "ダイオウグソクムシやメンダコなど深海の生き物を精密に造形。",
-    "description_en": "Giant isopods, flapjack octopuses and other deep-sea creatures in fine detail."
+    "popularity": 74,
+    "added": "2026-11-01",
+    "description": "",
+    "description_en": ""
   },
   {
-    "id": "sample-tiny-tools",
-    "name": "【サンプル】ミニチュア工具セット",
-    "name_en": "[Sample] Miniature Tool Set",
-    "maker": "サンプルメーカーD",
-    "maker_en": "Sample Maker D",
-    "price": 400,
+    "id": "bandai-conan-gyukotto-2-2026-11",
+    "name": "名探偵コナン ぎゅーこっと2",
+    "name_en": "Detective Conan Gyukotto 2",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
     "release": "2026-11",
-    "genre": "miniature",
+    "genre": "anime",
     "moods": [
-      "real",
-      "cool"
-    ],
-    "tags": [
-      "工具",
-      "DIY",
-      "精密"
-    ],
-    "tags_en": [
-      "tools",
-      "DIY",
-      "detailed"
-    ],
-    "lineup": 6,
-    "image": "",
-    "official_url": "",
-    "store_search_url": "",
-    "popularity": 58,
-    "added": "2026-10-22",
-    "description": "スパナやペンチがちゃんと動く、手のひらサイズの工具。",
-    "description_en": "Palm-sized wrenches and pliers that actually move."
-  },
-  {
-    "id": "sample-onigiri-face",
-    "name": "【サンプル】おにぎり顔 ゆるマスコット",
-    "name_en": "[Sample] Onigiri Face Mascots",
-    "maker": "サンプルメーカーB",
-    "maker_en": "Sample Maker B",
-    "price": 300,
-    "release": "2027-01",
-    "genre": "other",
-    "moods": [
-      "funny",
       "kawaii"
     ],
     "tags": [
-      "おにぎり",
-      "ゆるキャラ"
+      "名探偵コナン",
+      "アニメ",
+      "マスコット"
     ],
     "tags_en": [
-      "onigiri",
+      "Detective Conan",
+      "anime",
       "mascot"
     ],
-    "lineup": 6,
+    "lineup": 5,
     "image": "",
     "official_url": "",
     "store_search_url": "",
-    "popularity": 52,
-    "added": "2026-10-31",
-    "description": "具によって表情が違う、ゆるいおにぎりのマスコット。",
-    "description_en": "Laid-back rice ball mascots whose expressions change with the filling."
+    "popularity": 75,
+    "added": "2026-11-01",
+    "description": "",
+    "description_en": ""
   },
   {
-    "id": "sample-premium-castle",
-    "name": "【サンプル】日本の名城 プレミアム立体模型",
-    "name_en": "[Sample] Japanese Castles Premium Models",
-    "maker": "サンプルメーカーC",
-    "maker_en": "Sample Maker C",
-    "price": 800,
-    "release": "2027-01",
-    "genre": "miniature",
+    "id": "bandai-capin-gallery-sanrio-sugar-spice-2026-11",
+    "name": "CAP'in GALLERY SANRIO CHARACTERS Sugar & Spice",
+    "name_en": "CAP'in GALLERY SANRIO CHARACTERS Sugar & Spice",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-11",
+    "genre": "anime",
     "moods": [
-      "real",
-      "cool"
+      "kawaii"
     ],
     "tags": [
-      "城",
-      "プレミアム",
-      "大人向け"
+      "サンリオ",
+      "大人向け",
+      "ギャラリー"
     ],
     "tags_en": [
-      "castle",
-      "premium"
+      "Sanrio",
+      "for adults",
+      "gallery"
+    ],
+    "lineup": 4,
+    "image": "",
+    "official_url": "",
+    "store_search_url": "",
+    "popularity": 79,
+    "added": "2026-11-01",
+    "description": "",
+    "description_en": ""
+  },
+  {
+    "id": "bandai-sanrio-matcha-figure-2026-11",
+    "name": "さんりおきゃらくたぁず 和みの抹茶ふぃぎゅあ",
+    "name_en": "Sanrio Characters Matcha Figures",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-11",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [
+      "サンリオ",
+      "抹茶",
+      "和"
+    ],
+    "tags_en": [
+      "Sanrio",
+      "matcha",
+      "Japanese style"
+    ],
+    "lineup": 5,
+    "image": "",
+    "official_url": "",
+    "store_search_url": "",
+    "popularity": 77,
+    "added": "2026-11-01",
+    "description": "",
+    "description_en": ""
+  },
+  {
+    "id": "bandai-disney-holiday-ornament-charm-2026-11",
+    "name": "ディズニーキャラクター Holidayオーナメントチャーム",
+    "name_en": "Disney Characters Holiday Ornament Charms",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-11",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [
+      "ディズニー",
+      "クリスマス",
+      "チャーム"
+    ],
+    "tags_en": [
+      "Disney",
+      "Christmas",
+      "charm"
     ],
     "lineup": 4,
     "image": "",
     "official_url": "",
     "store_search_url": "",
     "popularity": 73,
-    "added": "2026-10-31",
-    "description": "石垣の質感まで再現したプレミアム価格帯のシリーズ。台座つき。",
-    "description_en": "Premium-priced castle models with detailed stone walls and a display base."
+    "added": "2026-11-01",
+    "description": "",
+    "description_en": ""
+  },
+  {
+    "id": "bandai-tamagotchi-mejirushi-30th-2026-11",
+    "name": "たまごっち めじるしアクセサリー 30th anniversary edition",
+    "name_en": "Tamagotchi Mejirushi Accessory 30th Anniversary Edition",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-11",
+    "genre": "retro",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [
+      "たまごっち",
+      "30周年",
+      "平成レトロ"
+    ],
+    "tags_en": [
+      "Tamagotchi",
+      "30th anniversary",
+      "Heisei retro"
+    ],
+    "lineup": 8,
+    "image": "",
+    "official_url": "",
+    "store_search_url": "",
+    "popularity": 81,
+    "added": "2026-11-01",
+    "description": "",
+    "description_en": ""
+  },
+  {
+    "id": "bandai-tom-jerry-hamburger-charm-2026-11",
+    "name": "TOM and JERRY なりきりハンバーガーマスコットチャーム",
+    "name_en": "TOM and JERRY Hamburger Mascot Charms",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-11",
+    "genre": "anime",
+    "moods": [
+      "funny",
+      "kawaii"
+    ],
+    "tags": [
+      "トムとジェリー",
+      "ハンバーガー",
+      "チャーム"
+    ],
+    "tags_en": [
+      "Tom and Jerry",
+      "hamburger",
+      "charm"
+    ],
+    "lineup": 4,
+    "image": "",
+    "official_url": "",
+    "store_search_url": "",
+    "popularity": 71,
+    "added": "2026-11-01",
+    "description": "",
+    "description_en": ""
+  },
+  {
+    "id": "bandai-anpanman-kururin-face-2026-11",
+    "name": "それいけ！アンパンマン くるりんフェイスアンパンマン",
+    "name_en": "Anpanman Kururin Face",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-11",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [
+      "アンパンマン",
+      "キッズ",
+      "フィギュア"
+    ],
+    "tags_en": [
+      "Anpanman",
+      "kids",
+      "figure"
+    ],
+    "lineup": 5,
+    "image": "",
+    "official_url": "",
+    "store_search_url": "",
+    "popularity": 60,
+    "added": "2026-11-01",
+    "description": "",
+    "description_en": ""
   }
 ]
