@@ -25,7 +25,9 @@ jobs:
         with:
           node-version: 22
 
+      # 取り込みは時間がかかるので、決まった時間（と手動実行）のときだけ。デザインの修正などはすぐ公開する
       - name: 画像・店舗・在庫を取り込む
+        if: github.event_name != 'push'
         run: |
           npm install --no-save --no-package-lock sharp@0.33.5
           node src/fetch-assets.js
@@ -33,6 +35,7 @@ jobs:
           SITE_URL: ${{ vars.SITE_URL || 'https://gacha-site.pages.dev' }}
 
       - name: 取り込んだものを保存
+        if: github.event_name != 'push'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
