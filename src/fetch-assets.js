@@ -5,8 +5,8 @@
  *     - site.json の image_allowed_makers に入っているメーカーだけ（許可のあるメーカーだけ）
  *     - 公式ページのタイトルに商品名が含まれていない場合は、別の商品の可能性があるので取り込まない
  *     - すでに images/ に画像がある商品は何もしない
- *  2) 店舗の緯度経度：住所から国土地理院の住所検索で計算して stores.json に書き込む
- *     - "geo": "gsi" が付いていない店舗だけ計算（AIや手入力の緯度経度は上書きする）
+ *  2) 店舗と在庫：バンダイ公式「ガシャポンどこ？」から商品ごとの取扱店を取り込む（公式の緯度経度を使う）
+ *  3) 手入力の店舗の緯度経度：住所から国土地理院の住所検索で計算（"geo" が付いていない店舗だけ）
  * 外部サイトへは1件ずつ間隔をあけてアクセスする。
  */
 "use strict";
@@ -97,7 +97,7 @@ async function importImages() {
 async function geocodeStores() {
   let done = 0;
   for (const s of stores) {
-    if (s.geo === "gsi" || !s.address) continue;
+    if (s.geo || !s.address) continue;
     // 建物名・階数を外して番地までで検索する
     const q = s.address.normalize("NFKC").split(/\s+/)[0];
     try {
@@ -124,9 +124,65 @@ async function geocodeStores() {
   return done;
 }
 
+/*
+ * 3) 店舗と在庫（バンダイ公式「ガシャポンどこ？」）
+ *    official_url が gashapon.jp の商品について、その商品を置いている店舗の一覧（店名・住所・公式の緯度経度）を取り込み、
+ *    stores.json と stock.json を作り直す。1商品につき1回だけアクセスする。
+ *    発売前でマシンに入っていない商品は 0件になる（発売後に自動で出てくる）。
+ */
+async function importStock() {
+  const targets = items.filter((it) => /gashapon\.jp\/products\/detail\.php\?jan_code=\d{13}/.test(it.official_url || ""));
+  if (!targets.length) return { stores: 0, rows: 0 };
+  const storeMap = new Map(stores.filter((s) => !String(s.id).startsWith("g-")).map((s) => [s.id, s])); // 手入力の店舗は残す
+  const stockPath = path.join(ROOT, "data", "stock.json");
+  const old = fs.existsSync(stockPath) ? JSON.parse(fs.readFileSync(stockPath, "utf8")) : { stock: [] };
+  const otherRows = (old.stock || []).filter((r) => !targets.some((t) => t.id === r.item_id)); // 対象外の商品の在庫は残す
+  const rows = [];
+  let ok = 0;
+  for (const it of targets) {
+    const code = it.official_url.match(/jan_code=(\d{13})/)[1];
+    const page = `https://gashapon.jp/shop/gplus_list.php?product_code=${code}`;
+    try {
+      const body = new URLSearchParams({ pref: "", free: "", product_code: code, gplus_type: "gplus", center_lat: "35.681236", center_lng: "139.767125", map_distance_flg: "false" });
+      const res = await fetch("https://gashapon.jp/shop/leaflet/getShops.php", {
+        method: "POST",
+        headers: { "User-Agent": UA, "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8", "X-Requested-With": "XMLHttpRequest", Referer: page },
+        body,
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      const list = (data.gplus_data || []).filter((x) => x.shop_code && x.latitude && x.longitude && x.delflg !== "1");
+      for (const x of list) {
+        const id = "g-" + String(x.shop_code).toLowerCase();
+        storeMap.set(id, {
+          id, name: x.shop_title, name_en: "", prefecture: x.shop_pref, address: x.shop_address, address_en: "",
+          lat: Number(x.latitude), lng: Number(x.longitude), geo: "official",
+          source_url: `https://gashapon.jp/shop/shop.php?shop_code=${x.shop_code}`,
+        });
+        rows.push({ item_id: it.id, store_id: id, status: "in_stock" });
+      }
+      console.log(`✔ ${it.id}: 取扱店 ${list.length}件`);
+      ok++;
+    } catch (e) {
+      console.log(`⚠ ${it.id}: 店舗の取り込みに失敗しました（${e.message}）。前回の在庫を残します`);
+      rows.push(...(old.stock || []).filter((r) => r.item_id === it.id));
+    }
+    await sleep(WAIT_MS);
+  }
+  if (!ok) return { stores: 0, rows: 0 };
+  const allRows = [...otherRows, ...rows];
+  const used = new Set(allRows.map((r) => r.store_id));
+  const keep = [...storeMap.values()].filter((s) => !String(s.id).startsWith("g-") || used.has(s.id));
+  stores.length = 0; stores.push(...keep);
+  fs.writeFileSync(storesPath, JSON.stringify(stores, null, 2) + "\n");
+  fs.writeFileSync(stockPath, JSON.stringify({ updated_at: new Date().toISOString(), source: "ガシャポンどこ？（バンダイ公式）", stock: allRows }, null, 1) + "\n");
+  return { stores: keep.length, rows: allRows.length };
+}
+
 (async () => {
   fs.mkdirSync(path.join(ROOT, "images"), { recursive: true });
   const imgs = await importImages();
+  const st = await importStock();
   const geos = await geocodeStores();
-  console.log(`取り込み完了：画像 ${imgs}件、店舗の位置 ${geos}件`);
+  console.log(`取り込み完了：画像 ${imgs}件、店舗 ${st.stores}件・在庫 ${st.rows}件、住所からの位置計算 ${geos}件`);
 })();

@@ -6,7 +6,7 @@ on:
     branches: [main]
   workflow_dispatch: {}
   schedule:
-    - cron: "0 15 * * *" # 毎日 日本時間0時（「NEW」表示や今月の表示を更新するため）
+    - cron: "0 0,6,15 * * *" # 日本時間 9時・15時・0時（在庫の更新と「NEW」表示の更新。公式サイトへの負担を考えて1日3回まで）
 
 concurrency:
   group: deploy
@@ -25,7 +25,7 @@ jobs:
         with:
           node-version: 22
 
-      - name: 画像と店舗の位置を取り込む
+      - name: 画像・店舗・在庫を取り込む
         run: |
           npm install --no-save --no-package-lock sharp@0.33.5
           node src/fetch-assets.js
@@ -36,8 +36,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add images data/stores.json
-          git diff --cached --quiet || (git commit -m "画像と店舗の位置を自動取り込み" && git push)
+          git add images data/stores.json data/stock.json
+          git diff --cached --quiet || (git commit -m "画像・店舗・在庫を自動取り込み" && git push)
 
       - name: ページを作る
         run: node src/build.js
