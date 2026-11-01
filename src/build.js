@@ -66,6 +66,8 @@ const T = {
     genders: [["male", "男性"], ["female", "女性"], ["none", "答えない"]],
     ages: [["10", "10代"], ["20", "20代"], ["30", "30代"], ["40", "40代"], ["50", "50代以上"]],
     next: "次へ", skip: "こだわらない", back: "戻る",
+    qGroups: "好きな系統は？（いくつでも）", more: "さらに詳しく選ぶ", less: "閉じる",
+    groupsHint: "詳しく選ばない場合は、その系統のすべてが対象になります。",
     budgets: [["any", "こだわらない"], ["300", "300円まで"], ["500", "400〜500円"], ["premium", "600円以上"]],
     quizBtn: "診断する", results: "診断結果",
     newTitle: "新着ガチャ", toCalendar: "発売カレンダーを見る", rankTitle: "注目のガチャ", genreTitle: "ジャンルから探す",
@@ -127,6 +129,8 @@ const T = {
     genders: [["male", "Male"], ["female", "Female"], ["none", "Prefer not to say"]],
     ages: [["10", "Teens"], ["20", "20s"], ["30", "30s"], ["40", "40s"], ["50", "50+"]],
     next: "Next", skip: "No preference", back: "Back",
+    qGroups: "What do you like? (pick any)", more: "Narrow it down", less: "Close",
+    groupsHint: "If you don't narrow it down, everything in that group counts.",
     budgets: [["any", "Any"], ["300", "Up to ¥300"], ["500", "¥400–500"], ["premium", "¥600+"]],
     quizBtn: "Show my matches", results: "Your matches",
     newTitle: "New arrivals", toCalendar: "See release calendar", rankTitle: "Editor's picks", genreTitle: "Browse by genre",
@@ -374,6 +378,7 @@ ${content}
     const stockedStores = new Set([...stockByItem.values()].flat().map((s) => s.name + s.address)).size;
     const embed = {
       home: c.H, root: c.R,
+      groups: (site.quiz_groups || []).map((g) => ({ slug: g.slug, subs: g.subs.map((x) => ({ slug: x.slug, match: x.match })) })),
       items: items.map((it) => ({
         id: it.id, name: nameOf(it, lang), jn: it.name, price: it.price, lineup: it.lineup, genre: it.genre, genre_label: genreLabel(genreOf(it.genre), lang),
         moods: it.moods, popularity: it.popularity, image: it.image, release_label: t.month(it.release),
@@ -408,14 +413,13 @@ ${content}
       <fieldset data-auto><legend><b>2</b>${t.qAge}</legend>
         <div class="opts opts-lg">${t.ages.map(([v, l]) => opt("age", "radio", v, l)).join("")}</div>
       </fieldset>
-      <fieldset data-multi><legend><b>3</b>${t.q1}</legend>
-        <div class="opts">${GENRES.filter((g) => g.slug !== "other").map((g) => opt("genre", "checkbox", g.slug, genreLabel(g, lang))).join("")}</div>
-      </fieldset>
-      <fieldset data-multi><legend><b>4</b>${t.q2}</legend>
-        <div class="opts">${site.moods.map((m) => opt("mood", "checkbox", m.slug, moodLabel(m, lang))).join("")}</div>
-      </fieldset>
-      <fieldset data-last><legend><b>5</b>${t.q3}</legend>
-        <div class="opts">${t.budgets.map(([v, l], i) => opt("budget", "radio", v, l, i === 0)).join("")}</div>
+      <fieldset data-last><legend><b>3</b>${t.qGroups}</legend>
+        <p class="q-hint">${t.groupsHint}</p>
+        <div class="groups">${(site.quiz_groups || []).map((g) => `<div class="grp" data-group="${g.slug}">
+          <label class="grp-main"><input type="checkbox" name="group" value="${g.slug}"><span>${lang === "en" ? g.en : g.label}</span></label>
+          <button type="button" class="grp-more" aria-expanded="false" aria-controls="sub-${g.slug}" data-more="${t.more}" data-less="${t.less}">${t.more}</button>
+          <div class="grp-subs opts" id="sub-${g.slug}" hidden>${g.subs.map((x) => opt("sub", "checkbox", `${g.slug}:${x.slug}`, lang === "en" ? x.en : x.label)).join("")}</div>
+        </div>`).join("")}</div>
       </fieldset>
       </div>
       <div class="quiz-nav">

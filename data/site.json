@@ -66,5 +66,187 @@
       "label": "かっこいい・渋い",
       "en": "Cool & classic"
     }
+  ],
+  "quiz_groups": [
+    {
+      "slug": "kawaii",
+      "label": "かわいい系",
+      "en": "Cute",
+      "subs": [
+        {
+          "slug": "sanrio",
+          "label": "サンリオ",
+          "en": "Sanrio",
+          "match": "サンリオ|キティ|マイメロ|クロミ|ポチャッコ|シナモ|ポムポム|シュガーバニーズ|ハンギョドン|ぐでたま"
+        },
+        {
+          "slug": "chiikawa",
+          "label": "ちいかわ",
+          "en": "Chiikawa",
+          "match": "ちいかわ|ハチワレ"
+        },
+        {
+          "slug": "disney",
+          "label": "ディズニー・ピクサー",
+          "en": "Disney & Pixar",
+          "match": "ディズニー|ピクサー|ミッキー|スティッチ|リメンバー・ミー|ズートピア"
+        },
+        {
+          "slug": "pokemon",
+          "label": "ポケモン・任天堂",
+          "en": "Pokémon & Nintendo",
+          "match": "ポケモン|ポケットモンスター|ピクミン|カービィ|マリオ|イーブイ"
+        },
+        {
+          "slug": "animal",
+          "label": "どうぶつ",
+          "en": "Animals",
+          "match": "ねこ|猫|にゃん|いぬ|犬|わんこ|うさぎ|パンダ|カピバラ|ペンギン|しばんばん|くま|クマ|mofusand|ひつじ|おさる"
+        },
+        {
+          "slug": "mascot",
+          "label": "ゆるキャラ・マスコット",
+          "en": "Mascots",
+          "match": "マスコット|ぬいぐるみ|ふわふわ|もふもふ|ぬい"
+        },
+        {
+          "slug": "accessory",
+          "label": "チャーム・アクセサリー",
+          "en": "Charms & accessories",
+          "match": "チャーム|めじるし|アクセサリー|リング|ポーチ|バッグ|ミラー|コスメ|パウダー|ヘアコーム|クリップ|バッジ"
+        }
+      ]
+    },
+    {
+      "slug": "cool",
+      "label": "かっこいい系",
+      "en": "Cool",
+      "subs": [
+        {
+          "slug": "robot",
+          "label": "ガンダム・ロボット",
+          "en": "Gundam & robots",
+          "match": "ガンダム|ロボ|メカ|マクロス|ROBOT"
+        },
+        {
+          "slug": "hero",
+          "label": "特撮・ヒーロー",
+          "en": "Tokusatsu heroes",
+          "match": "ライダー|ウルトラ|ゴジラ|怪獣|戦隊"
+        },
+        {
+          "slug": "shonen",
+          "label": "少年マンガ",
+          "en": "Shonen manga",
+          "match": "ONE PIECE|ワンピの実|ドラゴンボール|ジョジョ|HUNTER|ハイキュー|銀魂|キングダム|クローズ|WORST|チェンソー|呪術|ブルーロック|NARUTO|BLEACH"
+        },
+        {
+          "slug": "western",
+          "label": "アメコミ・洋画",
+          "en": "Hollywood & comics",
+          "match": "MARVEL|マーベル|STAR WARS|スター・ウォーズ|ハリー・ポッター|グレムリン|ナイトメア|HOT WHEELS"
+        }
+      ]
+    },
+    {
+      "slug": "oshi",
+      "label": "推し・アニメ系",
+      "en": "Anime & idols",
+      "subs": [
+        {
+          "slug": "idol",
+          "label": "アイドル・K-POP",
+          "en": "Idols & K-pop",
+          "match": "アイドル|NCT|aespa|RIIZE|SKZOO|ラブライブ|アイドリッシュ|アイマス|MyGO|ぼっち"
+        },
+        {
+          "slug": "vtuber",
+          "label": "VTuber・配信者",
+          "en": "VTubers & streamers",
+          "match": "ホロライブ|にじさんじ|すとぷり|赤見かるび"
+        },
+        {
+          "slug": "anime",
+          "label": "人気アニメ・マンガ",
+          "en": "Popular anime",
+          "match": "プリキュア|カードキャプター|おジャ魔女|フリーレン|コナン|しんちゃん|ちびまる子|ドラえもん|メイドインアビス|桜蘭|アイカツ|きらりん|デジモン|妖怪ウォッチ|ケロロ|犬夜叉|タコピー|とんがり帽子|いちご100|アンパンマン|薬屋|超かぐや姫"
+        },
+        {
+          "slug": "game",
+          "label": "ゲーム",
+          "en": "Games",
+          "match": "MINECRAFT|マイクラ|ソニック|逆転裁判|牧場物語|NIKKE|マリオ|Poppy|ウマ娘|ペルソナ"
+        }
+      ]
+    },
+    {
+      "slug": "real",
+      "label": "リアル・ミニチュア系",
+      "en": "Realistic & miniature",
+      "subs": [
+        {
+          "slug": "miniature",
+          "label": "ミニチュア・模型",
+          "en": "Miniatures & models",
+          "match": "ミニチュア|1/\\d+|模型|ボトルキャップ|CD|フィギュアコレクション|トルソー"
+        },
+        {
+          "slug": "food",
+          "label": "食べもの",
+          "en": "Food",
+          "match": "おすし|パン|ベーカリー|おやつ|チョコ|チロル|おでん|喫茶|弁当|抹茶|ハンバーガー|クッキー"
+        },
+        {
+          "slug": "creature",
+          "label": "生きもの・図鑑",
+          "en": "Creatures",
+          "match": "昆虫|骨格|図鑑|クワガタ|深海|生き物|いきもの"
+        },
+        {
+          "slug": "vehicle",
+          "label": "乗りもの",
+          "en": "Vehicles",
+          "match": "電車|JR|トミカ|プラレール|トラック|HOT WHEELS"
+        }
+      ]
+    },
+    {
+      "slug": "retro",
+      "label": "レトロ・なつかし系",
+      "en": "Retro & nostalgic",
+      "subs": [
+        {
+          "slug": "showa",
+          "label": "昭和レトロ",
+          "en": "Showa retro",
+          "match": "昭和|レトロ|パチンコ|ニャンちゅう|コンタック|ピジョン|Pigeon|チロル|ZETT"
+        },
+        {
+          "slug": "heisei",
+          "label": "平成なつかし",
+          "en": "Heisei nostalgia",
+          "match": "たまごっち|おジャ魔女|カードキャプター|ケロロ|デジモン|ハム太郎|ジュエルペット|きらりん|ナルミヤ|メゾピアノ|ミルモ|いちご100|パワーパフ|マクロス"
+        }
+      ]
+    },
+    {
+      "slug": "funny",
+      "label": "ネタ・おもしろ系",
+      "en": "Funny & quirky",
+      "subs": [
+        {
+          "slug": "machibouke",
+          "label": "まちぼうけ・ねむらせ隊",
+          "en": "Machibouke & Nemurase-tai",
+          "match": "まちぼうけ|ねむらせ|のっかる|ぎゅーこっと|肩ズン"
+        },
+        {
+          "slug": "neta",
+          "label": "ネタ・シュール",
+          "en": "Quirky",
+          "match": "怒った|ちゃあぁぁん|つめとぎ|たべすぎ|木彫り|なめこ|おぱんちゅ|お文具|グローブ|骨格|しばんばん"
+        }
+      ]
+    }
   ]
 }

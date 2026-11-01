@@ -6,7 +6,7 @@
   var LANG = langMeta ? langMeta.content : "ja";
   var EN = LANG === "en";
   var M = EN ? {
-    none: "No matches. Try a wider budget or style.",
+    none: "No matches. Try adding more groups or clearing the detailed picks.",
     found: function (n) { return n + " matches, best first."; },
     next: "Next", skip: "No preference",
     match: "Match",
@@ -23,7 +23,7 @@
     nearNg: function (km) { return "No shop within " + km + " km has it in stock. Try buying online below."; },
     count: function (n) { return n + " shops have it in stock. Tap \u201cUse my location\u201d to sort by distance."; }
   } : {
-    none: "条件に合うガチャが見つかりませんでした。予算やテイストを広げてみてください。",
+    none: "条件に合うガチャが見つかりませんでした。系統を増やすか、詳しい項目を外してみてください。",
     found: function (n) { return n + "件が見つかりました。相性の高い順に表示しています。"; },
     next: "次へ", skip: "こだわらない",
     match: "相性",
@@ -56,78 +56,101 @@
     var note = document.getElementById("results-note");
 
     /* 1問ずつ表示する（JavaScriptが動かないときは全部の質問がそのまま並ぶ） */
-    var steps = [].slice.call(quiz.querySelectorAll(".quiz-qs fieldset"));
+    var steps = [].slice.call(quiz.querySelectorAll(".quiz-qs > fieldset"));
     var cur = 0;
     var stepEl = document.getElementById("quiz-step");
     var barEl = document.getElementById("quiz-bar");
     var backBtn = document.getElementById("quiz-back");
     var nextBtn = document.getElementById("quiz-next");
     var submitBtn = document.getElementById("quiz-submit");
+    var calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
     quiz.classList.add("is-wizard");
-    function show(i) {
+    function show(i, dir) {
       cur = Math.max(0, Math.min(steps.length - 1, i));
-      steps.forEach(function (f, k) { f.hidden = k !== cur; });
+      steps.forEach(function (f, k) {
+        f.hidden = k !== cur;
+        f.classList.remove("enter-fwd", "enter-back");
+        if (k === cur && dir && !calm) { void f.offsetWidth; f.classList.add(dir > 0 ? "enter-fwd" : "enter-back"); }
+      });
       stepEl.textContent = (cur + 1) + " / " + steps.length;
       barEl.style.width = ((cur + 1) / steps.length * 100) + "%";
       backBtn.hidden = cur === 0;
-      var last = cur === steps.length - 1;
-      var multi = steps[cur].hasAttribute("data-multi");
-      nextBtn.hidden = !multi;
-      submitBtn.hidden = !last;
-      if (multi) nextBtn.textContent = steps[cur].querySelector("input:checked") ? M.next : M.skip;
+      nextBtn.hidden = true;
+      submitBtn.hidden = cur !== steps.length - 1;
     }
     steps.forEach(function (f) {
-      f.addEventListener("change", function () {
-        if (f.hasAttribute("data-auto")) setTimeout(function () { show(cur + 1); }, 180);
-        else if (f.hasAttribute("data-multi")) nextBtn.textContent = f.querySelector("input:checked") ? M.next : M.skip;
-      });
+      if (!f.hasAttribute("data-auto")) return;
+      f.addEventListener("change", function () { setTimeout(function () { show(cur + 1, 1); }, 220); });
     });
-    backBtn.addEventListener("click", function () { show(cur - 1); });
-    nextBtn.addEventListener("click", function () { show(cur + 1); });
+    backBtn.addEventListener("click", function () { show(cur - 1, -1); });
     show(0);
 
+    /* 系統：「さらに詳しく」で細かい項目を開く。細かい項目を選ぶと親の系統も選ばれる */
+    [].forEach.call(quiz.querySelectorAll(".grp"), function (g) {
+      var main = g.querySelector('input[name="group"]');
+      var more = g.querySelector(".grp-more");
+      var subs = g.querySelector(".grp-subs");
+      more.addEventListener("click", function () {
+        var open = subs.hidden;
+        subs.hidden = !open;
+        more.setAttribute("aria-expanded", open ? "true" : "false");
+        more.textContent = open ? more.getAttribute("data-less") : more.getAttribute("data-more");
+        g.classList.toggle("is-open", open);
+      });
+      subs.addEventListener("change", function () {
+        if (subs.querySelector("input:checked")) main.checked = true;
+        g.classList.toggle("is-on", main.checked);
+      });
+      main.addEventListener("change", function () {
+        if (!main.checked) [].forEach.call(subs.querySelectorAll("input"), function (x) { x.checked = false; });
+        g.classList.toggle("is-on", main.checked);
+      });
+    });
+
     var val = function (n) { return (quiz.querySelector('input[name="' + n + '"]:checked') || {}).value || ""; };
+    var vals = function (n) { return [].map.call(quiz.querySelectorAll('input[name="' + n + '"]:checked'), function (x) { return x.value; }); };
+    var GROUPS = (data.groups || []).map(function (g) {
+      return { slug: g.slug, subs: g.subs.map(function (x) { return { slug: x.slug, rx: new RegExp(x.match, "i") }; }) };
+    });
     var RX = {
       female: /サンリオ|キティ|マイメロ|クロミ|ポチャッコ|シナモ|ちいかわ|ディズニー|プリキュア|チャーム|アクセサリー|ポーチ|リング|コスメ|パウダー|ミラー|バッグ|ぬいぐるみ/,
-      male: /ガンダム|ゴジラ|ライダー|ウルトラ|ドラゴンボール|ONE PIECE|ワンピ|HG|ロボ|メカ|怪獣|クローズ|WORST|スター・?ウォーズ|STAR WARS|マーベル|MARVEL|野球|ミニカー|HOT WHEELS/,
-      "10": /ちいかわ|ホロライブ|すとぷり|NCT|aespa|RIIZE|SKZOO|アイドル|ハイキュー|フリーレン|チェンソー|推し|めじるし/,
-      "20": /ちいかわ|ホロライブ|すとぷり|NCT|aespa|RIIZE|SKZOO|アイドル|ハイキュー|フリーレン|チェンソー|ジョジョ|呪術|ポケモン|ポケットモンスター/,
+      male: /ガンダム|ゴジラ|ライダー|ウルトラ|ドラゴンボール|ONE PIECE|ワンピ|HG|ロボ|メカ|怪獣|クローズ|WORST|STAR WARS|MARVEL|野球|HOT WHEELS/,
+      "10": /ちいかわ|ホロライブ|すとぷり|NCT|aespa|RIIZE|SKZOO|アイドル|ハイキュー|フリーレン|チェンソー|めじるし/,
+      "20": /ちいかわ|ホロライブ|すとぷり|NCT|aespa|RIIZE|SKZOO|アイドル|ハイキュー|フリーレン|チェンソー|ジョジョ|ポケモン|ポケットモンスター/,
       "30": /たまごっち|おジャ魔女|カードキャプター|ケロロ|デジモン|ポケットモンスター|ハム太郎|ジュエルペット|きらりん|ナルミヤ|メゾピアノ|ドラゴンボール|ONE PIECE|ワンピ/,
-      "40": /ガンダム|ドラゴンボール|ウルトラ|ライダー|マクロス|ジョジョ|銀魂|いちご100|PEANUTS|パワーパフ|ケアベア|グレムリン|ファミコン|ミニチュア/,
+      "40": /ガンダム|ドラゴンボール|ウルトラ|ライダー|マクロス|ジョジョ|銀魂|いちご100|PEANUTS|パワーパフ|ケアベア|グレムリン|ミニチュア/,
       "50": /昭和|レトロ|ゴジラ|ウルトラ|仮面ライダー|ドラえもん|ちびまる子|サンリオ|ミニチュア|模型|骨格|図鑑/
     };
 
     quiz.addEventListener("submit", function (e) {
       e.preventDefault();
       var gender = val("gender"), age = val("age");
-      var genres = [].map.call(quiz.querySelectorAll('input[name="genre"]:checked'), function (x) { return x.value; });
-      var moods = [].map.call(quiz.querySelectorAll('input[name="mood"]:checked'), function (x) { return x.value; });
-      var budget = (quiz.querySelector('input[name="budget"]:checked') || {}).value || "any";
+      var chosen = vals("group");
+      var chosenSubs = vals("sub");
+      // 系統ごとに、細かい項目を選んでいればそれだけ、選んでいなければ全部を対象にする
+      var targets = GROUPS.filter(function (g) { return chosen.indexOf(g.slug) !== -1; }).map(function (g) {
+        var picked = g.subs.filter(function (x) { return chosenSubs.indexOf(g.slug + ":" + x.slug) !== -1; });
+        return picked.length ? picked : g.subs;
+      });
 
-      var inBudget = function (p) {
-        if (budget === "300") return p <= 300;
-        if (budget === "500") return p > 300 && p <= 500;
-        if (budget === "premium") return p > 500;
-        return true;
-      };
-
-      var scored = data.items.filter(function (it) { return inBudget(it.price); }).map(function (it) {
+      var scored = data.items.map(function (it) {
         var s = 0;
-        if (genres.length && genres.indexOf(it.genre) !== -1) s += 3;
-        moods.forEach(function (m) { if (it.moods.indexOf(m) !== -1) s += 2; });
+        targets.forEach(function (subs) {
+          var hit = subs.filter(function (x) { return x.rx.test(it.jn); }).length;
+          if (hit) s += 3 + Math.min(hit - 1, 2) * 0.5;
+        });
+        if (targets.length && !s) return { it: it, s: 0 };
         if (RX[gender] && RX[gender].test(it.jn)) s += 1.5;
         if (RX[age] && RX[age].test(it.jn)) s += 1.5;
         if (age === "50" && it.genre === "retro") s += 1;
-        if (gender === "female" && it.moods.indexOf("kawaii") !== -1) s += 0.5;
-        if (gender === "male" && it.moods.indexOf("cool") !== -1) s += 0.5;
         return { it: it, s: s };
       }).filter(function (x) {
-        return x.s > 0 || (!genres.length && !moods.length && !RX[gender] && !RX[age]);
+        return x.s > 0 || (!targets.length && !RX[gender] && !RX[age]);
       }).sort(function (a, b) { return b.s - a.s || b.it.popularity - a.it.popularity; });
 
-      var personal = (RX[gender] ? 2 : 0) + (RX[age] ? 1.5 : 0);
-      var max = 3 * (genres.length ? 1 : 0) + 2 * moods.length + personal || 1;
-      var anyChoice = genres.length || moods.length || personal;
+      var personal = (RX[gender] ? 1.5 : 0) + (RX[age] ? 1.5 : 0);
+      var max = (targets.length ? 4 : 0) + personal || 1;
+      var anyChoice = targets.length || personal;
       var top = scored.slice(0, 8);
       results.hidden = false;
       if (!top.length) {
@@ -140,7 +163,7 @@
           return cardHTML(x.it, data, anyChoice ? pct : null);
         }).join("");
       }
-      results.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+      results.scrollIntoView({ behavior: calm ? "auto" : "smooth", block: "start" });
     });
   }
 
