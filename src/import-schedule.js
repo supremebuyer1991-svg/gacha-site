@@ -14,7 +14,12 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const WAIT_MS = 2000;
 const MAX_NEW_PER_RUN = 150;
 
-const decode = (s) => s.replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&#0?39;/g, "'").replace(/&lt;/g, "<").replace(/&gt;/g, ">");
+const NAMED = { amp: "&", quot: '"', apos: "'", lt: "<", gt: ">", nbsp: " ", trade: "™", reg: "®", copy: "©", hellip: "…" };
+const decode = (s) => s
+  .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16)))
+  .replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(Number(d)))
+  .replace(/&([a-z]+);/gi, (m, n) => NAMED[n.toLowerCase()] ?? m)
+  .replace(/\u3000/g, " ");
 
 function guessGenre(name) {
   if (/ミニチュア|ミニカー|1\/\d+|トミカ|食品|模型|ジオラマ/.test(name)) return "miniature";

@@ -1,6 +1,6 @@
 {
-  "name": "GACHA ATELIER",
-  "name_ja": "ガチャアトリエ",
+  "name": "GACHA PLANET",
+  "name_ja": "ガチャプラネット",
   "tagline": "大人のためのカプセルトイ・ガイド",
   "tagline_en": "Capsule toy guide for collectors",
   "description": "新作ガチャガチャの発売日・価格・ラインナップと、近くの在庫店をまとめて探せる大人のコレクター向け情報サイト。",
@@ -10,8 +10,8 @@
   "rakuten_affiliate_id": "",
   "contact_url": "",
   "x_account": "",
-  "operator": "ガチャアトリエ運営事務局",
-  "operator_en": "GACHA ATELIER editorial team",
+  "operator": "ガチャプラネット運営事務局",
+  "operator_en": "GACHA PLANET editorial team",
   "sample_mode": false,
   "image_allowed_makers": [
     "バンダイ",
