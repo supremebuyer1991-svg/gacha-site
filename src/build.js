@@ -309,7 +309,7 @@ const ver = (f) => crypto.createHash("md5").update(fs.readFileSync(path.join(__d
 const CSS_V = ver("style.css");
 const JS_V = ver("app.js");
 
-const FONTS = "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700;900&display=swap";
+const FONTS = "https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Zen+Maru+Gothic:wght@500;700;900&display=swap";
 
 /* ================= 言語ごとにページを作る ================= */
 for (const lang of LANGS) {
@@ -375,7 +375,7 @@ ${site.x_account ? `<meta name="twitter:site" content="@${esc(site.x_account.rep
 ${ld}`;
     const content = `${site.sample_mode ? `<div class="sample-bar">${t.sampleBar}</div>` : ""}
 <header class="site-header"><div class="wrap">
-  <a class="logo" href="${c.H}index.html" aria-label="${esc(site.name)} ${t.logoAria}"><span class="logo-en">${esc(site.name)}</span><span class="logo-ja">${esc(t.tagline)}</span></a>
+  <a class="logo" href="${c.H}index.html" aria-label="${esc(site.name)} ${t.logoAria}"><span class="logo-en">${esc(site.name).split(" ").map((w, i) => `<span class="lw${i}">${w}</span>`).join(" ")}</span><span class="logo-ja">${esc(t.tagline)}</span></a>
   <nav class="nav" aria-label="${t.navAria}">${NAV.map(([h, k]) => `<a href="${c.H}${h}"${k === current ? ' aria-current="page"' : ""}>${t.nav[k]}</a>`).join("")}</nav>
   <form class="search" role="search" action="${c.H}search.html" data-index="${c.R}data/search-${lang}.json" data-home="${c.H}" data-root="${c.R}">
     <input type="search" name="q" id="search-q" placeholder="${t.searchPh}" aria-label="${t.searchAria}" autocomplete="off" enterkeyhint="search">
