@@ -1,0 +1,38 @@
+# data/ や images/ が更新されたら、ページを作り直して Cloudflare Pages に公開する
+name: サイトを公開
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+  schedule:
+    - cron: "0 15 * * *" # 毎日 日本時間0時（「NEW」表示や今月の表示を更新するため）
+
+concurrency:
+  group: deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: ページを作る
+        run: node src/build.js
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+
+      - name: Cloudflare Pages に公開
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=${{ vars.CF_PROJECT_NAME }} --branch=main

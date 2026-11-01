@@ -1,0 +1,372 @@
+[
+  {
+    "id": "sample-kissaten-mini",
+    "name": "【サンプル】純喫茶メニューミニチュアコレクション",
+    "name_en": "[Sample] Retro Café Menu Miniatures",
+    "maker": "サンプルメーカーA",
+    "maker_en": "Sample Maker A",
+    "price": 400,
+    "release": "2026-11",
+    "genre": "miniature",
+    "moods": [
+      "real"
+    ],
+    "tags": [
+      "食品サンプル",
+      "純喫茶",
+      "クリームソーダ",
+      "大人向け"
+    ],
+    "tags_en": [
+      "food replica",
+      "retro café",
+      "cream soda"
+    ],
+    "lineup": 6,
+    "image": "",
+    "official_url": "",
+    "store_search_url": "",
+    "popularity": 92,
+    "added": "2026-10-30",
+    "description": "クリームソーダやナポリタンなど、昔ながらの喫茶店メニューを手のひらサイズで再現したシリーズ。",
+    "description_en": "Cream soda, Napolitan spaghetti and other classic Japanese café dishes in palm-sized miniature."
+  },
+  {
+    "id": "sample-sleepy-cats",
+    "name": "【サンプル】おやすみねこ ふわふわマスコット",
+    "name_en": "[Sample] Sleepy Cats Plush Mascots",
+    "maker": "サンプルメーカーB",
+    "maker_en": "Sample Maker B",
+    "price": 300,
+    "release": "2026-11",
+    "genre": "animal",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [
+      "ねこ",
+      "マスコット",
+      "癒し"
+    ],
+    "tags_en": [
+      "cats",
+      "mascot",
+      "cozy"
+    ],
+    "lineup": 5,
+    "image": "",
+    "official_url": "",
+    "store_search_url": "",
+    "popularity": 88,
+    "added": "2026-10-29",
+    "description": "丸まって眠るねこたちのふわふわマスコット。バッグチャーム金具つき。",
+    "description_en": "Fluffy mascots of curled-up sleeping cats, with a bag-charm clip."
+  },
+  {
+    "id": "sample-showa-tv",
+    "name": "【サンプル】昭和の家電 ミニチュアブラウン管テレビ",
+    "name_en": "[Sample] Showa-Era CRT Television Miniatures",
+    "maker": "サンプルメーカーA",
+    "maker_en": "Sample Maker A",
+    "price": 500,
+    "release": "2026-11",
+    "genre": "retro",
+    "moods": [
+      "real",
+      "cool"
+    ],
+    "tags": [
+      "昭和レトロ",
+      "家電",
+      "ブラウン管"
+    ],
+    "tags_en": [
+      "Showa retro",
+      "appliance",
+      "CRT TV"
+    ],
+    "lineup": 4,
+    "image": "",
+    "official_url": "",
+    "store_search_url": "",
+    "popularity": 95,
+    "added": "2026-10-28",
+    "description": "ダイヤル式チャンネルまで再現した昭和のテレビ。画面シールの差し替えができる。",
+    "description_en": "A Showa-era TV down to the rotary channel dial. The screen sticker can be swapped."
+  },
+  {
+    "id": "sample-robo-pilot",
+    "name": "【サンプル】メカパイロット アクションフィギュア",
+    "name_en": "[Sample] Mecha Pilot Action Figures",
+    "maker": "サンプルメーカーC",
+    "maker_en": "Sample Maker C",
+    "price": 500,
+    "release": "2026-12",
+    "genre": "anime",
+    "moods": [
+      "cool"
+    ],
+    "tags": [
+      "ロボット",
+      "可動フィギュア"
+    ],
+    "tags_en": [
+      "robot",
+      "posable figure"
+    ],
+    "lineup": 5,
+    "image": "",
+    "official_url": "",
+    "store_search_url": "",
+    "popularity": 76,
+    "added": "2026-10-27",
+    "description": "肘と膝が動く小さなパイロットフィギュア。シリーズのメカと組み合わせて飾れる。",
+    "description_en": "Tiny pilot figures with movable elbows and knees, made to pair with the series' mechs."
+  },
+  {
+    "id": "sample-penguin-office",
+    "name": "【サンプル】はたらくペンギン オフィスフィギュア",
+    "name_en": "[Sample] Office Worker Penguins",
+    "maker": "サンプルメーカーB",
+    "maker_en": "Sample Maker B",
+    "price": 300,
+    "release": "2026-11",
+    "genre": "animal",
+    "moods": [
+      "funny",
+      "kawaii"
+    ],
+    "tags": [
+      "ペンギン",
+      "サラリーマン",
+      "ネタ系"
+    ],
+    "tags_en": [
+      "penguin",
+      "office worker",
+      "funny"
+    ],
+    "lineup": 6,
+    "image": "",
+    "official_url": "",
+    "store_search_url": "",
+    "popularity": 81,
+    "added": "2026-10-26",
+    "description": "残業や会議にのぞむペンギンたち。デスクに置いておきたいシリーズ。",
+    "description_en": "Penguins working overtime and sitting in meetings. Made for your desk."
+  },
+  {
+    "id": "sample-ekiben",
+    "name": "【サンプル】日本の駅弁ミニチュア",
+    "name_en": "[Sample] Japanese Ekiben Miniatures",
+    "maker": "サンプルメーカーD",
+    "maker_en": "Sample Maker D",
+    "price": 400,
+    "release": "2026-12",
+    "genre": "miniature",
+    "moods": [
+      "real"
+    ],
+    "tags": [
+      "駅弁",
+      "食品サンプル",
+      "旅"
+    ],
+    "tags_en": [
+      "ekiben",
+      "food replica",
+      "travel"
+    ],
+    "lineup": 5,
+    "image": "",
+    "official_url": "",
+    "store_search_url": "",
+    "popularity": 70,
+    "added": "2026-10-25",
+    "description": "各地の名物駅弁を、ふたの開け閉めまで再現。",
+    "description_en": "Famous regional train-station bento boxes, lids and all."
+  },
+  {
+    "id": "sample-retro-sign",
+    "name": "【サンプル】レトロ看板 ミニチュアプレート",
+    "name_en": "[Sample] Retro Enamel Sign Plates",
+    "maker": "サンプルメーカーD",
+    "maker_en": "Sample Maker D",
+    "price": 300,
+    "release": "2026-10",
+    "genre": "retro",
+    "moods": [
+      "cool"
+    ],
+    "tags": [
+      "ホーロー看板",
+      "昭和レトロ"
+    ],
+    "tags_en": [
+      "enamel sign",
+      "Showa retro"
+    ],
+    "lineup": 8,
+    "image": "",
+    "official_url": "",
+    "store_search_url": "",
+    "popularity": 64,
+    "added": "2026-10-20",
+    "description": "街角で見かけたホーロー看板を金属プレートで再現。マグネットつき。",
+    "description_en": "Classic Japanese enamel street signs as metal plates with magnets."
+  },
+  {
+    "id": "sample-magical-charm",
+    "name": "【サンプル】マジカルステッキ チャームコレクション",
+    "name_en": "[Sample] Magical Wand Charm Collection",
+    "maker": "サンプルメーカーC",
+    "maker_en": "Sample Maker C",
+    "price": 400,
+    "release": "2026-10",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [
+      "魔法少女",
+      "チャーム",
+      "大人向け"
+    ],
+    "tags_en": [
+      "magical girl",
+      "charm"
+    ],
+    "lineup": 5,
+    "image": "",
+    "official_url": "",
+    "store_search_url": "",
+    "popularity": 86,
+    "added": "2026-10-18",
+    "description": "変身ステッキをモチーフにしたメタリック塗装のチャーム。",
+    "description_en": "Metallic charms inspired by magical-girl transformation wands."
+  },
+  {
+    "id": "sample-deepsea",
+    "name": "【サンプル】深海生物 精密フィギュア",
+    "name_en": "[Sample] Deep-Sea Creatures Detailed Figures",
+    "maker": "サンプルメーカーA",
+    "maker_en": "Sample Maker A",
+    "price": 500,
+    "release": "2026-12",
+    "genre": "animal",
+    "moods": [
+      "real"
+    ],
+    "tags": [
+      "深海",
+      "生き物",
+      "精密"
+    ],
+    "tags_en": [
+      "deep sea",
+      "creatures",
+      "detailed"
+    ],
+    "lineup": 5,
+    "image": "",
+    "official_url": "",
+    "store_search_url": "",
+    "popularity": 79,
+    "added": "2026-10-24",
+    "description": "ダイオウグソクムシやメンダコなど深海の生き物を精密に造形。",
+    "description_en": "Giant isopods, flapjack octopuses and other deep-sea creatures in fine detail."
+  },
+  {
+    "id": "sample-tiny-tools",
+    "name": "【サンプル】ミニチュア工具セット",
+    "name_en": "[Sample] Miniature Tool Set",
+    "maker": "サンプルメーカーD",
+    "maker_en": "Sample Maker D",
+    "price": 400,
+    "release": "2026-11",
+    "genre": "miniature",
+    "moods": [
+      "real",
+      "cool"
+    ],
+    "tags": [
+      "工具",
+      "DIY",
+      "精密"
+    ],
+    "tags_en": [
+      "tools",
+      "DIY",
+      "detailed"
+    ],
+    "lineup": 6,
+    "image": "",
+    "official_url": "",
+    "store_search_url": "",
+    "popularity": 58,
+    "added": "2026-10-22",
+    "description": "スパナやペンチがちゃんと動く、手のひらサイズの工具。",
+    "description_en": "Palm-sized wrenches and pliers that actually move."
+  },
+  {
+    "id": "sample-onigiri-face",
+    "name": "【サンプル】おにぎり顔 ゆるマスコット",
+    "name_en": "[Sample] Onigiri Face Mascots",
+    "maker": "サンプルメーカーB",
+    "maker_en": "Sample Maker B",
+    "price": 300,
+    "release": "2027-01",
+    "genre": "other",
+    "moods": [
+      "funny",
+      "kawaii"
+    ],
+    "tags": [
+      "おにぎり",
+      "ゆるキャラ"
+    ],
+    "tags_en": [
+      "onigiri",
+      "mascot"
+    ],
+    "lineup": 6,
+    "image": "",
+    "official_url": "",
+    "store_search_url": "",
+    "popularity": 52,
+    "added": "2026-10-31",
+    "description": "具によって表情が違う、ゆるいおにぎりのマスコット。",
+    "description_en": "Laid-back rice ball mascots whose expressions change with the filling."
+  },
+  {
+    "id": "sample-premium-castle",
+    "name": "【サンプル】日本の名城 プレミアム立体模型",
+    "name_en": "[Sample] Japanese Castles Premium Models",
+    "maker": "サンプルメーカーC",
+    "maker_en": "Sample Maker C",
+    "price": 800,
+    "release": "2027-01",
+    "genre": "miniature",
+    "moods": [
+      "real",
+      "cool"
+    ],
+    "tags": [
+      "城",
+      "プレミアム",
+      "大人向け"
+    ],
+    "tags_en": [
+      "castle",
+      "premium"
+    ],
+    "lineup": 4,
+    "image": "",
+    "official_url": "",
+    "store_search_url": "",
+    "popularity": 73,
+    "added": "2026-10-31",
+    "description": "石垣の質感まで再現したプレミアム価格帯のシリーズ。台座つき。",
+    "description_en": "Premium-priced castle models with detailed stone walls and a display base."
+  }
+]

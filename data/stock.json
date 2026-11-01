@@ -1,0 +1,385 @@
+{
+ "updated_at": "2026-11-01T18:00:00+09:00",
+ "stock": [
+  {
+   "item_id": "sample-kissaten-mini",
+   "store_id": "s-ikebukuro",
+   "status": "few"
+  },
+  {
+   "item_id": "sample-kissaten-mini",
+   "store_id": "s-akihabara",
+   "status": "out_of_stock"
+  },
+  {
+   "item_id": "sample-kissaten-mini",
+   "store_id": "s-shibuya",
+   "status": "few"
+  },
+  {
+   "item_id": "sample-kissaten-mini",
+   "store_id": "s-yokohama",
+   "status": "out_of_stock"
+  },
+  {
+   "item_id": "sample-kissaten-mini",
+   "store_id": "s-umeda",
+   "status": "out_of_stock"
+  },
+  {
+   "item_id": "sample-kissaten-mini",
+   "store_id": "s-namba",
+   "status": "in_stock"
+  },
+  {
+   "item_id": "sample-kissaten-mini",
+   "store_id": "s-kyoto",
+   "status": "in_stock"
+  },
+  {
+   "item_id": "sample-kissaten-mini",
+   "store_id": "s-sannomiya",
+   "status": "out_of_stock"
+  },
+  {
+   "item_id": "sample-kissaten-mini",
+   "store_id": "s-nagoya",
+   "status": "out_of_stock"
+  },
+  {
+   "item_id": "sample-sleepy-cats",
+   "store_id": "s-umeda",
+   "status": "out_of_stock"
+  },
+  {
+   "item_id": "sample-sleepy-cats",
+   "store_id": "s-namba",
+   "status": "in_stock"
+  },
+  {
+   "item_id": "sample-sleepy-cats",
+   "store_id": "s-kyoto",
+   "status": "out_of_stock"
+  },
+  {
+   "item_id": "sample-sleepy-cats",
+   "store_id": "s-sannomiya",
+   "status": "few"
+  },
+  {
+   "item_id": "sample-sleepy-cats",
+   "store_id": "s-hakata",
+   "status": "in_stock"
+  },
+  {
+   "item_id": "sample-showa-tv",
+   "store_id": "s-ikebukuro",
+   "status": "out_of_stock"
+  },
+  {
+   "item_id": "sample-showa-tv",
+   "store_id": "s-yokohama",
+   "status": "in_stock"
+  },
+  {
+   "item_id": "sample-showa-tv",
+   "store_id": "s-umeda",
+   "status": "in_stock"
+  },
+  {
+   "item_id": "sample-showa-tv",
+   "store_id": "s-namba",
+   "status": "in_stock"
+  },
+  {
+   "item_id": "sample-showa-tv",
+   "store_id": "s-kyoto",
+   "status": "in_stock"
+  },
+  {
+   "item_id": "sample-showa-tv",
+   "store_id": "s-nagoya",
+   "status": "in_stock"
+  },
+  {
+   "item_id": "sample-showa-tv",
+   "store_id": "s-hakata",
+   "status": "few"
+  },
+  {
+   "item_id": "sample-robo-pilot",
+   "store_id": "s-ikebukuro",
+   "status": "few"
+  },
+  {
+   "item_id": "sample-robo-pilot",
+   "store_id": "s-shibuya",
+   "status": "in_stock"
+  },
+  {
+   "item_id": "sample-robo-pilot",
+   "store_id": "s-umeda",
+   "status": "in_stock"
+  },
+  {
+   "item_id": "sample-robo-pilot",
+   "store_id": "s-namba",
+   "status": "out_of_stock"
+  },
+  {
+   "item_id": "sample-robo-pilot",
+   "store_id": "s-kyoto",
+   "status": "out_of_stock"
+  },
+  {
+   "item_id": "sample-robo-pilot",
+   "store_id": "s-nagoya",
+   "status": "in_stock"
+  },
+  {
+   "item_id": "sample-penguin-office",
+   "store_id": "s-ikebukuro",
+   "status": "in_stock"
+  },
+  {
+   "item_id": "sample-penguin-office",
+   "store_id": "s-umeda",
+   "status": "in_stock"
+  },
+  {
+   "item_id": "sample-penguin-office",
+   "store_id": "s-sannomiya",
+   "status": "out_of_stock"
+  },
+  {
+   "item_id": "sample-penguin-office",
+   "store_id": "s-nagoya",
+   "status": "few"
+  },
+  {
+   "item_id": "sample-penguin-office",
+   "store_id": "s-hakata",
+   "status": "out_of_stock"
+  },
+  {
+   "item_id": "sample-ekiben",
+   "store_id": "s-ikebukuro",
+   "status": "few"
+  },
+  {
+   "item_id": "sample-ekiben",
+   "store_id": "s-akihabara",
+   "status": "out_of_stock"
+  },
+  {
+   "item_id": "sample-ekiben",
+   "store_id": "s-shibuya",
+   "status": "out_of_stock"
+  },
+  {
+   "item_id": "sample-ekiben",
+   "store_id": "s-yokohama",
+   "status": "in_stock"
+  },
+  {
+   "item_id": "sample-ekiben",
+   "store_id": "s-umeda",
+   "status": "in_stock"
+  },
+  {
+   "item_id": "sample-ekiben",
+   "store_id": "s-namba",
+   "status": "out_of_stock"
+  },
+  {
+   "item_id": "sample-ekiben",
+   "store_id": "s-kyoto",
+   "status": "out_of_stock"
+  },
+  {
+   "item_id": "sample-retro-sign",
+   "store_id": "s-shibuya",
+   "status": "out_of_stock"
+  },
+  {
+   "item_id": "sample-retro-sign",
+   "store_id": "s-yokohama",
+   "status": "in_stock"
+  },
+  {
+   "item_id": "sample-retro-sign",
+   "store_id": "s-umeda",
+   "status": "out_of_stock"
+  },
+  {
+   "item_id": "sample-retro-sign",
+   "store_id": "s-namba",
+   "status": "few"
+  },
+  {
+   "item_id": "sample-retro-sign",
+   "store_id": "s-sannomiya",
+   "status": "in_stock"
+  },
+  {
+   "item_id": "sample-retro-sign",
+   "store_id": "s-nagoya",
+   "status": "out_of_stock"
+  },
+  {
+   "item_id": "sample-magical-charm",
+   "store_id": "s-akihabara",
+   "status": "in_stock"
+  },
+  {
+   "item_id": "sample-magical-charm",
+   "store_id": "s-shibuya",
+   "status": "in_stock"
+  },
+  {
+   "item_id": "sample-magical-charm",
+   "store_id": "s-yokohama",
+   "status": "in_stock"
+  },
+  {
+   "item_id": "sample-magical-charm",
+   "store_id": "s-umeda",
+   "status": "in_stock"
+  },
+  {
+   "item_id": "sample-magical-charm",
+   "store_id": "s-kyoto",
+   "status": "in_stock"
+  },
+  {
+   "item_id": "sample-magical-charm",
+   "store_id": "s-sannomiya",
+   "status": "few"
+  },
+  {
+   "item_id": "sample-magical-charm",
+   "store_id": "s-nagoya",
+   "status": "few"
+  },
+  {
+   "item_id": "sample-deepsea",
+   "store_id": "s-ikebukuro",
+   "status": "in_stock"
+  },
+  {
+   "item_id": "sample-deepsea",
+   "store_id": "s-shibuya",
+   "status": "in_stock"
+  },
+  {
+   "item_id": "sample-deepsea",
+   "store_id": "s-yokohama",
+   "status": "out_of_stock"
+  },
+  {
+   "item_id": "sample-deepsea",
+   "store_id": "s-umeda",
+   "status": "out_of_stock"
+  },
+  {
+   "item_id": "sample-deepsea",
+   "store_id": "s-kyoto",
+   "status": "in_stock"
+  },
+  {
+   "item_id": "sample-deepsea",
+   "store_id": "s-nagoya",
+   "status": "in_stock"
+  },
+  {
+   "item_id": "sample-tiny-tools",
+   "store_id": "s-shibuya",
+   "status": "in_stock"
+  },
+  {
+   "item_id": "sample-tiny-tools",
+   "store_id": "s-namba",
+   "status": "out_of_stock"
+  },
+  {
+   "item_id": "sample-tiny-tools",
+   "store_id": "s-kyoto",
+   "status": "few"
+  },
+  {
+   "item_id": "sample-tiny-tools",
+   "store_id": "s-sannomiya",
+   "status": "out_of_stock"
+  },
+  {
+   "item_id": "sample-tiny-tools",
+   "store_id": "s-nagoya",
+   "status": "few"
+  },
+  {
+   "item_id": "sample-tiny-tools",
+   "store_id": "s-hakata",
+   "status": "out_of_stock"
+  },
+  {
+   "item_id": "sample-onigiri-face",
+   "store_id": "s-ikebukuro",
+   "status": "out_of_stock"
+  },
+  {
+   "item_id": "sample-onigiri-face",
+   "store_id": "s-akihabara",
+   "status": "in_stock"
+  },
+  {
+   "item_id": "sample-onigiri-face",
+   "store_id": "s-shibuya",
+   "status": "in_stock"
+  },
+  {
+   "item_id": "sample-onigiri-face",
+   "store_id": "s-yokohama",
+   "status": "out_of_stock"
+  },
+  {
+   "item_id": "sample-onigiri-face",
+   "store_id": "s-umeda",
+   "status": "out_of_stock"
+  },
+  {
+   "item_id": "sample-premium-castle",
+   "store_id": "s-ikebukuro",
+   "status": "out_of_stock"
+  },
+  {
+   "item_id": "sample-premium-castle",
+   "store_id": "s-akihabara",
+   "status": "in_stock"
+  },
+  {
+   "item_id": "sample-premium-castle",
+   "store_id": "s-shibuya",
+   "status": "out_of_stock"
+  },
+  {
+   "item_id": "sample-premium-castle",
+   "store_id": "s-yokohama",
+   "status": "few"
+  },
+  {
+   "item_id": "sample-premium-castle",
+   "store_id": "s-namba",
+   "status": "in_stock"
+  },
+  {
+   "item_id": "sample-premium-castle",
+   "store_id": "s-kyoto",
+   "status": "out_of_stock"
+  },
+  {
+   "item_id": "sample-premium-castle",
+   "store_id": "s-hakata",
+   "status": "in_stock"
+  }
+ ]
+}

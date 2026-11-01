@@ -1,0 +1,65 @@
+{
+  "name": "GACHA ATELIER",
+  "name_ja": "ガチャアトリエ",
+  "tagline": "大人のためのカプセルトイ・ガイド",
+  "tagline_en": "Capsule toy guide for collectors",
+  "description": "新作ガチャガチャの発売日・価格・ラインナップと、近くの在庫店をまとめて探せる大人のコレクター向け情報サイト。",
+  "description_en": "New Japanese capsule toys (gacha) with release dates, prices and lineups, plus nearby shops in Japan that have them in stock.",
+  "url": "https://example.pages.dev",
+  "amazon_tag": "",
+  "rakuten_affiliate_id": "",
+  "contact_url": "",
+  "x_account": "",
+  "operator": "ガチャアトリエ運営事務局",
+  "operator_en": "GACHA ATELIER editorial team",
+  "sample_mode": true,
+  "genres": [
+    {
+      "slug": "anime",
+      "label": "アニメ・キャラ",
+      "en": "Character"
+    },
+    {
+      "slug": "miniature",
+      "label": "リアルミニチュア",
+      "en": "Miniature"
+    },
+    {
+      "slug": "animal",
+      "label": "動物",
+      "en": "Animal"
+    },
+    {
+      "slug": "retro",
+      "label": "昭和レトロ",
+      "en": "Retro"
+    },
+    {
+      "slug": "other",
+      "label": "その他",
+      "en": "Others"
+    }
+  ],
+  "moods": [
+    {
+      "slug": "kawaii",
+      "label": "かわいい・癒し",
+      "en": "Cute & cozy"
+    },
+    {
+      "slug": "real",
+      "label": "リアル・精密",
+      "en": "Realistic & detailed"
+    },
+    {
+      "slug": "funny",
+      "label": "ネタ・おもしろ",
+      "en": "Funny & quirky"
+    },
+    {
+      "slug": "cool",
+      "label": "かっこいい・渋い",
+      "en": "Cool & classic"
+    }
+  ]
+}
