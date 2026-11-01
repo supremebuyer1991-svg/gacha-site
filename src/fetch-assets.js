@@ -203,6 +203,9 @@ async function importStock() {
   fs.mkdirSync(path.join(ROOT, "images"), { recursive: true });
   await require("./import-schedule.js")();
   items = read("items.json");
+  // 新しく入った商品に診断用のタグを仮に付ける（毎晩Claudeが見直す）
+  const tagged = require("./auto-tags.js")(items, site.quiz_groups);
+  if (tagged) { fs.writeFileSync(path.join(ROOT, "data", "items.json"), JSON.stringify(items, null, 2) + "\n"); console.log(`- 診断タグを仮に付けた商品：${tagged}件`); }
   const imgs = await importImages();
   const st = await importStock();
   const geos = await geocodeStores();

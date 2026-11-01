@@ -381,7 +381,7 @@ ${content}
       groups: (site.quiz_groups || []).map((g) => ({ slug: g.slug, subs: g.subs.map((x) => ({ slug: x.slug, match: x.match })) })),
       items: items.map((it) => ({
         id: it.id, name: nameOf(it, lang), jn: it.name, price: it.price, lineup: it.lineup, genre: it.genre, genre_label: genreLabel(genreOf(it.genre), lang),
-        moods: it.moods, popularity: it.popularity, image: it.image, release_label: t.month(it.release),
+        moods: it.moods, popularity: it.popularity, qa: it.q_ages || [], qg: it.q_genders || [], qs: it.q_subs || [], image: it.image, release_label: t.month(it.release),
       })),
     };
     const opt = (name, type, value, label, checked) =>

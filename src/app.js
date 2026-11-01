@@ -9,6 +9,7 @@
     none: "No matches. Try adding more groups or clearing the detailed picks.",
     found: function (n) { return n + " matches, best first."; },
     next: "Next", skip: "No preference",
+    relaxed: function (n) { return "No exact match for your age and gender, so here are " + n + " items from the groups you picked."; },
     match: "Match",
     lineup: function (n) { return n + " designs"; },
     loadErr: "Couldn't load stock information. Please reload the page later.",
@@ -26,6 +27,7 @@
     none: "条件に合うガチャが見つかりませんでした。系統を増やすか、詳しい項目を外してみてください。",
     found: function (n) { return n + "件が見つかりました。相性の高い順に表示しています。"; },
     next: "次へ", skip: "こだわらない",
+    relaxed: function (n) { return "年代・性別にぴったりの商品がなかったので、選んだ系統の" + n + "件を表示しています。"; },
     match: "相性",
     lineup: function (n) { return "全" + n + "種"; },
     loadErr: "在庫情報を読み込めませんでした。時間をおいて再読み込みしてください。",
@@ -112,15 +114,6 @@
     var GROUPS = (data.groups || []).map(function (g) {
       return { slug: g.slug, subs: g.subs.map(function (x) { return { slug: x.slug, rx: new RegExp(x.match, "i") }; }) };
     });
-    var RX = {
-      female: /サンリオ|キティ|マイメロ|クロミ|ポチャッコ|シナモ|ちいかわ|ディズニー|プリキュア|チャーム|アクセサリー|ポーチ|リング|コスメ|パウダー|ミラー|バッグ|ぬいぐるみ/,
-      male: /ガンダム|ゴジラ|ライダー|ウルトラ|ドラゴンボール|ONE PIECE|ワンピ|HG|ロボ|メカ|怪獣|クローズ|WORST|STAR WARS|MARVEL|野球|HOT WHEELS/,
-      "10": /ちいかわ|ホロライブ|すとぷり|NCT|aespa|RIIZE|SKZOO|アイドル|ハイキュー|フリーレン|チェンソー|めじるし/,
-      "20": /ちいかわ|ホロライブ|すとぷり|NCT|aespa|RIIZE|SKZOO|アイドル|ハイキュー|フリーレン|チェンソー|ジョジョ|ポケモン|ポケットモンスター/,
-      "30": /たまごっち|おジャ魔女|カードキャプター|ケロロ|デジモン|ポケットモンスター|ハム太郎|ジュエルペット|きらりん|ナルミヤ|メゾピアノ|ドラゴンボール|ONE PIECE|ワンピ/,
-      "40": /ガンダム|ドラゴンボール|ウルトラ|ライダー|マクロス|ジョジョ|銀魂|いちご100|PEANUTS|パワーパフ|ケアベア|グレムリン|ミニチュア/,
-      "50": /昭和|レトロ|ゴジラ|ウルトラ|仮面ライダー|ドラえもん|ちびまる子|サンリオ|ミニチュア|模型|骨格|図鑑/
-    };
 
     quiz.addEventListener("submit", function (e) {
       e.preventDefault();
@@ -131,36 +124,35 @@
       // 細かい項目を選んだ系統は、その項目だけ（強め）。選んでいない系統は全部（ふつう）
       var targets = GROUPS.filter(function (g) { return chosen.indexOf(g.slug) !== -1; }).map(function (g) {
         var picked = g.subs.filter(function (x) { return chosenSubs.indexOf(g.slug + ":" + x.slug) !== -1; });
-        return { subs: picked.length ? picked : g.subs, weight: picked.length ? 6 : 3 };
+        return { slug: g.slug, subs: picked.length ? picked : g.subs, weight: picked.length ? 6 : 3 };
       });
 
-      var scored = data.items.map(function (it) {
+      // 選んだ系統（細かい項目）のタグが付いた商品だけを候補にする
+      var cands = data.items.map(function (it) {
         var s = 0;
         targets.forEach(function (t) {
-          if (t.subs.some(function (x) { return x.rx.test(it.jn); })) s += t.weight;
+          if (t.subs.some(function (x) { return it.qs.indexOf(t.slug + ":" + x.slug) !== -1; })) s += t.weight;
         });
-        if (targets.length && !s) return { it: it, s: 0 };
-        // 性別・年代は、同じくらいの商品の並び順を決める小さな加点だけ
-        if (RX[gender] && RX[gender].test(it.jn)) s += 0.5;
-        if (RX[age] && RX[age].test(it.jn)) s += 0.5;
-        if (age === "50" && it.genre === "retro") s += 0.3;
         return { it: it, s: s };
-      }).filter(function (x) {
-        return x.s > 0 || (!targets.length && !RX[gender] && !RX[age]);
-      }).sort(function (a, b) { return b.s - a.s || b.it.popularity - a.it.popularity; });
-
-      var personal = (RX[gender] ? 0.5 : 0) + (RX[age] ? 0.5 : 0);
-      var max = targets.reduce(function (a, t) { return Math.max(a, t.weight); }, 0) + personal || 1;
-      var anyChoice = targets.length || personal;
+      }).filter(function (x) { return !targets.length || x.s > 0; });
+      // 年代・性別のタグが当てはまる商品だけに絞る（0件になるときは絞らずに出す）
+      var fit = function (x) {
+        return (!age || x.it.qa.indexOf(age) !== -1) && (!(gender === "male" || gender === "female") || x.it.qg.indexOf(gender) !== -1);
+      };
+      var strict = cands.filter(fit);
+      var relaxed = !strict.length && cands.length && (age || gender === "male" || gender === "female");
+      var scored = (strict.length ? strict : cands).sort(function (a, b) { return b.s - a.s || b.it.popularity - a.it.popularity; });
+      var max = targets.reduce(function (a, t) { return Math.max(a, t.weight); }, 0) || 1;
+      var anyChoice = targets.length;
       var top = scored.slice(0, 8);
       results.hidden = false;
       if (!top.length) {
         note.textContent = M.none;
         grid.innerHTML = "";
       } else {
-        note.textContent = M.found(scored.length);
+        note.textContent = relaxed ? M.relaxed(scored.length) : M.found(scored.length);
         grid.innerHTML = top.map(function (x) {
-          var pct = Math.min(99, Math.round((x.s / max) * 100));
+          var pct = Math.min(99, Math.round((x.s / max) * 100) - (relaxed ? 20 : 0));
           return cardHTML(x.it, data, anyChoice ? pct : null);
         }).join("");
       }
