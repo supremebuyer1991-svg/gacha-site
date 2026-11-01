@@ -128,28 +128,29 @@
       var chosen = vals("group");
       var chosenSubs = vals("sub");
       // 系統ごとに、細かい項目を選んでいればそれだけ、選んでいなければ全部を対象にする
+      // 細かい項目を選んだ系統は、その項目だけ（強め）。選んでいない系統は全部（ふつう）
       var targets = GROUPS.filter(function (g) { return chosen.indexOf(g.slug) !== -1; }).map(function (g) {
         var picked = g.subs.filter(function (x) { return chosenSubs.indexOf(g.slug + ":" + x.slug) !== -1; });
-        return picked.length ? picked : g.subs;
+        return { subs: picked.length ? picked : g.subs, weight: picked.length ? 6 : 3 };
       });
 
       var scored = data.items.map(function (it) {
         var s = 0;
-        targets.forEach(function (subs) {
-          var hit = subs.filter(function (x) { return x.rx.test(it.jn); }).length;
-          if (hit) s += 3 + Math.min(hit - 1, 2) * 0.5;
+        targets.forEach(function (t) {
+          if (t.subs.some(function (x) { return x.rx.test(it.jn); })) s += t.weight;
         });
         if (targets.length && !s) return { it: it, s: 0 };
-        if (RX[gender] && RX[gender].test(it.jn)) s += 1.5;
-        if (RX[age] && RX[age].test(it.jn)) s += 1.5;
-        if (age === "50" && it.genre === "retro") s += 1;
+        // 性別・年代は、同じくらいの商品の並び順を決める小さな加点だけ
+        if (RX[gender] && RX[gender].test(it.jn)) s += 0.5;
+        if (RX[age] && RX[age].test(it.jn)) s += 0.5;
+        if (age === "50" && it.genre === "retro") s += 0.3;
         return { it: it, s: s };
       }).filter(function (x) {
         return x.s > 0 || (!targets.length && !RX[gender] && !RX[age]);
       }).sort(function (a, b) { return b.s - a.s || b.it.popularity - a.it.popularity; });
 
-      var personal = (RX[gender] ? 1.5 : 0) + (RX[age] ? 1.5 : 0);
-      var max = (targets.length ? 4 : 0) + personal || 1;
+      var personal = (RX[gender] ? 0.5 : 0) + (RX[age] ? 0.5 : 0);
+      var max = targets.reduce(function (a, t) { return Math.max(a, t.weight); }, 0) + personal || 1;
       var anyChoice = targets.length || personal;
       var top = scored.slice(0, 8);
       results.hidden = false;
