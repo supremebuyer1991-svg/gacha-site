@@ -59,9 +59,9 @@ const T = {
     lineup: (n) => `全${n}種`, perPlay: "1回", series: (n) => `${n} シリーズ`,
     home: "トップ", logoAria: "トップへ",
     heroH1: "手のひらの名品を、<br>いちばん早く見つける。",
-    heroLead: "新作ガチャの発売日・価格・ラインナップから、<wbr>近くの在庫店まで。",
-    heroSub: "大人のコレクターのための情報を、ひとつの場所に。",
-    stats: ["掲載シリーズ", "今月の発売", "在庫を確認できる店舗"],
+    heroLead: "<span class=\"ph\">新作ガチャの</span><span class=\"ph\">発売日・</span><span class=\"ph\">価格・</span><span class=\"ph\">ラインナップから、</span><br class=\"br-pc\"><span class=\"ph\">近くの在庫店まで。</span>",
+    heroSub: "<span class=\"ph\">大人のコレクターのための</span><span class=\"ph\">情報を、</span><span class=\"ph\">ひとつの場所に。</span>",
+    stats: ["掲載シリーズ", "今月の発売", "取扱店舗"],
     quizTitle: "あなたに合うガチャ診断", q1: "好きなジャンル（いくつでも）", q2: "好みのテイスト（いくつでも）", q3: "1回あたりの予算",
     budgets: [["any", "こだわらない"], ["300", "300円まで"], ["500", "400〜500円"], ["premium", "600円以上"]],
     quizBtn: "診断する", results: "診断結果",
@@ -119,7 +119,7 @@ const T = {
     heroH1: "Find Japan's finest<br>capsule toys first.",
     heroLead: "New gacha release dates, prices and lineups, plus the shops near you that have them.",
     heroSub: "A capsule toy guide for collectors in Japan.",
-    stats: ["Series listed", "Out this month", "Shops with stock info"],
+    stats: ["Series listed", "Out this month", "Shops"],
     quizTitle: "Find your gacha", q1: "Genres you like (pick any)", q2: "Your style (pick any)", q3: "Budget per play",
     budgets: [["any", "Any"], ["300", "Up to ¥300"], ["500", "¥400–500"], ["premium", "¥600+"]],
     quizBtn: "Show my matches", results: "Your matches",
@@ -267,7 +267,7 @@ for (const it of items) {
   }));
 }
 
-const FONTS = "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho+B1:wght@700;800&display=swap";
+const FONTS = "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700;900&display=swap";
 
 /* ================= 言語ごとにページを作る ================= */
 for (const lang of LANGS) {
@@ -380,9 +380,9 @@ ${content}
 <div class="wrap">
   <section class="hero">
     <div class="hero-intro">
-      <div class="hero-planet" aria-hidden="true"><i class="ring"></i><i class="orb"></i><i class="ring ring-front"></i><i class="moon"></i></div>
       <div class="hero-text">
         <h1 class="hero-lead">${t.heroLead}</h1>
+        <div class="hero-planet" aria-hidden="true"><i class="ring"></i><i class="orb"></i><i class="ring ring-front"></i><i class="moon"></i></div>
         <p class="hero-sub">${t.heroSub}</p>
         <dl class="hero-stats">
           ${[items.length, releasingNow, stockedStores].map((n, i) => `<div><dt>${t.stats[i]}</dt><dd>${n.toLocaleString("en-US")}</dd></div>`).join("")}
