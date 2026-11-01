@@ -163,6 +163,14 @@ const T = {
   },
 };
 
+/* ---------- 画像：images/商品id.jpg（.webp .png .jpeg）を置けば自動で使う ---------- */
+const findImage = (id) => {
+  for (const ext of ["webp", "jpg", "jpeg", "png"]) {
+    if (fs.existsSync(path.join(ROOT, "images", `${id}.${ext}`))) return `images/${id}.${ext}`;
+  }
+  return "";
+};
+
 /* ---------- 商品データのチェック（おかしい商品は飛ばして警告） ---------- */
 const warnings = [];
 const seen = new Set();
@@ -179,9 +187,10 @@ const items = rawItems.filter((it, i) => {
   seen.add(it.id);
   return true;
 }).map((it) => ({
-  moods: [], tags: [], tags_en: [], lineup: null, image: "", official_url: "", store_search_url: "", popularity: 0, added: today,
+  moods: [], tags: [], tags_en: [], lineup: null, image: findImage(it.id), official_url: "", store_search_url: "", popularity: 0, added: today,
   description: "", description_en: "", name_en: "", maker_en: "",
   ...it,
+  image: it.image || findImage(it.id),
   price: Number(it.price),
   genre: GENRES.some((g) => g.slug === it.genre) ? it.genre : "other",
   moods: (it.moods || []).filter((m) => moodSlugs.includes(m)),

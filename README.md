@@ -6,15 +6,15 @@
 
 | 場所 | 中身 | 誰が触る |
 |---|---|---|
-| `data/items.json` | 商品 | Gemini |
+| `data/items.json` | 商品の文字データ（日本語・英語） | Claude |
+| `images/` | 商品画像（`商品id.jpg` で置けば自動で表示） | Gemini |
 | `data/stores.json` | 店舗 | Gemini |
 | `data/stock.json` | 在庫 | Gemini |
-| `images/` | 商品画像 | Gemini |
 | `data/site.json` | サイト名・アフィリエイトID・お問い合わせ先 | 運営者 |
 | `src/` | ページを作る仕組み・デザイン | Claude |
 | `.github/workflows/deploy.yml` | 自動公開の設定 | Claude |
 
-Geminiへの説明は `GEMINI_GUIDE.md` にまとまっています。
+Geminiへの説明は `GEMINI_GUIDE.md`、商品データの書き方は `DATA_GUIDE.md` にまとまっています。
 
 ## 最初の設定（1回だけ）
 
