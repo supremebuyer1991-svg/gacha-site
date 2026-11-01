@@ -56,9 +56,28 @@ function pageTitle(html) {
   return m ? m[1].replace(/｜.*$/, "").trim() : "";
 }
 
+// 公式の「準備中」画像（ほぼ一色のグレー）かどうか
+async function isPlaceholder(sharp, input) {
+  const { channels } = await sharp(input).resize(64, 64, { fit: "fill" }).stats();
+  const sd = channels.slice(0, 3).reduce((a, c) => a + c.stdev, 0) / 3;
+  return sd < 18;
+}
+
+// すでに保存した画像のうち「準備中」のものを消して、次回取り込み直す
+async function removePlaceholders(sharp) {
+  let n = 0;
+  for (const f of fs.readdirSync(path.join(ROOT, "images"))) {
+    if (!/\.(webp|jpg|jpeg|png)$/.test(f)) continue;
+    const p = path.join(ROOT, "images", f);
+    try { if (await isPlaceholder(sharp, p)) { fs.unlinkSync(p); n++; } } catch {}
+  }
+  if (n) console.log(`- 「準備中」の画像 ${n}件を外しました（公式に写真が出たら自動で入れ直します）`);
+}
+
 async function importImages() {
   let sharp;
   try { sharp = require("sharp"); } catch { console.log("⚠ sharp が入っていないので画像の取り込みを飛ばします"); return 0; }
+  await removePlaceholders(sharp);
   const allowed = site.image_allowed_makers || [];
   let done = 0;
   for (const it of items) {
@@ -79,6 +98,7 @@ async function importImages() {
       const res = await fetch(imgUrl, { headers: { "User-Agent": UA, Referer: it.official_url } });
       if (!res.ok) throw new Error(`画像 HTTP ${res.status}`);
       const buf = Buffer.from(await res.arrayBuffer());
+      if (await isPlaceholder(sharp, buf)) { console.log(`- ${it.id}: 公式画像がまだ「準備中」なので、次回また確認します`); await sleep(WAIT_MS); continue; }
       await sharp(buf)
         .resize(800, 800, { fit: "contain", background: "#ffffff" })
         .flatten({ background: "#ffffff" })

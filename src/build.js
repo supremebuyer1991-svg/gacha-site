@@ -62,7 +62,10 @@ const T = {
     heroLead: "<span class=\"ph\">新作ガチャの</span><span class=\"ph\">発売日・</span><span class=\"ph\">価格・</span><span class=\"ph\">ラインナップから、</span><br class=\"br-pc\"><span class=\"ph\">近くの在庫店まで。</span>",
     heroSub: "<span class=\"ph\">大人のコレクターのための</span><span class=\"ph\">情報を、</span><span class=\"ph\">ひとつの場所に。</span>",
     stats: ["掲載シリーズ", "今月の発売", "取扱店舗"],
-    quizTitle: "あなたに合うガチャ診断", q1: "好きなジャンル（いくつでも）", q2: "好みのテイスト（いくつでも）", q3: "1回あたりの予算",
+    quizTitle: "あなたに合うガチャ診断", qGender: "あなたの性別は？", qAge: "年代は？", q1: "好きなジャンルは？（いくつでも）", q2: "好みのテイストは？（いくつでも）", q3: "1回あたりの予算は？",
+    genders: [["male", "男性"], ["female", "女性"], ["none", "答えない"]],
+    ages: [["10", "10代"], ["20", "20代"], ["30", "30代"], ["40", "40代"], ["50", "50代以上"]],
+    next: "次へ", skip: "こだわらない", back: "戻る",
     budgets: [["any", "こだわらない"], ["300", "300円まで"], ["500", "400〜500円"], ["premium", "600円以上"]],
     quizBtn: "診断する", results: "診断結果",
     newTitle: "新着ガチャ", toCalendar: "発売カレンダーを見る", rankTitle: "注目のガチャ", genreTitle: "ジャンルから探す",
@@ -120,7 +123,10 @@ const T = {
     heroLead: "New gacha release dates, prices and lineups, plus the shops near you that have them.",
     heroSub: "A capsule toy guide for collectors in Japan.",
     stats: ["Series listed", "Out this month", "Shops"],
-    quizTitle: "Find your gacha", q1: "Genres you like (pick any)", q2: "Your style (pick any)", q3: "Budget per play",
+    quizTitle: "Find your gacha", qGender: "You are…", qAge: "Your age", q1: "Genres you like (pick any)", q2: "Your style (pick any)", q3: "Budget per play",
+    genders: [["male", "Male"], ["female", "Female"], ["none", "Prefer not to say"]],
+    ages: [["10", "Teens"], ["20", "20s"], ["30", "30s"], ["40", "40s"], ["50", "50+"]],
+    next: "Next", skip: "No preference", back: "Back",
     budgets: [["any", "Any"], ["300", "Up to ¥300"], ["500", "¥400–500"], ["premium", "¥600+"]],
     quizBtn: "Show my matches", results: "Your matches",
     newTitle: "New arrivals", toCalendar: "See release calendar", rankTitle: "Editor's picks", genreTitle: "Browse by genre",
@@ -369,7 +375,7 @@ ${content}
     const embed = {
       home: c.H, root: c.R,
       items: items.map((it) => ({
-        id: it.id, name: nameOf(it, lang), price: it.price, lineup: it.lineup, genre: it.genre, genre_label: genreLabel(genreOf(it.genre), lang),
+        id: it.id, name: nameOf(it, lang), jn: it.name, price: it.price, lineup: it.lineup, genre: it.genre, genre_label: genreLabel(genreOf(it.genre), lang),
         moods: it.moods, popularity: it.popularity, image: it.image, release_label: t.month(it.release),
       })),
     };
@@ -390,19 +396,33 @@ ${content}
       </div>
     </div>
     <form class="quiz" id="quiz" aria-labelledby="quiz-title">
-      <h2 id="quiz-title">${t.quizTitle}</h2>
+      <div class="quiz-head">
+        <h2 id="quiz-title">${t.quizTitle}</h2>
+        <span class="quiz-step" id="quiz-step" aria-live="polite"></span>
+      </div>
+      <div class="quiz-bar" aria-hidden="true"><i id="quiz-bar"></i></div>
       <div class="quiz-qs">
-      <fieldset><legend><b>1</b>${t.q1}</legend>
+      <fieldset data-auto><legend><b>1</b>${t.qGender}</legend>
+        <div class="opts opts-lg">${t.genders.map(([v, l]) => opt("gender", "radio", v, l)).join("")}</div>
+      </fieldset>
+      <fieldset data-auto><legend><b>2</b>${t.qAge}</legend>
+        <div class="opts opts-lg">${t.ages.map(([v, l]) => opt("age", "radio", v, l)).join("")}</div>
+      </fieldset>
+      <fieldset data-multi><legend><b>3</b>${t.q1}</legend>
         <div class="opts">${GENRES.filter((g) => g.slug !== "other").map((g) => opt("genre", "checkbox", g.slug, genreLabel(g, lang))).join("")}</div>
       </fieldset>
-      <fieldset><legend><b>2</b>${t.q2}</legend>
+      <fieldset data-multi><legend><b>4</b>${t.q2}</legend>
         <div class="opts">${site.moods.map((m) => opt("mood", "checkbox", m.slug, moodLabel(m, lang))).join("")}</div>
       </fieldset>
-      <fieldset><legend><b>3</b>${t.q3}</legend>
+      <fieldset data-last><legend><b>5</b>${t.q3}</legend>
         <div class="opts">${t.budgets.map(([v, l], i) => opt("budget", "radio", v, l, i === 0)).join("")}</div>
       </fieldset>
       </div>
-      <button class="btn btn-gold" type="submit">${t.quizBtn}</button>
+      <div class="quiz-nav">
+        <button class="btn btn-ghost" type="button" id="quiz-back" hidden>${t.back}</button>
+        <button class="btn btn-gold" type="button" id="quiz-next" hidden>${t.next}</button>
+        <button class="btn btn-gold" type="submit" id="quiz-submit">${t.quizBtn}</button>
+      </div>
     </form>
   </section>
 

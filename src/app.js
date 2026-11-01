@@ -8,6 +8,7 @@
   var M = EN ? {
     none: "No matches. Try a wider budget or style.",
     found: function (n) { return n + " matches, best first."; },
+    next: "Next", skip: "No preference",
     match: "Match",
     lineup: function (n) { return n + " designs"; },
     loadErr: "Couldn't load stock information. Please reload the page later.",
@@ -24,6 +25,7 @@
   } : {
     none: "条件に合うガチャが見つかりませんでした。予算やテイストを広げてみてください。",
     found: function (n) { return n + "件が見つかりました。相性の高い順に表示しています。"; },
+    next: "次へ", skip: "こだわらない",
     match: "相性",
     lineup: function (n) { return "全" + n + "種"; },
     loadErr: "在庫情報を読み込めませんでした。時間をおいて再読み込みしてください。",
@@ -53,8 +55,51 @@
     var grid = document.getElementById("results-grid");
     var note = document.getElementById("results-note");
 
+    /* 1問ずつ表示する（JavaScriptが動かないときは全部の質問がそのまま並ぶ） */
+    var steps = [].slice.call(quiz.querySelectorAll(".quiz-qs fieldset"));
+    var cur = 0;
+    var stepEl = document.getElementById("quiz-step");
+    var barEl = document.getElementById("quiz-bar");
+    var backBtn = document.getElementById("quiz-back");
+    var nextBtn = document.getElementById("quiz-next");
+    var submitBtn = document.getElementById("quiz-submit");
+    quiz.classList.add("is-wizard");
+    function show(i) {
+      cur = Math.max(0, Math.min(steps.length - 1, i));
+      steps.forEach(function (f, k) { f.hidden = k !== cur; });
+      stepEl.textContent = (cur + 1) + " / " + steps.length;
+      barEl.style.width = ((cur + 1) / steps.length * 100) + "%";
+      backBtn.hidden = cur === 0;
+      var last = cur === steps.length - 1;
+      var multi = steps[cur].hasAttribute("data-multi");
+      nextBtn.hidden = !multi;
+      submitBtn.hidden = !last;
+      if (multi) nextBtn.textContent = steps[cur].querySelector("input:checked") ? M.next : M.skip;
+    }
+    steps.forEach(function (f) {
+      f.addEventListener("change", function () {
+        if (f.hasAttribute("data-auto")) setTimeout(function () { show(cur + 1); }, 180);
+        else if (f.hasAttribute("data-multi")) nextBtn.textContent = f.querySelector("input:checked") ? M.next : M.skip;
+      });
+    });
+    backBtn.addEventListener("click", function () { show(cur - 1); });
+    nextBtn.addEventListener("click", function () { show(cur + 1); });
+    show(0);
+
+    var val = function (n) { return (quiz.querySelector('input[name="' + n + '"]:checked') || {}).value || ""; };
+    var RX = {
+      female: /サンリオ|キティ|マイメロ|クロミ|ポチャッコ|シナモ|ちいかわ|ディズニー|プリキュア|チャーム|アクセサリー|ポーチ|リング|コスメ|パウダー|ミラー|バッグ|ぬいぐるみ/,
+      male: /ガンダム|ゴジラ|ライダー|ウルトラ|ドラゴンボール|ONE PIECE|ワンピ|HG|ロボ|メカ|怪獣|クローズ|WORST|スター・?ウォーズ|STAR WARS|マーベル|MARVEL|野球|ミニカー|HOT WHEELS/,
+      "10": /ちいかわ|ホロライブ|すとぷり|NCT|aespa|RIIZE|SKZOO|アイドル|ハイキュー|フリーレン|チェンソー|推し|めじるし/,
+      "20": /ちいかわ|ホロライブ|すとぷり|NCT|aespa|RIIZE|SKZOO|アイドル|ハイキュー|フリーレン|チェンソー|ジョジョ|呪術|ポケモン|ポケットモンスター/,
+      "30": /たまごっち|おジャ魔女|カードキャプター|ケロロ|デジモン|ポケットモンスター|ハム太郎|ジュエルペット|きらりん|ナルミヤ|メゾピアノ|ドラゴンボール|ONE PIECE|ワンピ/,
+      "40": /ガンダム|ドラゴンボール|ウルトラ|ライダー|マクロス|ジョジョ|銀魂|いちご100|PEANUTS|パワーパフ|ケアベア|グレムリン|ファミコン|ミニチュア/,
+      "50": /昭和|レトロ|ゴジラ|ウルトラ|仮面ライダー|ドラえもん|ちびまる子|サンリオ|ミニチュア|模型|骨格|図鑑/
+    };
+
     quiz.addEventListener("submit", function (e) {
       e.preventDefault();
+      var gender = val("gender"), age = val("age");
       var genres = [].map.call(quiz.querySelectorAll('input[name="genre"]:checked'), function (x) { return x.value; });
       var moods = [].map.call(quiz.querySelectorAll('input[name="mood"]:checked'), function (x) { return x.value; });
       var budget = (quiz.querySelector('input[name="budget"]:checked') || {}).value || "any";
@@ -70,12 +115,19 @@
         var s = 0;
         if (genres.length && genres.indexOf(it.genre) !== -1) s += 3;
         moods.forEach(function (m) { if (it.moods.indexOf(m) !== -1) s += 2; });
+        if (RX[gender] && RX[gender].test(it.jn)) s += 1.5;
+        if (RX[age] && RX[age].test(it.jn)) s += 1.5;
+        if (age === "50" && it.genre === "retro") s += 1;
+        if (gender === "female" && it.moods.indexOf("kawaii") !== -1) s += 0.5;
+        if (gender === "male" && it.moods.indexOf("cool") !== -1) s += 0.5;
         return { it: it, s: s };
       }).filter(function (x) {
-        return (!genres.length && !moods.length) || x.s > 0;
+        return x.s > 0 || (!genres.length && !moods.length && !RX[gender] && !RX[age]);
       }).sort(function (a, b) { return b.s - a.s || b.it.popularity - a.it.popularity; });
 
-      var max = 3 * (genres.length ? 1 : 0) + 2 * moods.length || 1;
+      var personal = (RX[gender] ? 2 : 0) + (RX[age] ? 1.5 : 0);
+      var max = 3 * (genres.length ? 1 : 0) + 2 * moods.length + personal || 1;
+      var anyChoice = genres.length || moods.length || personal;
       var top = scored.slice(0, 8);
       results.hidden = false;
       if (!top.length) {
@@ -84,8 +136,8 @@
       } else {
         note.textContent = M.found(scored.length);
         grid.innerHTML = top.map(function (x) {
-          var pct = Math.round((x.s / max) * 100);
-          return cardHTML(x.it, data, (genres.length || moods.length) ? pct : null);
+          var pct = Math.min(99, Math.round((x.s / max) * 100));
+          return cardHTML(x.it, data, anyChoice ? pct : null);
         }).join("");
       }
       results.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
