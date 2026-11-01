@@ -183,7 +183,7 @@ const items = rawItems.filter((it, i) => {
   if (seen.has(it.id)) { warnings.push(`${where}: id「${it.id}」が重複しています`); return false; }
   if (!/^\d{4}-\d{2}$/.test(it.release)) { warnings.push(`${where}: release は「2026-11」の形にしてください`); return false; }
   if (!GENRES.some((g) => g.slug === it.genre)) warnings.push(`${where}: genre「${it.genre}」は未登録なので「その他」に入れました`);
-  if (!it.name_en) warnings.push(`${where}: name_en（英語名）が空なので、英語ページでは日本語名を表示します`);
+
   seen.add(it.id);
   return true;
 }).map((it) => ({
@@ -590,6 +590,9 @@ ${pages.map(urlEntry).join("\n")}
 `);
 write("robots.txt", `User-agent: *\nAllow: /\nSitemap: ${SITE_URL}/sitemap.xml\n`);
 write("_headers", `/assets/*\n  Cache-Control: public, max-age=86400\n/images/*\n  Cache-Control: public, max-age=604800\n/data/*\n  Cache-Control: public, max-age=300\n`);
+
+const noEn = items.filter((it) => !it.name_en).length;
+if (noEn) warnings.push(`英語名（name_en）がまだない商品が${noEn}件あります（英語ページでは日本語名を表示）`);
 
 /* ---------- 結果 ---------- */
 console.log(`✔ ${items.length}商品・${validStores.length}店舗から 日本語${pages.filter((p) => p[0] === "ja").length}・英語${pages.filter((p) => p[0] === "en").length}ページを ${path.relative(ROOT, OUT)}/ に書き出しました`);

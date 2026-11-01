@@ -16,14 +16,14 @@ const path = require("path");
 const ROOT = path.join(__dirname, "..");
 const read = (f) => JSON.parse(fs.readFileSync(path.join(ROOT, "data", f), "utf8"));
 const site = read("site.json");
-const items = read("items.json");
+let items = read("items.json");
 const storesPath = path.join(ROOT, "data", "stores.json");
 const stores = fs.existsSync(storesPath) ? read("stores.json") : [];
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const UA = "Mozilla/5.0 (compatible; GachaSiteBot/1.0; +" + (process.env.SITE_URL || site.url) + ")";
 const WAIT_MS = 2000;
-const MAX_IMAGES_PER_RUN = 30;
+const MAX_IMAGES_PER_RUN = 60;
 
 // 比べるために、空白・記号・全角半角の違いをなくす
 const norm = (s) => String(s || "")
@@ -181,6 +181,8 @@ async function importStock() {
 
 (async () => {
   fs.mkdirSync(path.join(ROOT, "images"), { recursive: true });
+  await require("./import-schedule.js")();
+  items = read("items.json");
   const imgs = await importImages();
   const st = await importStock();
   const geos = await geocodeStores();
