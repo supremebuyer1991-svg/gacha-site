@@ -59,8 +59,9 @@ const T = {
     lineup: (n) => `全${n}種`, perPlay: "1回", series: (n) => `${n} シリーズ`,
     home: "トップ", logoAria: "トップへ",
     heroH1: "手のひらの名品を、<br>いちばん早く見つける。",
-    heroLead: "新作ガチャガチャの発売日・価格・ラインナップから、近くの在庫店まで。大人のコレクターのための情報を、ひとつの場所に。",
-    heroCount: (a, b) => `いま <b>${a}</b> シリーズを掲載、うち <b>${b}</b> シリーズが来月以降に発売。`,
+    heroLead: "新作ガチャの発売日・価格・ラインナップから、<wbr>近くの在庫店まで。",
+    heroSub: "大人のコレクターのための情報を、ひとつの場所に。",
+    stats: ["掲載シリーズ", "今月の発売", "在庫を確認できる店舗"],
     quizTitle: "あなたに合うガチャ診断", q1: "好きなジャンル（いくつでも）", q2: "好みのテイスト（いくつでも）", q3: "1回あたりの予算",
     budgets: [["any", "こだわらない"], ["300", "300円まで"], ["500", "400〜500円"], ["premium", "600円以上"]],
     quizBtn: "診断する", results: "診断結果",
@@ -116,8 +117,9 @@ const T = {
     lineup: (n) => `${n} designs`, perPlay: "per play", series: (n) => `${n} series`,
     home: "Home", logoAria: "Home",
     heroH1: "Find Japan's finest<br>capsule toys first.",
-    heroLead: "Release dates, prices and full lineups of new gacha, plus the shops near you that still have them in stock. A guide for collectors visiting Japan.",
-    heroCount: (a, b) => `<b>${a}</b> series listed, <b>${b}</b> coming next month or later.`,
+    heroLead: "New gacha release dates, prices and lineups, plus the shops near you that have them.",
+    heroSub: "A capsule toy guide for collectors in Japan.",
+    stats: ["Series listed", "Out this month", "Shops with stock info"],
     quizTitle: "Find your gacha", q1: "Genres you like (pick any)", q2: "Your style (pick any)", q3: "Budget per play",
     budgets: [["any", "Any"], ["300", "Up to ¥300"], ["500", "¥400–500"], ["premium", "¥600+"]],
     quizBtn: "Show my matches", results: "Your matches",
@@ -362,7 +364,8 @@ ${content}
     const c = ctx("index.html");
     const newest = [...items].sort(byNewest).slice(0, 8);
     const ranking = [...items].sort(byPopular).slice(0, 5);
-    const upcoming = items.filter((it) => it.release > thisMonth).length;
+    const releasingNow = items.filter((it) => it.release === thisMonth).length;
+    const stockedStores = new Set([...stockByItem.values()].flat().map((s) => s.name + s.address)).size;
     const embed = {
       home: c.H, root: c.R,
       items: items.map((it) => ({
@@ -377,8 +380,14 @@ ${content}
 <div class="wrap">
   <section class="hero">
     <div class="hero-intro">
-      <h1 class="hero-lead">${t.heroLead}</h1>
-      <p class="hero-count">${t.heroCount(items.length, upcoming)}</p>
+      <div class="hero-planet" aria-hidden="true"><i class="ring"></i><i class="orb"></i><i class="ring ring-front"></i><i class="moon"></i></div>
+      <div class="hero-text">
+        <h1 class="hero-lead">${t.heroLead}</h1>
+        <p class="hero-sub">${t.heroSub}</p>
+        <dl class="hero-stats">
+          ${[items.length, releasingNow, stockedStores].map((n, i) => `<div><dt>${t.stats[i]}</dt><dd>${n.toLocaleString("en-US")}</dd></div>`).join("")}
+        </dl>
+      </div>
     </div>
     <form class="quiz" id="quiz" aria-labelledby="quiz-title">
       <h2 id="quiz-title">${t.quizTitle}</h2>
