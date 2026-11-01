@@ -391,6 +391,7 @@ ${content}
     </div>
     <form class="quiz" id="quiz" aria-labelledby="quiz-title">
       <h2 id="quiz-title">${t.quizTitle}</h2>
+      <div class="quiz-qs">
       <fieldset><legend><b>1</b>${t.q1}</legend>
         <div class="opts">${GENRES.filter((g) => g.slug !== "other").map((g) => opt("genre", "checkbox", g.slug, genreLabel(g, lang))).join("")}</div>
       </fieldset>
@@ -400,6 +401,7 @@ ${content}
       <fieldset><legend><b>3</b>${t.q3}</legend>
         <div class="opts">${t.budgets.map(([v, l], i) => opt("budget", "radio", v, l, i === 0)).join("")}</div>
       </fieldset>
+      </div>
       <button class="btn btn-gold" type="submit">${t.quizBtn}</button>
     </form>
   </section>
