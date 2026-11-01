@@ -9,6 +9,8 @@
     none: "No matches. Try adding more groups or clearing the detailed picks.",
     found: function (n) { return n + " matches, best first."; },
     next: "Next", skip: "No preference",
+    searchNone: "No results. Try a shorter word.", searchCount: " results.",
+    searchAll: function (n) { return "See all " + n + " results"; },
     relaxed: function (n) { return "No exact match for your age and gender, so here are " + n + " items from the groups you picked."; },
     match: "Match",
     lineup: function (n) { return n + " designs"; },
@@ -27,6 +29,8 @@
     none: "条件に合うガチャが見つかりませんでした。系統を増やすか、詳しい項目を外してみてください。",
     found: function (n) { return n + "件が見つかりました。相性の高い順に表示しています。"; },
     next: "次へ", skip: "こだわらない",
+    searchNone: "見つかりませんでした。ことばを短くするか、ひらがな・カタカナを変えてみてください。", searchCount: "件見つかりました。",
+    searchAll: function (n) { return n + "件すべて見る"; },
     relaxed: function (n) { return "年代・性別にぴったりの商品がなかったので、選んだ系統の" + n + "件を表示しています。"; },
     match: "相性",
     lineup: function (n) { return "全" + n + "種"; },
@@ -48,6 +52,66 @@
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
     });
   };
+
+  /* ================= 検索（全ページのヘッダー） ================= */
+  var sForm = document.querySelector("form.search");
+  if (sForm) {
+    var sInput = sForm.querySelector("input");
+    var sPop = sForm.querySelector(".search-pop");
+    var sIndex = null, sLoading = null;
+    var home = sForm.getAttribute("data-home"), root = sForm.getAttribute("data-root");
+    // ひらがな・カタカナ、全角・半角、大文字・小文字の違いをなくして比べる
+    var norm = function (v) {
+      return String(v || "").normalize("NFKC").toLowerCase()
+        .replace(/[\u3041-\u3096]/g, function (c) { return String.fromCharCode(c.charCodeAt(0) + 0x60); })
+        .replace(/[\s・･!！?？'’"“”:：\-‐–—~〜～、。,.\/／|｜【】\[\]「」『』()（）♪☆★™]/g, "");
+    };
+    var load = function () {
+      if (!sLoading) sLoading = fetch(sForm.getAttribute("data-index")).then(function (r) { return r.json(); }).then(function (d) {
+        sIndex = d.map(function (x) { x._s = norm([x.n, x.a, x.m, x.g, x.k].join(" ")); return x; });
+        return sIndex;
+      });
+      return sLoading;
+    };
+    var find = function (q) {
+      var words = String(q).split(/\s+/).map(norm).filter(Boolean);
+      if (!words.length) return [];
+      return sIndex.filter(function (x) { return words.every(function (w) { return x._s.indexOf(w) !== -1; }); });
+    };
+    var thumbHTML = function (x) {
+      return x.img ? '<img src="' + esc(/^https?:/.test(x.img) ? x.img : root + x.img) + '" alt="" loading="lazy" width="48" height="48">' : '<span class="sp-cap" aria-hidden="true"></span>';
+    };
+    var render = function () {
+      var q = sInput.value.trim();
+      if (!q || !sIndex) { sPop.hidden = true; return; }
+      var hits = find(q);
+      sPop.innerHTML = hits.length
+        ? hits.slice(0, 8).map(function (x) {
+            return '<a class="sp-item" href="' + home + "item/" + esc(x.id) + '.html">' + thumbHTML(x) + '<span class="sp-name">' + esc(x.n) + '</span><span class="sp-price">¥' + x.p + "</span></a>";
+          }).join("") + (hits.length > 8 ? '<button class="sp-all" type="submit">' + esc(M.searchAll(hits.length)) + "</button>" : "")
+        : '<p class="sp-none">' + esc(M.searchNone) + "</p>";
+      sPop.hidden = false;
+    };
+    sInput.addEventListener("focus", load);
+    sInput.addEventListener("input", function () { load().then(render); });
+    sInput.addEventListener("keydown", function (e) { if (e.key === "Escape") { sPop.hidden = true; sInput.blur(); } });
+    document.addEventListener("click", function (e) { if (!sForm.contains(e.target)) sPop.hidden = true; });
+
+    // 検索結果ページ
+    var srGrid = document.getElementById("sr-grid");
+    if (srGrid) {
+      var q = new URLSearchParams(location.search).get("q") || "";
+      sInput.value = q;
+      load().then(function () {
+        var hits = find(q);
+        document.getElementById("sr-title").textContent = q ? "「" + q + "」" : document.getElementById("sr-title").textContent;
+        document.getElementById("sr-note").textContent = q ? (hits.length ? hits.length + M.searchCount : M.searchNone) : "";
+        srGrid.innerHTML = hits.map(function (x) {
+          return cardHTML({ id: x.id, name: x.n, price: x.p, lineup: x.l, image: x.img, genre_label: x.g, release_label: x.r }, { home: home, root: root }, null);
+        }).join("");
+      });
+    }
+  }
 
   /* ================= 診断（トップページ） ================= */
   var quiz = document.getElementById("quiz");

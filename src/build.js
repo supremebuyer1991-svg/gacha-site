@@ -66,6 +66,7 @@ const T = {
     genders: [["male", "男性"], ["female", "女性"], ["none", "答えない"]],
     ages: [["10", "10代"], ["20", "20代"], ["30", "30代"], ["40", "40代"], ["50", "50代以上"]],
     next: "次へ", skip: "こだわらない", back: "戻る",
+    searchPh: "商品名・作品名で探す", searchAria: "商品を検索", searchTitle: "検索結果", searchNone: "見つかりませんでした。ことばを短くするか、ひらがな・カタカナを変えてみてください。", searchCount: "件",
     qGroups: "好きな系統は？（いくつでも）", more: "さらに詳しく選ぶ", less: "閉じる",
     groupsHint: "詳しく選ばない場合は、その系統のすべてが対象になります。",
     budgets: [["any", "こだわらない"], ["300", "300円まで"], ["500", "400〜500円"], ["premium", "600円以上"]],
@@ -129,6 +130,7 @@ const T = {
     genders: [["male", "Male"], ["female", "Female"], ["none", "Prefer not to say"]],
     ages: [["10", "Teens"], ["20", "20s"], ["30", "30s"], ["40", "40s"], ["50", "50+"]],
     next: "Next", skip: "No preference", back: "Back",
+    searchPh: "Search items or series", searchAria: "Search items", searchTitle: "Search results", searchNone: "No results. Try a shorter word.", searchCount: " results",
     qGroups: "What do you like? (pick any)", more: "Narrow it down", less: "Close",
     groupsHint: "If you don't narrow it down, everything in that group counts.",
     budgets: [["any", "Any"], ["300", "Up to ¥300"], ["500", "¥400–500"], ["premium", "¥600+"]],
@@ -345,6 +347,10 @@ ${ld}`;
 <header class="site-header"><div class="wrap">
   <a class="logo" href="${c.H}index.html" aria-label="${esc(site.name)} ${t.logoAria}"><span class="logo-en">${esc(site.name)}</span><span class="logo-ja">${esc(t.tagline)}</span></a>
   <nav class="nav" aria-label="${t.navAria}">${NAV.map(([h, k]) => `<a href="${c.H}${h}"${k === current ? ' aria-current="page"' : ""}>${t.nav[k]}</a>`).join("")}</nav>
+  <form class="search" role="search" action="${c.H}search.html" data-index="${c.R}data/search-${lang}.json" data-home="${c.H}" data-root="${c.R}">
+    <input type="search" name="q" id="search-q" placeholder="${t.searchPh}" aria-label="${t.searchAria}" autocomplete="off" enterkeyhint="search">
+    <div class="search-pop" id="search-pop" hidden></div>
+  </form>
   <a class="lang-switch" href="${switchHref}" hreflang="${other}" lang="${other}" aria-label="${t.switchAria}">${t.switchLabel}</a>
 </div></header>
 <main>${body}</main>
@@ -594,6 +600,19 @@ ${content}
     layout({ rel: "faq.html", title: t.faqTitle, description: t.faqDesc, body, jsonld, current: "faq" });
   }
 
+  /* ---------- 検索結果ページ ---------- */
+  {
+    const body = `<div class="wrap">
+  <header class="page-head"><h1 id="sr-title">${t.searchTitle}</h1><p class="lead" id="sr-note"></p></header>
+  <section class="section" style="padding-top:32px"><div class="grid" id="sr-grid"></div></section>
+</div>`;
+    layout({ rel: "search.html", title: t.searchTitle, description: t.searchTitle, body });
+  }
+  write(`data/search-${lang}.json`, JSON.stringify(items.map((it) => ({
+    id: it.id, n: nameOf(it, lang), a: lang === "en" ? it.name : it.name_en, m: makerOf(it, lang), img: it.image, p: it.price, l: it.lineup, r: t.month(it.release), g: genreLabel(genreOf(it.genre), lang),
+    k: [...(it.tags || []), ...(it.tags_en || [])].join(" "),
+  }))));
+
   /* ---------- 運営者情報 ---------- */
   {
     const x = site.x_account ? site.x_account.replace(/^@/, "") : "";
@@ -619,7 +638,7 @@ const urlEntry = ([lang, rel]) => `  <url><loc>${esc(canonical(lang, rel))}</loc
   </url>`;
 write("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-${pages.map(urlEntry).join("\n")}
+${pages.filter(([, r]) => r !== "search.html").map(urlEntry).join("\n")}
 </urlset>
 `);
 write("robots.txt", `User-agent: *\nAllow: /\nSitemap: ${SITE_URL}/sitemap.xml\n`);
