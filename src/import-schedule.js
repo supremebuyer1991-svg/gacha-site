@@ -12,7 +12,8 @@ const itemsPath = path.join(ROOT, "data", "items.json");
 const UA = "Mozilla/5.0 (compatible; GachaSiteBot/1.0; +" + (process.env.SITE_URL || "https://gacha-site.pages.dev") + ")";
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const WAIT_MS = 2000;
-const MAX_NEW_PER_RUN = 150;
+const MAX_NEW_PER_RUN = 150; // 今月・来月の新作の上限
+const MAX_PAST_PER_RUN = 80; // さかのぼり分の上限
 
 const NAMED = { amp: "&", quot: '"', apos: "'", lt: "<", gt: ">", nbsp: " ", trade: "™", reg: "®", copy: "©", hellip: "…" };
 const decode = (s) => s
@@ -55,7 +56,9 @@ async function main() {
   const bf = fs.existsSync(bfPath) ? JSON.parse(fs.readFileSync(bfPath, "utf8")) : { next: null, until: null };
   if (!bf.next) bf.next = ym(new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - 1, 1)));
   if (!bf.until) bf.until = ym(new Date(Date.UTC(now.getUTCFullYear() - 1, now.getUTCMonth(), 1)));
-  const backMonth = bf.next >= bf.until ? bf.next : null;
+  // さかのぼりは夜中（日本時間0〜2時）の実行だけ。公式サイトとGitHubの使用時間への負担を抑えるため
+  const nightRun = now.getUTCHours() < 3 || process.env.FORCE_BACKFILL === "1";
+  const backMonth = nightRun && bf.next >= bf.until ? bf.next : null;
   if (backMonth) months.push(backMonth);
 
   const found = [];
@@ -73,10 +76,12 @@ async function main() {
     await sleep(WAIT_MS);
   }
 
-  let added = 0;
+  let added = 0, addedPast = 0;
   for (const f of found) {
     const jan13 = f.jan.slice(0, 13);
     if (known.has(jan13) || added >= MAX_NEW_PER_RUN) continue;
+    if (f.past && addedPast >= MAX_PAST_PER_RUN) continue;
+    if (f.past) addedPast++;
     known.add(jan13);
     const url = `https://gashapon.jp/products/detail.php?jan_code=${f.jan}`;
     let lineup = null;

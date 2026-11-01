@@ -23,7 +23,7 @@ const stores = fs.existsSync(storesPath) ? read("stores.json") : [];
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const UA = "Mozilla/5.0 (compatible; GachaSiteBot/1.0; +" + (process.env.SITE_URL || site.url) + ")";
 const WAIT_MS = 2000;
-const MAX_IMAGES_PER_RUN = 100;
+const MAX_IMAGES_PER_RUN = 60;
 
 // 比べるために、空白・記号・全角半角の違いをなくす
 const norm = (s) => String(s || "")
