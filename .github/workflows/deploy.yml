@@ -32,7 +32,7 @@ jobs:
           npm install --no-save --no-package-lock sharp@0.33.5
           node src/fetch-assets.js
         env:
-          STOCK_IN_GITHUB: "1"
+          STOCK_IN_GITHUB: "0"
           SITE_URL: ${{ vars.SITE_URL || 'https://gacha-site.pages.dev' }}
 
       - name: 取り込んだものを保存
