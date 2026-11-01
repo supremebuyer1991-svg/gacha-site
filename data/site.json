@@ -13,6 +13,11 @@
   "operator": "ガチャアトリエ運営事務局",
   "operator_en": "GACHA ATELIER editorial team",
   "sample_mode": false,
+  "image_allowed_makers": [
+    "バンダイ",
+    "タカラトミーアーツ",
+    "ブシロード"
+  ],
   "genres": [
     {
       "slug": "anime",

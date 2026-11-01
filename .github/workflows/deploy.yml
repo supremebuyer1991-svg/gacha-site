@@ -16,7 +16,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       deployments: write
     steps:
       - uses: actions/checkout@v4
@@ -24,6 +24,20 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+
+      - name: 画像と店舗の位置を取り込む
+        run: |
+          npm install --no-save --no-package-lock sharp@0.33.5
+          node src/fetch-assets.js
+        env:
+          SITE_URL: ${{ vars.SITE_URL || 'https://gacha-site.pages.dev' }}
+
+      - name: 取り込んだものを保存
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add images data/stores.json
+          git diff --cached --quiet || (git commit -m "画像と店舗の位置を自動取り込み" && git push)
 
       - name: ページを作る
         run: node src/build.js

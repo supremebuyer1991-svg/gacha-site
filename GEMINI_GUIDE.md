@@ -5,39 +5,32 @@
 
 | 担当 | やること |
 |---|---|
-| **Gemini（あなた）** | **商品画像を `images/` に置く**、店舗と在庫のデータ（`data/stores.json`・`data/stock.json`） |
-| Claude | 商品の文字データ（`data/items.json`：商品名・価格・発売月・英語名・タグなど）、サイトの仕組み |
+| **Gemini（あなた）** | 店舗と在庫のデータ（`data/stores.json`・`data/stock.json`） |
+| Claude | 商品データ（`data/items.json`）、サイトの仕組み |
+| 自動 | 商品画像（公式ページから取り込み）、店舗の緯度経度（住所から計算） |
 
 **`data/items.json`・`src/`・`.github/` は変更しないでください。**
 `main` ブランチに変更を送ると、GitHub Actions が自動でページを作り直して公開します。
 
 ---
 
-## 1. 商品画像 `images/`（メインの作業）
+## 1. 商品画像
 
-1. `data/items.json` を開き、画像が必要な商品の `id` を確認する
-2. その商品の画像を **`images/商品id.jpg`** という名前で置く
-   - 例：id が `bandai-kissaten-mini-2026-11` なら `images/bandai-kissaten-mini-2026-11.jpg`
-   - `.webp` `.png` でもよい
-3. それだけで、サイトに自動で表示される（`items.json` を書き換える必要はない）
-
-画像の決まり：
-- 正方形、横800px程度
-- 1枚300KB以下を目安に（重いとサイトが遅くなる）
-- 商品全体（ラインナップがわかる画像）が望ましい
-
-画像がまだない商品は、どれかを調べるには：`items.json` の各 `id` について、`images/` に同じ名前のファイルがあるかを見る。
+**作業は不要です。** Claudeが items.json に公式の商品ページ（official_url）を登録すると、公開のときに自動で画像が取り込まれます。
 
 ## 2. 店舗 `data/stores.json`
 
 ```json
-{ "id": "s-ikebukuro-001", "name": "店舗名", "name_en": "Shop name", "prefecture": "東京都", "address": "住所", "address_en": "Higashi-Ikebukuro, Toshima-ku", "lat": 35.7295, "lng": 139.7193 }
+{ "id": "s-tokyo-gashapon-ikebukuro", "name": "ガシャポンのデパート 池袋総本店", "name_en": "Gashapon Department Store Ikebukuro", "prefecture": "東京都", "address": "東京都豊島区東池袋3-1-3 サンシャインシティ ワールドインポートマートビル3F", "address_en": "3F World Import Mart Bldg., Sunshine City, 3-1-3 Higashi-Ikebukuro, Toshima-ku", "source_url": "https://（その店舗が載っている公式の店舗ページ）" }
 ```
 
+- **店名・住所は、各チェーン公式サイトの店舗一覧から一字一句そのまま書き写す。記憶や推測で書かない**
+- **`source_url`（情報元のページ）は必須。** 書き写した公式ページのURLを入れる
+- **`lat` `lng`（緯度経度）は書かない。** 住所から自動で計算される
+- 住所は「番地」と「建物名・階」の間に半角スペースを1つ入れる（位置の計算は番地までで行うため）
 - `id` は半角英小文字・数字・ハイフン。重複禁止
 - `prefecture` は「東京都」「大阪府」のように正式名
-- `lat`（緯度）`lng`（経度）は数字。近い順の並べ替えに使う
-- `name_en` `address_en` は英語ページ用（空でもOK。英語ページには日本語名も一緒に出る）
+- `name_en` `address_en` は英語ページ用（空でもOK）
 
 ## 3. 在庫 `data/stock.json`
 
@@ -53,6 +46,7 @@
 - `updated_at`：情報を集めた日時（サイトに「○時時点」と表示される）
 - `status`：`in_stock`（在庫あり）`few`（残りわずか）`out_of_stock`（売り切れ）のどれか
 - `item_id` は items.json の id、`store_id` は stores.json の id を使う
+- 在庫の情報元も、公式の店舗検索など、確かめられるところだけ
 
 ## 4. 送る前のチェック
 

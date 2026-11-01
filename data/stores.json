@@ -1,12 +1,1 @@
-[
-  {"id": "s-ikebukuro", "name": "【サンプル】カプセルトイ専門店 池袋", "prefecture": "東京都", "address": "東京都豊島区東池袋（サンプル）", "lat": 35.7295, "lng": 139.7193, "name_en": "[Sample] Capsule Toy Shop Ikebukuro", "address_en": "Ikebukuro (sample)"},
-  {"id": "s-akihabara", "name": "【サンプル】ガチャコーナー 秋葉原", "prefecture": "東京都", "address": "東京都千代田区外神田（サンプル）", "lat": 35.6984, "lng": 139.7731, "name_en": "[Sample] Capsule Toy Shop Akihabara", "address_en": "Akihabara (sample)"},
-  {"id": "s-shibuya", "name": "【サンプル】カプセルステーション 渋谷", "prefecture": "東京都", "address": "東京都渋谷区道玄坂（サンプル）", "lat": 35.658, "lng": 139.6994, "name_en": "[Sample] Capsule Toy Shop Shibuya", "address_en": "Shibuya (sample)"},
-  {"id": "s-yokohama", "name": "【サンプル】ガチャひろば 横浜", "prefecture": "神奈川県", "address": "神奈川県横浜市西区（サンプル）", "lat": 35.466, "lng": 139.6223, "name_en": "[Sample] Capsule Toy Shop Yokohama", "address_en": "Yokohama (sample)"},
-  {"id": "s-umeda", "name": "【サンプル】カプセルトイ専門店 梅田", "prefecture": "大阪府", "address": "大阪府大阪市北区（サンプル）", "lat": 34.7025, "lng": 135.4959, "name_en": "[Sample] Capsule Toy Shop Umeda", "address_en": "Umeda (sample)"},
-  {"id": "s-namba", "name": "【サンプル】ガチャコーナー なんば", "prefecture": "大阪府", "address": "大阪府大阪市中央区（サンプル）", "lat": 34.6659, "lng": 135.5013, "name_en": "[Sample] Capsule Toy Shop Namba", "address_en": "Namba (sample)"},
-  {"id": "s-kyoto", "name": "【サンプル】カプセルステーション 京都", "prefecture": "京都府", "address": "京都府京都市下京区（サンプル）", "lat": 34.9858, "lng": 135.7588, "name_en": "[Sample] Capsule Toy Shop Kyoto", "address_en": "Kyoto (sample)"},
-  {"id": "s-sannomiya", "name": "【サンプル】ガチャひろば 三宮", "prefecture": "兵庫県", "address": "兵庫県神戸市中央区（サンプル）", "lat": 34.6946, "lng": 135.1955, "name_en": "[Sample] Capsule Toy Shop Sannomiya", "address_en": "Sannomiya (sample)"},
-  {"id": "s-nagoya", "name": "【サンプル】カプセルトイ専門店 名古屋", "prefecture": "愛知県", "address": "愛知県名古屋市中村区（サンプル）", "lat": 35.1709, "lng": 136.8815, "name_en": "[Sample] Capsule Toy Shop Nagoya", "address_en": "Nagoya (sample)"},
-  {"id": "s-hakata", "name": "【サンプル】ガチャコーナー 博多", "prefecture": "福岡県", "address": "福岡県福岡市博多区（サンプル）", "lat": 33.5902, "lng": 130.4206, "name_en": "[Sample] Capsule Toy Shop Hakata", "address_en": "Hakata (sample)"}
-]
+[]

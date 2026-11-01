@@ -196,7 +196,12 @@ const items = rawItems.filter((it, i) => {
   moods: (it.moods || []).filter((m) => moodSlugs.includes(m)),
 }));
 
-const storeById = new Map(stores.map((s) => [s.id, s]));
+const validStores = stores.filter((s) => {
+  if (typeof s.lat !== "number" || typeof s.lng !== "number") { warnings.push(`stores.json: ${s.id} は位置（緯度経度）がまだないので載せませんでした`); return false; }
+  if (!s.source_url) warnings.push(`stores.json: ${s.id} に情報元（source_url）がありません`);
+  return true;
+});
+const storeById = new Map(validStores.map((s) => [s.id, s]));
 const stockByItem = new Map();
 for (const row of stockFile.stock || []) {
   const s = storeById.get(row.store_id);
@@ -587,5 +592,5 @@ write("robots.txt", `User-agent: *\nAllow: /\nSitemap: ${SITE_URL}/sitemap.xml\n
 write("_headers", `/assets/*\n  Cache-Control: public, max-age=86400\n/images/*\n  Cache-Control: public, max-age=604800\n/data/*\n  Cache-Control: public, max-age=300\n`);
 
 /* ---------- 結果 ---------- */
-console.log(`✔ ${items.length}商品・${stores.length}店舗から 日本語${pages.filter((p) => p[0] === "ja").length}・英語${pages.filter((p) => p[0] === "en").length}ページを ${path.relative(ROOT, OUT)}/ に書き出しました`);
+console.log(`✔ ${items.length}商品・${validStores.length}店舗から 日本語${pages.filter((p) => p[0] === "ja").length}・英語${pages.filter((p) => p[0] === "en").length}ページを ${path.relative(ROOT, OUT)}/ に書き出しました`);
 if (warnings.length) { console.log(`⚠ 注意 ${warnings.length}件:`); warnings.forEach((w) => console.log("  - " + w)); }
