@@ -32,6 +32,7 @@ jobs:
           npm install --no-save --no-package-lock sharp@0.33.5
           node src/fetch-assets.js
         env:
+          STOCK_IN_GITHUB: "1"
           SITE_URL: ${{ vars.SITE_URL || 'https://gacha-site.pages.dev' }}
 
       - name: 取り込んだものを保存
@@ -47,11 +48,39 @@ jobs:
         env:
           SITE_URL: ${{ vars.SITE_URL || 'https://gacha-site.pages.dev' }}
 
+      - name: Cloudflare の在庫データベースを準備
+        id: d1
+        continue-on-error: true
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          W="npx --yes wrangler@4"
+          getid() { $W d1 list --json 2>/dev/null | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{try{const a=JSON.parse(s);const x=a.find(d=>d.name==="gacha-stock");process.stdout.write(x?(x.uuid||x.id||""):"")}catch{}})'; }
+          ID=$(getid)
+          if [ -z "$ID" ]; then $W d1 create gacha-stock; ID=$(getid); fi
+          if [ -z "$ID" ]; then echo "D1を用意できませんでした（APIトークンの権限を確認）"; exit 1; fi
+          sed -i "s/__D1_ID__/$ID/" wrangler.toml worker/wrangler.toml
+          $W d1 execute gacha-stock --remote --file worker/schema.sql
+          echo "ok=1" >> "$GITHUB_OUTPUT"
+
       - name: Cloudflare Pages に公開
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          # 初回だけ Pages のプロジェクトを作る（すでにあれば何もしない）
-          preCommands: npx wrangler pages project create ${{ vars.CF_PROJECT_NAME || 'gacha-site' }} --production-branch=main || true
-          command: pages deploy dist --project-name=${{ vars.CF_PROJECT_NAME || 'gacha-site' }} --branch=main
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          PROJECT: ${{ vars.CF_PROJECT_NAME || 'gacha-site' }}
+        run: |
+          W="npx --yes wrangler@4"
+          # データベースが使えないときは、在庫の窓口なしで公開する（ページは在庫ファイルを読む）
+          if [ "${{ steps.d1.outputs.ok }}" != "1" ]; then rm -f wrangler.toml; rm -rf functions; fi
+          $W pages project create "$PROJECT" --production-branch=main 2>/dev/null || true
+          $W pages deploy dist --project-name="$PROJECT" --branch=main
+
+      - name: 在庫確認ワーカーを公開
+        if: steps.d1.outputs.ok == '1'
+        continue-on-error: true
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        working-directory: worker
+        run: npx --yes wrangler@4 deploy

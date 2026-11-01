@@ -1,0 +1,9 @@
+# Cloudflare Pages の設定（在庫データベースをサイトから読むため）
+name = "gacha-site"
+pages_build_output_dir = "dist"
+compatibility_date = "2024-11-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "gacha-stock"
+database_id = "__D1_ID__"

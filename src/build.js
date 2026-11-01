@@ -285,6 +285,16 @@ fs.copyFileSync(path.join(__dirname, "style.css"), path.join(OUT, "assets/style.
 fs.copyFileSync(path.join(__dirname, "app.js"), path.join(OUT, "assets/app.js"));
 if (fs.existsSync(path.join(ROOT, "images"))) fs.cpSync(path.join(ROOT, "images"), path.join(OUT, "images"), { recursive: true });
 
+// 在庫を確認する商品の一覧（Cloudflareの在庫確認ワーカーが読む）：先月以降に発売のバンダイ商品
+{
+  const from = new Date(Date.UTC(nowJST.getUTCFullYear(), nowJST.getUTCMonth() - 1, 1)).toISOString().slice(0, 7);
+  const targets = items
+    .filter((it) => it.release >= from)
+    .map((it) => ({ id: it.id, code: ((it.official_url || "").match(/gashapon\.jp\/products\/detail\.php\?jan_code=(\d{13})/) || [])[1] }))
+    .filter((t) => t.code);
+  write("data/stock-targets.json", JSON.stringify(targets));
+}
+
 // 在庫データ（言語共通）
 for (const it of items) {
   write(`data/stock/${it.id}.json`, JSON.stringify({
@@ -535,7 +545,7 @@ ${content}
     </div>
   </article>
 
-  <section class="section" id="stock" data-src="${c.R}data/stock/${it.id}.json" style="scroll-margin-top:24px">
+  <section class="section" id="stock" data-api="${c.R}api/stock/${it.id}" data-src="${c.R}data/stock/${it.id}.json" style="scroll-margin-top:24px">
     <div class="panel">
       <h2 style="font-size:22px">${t.storesTitle}</h2>
       <div class="stock-tools">
@@ -543,7 +553,7 @@ ${content}
         <label for="pref" style="font-size:13px;color:var(--muted)">${t.or}</label>
         <select id="pref" aria-label="${t.prefAria}"><option value="">${t.loading}</option></select>
       </div>
-      <p class="stock-status" id="stock-status" role="status">${hasStock ? t.stockLoading : t.stockNone}</p>
+      <p class="stock-status" id="stock-status" role="status">${t.stockLoading}</p>
       <ul class="stores" id="store-list"></ul>
       <p class="fine"><span id="stock-updated"></span>${t.stockFine}
       ${it.store_search_url ? `<br><a href="${esc(it.store_search_url)}" target="_blank" rel="noopener" style="color:var(--gold-soft);border-bottom:1px solid var(--line-strong)">${t.officialStores}</a>` : ""}</p>

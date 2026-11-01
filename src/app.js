@@ -298,8 +298,10 @@
     var RANK = { in_stock: 0, few: 1, out_of_stock: 2 };
     var FAR_KM = 30;
 
-    fetch(stock.getAttribute("data-src"))
-      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    // まずCloudflareの在庫データベース（最新）を読み、だめならサイトに置いた在庫ファイルを読む
+    var getJSON = function (u) { return fetch(u).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (d) { if (!d) throw new Error("empty"); return d; }); };
+    getJSON(stock.getAttribute("data-api"))
+      .catch(function () { return getJSON(stock.getAttribute("data-src")); })
       .then(function (d) {
         stores = d.stores || [];
         var up = document.getElementById("stock-updated");

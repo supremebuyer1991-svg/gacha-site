@@ -210,7 +210,8 @@ async function importStock() {
   const tagged = require("./auto-tags.js")(items, site.quiz_groups);
   if (tagged) { fs.writeFileSync(path.join(ROOT, "data", "items.json"), JSON.stringify(items, null, 2) + "\n"); console.log(`- 診断タグを仮に付けた商品：${tagged}件`); }
   const imgs = await importImages();
-  const st = await importStock();
+  // 在庫確認はCloudflareのワーカーに移行中。STOCK_IN_GITHUB=1 のときだけGitHubでも行う
+  const st = process.env.STOCK_IN_GITHUB === "1" ? await importStock() : { stores: 0, rows: 0 };
   const geos = await geocodeStores();
   console.log(`取り込み完了：画像 ${imgs}件、店舗 ${st.stores}件・在庫 ${st.rows}件、住所からの位置計算 ${geos}件`);
 })();
