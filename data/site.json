@@ -77,115 +77,36 @@
           "slug": "sanrio",
           "label": "サンリオ",
           "en": "Sanrio",
-          "match": "サンリオ|キティ|マイメロ|クロミ|ポチャッコ|シナモ|ポムポム|シュガーバニーズ|ハンギョドン|ぐでたま|SANRIO|さんりお",
-          "leaves": [
-            {
-              "slug": "kitty",
-              "label": "ハローキティ",
-              "en": "Hello Kitty",
-              "match": "キティ"
-            },
-            {
-              "slug": "melody",
-              "label": "マイメロディ",
-              "en": "My Melody",
-              "match": "マイメロ"
-            },
-            {
-              "slug": "kuromi",
-              "label": "クロミ",
-              "en": "Kuromi",
-              "match": "クロミ"
-            },
-            {
-              "slug": "cinnamoroll",
-              "label": "シナモロール",
-              "en": "Cinnamoroll",
-              "match": "シナモ"
-            },
-            {
-              "slug": "pochacco",
-              "label": "ポチャッコ",
-              "en": "Pochacco",
-              "match": "ポチャッコ"
-            },
-            {
-              "slug": "pompom",
-              "label": "ポムポムプリン",
-              "en": "Pompompurin",
-              "match": "ポムポム"
-            },
-            {
-              "slug": "sanrio-all",
-              "label": "みんな集合",
-              "en": "All characters",
-              "match": "サンリオキャラクターズ|SANRIO CHARACTERS|さんりおきゃらくたぁず"
-            }
-          ]
+          "match": "サンリオ|キティ|マイメロ|クロミ|ポチャッコ|シナモ|ポムポム|シュガーバニーズ|ハンギョドン|ぐでたま|SANRIO|さんりお|キティ|HELLO ?KITTY|マイメロ|クロミ|シナモ|ポチャッコ|ポムポム|ハンギョドン|ぐでたま|けろっぴ|タキシードサム|ばつ丸|キキララ|リトルツインスターズ|こぎみゅん|シュガーバニーズ|はぴだんぶい|サンリオキャラクターズ|SANRIO CHARACTERS|さんりおきゃらくたぁず",
+          "leaves": []
         },
         {
           "slug": "chiikawa",
           "label": "ちいかわ",
           "en": "Chiikawa",
-          "match": "ちいかわ|ハチワレ"
+          "match": "ちいかわ|ハチワレ|ちいかわ|ハチワレ",
+          "leaves": []
         },
         {
           "slug": "disney",
           "label": "ディズニー・ピクサー",
           "en": "Disney & Pixar",
-          "match": "ディズニー|ピクサー|ミッキー|スティッチ|リメンバー・ミー|ズートピア",
-          "leaves": [
-            {
-              "slug": "mickey",
-              "label": "ミッキー＆フレンズ",
-              "en": "Mickey & Friends",
-              "match": "ミッキー|ミニー|ディズニーキャラクター"
-            },
-            {
-              "slug": "pixar",
-              "label": "ピクサー",
-              "en": "Pixar",
-              "match": "ピクサー|リメンバー・ミー|トイ・ストーリー"
-            },
-            {
-              "slug": "stitch",
-              "label": "スティッチ",
-              "en": "Stitch",
-              "match": "スティッチ"
-            },
-            {
-              "slug": "nightmare",
-              "label": "ナイトメアー・ビフォア・クリスマス",
-              "en": "Nightmare Before Christmas",
-              "match": "ナイトメア"
-            }
-          ]
+          "match": "ディズニー|ピクサー|ミッキー|スティッチ|リメンバー・ミー|ズートピア|ミッキー|ミニー|ドナルド|ディズニーキャラクター|プリンセス|Princess|ピクサー|トイ・ストーリー|モンスターズ・インク|ファインディング|スティッチ|ナイトメア|ツイステ|ズートピア|リメンバー・ミー|プーさん|Pooh|アナと雪|アナ雪|ふしぎの国のアリス|不思議の国のアリス",
+          "leaves": []
         },
         {
           "slug": "pokemon",
           "label": "ポケモン・任天堂",
           "en": "Pokémon & Nintendo",
-          "match": "ポケモン|ポケットモンスター|ピクミン|カービィ|マリオ|イーブイ",
-          "leaves": [
-            {
-              "slug": "poke",
-              "label": "ポケモン",
-              "en": "Pokémon",
-              "match": "ポケモン|ポケットモンスター|イーブイ"
-            },
-            {
-              "slug": "mario",
-              "label": "マリオ",
-              "en": "Mario",
-              "match": "マリオ"
-            },
-            {
-              "slug": "pikmin",
-              "label": "ピクミン",
-              "en": "Pikmin",
-              "match": "ピクミン"
-            }
-          ]
+          "match": "ポケモン|ポケットモンスター|ピクミン|カービィ|マリオ|イーブイ|ポケモン|ポケットモンスター|イーブイ|ピカチュウ|マリオ|ピクミン|カービィ|どうぶつの森|スプラトゥーン|ゼルダ",
+          "leaves": []
+        },
+        {
+          "slug": "character",
+          "label": "人気キャラクター",
+          "en": "Popular characters",
+          "match": "mofusand|おぱんちゅ|しばんばん|カピバラさん|くまのがっこう|ねこあつめ|PEANUTS|スヌーピー|miffy|ミッフィー|MOOMIN|ムーミン|ケアベア|パンどろぼう|はらぺこあおむし|ピーターラビット|すみっコ|リラックマ|お茶犬|お茶猫|モンチッチ|BT21|TOM and JERRY|トムとジェリー|スポンジ・ボブ|テレタビーズ|Lil ala mode|お文具|なめこ|ちいかわ|ハチワレ|スンスン|いーすとけん|ジャージカップル|mofusand|おぱんちゅ|しばんばん|カピバラさん|くまのがっこう|ねこあつめ|PEANUTS|スヌーピー|miffy|ミッフィー|MOOMIN|ムーミン|ケアベア|パンどろぼう|はらぺこあおむし|ピーターラビット|すみっコ|リラックマ|お茶犬|お茶猫|モンチッチ|BT21|TOM and JERRY|トムとジェリー|スポンジ・ボブ|テレタビーズ|Lil ala mode|お文具|なめこ|ちいかわ|ハチワレ|スンスン|いーすとけん|ジャージカップル",
+          "leaves": []
         },
         {
           "slug": "animal",
@@ -274,123 +195,29 @@
           "slug": "robot",
           "label": "ガンダム・ロボット",
           "en": "Gundam & robots",
-          "match": "ガンダム|ロボ|メカ|マクロス|ROBOT",
-          "leaves": [
-            {
-              "slug": "gundam",
-              "label": "ガンダム",
-              "en": "Gundam",
-              "match": "ガンダム"
-            },
-            {
-              "slug": "macross",
-              "label": "マクロス",
-              "en": "Macross",
-              "match": "マクロス"
-            }
-          ]
+          "match": "ガンダム|ロボ|メカ|マクロス|ROBOT|ガンダム|マクロス|エヴァンゲリオン|EVANGELION|ゾイド|ZOIDS|コードギアス|パトレイバー",
+          "leaves": []
         },
         {
           "slug": "hero",
           "label": "特撮・ヒーロー",
           "en": "Tokusatsu heroes",
-          "match": "ライダー|ウルトラ|ゴジラ|怪獣|戦隊",
-          "leaves": [
-            {
-              "slug": "rider",
-              "label": "仮面ライダー",
-              "en": "Kamen Rider",
-              "match": "ライダー"
-            },
-            {
-              "slug": "ultraman",
-              "label": "ウルトラマン",
-              "en": "Ultraman",
-              "match": "ウルトラ"
-            },
-            {
-              "slug": "godzilla",
-              "label": "ゴジラ",
-              "en": "Godzilla",
-              "match": "ゴジラ"
-            }
-          ]
+          "match": "ライダー|ウルトラ|ゴジラ|怪獣|戦隊|ライダー|ウルトラ|ゴジラ|戦隊|ガメラ",
+          "leaves": []
         },
         {
           "slug": "shonen",
           "label": "少年マンガ",
           "en": "Shonen manga",
-          "match": "ONE PIECE|ワンピの実|ドラゴンボール|ジョジョ|HUNTER|ハイキュー|銀魂|キングダム|クローズ|WORST|チェンソー|呪術|ブルーロック|NARUTO|BLEACH",
-          "leaves": [
-            {
-              "slug": "onepiece",
-              "label": "ワンピース",
-              "en": "ONE PIECE",
-              "match": "ONE PIECE|ワンピの実"
-            },
-            {
-              "slug": "dragonball",
-              "label": "ドラゴンボール",
-              "en": "Dragon Ball",
-              "match": "ドラゴンボール"
-            },
-            {
-              "slug": "jojo",
-              "label": "ジョジョ",
-              "en": "JoJo",
-              "match": "ジョジョ"
-            },
-            {
-              "slug": "haikyu",
-              "label": "ハイキュー!!",
-              "en": "Haikyu!!",
-              "match": "ハイキュー"
-            },
-            {
-              "slug": "gintama",
-              "label": "銀魂",
-              "en": "Gintama",
-              "match": "銀魂"
-            },
-            {
-              "slug": "other-shonen",
-              "label": "そのほか",
-              "en": "Others",
-              "match": "HUNTER|キングダム|クローズ|WORST|チェンソー|呪術|ブルーロック"
-            }
-          ]
+          "match": "ONE PIECE|ワンピの実|ドラゴンボール|ジョジョ|HUNTER|ハイキュー|銀魂|キングダム|クローズ|WORST|チェンソー|呪術|ブルーロック|NARUTO|BLEACH|ONE PIECE|ワンピの実|ワンピース|ドラゴンボール|ジョジョ|ハイキュー|銀魂|キングダム|HUNTER|NARUTO|ナルト|BLEACH|呪術|鬼滅|チェンソー|ブルーロック|ヒロアカ|ヒーローアカデミア|東京リベンジャーズ|東リベ|進撃の巨人|クローズ|WORST|SLAM DUNK|スラムダンク|キン肉マン|北斗の拳|鋼の錬金術師|SPY×FAMILY|スパイファミリー|幽.?遊.?白書|黒子のバスケ|怪獣8号|ダンダダン|推しの子|暗殺教室|遊.?戯.?王|らんま|犬夜叉|いちご100|少年サンデー",
+          "leaves": []
         },
         {
           "slug": "western",
           "label": "アメコミ・洋画",
           "en": "Hollywood & comics",
-          "match": "MARVEL|マーベル|STAR WARS|スター・ウォーズ|ハリー・ポッター|グレムリン|ナイトメア|HOT WHEELS",
-          "leaves": [
-            {
-              "slug": "marvel",
-              "label": "マーベル",
-              "en": "Marvel",
-              "match": "MARVEL|マーベル|スパイダーマン"
-            },
-            {
-              "slug": "starwars",
-              "label": "スター・ウォーズ",
-              "en": "Star Wars",
-              "match": "STAR WARS|スター・ウォーズ"
-            },
-            {
-              "slug": "harrypotter",
-              "label": "ハリー・ポッター",
-              "en": "Harry Potter",
-              "match": "ハリー・ポッター"
-            },
-            {
-              "slug": "other-western",
-              "label": "そのほか",
-              "en": "Others",
-              "match": "グレムリン|ナイトメア|HOT WHEELS|TOM and JERRY|PEANUTS"
-            }
-          ]
+          "match": "MARVEL|マーベル|STAR WARS|スター・ウォーズ|ハリー・ポッター|グレムリン|ナイトメア|HOT WHEELS|MARVEL|マーベル|スパイダーマン|アベンジャーズ|^DC |バットマン|スーパーマン|STAR WARS|スター・ウォーズ|ハリー・ポッター|グレムリン|HOT WHEELS",
+          "leaves": []
         }
       ]
     },
@@ -401,107 +228,52 @@
       "subs": [
         {
           "slug": "idol",
-          "label": "アイドル・K-POP",
-          "en": "Idols & K-pop",
-          "match": "アイドル|NCT|aespa|RIIZE|SKZOO|ラブライブ|アイドリッシュ|アイマス|MyGO|ぼっち",
-          "leaves": [
-            {
-              "slug": "kpop",
-              "label": "K-POP",
-              "en": "K-pop",
-              "match": "NCT|aespa|RIIZE|SKZOO"
-            },
-            {
-              "slug": "anime-idol",
-              "label": "アニメのアイドル・バンド",
-              "en": "Anime idols & bands",
-              "match": "ラブライブ|アイドリッシュ|アイドルマスター|MyGO|ぼっち"
-            },
-            {
-              "slug": "miku",
-              "label": "初音ミク",
-              "en": "Hatsune Miku",
-              "match": "初音ミク"
-            }
-          ]
+          "label": "K-POP・アニメのアイドル",
+          "en": "K-pop & anime idols",
+          "match": "アイドル|NCT|aespa|RIIZE|SKZOO|ラブライブ|アイドリッシュ|アイマス|MyGO|ぼっち|NCT|aespa|RIIZE|SKZOO|Stray Kids|TWICE|BTS|SEVENTEEN|PLAVE|LE SSERAFIM|デーモン・ハンターズ|Novelbright|ラブライブ|アイドリッシュ|アイドルマスター|アイマス|MyGO|バンドリ|BanG Dream|ぼっち|初音ミク|うたの☆プリンス|うたプリ|あんさんぶる|あんスタ|ヒプノシス",
+          "leaves": []
+        },
+        {
+          "slug": "jidol",
+          "label": "国内アイドル・地下アイドル",
+          "en": "Japanese idols",
+          "match": "モーニング娘|ハロプロ|アンジュルム|Juice=Juice|つばきファクトリー|BEYOOOOONDS|乃木坂|櫻坂|日向坂|AKB48|SKE48|NMB48|HKT48|STU48|=LOVE|＝LOVE|≠ME|≒JOY|FRUITS ZIPPER|CANDY TUNE|CUTIE STREET|超ときめき|いぎなり東北産|ももいろクローバー|ももクロ|恵比寿中学|エビ中|BiSH|WACK|地下アイドル|ライブアイドル|ライブアイドル|Snow Man|SixTONES|なにわ男子|JO1|(?<![A-Za-z])INI(?![A-Za-z])|BE:FIRST|モーニング娘|ハロプロ|アンジュルム|Juice=Juice|つばきファクトリー|BEYOOOOONDS|乃木坂|櫻坂|日向坂|AKB48|SKE48|NMB48|HKT48|STU48|=LOVE|＝LOVE|≠ME|≒JOY|FRUITS ZIPPER|CANDY TUNE|CUTIE STREET|超ときめき|いぎなり東北産|ももいろクローバー|ももクロ|恵比寿中学|エビ中|BiSH|WACK|地下アイドル|ライブアイドル|ライブアイドル|Snow Man|SixTONES|なにわ男子|JO1|(?<![A-Za-z])INI(?![A-Za-z])|BE:FIRST",
+          "leaves": []
         },
         {
           "slug": "vtuber",
           "label": "VTuber・配信者",
           "en": "VTubers & streamers",
-          "match": "ホロライブ|にじさんじ|すとぷり|赤見かるび",
-          "leaves": [
-            {
-              "slug": "hololive",
-              "label": "ホロライブ",
-              "en": "hololive",
-              "match": "ホロライブ"
-            },
-            {
-              "slug": "stpr",
-              "label": "すとぷり",
-              "en": "STPR",
-              "match": "すとぷり"
-            },
-            {
-              "slug": "other-vtuber",
-              "label": "そのほか",
-              "en": "Others",
-              "match": "赤見かるび|にじさんじ"
-            }
-          ]
+          "match": "ホロライブ|にじさんじ|すとぷり|赤見かるび|ホロライブ|hololive|にじさんじ|すとぷり|いれいす|赤見かるび|CRAZY RACCOON|ぶいすぽ",
+          "leaves": []
         },
         {
-          "slug": "anime",
-          "label": "人気アニメ・マンガ",
-          "en": "Popular anime",
-          "match": "プリキュア|カードキャプター|おジャ魔女|フリーレン|コナン|しんちゃん|ちびまる子|ドラえもん|メイドインアビス|桜蘭|アイカツ|きらりん|デジモン|妖怪ウォッチ|ケロロ|犬夜叉|タコピー|とんがり帽子|いちご100|アンパンマン|薬屋|超かぐや姫",
-          "leaves": [
-            {
-              "slug": "girls",
-              "label": "女の子向けアニメ",
-              "en": "Anime for girls",
-              "match": "プリキュア|おジャ魔女|カードキャプター|アイカツ|きらりん|ジュエルペット"
-            },
-            {
-              "slug": "family",
-              "label": "国民的アニメ",
-              "en": "Family classics",
-              "match": "しんちゃん|ドラえもん|ちびまる子|アンパンマン|コナン"
-            },
-            {
-              "slug": "manga",
-              "label": "マンガ原作",
-              "en": "Manga adaptations",
-              "match": "フリーレン|メイドインアビス|桜蘭|犬夜叉|タコピー|とんがり帽子|いちご100|薬屋|ケロロ|妖怪ウォッチ|デジモン|超かぐや姫"
-            }
-          ]
+          "slug": "kids",
+          "label": "国民的・キッズアニメ",
+          "en": "Classic & kids' anime",
+          "match": "ドラえもん|しんちゃん|ちびまる子|コナン|アンパンマン|妖怪ウォッチ|鬼太郎|はなかっぱ|ぜんまいざむらい|ノンタン|みいつけた|がんこちゃん|チョコランタン|サザエさん|おしりたんてい|コジコジ|忍たま|ケロロ|ニャンちゅう|モリゾー|みいつけた|がんこちゃん|ドラえもん|しんちゃん|ちびまる子|コナン|アンパンマン|妖怪ウォッチ|鬼太郎|はなかっぱ|ぜんまいざむらい|ノンタン|みいつけた|がんこちゃん|チョコランタン|サザエさん|おしりたんてい|コジコジ|忍たま|ケロロ|ニャンちゅう|モリゾー|みいつけた|がんこちゃん",
+          "leaves": []
+        },
+        {
+          "slug": "girls",
+          "label": "女の子向けアニメ",
+          "en": "Anime for girls",
+          "match": "プリキュア|ぷちきゅあ|アイカツ|おジャ魔女|カードキャプター|きらりん|ジュエルペット|レイアース|桜蘭|セーラームーン|しゅごキャラ|ミルモ|クレヨン王国|プリパラ|プリティーリズム|ひみつのアイプリ|プリキュア|ぷちきゅあ|アイカツ|おジャ魔女|カードキャプター|きらりん|ジュエルペット|レイアース|桜蘭|セーラームーン|しゅごキャラ|ミルモ|クレヨン王国|プリパラ|プリティーリズム|ひみつのアイプリ",
+          "leaves": []
+        },
+        {
+          "slug": "trend",
+          "label": "話題のアニメ・マンガ",
+          "en": "Popular anime & manga",
+          "match": "フリーレン|薬屋のひとりごと|メイドインアビス|とんがり帽子|タコピー|超かぐや姫|アオのハコ|オーバーロード|サマーウォーズ|転生したらスライム|転スラ|Re:ゼロ|リゼロ|文豪ストレイ|まどか|ハルヒ|けいおん|ゆるキャン|ガルパン|ガールズ＆パンツァー|ガールズ&パンツァー|ガリレオ|ダンジョン飯|ぼっち|MyGO|フリーレン|薬屋のひとりごと|メイドインアビス|とんがり帽子|タコピー|超かぐや姫|アオのハコ|オーバーロード|サマーウォーズ|転生したらスライム|転スラ|Re:ゼロ|リゼロ|文豪ストレイ|まどか|ハルヒ|けいおん|ゆるキャン|ガルパン|ガールズ＆パンツァー|ガールズ&パンツァー|ガリレオ|ダンジョン飯|ぼっち|MyGO",
+          "leaves": []
         },
         {
           "slug": "game",
           "label": "ゲーム",
           "en": "Games",
-          "match": "MINECRAFT|マイクラ|ソニック|逆転裁判|牧場物語|NIKKE|マリオ|Poppy|ウマ娘|ペルソナ",
-          "leaves": [
-            {
-              "slug": "minecraft",
-              "label": "マインクラフト",
-              "en": "Minecraft",
-              "match": "MINECRAFT"
-            },
-            {
-              "slug": "sonic",
-              "label": "ソニック",
-              "en": "Sonic",
-              "match": "ソニック"
-            },
-            {
-              "slug": "other-game",
-              "label": "そのほか",
-              "en": "Others",
-              "match": "逆転裁判|牧場物語|NIKKE|Poppy|ウマ娘|ペルソナ"
-            }
-          ]
+          "match": "MINECRAFT|マイクラ|ソニック|逆転裁判|牧場物語|NIKKE|マリオ|Poppy|ウマ娘|ペルソナ|MINECRAFT|マインクラフト|マイクラ|ソニック|逆転裁判|牧場物語|NIKKE|Poppy|ウマ娘|ペルソナ|モンスターハンター|モンハン|ドラゴンクエスト|ドラクエ|ファイナルファンタジー|FINAL FANTASY|サルゲッチュ|刀剣乱舞|原神|ブルーアーカイブ|ブルアカ|マリオ|どうぶつの森|パックマン|PAC-MAN|ストリートファイター",
+          "leaves": []
         }
       ]
     },
@@ -607,33 +379,15 @@
           "slug": "showa",
           "label": "昭和レトロ",
           "en": "Showa retro",
-          "match": "昭和|レトロ|パチンコ|ニャンちゅう|コンタック|ピジョン|Pigeon|チロル|ZETT"
+          "match": "昭和|レトロ|パチンコ|ニャンちゅう|コンタック|ピジョン|Pigeon|チロル|ZETT|パチンコ|パチスロ|ピジョン|Pigeon|コンタック|チロル|雪印|ZETT|日産|モンチッチ|ニャンちゅう|ドラえもん|鬼太郎|サザエさん|キン肉マン|北斗の拳|ノンタン|ウルトラ|ゴジラ",
+          "leaves": []
         },
         {
           "slug": "heisei",
           "label": "平成なつかし",
           "en": "Heisei nostalgia",
-          "match": "たまごっち|おジャ魔女|カードキャプター|ケロロ|デジモン|ハム太郎|ジュエルペット|きらりん|ナルミヤ|メゾピアノ|ミルモ|いちご100|パワーパフ|マクロス",
-          "leaves": [
-            {
-              "slug": "tamagotchi",
-              "label": "たまごっち",
-              "en": "Tamagotchi",
-              "match": "たまごっち"
-            },
-            {
-              "slug": "magical",
-              "label": "魔法少女",
-              "en": "Magical girls",
-              "match": "おジャ魔女|カードキャプター|きらりん|ジュエルペット"
-            },
-            {
-              "slug": "heisei-other",
-              "label": "そのほか",
-              "en": "Others",
-              "match": "ケロロ|デジモン|ハム太郎|ナルミヤ|メゾピアノ|ミルモ|いちご100|パワーパフ|マクロス"
-            }
-          ]
+          "match": "たまごっち|おジャ魔女|カードキャプター|ケロロ|デジモン|ハム太郎|ジュエルペット|きらりん|ナルミヤ|メゾピアノ|ミルモ|いちご100|パワーパフ|マクロス|たまごっち|ナルミヤ|メゾピアノ|Mezzo Piano|パワーパフ|mojojojo|ケロロ|デジモン|ハム太郎|ほっぺちゃん|ジュエルポッド|お茶犬|お茶猫|おジャ魔女|カードキャプター|きらりん|ジュエルペット|いちご100|マクロスF|マクロスＦ|サルゲッチュ",
+          "leaves": []
         }
       ]
     },

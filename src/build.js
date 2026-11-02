@@ -27,6 +27,7 @@ const readJSON = (f, fallback) => {
 const site = readJSON("site.json");
 const rawItems = readJSON("items.json", []);
 const stores = readJSON("stores.json", []);
+const titles = readJSON("titles.json", []); // 診断の「作品名」カタログ
 const stockFile = readJSON("stock.json", { updated_at: null, stock: [] });
 
 const SITE_URL = (process.env.SITE_URL || site.url || "").replace(/\/$/, "");
@@ -67,7 +68,7 @@ const T = {
     ages: [["10", "10代"], ["20", "20代"], ["30", "30代"], ["40", "40代"], ["50", "50代以上"]],
     next: "次へ", skip: "こだわらない", back: "戻る",
     searchPh: "商品名・作品名で探す", searchAria: "商品を検索", searchTitle: "検索結果", searchNone: "見つかりませんでした。ことばを短くするか、ひらがな・カタカナを変えてみてください。", searchCount: "件",
-    leafPrefix: (n) => `「${n}」からさらに選ぶ`,
+    leafPrefix: (n) => `「${n}」からさらに選ぶ`, leafFilter: "作品名・名前でしぼりこむ", leafAll: (n) => `ぜんぶ見る（${n}件）`, leafNone: "見つかりません",
     sortAria: "並び替え", sorts: [["match", "相性順"], ["new", "新着順"], ["popular", "人気順"], ["release", "発売日順"], ["cheap", "安い順"]], showMore: "もっと見る",
     qGroups: "好きな系統は？（いくつでも）", more: "さらに詳しく選ぶ", less: "閉じる",
     groupsHint: "詳しく選ばない場合は、その系統のすべてが対象になります。詳しい項目を選ぶと、さらに細かい項目が出てきます。",
@@ -134,7 +135,7 @@ const T = {
     ages: [["10", "Teens"], ["20", "20s"], ["30", "30s"], ["40", "40s"], ["50", "50+"]],
     next: "Next", skip: "No preference", back: "Back",
     searchPh: "Search items or series", searchAria: "Search items", searchTitle: "Search results", searchNone: "No results. Try a shorter word.", searchCount: " results",
-    leafPrefix: (n) => `Narrow down ${n}`,
+    leafPrefix: (n) => `Narrow down ${n}`, leafFilter: "Filter by title or name", leafAll: (n) => `Show all (${n})`, leafNone: "No matches",
     sortAria: "Sort", sorts: [["match", "Best match"], ["new", "Newest"], ["popular", "Popular"], ["release", "Release date"], ["cheap", "Lowest price"]], showMore: "Show more",
     qGroups: "What do you like? (pick any)", more: "Narrow it down", less: "Close",
     groupsHint: "If you don't narrow it down, everything in that group counts. Pick a detail to see even finer options.",
@@ -263,13 +264,36 @@ const affiliate = (it) => {
   return { amazon, rakuten };
 };
 
+/* ---------- 診断：作品名カタログで細かい項目を作る ---------- */
+// 商品名に作品名が入っていれば、その作品が属する項目（例 oshi:kids）を自動で足す
+const subKeys = new Set((site.quiz_groups || []).flatMap((g) => g.subs.map((x) => `${g.slug}:${x.slug}`)));
+const titleRx = titles.map((tt) => ({ ...tt, rx: new RegExp(tt.match, "i") }));
+for (const it of items) {
+  const qs = new Set((it.q_subs || []).filter((k) => subKeys.has(k)));
+  for (const tt of titleRx) if (tt.rx.test(it.name)) tt.subs.forEach((k) => subKeys.has(k) && qs.add(k));
+  it._qs = [...qs];
+}
+const slugOf = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "t";
+for (const g of site.quiz_groups || []) for (const x of g.subs) {
+  const key = `${g.slug}:${x.slug}`;
+  const cat = titleRx.filter((tt) => tt.subs.includes(key));
+  if (!cat.length) continue;
+  const used = new Set();
+  x.leaves = cat.map((tt) => {
+    let slug = slugOf(tt.en);
+    while (used.has(slug)) slug += "x";
+    used.add(slug);
+    return { slug, label: tt.label, en: tt.en, match: tt.match };
+  });
+}
 /* ---------- 診断：商品が1件もない項目は出さない ---------- */
-const hasSub = (key) => items.some((it) => (it.q_subs || []).includes(key));
+const hasSub = (key) => items.some((it) => it._qs.includes(key));
 const liveSubs = (g) => g.subs.filter((x) => hasSub(`${g.slug}:${x.slug}`));
-const liveLeaves = (g, x) => (x.leaves || []).filter((l) => {
+const liveLeaves = (g, x) => (x.leaves || []).map((l) => {
   const rx = new RegExp(l.match, "i");
-  return items.some((it) => (it.q_subs || []).includes(`${g.slug}:${x.slug}`) && rx.test(it.name));
-});
+  return { ...l, n: items.filter((it) => it._qs.includes(`${g.slug}:${x.slug}`) && rx.test(it.name)).length };
+}).filter((l) => l.n > 0).sort((a, b) => b.n - a.n);
+const LEAF_SHOW = 12; // これより多いときは、しぼりこみ欄と「ぜんぶ見る」を出す
 
 /* ---------- 書き出し ---------- */
 const pages = []; // サイトマップ用 [lang, rel]
@@ -417,7 +441,7 @@ ${content}
       groups: (site.quiz_groups || []).map((g) => ({ slug: g.slug, subs: g.subs.map((x) => ({ slug: x.slug, leaves: (x.leaves || []).map((l) => ({ slug: l.slug, match: l.match })) })) })),
       items: items.map((it) => ({
         id: it.id, name: nameOf(it, lang), jn: it.name, price: it.price, lineup: it.lineup, genre: it.genre, genre_label: genreLabel(genreOf(it.genre), lang),
-        moods: it.moods, popularity: it.popularity, ad: it.added, rl: it.release, qa: it.q_ages || [], qg: it.q_genders || [], qs: it.q_subs || [], image: it.image, release_label: t.month(it.release),
+        moods: it.moods, popularity: it.popularity, ad: it.added, rl: it.release, qa: it.q_ages || [], qg: it.q_genders || [], qs: it._qs, image: it.image, release_label: t.month(it.release),
       })),
     };
     const opt = (name, type, value, label, checked) =>
@@ -458,7 +482,9 @@ ${content}
             <div class="opts">${liveSubs(g).map((x) => opt("sub", "checkbox", `${g.slug}:${x.slug}`, lang === "en" ? x.en : x.label)).join("")}</div>
             ${liveSubs(g).map((x) => ({ x, leaves: liveLeaves(g, x) })).filter((v) => v.leaves.length > 1).map(({ x, leaves }) => `<div class="leaf-row" data-sub="${g.slug}:${x.slug}" hidden>
               <span class="leaf-label">${t.leafPrefix(lang === "en" ? x.en : x.label)}</span>
-              <div class="opts opts-sm">${leaves.map((l) => opt("leaf", "checkbox", `${g.slug}:${x.slug}:${l.slug}`, lang === "en" ? l.en : l.label)).join("")}</div>
+              ${leaves.length > LEAF_SHOW ? `<input class="leaf-filter" type="search" placeholder="${t.leafFilter}" aria-label="${t.leafFilter}">` : ""}
+              <div class="opts opts-sm${leaves.length > LEAF_SHOW ? " is-clipped" : ""}">${leaves.map((l, i) => opt("leaf", "checkbox", `${g.slug}:${x.slug}:${l.slug}`, `${esc(lang === "en" ? l.en : l.label)}<small>${l.n}</small>`).replace('<label class="opt"', i >= LEAF_SHOW ? '<label class="opt is-extra"' : '<label class="opt"')).join("")}</div>
+              ${leaves.length > LEAF_SHOW ? `<p class="leaf-none" hidden>${t.leafNone}</p><button type="button" class="leaf-all">${t.leafAll(leaves.length)}</button>` : ""}
             </div>`).join("")}
           </div>
         </div>`).join("")}</div>

@@ -168,7 +168,7 @@
         [].forEach.call(subs.querySelectorAll(".leaf-row"), function (row) {
           var sub = subs.querySelector('input[name="sub"][value="' + row.getAttribute("data-sub") + '"]');
           row.hidden = !(sub && sub.checked);
-          if (row.hidden) [].forEach.call(row.querySelectorAll("input"), function (x) { x.checked = false; });
+          if (row.hidden) [].forEach.call(row.querySelectorAll('input[name="leaf"]'), function (x) { x.checked = false; });
         });
       };
       subs.addEventListener("change", function (e) {
@@ -180,6 +180,30 @@
         if (subs.querySelector("input:checked")) main.checked = true;
         syncLeaves();
         g.classList.toggle("is-on", main.checked);
+      });
+      // 作品がたくさんある段：しぼりこみ欄と「ぜんぶ見る」
+      var lnorm = function (v) {
+        return String(v || "").normalize("NFKC").toLowerCase()
+          .replace(/[\u3041-\u3096]/g, function (c) { return String.fromCharCode(c.charCodeAt(0) + 0x60); })
+          .replace(/[\s・･!！?？'’"“”:：\-‐–—~〜～、。,.\/／|｜【】\[\]「」『』()（）♪☆★™=＝]/g, "");
+      };
+      [].forEach.call(subs.querySelectorAll(".leaf-row"), function (row) {
+        var box = row.querySelector(".opts"), f = row.querySelector(".leaf-filter"), all = row.querySelector(".leaf-all"), none = row.querySelector(".leaf-none");
+        if (!f) return;
+        var labels = [].slice.call(box.querySelectorAll(".opt"));
+        labels.forEach(function (l) { l._s = lnorm(l.querySelector("span").firstChild.textContent); });
+        all.addEventListener("click", function () { box.classList.remove("is-clipped"); all.hidden = true; });
+        f.addEventListener("input", function () {
+          var q = lnorm(f.value), hit = 0;
+          box.classList.toggle("is-filtering", !!q);
+          labels.forEach(function (l) {
+            var ok = !q || l._s.indexOf(q) !== -1 || l.querySelector("input").checked;
+            l.classList.toggle("is-hit", !!q && ok);
+            if (q && ok) hit++;
+          });
+          none.hidden = !q || hit > 0;
+          all.hidden = !!q || !box.classList.contains("is-clipped");
+        });
       });
       main.addEventListener("change", function () {
         if (!main.checked) [].forEach.call(subs.querySelectorAll("input"), function (x) { x.checked = false; });

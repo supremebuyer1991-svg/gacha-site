@@ -1,0 +1,2043 @@
+[
+ {
+  "label": "ハローキティ",
+  "en": "Hello Kitty",
+  "match": "キティ|HELLO ?KITTY",
+  "subs": [
+   "kawaii:sanrio"
+  ]
+ },
+ {
+  "label": "マイメロディ",
+  "en": "My Melody",
+  "match": "マイメロ",
+  "subs": [
+   "kawaii:sanrio"
+  ]
+ },
+ {
+  "label": "クロミ",
+  "en": "Kuromi",
+  "match": "クロミ",
+  "subs": [
+   "kawaii:sanrio"
+  ]
+ },
+ {
+  "label": "シナモロール",
+  "en": "Cinnamoroll",
+  "match": "シナモ",
+  "subs": [
+   "kawaii:sanrio"
+  ]
+ },
+ {
+  "label": "ポチャッコ",
+  "en": "Pochacco",
+  "match": "ポチャッコ",
+  "subs": [
+   "kawaii:sanrio"
+  ]
+ },
+ {
+  "label": "ポムポムプリン",
+  "en": "Pompompurin",
+  "match": "ポムポム",
+  "subs": [
+   "kawaii:sanrio"
+  ]
+ },
+ {
+  "label": "ハンギョドン",
+  "en": "Hangyodon",
+  "match": "ハンギョドン",
+  "subs": [
+   "kawaii:sanrio"
+  ]
+ },
+ {
+  "label": "ぐでたま",
+  "en": "Gudetama",
+  "match": "ぐでたま",
+  "subs": [
+   "kawaii:sanrio"
+  ]
+ },
+ {
+  "label": "けろけろけろっぴ",
+  "en": "Keroppi",
+  "match": "けろっぴ",
+  "subs": [
+   "kawaii:sanrio"
+  ]
+ },
+ {
+  "label": "タキシードサム",
+  "en": "Tuxedosam",
+  "match": "タキシードサム",
+  "subs": [
+   "kawaii:sanrio"
+  ]
+ },
+ {
+  "label": "バッドばつ丸",
+  "en": "Badtz-Maru",
+  "match": "ばつ丸",
+  "subs": [
+   "kawaii:sanrio"
+  ]
+ },
+ {
+  "label": "リトルツインスターズ",
+  "en": "Little Twin Stars",
+  "match": "キキララ|リトルツインスターズ",
+  "subs": [
+   "kawaii:sanrio"
+  ]
+ },
+ {
+  "label": "こぎみゅん",
+  "en": "Kogimyun",
+  "match": "こぎみゅん",
+  "subs": [
+   "kawaii:sanrio"
+  ]
+ },
+ {
+  "label": "シュガーバニーズ",
+  "en": "Sugarbunnies",
+  "match": "シュガーバニーズ",
+  "subs": [
+   "kawaii:sanrio"
+  ]
+ },
+ {
+  "label": "はぴだんぶい",
+  "en": "Hapidanbui",
+  "match": "はぴだんぶい",
+  "subs": [
+   "kawaii:sanrio"
+  ]
+ },
+ {
+  "label": "サンリオキャラクターズ（みんな）",
+  "en": "Sanrio Characters (all)",
+  "match": "サンリオキャラクターズ|SANRIO CHARACTERS|さんりおきゃらくたぁず",
+  "subs": [
+   "kawaii:sanrio"
+  ]
+ },
+ {
+  "label": "ミッキー＆フレンズ",
+  "en": "Mickey & Friends",
+  "match": "ミッキー|ミニー|ドナルド|ディズニーキャラクター",
+  "subs": [
+   "kawaii:disney"
+  ]
+ },
+ {
+  "label": "ディズニープリンセス",
+  "en": "Disney Princess",
+  "match": "プリンセス|Princess",
+  "subs": [
+   "kawaii:disney"
+  ]
+ },
+ {
+  "label": "ピクサー",
+  "en": "Pixar",
+  "match": "ピクサー|トイ・ストーリー|モンスターズ・インク|ファインディング",
+  "subs": [
+   "kawaii:disney"
+  ]
+ },
+ {
+  "label": "スティッチ",
+  "en": "Stitch",
+  "match": "スティッチ",
+  "subs": [
+   "kawaii:disney"
+  ]
+ },
+ {
+  "label": "ナイトメアー・ビフォア・クリスマス",
+  "en": "The Nightmare Before Christmas",
+  "match": "ナイトメア",
+  "subs": [
+   "kawaii:disney"
+  ]
+ },
+ {
+  "label": "ツイステッドワンダーランド",
+  "en": "Twisted-Wonderland",
+  "match": "ツイステ",
+  "subs": [
+   "kawaii:disney"
+  ]
+ },
+ {
+  "label": "ズートピア",
+  "en": "Zootopia",
+  "match": "ズートピア",
+  "subs": [
+   "kawaii:disney"
+  ]
+ },
+ {
+  "label": "リメンバー・ミー",
+  "en": "Coco",
+  "match": "リメンバー・ミー",
+  "subs": [
+   "kawaii:disney"
+  ]
+ },
+ {
+  "label": "くまのプーさん",
+  "en": "Winnie the Pooh",
+  "match": "プーさん|Pooh",
+  "subs": [
+   "kawaii:disney"
+  ]
+ },
+ {
+  "label": "アナと雪の女王",
+  "en": "Frozen",
+  "match": "アナと雪|アナ雪",
+  "subs": [
+   "kawaii:disney"
+  ]
+ },
+ {
+  "label": "ふしぎの国のアリス",
+  "en": "Alice in Wonderland",
+  "match": "ふしぎの国のアリス|不思議の国のアリス",
+  "subs": [
+   "kawaii:disney"
+  ]
+ },
+ {
+  "label": "ポケモン",
+  "en": "Pokémon",
+  "match": "ポケモン|ポケットモンスター|イーブイ|ピカチュウ",
+  "subs": [
+   "kawaii:pokemon"
+  ]
+ },
+ {
+  "label": "スーパーマリオ",
+  "en": "Super Mario",
+  "match": "マリオ",
+  "subs": [
+   "kawaii:pokemon"
+  ]
+ },
+ {
+  "label": "ピクミン",
+  "en": "Pikmin",
+  "match": "ピクミン",
+  "subs": [
+   "kawaii:pokemon"
+  ]
+ },
+ {
+  "label": "星のカービィ",
+  "en": "Kirby",
+  "match": "カービィ",
+  "subs": [
+   "kawaii:pokemon"
+  ]
+ },
+ {
+  "label": "どうぶつの森",
+  "en": "Animal Crossing",
+  "match": "どうぶつの森",
+  "subs": [
+   "kawaii:pokemon"
+  ]
+ },
+ {
+  "label": "スプラトゥーン",
+  "en": "Splatoon",
+  "match": "スプラトゥーン",
+  "subs": [
+   "kawaii:pokemon"
+  ]
+ },
+ {
+  "label": "ゼルダの伝説",
+  "en": "Zelda",
+  "match": "ゼルダ",
+  "subs": [
+   "kawaii:pokemon"
+  ]
+ },
+ {
+  "label": "mofusand",
+  "en": "mofusand",
+  "match": "mofusand",
+  "subs": [
+   "kawaii:character"
+  ]
+ },
+ {
+  "label": "おぱんちゅうさぎ",
+  "en": "Opanchu Usagi",
+  "match": "おぱんちゅ",
+  "subs": [
+   "kawaii:character"
+  ]
+ },
+ {
+  "label": "しばんばん",
+  "en": "Shibanban",
+  "match": "しばんばん",
+  "subs": [
+   "kawaii:character"
+  ]
+ },
+ {
+  "label": "カピバラさん",
+  "en": "Kapibara-san",
+  "match": "カピバラさん",
+  "subs": [
+   "kawaii:character"
+  ]
+ },
+ {
+  "label": "くまのがっこう",
+  "en": "The Bears' School",
+  "match": "くまのがっこう",
+  "subs": [
+   "kawaii:character"
+  ]
+ },
+ {
+  "label": "ねこあつめ",
+  "en": "Neko Atsume",
+  "match": "ねこあつめ",
+  "subs": [
+   "kawaii:character"
+  ]
+ },
+ {
+  "label": "PEANUTS（スヌーピー）",
+  "en": "PEANUTS (Snoopy)",
+  "match": "PEANUTS|スヌーピー",
+  "subs": [
+   "kawaii:character"
+  ]
+ },
+ {
+  "label": "ミッフィー",
+  "en": "Miffy",
+  "match": "miffy|ミッフィー",
+  "subs": [
+   "kawaii:character"
+  ]
+ },
+ {
+  "label": "ムーミン",
+  "en": "Moomin",
+  "match": "MOOMIN|ムーミン",
+  "subs": [
+   "kawaii:character"
+  ]
+ },
+ {
+  "label": "ケアベア",
+  "en": "Care Bears",
+  "match": "ケアベア",
+  "subs": [
+   "kawaii:character"
+  ]
+ },
+ {
+  "label": "パンどろぼう",
+  "en": "Pan Dorobou",
+  "match": "パンどろぼう",
+  "subs": [
+   "kawaii:character"
+  ]
+ },
+ {
+  "label": "はらぺこあおむし",
+  "en": "The Very Hungry Caterpillar",
+  "match": "はらぺこあおむし",
+  "subs": [
+   "kawaii:character"
+  ]
+ },
+ {
+  "label": "ピーターラビット",
+  "en": "Peter Rabbit",
+  "match": "ピーターラビット",
+  "subs": [
+   "kawaii:character"
+  ]
+ },
+ {
+  "label": "すみっコぐらし",
+  "en": "Sumikko Gurashi",
+  "match": "すみっコ",
+  "subs": [
+   "kawaii:character"
+  ]
+ },
+ {
+  "label": "リラックマ",
+  "en": "Rilakkuma",
+  "match": "リラックマ",
+  "subs": [
+   "kawaii:character"
+  ]
+ },
+ {
+  "label": "お茶犬",
+  "en": "Ocha-ken",
+  "match": "お茶犬|お茶猫",
+  "subs": [
+   "kawaii:character"
+  ]
+ },
+ {
+  "label": "モンチッチ",
+  "en": "Monchhichi",
+  "match": "モンチッチ",
+  "subs": [
+   "kawaii:character"
+  ]
+ },
+ {
+  "label": "BT21",
+  "en": "BT21",
+  "match": "BT21",
+  "subs": [
+   "kawaii:character"
+  ]
+ },
+ {
+  "label": "トムとジェリー",
+  "en": "Tom and Jerry",
+  "match": "TOM and JERRY|トムとジェリー",
+  "subs": [
+   "kawaii:character"
+  ]
+ },
+ {
+  "label": "スポンジ・ボブ",
+  "en": "SpongeBob",
+  "match": "スポンジ・ボブ",
+  "subs": [
+   "kawaii:character"
+  ]
+ },
+ {
+  "label": "テレタビーズ",
+  "en": "Teletubbies",
+  "match": "テレタビーズ",
+  "subs": [
+   "kawaii:character"
+  ]
+ },
+ {
+  "label": "Lil ala mode",
+  "en": "Lil ala mode",
+  "match": "Lil ala mode",
+  "subs": [
+   "kawaii:character"
+  ]
+ },
+ {
+  "label": "お文具といっしょ",
+  "en": "Obungu to Issho",
+  "match": "お文具",
+  "subs": [
+   "kawaii:character"
+  ]
+ },
+ {
+  "label": "なめこ",
+  "en": "Nameko",
+  "match": "なめこ",
+  "subs": [
+   "kawaii:character"
+  ]
+ },
+ {
+  "label": "ちいかわ",
+  "en": "Chiikawa",
+  "match": "ちいかわ|ハチワレ",
+  "subs": [
+   "kawaii:character",
+   "kawaii:chiikawa"
+  ]
+ },
+ {
+  "label": "パペットスンスン",
+  "en": "Puppet Sunsun",
+  "match": "スンスン",
+  "subs": [
+   "kawaii:character"
+  ]
+ },
+ {
+  "label": "いーすとけん。",
+  "en": "Eastken",
+  "match": "いーすとけん",
+  "subs": [
+   "kawaii:character"
+  ]
+ },
+ {
+  "label": "ジャージカップル",
+  "en": "Jersey Couple",
+  "match": "ジャージカップル",
+  "subs": [
+   "kawaii:character"
+  ]
+ },
+ {
+  "label": "機動戦士ガンダム",
+  "en": "Mobile Suit Gundam",
+  "match": "ガンダム",
+  "subs": [
+   "cool:robot"
+  ]
+ },
+ {
+  "label": "マクロス",
+  "en": "Macross",
+  "match": "マクロス",
+  "subs": [
+   "cool:robot"
+  ]
+ },
+ {
+  "label": "エヴァンゲリオン",
+  "en": "Evangelion",
+  "match": "エヴァンゲリオン|EVANGELION",
+  "subs": [
+   "cool:robot"
+  ]
+ },
+ {
+  "label": "ゾイド",
+  "en": "Zoids",
+  "match": "ゾイド|ZOIDS",
+  "subs": [
+   "cool:robot"
+  ]
+ },
+ {
+  "label": "コードギアス",
+  "en": "Code Geass",
+  "match": "コードギアス",
+  "subs": [
+   "cool:robot"
+  ]
+ },
+ {
+  "label": "機動警察パトレイバー",
+  "en": "Patlabor",
+  "match": "パトレイバー",
+  "subs": [
+   "cool:robot"
+  ]
+ },
+ {
+  "label": "仮面ライダー",
+  "en": "Kamen Rider",
+  "match": "ライダー",
+  "subs": [
+   "cool:hero"
+  ]
+ },
+ {
+  "label": "ウルトラマン",
+  "en": "Ultraman",
+  "match": "ウルトラ",
+  "subs": [
+   "cool:hero"
+  ]
+ },
+ {
+  "label": "ゴジラ",
+  "en": "Godzilla",
+  "match": "ゴジラ",
+  "subs": [
+   "cool:hero"
+  ]
+ },
+ {
+  "label": "スーパー戦隊",
+  "en": "Super Sentai",
+  "match": "戦隊",
+  "subs": [
+   "cool:hero"
+  ]
+ },
+ {
+  "label": "ガメラ",
+  "en": "Gamera",
+  "match": "ガメラ",
+  "subs": [
+   "cool:hero"
+  ]
+ },
+ {
+  "label": "ONE PIECE",
+  "en": "ONE PIECE",
+  "match": "ONE PIECE|ワンピの実|ワンピース",
+  "subs": [
+   "cool:shonen"
+  ]
+ },
+ {
+  "label": "ドラゴンボール",
+  "en": "Dragon Ball",
+  "match": "ドラゴンボール",
+  "subs": [
+   "cool:shonen"
+  ]
+ },
+ {
+  "label": "ジョジョの奇妙な冒険",
+  "en": "JoJo's Bizarre Adventure",
+  "match": "ジョジョ",
+  "subs": [
+   "cool:shonen"
+  ]
+ },
+ {
+  "label": "ハイキュー!!",
+  "en": "Haikyu!!",
+  "match": "ハイキュー",
+  "subs": [
+   "cool:shonen"
+  ]
+ },
+ {
+  "label": "銀魂",
+  "en": "Gintama",
+  "match": "銀魂",
+  "subs": [
+   "cool:shonen"
+  ]
+ },
+ {
+  "label": "キングダム",
+  "en": "Kingdom",
+  "match": "キングダム",
+  "subs": [
+   "cool:shonen"
+  ]
+ },
+ {
+  "label": "HUNTER×HUNTER",
+  "en": "HUNTER×HUNTER",
+  "match": "HUNTER",
+  "subs": [
+   "cool:shonen"
+  ]
+ },
+ {
+  "label": "NARUTO",
+  "en": "NARUTO",
+  "match": "NARUTO|ナルト",
+  "subs": [
+   "cool:shonen"
+  ]
+ },
+ {
+  "label": "BLEACH",
+  "en": "BLEACH",
+  "match": "BLEACH",
+  "subs": [
+   "cool:shonen"
+  ]
+ },
+ {
+  "label": "呪術廻戦",
+  "en": "Jujutsu Kaisen",
+  "match": "呪術",
+  "subs": [
+   "cool:shonen"
+  ]
+ },
+ {
+  "label": "鬼滅の刃",
+  "en": "Demon Slayer",
+  "match": "鬼滅",
+  "subs": [
+   "cool:shonen"
+  ]
+ },
+ {
+  "label": "チェンソーマン",
+  "en": "Chainsaw Man",
+  "match": "チェンソー",
+  "subs": [
+   "cool:shonen"
+  ]
+ },
+ {
+  "label": "ブルーロック",
+  "en": "Blue Lock",
+  "match": "ブルーロック",
+  "subs": [
+   "cool:shonen"
+  ]
+ },
+ {
+  "label": "僕のヒーローアカデミア",
+  "en": "My Hero Academia",
+  "match": "ヒロアカ|ヒーローアカデミア",
+  "subs": [
+   "cool:shonen"
+  ]
+ },
+ {
+  "label": "東京リベンジャーズ",
+  "en": "Tokyo Revengers",
+  "match": "東京リベンジャーズ|東リベ",
+  "subs": [
+   "cool:shonen"
+  ]
+ },
+ {
+  "label": "進撃の巨人",
+  "en": "Attack on Titan",
+  "match": "進撃の巨人",
+  "subs": [
+   "cool:shonen"
+  ]
+ },
+ {
+  "label": "クローズ＆WORST",
+  "en": "Crows & WORST",
+  "match": "クローズ|WORST",
+  "subs": [
+   "cool:shonen"
+  ]
+ },
+ {
+  "label": "SLAM DUNK",
+  "en": "SLAM DUNK",
+  "match": "SLAM DUNK|スラムダンク",
+  "subs": [
+   "cool:shonen"
+  ]
+ },
+ {
+  "label": "キン肉マン",
+  "en": "Kinnikuman",
+  "match": "キン肉マン",
+  "subs": [
+   "cool:shonen"
+  ]
+ },
+ {
+  "label": "北斗の拳",
+  "en": "Fist of the North Star",
+  "match": "北斗の拳",
+  "subs": [
+   "cool:shonen"
+  ]
+ },
+ {
+  "label": "鋼の錬金術師",
+  "en": "Fullmetal Alchemist",
+  "match": "鋼の錬金術師",
+  "subs": [
+   "cool:shonen"
+  ]
+ },
+ {
+  "label": "SPY×FAMILY",
+  "en": "SPY×FAMILY",
+  "match": "SPY×FAMILY|スパイファミリー",
+  "subs": [
+   "cool:shonen"
+  ]
+ },
+ {
+  "label": "幽☆遊☆白書",
+  "en": "Yu Yu Hakusho",
+  "match": "幽.?遊.?白書",
+  "subs": [
+   "cool:shonen"
+  ]
+ },
+ {
+  "label": "黒子のバスケ",
+  "en": "Kuroko's Basketball",
+  "match": "黒子のバスケ",
+  "subs": [
+   "cool:shonen"
+  ]
+ },
+ {
+  "label": "怪獣8号",
+  "en": "Kaiju No. 8",
+  "match": "怪獣8号",
+  "subs": [
+   "cool:shonen"
+  ]
+ },
+ {
+  "label": "ダンダダン",
+  "en": "Dandadan",
+  "match": "ダンダダン",
+  "subs": [
+   "cool:shonen"
+  ]
+ },
+ {
+  "label": "【推しの子】",
+  "en": "Oshi no Ko",
+  "match": "推しの子",
+  "subs": [
+   "cool:shonen"
+  ]
+ },
+ {
+  "label": "暗殺教室",
+  "en": "Assassination Classroom",
+  "match": "暗殺教室",
+  "subs": [
+   "cool:shonen"
+  ]
+ },
+ {
+  "label": "遊☆戯☆王",
+  "en": "Yu-Gi-Oh!",
+  "match": "遊.?戯.?王",
+  "subs": [
+   "cool:shonen"
+  ]
+ },
+ {
+  "label": "らんま1/2",
+  "en": "Ranma 1/2",
+  "match": "らんま",
+  "subs": [
+   "cool:shonen"
+  ]
+ },
+ {
+  "label": "犬夜叉",
+  "en": "Inuyasha",
+  "match": "犬夜叉",
+  "subs": [
+   "cool:shonen"
+  ]
+ },
+ {
+  "label": "いちご100％",
+  "en": "Ichigo 100%",
+  "match": "いちご100",
+  "subs": [
+   "cool:shonen"
+  ]
+ },
+ {
+  "label": "少年サンデー作品",
+  "en": "Shonen Sunday titles",
+  "match": "少年サンデー",
+  "subs": [
+   "cool:shonen"
+  ]
+ },
+ {
+  "label": "マーベル",
+  "en": "Marvel",
+  "match": "MARVEL|マーベル|スパイダーマン|アベンジャーズ",
+  "subs": [
+   "cool:western"
+  ]
+ },
+ {
+  "label": "DC",
+  "en": "DC",
+  "match": "^DC |バットマン|スーパーマン",
+  "subs": [
+   "cool:western"
+  ]
+ },
+ {
+  "label": "スター・ウォーズ",
+  "en": "Star Wars",
+  "match": "STAR WARS|スター・ウォーズ",
+  "subs": [
+   "cool:western"
+  ]
+ },
+ {
+  "label": "ハリー・ポッター",
+  "en": "Harry Potter",
+  "match": "ハリー・ポッター",
+  "subs": [
+   "cool:western"
+  ]
+ },
+ {
+  "label": "グレムリン",
+  "en": "Gremlins",
+  "match": "グレムリン",
+  "subs": [
+   "cool:western"
+  ]
+ },
+ {
+  "label": "HOT WHEELS",
+  "en": "Hot Wheels",
+  "match": "HOT WHEELS",
+  "subs": [
+   "cool:western"
+  ]
+ },
+ {
+  "label": "NCT",
+  "en": "NCT",
+  "match": "NCT",
+  "subs": [
+   "oshi:idol"
+  ]
+ },
+ {
+  "label": "aespa",
+  "en": "aespa",
+  "match": "aespa",
+  "subs": [
+   "oshi:idol"
+  ]
+ },
+ {
+  "label": "RIIZE",
+  "en": "RIIZE",
+  "match": "RIIZE",
+  "subs": [
+   "oshi:idol"
+  ]
+ },
+ {
+  "label": "Stray Kids（SKZOO）",
+  "en": "Stray Kids (SKZOO)",
+  "match": "SKZOO|Stray Kids",
+  "subs": [
+   "oshi:idol"
+  ]
+ },
+ {
+  "label": "TWICE",
+  "en": "TWICE",
+  "match": "TWICE",
+  "subs": [
+   "oshi:idol"
+  ]
+ },
+ {
+  "label": "BTS",
+  "en": "BTS",
+  "match": "BTS",
+  "subs": [
+   "oshi:idol"
+  ]
+ },
+ {
+  "label": "SEVENTEEN",
+  "en": "SEVENTEEN",
+  "match": "SEVENTEEN",
+  "subs": [
+   "oshi:idol"
+  ]
+ },
+ {
+  "label": "PLAVE",
+  "en": "PLAVE",
+  "match": "PLAVE",
+  "subs": [
+   "oshi:idol"
+  ]
+ },
+ {
+  "label": "LE SSERAFIM",
+  "en": "LE SSERAFIM",
+  "match": "LE SSERAFIM",
+  "subs": [
+   "oshi:idol"
+  ]
+ },
+ {
+  "label": "KPOPガールズ！デーモン・ハンターズ",
+  "en": "KPop Demon Hunters",
+  "match": "デーモン・ハンターズ",
+  "subs": [
+   "oshi:idol"
+  ]
+ },
+ {
+  "label": "Novelbright",
+  "en": "Novelbright",
+  "match": "Novelbright",
+  "subs": [
+   "oshi:idol"
+  ]
+ },
+ {
+  "label": "ラブライブ！",
+  "en": "Love Live!",
+  "match": "ラブライブ",
+  "subs": [
+   "oshi:idol"
+  ]
+ },
+ {
+  "label": "アイドリッシュセブン",
+  "en": "IDOLiSH7",
+  "match": "アイドリッシュ",
+  "subs": [
+   "oshi:idol"
+  ]
+ },
+ {
+  "label": "アイドルマスター",
+  "en": "THE IDOLM@STER",
+  "match": "アイドルマスター|アイマス",
+  "subs": [
+   "oshi:idol"
+  ]
+ },
+ {
+  "label": "MyGO!!!!!・バンドリ！",
+  "en": "MyGO!!!!! / BanG Dream!",
+  "match": "MyGO|バンドリ|BanG Dream",
+  "subs": [
+   "oshi:idol"
+  ]
+ },
+ {
+  "label": "ぼっち・ざ・ろっく！",
+  "en": "Bocchi the Rock!",
+  "match": "ぼっち",
+  "subs": [
+   "oshi:idol"
+  ]
+ },
+ {
+  "label": "初音ミク",
+  "en": "Hatsune Miku",
+  "match": "初音ミク",
+  "subs": [
+   "oshi:idol"
+  ]
+ },
+ {
+  "label": "うたの☆プリンスさまっ♪",
+  "en": "Uta no Prince-sama",
+  "match": "うたの☆プリンス|うたプリ",
+  "subs": [
+   "oshi:idol"
+  ]
+ },
+ {
+  "label": "あんさんぶるスターズ！",
+  "en": "Ensemble Stars!",
+  "match": "あんさんぶる|あんスタ",
+  "subs": [
+   "oshi:idol"
+  ]
+ },
+ {
+  "label": "ヒプノシスマイク",
+  "en": "Hypnosis Mic",
+  "match": "ヒプノシス",
+  "subs": [
+   "oshi:idol"
+  ]
+ },
+ {
+  "label": "ホロライブ",
+  "en": "hololive",
+  "match": "ホロライブ|hololive",
+  "subs": [
+   "oshi:vtuber"
+  ]
+ },
+ {
+  "label": "にじさんじ",
+  "en": "Nijisanji",
+  "match": "にじさんじ",
+  "subs": [
+   "oshi:vtuber"
+  ]
+ },
+ {
+  "label": "すとぷり",
+  "en": "StPR",
+  "match": "すとぷり",
+  "subs": [
+   "oshi:vtuber"
+  ]
+ },
+ {
+  "label": "いれいす",
+  "en": "Irregular Dice",
+  "match": "いれいす",
+  "subs": [
+   "oshi:vtuber"
+  ]
+ },
+ {
+  "label": "赤見かるび",
+  "en": "Akami Karubi",
+  "match": "赤見かるび",
+  "subs": [
+   "oshi:vtuber"
+  ]
+ },
+ {
+  "label": "CRAZY RACCOON",
+  "en": "CRAZY RACCOON",
+  "match": "CRAZY RACCOON",
+  "subs": [
+   "oshi:vtuber"
+  ]
+ },
+ {
+  "label": "ぶいすぽっ！",
+  "en": "VSPO!",
+  "match": "ぶいすぽ",
+  "subs": [
+   "oshi:vtuber"
+  ]
+ },
+ {
+  "label": "ドラえもん",
+  "en": "Doraemon",
+  "match": "ドラえもん",
+  "subs": [
+   "oshi:kids"
+  ]
+ },
+ {
+  "label": "クレヨンしんちゃん",
+  "en": "Crayon Shin-chan",
+  "match": "しんちゃん",
+  "subs": [
+   "oshi:kids"
+  ]
+ },
+ {
+  "label": "ちびまる子ちゃん",
+  "en": "Chibi Maruko-chan",
+  "match": "ちびまる子",
+  "subs": [
+   "oshi:kids"
+  ]
+ },
+ {
+  "label": "名探偵コナン",
+  "en": "Detective Conan",
+  "match": "コナン",
+  "subs": [
+   "oshi:kids"
+  ]
+ },
+ {
+  "label": "それいけ！アンパンマン",
+  "en": "Anpanman",
+  "match": "アンパンマン",
+  "subs": [
+   "oshi:kids"
+  ]
+ },
+ {
+  "label": "妖怪ウォッチ",
+  "en": "Yo-kai Watch",
+  "match": "妖怪ウォッチ",
+  "subs": [
+   "oshi:kids"
+  ]
+ },
+ {
+  "label": "ゲゲゲの鬼太郎",
+  "en": "GeGeGe no Kitaro",
+  "match": "鬼太郎",
+  "subs": [
+   "oshi:kids"
+  ]
+ },
+ {
+  "label": "はなかっぱ",
+  "en": "Hanakappa",
+  "match": "はなかっぱ",
+  "subs": [
+   "oshi:kids"
+  ]
+ },
+ {
+  "label": "ぜんまいざむらい",
+  "en": "Zenmai Zamurai",
+  "match": "ぜんまいざむらい",
+  "subs": [
+   "oshi:kids"
+  ]
+ },
+ {
+  "label": "ノンタン",
+  "en": "Nontan",
+  "match": "ノンタン",
+  "subs": [
+   "oshi:kids"
+  ]
+ },
+ {
+  "label": "みいつけた！",
+  "en": "Miitsuketa!",
+  "match": "みいつけた",
+  "subs": [
+   "oshi:kids"
+  ]
+ },
+ {
+  "label": "ざわざわ森のがんこちゃん",
+  "en": "Gankochan",
+  "match": "がんこちゃん",
+  "subs": [
+   "oshi:kids"
+  ]
+ },
+ {
+  "label": "ぐ～チョコランタン",
+  "en": "Gu-Choco Lantern",
+  "match": "チョコランタン",
+  "subs": [
+   "oshi:kids"
+  ]
+ },
+ {
+  "label": "サザエさん",
+  "en": "Sazae-san",
+  "match": "サザエさん",
+  "subs": [
+   "oshi:kids"
+  ]
+ },
+ {
+  "label": "おしりたんてい",
+  "en": "Butt Detective",
+  "match": "おしりたんてい",
+  "subs": [
+   "oshi:kids"
+  ]
+ },
+ {
+  "label": "コジコジ",
+  "en": "Kojikoji",
+  "match": "コジコジ",
+  "subs": [
+   "oshi:kids"
+  ]
+ },
+ {
+  "label": "忍たま乱太郎",
+  "en": "Nintama Rantaro",
+  "match": "忍たま",
+  "subs": [
+   "oshi:kids"
+  ]
+ },
+ {
+  "label": "ケロロ軍曹",
+  "en": "Sgt. Frog",
+  "match": "ケロロ",
+  "subs": [
+   "oshi:kids"
+  ]
+ },
+ {
+  "label": "NHKキャラクター",
+  "en": "NHK characters",
+  "match": "ニャンちゅう|モリゾー|みいつけた|がんこちゃん",
+  "subs": [
+   "oshi:kids"
+  ]
+ },
+ {
+  "label": "プリキュア",
+  "en": "Pretty Cure",
+  "match": "プリキュア|ぷちきゅあ",
+  "subs": [
+   "oshi:girls"
+  ]
+ },
+ {
+  "label": "アイカツ！",
+  "en": "Aikatsu!",
+  "match": "アイカツ",
+  "subs": [
+   "oshi:girls"
+  ]
+ },
+ {
+  "label": "おジャ魔女どれみ",
+  "en": "Ojamajo Doremi",
+  "match": "おジャ魔女",
+  "subs": [
+   "oshi:girls"
+  ]
+ },
+ {
+  "label": "カードキャプターさくら",
+  "en": "Cardcaptor Sakura",
+  "match": "カードキャプター",
+  "subs": [
+   "oshi:girls"
+  ]
+ },
+ {
+  "label": "きらりん☆レボリューション",
+  "en": "Kilari",
+  "match": "きらりん",
+  "subs": [
+   "oshi:girls"
+  ]
+ },
+ {
+  "label": "ジュエルペット",
+  "en": "Jewelpet",
+  "match": "ジュエルペット",
+  "subs": [
+   "oshi:girls"
+  ]
+ },
+ {
+  "label": "魔法騎士レイアース",
+  "en": "Magic Knight Rayearth",
+  "match": "レイアース",
+  "subs": [
+   "oshi:girls"
+  ]
+ },
+ {
+  "label": "桜蘭高校ホスト部",
+  "en": "Ouran High School Host Club",
+  "match": "桜蘭",
+  "subs": [
+   "oshi:girls"
+  ]
+ },
+ {
+  "label": "セーラームーン",
+  "en": "Sailor Moon",
+  "match": "セーラームーン",
+  "subs": [
+   "oshi:girls"
+  ]
+ },
+ {
+  "label": "しゅごキャラ！",
+  "en": "Shugo Chara!",
+  "match": "しゅごキャラ",
+  "subs": [
+   "oshi:girls"
+  ]
+ },
+ {
+  "label": "ミルモでポン！",
+  "en": "Mirmo",
+  "match": "ミルモ",
+  "subs": [
+   "oshi:girls"
+  ]
+ },
+ {
+  "label": "夢のクレヨン王国",
+  "en": "Crayon Kingdom",
+  "match": "クレヨン王国",
+  "subs": [
+   "oshi:girls"
+  ]
+ },
+ {
+  "label": "プリパラ・プリティーシリーズ",
+  "en": "PriPara / Pretty Series",
+  "match": "プリパラ|プリティーリズム|ひみつのアイプリ",
+  "subs": [
+   "oshi:girls"
+  ]
+ },
+ {
+  "label": "葬送のフリーレン",
+  "en": "Frieren",
+  "match": "フリーレン",
+  "subs": [
+   "oshi:trend"
+  ]
+ },
+ {
+  "label": "薬屋のひとりごと",
+  "en": "The Apothecary Diaries",
+  "match": "薬屋のひとりごと",
+  "subs": [
+   "oshi:trend"
+  ]
+ },
+ {
+  "label": "メイドインアビス",
+  "en": "Made in Abyss",
+  "match": "メイドインアビス",
+  "subs": [
+   "oshi:trend"
+  ]
+ },
+ {
+  "label": "とんがり帽子のアトリエ",
+  "en": "Witch Hat Atelier",
+  "match": "とんがり帽子",
+  "subs": [
+   "oshi:trend"
+  ]
+ },
+ {
+  "label": "タコピーの原罪",
+  "en": "Takopi's Original Sin",
+  "match": "タコピー",
+  "subs": [
+   "oshi:trend"
+  ]
+ },
+ {
+  "label": "超かぐや姫！",
+  "en": "Cosmic Princess Kaguya!",
+  "match": "超かぐや姫",
+  "subs": [
+   "oshi:trend"
+  ]
+ },
+ {
+  "label": "アオのハコ",
+  "en": "Blue Box",
+  "match": "アオのハコ",
+  "subs": [
+   "oshi:trend"
+  ]
+ },
+ {
+  "label": "オーバーロード",
+  "en": "Overlord",
+  "match": "オーバーロード",
+  "subs": [
+   "oshi:trend"
+  ]
+ },
+ {
+  "label": "サマーウォーズ",
+  "en": "Summer Wars",
+  "match": "サマーウォーズ",
+  "subs": [
+   "oshi:trend"
+  ]
+ },
+ {
+  "label": "転生したらスライムだった件",
+  "en": "That Time I Got Reincarnated as a Slime",
+  "match": "転生したらスライム|転スラ",
+  "subs": [
+   "oshi:trend"
+  ]
+ },
+ {
+  "label": "Re:ゼロから始める異世界生活",
+  "en": "Re:Zero",
+  "match": "Re:ゼロ|リゼロ",
+  "subs": [
+   "oshi:trend"
+  ]
+ },
+ {
+  "label": "文豪ストレイドッグス",
+  "en": "Bungo Stray Dogs",
+  "match": "文豪ストレイ",
+  "subs": [
+   "oshi:trend"
+  ]
+ },
+ {
+  "label": "魔法少女まどか☆マギカ",
+  "en": "Madoka Magica",
+  "match": "まどか",
+  "subs": [
+   "oshi:trend"
+  ]
+ },
+ {
+  "label": "涼宮ハルヒ",
+  "en": "Haruhi Suzumiya",
+  "match": "ハルヒ",
+  "subs": [
+   "oshi:trend"
+  ]
+ },
+ {
+  "label": "けいおん！",
+  "en": "K-On!",
+  "match": "けいおん",
+  "subs": [
+   "oshi:trend"
+  ]
+ },
+ {
+  "label": "ゆるキャン△",
+  "en": "Laid-Back Camp",
+  "match": "ゆるキャン",
+  "subs": [
+   "oshi:trend"
+  ]
+ },
+ {
+  "label": "ガールズ＆パンツァー",
+  "en": "Girls und Panzer",
+  "match": "ガルパン|ガールズ＆パンツァー|ガールズ&パンツァー",
+  "subs": [
+   "oshi:trend"
+  ]
+ },
+ {
+  "label": "ガリレオ（東野圭吾）",
+  "en": "Galileo",
+  "match": "ガリレオ",
+  "subs": [
+   "oshi:trend"
+  ]
+ },
+ {
+  "label": "ダンジョン飯",
+  "en": "Delicious in Dungeon",
+  "match": "ダンジョン飯",
+  "subs": [
+   "oshi:trend"
+  ]
+ },
+ {
+  "label": "ぼっち・ざ・ろっく！",
+  "en": "Bocchi the Rock!",
+  "match": "ぼっち",
+  "subs": [
+   "oshi:trend"
+  ]
+ },
+ {
+  "label": "MyGO!!!!!",
+  "en": "MyGO!!!!!",
+  "match": "MyGO",
+  "subs": [
+   "oshi:trend"
+  ]
+ },
+ {
+  "label": "マインクラフト",
+  "en": "Minecraft",
+  "match": "MINECRAFT|マインクラフト|マイクラ",
+  "subs": [
+   "oshi:game"
+  ]
+ },
+ {
+  "label": "ソニック",
+  "en": "Sonic",
+  "match": "ソニック",
+  "subs": [
+   "oshi:game"
+  ]
+ },
+ {
+  "label": "逆転裁判",
+  "en": "Ace Attorney",
+  "match": "逆転裁判",
+  "subs": [
+   "oshi:game"
+  ]
+ },
+ {
+  "label": "牧場物語",
+  "en": "Story of Seasons",
+  "match": "牧場物語",
+  "subs": [
+   "oshi:game"
+  ]
+ },
+ {
+  "label": "勝利の女神：NIKKE",
+  "en": "NIKKE",
+  "match": "NIKKE",
+  "subs": [
+   "oshi:game"
+  ]
+ },
+ {
+  "label": "Poppy Playtime",
+  "en": "Poppy Playtime",
+  "match": "Poppy",
+  "subs": [
+   "oshi:game"
+  ]
+ },
+ {
+  "label": "ウマ娘",
+  "en": "Uma Musume",
+  "match": "ウマ娘",
+  "subs": [
+   "oshi:game"
+  ]
+ },
+ {
+  "label": "ペルソナ",
+  "en": "Persona",
+  "match": "ペルソナ",
+  "subs": [
+   "oshi:game"
+  ]
+ },
+ {
+  "label": "モンスターハンター",
+  "en": "Monster Hunter",
+  "match": "モンスターハンター|モンハン",
+  "subs": [
+   "oshi:game"
+  ]
+ },
+ {
+  "label": "ドラゴンクエスト",
+  "en": "Dragon Quest",
+  "match": "ドラゴンクエスト|ドラクエ",
+  "subs": [
+   "oshi:game"
+  ]
+ },
+ {
+  "label": "ファイナルファンタジー",
+  "en": "Final Fantasy",
+  "match": "ファイナルファンタジー|FINAL FANTASY",
+  "subs": [
+   "oshi:game"
+  ]
+ },
+ {
+  "label": "サルゲッチュ",
+  "en": "Ape Escape",
+  "match": "サルゲッチュ",
+  "subs": [
+   "oshi:game"
+  ]
+ },
+ {
+  "label": "刀剣乱舞",
+  "en": "Touken Ranbu",
+  "match": "刀剣乱舞",
+  "subs": [
+   "oshi:game"
+  ]
+ },
+ {
+  "label": "原神",
+  "en": "Genshin Impact",
+  "match": "原神",
+  "subs": [
+   "oshi:game"
+  ]
+ },
+ {
+  "label": "ブルーアーカイブ",
+  "en": "Blue Archive",
+  "match": "ブルーアーカイブ|ブルアカ",
+  "subs": [
+   "oshi:game"
+  ]
+ },
+ {
+  "label": "スーパーマリオ",
+  "en": "Super Mario",
+  "match": "マリオ",
+  "subs": [
+   "oshi:game"
+  ]
+ },
+ {
+  "label": "どうぶつの森",
+  "en": "Animal Crossing",
+  "match": "どうぶつの森",
+  "subs": [
+   "oshi:game"
+  ]
+ },
+ {
+  "label": "パックマン",
+  "en": "PAC-MAN",
+  "match": "パックマン|PAC-MAN",
+  "subs": [
+   "oshi:game"
+  ]
+ },
+ {
+  "label": "ストリートファイター",
+  "en": "Street Fighter",
+  "match": "ストリートファイター",
+  "subs": [
+   "oshi:game"
+  ]
+ },
+ {
+  "label": "たまごっち",
+  "en": "Tamagotchi",
+  "match": "たまごっち",
+  "subs": [
+   "retro:heisei"
+  ]
+ },
+ {
+  "label": "ナルミヤキャラクターズ",
+  "en": "Narumiya characters",
+  "match": "ナルミヤ",
+  "subs": [
+   "retro:heisei"
+  ]
+ },
+ {
+  "label": "メゾピアノ",
+  "en": "mezzo piano",
+  "match": "メゾピアノ|Mezzo Piano",
+  "subs": [
+   "retro:heisei"
+  ]
+ },
+ {
+  "label": "パワーパフ ガールズ",
+  "en": "The Powerpuff Girls",
+  "match": "パワーパフ|mojojojo",
+  "subs": [
+   "retro:heisei"
+  ]
+ },
+ {
+  "label": "ケロロ軍曹",
+  "en": "Sgt. Frog",
+  "match": "ケロロ",
+  "subs": [
+   "retro:heisei"
+  ]
+ },
+ {
+  "label": "デジモン",
+  "en": "Digimon",
+  "match": "デジモン",
+  "subs": [
+   "retro:heisei"
+  ]
+ },
+ {
+  "label": "ハム太郎",
+  "en": "Hamtaro",
+  "match": "ハム太郎",
+  "subs": [
+   "retro:heisei"
+  ]
+ },
+ {
+  "label": "ほっぺちゃん",
+  "en": "Hoppe-chan",
+  "match": "ほっぺちゃん",
+  "subs": [
+   "retro:heisei"
+  ]
+ },
+ {
+  "label": "ジュエルポッド",
+  "en": "Jewel Pod",
+  "match": "ジュエルポッド",
+  "subs": [
+   "retro:heisei"
+  ]
+ },
+ {
+  "label": "お茶犬",
+  "en": "Ocha-ken",
+  "match": "お茶犬|お茶猫",
+  "subs": [
+   "retro:heisei"
+  ]
+ },
+ {
+  "label": "おジャ魔女どれみ",
+  "en": "Ojamajo Doremi",
+  "match": "おジャ魔女",
+  "subs": [
+   "retro:heisei"
+  ]
+ },
+ {
+  "label": "カードキャプターさくら",
+  "en": "Cardcaptor Sakura",
+  "match": "カードキャプター",
+  "subs": [
+   "retro:heisei"
+  ]
+ },
+ {
+  "label": "きらりん☆レボリューション",
+  "en": "Kilari",
+  "match": "きらりん",
+  "subs": [
+   "retro:heisei"
+  ]
+ },
+ {
+  "label": "ジュエルペット",
+  "en": "Jewelpet",
+  "match": "ジュエルペット",
+  "subs": [
+   "retro:heisei"
+  ]
+ },
+ {
+  "label": "いちご100％",
+  "en": "Ichigo 100%",
+  "match": "いちご100",
+  "subs": [
+   "retro:heisei"
+  ]
+ },
+ {
+  "label": "マクロスF",
+  "en": "Macross Frontier",
+  "match": "マクロスF|マクロスＦ",
+  "subs": [
+   "retro:heisei"
+  ]
+ },
+ {
+  "label": "サルゲッチュ",
+  "en": "Ape Escape",
+  "match": "サルゲッチュ",
+  "subs": [
+   "retro:heisei"
+  ]
+ },
+ {
+  "label": "パチンコ・パチスロ",
+  "en": "Pachinko & pachislot",
+  "match": "パチンコ|パチスロ",
+  "subs": [
+   "retro:showa"
+  ]
+ },
+ {
+  "label": "企業・ブランド",
+  "en": "Company & brand goods",
+  "match": "ピジョン|Pigeon|コンタック|チロル|雪印|ZETT|日産",
+  "subs": [
+   "retro:showa"
+  ]
+ },
+ {
+  "label": "モンチッチ",
+  "en": "Monchhichi",
+  "match": "モンチッチ",
+  "subs": [
+   "retro:showa"
+  ]
+ },
+ {
+  "label": "ニャンちゅう",
+  "en": "Nyanchu",
+  "match": "ニャンちゅう",
+  "subs": [
+   "retro:showa"
+  ]
+ },
+ {
+  "label": "昭和のアニメ・特撮",
+  "en": "Showa-era anime & tokusatsu",
+  "match": "ドラえもん|鬼太郎|サザエさん|キン肉マン|北斗の拳|ノンタン|ウルトラ|ゴジラ",
+  "subs": [
+   "retro:showa"
+  ]
+ },
+ {
+  "label": "モーニング娘。・ハロプロ",
+  "en": "Morning Musume / Hello! Project",
+  "match": "モーニング娘|ハロプロ|アンジュルム|Juice=Juice|つばきファクトリー|BEYOOOOONDS",
+  "subs": [
+   "oshi:jidol"
+  ]
+ },
+ {
+  "label": "乃木坂46",
+  "en": "Nogizaka46",
+  "match": "乃木坂",
+  "subs": [
+   "oshi:jidol"
+  ]
+ },
+ {
+  "label": "櫻坂46",
+  "en": "Sakurazaka46",
+  "match": "櫻坂",
+  "subs": [
+   "oshi:jidol"
+  ]
+ },
+ {
+  "label": "日向坂46",
+  "en": "Hinatazaka46",
+  "match": "日向坂",
+  "subs": [
+   "oshi:jidol"
+  ]
+ },
+ {
+  "label": "AKB48グループ",
+  "en": "AKB48 group",
+  "match": "AKB48|SKE48|NMB48|HKT48|STU48",
+  "subs": [
+   "oshi:jidol"
+  ]
+ },
+ {
+  "label": "=LOVE",
+  "en": "=LOVE",
+  "match": "=LOVE|＝LOVE",
+  "subs": [
+   "oshi:jidol"
+  ]
+ },
+ {
+  "label": "≠ME",
+  "en": "≠ME",
+  "match": "≠ME",
+  "subs": [
+   "oshi:jidol"
+  ]
+ },
+ {
+  "label": "≒JOY",
+  "en": "≒JOY",
+  "match": "≒JOY",
+  "subs": [
+   "oshi:jidol"
+  ]
+ },
+ {
+  "label": "FRUITS ZIPPER",
+  "en": "FRUITS ZIPPER",
+  "match": "FRUITS ZIPPER",
+  "subs": [
+   "oshi:jidol"
+  ]
+ },
+ {
+  "label": "CANDY TUNE",
+  "en": "CANDY TUNE",
+  "match": "CANDY TUNE",
+  "subs": [
+   "oshi:jidol"
+  ]
+ },
+ {
+  "label": "CUTIE STREET",
+  "en": "CUTIE STREET",
+  "match": "CUTIE STREET",
+  "subs": [
+   "oshi:jidol"
+  ]
+ },
+ {
+  "label": "超ときめき♡宣伝部",
+  "en": "Cho Tokimeki Sendenbu",
+  "match": "超ときめき",
+  "subs": [
+   "oshi:jidol"
+  ]
+ },
+ {
+  "label": "いぎなり東北産",
+  "en": "Iginari Tohokusan",
+  "match": "いぎなり東北産",
+  "subs": [
+   "oshi:jidol"
+  ]
+ },
+ {
+  "label": "ももいろクローバーZ",
+  "en": "Momoiro Clover Z",
+  "match": "ももいろクローバー|ももクロ",
+  "subs": [
+   "oshi:jidol"
+  ]
+ },
+ {
+  "label": "私立恵比寿中学",
+  "en": "Shiritsu Ebisu Chugaku",
+  "match": "恵比寿中学|エビ中",
+  "subs": [
+   "oshi:jidol"
+  ]
+ },
+ {
+  "label": "BiSH・WACK",
+  "en": "BiSH / WACK",
+  "match": "BiSH|WACK",
+  "subs": [
+   "oshi:jidol"
+  ]
+ },
+ {
+  "label": "ライブアイドル・地下アイドル",
+  "en": "Live idols (indie)",
+  "match": "地下アイドル|ライブアイドル|ライブアイドル",
+  "subs": [
+   "oshi:jidol"
+  ]
+ },
+ {
+  "label": "Snow Man",
+  "en": "Snow Man",
+  "match": "Snow Man",
+  "subs": [
+   "oshi:jidol"
+  ]
+ },
+ {
+  "label": "SixTONES",
+  "en": "SixTONES",
+  "match": "SixTONES",
+  "subs": [
+   "oshi:jidol"
+  ]
+ },
+ {
+  "label": "なにわ男子",
+  "en": "Naniwa Danshi",
+  "match": "なにわ男子",
+  "subs": [
+   "oshi:jidol"
+  ]
+ },
+ {
+  "label": "JO1・INI",
+  "en": "JO1 / INI",
+  "match": "JO1|(?<![A-Za-z])INI(?![A-Za-z])",
+  "subs": [
+   "oshi:jidol"
+  ]
+ },
+ {
+  "label": "BE:FIRST",
+  "en": "BE:FIRST",
+  "match": "BE:FIRST",
+  "subs": [
+   "oshi:jidol"
+  ]
+ }
+]

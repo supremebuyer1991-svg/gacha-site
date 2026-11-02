@@ -458,3 +458,13 @@ h1, h2, h3 { font-weight: 900; letter-spacing: .02em; }
 .sp-price { color: var(--gold); font-weight: 700; }
 a:focus-visible, button:focus-visible, select:focus-visible, summary:focus-visible, label:focus-within { outline-color: var(--sky); }
 @media (prefers-reduced-motion: reduce) { .card:hover, .genres a:hover { transform: none; } }
+
+/* 作品名がたくさんある段 */
+.leaf-row .opt small { margin-left: 6px; font-size: 11px; color: var(--muted); font-family: var(--font-latin); font-weight: 600; }
+.leaf-row .opt input:checked + span small { color: rgba(255,255,255,.85); }
+.leaf-filter { width: 100%; max-width: 360px; height: 38px; padding: 0 14px; border-radius: 999px; border: 2px solid var(--line); background: #fff; font: 500 14px var(--font-body); color: var(--text); }
+.leaf-filter:focus { outline: none; border-color: var(--sky); }
+.opts.is-clipped:not(.is-filtering) .opt.is-extra { display: none; }
+.opts.is-filtering .opt:not(.is-hit) { display: none; }
+.leaf-all { align-self: flex-start; background: none; border: 0; padding: 4px 0; color: var(--sky); font: 700 13px var(--font-body); cursor: pointer; border-bottom: 2px dotted var(--sky); }
+.leaf-none { margin: 0; font-size: 13px; color: var(--muted); }

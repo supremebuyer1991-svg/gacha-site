@@ -210,8 +210,7 @@
     "description": "",
     "description_en": "",
     "q_subs": [
-      "oshi:idol",
-      "oshi:anime"
+      "oshi:idol"
     ],
     "q_ages": [
       "20",
@@ -254,8 +253,7 @@
     "description": "",
     "description_en": "",
     "q_subs": [
-      "oshi:idol",
-      "oshi:anime"
+      "oshi:idol"
     ],
     "q_ages": [
       "20"
@@ -562,7 +560,6 @@
     "description": "",
     "description_en": "",
     "q_subs": [
-      "oshi:anime",
       "funny:machibouke"
     ],
     "q_ages": [
@@ -606,7 +603,6 @@
     "description": "",
     "description_en": "",
     "q_subs": [
-      "oshi:anime",
       "funny:machibouke"
     ],
     "q_ages": [
@@ -868,9 +864,7 @@
     "added": "2026-11-01",
     "description": "",
     "description_en": "",
-    "q_subs": [
-      "oshi:anime"
-    ],
+    "q_subs": [],
     "q_ages": [
       "10"
     ],
@@ -1125,9 +1119,7 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [
-      "oshi:anime"
-    ],
+    "q_subs": [],
     "q_ages": [
       "30",
       "40"
@@ -1576,7 +1568,6 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "oshi:anime",
       "funny:machibouke"
     ],
     "q_ages": [
@@ -1719,8 +1710,7 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
-      "oshi:anime"
+      "kawaii:accessory"
     ],
     "q_ages": [
       "10",
@@ -1975,8 +1965,7 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "oshi:idol",
-      "oshi:anime"
+      "oshi:idol"
     ],
     "q_ages": [
       "20",
@@ -2159,8 +2148,7 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
-      "oshi:anime"
+      "kawaii:mascot"
     ],
     "q_ages": [
       "10",
@@ -2415,7 +2403,6 @@
     "auto": true,
     "q_subs": [
       "kawaii:mascot",
-      "oshi:anime",
       "retro:heisei"
     ],
     "q_ages": [
@@ -2560,7 +2547,6 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "oshi:anime",
       "real:miniature"
     ],
     "q_ages": [
@@ -2635,7 +2621,6 @@
     "auto": true,
     "q_subs": [
       "kawaii:accessory",
-      "oshi:anime",
       "retro:heisei"
     ],
     "q_ages": [
@@ -2781,7 +2766,6 @@
     "auto": true,
     "q_subs": [
       "kawaii:accessory",
-      "oshi:anime",
       "retro:heisei"
     ],
     "q_ages": [
@@ -3077,7 +3061,6 @@
     "auto": true,
     "q_subs": [
       "kawaii:accessory",
-      "oshi:anime",
       "real:food"
     ],
     "q_ages": [
@@ -3293,7 +3276,6 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "oshi:anime",
       "retro:heisei"
     ],
     "q_ages": [
@@ -3330,8 +3312,7 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
-      "oshi:anime"
+      "kawaii:accessory"
     ],
     "q_ages": [
       "10",
@@ -3434,9 +3415,7 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [
-      "oshi:anime"
-    ],
+    "q_subs": [],
     "q_ages": [
       "30"
     ],
@@ -3471,7 +3450,6 @@
     "auto": true,
     "q_subs": [
       "kawaii:accessory",
-      "oshi:anime",
       "retro:heisei"
     ],
     "q_ages": [
@@ -3690,8 +3668,7 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
-      "oshi:anime"
+      "kawaii:accessory"
     ],
     "q_ages": [
       "10"
@@ -3873,7 +3850,6 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "oshi:anime",
       "retro:heisei"
     ],
     "q_ages": [
@@ -4064,7 +4040,6 @@
     "q_subs": [
       "kawaii:mascot",
       "kawaii:accessory",
-      "oshi:anime",
       "retro:heisei"
     ],
     "q_ages": [
@@ -4101,8 +4076,7 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
-      "oshi:anime"
+      "kawaii:accessory"
     ],
     "q_ages": [
       "20",
@@ -4513,8 +4487,7 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
-      "oshi:anime"
+      "kawaii:accessory"
     ],
     "q_ages": [
       "20",
@@ -4590,7 +4563,6 @@
     "auto": true,
     "q_subs": [
       "kawaii:accessory",
-      "oshi:anime",
       "retro:heisei"
     ],
     "q_ages": [
@@ -5144,8 +5116,7 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
-      "oshi:anime"
+      "kawaii:mascot"
     ],
     "q_ages": [
       "10",
@@ -5216,9 +5187,7 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [
-      "oshi:anime"
-    ],
+    "q_subs": [],
     "q_ages": [
       "10",
       "20",
@@ -5588,8 +5557,7 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
-      "oshi:anime"
+      "kawaii:accessory"
     ],
     "q_ages": [
       "20",
@@ -5729,8 +5697,7 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
-      "oshi:anime"
+      "kawaii:mascot"
     ],
     "q_ages": [
       "10",
@@ -5914,8 +5881,7 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
-      "oshi:anime"
+      "kawaii:mascot"
     ],
     "q_ages": [
       "10"
@@ -6016,7 +5982,6 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "oshi:anime",
       "real:miniature"
     ],
     "q_ages": [
@@ -6559,8 +6524,7 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
-      "oshi:anime"
+      "kawaii:accessory"
     ],
     "q_ages": [
       "10"
@@ -6823,8 +6787,7 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
-      "oshi:anime"
+      "kawaii:mascot"
     ],
     "q_ages": [
       "10"
@@ -7270,7 +7233,6 @@
     "auto": true,
     "q_subs": [
       "kawaii:mascot",
-      "oshi:anime",
       "real:food"
     ],
     "q_ages": [
@@ -7412,9 +7374,7 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [
-      "oshi:anime"
-    ],
+    "q_subs": [],
     "q_ages": [
       "10",
       "20"
@@ -7448,7 +7408,6 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "oshi:anime",
       "retro:heisei"
     ],
     "q_ages": [
@@ -7485,8 +7444,7 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
-      "oshi:anime"
+      "kawaii:accessory"
     ],
     "q_ages": [
       "10",
@@ -7701,9 +7659,7 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [
-      "oshi:anime"
-    ],
+    "q_subs": [],
     "q_ages": [
       "10"
     ],
@@ -7772,7 +7728,6 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "oshi:anime",
       "retro:heisei",
       "funny:machibouke"
     ],
@@ -7810,8 +7765,7 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
-      "oshi:anime"
+      "kawaii:accessory"
     ],
     "q_ages": [
       "10"
@@ -8028,7 +7982,6 @@
     "auto": true,
     "q_subs": [
       "kawaii:accessory",
-      "oshi:anime",
       "retro:heisei"
     ],
     "q_ages": [
@@ -8603,9 +8556,7 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [
-      "oshi:anime"
-    ],
+    "q_subs": [],
     "q_ages": [
       "10"
     ],
@@ -9166,7 +9117,6 @@
     "q_subs": [
       "kawaii:animal",
       "kawaii:mascot",
-      "oshi:anime",
       "retro:heisei"
     ],
     "q_ages": [
@@ -10183,8 +10133,7 @@
     "auto": true,
     "q_subs": [
       "kawaii:mascot",
-      "oshi:idol",
-      "oshi:anime"
+      "oshi:idol"
     ],
     "q_ages": [
       "10"
@@ -10623,7 +10572,6 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "oshi:anime",
       "real:food"
     ],
     "q_ages": [
@@ -10773,7 +10721,6 @@
     "auto": true,
     "q_subs": [
       "kawaii:accessory",
-      "oshi:anime",
       "retro:heisei"
     ],
     "q_ages": [
@@ -10809,8 +10756,7 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
-      "oshi:anime"
+      "kawaii:mascot"
     ],
     "q_ages": [
       "20",
@@ -10845,9 +10791,7 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [
-      "oshi:anime"
-    ],
+    "q_subs": [],
     "q_ages": [
       "20",
       "30",
@@ -11181,7 +11125,6 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "oshi:anime",
       "funny:machibouke"
     ],
     "q_ages": [
@@ -11256,9 +11199,7 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [
-      "oshi:anime"
-    ],
+    "q_subs": [],
     "q_ages": [
       "10"
     ],
@@ -11541,7 +11482,6 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "oshi:anime",
       "real:miniature"
     ],
     "q_ages": [
