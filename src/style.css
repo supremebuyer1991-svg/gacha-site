@@ -589,3 +589,10 @@ label.opt:focus-within { outline: none; }
 .grp-more { margin-left: auto; }
 .grp-subs { flex: 1 1 100%; min-width: 0; }
 .grp-main { margin-right: auto; justify-self: start; }
+/* 種類から探す：白いタイルに色の帯 */
+.types a { background: var(--surface) !important; border-top: 5px solid var(--gold); }
+.types a:nth-child(5n+2) { border-top-color: var(--sky); }
+.types a:nth-child(5n+3) { border-top-color: var(--mint); }
+.types a:nth-child(5n+4) { border-top-color: var(--yellow); }
+.types a:nth-child(5n+5) { border-top-color: var(--violet); }
+@media (max-width: 520px) { .genres { gap: 8px; } .genres a { padding: 14px 14px; } .genres .ja { font-size: 14.5px; } .genres .n { font-size: 11px; } }

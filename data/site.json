@@ -733,5 +733,67 @@
         }
       ]
     }
+  ],
+  "types": [
+    {
+      "slug": "charm",
+      "label": "チャーム・キーホルダー",
+      "en": "Charms & keychains",
+      "subs": [
+        "type:charm",
+        "type:mejirushi"
+      ]
+    },
+    {
+      "slug": "accessory",
+      "label": "アクセサリー・コスメ",
+      "en": "Accessories & beauty",
+      "subs": [
+        "type:fashion"
+      ]
+    },
+    {
+      "slug": "mascot",
+      "label": "マスコット・ぬいぐるみ",
+      "en": "Mascots & plushies",
+      "subs": [
+        "type:plush",
+        "kawaii:mascot"
+      ]
+    },
+    {
+      "slug": "figure",
+      "label": "フィギュア",
+      "en": "Figures",
+      "subs": [
+        "type:figure"
+      ]
+    },
+    {
+      "slug": "miniature",
+      "label": "ミニチュア",
+      "en": "Miniatures",
+      "subs": [
+        "type:minipkg",
+        "real:miniature"
+      ]
+    },
+    {
+      "slug": "goods",
+      "label": "雑貨・実用品",
+      "en": "Goods & everyday items",
+      "subs": [
+        "type:useful",
+        "type:stationery"
+      ]
+    },
+    {
+      "slug": "sound",
+      "label": "光る・音が出る",
+      "en": "Lights & sounds",
+      "subs": [
+        "type:sound"
+      ]
+    }
   ]
 }

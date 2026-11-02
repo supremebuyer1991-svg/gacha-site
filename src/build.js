@@ -76,7 +76,7 @@ const T = {
     groupsHint: "詳しく選ばない場合は、その系統のすべてが対象になります。詳しい項目を選ぶと、さらに細かい項目が出てきます。",
     budgets: [["any", "こだわらない"], ["300", "300円まで"], ["500", "400〜500円"], ["premium", "600円以上"]],
     quizBtn: "診断する", results: "診断結果",
-    newTitle: "新着ガチャ", toCalendar: "発売カレンダーを見る", rankTitle: "人気ランキング", genreTitle: "ジャンルから探す",
+    newTitle: "新着ガチャ", toCalendar: "発売カレンダーを見る", rankTitle: "人気ランキング", genreTitle: "ジャンルから探す", typeTitle: "種類から探す", typePage: (g) => `${g}のガチャガチャ`, typeLead: (g, n) => `${g}のガチャ${n}シリーズを新しい順に掲載しています。`,
     maker: "メーカー", release: "発売月", genre: "ジャンル", tags: "タグ",
     findStores: "近くの在庫店を探す", official: "公式サイトで見る",
     storesTitle: "近くの在庫店", geoBtn: "現在地から探す", or: "または", prefAria: "都道府県で絞り込む", loading: "読み込み中…",
@@ -153,7 +153,7 @@ const T = {
     groupsHint: "If you don't narrow it down, everything in that group counts. Pick a detail to see even finer options.",
     budgets: [["any", "Any"], ["300", "Up to ¥300"], ["500", "¥400–500"], ["premium", "¥600+"]],
     quizBtn: "Show my matches", results: "Your matches",
-    newTitle: "New arrivals", toCalendar: "See release calendar", rankTitle: "Most loved", genreTitle: "Browse by genre",
+    newTitle: "New arrivals", toCalendar: "See release calendar", rankTitle: "Most loved", genreTitle: "Browse by genre", typeTitle: "Browse by type", typePage: (g) => `Gacha ${g.toLowerCase()}`, typeLead: (g, n) => `${n} gacha series in ${g.toLowerCase()}, newest first.`,
     maker: "Maker", release: "Release", genre: "Genre", tags: "Tags",
     findStores: "Find shops near me", official: "Official page",
     storesTitle: "Shops with stock", geoBtn: "Use my location", or: "or", prefAria: "Filter by prefecture", loading: "Loading…",
@@ -279,7 +279,11 @@ const makerOf = (it, lang) => (lang === "en" && it.maker_en) || it.maker;
 const descOf = (it, lang) => (lang === "en" ? it.description_en : it.description);
 const tagsOf = (it, lang) => (lang === "en" && it.tags_en.length ? it.tags_en : it.tags);
 const genreLabel = (g, lang) => (lang === "en" ? g.en : g.label);
+// 「・」の後ろでだけ改行する（言葉の途中で折り返さない）
+const phr = (s) => esc(s).split(/(?<=・)/).map((w) => `<span class="ph">${w}</span>`).join("");
 const inGenre = (slug) => items.filter((it) => it._genres.includes(slug));
+const TYPES = site.types || [];
+const inType = (slug) => { const ty = TYPES.find((x) => x.slug === slug); return ty ? items.filter((it) => it._qs.some((k) => ty.subs.includes(k))) : []; };
 const moodLabel = (m, lang) => (lang === "en" ? m.en || m.label : m.label);
 
 const affiliate = (it) => {
@@ -565,9 +569,14 @@ ${content}
     </a></li>`).join("")}</ol>
   </section>
 
+  <section class="section" id="types">
+    <div class="section-head"><h2>${t.typeTitle}</h2></div>
+    <div class="genres types">${TYPES.filter((g) => inType(g.slug).length).map((g) => `<a href="${c.H}type/${g.slug}.html"><span class="ja">${phr(genreLabel(g, lang))}</span><span class="n">${t.series(inType(g.slug).length)}</span></a>`).join("")}</div>
+  </section>
+
   <section class="section" id="genres">
     <div class="section-head"><h2>${t.genreTitle}</h2></div>
-    <div class="genres">${GENRES.filter((g) => inGenre(g.slug).length).map((g) => `<a href="${c.H}genre/${g.slug}.html"><span class="ja">${genreLabel(g, lang)}</span><span class="n">${t.series(inGenre(g.slug).length)}</span></a>`).join("")}</div>
+    <div class="genres">${GENRES.filter((g) => inGenre(g.slug).length).map((g) => `<a href="${c.H}genre/${g.slug}.html"><span class="ja">${phr(genreLabel(g, lang))}</span><span class="n">${t.series(inGenre(g.slug).length)}</span></a>`).join("")}</div>
   </section>
 </div>
 <script type="application/json" id="items-data">${JSON.stringify({ ...embed, _items: undefined }).replace(/</g, "\\u003c")}</script>`;
@@ -706,6 +715,10 @@ ${content}
 </div>`;
     layout({ rel, title, description: lead, body, current });
   };
+  for (const g of TYPES) {
+    const list = inType(g.slug).sort(byNewest);
+    if (list.length) listPage(`type/${g.slug}.html`, { title: t.typePage(genreLabel(g, lang)), lead: t.typeLead(genreLabel(g, lang), list.length), list, current: "genre" });
+  }
   for (const g of GENRES) {
     const list = inGenre(g.slug).sort(byNewest);
     if (!list.length) continue;
