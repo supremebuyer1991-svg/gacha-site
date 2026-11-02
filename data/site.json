@@ -22,27 +22,140 @@
     {
       "slug": "anime",
       "label": "アニメ・キャラ",
-      "en": "Character"
+      "en": "Characters",
+      "subs": [
+        "kawaii:sanrio",
+        "kawaii:chiikawa",
+        "kawaii:disney",
+        "kawaii:pokemon",
+        "kawaii:character",
+        "oshi:kids",
+        "oshi:girls",
+        "oshi:trend",
+        "cool:shonen"
+      ]
+    },
+    {
+      "slug": "oshi",
+      "label": "推し・アイドル・VTuber",
+      "en": "Idols & VTubers",
+      "subs": [
+        "oshi:idol",
+        "oshi:jidol",
+        "oshi:vtuber"
+      ]
+    },
+    {
+      "slug": "game",
+      "label": "ゲーム",
+      "en": "Games",
+      "subs": [
+        "oshi:game"
+      ]
+    },
+    {
+      "slug": "hero",
+      "label": "特撮・ロボット",
+      "en": "Tokusatsu & robots",
+      "subs": [
+        "cool:robot",
+        "cool:hero"
+      ]
+    },
+    {
+      "slug": "western",
+      "label": "海外キャラ・映画",
+      "en": "Western & movies",
+      "subs": [
+        "cool:western",
+        "hobby:movie"
+      ]
     },
     {
       "slug": "miniature",
       "label": "リアルミニチュア",
-      "en": "Miniature"
+      "en": "Miniatures",
+      "subs": [
+        "real:miniature",
+        "type:minipkg",
+        "real:building"
+      ]
+    },
+    {
+      "slug": "food",
+      "label": "食べもの",
+      "en": "Food",
+      "subs": [
+        "real:food"
+      ]
     },
     {
       "slug": "animal",
-      "label": "動物",
-      "en": "Animal"
+      "label": "動物・生きもの",
+      "en": "Animals & creatures",
+      "subs": [
+        "kawaii:animal",
+        "real:creature",
+        "real:dino"
+      ]
+    },
+    {
+      "slug": "vehicle",
+      "label": "乗りもの",
+      "en": "Vehicles",
+      "subs": [
+        "real:vehicle"
+      ]
+    },
+    {
+      "slug": "accessory",
+      "label": "アクセ・雑貨",
+      "en": "Accessories & goods",
+      "subs": [
+        "type:mejirushi",
+        "type:fashion",
+        "type:useful",
+        "type:stationery",
+        "kawaii:accessory"
+      ]
     },
     {
       "slug": "retro",
-      "label": "昭和レトロ",
-      "en": "Retro"
+      "label": "昭和・平成レトロ",
+      "en": "Retro",
+      "subs": [
+        "retro:showa",
+        "retro:heisei"
+      ]
+    },
+    {
+      "slug": "funny",
+      "label": "ネタ・おもしろ",
+      "en": "Funny & quirky",
+      "subs": [
+        "funny:machibouke",
+        "funny:neta"
+      ]
+    },
+    {
+      "slug": "culture",
+      "label": "アート・カルチャー",
+      "en": "Art & culture",
+      "subs": [
+        "hobby:sports",
+        "hobby:japan",
+        "hobby:music",
+        "hobby:books",
+        "hobby:brand",
+        "hobby:art",
+        "real:space"
+      ]
     },
     {
       "slug": "other",
       "label": "その他",
-      "en": "Others"
+      "en": "Others",
+      "subs": []
     }
   ],
   "moods": [
@@ -183,6 +296,14 @@
               "match": "コスメ|パウダー|ミラー|ヘアコーム|クリップ"
             }
           ]
+        },
+        {
+          "slug": "yumekawa",
+          "label": "ゆめかわ・キラキラ",
+          "en": "Dreamy & sparkly",
+          "match": "ゆめかわ|パステル|キラキラ|オーロラ|クリスタル|ラメ|ホログラム|天使|エンジェル|ジュエル|ビーズ|シャカシャカ",
+          "auto": true,
+          "leaves": []
         }
       ]
     },
@@ -217,6 +338,22 @@
           "label": "アメコミ・洋画",
           "en": "Hollywood & comics",
           "match": "MARVEL|マーベル|STAR WARS|スター・ウォーズ|ハリー・ポッター|グレムリン|ナイトメア|HOT WHEELS|MARVEL|マーベル|スパイダーマン|アベンジャーズ|^DC |バットマン|スーパーマン|STAR WARS|スター・ウォーズ|ハリー・ポッター|グレムリン|HOT WHEELS",
+          "leaves": []
+        },
+        {
+          "slug": "dark",
+          "label": "ダーク・ホラー",
+          "en": "Dark & spooky",
+          "match": "ホラー|おばけ|ゴースト|Ghost|ゾンビ|悪魔|ナイトメア|骸骨|ドクロ|妖怪|鬼太郎|オバケ|呪",
+          "auto": true,
+          "leaves": []
+        },
+        {
+          "slug": "weaponry",
+          "label": "武将・歴史",
+          "en": "History & samurai",
+          "match": "武将|戦国|侍|サムライ|忍者|刀|甲冑|城|新選組|三国志",
+          "auto": true,
           "leaves": []
         }
       ]
@@ -273,6 +410,85 @@
           "label": "ゲーム",
           "en": "Games",
           "match": "MINECRAFT|マイクラ|ソニック|逆転裁判|牧場物語|NIKKE|マリオ|Poppy|ウマ娘|ペルソナ|MINECRAFT|マインクラフト|マイクラ|ソニック|逆転裁判|牧場物語|NIKKE|Poppy|ウマ娘|ペルソナ|モンスターハンター|モンハン|ドラゴンクエスト|ドラクエ|ファイナルファンタジー|FINAL FANTASY|サルゲッチュ|刀剣乱舞|原神|ブルーアーカイブ|ブルアカ|マリオ|どうぶつの森|パックマン|PAC-MAN|ストリートファイター",
+          "leaves": []
+        }
+      ]
+    },
+    {
+      "slug": "type",
+      "label": "アイテムの種類で選ぶ",
+      "en": "By item type",
+      "subs": [
+        {
+          "slug": "figure",
+          "label": "フィギュア",
+          "en": "Figures",
+          "match": "フィギュア|Fig\\.|HG |ENSEMBLE|CAPSULE INDEX|ROBOT魂|Figuarts|カプセルフィギュア|ならぶんです|のっかる|まちぼうけ|ねむらせ|肩ズン",
+          "auto": true,
+          "leaves": []
+        },
+        {
+          "slug": "plush",
+          "label": "ぬいぐるみ・マスコット",
+          "en": "Plushies & mascots",
+          "match": "ぬいぐるみ|ぬい|マスコット|フロッキー|ふわふわ|もふ",
+          "auto": true,
+          "leaves": []
+        },
+        {
+          "slug": "charm",
+          "label": "キーホルダー・チャーム",
+          "en": "Keychains & charms",
+          "match": "チャーム|キーホルダー|キーチェーン|カラビナ|ボールチェーン",
+          "auto": true,
+          "leaves": []
+        },
+        {
+          "slug": "mejirushi",
+          "label": "めじるしアクセサリー",
+          "en": "Mejirushi accessories",
+          "match": "めじるし",
+          "auto": true,
+          "leaves": []
+        },
+        {
+          "slug": "minipkg",
+          "label": "ミニチュアパッケージ",
+          "en": "Mini package replicas",
+          "match": "ミニチュアパッケージ|パッケージミニチュア|パッケージチャーム|ミニチュアチャーム|ボトルキャップ|ミニCD",
+          "auto": true,
+          "leaves": []
+        },
+        {
+          "slug": "stationery",
+          "label": "文房具・シール・カード",
+          "en": "Stationery & stickers",
+          "match": "シール|ステッカー|クリアファイル|ペンケース|ノート|カードダス|色紙|ポスター|お文具|しおり|ブック",
+          "auto": true,
+          "leaves": []
+        },
+        {
+          "slug": "fashion",
+          "label": "アクセ・コスメ・ヘアアクセ",
+          "en": "Accessories & beauty",
+          "match": "リング|ヘアコーム|ヘアゴム|ゴム|クリップ|ネイル|コスメ|パウダー|バーム|ミラー|アクセサリー",
+          "auto": true,
+          "leaves": []
+        },
+        {
+          "slug": "useful",
+          "label": "バッグ・ポーチ・実用品",
+          "en": "Bags & handy goods",
+          "match": "バッグ|ポーチ|トート|ケース|コースター|マウスシート|コンテナ|クリッカー|ライト|ミラー",
+          "auto": true,
+          "leaves": []
+        },
+        {
+          "slug": "sound",
+          "label": "光る・音が出る",
+          "en": "Lights & sounds",
+          "match": "ライト|光る|サウンド|サウンドロップ|プロジェクター|ミニCD",
+          "auto": true,
           "leaves": []
         }
       ]
@@ -367,6 +583,30 @@
               "match": "トミカ|トラック|HOT WHEELS|ミニカー"
             }
           ]
+        },
+        {
+          "slug": "dino",
+          "label": "恐竜",
+          "en": "Dinosaurs",
+          "match": "恐竜|ダイナソー|ジュラシック|ティラノ|化石",
+          "auto": true,
+          "leaves": []
+        },
+        {
+          "slug": "space",
+          "label": "宇宙・星",
+          "en": "Space & stars",
+          "match": "宇宙|惑星|天体|星座|TENKYU|月|ロケット|アストロ",
+          "auto": true,
+          "leaves": []
+        },
+        {
+          "slug": "building",
+          "label": "建物・街",
+          "en": "Buildings & towns",
+          "match": "建物|お城|駅|ビル|商店|ダイナー|スーパーマーケット|コンビニ|喫茶|カフェ|店",
+          "auto": true,
+          "leaves": []
         }
       ]
     },
@@ -427,6 +667,69 @@
           "label": "ネタ・シュール",
           "en": "Quirky",
           "match": "怒った|ちゃあぁぁん|つめとぎ|たべすぎ|木彫り|なめこ|おぱんちゅ|お文具|グローブ|骨格|しばんばん"
+        }
+      ]
+    },
+    {
+      "slug": "hobby",
+      "label": "趣味・カルチャー系",
+      "en": "Hobbies & culture",
+      "subs": [
+        {
+          "slug": "sports",
+          "label": "スポーツ",
+          "en": "Sports",
+          "match": "NBA|野球|グローブ|サッカー|バスケ|ZETT|ゴルフ|プロ野球|Jリーグ|ユニフォーム",
+          "auto": true,
+          "leaves": []
+        },
+        {
+          "slug": "japan",
+          "label": "和・日本文化",
+          "en": "Japanese culture",
+          "match": "JAPAN|和み|和風|埴輪|土偶|招き猫|(?<!雪)だるま|神社|お寺|着物|浮世絵|抹茶|おでん|おすし|すし",
+          "auto": true,
+          "leaves": []
+        },
+        {
+          "slug": "music",
+          "label": "音楽・バンド",
+          "en": "Music & bands",
+          "match": "CD|バンド|Novelbright|サウンド|楽器|ライブ|ぼっち|MyGO|初音ミク",
+          "auto": true,
+          "leaves": []
+        },
+        {
+          "slug": "books",
+          "label": "本・文学・マンガ",
+          "en": "Books & manga",
+          "match": "豆ガシャ本|ブック|東野圭吾|コミックス|Comics|小説|少年サンデー|少年ジャンプ",
+          "auto": true,
+          "leaves": []
+        },
+        {
+          "slug": "brand",
+          "label": "企業・お菓子コラボ",
+          "en": "Brand collabs",
+          "match": "ピジョン|Pigeon|コンタック|チロル|雪印|日産|ZETT|SANYO|rom&nd|ポンデクルール|NO MORE映画泥棒|JR",
+          "auto": true,
+          "leaves": []
+        },
+        {
+          "slug": "art",
+          "label": "アート・作家もの",
+          "en": "Art & designer toys",
+          "match": "CAP'in GALLERY|Art in|ART IN|作家|designed by|by |木彫り|たかはたまさお|ヨコミゾ|よこみぞ|ぽぼっと",
+          "auto": true,
+          "leaves": []
+        },
+        {
+          "slug": "movie",
+          "label": "映画",
+          "en": "Movies",
+          "match": "映画|MOVIE|劇場版|プレイバックムービー|ナイトメア|スター・ウォーズ|STAR WARS|ハリー・ポッター|ズートピア|リメンバー・ミー",
+          "auto": true,
+          "leaves": []
         }
       ]
     }

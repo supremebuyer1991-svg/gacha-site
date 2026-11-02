@@ -230,7 +230,6 @@ const items = rawItems.filter((it, i) => {
   if (!/^[a-z0-9-]+$/.test(it.id)) { warnings.push(`${where}: id は半角英小文字・数字・ハイフンだけにしてください`); return false; }
   if (seen.has(it.id)) { warnings.push(`${where}: id「${it.id}」が重複しています`); return false; }
   if (!/^\d{4}-\d{2}$/.test(it.release)) { warnings.push(`${where}: release は「2026-11」の形にしてください`); return false; }
-  if (!GENRES.some((g) => g.slug === it.genre)) warnings.push(`${where}: genre「${it.genre}」は未登録なので「その他」に入れました`);
 
   seen.add(it.id);
   return true;
@@ -240,7 +239,7 @@ const items = rawItems.filter((it, i) => {
   ...it,
   image: it.image || findImage(it.id),
   price: Number(it.price),
-  genre: GENRES.some((g) => g.slug === it.genre) ? it.genre : "other",
+  legacy_genre: it.genre,
   moods: (it.moods || []).filter((m) => moodSlugs.includes(m)),
 }));
 
@@ -280,6 +279,7 @@ const makerOf = (it, lang) => (lang === "en" && it.maker_en) || it.maker;
 const descOf = (it, lang) => (lang === "en" ? it.description_en : it.description);
 const tagsOf = (it, lang) => (lang === "en" && it.tags_en.length ? it.tags_en : it.tags);
 const genreLabel = (g, lang) => (lang === "en" ? g.en : g.label);
+const inGenre = (slug) => items.filter((it) => it._genres.includes(slug));
 const moodLabel = (m, lang) => (lang === "en" ? m.en || m.label : m.label);
 
 const affiliate = (it) => {
@@ -296,10 +296,18 @@ const affiliate = (it) => {
 // 商品名に作品名が入っていれば、その作品が属する項目（例 oshi:kids）を自動で足す
 const subKeys = new Set((site.quiz_groups || []).flatMap((g) => g.subs.map((x) => `${g.slug}:${x.slug}`)));
 const titleRx = titles.map((tt) => ({ ...tt, rx: new RegExp(tt.match, "i") }));
+const autoSubs = (site.quiz_groups || []).flatMap((g) => g.subs.filter((x) => x.auto && x.match).map((x) => ({ key: `${g.slug}:${x.slug}`, rx: new RegExp(x.match) })));
+const LEGACY_GENRE = { anime: "anime", miniature: "miniature", animal: "animal", retro: "retro", other: "other" };
 for (const it of items) {
   const qs = new Set((it.q_subs || []).filter((k) => subKeys.has(k)));
   for (const tt of titleRx) if (tt.rx.test(it.name)) tt.subs.forEach((k) => subKeys.has(k) && qs.add(k));
+  // "auto" の項目（あとから増やした項目）は、商品名から毎回自動で判定する
+  for (const a of autoSubs) if (a.rx.test(it.name)) qs.add(a.key);
   it._qs = [...qs];
+  // ジャンル：診断の項目から決める（複数のジャンルに入ることもある）。最初に当てはまったものがカードに出る
+  it._genres = GENRES.filter((g) => (g.subs || []).some((k) => it._qs.includes(k))).map((g) => g.slug);
+  if (!it._genres.length) it._genres = [LEGACY_GENRE[it.legacy_genre] || "other"];
+  it.genre = it._genres[0];
 }
 const slugOf = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "t";
 for (const g of site.quiz_groups || []) for (const x of g.subs) {
@@ -559,7 +567,7 @@ ${content}
 
   <section class="section" id="genres">
     <div class="section-head"><h2>${t.genreTitle}</h2></div>
-    <div class="genres">${GENRES.filter((g) => items.some((it) => it.genre === g.slug)).map((g) => `<a href="${c.H}genre/${g.slug}.html"><span class="ja">${genreLabel(g, lang)}</span><span class="n">${t.series(items.filter((it) => it.genre === g.slug).length)}</span></a>`).join("")}</div>
+    <div class="genres">${GENRES.filter((g) => inGenre(g.slug).length).map((g) => `<a href="${c.H}genre/${g.slug}.html"><span class="ja">${genreLabel(g, lang)}</span><span class="n">${t.series(inGenre(g.slug).length)}</span></a>`).join("")}</div>
   </section>
 </div>
 <script type="application/json" id="items-data">${JSON.stringify({ ...embed, _items: undefined }).replace(/</g, "\\u003c")}</script>`;
@@ -699,7 +707,8 @@ ${content}
     layout({ rel, title, description: lead, body, current });
   };
   for (const g of GENRES) {
-    const list = items.filter((it) => it.genre === g.slug).sort(byNewest);
+    const list = inGenre(g.slug).sort(byNewest);
+    if (!list.length) continue;
     listPage(`genre/${g.slug}.html`, { title: t.genrePage(genreLabel(g, lang)), lead: t.genreLead(genreLabel(g, lang), list.length), list, current: "genre" });
   }
   for (const maker of [...new Set(items.map((it) => it.maker))]) {
