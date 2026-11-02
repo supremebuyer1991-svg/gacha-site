@@ -583,3 +583,9 @@ label.opt:focus-within { outline: none; }
 .grp-subs .opts-sm { gap: 4px; }
 .leaf-row .opt small { margin-left: 3px; font-size: 10px; }
 .leaf-row { padding: 8px 10px; gap: 6px; }
+/* 名前と「さらに詳しく」が1行に入らないときは、ボタンを下の行へ（重ならないように） */
+.grp { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 10px; }
+.grp-main { flex: 0 1 auto; min-width: 0; }
+.grp-more { margin-left: auto; }
+.grp-subs { flex: 1 1 100%; min-width: 0; }
+.grp-main { margin-right: auto; justify-self: start; }
