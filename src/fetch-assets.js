@@ -202,6 +202,42 @@ async function importStock() {
   return { stores: keep.length, rows: allRows.length };
 }
 
+/*
+ * ラインナップ名の読み取り用に、公式の商品画像を大きめのサイズで lineup-src/ に置く（サイトには載せない）。
+ * 公式ページではラインナップ名が画像の中にしか書かれていないので、毎晩Claudeがこの画像を見て名前を入力し、
+ * 入力が済んだ画像は src/lineup-apply.js が消す。1回に MAX_LINEUP_PER_RUN 件まで、新しい商品から。
+ */
+const MAX_LINEUP_PER_RUN = 15;
+async function saveLineupSources() {
+  let sharp;
+  try { sharp = require("sharp"); } catch { return 0; }
+  const dir = path.join(ROOT, "lineup-src");
+  fs.mkdirSync(dir, { recursive: true });
+  const allowed = site.image_allowed_makers || [];
+  const waiting = fs.readdirSync(dir).filter((f) => f.endsWith(".jpg")).length;
+  let done = 0;
+  const todo = items.filter((it) => !Array.isArray(it.lineup_names) && it.official_url && allowed.includes(it.maker) && hasImage(it.id)
+    && !fs.existsSync(path.join(dir, `${it.id}.jpg`))).sort((a, b) => (b.release || "").localeCompare(a.release || ""));
+  for (const it of todo) {
+    if (done + waiting >= 40 || done >= MAX_LINEUP_PER_RUN) break;
+    try {
+      const html = await getText(it.official_url);
+      const imgUrl = pickImage(html, it.official_url);
+      if (!imgUrl) continue;
+      await sleep(WAIT_MS);
+      const res = await fetch(imgUrl, { headers: { "User-Agent": UA, Referer: it.official_url } });
+      if (!res.ok) throw new Error(`画像 HTTP ${res.status}`);
+      const buf = Buffer.from(await res.arrayBuffer());
+      if (await isPlaceholder(sharp, buf)) continue;
+      await sharp(buf).resize(1100, 1100, { fit: "inside", withoutEnlargement: true }).flatten({ background: "#ffffff" }).jpeg({ quality: 72 }).toFile(path.join(dir, `${it.id}.jpg`));
+      done++;
+    } catch (e) { console.log(`⚠ ${it.id}: ラインナップ用の画像を保存できませんでした（${e.message}）`); }
+    await sleep(WAIT_MS);
+  }
+  if (done) console.log(`- ラインナップ読み取り用の画像 ${done}件を保存しました`);
+  return done;
+}
+
 (async () => {
   fs.mkdirSync(path.join(ROOT, "images"), { recursive: true });
   await require("./import-schedule.js")();
@@ -213,5 +249,6 @@ async function importStock() {
   // 在庫確認はCloudflareのワーカーに移行中。STOCK_IN_GITHUB=1 のときだけGitHubでも行う
   const st = process.env.STOCK_IN_GITHUB === "1" ? await importStock() : { stores: 0, rows: 0 };
   const geos = await geocodeStores();
+  await saveLineupSources();
   console.log(`取り込み完了：画像 ${imgs}件、店舗 ${st.stores}件・在庫 ${st.rows}件、住所からの位置計算 ${geos}件`);
 })();

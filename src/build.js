@@ -28,6 +28,8 @@ const site = readJSON("site.json");
 const rawItems = readJSON("items.json", []);
 const stores = readJSON("stores.json", []);
 const titles = readJSON("titles.json", []); // 診断の「作品名」カタログ
+// ハートの数（公開の直前に GitHub Actions がサイトから読み込む。無ければ空）
+const votes = (() => { try { const v = readJSON("votes.json", {}); return v && typeof v === "object" && !Array.isArray(v) ? v : {}; } catch { return {}; } })();
 const stockFile = readJSON("stock.json", { updated_at: null, stock: [] });
 
 const SITE_URL = (process.env.SITE_URL || site.url || "").replace(/\/$/, "");
@@ -52,7 +54,7 @@ const T = {
     htmlLang: "ja", ogLocale: "ja_JP", switchLabel: "EN", switchAria: "English version",
     tagline: site.tagline, description: site.description,
     sampleBar: "ただいまサンプルデータを表示しています。商品・店舗・在庫はすべて架空です。",
-    nav: { new: "新着", ranking: "注目", calendar: "発売カレンダー", genre: "ジャンル", faq: "よくある質問" },
+    nav: { new: "新着", ranking: "人気", calendar: "発売カレンダー", genre: "ジャンル", faq: "よくある質問" },
     navAria: "メインメニュー", footAria: "サイト情報", about: "運営者情報・お問い合わせ",
     disclosure: "当サイトはAmazonアソシエイト・楽天アフィリエイトなどの広告プログラムに参加しています。掲載商品の画像・名称の権利は各メーカーに帰属します。",
     month: (ym) => { const [y, m] = ym.split("-"); return `${y}年${Number(m)}月`; },
@@ -74,7 +76,7 @@ const T = {
     groupsHint: "詳しく選ばない場合は、その系統のすべてが対象になります。詳しい項目を選ぶと、さらに細かい項目が出てきます。",
     budgets: [["any", "こだわらない"], ["300", "300円まで"], ["500", "400〜500円"], ["premium", "600円以上"]],
     quizBtn: "診断する", results: "診断結果",
-    newTitle: "新着ガチャ", toCalendar: "発売カレンダーを見る", rankTitle: "注目のガチャ", genreTitle: "ジャンルから探す",
+    newTitle: "新着ガチャ", toCalendar: "発売カレンダーを見る", rankTitle: "人気ランキング", genreTitle: "ジャンルから探す",
     maker: "メーカー", release: "発売月", genre: "ジャンル", tags: "タグ",
     findStores: "近くの在庫店を探す", official: "公式サイトで見る",
     storesTitle: "近くの在庫店", geoBtn: "現在地から探す", or: "または", prefAria: "都道府県で絞り込む", loading: "読み込み中…",
@@ -83,6 +85,16 @@ const T = {
     officialStores: "公式の店舗検索でも確かめる",
     buyTitle: "店舗で売り切れ？ネットで全種コンプ！", buyLead: "回しても揃わない、近くに置いていない。そんなときは通販のコンプリートセットを。",
     buyAria: "ネット通販", amazon: "Amazonで探す", rakuten: "楽天市場で探す",
+    fleaTitle: "単品で欲しいならフリマ・オークション", fleaLead: "「あのキャラだけ欲しい」「1つだけ安く」ならこちら。", mercari: "メルカリで探す", yahoo: "ヤフオクで探す", rakuma: "ラクマで探す",
+    lineupTitle: (n) => `ラインナップ（全${n}種）`, lineupNote: "公式の商品画像から読み取った名前です。", ageMin: (n) => `${n}才以上`, ageLabel: "対象年齢",
+    heart: "推し", heartAria: "ハートで応援（人気ランキングに反映）", heartNote: "ハートを押すと人気ランキングに反映されます（1日1回）",
+    arrTitle: "入荷情報", arrLoading: "入荷情報を読み込んでいます…", arrNone: "まだ入荷を確認できていません。設置店に入り次第ここに出ます。",
+    arrIn: "在庫あり", arrRestock: "累計補充", arrFirst: "初回観測", arrShops: (n) => `${n}店舗`, arrTimes: (n) => `${n}回`,
+    arrFastTitle: "入荷が早かった店", arrFastNote: "初回観測からどれくらいで入ったか（売り切れの店も含む）。",
+    arrPrefTitle: "都道府県別", arrPrefNote: "入荷を確認できた店の数と、早かった上位10店の平均（初回観測から14日以内）。",
+    arrAvg: (d) => `平均${d}日`, arrNoAvg: "14日以内の入荷なし", arrStockOn: "在庫あり", arrStockOff: "在庫なし",
+    feedTitle: "入荷速報", feedNew: "新入荷", feedBack: "在庫復活", feedNote: (n, s) => `${s}店で在庫あり${n ? `・補充${n}回` : ""}`,
+    oshiLabel: "推しの名前・キャラ名（あれば）", oshiPh: "例：タママ、ちいかわ、ルフィ",
     related: "同じジャンルのガチャ", seeAll: (g) => `${g}をすべて見る`,
     itemTitle: (n) => `${n}｜発売日・価格・在庫店`,
     itemDesc: (it, n, mk, mo) => `${n}（${mk}）は${mo}発売、1回${it.price}円${it.lineup ? `・全${it.lineup}種` : ""}のガチャガチャ。${it.description ? it.description + " " : ""}近くの在庫店や通販での入手方法もまとめています。`,
@@ -119,7 +131,7 @@ const T = {
     htmlLang: "en", ogLocale: "en_US", switchLabel: "日本語", switchAria: "日本語版",
     tagline: site.tagline_en, description: site.description_en,
     sampleBar: "Showing sample data. All items, stores and stock levels are fictional.",
-    nav: { new: "New", ranking: "Picks", calendar: "Calendar", genre: "Genres", faq: "FAQ" },
+    nav: { new: "New", ranking: "Popular", calendar: "Calendar", genre: "Genres", faq: "FAQ" },
     navAria: "Main menu", footAria: "Site information", about: "About & contact",
     disclosure: "As an Amazon Associate and Rakuten affiliate, we earn from qualifying purchases. Product images and names belong to their respective makers.",
     month: (ym) => { const [y, m] = ym.split("-"); return `${MONTH_EN[Number(m) - 1]} ${y}`; },
@@ -141,7 +153,7 @@ const T = {
     groupsHint: "If you don't narrow it down, everything in that group counts. Pick a detail to see even finer options.",
     budgets: [["any", "Any"], ["300", "Up to ¥300"], ["500", "¥400–500"], ["premium", "¥600+"]],
     quizBtn: "Show my matches", results: "Your matches",
-    newTitle: "New arrivals", toCalendar: "See release calendar", rankTitle: "Editor's picks", genreTitle: "Browse by genre",
+    newTitle: "New arrivals", toCalendar: "See release calendar", rankTitle: "Most loved", genreTitle: "Browse by genre",
     maker: "Maker", release: "Release", genre: "Genre", tags: "Tags",
     findStores: "Find shops near me", official: "Official page",
     storesTitle: "Shops with stock", geoBtn: "Use my location", or: "or", prefAria: "Filter by prefecture", loading: "Loading…",
@@ -150,6 +162,16 @@ const T = {
     officialStores: "Check the official shop finder",
     buyTitle: "Sold out nearby? Get the full set online", buyLead: "Couldn't get the one you wanted, or no shop nearby? Complete sets are available from Japanese online stores.",
     buyAria: "Buy online", amazon: "Search Amazon Japan", rakuten: "Search Rakuten",
+    fleaTitle: "Want just one design? Try resale markets", fleaLead: "Japanese flea-market and auction sites often have single pieces.", mercari: "Search Mercari", yahoo: "Search Yahoo! Auctions", rakuma: "Search Rakuma",
+    lineupTitle: (n) => `Lineup (${n} designs)`, lineupNote: "Names read from the official product image (in Japanese).", ageMin: (n) => `Ages ${n}+`, ageLabel: "Ages",
+    heart: "Love it", heartAria: "Send a heart (counts toward the popularity ranking)", heartNote: "Hearts count toward the popularity ranking (once a day)",
+    arrTitle: "Arrivals", arrLoading: "Loading arrival data…", arrNone: "No arrivals confirmed yet. Shops will appear here as soon as it lands.",
+    arrIn: "In stock", arrRestock: "Restocks", arrFirst: "First seen", arrShops: (n) => `${n} shops`, arrTimes: (n) => `${n}`,
+    arrFastTitle: "Fastest shops", arrFastNote: "How soon after first sighting each shop got it (including sold-out shops).",
+    arrPrefTitle: "By prefecture", arrPrefNote: "Shops that got it, and the average of the 10 fastest (within 14 days of first sighting).",
+    arrAvg: (d) => `avg ${d} days`, arrNoAvg: "none within 14 days", arrStockOn: "in stock", arrStockOff: "sold out",
+    feedTitle: "Just restocked", feedNew: "New arrival", feedBack: "Back in stock", feedNote: (n, s) => `In stock at ${s} shops${n ? ` · ${n} restocks` : ""}`,
+    oshiLabel: "Favorite character or member (optional)", oshiPh: "e.g. Chiikawa, Luffy",
     related: "More in this genre", seeAll: (g) => `See all ${g}`,
     itemTitle: (n) => `${n} | Release date, price & shops`,
     itemDesc: (it, n, mk, mo) => `${n} by ${mk}: released ${mo}, ¥${it.price} per play${it.lineup ? `, ${it.lineup} designs` : ""}. ${it.description_en ? it.description_en + " " : ""}Find shops in Japan that have it in stock, or buy the set online.`,
@@ -244,7 +266,8 @@ const absImg = (it) => (!it.image ? "" : /^https?:/.test(it.image) ? it.image : 
 const makerSlug = (name) => { let h = 0; for (const c of name) h = (h * 31 + c.codePointAt(0)) >>> 0; return "m" + h.toString(36); };
 const isNew = (it) => daysBetween(it.added, today) <= 7;
 const byNewest = (a, b) => (b.added > a.added ? 1 : b.added < a.added ? -1 : b.popularity - a.popularity);
-const byPopular = (a, b) => b.popularity - a.popularity;
+const heartsOf = (it) => Number(votes[it.id]) || 0;
+const byPopular = (a, b) => heartsOf(b) - heartsOf(a) || b.popularity - a.popularity;
 
 // 言語ごとの表示名
 const nameOf = (it, lang) => (lang === "en" && it.name_en) || it.name;
@@ -441,7 +464,7 @@ ${content}
       groups: (site.quiz_groups || []).map((g) => ({ slug: g.slug, subs: g.subs.map((x) => ({ slug: x.slug, leaves: (x.leaves || []).map((l) => ({ slug: l.slug, match: l.match })) })) })),
       items: items.map((it) => ({
         id: it.id, name: nameOf(it, lang), jn: it.name, price: it.price, lineup: it.lineup, genre: it.genre, genre_label: genreLabel(genreOf(it.genre), lang),
-        moods: it.moods, popularity: it.popularity, ad: it.added, rl: it.release, qa: it.q_ages || [], qg: it.q_genders || [], qs: it._qs, image: it.image, release_label: t.month(it.release),
+        moods: it.moods, popularity: it.popularity * 0.01 + heartsOf(it), on: (it.lineup_names || []).join("｜"), ad: it.added, rl: it.release, qa: it.q_ages || [], qg: it.q_genders || [], qs: it._qs, image: it.image, release_label: t.month(it.release),
       })),
     };
     const opt = (name, type, value, label, checked) =>
@@ -488,6 +511,7 @@ ${content}
             </div>`).join("")}
           </div>
         </div>`).join("")}</div>
+        <label class="oshi-in"><span>${t.oshiLabel}</span><input type="search" name="oshi" placeholder="${t.oshiPh}" autocomplete="off"></label>
       </fieldset>
       </div>
       <div class="quiz-nav">
@@ -512,11 +536,17 @@ ${content}
     <div class="grid">${newest.map((it) => card(it, c)).join("")}</div>
   </section>
 
+  <section class="section" id="feed" data-api="${c.R}api/feed" hidden>
+    <div class="section-head"><h2>${t.feedTitle}</h2></div>
+    <div class="grid" id="feed-grid"></div>
+    <script type="application/json" id="feed-i18n">${JSON.stringify({ isNew: t.feedNew, back: t.feedBack, note: t.feedNote(9, 8).replace("8", "{s}").replace("9", "{n}"), note0: t.feedNote(0, 8).replace("8", "{s}") })}</script>
+  </section>
+
   <section class="section" id="ranking">
     <div class="section-head"><h2>${t.rankTitle}</h2></div>
     <ol class="rank">${ranking.map((it, i) => `<li><a href="${c.H}item/${it.id}.html">
       <span class="rank-no">${i + 1}</span>${thumb(it, c.R, { badge: false })}
-      <span style="min-width:0"><span class="card-name">${esc(nameOf(it, lang))}</span><span class="card-foot"><span><b>¥${it.price}</b></span><span>${t.month(it.release)}</span></span></span>
+      <span style="min-width:0"><span class="card-name">${esc(nameOf(it, lang))}</span><span class="card-foot"><span><b>¥${it.price}</b></span><span>${heartsOf(it) ? `<em class="hearts">♥ ${heartsOf(it)}</em>` : t.month(it.release)}</span></span></span>
     </a></li>`).join("")}</ol>
   </section>
 
@@ -559,7 +589,8 @@ ${content}
       <div class="price"><small>${lang === "ja" ? t.perPlay : ""}</small><b>¥${it.price}</b><span>${lang === "en" ? t.perPlay : ""}${it.lineup ? `${lang === "en" ? " · " : ""}${t.lineup(it.lineup)}` : ""}</span></div>
       <dl class="spec">
         <dt>${t.maker}</dt><dd><a href="${c.H}maker/${makerSlug(it.maker)}.html">${esc(maker)}</a></dd>
-        <dt>${t.release}</dt><dd>${t.month(it.release)}</dd>
+        <dt>${t.release}</dt><dd>${t.month(it.release)}${lang === "ja" && it.release_note ? `<span class="rel-note">${esc(it.release_note)}</span>` : ""}</dd>
+        ${it.age_min ? `<dt>${t.ageLabel}</dt><dd>${t.ageMin(it.age_min)}</dd>` : ""}
         <dt>${t.genre}</dt><dd><a href="${c.H}genre/${g.slug}.html">${gl}</a></dd>
         ${tags.length ? `<dt>${t.tags}</dt><dd><div class="tags">${tags.map((x) => `<span class="chip chip-ai">${esc(x)}</span>`).join("")}</div></dd>` : ""}
       </dl>
@@ -567,9 +598,16 @@ ${content}
       <div class="item-actions">
         <a class="btn btn-gold" href="#stock">${t.findStores}</a>
         ${it.official_url ? `<a class="btn" href="${esc(it.official_url)}" target="_blank" rel="noopener">${t.official}</a>` : ""}
+        <button type="button" class="heart" data-vote="${c.R}api/vote/${it.id}" data-id="${it.id}" aria-label="${t.heartAria}" title="${t.heartNote}"><i aria-hidden="true">♥</i><span>${t.heart}</span><b>${heartsOf(it)}</b></button>
       </div>
     </div>
   </article>
+  ${(it.lineup_names || []).length ? `<section class="section lineup-sec">
+    <div class="section-head"><h2>${t.lineupTitle(it.lineup || it.lineup_names.length)}</h2></div>
+    <ol class="lineup">${it.lineup_names.map((n) => `<li lang="ja">${esc(n)}</li>`).join("")}</ol>
+    <p class="fine">${t.lineupNote}</p>
+  </section>` : ""}
+
 
   <section class="section" id="stock" data-api="${c.R}api/stock/${it.id}" data-src="${c.R}data/stock/${it.id}.json" style="scroll-margin-top:24px">
     <div class="panel">
@@ -585,6 +623,19 @@ ${content}
       ${it.store_search_url ? `<br><a href="${esc(it.store_search_url)}" target="_blank" rel="noopener" style="color:var(--gold-soft);border-bottom:1px solid var(--line-strong)">${t.officialStores}</a>` : ""}</p>
     </div>
 
+    <div class="panel arrivals" id="arrivals" data-api="${c.R}api/arrivals/${it.id}" data-lang="${lang}">
+      <h2 style="font-size:22px">${t.arrTitle}</h2>
+      <p class="stock-status" id="arr-status">${t.arrLoading}</p>
+      <div id="arr-body" hidden>
+        <dl class="arr-stats"><div><dt>${t.arrIn}</dt><dd id="arr-in"></dd></div><div><dt>${t.arrRestock}</dt><dd id="arr-re"></dd></div><div><dt>${t.arrFirst}</dt><dd id="arr-first"></dd></div></dl>
+        <h3 class="arr-h">${t.arrFastTitle}</h3><p class="fine" style="margin-top:4px">${t.arrFastNote}</p>
+        <ol class="arr-fast" id="arr-fast"></ol>
+        <h3 class="arr-h">${t.arrPrefTitle}</h3><p class="fine" style="margin-top:4px">${t.arrPrefNote}</p>
+        <ul class="arr-prefs" id="arr-prefs"></ul>
+      </div>
+      <script type="application/json" id="arr-i18n">${JSON.stringify({ shops: t.arrShops(0).replace("0", "{n}"), times: t.arrTimes(0).replace("0", "{n}"), avg: t.arrAvg(0).replace("0", "{n}"), noavg: t.arrNoAvg, on: t.arrStockOn, off: t.arrStockOff, none: t.arrNone })}</script>
+    </div>
+
     <aside class="buy" id="buy" aria-label="${t.buyAria}">
       <div>
         <h3>${t.buyTitle}<span class="pr">PR</span></h3>
@@ -593,6 +644,16 @@ ${content}
       <div class="btns">
         <a class="btn btn-gold" href="${esc(aff.amazon)}" target="_blank" rel="sponsored noopener">${t.amazon}</a>
         <a class="btn" href="${esc(aff.rakuten)}" target="_blank" rel="sponsored noopener">${t.rakuten}</a>
+      </div>
+    </aside>
+    <aside class="buy flea" aria-label="${t.fleaTitle}">
+      <div>
+        <h3>${t.fleaTitle}</h3>
+        <p>${t.fleaLead}</p>
+      </div>
+      <div class="btns">
+        ${[["mercari", `https://jp.mercari.com/search?keyword=${encodeURIComponent(it.name)}`], ["yahoo", `https://auctions.yahoo.co.jp/search/search?p=${encodeURIComponent(it.name)}`], ["rakuma", `https://fril.jp/s?query=${encodeURIComponent(it.name)}`]]
+          .map(([k, u]) => `<a class="btn" href="${esc(u)}" target="_blank" rel="noopener">${t[k]}</a>`).join("")}
       </div>
     </aside>
   </section>
@@ -699,7 +760,7 @@ ${content}
   }
   write(`data/search-${lang}.json`, JSON.stringify(items.map((it) => ({
     id: it.id, n: nameOf(it, lang), a: lang === "en" ? it.name : it.name_en, m: makerOf(it, lang), img: it.image, p: it.price, l: it.lineup, r: t.month(it.release), g: genreLabel(genreOf(it.genre), lang),
-    k: [...(it.tags || []), ...(it.tags_en || [])].join(" "),
+    k: [...(it.tags || []), ...(it.tags_en || []), ...(it.lineup_names || [])].join(" "),
   }))));
 
   /* ---------- 運営者情報 ---------- */

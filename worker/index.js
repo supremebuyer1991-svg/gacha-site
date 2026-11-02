@@ -39,7 +39,50 @@ async function checkItem(env, t) {
   const json = JSON.stringify({ updated_at: now.toISOString(), updated_ja: l.ja, updated_en: l.en, source: "gashapon", stores });
   await env.DB.prepare("INSERT INTO stock (item_id, data, updated_at, count) VALUES (?1, ?2, ?3, ?4) ON CONFLICT(item_id) DO UPDATE SET data = ?2, updated_at = ?3, count = ?4")
     .bind(t.id, json, now.toISOString(), stores.length).run();
+  await recordArrivals(env, t.id, data.gplus_data || [], now.toISOString());
   return stores.length;
+}
+
+/*
+ * 入荷の記録。変わったところだけ書き込む（データベースの書き込み回数を抑えるため）。
+ * - 初めて見た店 → 入荷（ただし、この商品を初めて確認したときに既にあった店は「いつ入ったか不明」として速さの集計から外す）
+ * - 在庫なしだった店がまた出てきた → 補充（在庫復活）
+ * - 一覧から消えた店 → 在庫なし
+ */
+async function recordArrivals(env, itemId, raw, nowIso) {
+  const cur = new Map();
+  for (const x of raw) {
+    if (x.delflg === "1") continue;
+    const key = String(x.shop_code || `${x.shop_title}|${x.shop_address}`);
+    cur.set(key, { pref: x.shop_pref || "", name: x.shop_title || "" });
+  }
+  const obs = await env.DB.prepare("SELECT first_seen FROM item_obs WHERE item_id = ?1").bind(itemId).first();
+  const firstTime = !obs;
+  const { results } = await env.DB.prepare("SELECT shop, in_now FROM seen WHERE item_id = ?1").bind(itemId).all();
+  const known = new Map((results || []).map((r) => [r.shop, r.in_now]));
+  const st = [];
+  let added = 0, back = 0;
+  for (const [shop, v] of cur) {
+    if (!known.has(shop)) {
+      st.push(env.DB.prepare("INSERT INTO seen (item_id, shop, pref, name, first_seen, last_seen, in_now, restocks, baseline) VALUES (?1, ?2, ?3, ?4, ?5, ?5, 1, 0, ?6)")
+        .bind(itemId, shop, v.pref, v.name, nowIso, firstTime ? 1 : 0));
+      if (!firstTime) added++;
+    } else if (!known.get(shop)) {
+      st.push(env.DB.prepare("UPDATE seen SET in_now = 1, restocks = restocks + 1, last_seen = ?3 WHERE item_id = ?1 AND shop = ?2").bind(itemId, shop, nowIso));
+      back++;
+    }
+  }
+  for (const [shop, inNow] of known) {
+    if (inNow && !cur.has(shop)) st.push(env.DB.prepare("UPDATE seen SET in_now = 0 WHERE item_id = ?1 AND shop = ?2").bind(itemId, shop));
+  }
+  const kind = added ? "new" : back ? "restock" : null;
+  if (firstTime) {
+    st.push(env.DB.prepare("INSERT INTO item_obs (item_id, first_seen, restocks, in_count, last_change, last_kind) VALUES (?1, ?2, 0, ?3, ?2, 'first')").bind(itemId, nowIso, cur.size));
+  } else {
+    st.push(env.DB.prepare("UPDATE item_obs SET restocks = restocks + ?2, in_count = ?3, last_change = CASE WHEN ?4 IS NULL THEN last_change ELSE ?5 END, last_kind = COALESCE(?4, last_kind) WHERE item_id = ?1")
+      .bind(itemId, back, cur.size, kind, nowIso));
+  }
+  for (let i = 0; i < st.length; i += 50) await env.DB.batch(st.slice(i, i + 50));
 }
 
 async function run(env) {

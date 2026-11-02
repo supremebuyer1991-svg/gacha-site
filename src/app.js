@@ -5,6 +5,12 @@
   var langMeta = document.querySelector('meta[name="site-lang"]');
   var LANG = langMeta ? langMeta.content : "ja";
   var EN = LANG === "en";
+  // ひらがな・カタカナ、全角・半角、大文字・小文字の違いをなくして比べる
+  var NORM = function (v) {
+    return String(v || "").normalize("NFKC").toLowerCase()
+      .replace(/[\u3041-\u3096]/g, function (c) { return String.fromCharCode(c.charCodeAt(0) + 0x60); })
+      .replace(/[\s・･!！?？'’"“”:：\-‐–—~〜～、。,.\/／|｜【】\[\]「」『』()（）♪☆★™]/g, "");
+  };
   var M = EN ? {
     none: "No matches. Try adding more groups or clearing the detailed picks.",
     found: function (n) { return n + " matches."; },
@@ -277,6 +283,10 @@
           else conds.push({ w: 6, test: function (it) { return it.qs.indexOf(key) !== -1; } });
         });
       });
+      // 推しの名前（自由入力）：商品名かラインナップ名に入っていれば一番強く当てる
+      var oshiEl = quiz.querySelector('input[name="oshi"]');
+      var oshiQ = oshiEl ? NORM(oshiEl.value) : "";
+      if (oshiQ) conds.push({ w: 12, test: function (it) { return NORM(it.jn + "｜" + it.name + "｜" + (it.on || "")).indexOf(oshiQ) !== -1; } });
       var cands = data.items.map(function (it) {
         var s = 0;
         conds.forEach(function (c) { if (c.test(it)) s += c.w; });
@@ -404,5 +414,81 @@
         statusEl.textContent = M.count(avail.length);
       }
     }
+  }
+
+  /* ================= 入荷情報（商品ページ） ================= */
+  var arr = document.getElementById("arrivals");
+  if (arr && window.fetch) {
+    var AI = JSON.parse(document.getElementById("arr-i18n").textContent);
+    var fill = function (tpl, n) { return tpl.replace("{n}", n); };
+    var st = document.getElementById("arr-status");
+    var fmt = function (iso) {
+      var d = new Date(iso);
+      return (d.getMonth() + 1) + "/" + d.getDate() + " " + String(d.getHours()).padStart(2, "0") + ":" + String(d.getMinutes()).padStart(2, "0");
+    };
+    var lagTxt = function (h) {
+      if (h < 1) return EN ? "< 1h" : "1時間以内";
+      if (h < 48) return EN ? Math.ceil(h) + "h" : Math.ceil(h) + "時間";
+      return EN ? (Math.round(h / 2.4) / 10) + " days" : (Math.round(h / 2.4) / 10) + "日";
+    };
+    fetch(arr.getAttribute("data-api")).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
+      if (!d || !d.total) { st.textContent = AI.none; return; }
+      st.hidden = true;
+      document.getElementById("arr-body").hidden = false;
+      document.getElementById("arr-in").textContent = fill(AI.shops, d.in_count);
+      document.getElementById("arr-re").textContent = fill(AI.times, d.restocks);
+      document.getElementById("arr-first").textContent = fmt(d.first_seen);
+      var fast = document.getElementById("arr-fast");
+      if (!d.fastest.length) fast.outerHTML = '<p class="fine">' + esc(AI.none) + "</p>";
+      else fast.innerHTML = d.fastest.map(function (r) {
+        return '<li><span class="af-lag">' + esc(lagTxt(r.lag)) + '</span><span class="af-name">' + esc(r.name) + '<small>' + esc(r.pref) + " · " + esc(fmt(r.at)) + '</small></span><span class="pill ' + (r.in ? "in_stock" : "out_of_stock") + '">' + esc(r.in ? AI.on : AI.off) + "</span></li>";
+      }).join("");
+      document.getElementById("arr-prefs").innerHTML = d.prefs.sort(function (a, b) { return a.avg_days == null ? 1 : b.avg_days == null ? -1 : a.avg_days - b.avg_days; }).map(function (p) {
+        return "<li><b>" + esc(p.pref) + "</b><span>" + esc(p.avg_days == null ? AI.noavg : fill(AI.avg, p.avg_days)) + "</span><small>" + esc(fill(AI.shops, p.n)) + "</small></li>";
+      }).join("");
+    }).catch(function () { st.textContent = AI.none; });
+  }
+
+  /* ================= ハート（人気投票） ================= */
+  [].forEach.call(document.querySelectorAll(".heart[data-vote]"), function (btn) {
+    var key = "gp-heart-" + btn.getAttribute("data-id") + "-" + new Date().toISOString().slice(0, 10);
+    var done = false;
+    try { done = localStorage.getItem(key) === "1"; } catch (e) {}
+    if (done) btn.classList.add("is-on");
+    btn.addEventListener("click", function () {
+      if (btn.classList.contains("is-on") || btn.disabled) return;
+      btn.disabled = true;
+      btn.classList.add("is-on", "pop");
+      var b = btn.querySelector("b");
+      b.textContent = String((Number(b.textContent) || 0) + 1);
+      fetch(btn.getAttribute("data-vote"), { method: "POST" }).then(function (r) { return r.json(); }).then(function (d) {
+        if (d && typeof d.n === "number") b.textContent = String(d.n);
+      }).catch(function () {}).then(function () {
+        btn.disabled = false;
+        try { localStorage.setItem(key, "1"); } catch (e) {}
+      });
+    });
+  });
+
+  /* ================= 入荷速報（トップページ） ================= */
+  var feed = document.getElementById("feed");
+  var itemsEl = document.getElementById("items-data");
+  if (feed && itemsEl && window.fetch) {
+    var FI = JSON.parse(document.getElementById("feed-i18n").textContent);
+    var D = JSON.parse(itemsEl.textContent);
+    var byId = {};
+    D.items.forEach(function (it) { byId[it.id] = it; });
+    fetch(feed.getAttribute("data-api")).then(function (r) { return r.ok ? r.json() : []; }).then(function (rows) {
+      var list = (rows || []).filter(function (r) { return byId[r.item_id]; }).slice(0, 8);
+      if (!list.length) return;
+      document.getElementById("feed-grid").innerHTML = list.map(function (r) {
+        var it = byId[r.item_id];
+        var html = cardHTML(it, D, null);
+        var note = (r.restocks ? FI.note.replace("{n}", r.restocks) : FI.note0).replace("{s}", r.in_count);
+        var badge = '<span class="badge-feed ' + (r.last_kind === "new" ? "is-new" : "") + '">' + esc(r.last_kind === "new" ? FI.isNew : FI.back) + "</span>";
+        return html.replace('<div class="thumb">', '<div class="thumb">' + badge).replace('<div class="card-foot">', '<div class="feed-note">' + esc(note) + '</div><div class="card-foot">');
+      }).join("");
+      feed.hidden = false;
+    }).catch(function () {});
   }
 })();

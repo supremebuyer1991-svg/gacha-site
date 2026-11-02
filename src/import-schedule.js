@@ -76,25 +76,34 @@ async function main() {
     await sleep(WAIT_MS);
   }
 
-  let added = 0, addedPast = 0;
+  let added = 0, addedPast = 0, weekUpdated = 0;
   for (const f of found) {
     const jan13 = f.jan.slice(0, 13);
-    if (known.has(jan13) || added >= MAX_NEW_PER_RUN) continue;
+    // すでにある商品は、発売週（第◯週）が公開・変更されていれば書き換える
+    if (known.has(jan13)) {
+      const old = items.find((x) => x.id === `bandai-${jan13}`);
+      const note = f.week && f.week !== "未定" ? f.week : "";
+      if (old && note && old.release_note !== note) { old.release_note = note; weekUpdated++; }
+      continue;
+    }
+    if (added >= MAX_NEW_PER_RUN) continue;
     if (f.past && addedPast >= MAX_PAST_PER_RUN) continue;
     if (f.past) addedPast++;
     known.add(jan13);
     const url = `https://gashapon.jp/products/detail.php?jan_code=${f.jan}`;
-    let lineup = null;
+    let lineup = null, ageMin = null;
     try {
       const d = await getText(url);
       const t = d.replace(/<[^>]+>/g, " ");
       const mm = t.match(/全\s*(\d+)\s*種/);
       if (mm) lineup = Number(mm[1]);
+      const ag = t.match(/対象年齢\s*(\d+)\s*才以上/);
+      if (ag) ageMin = Number(ag[1]);
     } catch (e) { console.log(`⚠ ${f.name}: 詳細ページを読めませんでした（${e.message}）`); }
     items.push({
       id: `bandai-${jan13}`, name: f.name, name_en: "", maker: "バンダイ", maker_en: "Bandai",
       price: f.price, release: f.month, release_note: f.week && f.week !== "未定" ? f.week : "",
-      genre: guessGenre(f.name), moods: guessMoods(f.name), tags: [], tags_en: [], lineup,
+      genre: guessGenre(f.name), moods: guessMoods(f.name), tags: [], tags_en: [], lineup, ...(ageMin ? { age_min: ageMin } : {}),
       image: "", official_url: url, store_search_url: `https://gashapon.jp/shop/gplus_list.php?product_code=${jan13}`,
       popularity: 50, added: f.past ? `${f.month}-01` : today, description: "", description_en: "", auto: true,
     });
@@ -102,7 +111,8 @@ async function main() {
     console.log(`✔ 追加：${f.name}（${f.month} ${f.week}）`);
     await sleep(WAIT_MS);
   }
-  if (added) fs.writeFileSync(itemsPath, JSON.stringify(items, null, 2) + "\n");
+  if (weekUpdated) console.log(`- 発売週を更新：${weekUpdated}件`);
+  if (added || weekUpdated) fs.writeFileSync(itemsPath, JSON.stringify(items, null, 2) + "\n");
   if (backMonth) {
     const left = found.filter((f) => f.past && !known.has(f.jan.slice(0, 13))).length;
     const got = found.filter((f) => f.past).length;
