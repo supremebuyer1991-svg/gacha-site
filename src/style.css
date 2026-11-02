@@ -538,3 +538,48 @@ a:focus-visible, button:focus-visible, select:focus-visible, summary:focus-visib
 .opts-lg .opt span { min-height: 42px; padding: 6px 6px; font-size: 14px; }
 @media (min-width: 901px) { .opts.opts-lg { max-width: 640px; } }
 @media (max-width: 520px) { .opts-lg .opt span { min-height: 40px; font-size: 14px; } }
+
+/* ===== 診断をコンパクトに（ボタン・枠・余白を小さく） ===== */
+.quiz { padding: 20px 22px; gap: 14px; }
+@media (min-width: 901px) { .quiz { padding: 22px 28px; } }
+.quiz-head h2, .quiz h2 { font-size: 17px; }
+.quiz-step { font-size: 15px; }
+.quiz-bar { height: 6px; margin-top: -2px; }
+.quiz.is-wizard .quiz-qs { min-height: 96px; }
+.quiz.is-wizard legend { font-size: 16px; margin-bottom: 10px; }
+.q-hint { font-size: 11.5px; margin: -4px 0 10px; }
+.opt span { padding: 5px 12px; font-size: 12.5px; border-width: 1.5px; }
+.opts-lg .opt span { min-height: 36px; padding: 4px 6px; font-size: 13.5px; }
+.opts-sm .opt span { padding: 3px 10px; font-size: 11.5px; }
+.groups { gap: 8px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); }
+.grp { padding: 10px 12px; gap: 6px; border-width: 1.5px; border-radius: 12px; }
+.grp-main { font-size: 15px; gap: 8px; }
+.grp-main input { width: 16px; height: 16px; }
+.grp-more { font-size: 11.5px; }
+.grp-subs { gap: 8px; }
+.opts { gap: 6px; }
+.leaf-row { padding: 10px 12px; gap: 6px; }
+.leaf-label { font-size: 11.5px; }
+.leaf-filter { height: 32px; font-size: 13px; max-width: 300px; }
+.oshi-in { margin-top: 12px; font-size: 13px; gap: 6px; }
+.oshi-in input { height: 36px; font-size: 14px; max-width: 360px; }
+.quiz-nav { margin-top: 2px; padding-top: 12px; gap: 10px; }
+.quiz-nav .btn { min-height: 38px; font-size: 13.5px; padding: 0 16px; }
+.quiz-nav .btn-gold { box-shadow: 0 4px 0 #d93763; margin-bottom: 4px; }
+@media (min-width: 901px) { .quiz .btn-gold, .quiz-nav .btn { min-width: 160px; } .quiz-nav .btn-ghost { min-width: 0; } }
+@media (max-width: 520px) { .opts-lg .opt span { min-height: 36px; font-size: 13.5px; } }
+/* 選んだボタンの周りの四角い枠は出さない（キーボード操作のときだけ丸い枠） */
+label.opt:focus-within { outline: none; }
+.opt input:focus-visible + span { outline: 2px solid var(--sky); outline-offset: 2px; }
+/* 系統の枠：名前と「さらに詳しく選ぶ」を1行に並べて低くする */
+.grp { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; column-gap: 8px; row-gap: 8px; }
+.grp-more { align-self: center; justify-self: end; white-space: nowrap; }
+.grp-subs { grid-column: 1 / -1; }
+.grp-main { white-space: nowrap; }
+/* 「さらに詳しく」で出る項目：小さめのボタンにして、たくさんあっても見やすく */
+.grp-subs .opt span { padding: 4px 10px; font-size: 12px; line-height: 1.35; border-width: 1.5px; }
+.grp-subs .opts { gap: 5px; }
+.grp-subs .opts-sm .opt span { padding: 3px 8px; font-size: 11.5px; line-height: 1.3; }
+.grp-subs .opts-sm { gap: 4px; }
+.leaf-row .opt small { margin-left: 3px; font-size: 10px; }
+.leaf-row { padding: 8px 10px; gap: 6px; }
