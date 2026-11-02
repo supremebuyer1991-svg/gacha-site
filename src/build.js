@@ -213,6 +213,11 @@ const findImage = (id) => {
   }
   return "";
 };
+// 一覧用の小さい画像（images/thumb/商品id.webp。取り込みのときに作る）。無ければ元の画像
+const thumbOf = (img) => {
+  const m = /^images\/([^/]+)\.\w+$/.exec(img || "");
+  return m && fs.existsSync(path.join(ROOT, "images", "thumb", `${m[1]}.webp`)) ? `images/thumb/${m[1]}.webp` : img;
+};
 
 /* ---------- 商品データのチェック（おかしい商品は飛ばして警告） ---------- */
 const warnings = [];
@@ -353,6 +358,7 @@ for (const it of items) {
 // デザイン・動きのファイルが変わったら、ブラウザに古いものが残らないよう番号を付ける
 const crypto = require("crypto");
 const ver = (f) => crypto.createHash("md5").update(fs.readFileSync(path.join(__dirname, f))).digest("hex").slice(0, 8);
+const QUIZ_V = crypto.createHash("md5").update(JSON.stringify(rawItems) + JSON.stringify(votes) + JSON.stringify(titles) + JSON.stringify(site)).digest("hex").slice(0, 8);
 const CSS_V = ver("style.css");
 const JS_V = ver("app.js");
 
@@ -376,7 +382,7 @@ for (const lang of LANGS) {
   const imgURL = (it, R) => (!it.image ? "" : /^https?:/.test(it.image) ? it.image : R + it.image);
 
   const thumb = (it, R, { eager = false, badge = true } = {}) => {
-    const src = imgURL(it, R);
+    const src = eager ? imgURL(it, R) : imgURL({ image: thumbOf(it.image) }, R);
     const img = src
       ? `<img src="${esc(src)}" alt="${esc(nameOf(it, lang))}" width="400" height="400" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`
       : `<div class="capsule" aria-hidden="true"><i></i><span>NO IMAGE</span></div>`;
@@ -462,9 +468,10 @@ ${content}
     const embed = {
       home: c.H, root: c.R,
       groups: (site.quiz_groups || []).map((g) => ({ slug: g.slug, subs: g.subs.map((x) => ({ slug: x.slug, leaves: (x.leaves || []).map((l) => ({ slug: l.slug, match: l.match })) })) })),
-      items: items.map((it) => ({
+      src: `${c.R}data/quiz-${lang}.json?v=${QUIZ_V}`,
+      _items: items.map((it) => ({
         id: it.id, name: nameOf(it, lang), jn: it.name, price: it.price, lineup: it.lineup, genre: it.genre, genre_label: genreLabel(genreOf(it.genre), lang),
-        moods: it.moods, popularity: it.popularity * 0.01 + heartsOf(it), on: (it.lineup_names || []).join("｜"), ad: it.added, rl: it.release, qa: it.q_ages || [], qg: it.q_genders || [], qs: it._qs, image: it.image, release_label: t.month(it.release),
+        moods: it.moods, popularity: it.popularity * 0.01 + heartsOf(it), on: (it.lineup_names || []).join("｜"), ad: it.added, rl: it.release, qa: it.q_ages || [], qg: it.q_genders || [], qs: it._qs, image: thumbOf(it.image), release_label: t.month(it.release),
       })),
     };
     const opt = (name, type, value, label, checked) =>
@@ -552,10 +559,11 @@ ${content}
 
   <section class="section" id="genres">
     <div class="section-head"><h2>${t.genreTitle}</h2></div>
-    <div class="genres">${GENRES.map((g) => `<a href="${c.H}genre/${g.slug}.html"><span class="ja">${genreLabel(g, lang)}</span><span class="n">${t.series(items.filter((it) => it.genre === g.slug).length)}</span></a>`).join("")}</div>
+    <div class="genres">${GENRES.filter((g) => items.some((it) => it.genre === g.slug)).map((g) => `<a href="${c.H}genre/${g.slug}.html"><span class="ja">${genreLabel(g, lang)}</span><span class="n">${t.series(items.filter((it) => it.genre === g.slug).length)}</span></a>`).join("")}</div>
   </section>
 </div>
-<script type="application/json" id="items-data">${JSON.stringify(embed).replace(/</g, "\\u003c")}</script>`;
+<script type="application/json" id="items-data">${JSON.stringify({ ...embed, _items: undefined }).replace(/</g, "\\u003c")}</script>`;
+    write(`data/quiz-${lang}.json`, JSON.stringify(embed._items));
 
     layout({
       rel: "index.html", title: site.name, description: t.description, body, current: "new",
@@ -704,11 +712,21 @@ ${content}
   {
     const allMonths = [...new Set(items.map((it) => it.release))].sort();
     const prevMonth = new Date(Date.UTC(nowJST.getUTCFullYear(), nowJST.getUTCMonth() - 1, 1)).toISOString().slice(0, 7);
-    const recent = allMonths.filter((m) => m >= prevMonth);
+    // 今月 → 来月以降 → 先月 の順（今いちばん見たい月を先頭に）
+    const recent = [...allMonths.filter((m) => m >= thisMonth), ...allMonths.filter((m) => m >= prevMonth && m < thisMonth)];
+    // 同じ月の中は発売週の早い順（「11月第2週」「11月9日週」など）。週が分からないものは後ろ
+    const weekKey = (it) => {
+      const n = it.release_note || "";
+      let m = n.match(/(\d+)月第(\d)週/);
+      if (m) return Number(m[1]) * 10 + Number(m[2]);
+      m = n.match(/(\d+)月(\d+)日週/);
+      if (m) return Number(m[1]) * 10 + Math.ceil(Number(m[2]) / 7);
+      return 999;
+    };
     const past = allMonths.filter((m) => m < prevMonth).reverse();
     const monthBlock = (m, c) => {
       const [y, mo] = m.split("-");
-      const list = items.filter((it) => it.release === m).sort(byPopular);
+      const list = items.filter((it) => it.release === m).sort((a, b) => weekKey(a) - weekKey(b) || byPopular(a, b));
       return `<section class="month" id="m${m}"><div class="month-label"><b>${mo}</b><span>${t.calMonth(y, Number(mo), list.length)}</span>${m === thisMonth ? `<br><span class="now">${t.thisMonth}</span>` : ""}</div>
       <div class="grid">${list.map((it) => card(it, c)).join("")}</div></section>`;
     };
@@ -759,7 +777,7 @@ ${content}
     layout({ rel: "search.html", title: t.searchTitle, description: t.searchTitle, body });
   }
   write(`data/search-${lang}.json`, JSON.stringify(items.map((it) => ({
-    id: it.id, n: nameOf(it, lang), a: lang === "en" ? it.name : it.name_en, m: makerOf(it, lang), img: it.image, p: it.price, l: it.lineup, r: t.month(it.release), g: genreLabel(genreOf(it.genre), lang),
+    id: it.id, n: nameOf(it, lang), a: lang === "en" ? it.name : it.name_en, m: makerOf(it, lang), img: thumbOf(it.image), p: it.price, l: it.lineup, r: t.month(it.release), g: genreLabel(genreOf(it.genre), lang),
     k: [...(it.tags || []), ...(it.tags_en || []), ...(it.lineup_names || [])].join(" "),
   }))));
 

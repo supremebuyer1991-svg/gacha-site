@@ -119,10 +119,21 @@
     }
   }
 
+  /* 診断・入荷速報で使う商品の一覧は、ページを軽くするため別のファイルにして後から読む */
+  var itemsJSON = document.getElementById("items-data");
+  var DATA = itemsJSON ? JSON.parse(itemsJSON.textContent) : null;
+  var itemsP = null;
+  var loadItems = function () {
+    if (!itemsP) itemsP = fetch(DATA.src).then(function (r) { return r.json(); }).then(function (list) { DATA.items = list; return DATA; });
+    return itemsP;
+  };
+
   /* ================= 診断（トップページ） ================= */
   var quiz = document.getElementById("quiz");
   if (quiz) {
-    var data = JSON.parse(document.getElementById("items-data").textContent);
+    var data = DATA;
+    // 診断を触り始めたら、裏で商品の一覧を読んでおく
+    quiz.addEventListener("change", function () { loadItems(); }, { once: true });
     var results = document.getElementById("results");
     var grid = document.getElementById("results-grid");
     var note = document.getElementById("results-note");
@@ -262,6 +273,10 @@
 
     quiz.addEventListener("submit", function (e) {
       e.preventDefault();
+      if (!data.items) {
+        loadItems().then(function () { quiz.dispatchEvent(new Event("submit", { cancelable: true })); }).catch(function () {});
+        return;
+      }
       var gender = val("gender"), age = val("age");
       var chosen = vals("group");
       var chosenSubs = vals("sub");
@@ -472,13 +487,15 @@
 
   /* ================= 入荷速報（トップページ） ================= */
   var feed = document.getElementById("feed");
-  var itemsEl = document.getElementById("items-data");
-  if (feed && itemsEl && window.fetch) {
+  if (feed && DATA && window.fetch) {
     var FI = JSON.parse(document.getElementById("feed-i18n").textContent);
-    var D = JSON.parse(itemsEl.textContent);
+    var D = DATA;
     var byId = {};
-    D.items.forEach(function (it) { byId[it.id] = it; });
     fetch(feed.getAttribute("data-api")).then(function (r) { return r.ok ? r.json() : []; }).then(function (rows) {
+      if (!rows || !rows.length) return null;
+      return loadItems().then(function () { D.items.forEach(function (it) { byId[it.id] = it; }); return rows; });
+    }).then(function (rows) {
+      if (!rows) return;
       var list = (rows || []).filter(function (r) { return byId[r.item_id]; }).slice(0, 8);
       if (!list.length) return;
       document.getElementById("feed-grid").innerHTML = list.map(function (r) {

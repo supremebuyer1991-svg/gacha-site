@@ -517,3 +517,10 @@ a:focus-visible, button:focus-visible, select:focus-visible, summary:focus-visib
 .badge-feed { position: absolute; z-index: 1; top: 8px; left: 8px; font: 700 12px/1 var(--font-body); color: #fff; background: var(--mint); padding: 5px 10px; border-radius: 999px; }
 .badge-feed.is-new { background: var(--sky); }
 .feed-note { font-size: 12px; font-weight: 700; color: var(--ok); }
+@media (max-width: 520px) {
+  .arr-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  .arr-stats div { min-width: 0; padding: 8px 10px; }
+  .arr-stats dd { font-size: 16px; }
+  .arr-fast li { grid-template-columns: 64px minmax(0, 1fr) auto; gap: 8px; }
+  .item-actions .btn-gold { flex: 1 1 100%; }
+}

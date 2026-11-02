@@ -127,4 +127,7 @@ async function main() {
   console.log(`スケジュール取り込み：公式に${found.length}件、新しく${added}件を追加`);
 }
 module.exports = main;
+module.exports.decode = decode;
+module.exports.guessGenre = guessGenre;
+module.exports.guessMoods = guessMoods;
 if (require.main === module) main();

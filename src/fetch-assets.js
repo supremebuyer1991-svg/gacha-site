@@ -53,7 +53,7 @@ function pickImage(html, pageUrl) {
 
 function pageTitle(html) {
   const m = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
-  return m ? m[1].replace(/｜.*$/, "").trim() : "";
+  return m ? require("./import-schedule.js").decode(m[1]).replace(/｜.*$/, "").trim() : "";
 }
 
 // 公式の「準備中」画像（ほぼ一色のグレー）かどうか
@@ -238,9 +238,33 @@ async function saveLineupSources() {
   return done;
 }
 
+// 一覧用の小さい画像を作る（まだ無いものだけ）。一覧ページの読み込みを軽くするため
+async function makeThumbs() {
+  let sharp;
+  try { sharp = require("sharp"); } catch { return 0; }
+  const dir = path.join(ROOT, "images", "thumb");
+  fs.mkdirSync(dir, { recursive: true });
+  let n = 0;
+  for (const f of fs.readdirSync(path.join(ROOT, "images"))) {
+    const m = /^(.+)\.(webp|jpg|jpeg|png)$/.exec(f);
+    if (!m) continue;
+    const out = path.join(dir, `${m[1]}.webp`);
+    if (fs.existsSync(out)) continue;
+    try { await sharp(path.join(ROOT, "images", f)).resize(360, 360, { fit: "contain", background: "#ffffff" }).webp({ quality: 70 }).toFile(out); n++; } catch {}
+  }
+  // 元の画像が消えたもの（「準備中」だった画像など）の小さい画像も消す
+  for (const f of fs.readdirSync(dir)) {
+    const id = f.replace(/\.webp$/, "");
+    if (!["webp", "jpg", "jpeg", "png"].some((e) => fs.existsSync(path.join(ROOT, "images", `${id}.${e}`)))) fs.unlinkSync(path.join(dir, f));
+  }
+  if (n) console.log(`- 一覧用の小さい画像を ${n}件 作りました`);
+  return n;
+}
+
 (async () => {
   fs.mkdirSync(path.join(ROOT, "images"), { recursive: true });
   await require("./import-schedule.js")();
+  try { await require("./import-takara.js")(); } catch (e) { console.log(`⚠ タカラトミーアーツの取り込みに失敗しました（${e.message}）`); }
   items = read("items.json");
   // 新しく入った商品に診断用のタグを仮に付ける（毎晩Claudeが見直す）
   const tagged = require("./auto-tags.js")(items, site.quiz_groups);
@@ -250,5 +274,6 @@ async function saveLineupSources() {
   const st = process.env.STOCK_IN_GITHUB === "1" ? await importStock() : { stores: 0, rows: 0 };
   const geos = await geocodeStores();
   await saveLineupSources();
+  await makeThumbs();
   console.log(`取り込み完了：画像 ${imgs}件、店舗 ${st.stores}件・在庫 ${st.rows}件、住所からの位置計算 ${geos}件`);
 })();

@@ -4,7 +4,12 @@ name: サイトを公開
 on:
   push:
     branches: [main]
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      backfill:
+        description: "過去の商品の取り込みを今すぐ進める"
+        type: boolean
+        default: false
   schedule:
     - cron: "0 0,6,15 * * *" # 日本時間 9時・15時・0時（在庫の更新と「NEW」表示の更新。公式サイトへの負担を考えて1日3回まで）
 
@@ -33,6 +38,7 @@ jobs:
           node src/fetch-assets.js
         env:
           STOCK_IN_GITHUB: "0"
+          FORCE_BACKFILL: ${{ github.event.inputs.backfill == 'true' && '1' || '0' }}
           SITE_URL: ${{ vars.SITE_URL || 'https://gacha-site.pages.dev' }}
 
       - name: 取り込んだものを保存

@@ -499,7 +499,7 @@
  {
   "label": "機動戦士ガンダム",
   "en": "Mobile Suit Gundam",
-  "match": "ガンダム",
+  "match": "ガンダム|GUNDAM",
   "subs": [
    "cool:robot"
   ]
@@ -1259,7 +1259,7 @@
  {
   "label": "NHKキャラクター",
   "en": "NHK characters",
-  "match": "ニャンちゅう|モリゾー|みいつけた|がんこちゃん",
+  "match": "ニャンちゅう|みいつけた|がんこちゃん|ノンタン|チョコランタン|おかあさんといっしょ|いないいないばあ",
   "subs": [
    "oshi:kids"
   ]
@@ -1363,7 +1363,7 @@
  {
   "label": "プリパラ・プリティーシリーズ",
   "en": "PriPara / Pretty Series",
-  "match": "プリパラ|プリティーリズム|ひみつのアイプリ",
+  "match": "プリパラ|プリティーリズム|アイプリ",
   "subs": [
    "oshi:girls"
   ]
@@ -2038,6 +2038,38 @@
   "match": "BE:FIRST",
   "subs": [
    "oshi:jidol"
+  ]
+ },
+ {
+  "label": "ひつじのショーン",
+  "en": "Shaun the Sheep",
+  "match": "ひつじのショーン",
+  "subs": [
+   "kawaii:character"
+  ]
+ },
+ {
+  "label": "塊魂",
+  "en": "Katamari Damacy",
+  "match": "塊魂",
+  "subs": [
+   "oshi:game"
+  ]
+ },
+ {
+  "label": "EXPOキャラクター",
+  "en": "Expo mascots",
+  "match": "モリゾー|キッコロ|ミャクミャク",
+  "subs": [
+   "kawaii:character"
+  ]
+ },
+ {
+  "label": "サンエックス",
+  "en": "San-X",
+  "match": "サンエックス|すみっコ|リラックマ",
+  "subs": [
+   "kawaii:character"
   ]
  }
 ]
