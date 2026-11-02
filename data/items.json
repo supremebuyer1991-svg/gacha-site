@@ -5787,7 +5787,7 @@
   {
     "id": "bandai-4570118245601",
     "name": "mofusand めじるしアクセサリー2",
-    "name_en": "",
+    "name_en": "mofusand Mejirushi Accessory 2",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -5809,22 +5809,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
       "kawaii:animal",
       "kawaii:accessory"
     ],
     "q_ages": [
       "10",
-      "20"
+      "20",
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769708473",
     "name": "【ガシャポンバンダイオフィシャルショップ限定再販】たまごっち スイングケース2",
-    "name_en": "",
+    "name_en": "[Gashapon Official Shop Reissue] Tamagotchi Swing Case 2",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -5844,22 +5846,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
+      "kawaii:character",
+      "kawaii:accessory",
       "retro:heisei"
     ],
     "q_ages": [
+      "20",
       "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118181848",
     "name": "名探偵プリキュア！ カプセルラバーマスコット２",
-    "name_en": "",
+    "name_en": "Detective Pretty Cure! Capsule Rubber Mascot 2",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -5881,20 +5884,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot"
+      "oshi:girls",
+      "kawaii:accessory"
     ],
     "q_ages": [
-      "10"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118184832",
     "name": "グレムリン もぐもぐかくれんぼ",
-    "name_en": "",
+    "name_en": "Gremlins Mogu Mogu Hide-and-Seek",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -5914,21 +5919,25 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "cool:western"
+      "cool:western",
+      "kawaii:character",
+      "retro:showa"
     ],
     "q_ages": [
-      "40"
+      "30",
+      "40",
+      "50"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769935893",
     "name": "パチスロ魂 サウンドコレクション",
-    "name_en": "",
+    "name_en": "Pachislot Damashii Sound Collection",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -5947,22 +5956,24 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "oshi:game",
+      "funny:neta"
+    ],
     "q_ages": [
-      "20",
       "30",
-      "40"
+      "40",
+      "50"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769995682",
     "name": "Capsuleトルソー アイカツ！ 2",
-    "name_en": "",
+    "name_en": "Capsule Torso Aikatsu! 2",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -5982,20 +5993,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "real:miniature"
+      "oshi:girls",
+      "oshi:idol",
+      "real:miniature",
+      "retro:heisei"
     ],
     "q_ages": [
-      "10"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770053883",
     "name": "Lil ala mode お星さまライトスイング",
-    "name_en": "",
+    "name_en": "Lil ala mode Star Light Swing",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -6015,23 +6030,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot"
+      "kawaii:character",
+      "kawaii:accessory"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770055467",
     "name": "キン肉マン ドットフィギュアチャーム2",
-    "name_en": "",
+    "name_en": "Kinnikuman Dot Figure Charm 2",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -6054,22 +6068,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory"
+      "cool:shonen",
+      "retro:showa"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "40",
+      "50"
     ],
     "q_genders": [
-      "female"
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770122213",
     "name": "【ガシャポンバンダイオフィシャルショップ限定】HGドラゴンボール03 DAIMA SPECIAL EDITION",
-    "name_en": "",
+    "name_en": "[Gashapon Official Shop Exclusive] HG Dragon Ball 03 DAIMA Special Edition",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -6091,21 +6105,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "cool:shonen"
+      "cool:shonen",
+      "real:miniature"
     ],
     "q_ages": [
+      "20",
       "30",
       "40"
     ],
     "q_genders": [
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769968280",
     "name": "スーパー戦隊シリーズ めじるしアクセサリー",
-    "name_en": "",
+    "name_en": "Super Sentai Series Mejirushi Accessory",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -6127,8 +6143,8 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
-      "cool:hero"
+      "cool:hero",
+      "kawaii:accessory"
     ],
     "q_ages": [
       "20",
@@ -6136,14 +6152,15 @@
       "40"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769995828",
     "name": "カラフルビーズべこ しゃかしゃかめじるしアクセサリー",
-    "name_en": "",
+    "name_en": "Colorful Beads Beko Shaka Shaka Mejirushi Accessory",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -6165,6 +6182,7 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:mascot",
       "kawaii:accessory"
     ],
     "q_ages": [
@@ -6175,12 +6193,12 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-2026100900000",
     "name": "ガシャポンメンバーズ景品ガシャポン(アソートコレクション)",
-    "name_en": "",
+    "name_en": "Gashapon Members Prize Gashapon (Assorted Collection)",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 0,
@@ -6199,22 +6217,24 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "kawaii:character"
+    ],
     "q_ages": [
+      "10",
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118184191",
     "name": "KPOPガールズ！ デーモン・ハンターズ ミニCDコレクション",
-    "name_en": "",
+    "name_en": "KPop Demon Hunters Mini CD Collection",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -6234,23 +6254,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:idol",
+      "oshi:trend",
       "real:miniature"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118184276",
     "name": "SKZOO ぷくっとバースデークリアリング ～PuppyM＆Wolf Chan＆Leebit～",
-    "name_en": "",
+    "name_en": "SKZOO Puffy Birthday Clear Ring ~PuppyM & Wolf Chan & Leebit~",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -6270,8 +6290,9 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
-      "oshi:idol"
+      "oshi:idol",
+      "kawaii:character",
+      "kawaii:accessory"
     ],
     "q_ages": [
       "10",
@@ -6280,12 +6301,12 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118186768",
     "name": "サンリオキャラクターズ ふわふわめじるしアクセサリー ～Baby～",
-    "name_en": "",
+    "name_en": "Sanrio Characters Fluffy Mejirushi Accessory ~Baby~",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -6308,7 +6329,6 @@
     "auto": true,
     "q_subs": [
       "kawaii:sanrio",
-      "kawaii:mascot",
       "kawaii:accessory"
     ],
     "q_ages": [
@@ -6319,12 +6339,12 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118197733",
     "name": "コジコジ BIGカプキャラ",
-    "name_en": "",
+    "name_en": "Coji-Coji BIG Capchara",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -6343,22 +6363,24 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "kawaii:character",
+      "retro:heisei"
+    ],
     "q_ages": [
       "20",
       "30",
       "40"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118201928",
     "name": "パワーパフ ガールズ CAPSULE APARTMENT",
-    "name_en": "",
+    "name_en": "The Powerpuff Girls Capsule Apartment",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 800,
@@ -6378,21 +6400,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "retro:heisei"
+      "cool:western",
+      "kawaii:character",
+      "real:miniature"
     ],
     "q_ages": [
-      "30",
-      "40"
+      "20",
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118202222",
     "name": "CRAZY RACCOON キーボード風クリッカー",
-    "name_en": "",
+    "name_en": "CRAZY RACCOON Keyboard Clicker",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -6411,22 +6435,23 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "oshi:vtuber",
+      "oshi:game"
+    ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118206442",
     "name": "モーニング娘。 コスチュームチャーム",
-    "name_en": "",
+    "name_en": "Morning Musume. Costume Charm",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -6448,7 +6473,9 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory"
+      "oshi:jidol",
+      "kawaii:accessory",
+      "retro:heisei"
     ],
     "q_ages": [
       "20",
@@ -6456,14 +6483,15 @@
       "40"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769927409",
     "name": "雪印メグミルク ミニチュアチャーム ～ゼリー＆プリンシリーズ～",
-    "name_en": "",
+    "name_en": "Snow Brand Megmilk Miniature Charm ~Jelly & Pudding Series~",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -6486,23 +6514,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
-      "real:miniature"
+      "real:food",
+      "real:miniature",
+      "kawaii:accessory"
     ],
     "q_ages": [
-      "30",
-      "40",
-      "50"
+      "20",
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769995118",
     "name": "クレヨンしんちゃん ぶりぶりざえもん着ぐるみ めじるしアクセサリー",
-    "name_en": "",
+    "name_en": "Crayon Shin-chan Buriburizaemon Costume Mejirushi Accessory",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -6524,20 +6552,25 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory"
+      "oshi:kids",
+      "kawaii:accessory",
+      "funny:neta"
     ],
     "q_ages": [
-      "10"
+      "10",
+      "20",
+      "30"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769995316",
     "name": "ぜんまいざむらい まちぼうけ",
-    "name_en": "",
+    "name_en": "Zenmai Zamurai Machibouke",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -6559,23 +6592,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "funny:machibouke"
+      "oshi:kids",
+      "funny:machibouke",
+      "retro:heisei"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769995545",
     "name": "Novelbright ならぶんです。",
-    "name_en": "",
+    "name_en": "Novelbright Narabundesu.",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -6594,22 +6628,23 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "oshi:jidol",
+      "funny:neta"
+    ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770026528",
     "name": "お文具といっしょ お惣菜なりきりマスコットなのです",
-    "name_en": "",
+    "name_en": "Obungu to Issho Deli Food Costume Mascot",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -6631,24 +6666,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
-      "funny:neta"
+      "kawaii:character",
+      "real:food"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770027020",
     "name": "サンリオキャラクターズ ボンボンドロップミニチュアチャーム2",
-    "name_en": "",
+    "name_en": "Sanrio Characters Bonbon Drop Miniature Charm 2",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -6677,20 +6710,17 @@
     ],
     "q_ages": [
       "10",
-      "20",
-      "30",
-      "40",
-      "50"
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770027150",
     "name": "はなかっぱ まちぼうけ",
-    "name_en": "",
+    "name_en": "Hanakappa Machibouke",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -6712,23 +6742,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:kids",
       "funny:machibouke"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770027211",
     "name": "ジャージカップル ぷっくりめじるしアクセサリー",
-    "name_en": "",
+    "name_en": "Jersey Couple Puffy Mejirushi Accessory",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -6750,22 +6780,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
       "kawaii:accessory"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770027242",
     "name": "クレヨンしんちゃん おべんとうマスコット",
-    "name_en": "",
+    "name_en": "Crayon Shin-chan Bento Mascot",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -6787,21 +6817,25 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot"
+      "oshi:kids",
+      "real:food",
+      "real:miniature"
     ],
     "q_ages": [
-      "10"
+      "10",
+      "20",
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770033618",
     "name": "まちぼうけ スーパーマーケットの場合",
-    "name_en": "",
+    "name_en": "Machibouke Supermarket Edition",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -6823,23 +6857,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "funny:machibouke"
+      "funny:machibouke",
+      "real:food"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770054712",
     "name": "サンリオキャラクターズ モノトーンマスコット",
-    "name_en": "",
+    "name_en": "Sanrio Characters Monotone Mascot",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -6861,23 +6894,21 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:sanrio",
-      "kawaii:mascot"
+      "kawaii:sanrio"
     ],
     "q_ages": [
       "10",
-      "20",
-      "30"
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770055313",
     "name": "ナルミヤキャラクターズ ペンケースチャーム",
-    "name_en": "",
+    "name_en": "Narumiya Characters Pen Case Charm",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -6899,21 +6930,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
       "kawaii:accessory",
       "retro:heisei"
     ],
     "q_ages": [
+      "20",
       "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770071016",
     "name": "たまごっち UFOスイング ～オーロラver.～",
-    "name_en": "",
+    "name_en": "Tamagotchi UFO Swing ~Aurora ver.~",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -6933,22 +6966,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
+      "kawaii:character",
+      "kawaii:accessory",
       "retro:heisei"
     ],
     "q_ages": [
+      "20",
       "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770122848",
     "name": "ギャルネコ めじるしアクセサリー",
-    "name_en": "",
+    "name_en": "Gal Neko Mejirushi Accessory",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -6970,22 +7004,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
+      "kawaii:animal",
       "kawaii:accessory"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118246844",
     "name": "【ガシャポンバンダイオフィシャルショップ限定再販】ハリー・ポッター めじるしアクセサリー＋",
-    "name_en": "",
+    "name_en": "[Gashapon Official Shop Reissue] Harry Potter Mejirushi Accessory+",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -7007,22 +7042,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
-      "cool:western"
+      "cool:western",
+      "kawaii:accessory"
     ],
     "q_ages": [
-      "30",
-      "40"
+      "20",
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118184313",
     "name": "TWICE LOVELYS アクリルカラビナフロッキーマスコット",
-    "name_en": "",
+    "name_en": "TWICE LOVELYS Acrylic Carabiner Flocked Mascot",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -7044,23 +7079,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot"
+      "oshi:idol",
+      "kawaii:character"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118219367",
     "name": "暗殺教室 殺せんせー めじるしアクセサリー2",
-    "name_en": "",
+    "name_en": "Assassination Classroom Koro-sensei Mejirushi Accessory 2",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -7082,22 +7117,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "cool:shonen",
       "kawaii:accessory"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769935329",
     "name": "ノンタン パッケージミニチュアコレクション",
-    "name_en": "",
+    "name_en": "Non-tan Package Miniature Collection",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -7119,7 +7155,9 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "real:miniature"
+      "retro:showa",
+      "real:miniature",
+      "kawaii:animal"
     ],
     "q_ages": [
       "30",
@@ -7127,15 +7165,14 @@
       "50"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118186249",
     "name": "まちぼうけ パンの場合  めじるしアクセサリー",
-    "name_en": "",
+    "name_en": "Machibouke Bread Edition Mejirushi Accessory",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -7158,24 +7195,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
+      "funny:machibouke",
       "real:food",
-      "funny:machibouke"
+      "kawaii:accessory"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118181503",
     "name": "ハリー・ポッター アクリルスライド ミラーコレクション",
-    "name_en": "",
+    "name_en": "Harry Potter Acrylic Slide Mirror Collection",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -7195,22 +7231,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
-      "cool:western"
+      "cool:western",
+      "kawaii:accessory"
     ],
     "q_ages": [
-      "30",
-      "40"
+      "20",
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118182029",
     "name": "それいけ！アンパンマン おっきなアンパンマンマスコット11",
-    "name_en": "",
+    "name_en": "Anpanman Big Anpanman Mascot 11",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -7232,22 +7268,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
-      "real:food"
+      "oshi:kids",
+      "kawaii:mascot"
     ],
     "q_ages": [
-      "10"
+      "20",
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118183958",
     "name": "ねこあつめ2 ぬいぐるみクリップ",
-    "name_en": "",
+    "name_en": "Neko Atsume 2 Plush Clip",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -7269,24 +7306,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:animal",
-      "kawaii:mascot",
-      "kawaii:accessory"
+      "oshi:game",
+      "kawaii:animal"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118184757",
     "name": "DC プロジェクターライトキーホルダー",
-    "name_en": "",
+    "name_en": "DC Projector Light Keychain",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -7305,22 +7340,23 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "cool:western"
+    ],
     "q_ages": [
       "20",
       "30",
       "40"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118186324",
     "name": "RIIZE ぷくっとリング",
-    "name_en": "",
+    "name_en": "RIIZE Puffy Ring",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -7340,8 +7376,8 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
-      "oshi:idol"
+      "oshi:idol",
+      "kawaii:accessory"
     ],
     "q_ages": [
       "10",
@@ -7350,12 +7386,12 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769738982",
     "name": "名探偵コナン なりきりコレクション",
-    "name_en": "",
+    "name_en": "Detective Conan Narikiri Collection",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -7374,21 +7410,25 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "oshi:trend",
+      "oshi:kids"
+    ],
     "q_ages": [
       "10",
-      "20"
+      "20",
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769823084",
     "name": "いちご100％ Comics Charm Collection01",
-    "name_en": "",
+    "name_en": "Strawberry 100% Comics Charm Collection 01",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -7408,21 +7448,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "cool:shonen",
       "retro:heisei"
     ],
     "q_ages": [
-      "30"
+      "30",
+      "40"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770026757",
     "name": "ドラえもん ひみつ道具カラフルマルチチャーム",
-    "name_en": "",
+    "name_en": "Doraemon Secret Gadgets Colorful Multi Charm",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -7444,21 +7485,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:kids",
       "kawaii:accessory"
     ],
     "q_ages": [
       "10",
-      "50"
+      "20",
+      "30"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770026924",
     "name": "Winnie the Pooh ＜TAROUT＞ マスコットスイング",
-    "name_en": "",
+    "name_en": "Winnie the Pooh <TAROUT> Mascot Swing",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -7480,23 +7524,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot"
+      "kawaii:disney",
+      "kawaii:accessory"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770027549",
     "name": "BLEACH 人形芝居（テアトロ・デ・ティテレ） フィギュア",
-    "name_en": "",
+    "name_en": "BLEACH Teatro de Títere Figure",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -7518,23 +7561,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "cool:shonen"
+      "cool:shonen",
+      "real:miniature"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770055337",
     "name": "ナルミヤキャラクターズ あみぐるみフロッキー",
-    "name_en": "",
+    "name_en": "Narumiya Characters Amigurumi Flocked Mascot",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -7554,20 +7597,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
+      "kawaii:accessory",
       "retro:heisei"
     ],
     "q_ages": [
+      "20",
       "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770068665",
     "name": "mofusand 給食当番がんばるにゃん",
-    "name_en": "",
+    "name_en": "mofusand School Lunch Duty Nyan",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -7587,21 +7633,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
       "kawaii:animal"
     ],
     "q_ages": [
       "10",
-      "20"
+      "20",
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770070392",
     "name": "Lil ala mode ミニチュアパッケージチャーム ～ムース～",
-    "name_en": "",
+    "name_en": "Lil ala mode Miniature Package Charms ~Mousse~",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -7624,23 +7672,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
-      "real:miniature"
+      "kawaii:character",
+      "real:miniature",
+      "kawaii:accessory"
     ],
     "q_ages": [
-      "30",
-      "40",
-      "50"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770083859",
     "name": "クレヨンしんちゃん おバカスタムビークル 第4弾 ふたば幼稚園大集合シリーズ",
-    "name_en": "",
+    "name_en": "Crayon Shin-chan Obaka Custom Vehicle Vol.4 Futaba Kindergarten Series",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -7659,20 +7707,25 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "oshi:kids",
+      "real:vehicle"
+    ],
     "q_ages": [
-      "10"
+      "10",
+      "20",
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770094749",
     "name": "学園アイドルマスター リバラバ！2",
-    "name_en": "",
+    "name_en": "Gakuen Idolmaster Rivalava! 2",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -7692,21 +7745,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "oshi:idol"
+      "oshi:idol",
+      "oshi:game"
     ],
     "q_ages": [
       "10",
       "20"
     ],
     "q_genders": [
+      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770095258",
     "name": "ケロロ軍曹☆ まちぼうけであります NEW EDITION",
-    "name_en": "",
+    "name_en": "Sgt. Frog Machibouke de Arimasu NEW EDITION",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -7728,22 +7783,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "retro:heisei",
-      "funny:machibouke"
+      "oshi:kids",
+      "funny:machibouke",
+      "retro:heisei"
     ],
     "q_ages": [
+      "20",
       "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770095319",
     "name": "アイカツ！ カラフルマルチチャーム",
-    "name_en": "",
+    "name_en": "Aikatsu! Colorful Multi Charm",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -7765,20 +7822,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory"
+      "oshi:girls",
+      "oshi:idol",
+      "kawaii:accessory",
+      "retro:heisei"
     ],
     "q_ages": [
-      "10"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770096057",
     "name": "角醒ハンター オメガホーン めじるしアクセサリー",
-    "name_en": "",
+    "name_en": "Kakusei Hunter Omega Horn Mejirushi Accessory",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -7800,22 +7861,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:kids",
       "kawaii:accessory"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
-      "female"
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770121841",
     "name": "BT21 ベーカリーチャーム",
-    "name_en": "",
+    "name_en": "BT21 Bakery Charm",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -7837,23 +7898,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:idol",
+      "kawaii:character",
       "kawaii:accessory",
       "real:food"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770139853",
     "name": "豆ガシャ本 「週刊少年サンデー コミックスコレクション」",
-    "name_en": "",
+    "name_en": "Mame Gasha Book \"Weekly Shonen Sunday Comics Collection\"",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -7872,22 +7934,24 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "cool:shonen",
+      "real:miniature"
+    ],
     "q_ages": [
-      "20",
       "30",
-      "40"
+      "40",
+      "50"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4549660800873",
     "name": "JOCHUM カプセルラバーマスコット",
-    "name_en": "",
+    "name_en": "JOCHUM Capsule Rubber Mascot",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -7909,23 +7973,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot"
+      "oshi:jidol",
+      "kawaii:character"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769867071",
     "name": "【CAP'in GALLERY】VIRUSWEETS figure collection ～甘味処～",
-    "name_en": "",
+    "name_en": "[CAP'in GALLERY] VIRUSWEETS Figure Collection ~Kanmidokoro~",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -7944,22 +8007,24 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "kawaii:character",
+      "real:food",
+      "real:miniature"
+    ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769822339",
     "name": "カードキャプターさくら めじるしアクセサリー2",
-    "name_en": "",
+    "name_en": "Cardcaptor Sakura Mejirushi Accessory 2",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -7981,21 +8046,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:girls",
       "kawaii:accessory",
       "retro:heisei"
     ],
     "q_ages": [
+      "20",
       "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769889400",
     "name": "【ガシャポンバンダイオフィシャルショップ限定再販】めじるしアクセサリー サンリオキャラクターズ～エモきゅん～ パステルカラーver.",
-    "name_en": "",
+    "name_en": "[Gashapon Official Shop Reissue] Mejirushi Accessory Sanrio Characters ~Emo Kyun~ Pastel Color ver.",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -8022,18 +8089,17 @@
     ],
     "q_ages": [
       "10",
-      "20",
-      "30"
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769842597",
     "name": "【フラットガシャポン】Mezzo Piano アクリルコースターディスプレイ",
-    "name_en": "",
+    "name_en": "[Flat Gashapon] Mezzo Piano Acrylic Coaster Display",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -8052,22 +8118,23 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "kawaii:character",
+      "retro:heisei"
+    ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769889431",
     "name": "みいつけた！ めじるしアクセサリー2",
-    "name_en": "",
+    "name_en": "Miitsuketa! Mejirushi Accessory 2",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -8089,22 +8156,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:kids",
       "kawaii:accessory"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769840708",
     "name": "【フラットガシャポン】たまごっち ネイルシールコレクション",
-    "name_en": "",
+    "name_en": "[Flat Gashapon] Tamagotchi Nail Sticker Collection",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -8124,21 +8192,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
       "retro:heisei"
     ],
     "q_ages": [
+      "20",
       "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769979422",
     "name": "【フラットガシャポン】銀魂 まちぼうけステッカーコレクション～貼ってくれるまでスタンバってました～",
-    "name_en": "",
+    "name_en": "[Flat Gashapon] Gintama Machibouke Sticker Collection",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -8171,12 +8240,12 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570117984075",
     "name": "ちいかわ めじるしアクセサリー3",
-    "name_en": "",
+    "name_en": "Chiikawa Mejirushi Accessory 3",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -8208,12 +8277,12 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769823299",
     "name": "森チャック めじるしアクセサリー",
-    "name_en": "",
+    "name_en": "Mori Chack Mejirushi Accessory",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -8235,22 +8304,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
+      "kawaii:animal",
       "kawaii:accessory"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118183972",
     "name": "メロとタビ めじるしアクセサリー",
-    "name_en": "",
+    "name_en": "Mero to Tabi Mejirushi Accessory",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -8272,22 +8342,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
+      "kawaii:animal",
       "kawaii:accessory"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118184634",
     "name": "PEANUTS めじるしアクセサリー SUMMER",
-    "name_en": "",
+    "name_en": "PEANUTS Mejirushi Accessory SUMMER",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -8309,20 +8380,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
       "kawaii:accessory"
     ],
     "q_ages": [
+      "20",
+      "30",
       "40"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769739422",
     "name": "夢のクレヨン王国 めじるしアクセサリー",
-    "name_en": "",
+    "name_en": "Yume no Crayon Oukoku Mejirushi Accessory",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -8344,22 +8418,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:girls",
+      "retro:heisei",
       "kawaii:accessory"
     ],
     "q_ages": [
-      "20",
       "30",
       "40"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769867255",
     "name": "【CAP'in GALLERY】かえちゃんふぃぎゅあ designed by 田中かえ",
-    "name_en": "",
+    "name_en": "[CAP'in GALLERY] Kae-chan Figure designed by Kae Tanaka",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -8378,22 +8453,23 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "kawaii:character",
+      "real:miniature"
+    ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770033625",
     "name": "rom＆nd ミニチュアコレクション3",
-    "name_en": "",
+    "name_en": "rom&nd Miniature Collection 3",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -8418,20 +8494,18 @@
       "real:miniature"
     ],
     "q_ages": [
-      "30",
-      "40",
-      "50"
+      "10",
+      "20"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770055344",
     "name": "【ガシャポンバンダイオフィシャルショップ限定】【CAP'in GALLERY】VIRUSWEETS figure collection ～trick or treat～",
-    "name_en": "",
+    "name_en": "[Gashapon Official Shop Exclusive] [CAP'in GALLERY] VIRUSWEETS Figure Collection ~Trick or Treat~",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -8450,22 +8524,24 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "kawaii:character",
+      "real:food",
+      "real:miniature"
+    ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770055375",
     "name": "【CAP'in GALLERY】LilGemily figure collection",
-    "name_en": "",
+    "name_en": "[CAP'in GALLERY] LilGemily Figure Collection",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -8484,22 +8560,23 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "kawaii:character",
+      "real:miniature"
+    ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770069242",
     "name": "【CAP'in GALLERY】atmos TENKYU フィギュアコレクション",
-    "name_en": "",
+    "name_en": "[CAP'in GALLERY] atmos TENKYU Figure Collection",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -8525,19 +8602,17 @@
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118181862",
     "name": "名探偵プリキュア！ サウンドロップ",
-    "name_en": "",
+    "name_en": "Detective Pretty Cure! Soundrop",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -8556,19 +8631,22 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "oshi:girls"
+    ],
     "q_ages": [
-      "10"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118184870",
     "name": "スポンジ・ボブ めじるしアクセサリー２",
-    "name_en": "",
+    "name_en": "SpongeBob SquarePants Mejirushi Accessory 2",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -8590,22 +8668,25 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "cool:western",
+      "kawaii:character",
       "kawaii:accessory"
     ],
     "q_ages": [
+      "10",
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769911262",
     "name": "魔法騎士レイアース カプセルフィギュアコレクション",
-    "name_en": "",
+    "name_en": "Magic Knight Rayearth Capsule Figure Collection",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -8627,23 +8708,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:girls",
+      "retro:heisei",
       "real:miniature"
     ],
     "q_ages": [
-      "20",
       "30",
       "40"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769979286",
     "name": "miffy カラフルカラビナマスコット",
-    "name_en": "",
+    "name_en": "miffy Colorful Carabiner Mascot",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -8665,23 +8746,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot"
+      "kawaii:character",
+      "kawaii:animal",
+      "kawaii:accessory"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769979484",
     "name": "TVアニメ『アオのハコ』 カプセルラバーマスコット2",
-    "name_en": "",
+    "name_en": "Blue Box Capsule Rubber Mascot 2",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -8703,23 +8784,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot"
+      "oshi:trend",
+      "cool:shonen",
+      "kawaii:accessory"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769979804",
     "name": "初音ミク まちぼうけ",
-    "name_en": "",
+    "name_en": "Hatsune Miku Machibouke",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -8741,23 +8822,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:idol",
       "funny:machibouke"
     ],
     "q_ages": [
+      "10",
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769995279",
     "name": "【CAP'in GALLERY】miffy Glint Series",
-    "name_en": "",
+    "name_en": "[CAP'in GALLERY] miffy Glint Series",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -8776,22 +8858,23 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "kawaii:character",
+      "kawaii:animal"
+    ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770026948",
     "name": "“ディズニーキャラクター” CAT スイングマスコット",
-    "name_en": "",
+    "name_en": "Disney Characters CAT Swing Mascot",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -8814,21 +8897,23 @@
     "auto": true,
     "q_subs": [
       "kawaii:disney",
-      "kawaii:mascot"
+      "kawaii:animal",
+      "kawaii:accessory"
     ],
     "q_ages": [
+      "10",
       "20",
       "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770026955",
     "name": "ズートピア2 ミニチュア＆パッケージコレクション",
-    "name_en": "",
+    "name_en": "Zootopia 2 Miniature & Package Collection",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -8851,23 +8936,24 @@
     "auto": true,
     "q_subs": [
       "kawaii:disney",
+      "kawaii:animal",
       "real:miniature"
     ],
     "q_ages": [
-      "30",
-      "40",
-      "50"
+      "10",
+      "20",
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770026993",
     "name": "サンリオキャラクターズ ときめきフリルマスコット",
-    "name_en": "",
+    "name_en": "Sanrio Characters Tokimeki Frill Mascot",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -8890,22 +8976,21 @@
     "auto": true,
     "q_subs": [
       "kawaii:sanrio",
-      "kawaii:mascot"
+      "kawaii:accessory"
     ],
     "q_ages": [
       "10",
-      "20",
-      "30"
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770027006",
     "name": "サンリオキャラクターズ 実写版ミニチュアチャーム",
-    "name_en": "",
+    "name_en": "Sanrio Characters Real-Life Miniature Charm",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -8929,25 +9014,23 @@
     "auto": true,
     "q_subs": [
       "kawaii:sanrio",
-      "kawaii:accessory",
-      "real:miniature"
+      "real:miniature",
+      "kawaii:accessory"
     ],
     "q_ages": [
       "10",
       "20",
-      "30",
-      "40",
-      "50"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770053814",
     "name": "TOM and JERRY ぷにぷにし隊～クリアカラーバージョン～",
-    "name_en": "",
+    "name_en": "TOM and JERRY Punipuni-tai ~Clear Color Version~",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -8966,7 +9049,11 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "cool:western",
+      "kawaii:character",
+      "funny:neta"
+    ],
     "q_ages": [
       "20",
       "30",
@@ -8976,12 +9063,12 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770054644",
     "name": "ディズニー ツイステッドワンダーランド めじるしアクセサリー",
-    "name_en": "",
+    "name_en": "Disney Twisted-Wonderland Mejirushi Accessory",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -9004,21 +9091,22 @@
     "auto": true,
     "q_subs": [
       "kawaii:disney",
+      "oshi:game",
       "kawaii:accessory"
     ],
     "q_ages": [
-      "20",
-      "30"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770054903",
     "name": "お茶犬Sweets めじるしアクセサリー",
-    "name_en": "",
+    "name_en": "Ochaken Sweets Mejirushi Accessory",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -9040,23 +9128,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
       "kawaii:animal",
-      "kawaii:accessory"
+      "kawaii:accessory",
+      "retro:heisei"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770054989",
     "name": "MOOMIN カプセルボトルチャーム",
-    "name_en": "",
+    "name_en": "MOOMIN Capsule Bottle Charm",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -9078,6 +9167,7 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
       "kawaii:accessory"
     ],
     "q_ages": [
@@ -9088,12 +9178,12 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770056099",
     "name": "おジャ魔女どれみ×ひつじのショーン ラバーマスコット",
-    "name_en": "",
+    "name_en": "Ojamajo Doremi × Shaun the Sheep Rubber Mascot",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -9115,22 +9205,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:animal",
-      "kawaii:mascot",
-      "retro:heisei"
+      "oshi:girls",
+      "retro:heisei",
+      "kawaii:animal"
     ],
     "q_ages": [
+      "20",
       "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770068504",
     "name": "ぐ～チョコランタン カラフルカラビナマスコット",
-    "name_en": "",
+    "name_en": "Gu-Choco Lantern Colorful Carabiner Mascot",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -9152,24 +9243,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
-      "real:food"
+      "oshi:kids",
+      "retro:heisei",
+      "kawaii:accessory"
     ],
     "q_ages": [
-      "20",
       "30",
       "40"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770069266",
     "name": "機動戦士ガンダム ガンダムヘッド めじるしアクセサリー2",
-    "name_en": "",
+    "name_en": "Mobile Suit Gundam Gundam Head Mejirushi Accessory 2",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -9191,23 +9281,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
-      "cool:robot"
+      "cool:robot",
+      "kawaii:accessory"
     ],
     "q_ages": [
+      "20",
       "30",
       "40"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770070293",
     "name": "ほっぺちゃん ゆめかわキラキラチャーム",
-    "name_en": "",
+    "name_en": "Hoppe-chan Yume-kawa Sparkle Charm",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -9229,22 +9319,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory"
+      "kawaii:character",
+      "kawaii:accessory",
+      "retro:heisei"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770070422",
     "name": "モンチッチ Twinkleゴム",
-    "name_en": "",
+    "name_en": "Monchhichi Twinkle Hair Tie",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -9263,22 +9354,25 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "kawaii:character",
+      "kawaii:accessory",
+      "retro:showa"
+    ],
     "q_ages": [
       "20",
       "30",
       "40"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770071207",
     "name": "ナルミヤキャラクターズ モノトーンマスコット",
-    "name_en": "",
+    "name_en": "Narumiya Characters Monotone Mascot",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -9300,21 +9394,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
+      "kawaii:character",
       "retro:heisei"
     ],
     "q_ages": [
+      "20",
       "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770076776",
     "name": "いたずらねこちゃあぁぁん",
-    "name_en": "",
+    "name_en": "Itazura Neko-chaaan",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -9334,24 +9429,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:animal",
-      "funny:neta"
+      "funny:neta",
+      "kawaii:animal"
     ],
     "q_ages": [
+      "10",
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770098419",
     "name": "仮面ライダーマイス めじるしアクセサリー",
-    "name_en": "",
+    "name_en": "Kamen Rider Mais Mejirushi Accessory",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -9373,23 +9468,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
-      "cool:hero"
+      "cool:hero",
+      "kawaii:accessory"
     ],
     "q_ages": [
-      "40",
-      "50"
+      "20",
+      "30",
+      "40"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770098860",
     "name": "ポンデクルール ジュエルペット 香り付き保湿バーム",
-    "name_en": "",
+    "name_en": "Pondekrewl Jewelpet Scented Moisturizing Balm",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -9409,20 +9505,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
       "retro:heisei"
     ],
     "q_ages": [
+      "20",
       "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770121940",
     "name": "【フラットガシャポン】サンリオキャラクターズ ミニおりたたみコンテナ2",
-    "name_en": "",
+    "name_en": "[Flat Gashapon] Sanrio Characters Mini Folding Container 2",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -9452,12 +9550,12 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770122909",
     "name": "ART IN GASHAPON ウゴモ 埴輪と土偶",
-    "name_en": "",
+    "name_en": "ART IN GASHAPON Ugomo Haniwa and Dogu",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -9476,22 +9574,25 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "funny:neta",
+      "real:miniature"
+    ],
     "q_ages": [
-      "20",
       "30",
-      "40"
+      "40",
+      "50"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770129533",
     "name": "【フラットガシャポン】TOM and JERRY マウスシートコレクション",
-    "name_en": "",
+    "name_en": "[Flat Gashapon] TOM and JERRY Mouse Pad Collection",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -9510,7 +9611,10 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "cool:western",
+      "kawaii:character"
+    ],
     "q_ages": [
       "20",
       "30",
@@ -9520,12 +9624,12 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770139198",
     "name": "仮面ライダーマイス GPライダーエグズ02",
-    "name_en": "",
+    "name_en": "Kamen Rider Mais GP Rider Egz 02",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -9545,21 +9649,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "cool:hero"
+      "cool:hero",
+      "kawaii:accessory"
     ],
     "q_ages": [
-      "40",
-      "50"
+      "20",
+      "30",
+      "40"
     ],
     "q_genders": [
+      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4549660973492",
     "name": "パンどろぼう めじるしアクセサリー",
-    "name_en": "",
+    "name_en": "Pandorobou Mejirushi Accessory",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -9581,23 +9688,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
       "kawaii:accessory",
-      "real:food"
+      "oshi:trend"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769866340",
     "name": "お文具といっしょ めじるしアクセサリー ～おっきなペロペロキャンディなのです～",
-    "name_en": "",
+    "name_en": "Obungu to Issho Mejirushi Accessory ~Big Lollipop~",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -9619,23 +9726,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
-      "funny:neta"
+      "kawaii:character",
+      "real:food",
+      "kawaii:accessory"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769860607",
     "name": "サマーウォーズ めじるしアクセサリー",
-    "name_en": "",
+    "name_en": "Summer Wars Mejirushi Accessory",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -9657,22 +9764,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:trend",
       "kawaii:accessory"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769776236",
     "name": "はらぺこあおむし めじるしアクセサリー",
-    "name_en": "",
+    "name_en": "The Very Hungry Caterpillar Mejirushi Accessory",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -9694,22 +9802,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
+      "kawaii:animal",
       "kawaii:accessory"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769889622",
     "name": "【ガシャポンバンダイオフィシャルショップ限定再販】ケアベア™ フォトフレームマスコット",
-    "name_en": "",
+    "name_en": "[Gashapon Official Shop Reissue] Care Bears™ Photo Frame Mascot",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -9731,20 +9840,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot"
+      "kawaii:character",
+      "kawaii:animal",
+      "retro:heisei"
     ],
     "q_ages": [
-      "40"
+      "20",
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118197719",
     "name": "TOM and JERRY フォトフレームマスコット",
-    "name_en": "",
+    "name_en": "TOM and JERRY Photo Frame Mascot",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -9766,7 +9878,8 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot"
+      "cool:western",
+      "kawaii:character"
     ],
     "q_ages": [
       "20",
@@ -9777,12 +9890,12 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118195869",
     "name": "くまのがっこう カラフルマルチチャーム",
-    "name_en": "",
+    "name_en": "Jackie (Kuma no Gakko) Colorful Multi Charm",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -9804,6 +9917,7 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
       "kawaii:animal",
       "kawaii:accessory"
     ],
@@ -9815,12 +9929,12 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118186942",
     "name": "ジュエルポッド ミニチュアチャームコレクション",
-    "name_en": "",
+    "name_en": "Jewel Pod Miniature Charm Collection",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -9847,19 +9961,18 @@
       "real:miniature"
     ],
     "q_ages": [
-      "30",
-      "40",
-      "50"
+      "20",
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118187321",
     "name": "ちいかわ カプセルステッキ",
-    "name_en": "",
+    "name_en": "Chiikawa Capsule Stick",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -9888,12 +10001,12 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118196545",
     "name": "ONE PIECE ゆらゆらし隊",
-    "name_en": "",
+    "name_en": "ONE PIECE Yurayura-shi-tai",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -9913,20 +10026,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "cool:shonen"
+      "cool:shonen",
+      "funny:neta"
     ],
     "q_ages": [
-      "30"
+      "20",
+      "30",
+      "40"
     ],
     "q_genders": [
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118196859",
     "name": "鋼の錬金術師 まちぼうけ",
-    "name_en": "",
+    "name_en": "Fullmetal Alchemist Machibouke",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -9948,6 +10064,7 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "cool:shonen",
       "funny:machibouke"
     ],
     "q_ages": [
@@ -9959,12 +10076,12 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118206206",
     "name": "ちいかわ ふわふわフロッキードール",
-    "name_en": "",
+    "name_en": "Chiikawa Fluffy Flocked Doll",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -9996,12 +10113,12 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769888700",
     "name": "CAPSULEVERSE ゴジラ",
-    "name_en": "",
+    "name_en": "CAPSULEVERSE Godzilla",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 800,
@@ -10021,7 +10138,9 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "cool:hero"
+      "cool:hero",
+      "real:miniature",
+      "retro:showa"
     ],
     "q_ages": [
       "40",
@@ -10030,12 +10149,12 @@
     "q_genders": [
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769889592",
     "name": "yeye ムンゲのフィギュア",
-    "name_en": "",
+    "name_en": "yeye Munge Figure",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -10056,22 +10175,23 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "kawaii:character",
+      "real:miniature"
+    ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769927140",
     "name": "パペットスンスン パッケージミニチュアチャーム",
-    "name_en": "",
+    "name_en": "Puppet Sunsun Package Miniature Charm",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -10094,23 +10214,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
-      "real:miniature"
+      "kawaii:character",
+      "real:miniature",
+      "kawaii:accessory"
     ],
     "q_ages": [
-      "30",
-      "40",
-      "50"
+      "10",
+      "20",
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769928420",
     "name": "クレヨンしんちゃん なりきり！？アイドルステージ スイングマスコット",
-    "name_en": "",
+    "name_en": "Crayon Shin-chan Narikiri!? Idol Stage Swing Mascot",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -10132,22 +10253,25 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:kids",
       "kawaii:mascot",
-      "oshi:idol"
+      "funny:neta"
     ],
     "q_ages": [
-      "10"
+      "10",
+      "20",
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769968372",
     "name": "HG HUNTER×HUNTER Vol.1",
-    "name_en": "",
+    "name_en": "HG HUNTER×HUNTER Vol.1",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -10169,20 +10293,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "cool:shonen"
+      "cool:shonen",
+      "real:miniature"
     ],
     "q_ages": [
-      "30"
+      "20",
+      "30",
+      "40"
     ],
     "q_genders": [
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769979293",
     "name": "FANFANCHUU カラフルカラビナマスコット",
-    "name_en": "",
+    "name_en": "FANFANCHUU Colorful Carabiner Mascot",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -10204,23 +10331,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot"
+      "kawaii:character",
+      "kawaii:accessory"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769979514",
     "name": "モンスターハンター めじるしアクセサリー",
-    "name_en": "",
+    "name_en": "Monster Hunter Mejirushi Accessory",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -10242,22 +10368,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:game",
       "kawaii:accessory"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769979545",
     "name": "オーバーロード まちぼうけ",
-    "name_en": "",
+    "name_en": "Overlord Machibouke",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -10279,6 +10406,7 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:trend",
       "funny:machibouke"
     ],
     "q_ages": [
@@ -10287,15 +10415,14 @@
       "40"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769979729",
     "name": "機動戦士ガンダム MOBILE SUIT ENSEMBLE 31",
-    "name_en": "",
+    "name_en": "Mobile Suit Gundam MOBILE SUIT ENSEMBLE 31",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -10315,7 +10442,8 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "cool:robot"
+      "cool:robot",
+      "real:miniature"
     ],
     "q_ages": [
       "30",
@@ -10324,12 +10452,12 @@
     "q_genders": [
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769979736",
     "name": "【箱売】機動戦士ガンダム MOBILE SUIT ENSEMBLE 31",
-    "name_en": "",
+    "name_en": "[Box Set] Mobile Suit Gundam MOBILE SUIT ENSEMBLE 31",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 550,
@@ -10349,7 +10477,8 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "cool:robot"
+      "cool:robot",
+      "real:miniature"
     ],
     "q_ages": [
       "30",
@@ -10358,12 +10487,12 @@
     "q_genders": [
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770001747",
     "name": "ポケットモンスター つまんでつなげてマスコット16",
-    "name_en": "",
+    "name_en": "Pokémon Pinch & Link Mascots 16",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -10386,7 +10515,8 @@
     "auto": true,
     "q_subs": [
       "kawaii:pokemon",
-      "kawaii:mascot"
+      "kawaii:mascot",
+      "kawaii:accessory"
     ],
     "q_ages": [
       "10",
@@ -10397,12 +10527,12 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770013382",
     "name": "TVアニメ「らんま1/2」 めじるしアクセサリー",
-    "name_en": "",
+    "name_en": "Ranma 1/2 (TV Anime) Mejirushi Accessory",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -10425,23 +10555,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
-      "real:miniature"
+      "cool:shonen",
+      "retro:showa",
+      "kawaii:accessory"
     ],
     "q_ages": [
-      "20",
       "30",
       "40"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770027051",
     "name": "サンリオキャラクターズ がんばれないチャーム",
-    "name_en": "",
+    "name_en": "Sanrio Characters Ganbarenai Charm",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -10468,18 +10599,17 @@
     ],
     "q_ages": [
       "10",
-      "20",
-      "30"
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770027525",
     "name": "銀魂 もぐもぐ隊2",
-    "name_en": "",
+    "name_en": "Gintama Mogumogu-tai 2",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -10499,7 +10629,8 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "cool:shonen"
+      "cool:shonen",
+      "funny:neta"
     ],
     "q_ages": [
       "20",
@@ -10509,12 +10640,12 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770027594",
     "name": "ゲゲゲの鬼太郎（第4期） ねむらせ隊",
-    "name_en": "",
+    "name_en": "GeGeGe no Kitaro (4th Series) Nemurase-tai",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -10536,10 +10667,11 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:kids",
+      "retro:heisei",
       "funny:machibouke"
     ],
     "q_ages": [
-      "20",
       "30",
       "40"
     ],
@@ -10547,12 +10679,12 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770053784",
     "name": "それいけ！アンパンマン わくわくたまご9",
-    "name_en": "",
+    "name_en": "Anpanman Wakuwaku Tamago 9",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -10572,21 +10704,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "real:food"
+      "oshi:kids",
+      "kawaii:mascot"
     ],
     "q_ages": [
-      "10"
+      "20",
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770054682",
     "name": "チアリステイルズ マスコット",
-    "name_en": "",
+    "name_en": "Cheerith Tales Mascot",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -10608,23 +10742,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
       "kawaii:mascot"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770054705",
     "name": "めじるしアクセサリー サンリオキャラクターズオールスターズ Part.3",
-    "name_en": "",
+    "name_en": "Mejirushi Accessory Sanrio Characters All Stars Part.3",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -10657,12 +10790,12 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770054828",
     "name": "HELLOKITTY スクールガールスイング",
-    "name_en": "",
+    "name_en": "HELLO KITTY Schoolgirl Swing",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -10682,23 +10815,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot"
+      "kawaii:sanrio"
     ],
     "q_ages": [
+      "10",
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770054873",
     "name": "カードキャプターさくら めじるしアクセサリー5",
-    "name_en": "",
+    "name_en": "Cardcaptor Sakura Mejirushi Accessory 5",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -10720,21 +10852,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:girls",
       "kawaii:accessory",
       "retro:heisei"
     ],
     "q_ages": [
+      "20",
       "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770054927",
     "name": "アニメ『薬屋のひとりごと』 カプセルラバーマスコット3",
-    "name_en": "",
+    "name_en": "The Apothecary Diaries Capsule Rubber Mascot 3",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -10756,23 +10890,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot"
+      "oshi:trend",
+      "kawaii:accessory"
     ],
     "q_ages": [
+      "10",
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770054934",
     "name": "【フラットガシャポン/ジャンボカードダス】アニメ『薬屋のひとりごと』 クリアポスター3",
-    "name_en": "",
+    "name_en": "[Flat Gashapon / Jumbo Carddass] The Apothecary Diaries Clear Poster 3",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 200,
@@ -10791,22 +10925,23 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "oshi:trend"
+    ],
     "q_ages": [
+      "10",
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770055481",
     "name": "ジョジョの奇妙な冒険 黄金の風 めじるしアクセサリー01",
-    "name_en": "",
+    "name_en": "JoJo's Bizarre Adventure Golden Wind Mejirushi Accessory 01",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -10828,8 +10963,8 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
-      "cool:shonen"
+      "cool:shonen",
+      "kawaii:accessory"
     ],
     "q_ages": [
       "20",
@@ -10840,12 +10975,12 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770055535",
     "name": "刀剣乱舞ONLINE めじるしアクセサリー",
-    "name_en": "",
+    "name_en": "Touken Ranbu ONLINE Mejirushi Accessory",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -10867,22 +11002,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:game",
       "kawaii:accessory"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770055863",
     "name": "CAPSULEVERSE 機動戦士ガンダム 01",
-    "name_en": "",
+    "name_en": "CAPSULEVERSE Mobile Suit Gundam 01",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 800,
@@ -10902,21 +11037,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "cool:robot"
+      "cool:robot",
+      "real:miniature"
     ],
     "q_ages": [
-      "30",
-      "40"
+      "20",
+      "30"
     ],
     "q_genders": [
+      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770055979",
     "name": "サルゲッチュ めじるしアクセサリー2",
-    "name_en": "",
+    "name_en": "Ape Escape Mejirushi Accessory 2",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -10938,22 +11075,25 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:game",
+      "retro:heisei",
+      "kawaii:animal",
       "kawaii:accessory"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770067545",
     "name": "PLAVE めじるしアクセサリー",
-    "name_en": "",
+    "name_en": "PLAVE Mejirushi Accessory",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -10975,22 +11115,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:idol",
       "kawaii:accessory"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770068252",
     "name": "“ディズニーキャラクター” ふわふわめじるしアクセサリー",
-    "name_en": "",
+    "name_en": "Disney Characters Fluffy Mejirushi Accessory",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -11013,22 +11153,22 @@
     "auto": true,
     "q_subs": [
       "kawaii:disney",
-      "kawaii:mascot",
       "kawaii:accessory"
     ],
     "q_ages": [
+      "10",
       "20",
       "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770068412",
     "name": "どうぶつの森 めじるしアクセサリー",
-    "name_en": "",
+    "name_en": "Animal Crossing Mejirushi Accessory",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -11050,22 +11190,26 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:pokemon",
+      "oshi:game",
+      "kawaii:animal",
       "kawaii:accessory"
     ],
     "q_ages": [
+      "10",
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770068559",
     "name": "らぼっと ふわふわフロッキーチャーム",
-    "name_en": "",
+    "name_en": "Labotto Fluffy Flocked Charm",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -11087,23 +11231,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
+      "kawaii:character",
       "kawaii:accessory"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770068955",
     "name": "葬送のフリーレン まちぼうけ3",
-    "name_en": "",
+    "name_en": "Frieren: Beyond Journey's End Machibouke 3",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -11125,22 +11268,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:trend",
       "funny:machibouke"
     ],
     "q_ages": [
       "10",
-      "20"
+      "20",
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770069143",
     "name": "MINECRAFT クリスタルチャーム",
-    "name_en": "",
+    "name_en": "MINECRAFT Crystal Charm",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -11162,23 +11307,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
-      "oshi:game"
+      "oshi:game",
+      "kawaii:accessory"
     ],
     "q_ages": [
       "10",
-      "30"
+      "20"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770069150",
     "name": "妖怪ウォッチ 召喚メダルフィギュア",
-    "name_en": "",
+    "name_en": "Yo-kai Watch Summon Medal Figure",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -11199,20 +11344,25 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "oshi:kids",
+      "oshi:game",
+      "retro:heisei"
+    ],
     "q_ages": [
-      "10"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770070965",
     "name": "いれいす ふわふわカラフルマルチチャーム",
-    "name_en": "",
+    "name_en": "Irregular Dice Fluffy Colorful Multi Charm",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -11234,23 +11384,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
+      "oshi:vtuber",
       "kawaii:accessory"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118184122",
     "name": "【フラットガシャポン】たまごっち クリアラバーコースター",
-    "name_en": "",
+    "name_en": "[Flat Gashapon] Tamagotchi Clear Rubber Coaster",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -11270,21 +11419,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
       "retro:heisei"
     ],
     "q_ages": [
+      "20",
       "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118129611",
     "name": "【ガシャポンバンダイオフィシャルショップ限定再販】なりきりオーナーシリーズ - 日産 歴代GT-R コレクタブルキー -",
-    "name_en": "",
+    "name_en": "[Gashapon Official Shop Reissue] Narikiri Owner Series - Nissan GT-R Collectible Keys -",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -11303,22 +11453,24 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "real:vehicle",
+      "real:miniature"
+    ],
     "q_ages": [
-      "20",
       "30",
-      "40"
+      "40",
+      "50"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118206145",
     "name": "たまごっち アクリルスライドミラーコレクション 30th anniversary edition",
-    "name_en": "",
+    "name_en": "Tamagotchi Acrylic Slide Mirror Collection 30th Anniversary Edition",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -11338,21 +11490,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
       "kawaii:accessory",
       "retro:heisei"
     ],
     "q_ages": [
+      "20",
       "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769817021",
     "name": "【フラットガシャポン】サンエックスユニバース ネイルシール",
-    "name_en": "",
+    "name_en": "[Flat Gashapon] San-X Universe Nail Stickers",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -11371,22 +11525,22 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "kawaii:character"
+    ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769911231",
     "name": "ぽぼっと。さんのひとくち粘土図鑑 めじるしアクセサリー",
-    "name_en": "",
+    "name_en": "Poboto-san's Bite-Size Clay Encyclopedia Mejirushi Accessory",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -11409,21 +11563,22 @@
     "auto": true,
     "q_subs": [
       "kawaii:accessory",
-      "real:creature"
+      "real:creature",
+      "kawaii:animal"
     ],
     "q_ages": [
-      "40",
-      "50"
+      "20",
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769911538",
     "name": "モリゾーとキッコロ めじるしアクセサリー",
-    "name_en": "",
+    "name_en": "Morizo and Kiccoro Mejirushi Accessory",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -11445,7 +11600,9 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory"
+      "kawaii:mascot",
+      "kawaii:accessory",
+      "retro:heisei"
     ],
     "q_ages": [
       "20",
@@ -11453,14 +11610,15 @@
       "40"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769860621",
     "name": "妖怪ウォッチ ミニチュアパッケージコレクション",
-    "name_en": "",
+    "name_en": "Yo-kai Watch Miniature Package Collection",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -11482,24 +11640,25 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "real:miniature"
+      "oshi:kids",
+      "oshi:game",
+      "real:miniature",
+      "retro:heisei"
     ],
     "q_ages": [
       "10",
-      "30",
-      "40",
-      "50"
+      "20"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118205940",
     "name": "お茶犬・お茶猫 めじるしアクセサリー",
-    "name_en": "",
+    "name_en": "Ochaken & Ochaneko Mejirushi Accessory",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -11521,23 +11680,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
       "kawaii:animal",
-      "kawaii:accessory"
+      "kawaii:accessory",
+      "retro:heisei"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769995774",
     "name": "ハイキュー!! めじるしアクセサリー アニマルver.1",
-    "name_en": "",
+    "name_en": "Haikyu!! Mejirushi Accessory Animal ver.1",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -11559,22 +11719,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
-      "cool:shonen"
+      "cool:shonen",
+      "oshi:trend",
+      "kawaii:accessory"
     ],
     "q_ages": [
       "10",
-      "20"
+      "20",
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118197252",
     "name": "NO MORE映画泥棒 めじるしアクセサリー",
-    "name_en": "",
+    "name_en": "NO MORE Eiga Dorobo Mejirushi Accessory",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -11596,6 +11758,7 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "funny:neta",
       "kawaii:accessory"
     ],
     "q_ages": [
@@ -11604,14 +11767,15 @@
       "40"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769832642",
     "name": "【ジャンボカードダス/フラットガシャポン】たまごっち ジャンボシールダス２",
-    "name_en": "",
+    "name_en": "[Jumbo Carddass / Flat Gashapon] Tamagotchi Jumbo Sealdass 2",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 200,
@@ -11631,21 +11795,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
       "retro:heisei"
     ],
     "q_ages": [
+      "20",
       "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769722660",
     "name": "ピーターラビット™ めじるしアクセサリー",
-    "name_en": "",
+    "name_en": "Peter Rabbit™ Mejirushi Accessory",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -11667,22 +11832,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
+      "kawaii:animal",
       "kawaii:accessory"
     ],
     "q_ages": [
-      "20",
       "30",
-      "40"
+      "40",
+      "50"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769836558",
     "name": "ゲゲゲの鬼太郎（第4期） めじるしアクセサリー",
-    "name_en": "",
+    "name_en": "GeGeGe no Kitaro (4th Series) Mejirushi Accessory",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -11704,22 +11871,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:kids",
+      "retro:heisei",
       "kawaii:accessory"
     ],
     "q_ages": [
-      "20",
       "30",
       "40"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769911477",
     "name": "パワーパフ ガールズ ブリスターチャームコレクション",
-    "name_en": "",
+    "name_en": "The Powerpuff Girls Blister Charm Collection",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -11741,22 +11910,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "cool:western",
+      "kawaii:character",
       "kawaii:accessory",
       "retro:heisei"
     ],
     "q_ages": [
-      "30",
-      "40"
+      "20",
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769928567",
     "name": "なめこ栽培キット ぬいぐるみマスコット",
-    "name_en": "",
+    "name_en": "Nameko Cultivation Kit Plush Mascot",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -11779,22 +11950,24 @@
     "auto": true,
     "q_subs": [
       "kawaii:mascot",
-      "funny:neta"
+      "oshi:game",
+      "funny:neta",
+      "retro:heisei"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118197955",
     "name": "ぷちきゅあ めじるしアクセサリー ～Heart Collection～",
-    "name_en": "",
+    "name_en": "Petit Cure Mejirushi Accessory ~Heart Collection~",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -11816,22 +11989,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:girls",
       "kawaii:accessory"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770095234",
     "name": "仮面ライダーシリーズ めじるしアクセサリーBEST",
-    "name_en": "",
+    "name_en": "Kamen Rider Series Mejirushi Accessory BEST",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -11853,23 +12026,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
-      "cool:hero"
+      "cool:hero",
+      "kawaii:accessory"
     ],
     "q_ages": [
-      "40",
-      "50"
+      "20",
+      "30",
+      "40"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118205483",
     "name": "Disney Princess コスチュームめじるしアクセサリー",
-    "name_en": "",
+    "name_en": "Disney Princess Costume Mejirushi Accessory",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -11891,22 +12065,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:disney",
       "kawaii:accessory"
     ],
     "q_ages": [
+      "10",
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769979019",
     "name": "カプセリウム ドラゴンクエスト",
-    "name_en": "",
+    "name_en": "Capsulium Dragon Quest",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 600,
@@ -11925,22 +12100,23 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "oshi:game",
+      "real:miniature"
+    ],
     "q_ages": [
-      "20",
       "30",
       "40"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770071092",
     "name": "カラフルマルチチャーム 塊魂",
-    "name_en": "",
+    "name_en": "Colorful Multi Charm Katamari Damacy",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -11962,22 +12138,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory"
+      "oshi:game",
+      "kawaii:accessory",
+      "retro:heisei"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770081695",
     "name": "JAPAN めじるしアクセサリー3",
-    "name_en": "",
+    "name_en": "JAPAN Mejirushi Accessory 3",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -12007,14 +12185,15 @@
       "40"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770095616",
     "name": "きらちゅるした めじるしリンクチャーム ちっちゃなおばけさん",
-    "name_en": "",
+    "name_en": "Kirachuru Shita Mejirushi Link Charm Little Ghosts",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -12036,22 +12215,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
       "kawaii:accessory"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770122510",
     "name": "HG ウルトラマン 60周年記念弾",
-    "name_en": "",
+    "name_en": "HG Ultraman 60th Anniversary Edition",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -12074,6 +12253,7 @@
     "auto": true,
     "q_subs": [
       "cool:hero",
+      "real:miniature",
       "retro:showa"
     ],
     "q_ages": [
@@ -12083,12 +12263,12 @@
     "q_genders": [
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770122855",
     "name": "リンクトラベラーズ ～幻想に彩られた世界編～ SIDE：G",
-    "name_en": "",
+    "name_en": "Link Travelers ~Fantasy-Colored World~ SIDE: G",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -12107,22 +12287,22 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "kawaii:character"
+    ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770129465",
     "name": "GUNDAM × hololive production カプセルラバーマスコット1",
-    "name_en": "",
+    "name_en": "GUNDAM × hololive production Capsule Rubber Mascot 1",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -12144,24 +12324,25 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
-      "oshi:vtuber"
+      "cool:robot",
+      "oshi:vtuber",
+      "kawaii:mascot"
     ],
     "q_ages": [
+      "10",
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770130188",
     "name": "NBA 3Dユニフォームチャーム",
-    "name_en": "",
+    "name_en": "NBA 3D Uniform Charm",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -12191,14 +12372,14 @@
       "40"
     ],
     "q_genders": [
-      "female"
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770131505",
     "name": "星のカービィ メタルめじるしアクセサリー",
-    "name_en": "",
+    "name_en": "Kirby Metal Mejirushi Accessory",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -12222,22 +12403,24 @@
     "auto": true,
     "q_subs": [
       "kawaii:pokemon",
+      "oshi:game",
       "kawaii:accessory"
     ],
     "q_ages": [
+      "10",
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770139747",
     "name": "ポケットモンスター ポケモンラバーマスコット31",
-    "name_en": "",
+    "name_en": "Pokémon Rubber Mascot 31",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -12271,12 +12454,12 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770140453",
     "name": "【フラットガシャポン】みいつけた！ ネイル＆マルチシールコレクション",
-    "name_en": "",
+    "name_en": "[Flat Gashapon] Miitsuketa! Nail & Multi Sticker Collection",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -12300,19 +12483,18 @@
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770140965",
     "name": "キングダム まちぼうけセレクション",
-    "name_en": "",
+    "name_en": "Kingdom Machibouke Selection",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -12345,6 +12527,6 @@
     "q_genders": [
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   }
 ]
