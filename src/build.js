@@ -501,7 +501,7 @@ ${content}
         <div class="opts opts-lg">${t.genders.map(([v, l]) => opt("gender", "radio", v, l)).join("")}</div>
       </fieldset>
       <fieldset data-auto><legend><b>2</b>${t.qAge}</legend>
-        <div class="opts opts-lg">${t.ages.map(([v, l]) => opt("age", "radio", v, l)).join("")}</div>
+        <div class="opts opts-lg opts-age">${t.ages.map(([v, l]) => opt("age", "radio", v, l)).join("")}</div>
       </fieldset>
       <fieldset data-last><legend><b>3</b>${t.qGroups}</legend>
         <p class="q-hint">${t.groupsHint}</p>
