@@ -11936,5 +11936,415 @@
       "male"
     ],
     "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770071092",
+    "name": "カラフルマルチチャーム 塊魂",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-10",
+    "release_note": "10月第5週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770071092000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770071092",
+    "popularity": 50,
+    "added": "2026-10-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770081695",
+    "name": "JAPAN めじるしアクセサリー3",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-10",
+    "release_note": "10月第5週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 8,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770081695000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770081695",
+    "popularity": 50,
+    "added": "2026-10-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770095616",
+    "name": "きらちゅるした めじるしリンクチャーム ちっちゃなおばけさん",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-10",
+    "release_note": "10月第5週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 8,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770095616000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770095616",
+    "popularity": 50,
+    "added": "2026-10-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770122510",
+    "name": "HG ウルトラマン 60周年記念弾",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-10",
+    "release_note": "10月第5週より順次",
+    "genre": "anime",
+    "moods": [
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770122510000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770122510",
+    "popularity": 50,
+    "added": "2026-10-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "cool:hero",
+      "retro:showa"
+    ],
+    "q_ages": [
+      "40",
+      "50"
+    ],
+    "q_genders": [
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770122855",
+    "name": "リンクトラベラーズ ～幻想に彩られた世界編～ SIDE：G",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-10",
+    "release_note": "10月第5週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 7,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770122855000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770122855",
+    "popularity": 50,
+    "added": "2026-10-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770129465",
+    "name": "GUNDAM × hololive production カプセルラバーマスコット1",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-10",
+    "release_note": "10月第5週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770129465000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770129465",
+    "popularity": 50,
+    "added": "2026-10-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "oshi:vtuber"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770130188",
+    "name": "NBA 3Dユニフォームチャーム",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-10",
+    "release_note": "10月第5週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770130188000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770130188",
+    "popularity": 50,
+    "added": "2026-10-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770131505",
+    "name": "星のカービィ メタルめじるしアクセサリー",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-10",
+    "release_note": "10月第5週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii",
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 7,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770131505000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770131505",
+    "popularity": 50,
+    "added": "2026-10-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:pokemon",
+      "kawaii:accessory"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770139747",
+    "name": "ポケットモンスター ポケモンラバーマスコット31",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-10",
+    "release_note": "10月第5週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 8,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770139747000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770139747",
+    "popularity": 50,
+    "added": "2026-10-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:pokemon",
+      "kawaii:mascot"
+    ],
+    "q_ages": [
+      "10",
+      "20",
+      "30"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770140453",
+    "name": "【フラットガシャポン】みいつけた！ ネイル＆マルチシールコレクション",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-10",
+    "release_note": "10月第5週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770140453000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770140453",
+    "popularity": 50,
+    "added": "2026-10-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "oshi:kids"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770140965",
+    "name": "キングダム まちぼうけセレクション",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-10",
+    "release_note": "10月第5週より順次",
+    "genre": "anime",
+    "moods": [
+      "funny"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 8,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770140965000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770140965",
+    "popularity": 50,
+    "added": "2026-10-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "cool:shonen",
+      "funny:machibouke"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "male"
+    ],
+    "tags_auto": true
   }
 ]
