@@ -534,3 +534,7 @@ a:focus-visible, button:focus-visible, select:focus-visible, summary:focus-visib
   .opts-age .opt { flex: 1 1 30%; }
   .opts-lg .opt span { font-size: 15px; }
 }
+/* 性別・年代のボタンを少し小さく */
+.opts-lg .opt span { min-height: 42px; padding: 6px 6px; font-size: 14px; }
+@media (min-width: 901px) { .opts.opts-lg { max-width: 640px; } }
+@media (max-width: 520px) { .opts-lg .opt span { min-height: 40px; font-size: 14px; } }

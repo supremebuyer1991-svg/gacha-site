@@ -163,7 +163,14 @@
     }
     steps.forEach(function (f) {
       if (!f.hasAttribute("data-auto")) return;
-      f.addEventListener("change", function () { setTimeout(function () { show(cur + 1, 1); }, 220); });
+      // 選んだら次へ。戻ってきて同じ答えをもう一度押したときも進む（そのときは「change」が起きないので「click」で見る）
+      var timer = null;
+      f.addEventListener("click", function (e) {
+        if (!e.target.matches || !e.target.matches('input[type="radio"]')) return;
+        var me = steps.indexOf(f);
+        if (timer || me !== cur) return;
+        timer = setTimeout(function () { timer = null; if (cur === me) show(me + 1, 1); }, 220);
+      });
     });
     backBtn.addEventListener("click", function () { show(cur - 1, -1); });
     show(0);
