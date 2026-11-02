@@ -1,9 +1,9 @@
 {
   "name": "GACHA PLANET",
   "name_ja": "ガチャプラネット",
-  "tagline": "大人のためのカプセルトイ・ガイド",
-  "tagline_en": "Capsule toy guide for collectors",
-  "description": "新作ガチャガチャの発売日・価格・ラインナップと、近くの在庫店をまとめて探せる大人のコレクター向け情報サイト。",
+  "tagline": "ガチャガチャ情報まとめ",
+  "tagline_en": "Capsule toy guide",
+  "description": "新作ガチャガチャの発売日・価格・ラインナップと、近くの在庫店・入荷情報をまとめて探せる情報サイト。",
   "description_en": "New Japanese capsule toys (gacha) with release dates, prices and lineups, plus nearby shops in Japan that have them in stock.",
   "url": "https://example.pages.dev",
   "amazon_tag": "",
