@@ -112,7 +112,9 @@ const T = {
       ["在庫情報はどのくらい正確ですか？", "各店舗の情報を定期的に集めて表示しています。更新の間に売り切れたり補充されたりすることがあるため、表示と実際が異なる場合があります。商品ページに「○時時点の情報」と表示しているので目安にしてください。"],
       ["現在地を使うと、位置情報はどこかに送られますか？", "送られません。現在地はお使いの端末の中で店舗までの距離を計算するためだけに使い、当サイトのサーバーを含めどこにも保存・送信しません。"],
       ["近くに在庫がないときはどうすればいいですか？", "商品ページの下にあるAmazon・楽天市場のボタンから、コンプリートセットや単品を探せます。発売から日が浅い商品は、数日後に店舗へ再入荷することもあります。"],
-      ["発売日がメーカーの発表と違うことはありますか？", "当サイトはメーカーの発表をもとに月単位で掲載しています。実際の店頭に並ぶ時期は地域や店舗によって前後します。"],
+      ["発売日がメーカーの発表と違うことはありますか？", "当サイトはメーカーの発表をもとに、発売週ごとに掲載しています。実際の店頭に並ぶ時期は地域や店舗によって前後します。"],
+      ["「11月第2週発売」は何日から売られますか？", "当サイトでは、その月の最初の月曜日から始まる週を「第1週」として数えています（例：2026年11月の第1週は11/2〜11/8、第2週は11/9〜11/15）。メーカーの「第◯週」は、その週から順次お店に並ぶという意味で、決まった発売日はありません。早いお店で週の初め、遅いお店では翌週になることもあります。"],
+      ["先の月の新作はいつごろわかりますか？", "バンダイ・タカラトミーアーツは、おおむね1〜2か月前に発売予定を公式サイトで発表します。当サイトは1日3回公式の発表を確かめ、3か月先まで発売カレンダーに自動で追加しています。"],
       ["ガチャ診断はどうやって決まっていますか？", "選んだジャンル・テイスト・予算と、各商品に付けたタグを照らし合わせて、相性の高い順に表示しています。タグはAIで付けたものを含みます。"],
       ["掲載内容の誤りを見つけたら？", "運営者情報ページのお問い合わせ先からお知らせください。確認のうえ修正します。"],
     ],
@@ -187,6 +189,7 @@ const T = {
     faqTitle: "FAQ", faqLead: "How to read stock information and how to buy online.",
     faqDesc: "Answers about stock accuracy, location privacy, buying gacha online and visiting shops in Japan.",
     faqs: [
+      ["What does \"week 2 of November\" mean?", "We count the week starting on the first Monday of the month as week 1 (for November 2026, week 1 is Nov 2–8 and week 2 is Nov 9–15). Makers announce a release week rather than a date, and machines are restocked during that week, so arrival can vary by a few days from shop to shop."],
       ["What is gacha (gashapon)?", "Gacha are capsule toy vending machines found all over Japan. Insert coins, turn the handle, and get one random item from the series. Most machines take ¥100 coins only, so bring change."],
       ["How accurate is the stock information?", "We collect stock information from shops regularly. Items can sell out or be restocked between updates, so treat it as a guide. Each item page shows when the information was collected."],
       ["Is my location sent anywhere?", "No. Your location is only used on your own device to calculate the distance to each shop. It is never stored or sent to our server or anyone else."],
