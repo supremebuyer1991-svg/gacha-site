@@ -793,3 +793,23 @@ label.opt:focus-within { outline: none; }
 .rate-pick-sm button { font-size: 24px; }
 .ts-pref { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; font-weight: 700; }
 .ts-pref select { height: 40px; padding: 0 12px; border-radius: 10px; border: 1px solid var(--line-strong); background: var(--surface); font: 15px var(--font-body); min-width: 160px; }
+
+/* トップ：診断を低く・上に詰める */
+.hero { gap: 18px; }
+@media (max-width: 900px) { .hero { padding-top: 22px; gap: 14px; } .hero-intro { padding-bottom: 18px; } }
+.quiz { padding: 14px 18px; gap: 10px; }
+@media (min-width: 901px) { .quiz { padding: 16px 24px; } }
+.quiz.is-wizard .quiz-qs { min-height: 0; }
+.quiz.is-wizard legend { margin-bottom: 8px; }
+.quiz-nav { padding-top: 10px; margin-top: 0; }
+.quiz-nav:not(:has(.btn:not([hidden]))) { display: none; }
+
+/* 新着ガチャ：上に詰めて、小さめの写真で横に並べる（横スクロール） */
+#new { padding-top: 36px; }
+#new .section-head { margin-bottom: 14px; }
+.grid.row-scroll { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 2px 12px; margin: 0 -2px; scrollbar-width: thin; -webkit-overflow-scrolling: touch; }
+.row-scroll > .card { flex: 0 0 150px; scroll-snap-align: start; gap: 6px; }
+@media (min-width: 901px) { .row-scroll > .card { flex-basis: calc((100% - 60px) / 6); } }
+.row-scroll .card-name { font-size: 12.5px; line-height: 1.45; }
+.row-scroll .card-meta, .row-scroll .card-foot { font-size: 11px; }
+.row-scroll .card:hover { transform: none; }

@@ -604,7 +604,7 @@ ${content}
 
   <section class="section" id="new">
     <div class="section-head"><h2>${t.newTitle}</h2><span><a class="more" href="${c.H}week.html">${lang === "en" ? "This week" : "今週発売"}</a>　<a class="more" href="${c.H}calendar.html">${t.toCalendar}</a></span></div>
-    <div class="grid">${newest.map((it) => card(it, c)).join("")}</div>
+    <div class="grid row-scroll">${newest.map((it) => card(it, c)).join("")}</div>
   </section>
 
   <section class="section" id="feed" data-api="${c.R}api/feed" hidden>
