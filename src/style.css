@@ -596,3 +596,36 @@ label.opt:focus-within { outline: none; }
 .types a:nth-child(5n+4) { border-top-color: var(--yellow); }
 .types a:nth-child(5n+5) { border-top-color: var(--violet); }
 @media (max-width: 520px) { .genres { gap: 8px; } .genres a { padding: 14px 14px; } .genres .ja { font-size: 14.5px; } .genres .n { font-size: 11px; } }
+
+/* ===== みんなのガチャマップ ===== */
+.map-wrap { margin-top: 24px; }
+.map-tools { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.map-q { flex: 1 1 220px; height: 44px; padding: 0 16px; border-radius: 999px; border: 2px solid var(--line); background: #fff; font: 500 14px var(--font-body); }
+.map-tools .btn { min-height: 44px; }
+.map { position: relative; height: min(68vh, 620px); border-radius: var(--radius); overflow: hidden; box-shadow: 0 10px 30px rgba(58,77,160,.10), 0 2px 0 var(--line); background: #eef2ff; z-index: 0; }
+.map-sm { height: 260px; }
+.map.is-adding::after { content: "＋"; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -54%); font: 700 48px/1 var(--font-latin); color: var(--gold); text-shadow: 0 0 6px #fff, 0 0 2px #fff; z-index: 500; pointer-events: none; }
+.map-add { margin-top: 12px; background: var(--surface); border-radius: var(--radius); padding: 16px 18px; box-shadow: 0 2px 0 var(--line); display: flex; flex-direction: column; gap: 10px; }
+.map-add label { display: flex; flex-direction: column; gap: 4px; font-size: 13px; font-weight: 700; color: var(--text-2); }
+.map-add input, .rep-form input { height: 42px; padding: 0 14px; border-radius: 12px; border: 2px solid var(--line); font: 500 15px var(--font-body); background: #fff; }
+.map-add-btns, .rep-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+.leaflet-popup-content { font-family: var(--font-body); font-size: 13px; line-height: 1.6; }
+.leaflet-popup-content a { color: var(--sky); font-weight: 700; }
+.shop-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 10px; }
+.shop-row { display: flex; flex-direction: column; gap: 2px; background: var(--surface); border-radius: 14px; padding: 14px 16px; box-shadow: 0 2px 0 var(--line); }
+.shop-row b { font-size: 15px; } .shop-row span { font-size: 12px; color: var(--muted); }
+.shop-row em { font-style: normal; font-size: 12px; font-weight: 700; color: var(--gold); }
+.shop-row:hover b { color: var(--gold); }
+.tag-user { font-style: normal; font-size: 11px; color: var(--mint); font-weight: 700; }
+.shop-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 20px; align-items: start; margin-top: 20px; }
+@media (max-width: 760px) { .shop-grid { grid-template-columns: minmax(0, 1fr); } }
+.shop-stats { display: grid; grid-template-columns: minmax(0, 1fr); margin: 0; }
+.shop-warn { margin-top: 14px; background: #fff7e6; color: #8a5a00; border-radius: 12px; padding: 10px 14px; font-weight: 700; font-size: 13px; }
+#report-box { margin-top: 32px; padding: 22px; }
+.rep-form { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
+.rep-more { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 12px; font-size: 13px; font-weight: 700; color: var(--text-2); }
+.rep-list { list-style: none; margin: 0; padding: 0; }
+.rep-list li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2px 10px; align-items: center; padding: 10px 0; border-top: 1px solid var(--line); }
+.rep-list li b { font-size: 14px; } .rep-list li b a:hover { color: var(--gold); }
+.rep-list li small { grid-column: 2; font-size: 12px; color: var(--muted); }
+.stores .s-name a { border-bottom: 1px dotted var(--sky); }

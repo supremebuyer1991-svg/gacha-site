@@ -3,3 +3,4 @@ dist-preview/
 node_modules/
 .DS_Store
 data/votes.json
+data/shops-live.json

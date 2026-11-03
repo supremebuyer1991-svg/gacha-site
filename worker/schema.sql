@@ -7,3 +7,10 @@ CREATE TABLE IF NOT EXISTS item_obs (item_id TEXT PRIMARY KEY, first_seen TEXT N
 -- ハート投票
 CREATE TABLE IF NOT EXISTS votes (item_id TEXT PRIMARY KEY, n INTEGER DEFAULT 0);
 CREATE TABLE IF NOT EXISTS vote_log (item_id TEXT NOT NULL, who TEXT NOT NULL, day TEXT NOT NULL, PRIMARY KEY (item_id, who, day));
+-- みんなのガチャマップ：お店（公式の取扱店は自動で、みんなが足したお店は src='user'）
+CREATE TABLE IF NOT EXISTS shops (id TEXT PRIMARY KEY, name TEXT NOT NULL, pref TEXT, address TEXT, lat REAL, lng REAL, src TEXT DEFAULT 'bandai', created_at TEXT, hidden INTEGER DEFAULT 0, flags INTEGER DEFAULT 0, who TEXT);
+-- みんなの報告：在庫（in/out）、台数（machines）、閉店（closed）、ここに無い（wrong）
+CREATE TABLE IF NOT EXISTS reports (id INTEGER PRIMARY KEY AUTOINCREMENT, shop_id TEXT NOT NULL, kind TEXT NOT NULL, item_id TEXT, item_name TEXT, value TEXT, created_at TEXT NOT NULL, who TEXT NOT NULL);
+CREATE INDEX IF NOT EXISTS reports_shop ON reports (shop_id, created_at);
+CREATE INDEX IF NOT EXISTS reports_who ON reports (who, created_at);
+CREATE INDEX IF NOT EXISTS seen_shop ON seen (lower(shop));

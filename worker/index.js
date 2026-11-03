@@ -54,7 +54,7 @@ async function recordArrivals(env, itemId, raw, nowIso) {
   for (const x of raw) {
     if (x.delflg === "1") continue;
     const key = String(x.shop_code || `${x.shop_title}|${x.shop_address}`);
-    cur.set(key, { pref: x.shop_pref || "", name: x.shop_title || "" });
+    cur.set(key, { pref: x.shop_pref || "", name: x.shop_title || "", address: x.shop_address || "", lat: Number(x.latitude) || null, lng: Number(x.longitude) || null, code: x.shop_code ? String(x.shop_code).toLowerCase() : "" });
   }
   const obs = await env.DB.prepare("SELECT first_seen FROM item_obs WHERE item_id = ?1").bind(itemId).first();
   const firstTime = !obs;
@@ -67,6 +67,8 @@ async function recordArrivals(env, itemId, raw, nowIso) {
       st.push(env.DB.prepare("INSERT INTO seen (item_id, shop, pref, name, first_seen, last_seen, in_now, restocks, baseline) VALUES (?1, ?2, ?3, ?4, ?5, ?5, 1, 0, ?6)")
         .bind(itemId, shop, v.pref, v.name, nowIso, firstTime ? 1 : 0));
       if (!firstTime) added++;
+      // ガチャマップのお店にも登録（すでにあれば何もしない）
+      if (v.code && v.lat && v.lng) st.push(env.DB.prepare("INSERT OR IGNORE INTO shops (id, name, pref, address, lat, lng, src, created_at) VALUES (?1, ?2, ?3, ?4, ?5, ?6, 'bandai', ?7)").bind(v.code, v.name, v.pref, v.address, v.lat, v.lng, nowIso));
     } else if (!known.get(shop)) {
       st.push(env.DB.prepare("UPDATE seen SET in_now = 1, restocks = restocks + 1, last_seen = ?3 WHERE item_id = ?1 AND shop = ?2").bind(itemId, shop, nowIso));
       back++;

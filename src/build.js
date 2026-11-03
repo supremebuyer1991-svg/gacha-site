@@ -54,7 +54,7 @@ const T = {
     htmlLang: "ja", ogLocale: "ja_JP", switchLabel: "EN", switchAria: "English version",
     tagline: site.tagline, description: site.description,
     sampleBar: "ただいまサンプルデータを表示しています。商品・店舗・在庫はすべて架空です。",
-    nav: { new: "新着", ranking: "人気", calendar: "発売カレンダー", genre: "ジャンル", faq: "よくある質問" },
+    nav: { map: "ガチャマップ", new: "新着", ranking: "人気", calendar: "発売カレンダー", genre: "ジャンル", faq: "よくある質問" },
     navAria: "メインメニュー", footAria: "サイト情報", about: "運営者情報・お問い合わせ",
     disclosure: "当サイトはAmazonアソシエイト・楽天アフィリエイトなどの広告プログラムに参加しています。掲載商品の画像・名称の権利は各メーカーに帰属します。",
     month: (ym) => { const [y, m] = ym.split("-"); return `${y}年${Number(m)}月`; },
@@ -131,7 +131,7 @@ const T = {
     htmlLang: "en", ogLocale: "en_US", switchLabel: "日本語", switchAria: "日本語版",
     tagline: site.tagline_en, description: site.description_en,
     sampleBar: "Showing sample data. All items, stores and stock levels are fictional.",
-    nav: { new: "New", ranking: "Popular", calendar: "Calendar", genre: "Genres", faq: "FAQ" },
+    nav: { map: "Gacha map", new: "New", ranking: "Popular", calendar: "Calendar", genre: "Genres", faq: "FAQ" },
     navAria: "Main menu", footAria: "Site information", about: "About & contact",
     disclosure: "As an Amazon Associate and Rakuten affiliate, we earn from qualifying purchases. Product images and names belong to their respective makers.",
     month: (ym) => { const [y, m] = ym.split("-"); return `${MONTH_EN[Number(m) - 1]} ${y}`; },
@@ -354,6 +354,19 @@ const WEEK = (() => {
   return { m, weekNo, mon, sun, md, label: `${m}月第${weekNo}週`, range: `${md(mon)}〜${md(sun)}`, items: items.filter(inWeek).sort(byPopular) };
 })();
 
+/* ---------- みんなのガチャマップ：お店 ---------- */
+const shopsLive = readJSON("shops-live.json", {}) || {};
+const SHOPS = (() => {
+  const list = Array.isArray(shopsLive.shops) && shopsLive.shops.length ? shopsLive.shops
+    : stores.filter((x) => /^g-s\d+$/i.test(x.id) && x.lat && x.lng).map((x) => ({ id: x.id.slice(2).toLowerCase(), name: x.name, pref: x.prefecture, address: x.address, lat: x.lat, lng: x.lng, src: "bandai", hidden: 0 }));
+  return list.filter((x) => !x.hidden && x.lat && x.lng && /^[a-z0-9-]+$/.test(x.id));
+})();
+const SHOP_OFFICIAL = shopsLive.official || {};
+const SHOP_REPORTS = shopsLive.reports || {};
+const PREF_ORDER = Object.keys(PREF_EN);
+const prefSlug = (p) => (PREF_EN[p] || "other").toLowerCase().replace(/[^a-z]+/g, "-");
+const itemById = new Map(items.map((it) => [it.id, it]));
+
 /* ---------- 書き出し ---------- */
 const pages = []; // サイトマップ用 [lang, rel]
 const write = (rel, content) => {
@@ -428,22 +441,22 @@ for (const lang of LANGS) {
   <div class="card-foot"><span><b>¥${it.price}</b>${it.lineup ? ` / ${t.lineup(it.lineup)}` : ""}</span><span>${t.month(it.release)}</span></div>
 </a>`;
 
-  const layout = ({ rel, title, description, body, jsonld = [], ogImage = "", ogType = "website", current = "" }) => {
+  const layout = ({ rel, title, description, body, jsonld = [], ogImage = "", ogType = "website", current = "", jaOnly = false, extraHead = "" }) => {
     const c = ctx(rel);
     const fragment = PREVIEW && lang === "ja" && rel === "index.html";
     const fullTitle = rel === "index.html" ? `${site.name}｜${t.tagline}` : `${title}｜${site.name}`;
     // 反対の言語の同じページへのリンク
-    const switchHref = lang === "ja" ? `${c.H}en/${rel}` : `${c.R}${rel}`;
+    const switchHref = jaOnly ? `${c.H}en/index.html` : lang === "ja" ? `${c.H}en/${rel}` : `${c.R}${rel}`;
     const ld = jsonld.map((o) => `<script type="application/ld+json">${JSON.stringify(o).replace(/</g, "\\u003c")}</script>`).join("\n");
-    const NAV = [["index.html#new", "new"], ["index.html#ranking", "ranking"], ["calendar.html", "calendar"], ["index.html#genres", "genre"], ["faq.html", "faq"]];
+    const NAV = [["index.html#new", "new"], ["index.html#ranking", "ranking"], ["calendar.html", "calendar"], ["@map.html", "map"], ["index.html#genres", "genre"], ["faq.html", "faq"]];
     const head = `<title>${esc(fullTitle)}</title>
 ${fragment ? '<meta name="claude:viewport-fit-sides" content="cover">' : ""}
 <meta name="site-lang" content="${lang}">
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${esc(canonical(lang, rel))}">
-<link rel="alternate" hreflang="ja" href="${esc(canonical("ja", rel))}">
+${jaOnly ? "" : `<link rel="alternate" hreflang="ja" href="${esc(canonical("ja", rel))}">
 <link rel="alternate" hreflang="en" href="${esc(canonical("en", rel))}">
-<link rel="alternate" hreflang="x-default" href="${esc(canonical("ja", rel))}">
+<link rel="alternate" hreflang="x-default" href="${esc(canonical("ja", rel))}">`}
 <meta property="og:site_name" content="${esc(site.name)}">
 <meta property="og:locale" content="${t.ogLocale}">
 <meta property="og:title" content="${esc(fullTitle)}">
@@ -458,11 +471,12 @@ ${site.x_account ? `<meta name="twitter:site" content="@${esc(site.x_account.rep
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="${FONTS}">
 <link rel="stylesheet" href="${c.R}assets/style.css?v=${CSS_V}">
+${extraHead}
 ${ld}`;
     const content = `${site.sample_mode ? `<div class="sample-bar">${t.sampleBar}</div>` : ""}
 <header class="site-header"><div class="wrap">
   <a class="logo" href="${c.H}index.html" aria-label="${esc(site.name)} ${t.logoAria}"><span class="logo-en">${esc(site.name).split(" ").map((w, i) => `<span class="lw${i}">${w}</span>`).join(" ")}</span><span class="logo-ja">${esc(t.tagline)}</span></a>
-  <nav class="nav" aria-label="${t.navAria}">${NAV.map(([h, k]) => `<a href="${c.H}${h}"${k === current ? ' aria-current="page"' : ""}>${t.nav[k]}</a>`).join("")}</nav>
+  <nav class="nav" aria-label="${t.navAria}">${NAV.map(([h, k]) => `<a href="${h[0] === "@" ? c.R + h.slice(1) : c.H + h}"${k === current ? ' aria-current="page"' : ""}>${t.nav[k]}</a>`).join("")}</nav>
   <form class="search" role="search" action="${c.H}search.html" data-index="${c.R}data/search-${lang}.json" data-home="${c.H}" data-root="${c.R}">
     <input type="search" name="q" id="search-q" placeholder="${t.searchPh}" aria-label="${t.searchAria}" autocomplete="off" enterkeyhint="search">
     <div class="search-pop" id="search-pop" hidden></div>
@@ -488,7 +502,7 @@ ${content}
 </body>
 </html>`;
     write(langDir(lang) + rel, html);
-    pages.push([lang, rel]);
+    pages.push([lang, rel, jaOnly]);
   };
 
   /* ---------- トップページ ---------- */
@@ -831,6 +845,122 @@ ${content}
     k: [...(it.tags || []), ...(it.tags_en || []), ...(it.lineup_names || [])].join(" "),
   }))));
 
+  /* ---------- みんなのガチャマップ（日本語だけ） ---------- */
+  if (lang === "ja") {
+    const LEAF = `<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin="" defer></script>`;
+    const shopCard = (sh, c) => `<a class="shop-row" href="${c.R}shop/${sh.id}.html"><b>${esc(sh.name)}</b><span>${esc(sh.address || sh.pref || "")}</span>${(SHOP_OFFICIAL[sh.id] || []).length ? `<em>取扱中 ${(SHOP_OFFICIAL[sh.id] || []).length}種</em>` : ""}${sh.src === "user" ? '<i class="tag-user">みんなが追加</i>' : ""}</a>`;
+    // 地図ページ
+    {
+      const c = ctx("map.html");
+      const prefs = PREF_ORDER.filter((p) => SHOPS.some((x) => x.pref === p));
+      const body = `<div class="wrap">
+  <nav class="breadcrumb" aria-label="breadcrumb"><a href="${c.H}index.html">${t.home}</a><span>/</span><span>みんなのガチャマップ</span></nav>
+  <header class="page-head"><h1>みんなのガチャマップ</h1><p class="lead">全国のガチャのあるお店を地図で探せます。お店の在庫や台数は、みんなの報告で更新されます。地図にないお店は「お店を追加」から足せます。</p></header>
+  <section class="map-wrap">
+    <div class="map-tools">
+      <button class="btn btn-gold" type="button" id="map-geo">現在地のまわり</button>
+      <input type="search" id="map-q" class="map-q" placeholder="お店の名前・地名で探す" autocomplete="off">
+      <button class="btn" type="button" id="map-add">＋ お店を追加</button>
+    </div>
+    <div id="map" class="map" data-shops="${c.R}api/shops" data-fallback="${c.R}data/shops.json" data-root="${c.R}"></div>
+    <div class="map-add" id="map-add-box" hidden>
+      <p><b>地図を動かして、真ん中の＋をお店の場所に合わせてください。</b></p>
+      <label>お店の名前<input type="text" id="add-name" maxlength="60" placeholder="例：ガシャポンのデパート 池袋総本店"></label>
+      <label>住所（わかれば）<input type="text" id="add-addr" maxlength="120"></label>
+      <div class="map-add-btns"><button class="btn btn-gold" type="button" id="add-send">この場所で追加する</button><button class="btn btn-ghost" type="button" id="add-cancel">やめる</button></div>
+      <p class="fine" id="add-msg" role="status"></p>
+    </div>
+    <p class="fine">地図：国土地理院の地図を使っています。お店の情報はバンダイ公式「ガシャポンどこ？」の取扱店と、みんなの報告をもとにしています。<a href="${c.R}rules.html">投稿のきまり</a></p>
+  </section>
+  <section class="section"><div class="section-head"><h2>都道府県から探す</h2></div>
+    <div class="archive-list">${prefs.map((p) => `<a href="${c.R}shops/${prefSlug(p)}.html">${p}（${SHOPS.filter((x) => x.pref === p).length}）</a>`).join("")}</div>
+  </section>
+</div>`;
+      layout({ rel: "map.html", title: "みんなのガチャマップ｜全国のガチャのあるお店", description: `全国${SHOPS.length}店のガチャのあるお店を地図で探せます。在庫や台数はみんなの報告で更新。地図にないお店も追加できます。`, body, current: "map", jaOnly: true, extraHead: LEAF });
+    }
+    // 都道府県ごとのお店一覧
+    for (const p of PREF_ORDER) {
+      const list = SHOPS.filter((x) => x.pref === p).sort((a, b) => (SHOP_OFFICIAL[b.id] || []).length - (SHOP_OFFICIAL[a.id] || []).length || (a.name > b.name ? 1 : -1));
+      if (!list.length) continue;
+      const rel = `shops/${prefSlug(p)}.html`;
+      const c = ctx(rel);
+      const body = `<div class="wrap">
+  <nav class="breadcrumb" aria-label="breadcrumb"><a href="${c.H}index.html">${t.home}</a><span>/</span><a href="${c.R}map.html">ガチャマップ</a><span>/</span><span>${p}</span></nav>
+  <header class="page-head"><h1>${p}のガチャのあるお店</h1><p class="lead">${p}でガチャを置いているお店${list.length}店。取扱中のガチャが多い順に並べています。</p></header>
+  <section class="section" style="padding-top:32px"><div class="shop-list">${list.map((sh) => shopCard(sh, c)).join("")}</div></section>
+</div>`;
+      layout({ rel, title: `${p}のガチャのあるお店（${list.length}店）`, description: `${p}でガチャガチャを置いているお店${list.length}店の一覧。取扱中のガチャ、在庫や台数のみんなの報告も見られます。`, body, current: "map", jaOnly: true });
+    }
+    // お店ごとのページ
+    for (const sh of SHOPS) {
+      const rel = `shop/${sh.id}.html`;
+      const c = ctx(rel);
+      const off = (SHOP_OFFICIAL[sh.id] || []).map((id) => itemById.get(id)).filter(Boolean).sort(byNewest);
+      const rp = SHOP_REPORTS[sh.id];
+      const gmap = `https://www.google.com/maps/search/?api=1&query=${sh.lat},${sh.lng}`;
+      const body = `<div class="wrap">
+  <nav class="breadcrumb" aria-label="breadcrumb"><a href="${c.H}index.html">${t.home}</a><span>/</span><a href="${c.R}map.html">ガチャマップ</a><span>/</span>${sh.pref ? `<a href="${c.R}shops/${prefSlug(sh.pref)}.html">${esc(sh.pref)}</a><span>/</span>` : ""}<span>${esc(sh.name)}</span></nav>
+  <article class="shop" id="shop" data-id="${sh.id}" data-api="${c.R}api/shop/${sh.id}" data-report="${c.R}api/report" data-root="${c.R}" data-lat="${sh.lat}" data-lng="${sh.lng}">
+    <header class="page-head" style="padding-top:28px">
+      <p class="eyebrow">${sh.src === "user" ? "みんなが追加したお店" : "ガシャポン公式の取扱店"}</p>
+      <h1>${esc(sh.name)}</h1>
+      <p class="lead">${esc(sh.address || sh.pref || "")}</p>
+      <div class="item-actions"><a class="btn" href="${esc(gmap)}" target="_blank" rel="noopener">Googleマップで開く</a><a class="btn" href="${c.R}map.html#${sh.id}">ガチャマップで見る</a></div>
+    </header>
+    <div class="shop-grid">
+      <div id="shop-map" class="map map-sm"></div>
+      <dl class="arr-stats shop-stats">
+        <div><dt>取扱中のガチャ（公式）</dt><dd id="st-off">${off.length}種</dd></div>
+        <div><dt>みんなの報告（30日）</dt><dd id="st-rep">${rp ? rp.n : 0}件</dd></div>
+        <div><dt>ガチャの台数（報告）</dt><dd id="st-mac">—</dd></div>
+      </dl>
+    </div>
+    <p class="shop-warn" id="shop-warn" hidden></p>
+
+    <section class="section panel" id="report-box">
+      <h2 style="font-size:20px">在庫を報告する</h2>
+      <p class="fine" style="margin-top:4px">お店で見たガチャを教えてください。報告はこのページにすぐ反映されます（名前などは表示されません）。</p>
+      <div class="rep-form">
+        <input type="search" id="rep-item" list="rep-items" placeholder="ガチャの名前（例：ちいかわ めじるし）" autocomplete="off" maxlength="60">
+        <datalist id="rep-items">${off.map((it) => `<option value="${esc(it.name)}">`).join("")}</datalist>
+        <div class="rep-btns"><button class="btn btn-gold" type="button" data-kind="in">あった</button><button class="btn" type="button" data-kind="out">なかった・売り切れ</button></div>
+      </div>
+      <div class="rep-more">
+        <span>このお店のガチャの台数：</span>${["~10", "~50", "~100", "100+"].map((v) => `<button class="sort" type="button" data-kind="machines" data-value="${v}">${v === "100+" ? "100台以上" : v.replace("~", "") + "台くらい"}</button>`).join("")}
+      </div>
+      <div class="rep-more"><button class="sort" type="button" data-kind="closed">閉店していた</button><button class="sort" type="button" data-kind="wrong">ここにガチャはない</button></div>
+      <p class="fine" id="rep-msg" role="status"></p>
+    </section>
+
+    <section class="section" id="rep-sec">
+      <div class="section-head"><h2>みんなの在庫報告</h2></div>
+      <ul class="rep-list" id="rep-list"><li class="fine">読み込み中…</li></ul>
+    </section>
+
+    ${off.length ? `<section class="section"><div class="section-head"><h2>取扱中のガチャ（公式）</h2></div>
+      <p class="fine" style="margin-top:-16px;margin-bottom:20px">バンダイ公式「ガシャポンどこ？」で、このお店の取扱があるガチャです（通信機能のあるマシンのみ）。</p>
+      <div class="grid">${off.slice(0, 40).map((it) => card(it, c)).join("")}</div></section>` : ""}
+  </article>
+  <p class="fine" style="margin-top:40px">お店の情報は、バンダイ公式の取扱店とみんなの報告をもとにしています。実際と違うことがあります。営業時間などはお店でご確認ください。<a href="${c.R}rules.html">投稿のきまり</a></p>
+</div>
+<script type="application/json" id="shop-items">${JSON.stringify(off.map((it) => [it.id, it.name])).replace(/</g, "\\u003c")}</script>`;
+      layout({ rel, title: `${sh.name}のガチャ在庫・取扱ガチャ`, description: `${sh.name}（${sh.address || sh.pref || ""}）のガチャ情報。取扱中のガチャ${off.length}種と、みんなの在庫報告・台数を確認できます。`, body, current: "map", jaOnly: true, extraHead: LEAF,
+        jsonld: [{ "@context": "https://schema.org", "@type": "Store", name: sh.name, address: sh.address || undefined, geo: { "@type": "GeoCoordinates", latitude: sh.lat, longitude: sh.lng }, url: canonical("ja", rel) }] });
+    }
+    // 投稿のきまり
+    {
+      const c = ctx("rules.html");
+      const body = `<div class="wrap"><header class="page-head"><h1>投稿のきまり</h1><p class="lead">みんなのガチャマップに、お店や在庫を報告するときのきまりです。</p></header>
+  <div class="prose">
+    <h2>報告できること</h2><p>ガチャのあるお店の場所・名前、ガチャがあった／なかった、ガチャの台数、閉店していたこと、の4つです。文章のコメントは受け付けていません。</p>
+    <h2>してはいけないこと</h2><ul><li>うその報告、いたずらでお店を追加すること</li><li>お店や人の迷惑になる報告（個人の家・お店でない場所を登録するなど）</li><li>同じ報告を何度もくり返すこと</li></ul>
+    <h2>報告の扱い</h2><p>報告は名前を出さずに表示します。いたずらを防ぐため、報告した端末を見分けるための読めない符号を記録します（IPアドレスそのものは保存しません）。1日に報告できる数に上限があります。みんなが追加したお店は、「閉店していた」「ここにガチャはない」の報告が3人から来ると、自動で地図から外れます。</p>
+    <p>報告は利用者からの情報です。実際の在庫や営業状況と違うことがあります。おかしな情報を見つけたら、運営者情報のページからお知らせください。</p>
+  </div></div>`;
+      layout({ rel: "rules.html", title: "投稿のきまり", description: "みんなのガチャマップに報告するときのきまり。", body, jaOnly: true });
+    }
+  }
+
   /* ---------- 運営者情報 ---------- */
   {
     const x = site.x_account ? site.x_account.replace(/^@/, "") : "";
@@ -850,7 +980,7 @@ write("404.html", `<!doctype html><html lang="ja"><head><meta charset="utf-8"><m
 <body><main><div class="wrap"><header class="page-head"><h1>ページが見つかりません</h1><p class="lead">販売終了などで掲載を終えた可能性があります。<br><span lang="en">This page could not be found. It may have been removed.</span></p>
 <p style="margin-top:24px;display:flex;gap:10px;flex-wrap:wrap"><a class="btn btn-gold" href="/">トップへ戻る</a><a class="btn" href="/en/" lang="en">English home</a></p></header></div></main></body></html>`);
 
-const urlEntry = ([lang, rel]) => `  <url><loc>${esc(canonical(lang, rel))}</loc><lastmod>${today}</lastmod>
+const urlEntry = ([lang, rel, jaOnly]) => jaOnly ? `  <url><loc>${esc(canonical(lang, rel))}</loc><lastmod>${today}</lastmod></url>` : `  <url><loc>${esc(canonical(lang, rel))}</loc><lastmod>${today}</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="${esc(canonical("ja", rel))}"/>
     <xhtml:link rel="alternate" hreflang="en" href="${esc(canonical("en", rel))}"/>
   </url>`;
@@ -861,7 +991,8 @@ ${pages.filter(([, r]) => r !== "search.html").map(urlEntry).join("\n")}
 `);
 write("robots.txt", `User-agent: *\nAllow: /\nSitemap: ${SITE_URL}/sitemap.xml\n`);
 // Cloudflare の窓口（functions/）を動かすのは、ページと /api/ だけ（画像などでは動かさず、無料の回数を節約する）
-write("_routes.json", JSON.stringify({ version: 1, include: ["/", "/api/*", "/item/*", "/genre/*", "/type/*", "/maker/*", "/calendar*", "/search*", "/week*", "/faq*", "/about*", "/en", "/en/", "/en/item/*", "/en/genre/*", "/en/type/*", "/en/maker/*", "/en/calendar*", "/en/search*", "/en/week*", "/en/faq*", "/en/about*", "/index.html", "/en/index.html"], exclude: ["/assets/*", "/images/*", "/data/*"] }));
+write("_routes.json", JSON.stringify({ version: 1, include: ["/", "/api/*", "/item/*", "/shop/*", "/map*", "/shops/*", "/rules*", "/genre/*", "/type/*", "/maker/*", "/calendar*", "/search*", "/week*", "/faq*", "/about*", "/en", "/en/", "/en/item/*", "/en/genre/*", "/en/type/*", "/en/maker/*", "/en/calendar*", "/en/search*", "/en/week*", "/en/faq*", "/en/about*", "/index.html", "/en/index.html"], exclude: ["/assets/*", "/images/*", "/data/*"] }));
+write("data/shops.json", JSON.stringify(SHOPS.map((x) => [x.id, x.name, x.pref, x.lat, x.lng, x.src === "user" ? 1 : 0])));
 // X投稿用のデータ（毎朝の自動予約で使う）：今週発売・紹介する新作の候補
 {
   const pack = (it) => ({ id: it.id, name: it.name, maker: it.maker, price: it.price, lineup: it.lineup, lineup_names: (it.lineup_names || []).slice(0, 12), release: it.release, release_note: it.release_note || "", genre: genreLabel(genreOf(it.genre), "ja"), img: it.image ? `${SITE_URL}/${thumbOf(it.image)}` : "", img_large: it.image ? `${SITE_URL}/${it.image}` : "", url: `${SITE_URL}/item/${it.id}`, hearts: heartsOf(it) });

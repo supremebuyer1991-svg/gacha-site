@@ -418,7 +418,7 @@
         var nm = (EN && s.name_en) || s.name;
         var ad = EN ? (s.address_en ? s.address_en + ", " + s.prefecture_en : s.address) : s.address;
         return '<li class="' + (s.status === "out_of_stock" ? "is-off" : "") + '">' +
-          '<span class="s-name">' + esc(nm) + "</span>" +
+          '<span class="s-name">' + (function () { var m = /shop_code=(S\d+)/i.exec(s.url || ""); return m && !EN ? '<a href="' + stock.getAttribute("data-api").replace(/api\/stock\/.*$/, "") + "shop/" + m[1].toLowerCase() + '.html">' + esc(nm) + "</a>" : esc(nm); })() + "</span>" +
           '<span class="s-addr">' + esc(ad) + (EN && s.name_en ? ' <span lang="ja">' + esc(s.name) + "</span>" : "") + "</span>" +
           '<span class="s-right">' + (r.d != null ? '<span class="s-dist">' + fmt(r.d) + "</span>" : "") +
           '<span class="pill ' + s.status + '">' + LABEL[s.status] + "</span></span></li>";
@@ -514,5 +514,142 @@
       }).join("");
       feed.hidden = false;
     }).catch(function () {});
+  }
+
+  /* ================= みんなのガチャマップ ================= */
+  var ago = function (iso) {
+    var m = Math.max(0, Math.round((Date.now() - Date.parse(iso)) / 60000));
+    if (m < 60) return m <= 1 ? "たった今" : m + "分前";
+    var h = Math.round(m / 60); if (h < 24) return h + "時間前";
+    return Math.round(h / 24) + "日前";
+  };
+  var whenLeaflet = function (fn) {
+    if (window.L) return fn();
+    var n = 0, iv = setInterval(function () { if (window.L) { clearInterval(iv); fn(); } else if (++n > 100) clearInterval(iv); }, 100);
+  };
+  var tiles = function (map) {
+    window.L.tileLayer("https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png", { maxZoom: 18, minZoom: 4, attribution: '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener">国土地理院</a>' }).addTo(map);
+  };
+  var post = function (url, body) {
+    return fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }).then(function (r) { return r.json().then(function (d) { d._status = r.status; return d; }); });
+  };
+
+  var mapEl = document.getElementById("map");
+  if (mapEl && !document.getElementById("shop")) whenLeaflet(function () {
+    var L = window.L, root = mapEl.getAttribute("data-root");
+    var map = L.map(mapEl, { preferCanvas: true, zoomControl: true }).setView([36.3, 137.8], 5);
+    tiles(map);
+    var markers = {}, list = [];
+    var popup = function (s) {
+      return '<b>' + esc(s[1]) + '</b><br><span style="color:#6b7194">' + esc(s[2] || "") + (s[5] ? "・みんなが追加" : "") + '</span><br><a href="' + root + 'shop/' + esc(s[0]) + '.html">お店のページ（在庫・報告）→</a>';
+    };
+    var add = function (s) {
+      var m = L.circleMarker([s[3], s[4]], { radius: 7, weight: 2, color: "#fff", fillColor: s[5] ? "#2ccfa6" : "#ff4f7b", fillOpacity: 0.95 }).addTo(map).bindPopup(popup(s));
+      markers[s[0]] = m; list.push(s);
+    };
+    var load = function (u) { return fetch(u).then(function (r) { if (!r.ok) throw 0; return r.json(); }); };
+    load(mapEl.getAttribute("data-shops")).catch(function () { return load(mapEl.getAttribute("data-fallback")); }).then(function (rows) {
+      rows.forEach(add);
+      var h = decodeURIComponent(location.hash.slice(1));
+      if (h && markers[h]) { map.setView(markers[h].getLatLng(), 16); markers[h].openPopup(); }
+    });
+    document.getElementById("map-geo").addEventListener("click", function () {
+      if (!navigator.geolocation) return;
+      navigator.geolocation.getCurrentPosition(function (p) { map.setView([p.coords.latitude, p.coords.longitude], 14); }, function () {}, { enableHighAccuracy: false, timeout: 8000 });
+    });
+    var q = document.getElementById("map-q");
+    q.addEventListener("keydown", function (e) {
+      if (e.key !== "Enter") return;
+      e.preventDefault();
+      var v = NORM(q.value); if (!v) return;
+      var hits = list.filter(function (s) { return NORM(s[1] + (s[2] || "")).indexOf(v) !== -1; });
+      if (!hits.length) return;
+      if (hits.length === 1) { map.setView([hits[0][3], hits[0][4]], 16); markers[hits[0][0]].openPopup(); }
+      else map.fitBounds(L.latLngBounds(hits.map(function (s) { return [s[3], s[4]]; })), { maxZoom: 15, padding: [30, 30] });
+    });
+    // お店を追加
+    var box = document.getElementById("map-add-box"), msg = document.getElementById("add-msg");
+    document.getElementById("map-add").addEventListener("click", function () {
+      box.hidden = false; mapEl.classList.add("is-adding");
+      if (map.getZoom() < 15) msg.textContent = "地図を拡大して、お店の場所に＋を合わせてください。";
+      box.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    });
+    document.getElementById("add-cancel").addEventListener("click", function () { box.hidden = true; mapEl.classList.remove("is-adding"); msg.textContent = ""; });
+    document.getElementById("add-send").addEventListener("click", function () {
+      var name = document.getElementById("add-name").value.trim();
+      if (name.length < 2) { msg.textContent = "お店の名前を入れてください。"; return; }
+      if (map.getZoom() < 15) { msg.textContent = "場所がずれないよう、もっと地図を拡大してから追加してください。"; return; }
+      var c = map.getCenter();
+      msg.textContent = "送っています…";
+      post(root + "api/shops", { name: name, address: document.getElementById("add-addr").value.trim(), lat: c.lat, lng: c.lng }).then(function (d) {
+        if (d.ok) {
+          add([d.id, name, "", c.lat, c.lng, 1]); markers[d.id].openPopup();
+          msg.textContent = "追加しました！ありがとうございます。お店のページは数時間後にできます。";
+          document.getElementById("add-name").value = ""; document.getElementById("add-addr").value = "";
+          mapEl.classList.remove("is-adding");
+        } else msg.textContent = d.error === "dup" ? "このお店はもう地図にあります。" : d.error === "limit" ? "今日追加できる数を超えました。また明日お願いします。" : "追加できませんでした。名前と場所を確かめてください。";
+      }).catch(function () { msg.textContent = "送れませんでした。時間をおいてもう一度お試しください。"; });
+    });
+  });
+
+  var shopEl = document.getElementById("shop");
+  if (shopEl) {
+    var sid = shopEl.getAttribute("data-id");
+    var lat = Number(shopEl.getAttribute("data-lat")), lng = Number(shopEl.getAttribute("data-lng"));
+    whenLeaflet(function () {
+      var L = window.L, m = L.map("shop-map", { scrollWheelZoom: false }).setView([lat, lng], 16);
+      tiles(m);
+      L.circleMarker([lat, lng], { radius: 9, weight: 3, color: "#fff", fillColor: "#ff4f7b", fillOpacity: 1 }).addTo(m);
+    });
+    var known = [];
+    try { known = JSON.parse(document.getElementById("shop-items").textContent); } catch (e) {}
+    var listEl2 = document.getElementById("rep-list"), msgEl = document.getElementById("rep-msg");
+    var MAC = { "~10": "10台くらい", "~50": "50台くらい", "~100": "100台くらい", "100+": "100台以上" };
+    var draw = function (d) {
+      var reps = (d && d.reports) || [];
+      // ガチャごとに一番新しい報告をまとめる
+      var byItem = {}, order = [];
+      reps.forEach(function (r) {
+        if (r.kind !== "in" && r.kind !== "out") return;
+        var key = r.item_id || r.item_name;
+        var name = r.item_name || (known.filter(function (k) { return k[0] === r.item_id; })[0] || [null, r.item_id])[1];
+        if (!byItem[key]) { byItem[key] = { name: name, id: r.item_id, last: r, inN: 0, outN: 0 }; order.push(key); }
+        byItem[key][r.kind === "in" ? "inN" : "outN"]++;
+      });
+      listEl2.innerHTML = order.length ? order.slice(0, 40).map(function (k) {
+        var x = byItem[k], st = x.last.kind === "in";
+        var name = x.id ? '<a href="' + shopEl.getAttribute("data-root") + 'item/' + esc(x.id) + '.html">' + esc(x.name) + "</a>" : esc(x.name);
+        return '<li><span class="pill ' + (st ? "in_stock" : "out_of_stock") + '">' + (st ? "あった" : "なかった") + "</span><b>" + name + "</b><small>" + ago(x.last.created_at) + "（あった" + x.inN + "・なかった" + x.outN + "）</small></li>";
+      }).join("") : '<li class="fine">まだ報告はありません。お店で見たガチャを教えてください。</li>';
+      var mac = {}; reps.forEach(function (r) { if (r.kind === "machines") mac[r.value] = (mac[r.value] || 0) + 1; });
+      var best = Object.keys(mac).sort(function (a, b) { return mac[b] - mac[a]; })[0];
+      if (best) document.getElementById("st-mac").textContent = MAC[best];
+      var closed = reps.filter(function (r) { return r.kind === "closed"; }).length, wrong = reps.filter(function (r) { return r.kind === "wrong"; }).length;
+      var w = document.getElementById("shop-warn");
+      if (closed || wrong) { w.hidden = false; w.textContent = "⚠ " + (closed ? "閉店していたという報告が" + closed + "件" : "") + (closed && wrong ? "、" : "") + (wrong ? "ガチャがないという報告が" + wrong + "件" : "") + "あります。"; }
+      if (d && d.official) document.getElementById("st-off").textContent = d.official.filter(function (o) { return o.in; }).length + "種";
+      var n30 = reps.filter(function (r) { return Date.now() - Date.parse(r.created_at) < 30 * 864e5; }).length;
+      document.getElementById("st-rep").textContent = n30 + "件";
+    };
+    var reload = function () { return fetch(shopEl.getAttribute("data-api") + "?t=" + Date.now()).then(function (r) { return r.ok ? r.json() : null; }).then(draw).catch(function () { draw(null); }); };
+    reload();
+    [].forEach.call(document.querySelectorAll("#report-box [data-kind]"), function (b) {
+      b.addEventListener("click", function () {
+        var kind = b.getAttribute("data-kind"), body = { shop: sid, kind: kind };
+        if (kind === "in" || kind === "out") {
+          var v = document.getElementById("rep-item").value.trim();
+          if (!v) { msgEl.textContent = "ガチャの名前を入れてください（候補から選べます）。"; return; }
+          var hit = known.filter(function (k) { return k[1] === v; })[0];
+          if (hit) body.item_id = hit[0]; else body.item_name = v;
+        }
+        if (kind === "machines") body.value = b.getAttribute("data-value");
+        if ((kind === "closed" || kind === "wrong") && !window.confirm("このお店について「" + b.textContent + "」と報告しますか？")) return;
+        msgEl.textContent = "送っています…";
+        post(shopEl.getAttribute("data-report"), body).then(function (d) {
+          msgEl.textContent = d.ok ? (d.dup ? "同じ報告は少し時間をあけてからお願いします。" : "報告しました。ありがとうございます！") : d.error === "limit" ? "今日報告できる数を超えました。" : "報告できませんでした。";
+          if (d.ok) { document.getElementById("rep-item").value = ""; reload(); }
+        }).catch(function () { msgEl.textContent = "送れませんでした。時間をおいてもう一度お試しください。"; });
+      });
+    });
   }
 })();
