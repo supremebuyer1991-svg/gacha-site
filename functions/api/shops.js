@@ -1,6 +1,7 @@
 // ガチャマップ：お店の一覧（GET）と、お店を追加（POST）
 import { json, whoHash, todayJST, cleanText } from "../../lib/api-util.js";
 import { ngCheck } from "../../lib/ngwords.js";
+import { PREFS, prefFromText, prefFromLatLng } from "../../lib/prefs.js";
 export async function onRequestGet({ env }) {
   if (!env.DB) return json([], 503);
   const { results } = await env.DB.prepare("SELECT * FROM shops WHERE hidden = 0").all();
@@ -24,7 +25,9 @@ export async function onRequestPost({ env, request }) {
   const dup = (near.results || []).find((r) => r.name.replace(/\s/g, "") === n0);
   if (dup) return json({ ok: false, error: "dup", id: dup.id }, 409, 0);
   const id = "u-" + crypto.randomUUID().replace(/-/g, "").slice(0, 10);
-  const pref = cleanText(b.pref, 6) || "";
+  // 都道府県：地図の位置から（だめなら住所の書き出しから）
+  let pref = (await prefFromLatLng(lat, lng)) || prefFromText(address) || "";
+  if (!pref && PREFS.includes(String(b.pref || ""))) pref = String(b.pref);
   const KINDS = ["gacha", "game", "mall", "station", "shop", "other"];
   const kind = KINDS.includes(b.kind) ? b.kind : "other";
   const memo = b.memo ? String(b.memo).normalize("NFKC").trim().slice(0, 140) : "";

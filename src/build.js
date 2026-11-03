@@ -367,6 +367,8 @@ const shopsLive = readJSON("shops-live.json", {}) || {};
 const SHOPS = (() => {
   const list = Array.isArray(shopsLive.shops) && shopsLive.shops.length ? shopsLive.shops
     : stores.filter((x) => /^g-s\d+$/i.test(x.id) && x.lat && x.lng).map((x) => ({ id: x.id.slice(2).toLowerCase(), name: x.name, pref: x.prefecture, address: x.address, lat: x.lat, lng: x.lng, src: "bandai", hidden: 0 }));
+  const PN = Object.keys(PREF_EN);
+  for (const x of list) if (!x.pref && x.address) x.pref = PN.find((p) => String(x.address).startsWith(p)) || "";
   return list.filter((x) => !x.hidden && x.lat && x.lng && /^[a-z0-9-]+$/.test(x.id));
 })();
 const SHOP_OFFICIAL = shopsLive.official || {};
