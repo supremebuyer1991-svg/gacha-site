@@ -21884,5 +21884,281 @@
       "male"
     ],
     "tags_auto": true
+  },
+  {
+    "id": "tarts-y907043",
+    "name": "ちっちゃなふあふあえあ〜遊具",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-10",
+    "release_note": "10月26日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "lineup_names": [
+      "うさちゃん",
+      "わんちゃん",
+      "ぺんたちゃん",
+      "がおちゃん"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y907043",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-03",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y907524",
+    "name": "サンリオキャラクターズ トキメキステッキチャーム",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-10",
+    "release_note": "10月26日週発売",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "lineup_names": [
+      "クロミ",
+      "マイメロディ",
+      "ポムポムプリン",
+      "ハローキティ",
+      "シナモロール"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y907524",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-03",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:sanrio",
+      "kawaii:accessory",
+      "type:charm"
+    ],
+    "q_ages": [
+      "10",
+      "20",
+      "30"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y907630",
+    "name": "肩ズンFig. ゴジラ",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-10",
+    "release_note": "10月26日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "lineup_names": [
+      "ゴジラ（1984）",
+      "メカゴジラ（1974）",
+      "ガイガン（1972）",
+      "ヘドラ（1971）"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y907630",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-03",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "cool:hero",
+      "type:figure",
+      "retro:showa",
+      "funny:machibouke"
+    ],
+    "q_ages": [
+      "40",
+      "50"
+    ],
+    "q_genders": [
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y907845",
+    "name": "プラレール ぷっくりドロップめじるしガチャマスコット",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-10",
+    "release_note": "10月26日週発売",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "lineup_names": [
+      "新幹線 N700S",
+      "E5系新幹線はやぶさ",
+      "923形ドクターイエロー",
+      "E6系新幹線こまち",
+      "パンダくろしお「Smileアドベンチャートレイン"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y907845",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-03",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "kawaii:accessory",
+      "type:plush",
+      "type:mejirushi",
+      "real:vehicle"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y909443",
+    "name": "Disney SERIES CREATED by MUS Wear Collection Vol.2",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-10",
+    "release_note": "10月26日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 10,
+    "lineup_names": [
+      "FACE ニット WHT",
+      "FACE ニット PNK",
+      "FACE ニット BLU",
+      "FACE ニット YEL",
+      "DANCING PARTY ジャケット",
+      "IDOL&FUN MM プルオーバー",
+      "VOLUME SLEEVE ニットトップス",
+      "MALL YARN セーター",
+      "NATUVENTURE TSJ",
+      "NATUVENTURE TSJ2"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y909443",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-03",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "hobby:art"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y910968",
+    "name": "カプセルプラレール エアポート特急!大集合スペシャル",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-10",
+    "release_note": "10月26日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 12,
+    "lineup_names": [
+      "E259系 成田エクスプレス（ゼンマイ車）",
+      "E259系 成田エクスプレス（中間車）＋直線レール2本",
+      "E259系 成田エクスプレス（後尾車）＋曲線レール2本",
+      "名鉄2000系 ミュースカイ（ゼンマイ車）",
+      "名鉄2000系 ミュースカイ（中間車）＋直線レール2本",
+      "名鉄2000系 ミュースカイ（後尾車）＋曲線レール2本",
+      "南海ラピート（ゼンマイ車）",
+      "南海ラピート（中間車）＋直線レール2本",
+      "南海ラピート（後尾車）＋曲線レール2本",
+      "京成スカイライナーAE形（ゼンマイ車）",
+      "京成スカイライナーAE形（中間車）＋直線レール2本",
+      "京成スカイライナーAE形（後尾車）＋曲線レール2本"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y910968",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-03",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "real:vehicle"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
   }
 ]
