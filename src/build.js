@@ -286,6 +286,12 @@ const TYPES = site.types || [];
 const inType = (slug) => { const ty = TYPES.find((x) => x.slug === slug); return ty ? items.filter((it) => it._qs.some((k) => ty.subs.includes(k))) : []; };
 const moodLabel = (m, lang) => (lang === "en" ? m.en || m.label : m.label);
 
+const affSearch = (q) => {
+  const amazon = `https://www.amazon.co.jp/s?k=${encodeURIComponent(q)}${site.amazon_tag ? `&tag=${encodeURIComponent(site.amazon_tag)}` : ""}`;
+  const rs = `https://search.rakuten.co.jp/search/mall/${encodeURIComponent(q)}/`;
+  const rakuten = site.rakuten_affiliate_id ? `https://hb.afl.rakuten.co.jp/hgc/${site.rakuten_affiliate_id}/?pc=${encodeURIComponent(rs)}&m=${encodeURIComponent(rs)}` : rs;
+  return { amazon, rakuten };
+};
 const affiliate = (it) => {
   const q = `${it.name.replace(/【サンプル】/g, "")} ガチャ コンプ`;
   const amazon = `https://www.amazon.co.jp/s?k=${encodeURIComponent(q)}${site.amazon_tag ? `&tag=${encodeURIComponent(site.amazon_tag)}` : ""}`;
@@ -538,6 +544,11 @@ ${content}
         </dl>
       </div>
     </div>
+    <a class="katsu-banner" href="${c.R}gachakatsu.html">
+      <span class="kb-art" aria-hidden="true"><i class="kb-dot a">1</i><i class="kb-dot b">2</i><i class="kb-dot c">3</i><svg viewBox="0 0 120 60"><path d="M10 50 C 35 10, 60 55, 85 18 S 112 30, 112 30" fill="none" stroke="#3aa0ff" stroke-width="3" stroke-dasharray="6 6"/></svg></span>
+      <span class="kb-text"><b>${lang === "en" ? "NEW｜Gacha route planner" : "NEW｜ガチャ活しよう！"}</b><span>${lang === "en" ? "Find capsule-toy shops near you and get the most efficient route — by number of shops, time limit, or stops on the way." : "近くのガチャのお店を、いちばん効率よく回るルートを自動で作成。お店の数・時間・目的地までの寄り道から選べます。"}</span></span>
+      <span class="kb-go">${lang === "en" ? "Plan a route →" : "ルートを作る →"}</span>
+    </a>
     <form class="quiz" id="quiz" aria-labelledby="quiz-title">
       <div class="quiz-head">
         <h2 id="quiz-title">${t.quizTitle}</h2>
@@ -873,7 +884,7 @@ ${content}
       <div class="map-add-btns"><button class="btn btn-gold" type="button" id="add-send">この場所で追加する</button><button class="btn btn-ghost" type="button" id="add-cancel">やめる</button></div>
       <p class="fine" id="add-msg" role="status"></p>
     </div>
-    <div class="katsu panel" id="katsu" data-items="${c.R}data/shop-items.json?v=${QUIZ_V}" data-search="${c.R}data/search-ja.json" data-quiz="${c.R}data/quiz-ja.json?v=${QUIZ_V}">
+    <div class="katsu panel" id="katsu" data-items="${c.R}data/shop-items.json?v=${QUIZ_V}" data-search="${c.R}data/search-ja.json" data-quiz="${c.R}data/quiz-ja.json?v=${QUIZ_V}" data-amz="${esc(site.amazon_tag || "")}" data-rak="${esc(site.rakuten_affiliate_id || "")}">
       <h2 style="font-size:20px">🪐 ガチャ活ルートを作る</h2>
       <p class="fine" style="margin-top:4px">今いる場所から近いお店を、効率よく回れる順番に並べます。探したいガチャを入れると、そのガチャの取扱があるお店だけで作ります。</p>
       <div class="k-tabs" role="tablist">
@@ -901,6 +912,10 @@ ${content}
         <p class="fine" id="k-ex"></p>
         <div class="map-add-btns" id="k-gmaps"></div><div class="map-add-btns"><button class="btn btn-ghost" type="button" id="k-clear">ルートを消す</button></div>
         <p class="fine">距離はまっすぐ測った目安で、実際の道のりはもう少し長くなります。営業時間はお店でご確認ください。</p>
+      </div>
+      <div class="katsu-goods">
+        <h3>ガチャ活の持ちもの<span class="pr">PR</span></h3>
+        <div class="kg-list">${[["🪙", "100円玉がすぐ出せるコインケース", "コインケース 100円玉 収納"], ["👜", "カプセルがまとまる巾着・エコバッグ", "エコバッグ コンパクト 折りたたみ"], ["🔋", "地図とナビの電池切れ対策に", "モバイルバッテリー 軽量 薄型"], ["🖼️", "集めたガチャを飾るコレクションケース", "コレクションケース フィギュア ミニ"]].map(([ic, label, q]) => { const a = affSearch(q); return `<div class="kg"><span class="kg-ic" aria-hidden="true">${ic}</span><span class="kg-l">${label}</span><span class="kg-b"><a href="${esc(a.amazon)}" target="_blank" rel="sponsored noopener">Amazon</a><a href="${esc(a.rakuten)}" target="_blank" rel="sponsored noopener">楽天</a></span></div>`; }).join("")}</div>
       </div>
     </div>
     <p class="fine">地図：国土地理院の地図を使っています。お店の情報はバンダイ公式「ガシャポンどこ？」の取扱店と、みんなの報告をもとにしています。<a href="${c.R}rules.html">投稿のきまり</a></p>

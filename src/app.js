@@ -721,6 +721,8 @@
             var lab = links.length === 1 ? "Googleマップでナビを開く" : "Googleマップでナビ（" + (i === 0 ? "出発" : l.a + "店目") + "→" + (l.b > route.length ? "目的地" : l.b + "店目") + "）";
             return '<a class="btn' + (i === 0 ? " btn-gold" : "") + '" target="_blank" rel="noopener" href="' + esc(l.href) + '">' + lab + "</a>";
           }).join("");
+          var wantRaw = $("k-item").value.trim();
+          if (wantRaw) { var fw = aff(wantRaw + " ガチャ コンプ"); $("k-sum").innerHTML = esc($("k-sum").textContent) + '<span class="k-aff k-aff-big">「' + esc(wantRaw) + '」が見つからなかったら通販でも：<a href="' + esc(fw.a) + '" target="_blank" rel="sponsored noopener">Amazonで探す</a><a href="' + esc(fw.r) + '" target="_blank" rel="sponsored noopener">楽天で探す</a><i class="pr">PR</i></span>'; }
           var nEx = Object.keys(excluded).length;
           $("k-ex").innerHTML = nEx ? "外したお店：" + nEx + '店　<button type="button" class="k-pop" id="k-ex-reset">外したお店を元に戻す</button>' : "";
           $("k-result").hidden = false;
@@ -730,6 +732,11 @@
       };
       // ルートのお店ごとに「在庫のある人気ガチャ」を開く・閉じる
       var quizItems = null;
+      var AMZ = K.getAttribute("data-amz"), RAK = K.getAttribute("data-rak");
+      var aff = function (q) {
+        var rs = "https://search.rakuten.co.jp/search/mall/" + encodeURIComponent(q) + "/";
+        return { a: "https://www.amazon.co.jp/s?k=" + encodeURIComponent(q) + (AMZ ? "&tag=" + encodeURIComponent(AMZ) : ""), r: RAK ? "https://hb.afl.rakuten.co.jp/hgc/" + RAK + "/?pc=" + encodeURIComponent(rs) + "&m=" + encodeURIComponent(rs) : rs };
+      };
       var loadQuiz = function () {
         if (quizItems) return Promise.resolve(quizItems);
         return fetch(K.getAttribute("data-quiz")).then(function (r) { return r.json(); }).then(function (a) { quizItems = {}; a.forEach(function (it) { quizItems[it.id] = it; }); return quizItems; });
@@ -749,7 +756,9 @@
           ids.sort(function (a, b2) { return (qi[b2].popularity || 0) - (qi[a].popularity || 0) || (qi[b2].ad > qi[a].ad ? 1 : -1); });
           box.innerHTML = ids.length ? '<ol class="k-pop-list">' + ids.slice(0, 10).map(function (id) {
             var it = qi[id];
-            return '<li><a href="' + root + "item/" + esc(id) + '.html">' + (it.image ? '<img src="' + root + esc(it.image) + '" alt="" loading="lazy" width="40" height="40">' : "") + "<span>" + esc(it.name) + "</span><em>¥" + it.price + "</em></a></li>";
+            var f = aff(it.jn + " ガチャ コンプ");
+            return '<li><a href="' + root + "item/" + esc(id) + '.html">' + (it.image ? '<img src="' + root + esc(it.image) + '" alt="" loading="lazy" width="40" height="40">' : "") + "<span>" + esc(it.name) + "</span><em>¥" + it.price + "</em></a>" +
+              '<span class="k-aff">売り切れなら通販で：<a href="' + esc(f.a) + '" target="_blank" rel="sponsored noopener">Amazon</a><a href="' + esc(f.r) + '" target="_blank" rel="sponsored noopener">楽天</a><i class="pr">PR</i></span></li>';
           }).join("") + "</ol>" + (ids.length > 10 ? '<p class="fine">ほか' + (ids.length - 10) + '種。<a href="' + root + "shop/" + esc(sid) + '.html">お店のページで全部見る→</a></p>' : "") + '<p class="fine">バンダイ公式「ガシャポンどこ？」で取扱のあるガチャです（通信機能のあるマシンのみ）。</p>'
             : '<p class="fine">公式の取扱情報がまだないお店です。<a href="' + root + "shop/" + esc(sid) + '.html">お店のページ</a>で、みんなの在庫報告を見られます。</p>';
           box.setAttribute("data-done", "1");

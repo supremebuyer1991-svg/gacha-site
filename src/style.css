@@ -671,3 +671,37 @@ label.opt:focus-within { outline: none; }
 .k-acts { display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: center; }
 .k-del { margin-top: 4px; background: none; border: 0; padding: 2px 0; color: var(--muted); font: 700 12.5px var(--font-body); cursor: pointer; border-bottom: 2px dotted var(--line-strong); }
 .k-del:hover { color: var(--gold); border-color: var(--gold); }
+
+/* トップのガチャ活バナー */
+.katsu-banner { display: grid; grid-template-columns: 120px minmax(0, 1fr) auto; gap: 18px; align-items: center; padding: 18px 22px; border-radius: var(--radius); background: linear-gradient(120deg, #e9f6ff 0%, #fff3f7 60%, #fff9e6 100%); box-shadow: 0 4px 0 #d9e6fb; transition: transform .15s; }
+.katsu-banner:hover { transform: translateY(-2px); }
+.kb-art { position: relative; width: 120px; height: 60px; }
+.kb-art svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.kb-dot { position: absolute; z-index: 1; width: 24px; height: 24px; border-radius: 50%; background: var(--gold); color: #fff; border: 2px solid #fff; display: grid; place-items: center; font: 700 12px/1 var(--font-latin); font-style: normal; box-shadow: 0 2px 4px rgba(0,0,0,.2); }
+.kb-dot.a { left: 0; top: 36px; } .kb-dot.b { left: 50px; top: 18px; background: var(--sky); } .kb-dot.c { left: 96px; top: 10px; background: var(--mint); }
+.kb-text { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.kb-text b { font-size: 18px; font-weight: 900; color: var(--text); }
+.kb-text span { font-size: 13px; color: var(--text-2); font-weight: 700; }
+.kb-go { background: var(--gold); color: #fff; font-weight: 700; padding: 10px 18px; border-radius: 999px; box-shadow: 0 4px 0 #d93763; white-space: nowrap; }
+@media (max-width: 640px) { .katsu-banner { grid-template-columns: 64px minmax(0, 1fr); padding: 14px 16px; gap: 12px; } .kb-art { width: 64px; height: 40px; transform: scale(.55); transform-origin: left top; } .kb-go { grid-column: 1 / -1; text-align: center; } .kb-text b { font-size: 16px; } }
+/* ガチャ活の通販リンク */
+.k-aff { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; margin: 2px 0 2px 32px; font-size: 11.5px; color: var(--muted); }
+.k-aff a { color: var(--sky); font-weight: 700; border-bottom: 1px dotted var(--sky); }
+.k-aff .pr { font-style: normal; margin-left: 0; }
+.k-aff-big { margin: 8px 0 0; font-size: 12.5px; }
+.katsu-goods { margin-top: 18px; padding-top: 14px; border-top: 2px dashed var(--line); }
+.katsu-goods h3 { font-size: 15px; display: flex; align-items: center; gap: 6px; }
+.kg-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); gap: 8px; margin-top: 10px; }
+.kg { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 2px 8px; align-items: center; background: var(--surface-2); border-radius: 12px; padding: 10px 12px; }
+.kg-ic { grid-row: 1 / span 2; font-size: 22px; }
+.kg-l { font-size: 13px; font-weight: 700; }
+.kg-b { display: flex; gap: 10px; font-size: 12px; }
+.kg-b a { color: var(--sky); font-weight: 700; border-bottom: 1px dotted var(--sky); }
+/* メニューが増えたので、パソコンでも1行に収める */
+@media (min-width: 961px) {
+  .site-header .wrap { flex-wrap: nowrap; gap: 18px; }
+  .nav { gap: 14px; }
+  .nav a { font-size: 12.5px; letter-spacing: .02em; }
+  .search { flex: 0 1 200px; }
+}
+@media (min-width: 961px) and (max-width: 1180px) { .logo-ja { display: none; } .nav { gap: 10px; } .search { flex-basis: 160px; } }
