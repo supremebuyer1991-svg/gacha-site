@@ -954,12 +954,6 @@
         }).catch(function () { mm.textContent = "送れませんでした。時間をおいてもう一度お試しください。"; });
       });
     })();
-    var shareX = function (d) {
-      var a = document.getElementById("share-x"); if (!a) return;
-      var r = d && d.rating, cm = d && d.comments && d.comments[0];
-      var tx = "「" + a.getAttribute("data-name") + "」のガチャ情報" + (r ? "\n☆" + r.avg.toFixed(1) + "（" + r.n + "人の評価）" : "") + (cm ? "\n💬" + (cm.body.length > 60 ? cm.body.slice(0, 60) + "…" : cm.body) : "") + "\n#ガチャガチャ #ガチャ活";
-      a.href = "https://x.com/intent/post?text=" + encodeURIComponent(tx) + "&url=" + encodeURIComponent(a.getAttribute("data-url"));
-    };
     var known = [];
     try { known = JSON.parse(document.getElementById("shop-items").textContent); } catch (e) {}
     var listEl2 = document.getElementById("rep-list"), msgEl = document.getElementById("rep-msg");
