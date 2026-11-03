@@ -18,13 +18,21 @@ async function reverse(lat, lng, muni) {
 module.exports = async function shopAddrFixSql() {
   try {
     const d = await (await fetch(`${SITE}/api/shopdump`, { headers: UA })).json();
-    const list = (d.shops || []).filter((s) => s.src === "user" && s.lat && s.lng && bad(s.address)).slice(0, 30);
+    // 住所を位置から作るようにした（2026-11-04）より前に追加されたピンは、検索候補の住所が入っていて市区町村がずれていることがある
+    const OLD = "2026-11-03T20:45";
+    const users = (d.shops || []).filter((s) => s.src === "user" && s.lat && s.lng);
+    const list = users.filter((s) => bad(s.address) || String(s.created_at || "") < OLD).slice(0, 30);
     if (!list.length) return "";
     const muni = await muniTable();
     const out = [];
     for (const s of list) {
       const a = await reverse(s.lat, s.lng, muni).catch(() => "");
       if (!a || a === s.address) continue;
+      // 古いピンは、住所の市区町村が位置の市区町村と同じなら（町名が入っていれば）そのままにする
+      if (!bad(s.address)) {
+        const city = a.replace(/^.{2,3}?[都道府県]/, "").match(/^.+?[市区町村郡]/);
+        if (!city || String(s.address).replace(/\s/g, "").includes(city[0])) continue;
+      }
       const q = (v) => "'" + String(v).replace(/'/g, "''") + "'";
       out.push(`UPDATE shops SET address = ${q(a)} WHERE id = ${q(s.id)} AND address = ${q(s.address || "")};`);
       console.error(`住所を直します：${s.name}「${s.address || "(空)"}」→「${a}」`);
