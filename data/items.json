@@ -22644,5 +22644,167 @@
       "male"
     ],
     "tags_auto": false
+  },
+  {
+    "id": "bandai-4570118186522",
+    "name": "aespa ミニチュアパッケージチャーム",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2027-01",
+    "release_note": "",
+    "genre": "miniature",
+    "moods": [
+      "kawaii",
+      "real"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118186522000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118186522",
+    "popularity": 50,
+    "added": "2026-11-04",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "oshi:idol",
+      "type:charm",
+      "type:minipkg",
+      "real:miniature"
+    ],
+    "q_ages": [
+      "10",
+      "20",
+      "30",
+      "40",
+      "50"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770068535",
+    "name": "ロボット パルタ めじるしアクセサリー",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2027-01",
+    "release_note": "",
+    "genre": "anime",
+    "moods": [
+      "kawaii",
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770068535000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770068535",
+    "popularity": 50,
+    "added": "2026-11-04",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "cool:robot",
+      "type:mejirushi",
+      "type:fashion"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118186362",
+    "name": "RIIZE つまんでつなげてますこっと でらっくす! LITTLE RIIZE ver.",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2027-02",
+    "release_note": "",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 12,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118186362000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118186362",
+    "popularity": 50,
+    "added": "2026-11-04",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "oshi:idol"
+    ],
+    "q_ages": [
+      "10",
+      "20"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770068238",
+    "name": "SKZOO フーディースタイルフィギュア",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2027-02",
+    "release_note": "",
+    "genre": "anime",
+    "moods": [
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 8,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770068238000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770068238",
+    "popularity": 50,
+    "added": "2026-11-04",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "oshi:idol",
+      "type:figure"
+    ],
+    "q_ages": [
+      "10",
+      "20"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
   }
 ]
