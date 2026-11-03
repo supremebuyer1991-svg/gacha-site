@@ -601,7 +601,7 @@
       $("k-dest").addEventListener("change", function () {
         var v = NORM($("k-dest").value); if (!v) return;
         var hit = list.filter(function (s) { return NORM(s[1]) === v; })[0] || list.filter(function (s) { return NORM(s[1]).indexOf(v) !== -1; })[0];
-        if (hit) { setDest([hit[3], hit[4]], hit[1]); map.setView([hit[3], hit[4]], 14); }
+        if (hit) setDest([hit[3], hit[4]], hit[1]); // 地図は動かさない（「地図の真ん中から作る」の出発点が変わらないように）
       });
       $("k-pick").addEventListener("click", function () { picking = true; kmsg.textContent = "地図の目的地をタップしてください。"; mapEl.scrollIntoView({ behavior: "smooth", block: "center" }); });
       map.on("click", function (e) { if (!picking) return; picking = false; setDest([e.latlng.lat, e.latlng.lng]); kmsg.textContent = "目的地を決めました。"; });
