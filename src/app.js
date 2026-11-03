@@ -555,7 +555,10 @@
     });
     document.getElementById("map-geo").addEventListener("click", function () {
       if (!navigator.geolocation) return;
-      navigator.geolocation.getCurrentPosition(function (p) { map.setView([p.coords.latitude, p.coords.longitude], 14); }, function () {}, { enableHighAccuracy: false, timeout: 8000 });
+      navigator.geolocation.getCurrentPosition(function (p) {
+        map.setView([p.coords.latitude, p.coords.longitude], 14);
+        if (p.coords.accuracy > 1000) window.L.circle([p.coords.latitude, p.coords.longitude], { radius: p.coords.accuracy, color: "#3aa0ff", weight: 1, fillOpacity: 0.06 }).addTo(map).bindTooltip("このあたり（誤差 約" + Math.round(p.coords.accuracy / 1000) + "km）", { permanent: true }).openTooltip();
+      }, function () {}, { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 });
     });
     var q = document.getElementById("map-q");
     q.addEventListener("keydown", function (e) {
@@ -704,7 +707,11 @@
       $("k-go").addEventListener("click", function () {
         if (!navigator.geolocation) { kmsg.textContent = "この端末では現在地が使えません。「地図の真ん中から作る」をお使いください。"; return; }
         kmsg.textContent = "現在地を調べています…（位置はこの端末の中だけで使います）";
-        navigator.geolocation.getCurrentPosition(function (p) { build([p.coords.latitude, p.coords.longitude]); }, function () { kmsg.textContent = "現在地がわかりませんでした。地図を動かして「地図の真ん中から作る」をお試しください。"; }, { enableHighAccuracy: true, timeout: 10000 });
+        navigator.geolocation.getCurrentPosition(function (p) {
+          build([p.coords.latitude, p.coords.longitude]);
+          // パソコンなどGPSがない端末では、ネットの接続先から大まかに決まるので、何kmもずれることがある
+          if (p.coords.accuracy > 1000) setTimeout(function () { kmsg.textContent = "⚠ 現在地の精度が低いようです（誤差 約" + Math.round(p.coords.accuracy / 1000) + "km）。パソコンだと、ネットの接続先の場所（大きな駅の近くなど）になることがあります。ずれていたら、地図を本当の場所に動かして「地図の真ん中から作る」を押してください。"; }, 50);
+        }, function () { kmsg.textContent = "現在地がわかりませんでした。地図を動かして「地図の真ん中から作る」をお試しください。"; }, { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 });
       });
       $("k-here").addEventListener("click", function () { var c = map.getCenter(); build([c.lat, c.lng]); });
       $("k-clear").addEventListener("click", function () { routeLayer.clearLayers(); $("k-result").hidden = true; kmsg.textContent = ""; });
