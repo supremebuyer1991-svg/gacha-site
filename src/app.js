@@ -837,7 +837,7 @@
       var pc = document.getElementById("add-place-c"); pc.innerHTML = ""; msg.textContent = "探しています…";
       geocodeList(q2, map.getBounds()).then(function (a) {
         if (!a.length) { msg.textContent = "見つかりませんでした。「イオン 和泉府中」のように短く分けるか、住所や駅名で試してください。"; return; }
-        msg.textContent = "当てはまる場所をえらんでください。";
+        msg.textContent = "当てはまる場所をえらんでください（ちがう場所しか出ないときは「イオン 和泉府中」のように、名前を分けて探すと見つかりやすいです）。";
         pc.innerHTML = a.map(function (g, i) { return '<button type="button" class="sort" data-i="' + i + '"><b>' + esc(g.title) + "</b> <small>" + esc(g.area || "") + "</small></button>"; }).join("");
         pc.onclick = function (e) {
           var bt = e.target.closest && e.target.closest("button"); if (!bt) return;
