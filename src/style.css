@@ -907,3 +907,12 @@ label.opt:focus-within { outline: none; }
 /* 入荷速報：上の余白をつめる */
 .section.section-tight { padding-top: 28px; }
 .rank li[hidden] { display: none; }
+/* 月ごとのページ：前後の月へ */
+.month-pager { display: grid; grid-template-columns: 1fr auto 1fr; gap: 8px; align-items: center; margin: 28px 0 0; }
+.month-pager a { display: inline-flex; justify-content: center; padding: 10px 14px; border-radius: 999px; background: #fff; border: 1.5px solid var(--line); font-size: 14px; font-weight: 700; color: var(--text); text-decoration: none; white-space: nowrap; }
+.month-pager a:first-child { justify-self: start; }
+.month-pager a:last-child { justify-self: end; }
+.month-pager a:hover { border-color: var(--pink, #ff7eb6); }
+.archive-list .cur { display: inline-flex; align-items: center; padding: 9px 16px; border-radius: 999px; background: var(--pink, #ff7eb6); color: #fff; font-size: 14px; font-weight: 700; }
+@media (max-width: 640px) { .month-pager a { padding: 9px 10px; font-size: 12.5px; } }
+.rel-note:hover { background: #d6eaff; }

@@ -669,7 +669,7 @@ ${content}
       <div class="price"><small>${lang === "ja" ? t.perPlay : ""}</small><b>¥${it.price}</b><span>${lang === "en" ? t.perPlay : ""}${it.lineup ? `${lang === "en" ? " · " : ""}${t.lineup(it.lineup)}` : ""}</span></div>
       <dl class="spec">
         <dt>${t.maker}</dt><dd><a href="${c.H}maker/${makerSlug(it.maker)}.html">${esc(maker)}</a></dd>
-        <dt>${t.release}</dt><dd>${t.month(it.release)}${lang === "ja" && it.release_note ? `<span class="rel-note">${esc(it.release_note)}</span>` : ""}</dd>
+        <dt>${t.release}</dt><dd><a href="${c.H}calendar/${ws ? ws.toISOString().slice(0, 7) : it.release}.html">${t.month(it.release)}</a>${lang === "ja" && it.release_note ? (ws ? `<a class="rel-note" href="${c.H}calendar/${ws.toISOString().slice(0, 7)}.html#w${wi.key}">${esc(it.release_note)}</a>` : `<span class="rel-note">${esc(it.release_note)}</span>`) : ""}</dd>
         ${it.age_min ? `<dt>${t.ageLabel}</dt><dd>${t.ageMin(it.age_min)}</dd>` : ""}
         <dt>${t.genre}</dt><dd><a href="${c.H}genre/${g.slug}.html">${gl}</a></dd>
         ${tags.length ? `<dt>${t.tags}</dt><dd><div class="tags">${tags.map((x) => `<span class="chip chip-ai">${esc(x)}</span>`).join("")}</div></dd>` : ""}
@@ -768,7 +768,14 @@ ${content}
   <header class="page-head"><h1>${esc(title)}</h1><p class="lead">${esc(lead)}</p></header>
   <section class="section" style="padding-top:40px">${list.length ? `<div class="grid">${list.map((it) => card(it, c)).join("")}</div>` : `<p class="empty">${t.empty}</p>`}</section>
 </div>`;
-    layout({ rel, title, description: lead, body, current, ogImage });
+    const jsonld = [
+      { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
+        { "@type": "ListItem", position: 1, name: t.home, item: canonical(lang, "index.html") },
+        { "@type": "ListItem", position: 2, name: title } ] },
+      ...(list.length ? [{ "@context": "https://schema.org", "@type": "ItemList", numberOfItems: list.length,
+        itemListElement: list.slice(0, 30).map((it, i) => ({ "@type": "ListItem", position: i + 1, url: canonical(lang, `item/${it.id}.html`), name: nameOf(it, lang) })) }] : []),
+    ];
+    layout({ rel, title, description: lead, body, current, ogImage, jsonld });
   };
   // 今週発売のガチャ（X の「今週発売」投稿のリンク先）
   listPage("week.html", {
