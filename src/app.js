@@ -703,10 +703,16 @@
           }
           var direct = end ? hav(start, end) : 0;
           cand = cand.filter(function (s) { return !excluded[s[0]]; });
-          cand = cand.map(function (s) { return { s: s, p: [s[3], s[4]] }; }).filter(function (x) {
-            if (plan === "dest") { var extra = hav(start, x.p) + hav(x.p, end) - direct; return minsOf(extra, mode) <= detour; }
-            return hav(start, x.p) <= reach;
+          var all0 = cand.map(function (s) { return { s: s, p: [s[3], s[4]], d: hav(start, [s[3], s[4]]) }; });
+          cand = all0.filter(function (x) {
+            if (plan === "dest") { var extra = x.d + hav(x.p, end) - direct; return minsOf(extra, mode) <= detour; }
+            return x.d <= reach;
           });
+          // 「お店の数」で近くに足りないときは、少し遠いお店（近い範囲の4倍まで）も足す
+          if (plan === "count" && cand.length < n) {
+            var more = all0.filter(function (x) { return x.d > reach && x.d <= reach * 4; }).sort(function (a, b) { return a.d - b.d; }).slice(0, n - cand.length);
+            if (more.length) { noteAfter = (noteAfter ? noteAfter + " " : "") + "近く（約" + reach + "km以内）には" + cand.length + "店しかないので、少し遠いお店も入れています。"; cand = cand.concat(more); }
+          }
           if (!cand.length) { kmsg.textContent = plan === "dest" ? "寄り道できるお店が見つかりませんでした。寄り道の時間を長くしてみてください。" : "近くにお店が見つかりませんでした。移動を変えるか、時間を長くしてみてください。"; return; }
           cand = cand.sort(function (a, b) { return hav(start, a.p) - hav(start, b.p); }).slice(0, 60);
           // 道のり（km）と、かかる時間（分）
