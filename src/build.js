@@ -859,7 +859,7 @@ ${content}
   <section class="map-wrap${katsu ? " is-katsu" : ""}">
     <div class="map-tools">
       <button class="btn btn-gold" type="button" id="map-geo">現在地のまわり</button>
-      <input type="search" id="map-q" class="map-q" placeholder="お店の名前・地名で探す" autocomplete="off">
+      <input type="search" id="map-q" class="map-q" placeholder="お店の名前・地名・駅名で探す" autocomplete="off">
       <button class="btn" type="button" id="map-add">＋ お店を追加</button>
     </div>
     <div id="map" class="map" data-shops="${c.R}api/shops" data-fallback="${c.R}data/shops.json" data-root="${c.R}"></div>
@@ -889,6 +889,7 @@ ${content}
         <label class="k-wide">探したいガチャ（なくてもOK）<input type="search" id="k-item" list="k-items" placeholder="例：ちいかわ めじるしアクセサリー3" autocomplete="off"><datalist id="k-items"></datalist></label>
         <label class="k-check" data-for="count time"><input type="checkbox" id="k-back"> 最後に出発した場所へ戻る</label>
       </div>
+      <div class="k-start"><input type="search" id="k-start" placeholder="出発する場所を地名・駅名で（例：泉大津駅）" autocomplete="off"><button class="btn" type="button" id="k-start-go">この場所から作る</button></div>
       <div class="map-add-btns"><button class="btn btn-gold" type="button" id="k-go">現在地からルートを作る</button><button class="btn" type="button" id="k-here">地図の真ん中から作る</button></div>
       <p class="fine" id="k-msg" role="status"></p>
       <div id="k-result" hidden>

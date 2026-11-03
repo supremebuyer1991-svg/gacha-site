@@ -530,6 +530,13 @@
   var tiles = function (map) {
     window.L.tileLayer("https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png", { maxZoom: 18, minZoom: 4, attribution: '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener">国土地理院</a>' }).addTo(map);
   };
+  // 地名・駅名から場所を探す（国土地理院の住所検索。無料・登録なし）
+  var geocode = function (q) {
+    return fetch("https://msearch.gsi.go.jp/address-search/AddressSearch?q=" + encodeURIComponent(q)).then(function (r) { return r.json(); }).then(function (a) {
+      if (!a || !a.length) return null;
+      var c = a[0].geometry.coordinates; return { ll: [c[1], c[0]], title: a[0].properties.title };
+    });
+  };
   var post = function (url, body) {
     return fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }).then(function (r) { return r.json().then(function (d) { d._status = r.status; return d; }); });
   };
@@ -566,7 +573,7 @@
       e.preventDefault();
       var v = NORM(q.value); if (!v) return;
       var hits = list.filter(function (s) { return NORM(s[1] + (s[2] || "")).indexOf(v) !== -1; });
-      if (!hits.length) return;
+      if (!hits.length) { geocode(q.value.trim()).then(function (g) { if (g) map.setView(g.ll, 14); }).catch(function () {}); return; }
       if (hits.length === 1) { map.setView([hits[0][3], hits[0][4]], 16); markers[hits[0][0]].openPopup(); }
       else map.fitBounds(L.latLngBounds(hits.map(function (s) { return [s[3], s[4]]; })), { maxZoom: 15, padding: [30, 30] });
     });
@@ -710,10 +717,17 @@
         navigator.geolocation.getCurrentPosition(function (p) {
           build([p.coords.latitude, p.coords.longitude]);
           // パソコンなどGPSがない端末では、ネットの接続先から大まかに決まるので、何kmもずれることがある
-          if (p.coords.accuracy > 1000) setTimeout(function () { kmsg.textContent = "⚠ 現在地の精度が低いようです（誤差 約" + Math.round(p.coords.accuracy / 1000) + "km）。パソコンだと、ネットの接続先の場所（大きな駅の近くなど）になることがあります。ずれていたら、地図を本当の場所に動かして「地図の真ん中から作る」を押してください。"; }, 50);
+          if (p.coords.accuracy > 1000) setTimeout(function () { kmsg.textContent = "⚠ 現在地の精度が低いようです（誤差 約" + Math.round(p.coords.accuracy / 1000) + "km）。パソコンだと、ネットの接続先の場所（大きな駅の近くなど）になることがあります。ずれていたら、上の欄に「泉大津駅」のように出発する場所を入れて「この場所から作る」を押してください。"; }, 50);
         }, function () { kmsg.textContent = "現在地がわかりませんでした。地図を動かして「地図の真ん中から作る」をお試しください。"; }, { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 });
       });
       $("k-here").addEventListener("click", function () { var c = map.getCenter(); build([c.lat, c.lng]); });
+      var startByName = function () {
+        var q = $("k-start").value.trim(); if (!q) { kmsg.textContent = "出発する場所を入れてください。"; return; }
+        kmsg.textContent = "場所を探しています…";
+        geocode(q).then(function (g) { if (!g) { kmsg.textContent = "その場所が見つかりませんでした。駅名や市町村名で試してください。"; return; } build(g.ll); }).catch(function () { kmsg.textContent = "場所を探せませんでした。時間をおいてもう一度お試しください。"; });
+      };
+      $("k-start-go").addEventListener("click", startByName);
+      $("k-start").addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); startByName(); } });
       $("k-clear").addEventListener("click", function () { routeLayer.clearLayers(); $("k-result").hidden = true; kmsg.textContent = ""; });
     })();
 
