@@ -569,6 +569,29 @@
       return out.slice(0, 6);
     });
   };
+  // ピンの位置から住所（都道府県＋市区町村＋町名・丁目）を作る：国土地理院の住所変換
+  var muniReady = null;
+  var loadMuni = function () {
+    if (muniReady) return muniReady;
+    muniReady = new Promise(function (ok) {
+      if (window.GSI && window.GSI.MUNI_ARRAY) return ok(window.GSI.MUNI_ARRAY);
+      window.GSI = window.GSI || {};
+      var sc = document.createElement("script"); sc.src = "https://maps.gsi.go.jp/js/muni.js";
+      sc.onload = function () { ok((window.GSI && window.GSI.MUNI_ARRAY) || {}); }; sc.onerror = function () { ok({}); };
+      document.head.appendChild(sc);
+    });
+    return muniReady;
+  };
+  var addrAt = function (lat, lng) {
+    return Promise.all([loadMuni(), fetch("https://mreversegeocoder.gsi.go.jp/reverse-geocoder/LonLatToAddress?lat=" + lat + "&lon=" + lng).then(function (r) { return r.json(); })]).then(function (r) {
+      var x = r[1] && r[1].results; if (!x) return "";
+      var row = null, M = r[0];
+      for (var k in M) if (Number(k) === Number(x.muniCd)) { row = M[k]; break; }
+      if (!row) return "";
+      var p = String(row).split(",");
+      return (p[1] || "") + String(p[3] || "").replace(/[\s　]/g, "") + (x.lv01Nm && x.lv01Nm !== "－" ? x.lv01Nm : "");
+    }).catch(function () { return ""; });
+  };
   var geocode = function (q, near) {
     return geocodeList(q, near).then(function (a) { return a.length ? a[0] : geocodeGsi(q); }).catch(function () { return geocodeGsi(q); });
   };
@@ -880,7 +903,8 @@
         pc.onclick = function (e) {
           var bt = e.target.closest && e.target.closest("button"); if (!bt) return;
           var g = a[Number(bt.getAttribute("data-i"))]; map.setView(g.ll, 18); pc.innerHTML = "";
-          var ad = document.getElementById("add-addr"); if (!ad.value.trim() && g.addr) ad.value = g.addr.slice(0, 120);
+          var ad = document.getElementById("add-addr");
+          if (!ad.value.trim() || ad.getAttribute("data-auto") === ad.value) addrAt(g.ll[0], g.ll[1]).then(function (a) { if (a && (!ad.value.trim() || ad.getAttribute("data-auto") === ad.value)) { ad.value = a; ad.setAttribute("data-auto", a); } });
           msg.textContent = "「" + g.title + "」に移動しました。建物の中のお店の場所に＋を合わせて追加してください。";
         };
       }).catch(function () { msg.textContent = "探せませんでした。時間をおいてもう一度お試しください。"; });
@@ -894,13 +918,18 @@
       if (map.getZoom() < 15) { msg.textContent = "場所がずれないよう、もっと地図を拡大してから追加してください。"; return; }
       var c = map.getCenter();
       msg.textContent = "送っています…";
-      post(root + "api/shops", { name: name, address: document.getElementById("add-addr").value.trim(), kind: document.getElementById("add-kind").value, memo: document.getElementById("add-memo").value.trim(), lat: c.lat, lng: c.lng }).then(function (d) {
+      var adEl = document.getElementById("add-addr"), typed = adEl.value.trim();
+      var auto = !typed || adEl.getAttribute("data-auto") === adEl.value;
+      (auto ? addrAt(c.lat, c.lng) : Promise.resolve(typed)).then(function (address) {
+      if (!address) address = auto ? "" : typed;
+      return post(root + "api/shops", { name: name, address: address, kind: document.getElementById("add-kind").value, memo: document.getElementById("add-memo").value.trim(), lat: c.lat, lng: c.lng }).then(function (d) {
         if (d.ok) {
           add([d.id, name, "", c.lat, c.lng, 1]); markers[d.id].openPopup();
           msg.textContent = "追加しました！ありがとうございます。お店のページは数時間後にできます。";
-          document.getElementById("add-name").value = ""; document.getElementById("add-addr").value = ""; document.getElementById("add-memo").value = "";
+          document.getElementById("add-name").value = ""; adEl.value = ""; adEl.removeAttribute("data-auto"); document.getElementById("add-memo").value = "";
           mapEl.classList.remove("is-adding");
         } else msg.textContent = d.error === "ng" ? "使えない言葉が入っています。書き方を変えてください。" : d.error === "dup" ? "このお店はもう地図にあります。" : d.error === "limit" ? "今日追加できる数を超えました。また明日お願いします。" : "追加できませんでした。名前と場所を確かめてください。";
+      });
       }).catch(function () { msg.textContent = "送れませんでした。時間をおいてもう一度お試しください。"; });
     });
   });

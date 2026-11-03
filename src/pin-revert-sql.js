@@ -9,4 +9,5 @@ for (const id of list) {
   const m = `(SELECT %s FROM pin_moves WHERE id = ${n})`;
   out.push(`UPDATE shops SET lat = ${m.replace("%s", "from_lat")}, lng = ${m.replace("%s", "from_lng")} WHERE id = ${m.replace("%s", "shop_id")} AND lat = ${m.replace("%s", "lat")} AND lng = ${m.replace("%s", "lng")};`);
 }
-process.stdout.write(out.join("\n") + (out.length ? "\n" : ""));
+// あわせて、町名の抜けた住所を直す（src/shop-addr-fix.js）
+require("./shop-addr-fix")().then((fix) => process.stdout.write(out.join("\n") + (out.length ? "\n" : "") + fix));
