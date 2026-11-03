@@ -950,7 +950,7 @@
         var c = shopMap.getCenter(); mm.textContent = "送っています…";
         post(shopEl.getAttribute("data-root") + "api/move", { shop: sid, lat: c.lat, lng: c.lng }).then(function (d) {
           if (d.ok) { shopPin.setLatLng([d.lat, d.lng]); stop(); mm.textContent = d.same ? "位置は変わっていません。" : "ピンの位置を直しました！ありがとうございます。地図やガチャ活にもすぐ反映されます。"; return; }
-          mm.textContent = d.error === "far" ? "1回に動かせるのは1kmまでです。少しずつ動かすか、正しい場所を確かめてください。" : d.error === "again" ? "このお店のピンは今日はもう直しています。また明日お願いします。" : d.error === "limit" ? "今日直せる回数をこえました。また明日お願いします。" : "直せませんでした。時間をおいてもう一度お試しください。";
+          mm.textContent = d.error === "official" ? "公式のお店のピンは動かせません。" : d.error === "far" ? "1回に動かせるのは1kmまでです。少しずつ動かすか、正しい場所を確かめてください。" : d.error === "again" ? "このお店のピンは今日はもう直しています。また明日お願いします。" : d.error === "limit" ? "今日直せる回数をこえました。また明日お願いします。" : "直せませんでした。時間をおいてもう一度お試しください。";
         }).catch(function () { mm.textContent = "送れませんでした。時間をおいてもう一度お試しください。"; });
       });
     })();
@@ -1032,7 +1032,7 @@
         drawRate({ avg: d.avg, n: d.n }); $("rate-msg").textContent = "☆" + v + "で評価しました。ありがとうございます！";
       }).catch(function (er) { $("rate-msg").textContent = er && er.message === "limit" ? "今日はこれ以上評価できません" : "送れませんでした。時間をおいてもう一度お試しください"; paintPick(myRate); });
     });
-    var reload = function () { return fetch(shopEl.getAttribute("data-api") + "?t=" + Date.now()).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) { draw(d); drawComments(d); drawRate(d && d.rating); shareX(d); if (d && d.shop && d.shop.lat && document.getElementById("mv-box").hidden) { liveLL = [d.shop.lat, d.shop.lng]; if (shopPin) { shopPin.setLatLng(liveLL); shopMap.setView(liveLL, 17); } } }).catch(function () { draw(null); drawComments(null); }); };
+    var reload = function () { return fetch(shopEl.getAttribute("data-api") + "?t=" + Date.now()).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) { draw(d); drawComments(d); drawRate(d && d.rating); shareX(d); if (d && d.shop && d.shop.lat && (!document.getElementById("mv-box") || document.getElementById("mv-box").hidden)) { liveLL = [d.shop.lat, d.shop.lng]; if (shopPin) { shopPin.setLatLng(liveLL); shopMap.setView(liveLL, 17); } } }).catch(function () { draw(null); drawComments(null); }); };
     reload();
     [].forEach.call(document.querySelectorAll("#report-box [data-kind]"), function (b) {
       b.addEventListener("click", function () {

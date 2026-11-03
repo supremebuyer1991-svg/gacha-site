@@ -80,6 +80,7 @@ jobs:
           $W d1 execute gacha-stock --remote --file worker/migrate.sql > /dev/null 2>&1 || true
           # ガチャマップのお店（公式の取扱店）を入れる。すでにあるお店は変えない
           node src/shops-seed-sql.js > /tmp/seed-shops.sql && $W d1 execute gacha-stock --remote --file /tmp/seed-shops.sql > /dev/null || echo "お店の登録に失敗（次回また試します）"
+          node src/pin-revert-sql.js > /tmp/pin-revert.sql && if [ -s /tmp/pin-revert.sql ]; then $W d1 execute gacha-stock --remote --file /tmp/pin-revert.sql > /dev/null || echo "ピンの戻しに失敗（次回また試します）"; fi
           echo "ok=1" >> "$GITHUB_OUTPUT"
 
       - name: Cloudflare Pages に公開

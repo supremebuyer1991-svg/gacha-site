@@ -1007,7 +1007,7 @@ ${content}
     </header>
     <div class="shop-grid">
       <div class="shop-mapbox"><div id="shop-map" class="map map-sm"></div>
-        <div class="map-add-btns" id="mv-btns"><button class="sort" type="button" id="mv-start">📍 ピンの位置がずれていたら直す</button></div>
+        ${sh.src === "user" ? `<div class="map-add-btns" id="mv-btns"><button class="sort" type="button" id="mv-start">📍 ピンの位置がずれていたら直す</button></div>` : ""}
         <div class="mv-box" id="mv-box" hidden><p class="fine"><b>地図を動かして、真ん中の＋を正しいお店の場所に合わせてください。</b>拡大すると建物やお店の名前が出ます（1回に動かせるのは1kmまで）。</p>
           <div class="map-add-btns"><button class="btn btn-gold" type="button" id="mv-save">この位置に直す</button><button class="btn btn-ghost" type="button" id="mv-cancel">やめる</button></div></div>
         <p class="fine" id="mv-msg" role="status"></p></div>
