@@ -873,11 +873,21 @@ ${content}
     <div class="katsu panel" id="katsu" data-items="${c.R}data/shop-items.json?v=${QUIZ_V}" data-search="${c.R}data/search-ja.json">
       <h2 style="font-size:20px">🪐 ガチャ活ルートを作る</h2>
       <p class="fine" style="margin-top:4px">今いる場所から近いお店を、効率よく回れる順番に並べます。探したいガチャを入れると、そのガチャの取扱があるお店だけで作ります。</p>
+      <div class="k-tabs" role="tablist">
+        <button class="sort is-on" type="button" data-plan="count">お店の数で</button>
+        <button class="sort" type="button" data-plan="time">時間内でたくさん</button>
+        <button class="sort" type="button" data-plan="dest">目的地までの寄り道</button>
+      </div>
       <div class="katsu-form">
-        <label>回るお店の数<select id="k-n"><option>3</option><option selected>5</option><option>8</option></select></label>
+        <label data-for="count">回るお店の数<select id="k-n"><option>3</option><option selected>5</option><option>8</option></select></label>
+        <label data-for="time" hidden>ガチャ活の時間<select id="k-time"><option value="30">30分</option><option value="60" selected>1時間</option><option value="90">1時間半</option><option value="120">2時間</option><option value="180">3時間</option><option value="240">4時間</option></select></label>
+        <label data-for="time" hidden>1店にいる時間<select id="k-stay"><option value="5">5分</option><option value="10" selected>10分</option><option value="15">15分</option><option value="20">20分</option></select></label>
+        <label data-for="dest" hidden>寄り道してもいい時間<select id="k-detour"><option value="10">10分まで</option><option value="20" selected>20分まで</option><option value="30">30分まで</option><option value="60">1時間まで</option></select></label>
         <label>移動<select id="k-mode"><option value="walking">歩き</option><option value="driving">車</option><option value="transit">電車・バス</option></select></label>
+        <label class="k-wide" data-for="dest" hidden>目的地（お店の名前か、下のボタンで地図をタップ）<input type="search" id="k-dest" list="k-shops" placeholder="例：ガシャポンのデパート 池袋総本店" autocomplete="off"><datalist id="k-shops"></datalist></label>
+        <div class="k-wide" data-for="dest" hidden><button class="btn" type="button" id="k-pick">地図をタップして目的地を決める</button> <span class="fine" id="k-dest-note"></span></div>
         <label class="k-wide">探したいガチャ（なくてもOK）<input type="search" id="k-item" list="k-items" placeholder="例：ちいかわ めじるしアクセサリー3" autocomplete="off"><datalist id="k-items"></datalist></label>
-        <label class="k-check"><input type="checkbox" id="k-back"> 最後に出発した場所へ戻る</label>
+        <label class="k-check" data-for="count time"><input type="checkbox" id="k-back"> 最後に出発した場所へ戻る</label>
       </div>
       <div class="map-add-btns"><button class="btn btn-gold" type="button" id="k-go">現在地からルートを作る</button><button class="btn" type="button" id="k-here">地図の真ん中から作る</button></div>
       <p class="fine" id="k-msg" role="status"></p>

@@ -570,28 +570,57 @@
     /* ---- ガチャ活：近いお店を効率よく回る順番を作る ---- */
     var K = document.getElementById("katsu");
     if (K) (function () {
-      var routeLayer = L.layerGroup().addTo(map), shopItems = null, itemIdx = null;
-      var kmsg = document.getElementById("k-msg");
+      var routeLayer = L.layerGroup().addTo(map), shopItems = null, itemIdx = null, plan = "count", dest = null, picking = false, destLayer = L.layerGroup().addTo(map);
+      var kmsg = document.getElementById("k-msg"), $ = function (id) { return document.getElementById(id); };
       var hav = function (a, b) {
         var R = 6371, t = Math.PI / 180, dLa = (b[0] - a[0]) * t, dLo = (b[1] - a[1]) * t;
         var x = Math.sin(dLa / 2) * Math.sin(dLa / 2) + Math.cos(a[0] * t) * Math.cos(b[0] * t) * Math.sin(dLo / 2) * Math.sin(dLo / 2);
         return 2 * R * Math.asin(Math.sqrt(x));
       };
-      // 候補のガチャ名（入力の候補）
+      var SPEED = { walking: 4.5, transit: 18, driving: 25 }, DETOUR = 1.3; // 道のり＝まっすぐの距離×1.3 の目安
+      var minsOf = function (km, mode) { return km * DETOUR / SPEED[mode] * 60; };
+      // 作り方の切り替え
+      [].forEach.call(K.querySelectorAll("[data-plan]"), function (b) {
+        b.addEventListener("click", function () {
+          plan = b.getAttribute("data-plan");
+          [].forEach.call(K.querySelectorAll("[data-plan]"), function (x) { x.classList.toggle("is-on", x === b); });
+          [].forEach.call(K.querySelectorAll("[data-for]"), function (el) { el.hidden = el.getAttribute("data-for").split(" ").indexOf(plan) === -1; });
+        });
+      });
       fetch(K.getAttribute("data-search")).then(function (r) { return r.json(); }).then(function (idx) {
         itemIdx = idx;
-        document.getElementById("k-items").innerHTML = idx.slice(0, 400).map(function (x) { return '<option value="' + esc(x.n) + '">'; }).join("");
+        $("k-items").innerHTML = idx.slice(0, 400).map(function (x) { return '<option value="' + esc(x.n) + '">'; }).join("");
       }).catch(function () {});
+      var fillShops = function () { $("k-shops").innerHTML = list.slice(0, 1500).map(function (s) { return '<option value="' + esc(s[1]) + '">'; }).join(""); };
+      setTimeout(fillShops, 1500);
+      var setDest = function (ll, label) {
+        dest = ll; destLayer.clearLayers();
+        L.circleMarker(ll, { radius: 9, weight: 3, color: "#fff", fillColor: "#8b5cf6", fillOpacity: 1 }).addTo(destLayer).bindTooltip("目的地", { permanent: true, direction: "top" });
+        $("k-dest-note").textContent = "目的地：" + (label || "地図でえらんだ場所");
+      };
+      $("k-dest").addEventListener("change", function () {
+        var v = NORM($("k-dest").value); if (!v) return;
+        var hit = list.filter(function (s) { return NORM(s[1]) === v; })[0] || list.filter(function (s) { return NORM(s[1]).indexOf(v) !== -1; })[0];
+        if (hit) { setDest([hit[3], hit[4]], hit[1]); map.setView([hit[3], hit[4]], 14); }
+      });
+      $("k-pick").addEventListener("click", function () { picking = true; kmsg.textContent = "地図の目的地をタップしてください。"; mapEl.scrollIntoView({ behavior: "smooth", block: "center" }); });
+      map.on("click", function (e) { if (!picking) return; picking = false; setDest([e.latlng.lat, e.latlng.lng]); kmsg.textContent = "目的地を決めました。"; });
       var loadItems = function () {
         if (shopItems) return Promise.resolve(shopItems);
         return fetch(K.getAttribute("data-items")).then(function (r) { return r.json(); }).then(function (d) { shopItems = d; return d; });
       };
+      var MAXS = 9; // Googleマップの経由地の上限にあわせる
       var build = function (start) {
-        var n = Number(document.getElementById("k-n").value) || 5;
-        var mode = document.getElementById("k-mode").value;
-        var back = document.getElementById("k-back").checked;
-        var want = NORM(document.getElementById("k-item").value);
-        var radius = mode === "walking" ? 3 : mode === "transit" ? 10 : 20;
+        var mode = $("k-mode").value, want = NORM($("k-item").value);
+        var back = plan !== "dest" && $("k-back").checked;
+        if (plan === "dest" && !dest) { kmsg.textContent = "目的地を決めてください（お店の名前を入れるか、地図をタップ）。"; return; }
+        var end = plan === "dest" ? dest : back ? start : null;
+        var n = plan === "count" ? Number($("k-n").value) : MAXS;
+        var budget = plan === "time" ? Number($("k-time").value) : Infinity;
+        var stay = plan === "time" ? Number($("k-stay").value) : 0;
+        var detour = plan === "dest" ? Number($("k-detour").value) : Infinity;
+        // 探す範囲：移動の速さと時間から
+        var reach = plan === "time" ? SPEED[mode] * (budget / 60) / DETOUR / (back ? 2 : 1) : mode === "walking" ? 3 : mode === "transit" ? 10 : 20;
         kmsg.textContent = "ルートを作っています…";
         (want ? loadItems() : Promise.resolve(null)).then(function (si) {
           var cand = list;
@@ -601,58 +630,84 @@
             cand = list.filter(function (s) { return (si.shops[s[0]] || []).some(function (i) { return wantIx[i]; }); });
             if (!cand.length) { kmsg.textContent = "そのガチャの取扱があるお店が見つかりませんでした（公式の取扱店だけで探しています）。名前を短くしてみてください。"; return; }
           }
-          cand = cand.map(function (s) { return { s: s, d: hav(start, [s[3], s[4]]) }; }).filter(function (x) { return x.d <= radius; }).sort(function (a, b) { return a.d - b.d; }).slice(0, 30);
-          if (!cand.length) { kmsg.textContent = "近く（" + radius + "km以内）にお店が見つかりませんでした。移動を「車」にするか、地図を動かして「地図の真ん中から作る」をお試しください。"; return; }
-          // 近い順にたどって n 店を選び（いちばん近いお店から次々に）、そのあと入れ替えで道のりを短くする
-          var left = cand.slice(), route = [], cur = start;
-          while (route.length < n && left.length) {
-            var bi = 0, bd = Infinity;
-            left.forEach(function (x, i) { var d = hav(cur, [x.s[3], x.s[4]]); if (d < bd) { bd = d; bi = i; } });
-            var pick = left.splice(bi, 1)[0]; route.push(pick.s); cur = [pick.s[3], pick.s[4]];
+          var direct = end ? hav(start, end) : 0;
+          cand = cand.map(function (s) { return { s: s, p: [s[3], s[4]] }; }).filter(function (x) {
+            if (plan === "dest") { var extra = hav(start, x.p) + hav(x.p, end) - direct; return minsOf(extra, mode) <= detour; }
+            return hav(start, x.p) <= reach;
+          });
+          if (!cand.length) { kmsg.textContent = plan === "dest" ? "寄り道できるお店が見つかりませんでした。寄り道の時間を長くしてみてください。" : "近くにお店が見つかりませんでした。移動を変えるか、時間を長くしてみてください。"; return; }
+          cand = cand.sort(function (a, b) { return hav(start, a.p) - hav(start, b.p); }).slice(0, 60);
+          // 道のり（km）と、かかる時間（分）
+          var pathKm = function (r) { var p = [start].concat(r.map(function (x) { return x.p; })); if (end) p.push(end); var t = 0; for (var i = 1; i < p.length; i++) t += hav(p[i - 1], p[i]); return t; };
+          var minsAll = function (r) { return minsOf(pathKm(r), mode) + stay * r.length; };
+          var ok = function (r) {
+            if (r.length > n || r.length > MAXS) return false;
+            if (plan === "time") return minsAll(r) <= budget;
+            if (plan === "dest") return minsOf(pathKm(r) - direct, mode) <= detour;
+            return true;
+          };
+          // いちばん道のりが増えない場所に、1店ずつ差し込んでいく（入らなくなったら終わり）
+          var route = [], pool = cand.slice();
+          while (pool.length) {
+            var best = null;
+            pool.forEach(function (c, ci) {
+              for (var i = 0; i <= route.length; i++) {
+                if (!end && i < route.length && false) continue;
+                var r2 = route.slice(0, i).concat([c], route.slice(i));
+                var add = pathKm(r2) - pathKm(route);
+                if (!best || add < best.add) best = { add: add, r: r2, ci: ci };
+              }
+            });
+            if (!best || !ok(best.r)) break;
+            route = best.r; pool.splice(best.ci, 1);
+            if (plan === "count" && route.length >= n) break;
           }
-          var pts = function (r) { return [start].concat(r.map(function (s) { return [s[3], s[4]]; })).concat(back ? [start] : []); };
-          var len = function (r) { var p = pts(r), t = 0; for (var i = 1; i < p.length; i++) t += hav(p[i - 1], p[i]); return t; };
+          // 順番の入れ替えで、さらに短くする
           var improved = true, guard = 0;
-          while (improved && guard++ < 50) {
+          while (improved && guard++ < 60) {
             improved = false;
             for (var i = 0; i < route.length - 1; i++) for (var j = i + 1; j < route.length; j++) {
               var r2 = route.slice(0, i).concat(route.slice(i, j + 1).reverse(), route.slice(j + 1));
-              if (len(r2) + 1e-9 < len(route)) { route = r2; improved = true; }
+              if (pathKm(r2) + 1e-9 < pathKm(route)) { route = r2; improved = true; }
             }
           }
+          if (!route.length) { kmsg.textContent = plan === "time" ? "その時間では回れるお店がありませんでした。時間を長くしてみてください。" : "回れるお店が見つかりませんでした。"; return; }
           // 地図に描く
           routeLayer.clearLayers();
-          var line = pts(route);
+          var line = [start].concat(route.map(function (x) { return x.p; })); if (end) line.push(end);
           L.polyline(line, { color: "#3aa0ff", weight: 4, opacity: 0.85, dashArray: "8 8" }).addTo(routeLayer);
           L.circleMarker(start, { radius: 8, weight: 3, color: "#fff", fillColor: "#3aa0ff", fillOpacity: 1 }).addTo(routeLayer).bindTooltip("出発", { permanent: true, direction: "top" });
-          route.forEach(function (s, i) {
-            L.marker([s[3], s[4]], { icon: L.divIcon({ className: "k-pin", html: "<b>" + (i + 1) + "</b>", iconSize: [28, 28], iconAnchor: [14, 14] }) }).addTo(routeLayer).bindPopup(popup(s));
+          route.forEach(function (x, i) {
+            L.marker(x.p, { icon: L.divIcon({ className: "k-pin", html: "<b>" + (i + 1) + "</b>", iconSize: [28, 28], iconAnchor: [14, 14] }) }).addTo(routeLayer).bindPopup(popup(x.s));
           });
           map.fitBounds(L.latLngBounds(line), { padding: [40, 40], maxZoom: 16 });
-          // 一覧と目安の時間（まっすぐの距離 × 1.3 を道のりの目安に）
-          var total = len(route) * 1.3, speed = mode === "walking" ? 4.5 : mode === "transit" ? 18 : 25, mins = Math.round(total / speed * 60);
-          var stay = route.length * 10;
-          document.getElementById("k-sum").textContent = route.length + "店を回るルート：道のり約" + total.toFixed(1) + "km・移動の目安 約" + mins + "分（お店で1店10分見ると合計 約" + (mins + stay) + "分）";
+          var km = pathKm(route) * DETOUR, mv = Math.round(minsOf(pathKm(route), mode)), st2 = (plan === "time" ? stay : 10) * route.length;
+          $("k-sum").textContent = plan === "dest"
+            ? "目的地までに" + route.length + "店に寄れます：道のり約" + km.toFixed(1) + "km・移動 約" + mv + "分（まっすぐ行くより約" + Math.round(minsOf(pathKm(route) - direct, mode)) + "分多いだけ）"
+            : plan === "time"
+              ? $("k-time").selectedOptions[0].textContent + "で" + route.length + "店回れます：移動 約" + mv + "分＋お店で " + st2 + "分＝約" + (mv + st2) + "分（道のり約" + km.toFixed(1) + "km）"
+              : route.length + "店を回るルート：道のり約" + km.toFixed(1) + "km・移動の目安 約" + mv + "分（お店で1店10分見ると合計 約" + (mv + st2) + "分）";
           var p0 = start;
-          document.getElementById("k-list").innerHTML = route.map(function (s, i) {
-            var d = hav(p0, [s[3], s[4]]) * 1.3; p0 = [s[3], s[4]];
-            return '<li><b>' + (i + 1) + '. <a href="' + root + "shop/" + esc(s[0]) + '.html">' + esc(s[1]) + "</a></b><small>前の場所から約" + (d < 1 ? Math.round(d * 1000) + "m" : d.toFixed(1) + "km") + "</small></li>";
-          }).join("");
+          $("k-list").innerHTML = route.map(function (x, i) {
+            var d = hav(p0, x.p) * DETOUR; p0 = x.p;
+            return '<li><b>' + (i + 1) + '. <a href="' + root + "shop/" + esc(x.s[0]) + '.html">' + esc(x.s[1]) + "</a></b><small>前の場所から約" + (d < 1 ? Math.round(d * 1000) + "m" : d.toFixed(1) + "km") + "・" + Math.max(1, Math.round(minsOf(hav(i ? route[i - 1].p : start, x.p), mode))) + "分</small></li>";
+          }).join("") + (end && plan === "dest" ? '<li><b>🏁 目的地</b></li>' : "");
           var ll = function (p) { return p[0].toFixed(6) + "," + p[1].toFixed(6); };
-          var dest = back ? start : [route[route.length - 1][3], route[route.length - 1][4]];
-          var wps = (back ? route : route.slice(0, -1)).map(function (s) { return ll([s[3], s[4]]); });
-          document.getElementById("k-gmap").href = "https://www.google.com/maps/dir/?api=1&origin=" + ll(start) + "&destination=" + ll(dest) + (wps.length ? "&waypoints=" + encodeURIComponent(wps.join("|")) : "") + "&travelmode=" + mode;
-          document.getElementById("k-result").hidden = false;
-          kmsg.textContent = route.length < n ? "近くのお店が" + route.length + "店だったので、" + route.length + "店で作りました。" : "";
+          var gEnd = end || route[route.length - 1].p;
+          var wps = (end ? route : route.slice(0, -1)).map(function (x) { return ll(x.p); });
+          $("k-gmap").href = "https://www.google.com/maps/dir/?api=1&origin=" + ll(start) + "&destination=" + ll(gEnd) + (wps.length ? "&waypoints=" + encodeURIComponent(wps.join("|")) : "") + "&travelmode=" + mode;
+          $("k-result").hidden = false;
+          kmsg.textContent = route.length >= MAXS && plan !== "count" ? "Googleマップで一度に案内できる9店までにしています。" : plan === "count" && route.length < n ? "近くのお店が" + route.length + "店だったので、" + route.length + "店で作りました。" : "";
+          $("k-result").scrollIntoView({ behavior: "smooth", block: "nearest" });
         }).catch(function () { kmsg.textContent = "ルートを作れませんでした。時間をおいてもう一度お試しください。"; });
       };
-      document.getElementById("k-go").addEventListener("click", function () {
+      $("k-go").addEventListener("click", function () {
         if (!navigator.geolocation) { kmsg.textContent = "この端末では現在地が使えません。「地図の真ん中から作る」をお使いください。"; return; }
         kmsg.textContent = "現在地を調べています…（位置はこの端末の中だけで使います）";
         navigator.geolocation.getCurrentPosition(function (p) { build([p.coords.latitude, p.coords.longitude]); }, function () { kmsg.textContent = "現在地がわかりませんでした。地図を動かして「地図の真ん中から作る」をお試しください。"; }, { enableHighAccuracy: true, timeout: 10000 });
       });
-      document.getElementById("k-here").addEventListener("click", function () { var c = map.getCenter(); build([c.lat, c.lng]); });
-      document.getElementById("k-clear").addEventListener("click", function () { routeLayer.clearLayers(); document.getElementById("k-result").hidden = true; kmsg.textContent = ""; });
+      $("k-here").addEventListener("click", function () { var c = map.getCenter(); build([c.lat, c.lng]); });
+      $("k-clear").addEventListener("click", function () { routeLayer.clearLayers(); $("k-result").hidden = true; kmsg.textContent = ""; });
     })();
 
     // お店を追加
