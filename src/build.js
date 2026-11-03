@@ -952,16 +952,17 @@ ${content}
       const rel = "toprated.html", c = ctx(rel);
       const byId = new Map(SHOPS.map((x) => [x.id, x]));
       const score = (r) => (r.avg * r.n + 3.5 * 3) / (r.n + 3);
-      const top = Object.entries(SHOP_RATINGS).map(([id, r]) => ({ sh: byId.get(id), r })).filter((x) => x.sh).sort((a, b) => score(b.r) - score(a.r) || b.r.n - a.r.n).slice(0, 50);
+      const top = Object.entries(SHOP_RATINGS).map(([id, r]) => ({ sh: byId.get(id), r })).filter((x) => x.sh).sort((a, b) => score(b.r) - score(a.r) || b.r.n - a.r.n);
       const body = `<div class="wrap">
   <nav class="breadcrumb" aria-label="breadcrumb"><a href="${c.H}index.html">${t.home}</a><span>/</span><a href="${c.R}map.html">ガチャマップ</a><span>/</span><span>評価の高いお店</span></nav>
-  <header class="page-head"><h1>☆評価の高いガチャのお店</h1><p class="lead">みんながつけた☆評価が高いお店のランキングです。評価の数が少ないお店が上に来すぎないように、評価の数も考えて並べています。</p></header>
+  <header class="page-head"><h1>☆評価の高いガチャのお店</h1><p class="lead">みんながつけた☆評価が高いお店のランキングです。都道府県ごとに見られます。評価の数が少ないお店が上に来すぎないように、評価の数も考えて並べています。</p></header>
   <section class="section" style="padding-top:32px">
-    <ol class="top-shops" id="top-shops" data-api="${c.R}api/toprated" data-root="${c.R}">${top.length ? top.map((x, i) => `<li><span class="ts-rank">${i + 1}</span><a href="${c.R}shop/${x.sh.id}.html"><b>${esc(x.sh.name)}</b><span>${esc(x.sh.pref || "")}</span></a><span class="shop-stars">${starsHtml(x.r)}</span></li>`).join("") : '<li class="fine">まだ評価がありません。行ったことのあるお店のページで☆をつけてみてください。</li>'}</ol>
+    <div class="ts-pref"><label for="ts-pref">都道府県</label><select id="ts-pref"><option value="">全国</option>${PREF_ORDER.map((p) => `<option value="${p}">${p}</option>`).join("")}</select></div>
+    <ol class="top-shops" id="top-shops" data-api="${c.R}api/toprated" data-root="${c.R}" data-init="${esc(JSON.stringify(top.map((x) => ({ id: x.sh.id, name: x.sh.name, pref: x.sh.pref || "", avg: x.r.avg, n: x.r.n }))))}"></ol>
     <p class="fine" style="margin-top:20px">☆は各お店のページでつけられます。<a href="${c.R}map.html">ガチャマップからお店を探す</a></p>
   </section>
 </div>`;
-      layout({ rel, title: "☆評価の高いガチャのお店ランキング", description: "みんなの☆評価が高いガチャガチャのお店ランキング。品ぞろえや台数のコメントも見られます。", body, current: "toprated", jaOnly: true });
+      layout({ rel, title: "☆評価の高いガチャのお店ランキング（都道府県別）", description: "みんなの☆評価が高いガチャガチャのお店ランキングを都道府県別に。品ぞろえや台数のコメントも見られます。", body, current: "toprated", jaOnly: true });
     }
     // 抽選情報
     {

@@ -915,15 +915,23 @@
     });
   }
 
-  // ☆評価の高いお店：最新の順位に入れかえ
+  // ☆評価の高いお店：都道府県でしぼる（最新の順位に入れかえ）
   var topEl = document.getElementById("top-shops");
-  if (topEl) fetch(topEl.getAttribute("data-api")).then(function (r) { return r.ok ? r.json() : null; }).then(function (a) {
-    if (!a || !a.length) return;
-    var R = topEl.getAttribute("data-root");
-    topEl.innerHTML = a.map(function (x, i) {
-      return '<li><span class="ts-rank">' + (i + 1) + '</span><a href="' + R + "shop/" + esc(x.id) + '.html"><b>' + esc(x.name) + "</b><span>" + esc(x.pref || "") + '</span></a><span class="shop-stars"><span class="stars-v" style="--v:' + x.avg + '"></span><b class="stars-n">' + Number(x.avg).toFixed(1) + "</b><small>（" + x.n + "）</small></span></li>";
-    }).join("");
-  }).catch(function () {});
+  if (topEl) (function () {
+    var R = topEl.getAttribute("data-root"), sel = document.getElementById("ts-pref"), all = [];
+    try { all = JSON.parse(topEl.getAttribute("data-init")) || []; } catch (e) {}
+    var drawTop = function () {
+      var p = sel.value, a = all.filter(function (x) { return !p || x.pref === p; }).slice(0, 30);
+      topEl.innerHTML = a.length ? a.map(function (x, i) {
+        return '<li><span class="ts-rank">' + (i + 1) + '</span><a href="' + R + "shop/" + esc(x.id) + '.html"><b>' + esc(x.name) + "</b><span>" + esc(x.pref || "") + '</span></a><span class="shop-stars"><span class="stars-v" style="--v:' + x.avg + '"></span><b class="stars-n">' + Number(x.avg).toFixed(1) + "</b><small>（" + x.n + "）</small></span></li>";
+      }).join("") : '<li class="fine">' + (p ? p + "のお店には" : "") + 'まだ評価がありません。行ったことのあるお店のページで☆をつけてみてください。</li>';
+    };
+    var h = decodeURIComponent(location.hash.slice(1)), saved = ""; try { saved = localStorage.getItem("ts-pref") || ""; } catch (e) {}
+    var init = h || saved; if (init && [].some.call(sel.options, function (o) { return o.value === init; })) sel.value = init;
+    sel.addEventListener("change", function () { try { localStorage.setItem("ts-pref", sel.value); } catch (e) {} history.replaceState(null, "", sel.value ? "#" + encodeURIComponent(sel.value) : location.pathname); drawTop(); });
+    drawTop();
+    fetch(topEl.getAttribute("data-api")).then(function (r) { return r.ok ? r.json() : null; }).then(function (a) { if (a && a.length) { all = a; drawTop(); } }).catch(function () {});
+  })();
 
   var shopEl = document.getElementById("shop");
   if (shopEl) {

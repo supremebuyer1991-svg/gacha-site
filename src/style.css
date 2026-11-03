@@ -791,3 +791,5 @@ label.opt:focus-within { outline: none; }
 .k-rv-form { display: flex; flex-direction: column; gap: 6px; padding: 8px 10px; background: var(--surface-2); border-radius: 12px; }
 .k-rv-form textarea { width: 100%; font: 13px var(--font-body); padding: 8px; border-radius: 8px; border: 1px solid var(--line-strong); resize: vertical; }
 .rate-pick-sm button { font-size: 24px; }
+.ts-pref { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; font-weight: 700; }
+.ts-pref select { height: 40px; padding: 0 12px; border-radius: 10px; border: 1px solid var(--line-strong); background: var(--surface); font: 15px var(--font-body); min-width: 160px; }
