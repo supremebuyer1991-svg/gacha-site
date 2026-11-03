@@ -834,7 +834,31 @@ ${pages.filter(([, r]) => r !== "search.html").map(urlEntry).join("\n")}
 write("robots.txt", `User-agent: *\nAllow: /\nSitemap: ${SITE_URL}/sitemap.xml\n`);
 // Cloudflare の窓口（functions/）を動かすのは、ページと /api/ だけ（画像などでは動かさず、無料の回数を節約する）
 write("_routes.json", JSON.stringify({ version: 1, include: ["/", "/api/*", "/item/*", "/genre/*", "/type/*", "/maker/*", "/calendar*", "/search*", "/faq*", "/about*", "/en", "/en/", "/en/item/*", "/en/genre/*", "/en/type/*", "/en/maker/*", "/en/calendar*", "/en/search*", "/en/faq*", "/en/about*", "/index.html", "/en/index.html"], exclude: ["/assets/*", "/images/*", "/data/*"] }));
-write("_headers", `/assets/*\n  Cache-Control: public, max-age=86400\n/images/*\n  Cache-Control: public, max-age=604800\n/data/*\n  Cache-Control: public, max-age=300\n`);
+// X投稿用のデータ（毎朝の自動予約で使う）：今週発売・紹介する新作の候補
+{
+  const d = nowJST.getUTCDate(), m = nowJST.getUTCMonth() + 1;
+  const firstDow = (new Date(Date.UTC(nowJST.getUTCFullYear(), nowJST.getUTCMonth(), 1)).getUTCDay() + 6) % 7; // 月曜=0
+  const weekNo = Math.ceil((d + firstDow) / 7);
+  const mon = new Date(nowJST); mon.setUTCDate(d - ((nowJST.getUTCDay() + 6) % 7));
+  const sun = new Date(mon); sun.setUTCDate(mon.getUTCDate() + 6);
+  const md = (x) => `${x.getUTCMonth() + 1}/${x.getUTCDate()}`;
+  const inWeek = (it) => {
+    const n = it.release_note || "";
+    let r = n.match(/(\d+)月第(\d)週/);
+    if (r) return Number(r[1]) === m && Number(r[2]) === weekNo;
+    r = n.match(/(\d+)月(\d+)日週/);
+    if (r) { const dd = new Date(Date.UTC(nowJST.getUTCFullYear(), Number(r[1]) - 1, Number(r[2]))); return dd >= new Date(mon.toISOString().slice(0, 10)) && dd <= new Date(sun.toISOString().slice(0, 10)); }
+    return false;
+  };
+  const pack = (it) => ({ id: it.id, name: it.name, maker: it.maker, price: it.price, lineup: it.lineup, lineup_names: (it.lineup_names || []).slice(0, 12), release: it.release, release_note: it.release_note || "", genre: genreLabel(genreOf(it.genre), "ja"), img: it.image ? `${SITE_URL}/${thumbOf(it.image)}` : "", img_large: it.image ? `${SITE_URL}/${it.image}` : "", url: `${SITE_URL}/item/${it.id}`, hearts: heartsOf(it) });
+  const week = items.filter((it) => inWeek(it) && it.image).sort(byPopular);
+  // 紹介する新作の候補：画像があり、今月・来月発売。日付で順番に回す（同じ商品が続かないように）
+  const pool = items.filter((it) => it.image && it.release >= thisMonth).sort((a, b) => (a.id < b.id ? -1 : 1));
+  const dayNo = Math.floor(Date.UTC(nowJST.getUTCFullYear(), nowJST.getUTCMonth(), d) / 864e5);
+  const picks = pool.length ? [0, 1, 2, 3].map((k) => pool[(dayNo * 2 + k) % pool.length]) : [];
+  write("data/x.json", JSON.stringify({ generated: new Date().toISOString(), today: today, week: { label: `${m}月第${weekNo}週`, from: md(mon), to: md(sun), count: week.length, items: week.slice(0, 12).map(pack) }, picks: picks.map(pack), site: SITE_URL }));
+}
+write("_headers", `/assets/*\n  Cache-Control: public, max-age=86400\n/images/*\n  Cache-Control: public, max-age=604800\n  Access-Control-Allow-Origin: *\n/data/*\n  Cache-Control: public, max-age=300\n  Access-Control-Allow-Origin: *\n`);
 
 const noEn = items.filter((it) => !it.name_en).length;
 if (noEn) warnings.push(`英語名（name_en）がまだない商品が${noEn}件あります（英語ページでは日本語名を表示）`);
