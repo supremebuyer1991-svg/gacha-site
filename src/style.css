@@ -668,3 +668,6 @@ label.opt:focus-within { outline: none; }
 .k-pop-list span { flex: 1; min-width: 0; font-weight: 700; }
 .k-pop-list em { font-style: normal; color: var(--gold); font-weight: 700; font-family: var(--font-latin); }
 .k-pop-list a:hover span { color: var(--gold); }
+.k-acts { display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: center; }
+.k-del { margin-top: 4px; background: none; border: 0; padding: 2px 0; color: var(--muted); font: 700 12.5px var(--font-body); cursor: pointer; border-bottom: 2px dotted var(--line-strong); }
+.k-del:hover { color: var(--gold); border-color: var(--gold); }

@@ -620,7 +620,10 @@
         return fetch(K.getAttribute("data-items")).then(function (r) { return r.json(); }).then(function (d) { shopItems = d; return d; });
       };
       var MAXS = 15;
-      var build = function (start) {
+      var excluded = {}, lastStart = null, noteAfter = "";
+      var build = function (start, keep) {
+        if (!keep) excluded = {};
+        lastStart = start;
         var mode = $("k-mode").value, want = NORM($("k-item").value);
         var back = plan !== "dest" && $("k-back").checked;
         if (plan === "dest" && !dest) { kmsg.textContent = "目的地を決めてください（お店の名前を入れるか、地図をタップ）。"; return; }
@@ -641,6 +644,7 @@
             if (!cand.length) { kmsg.textContent = "そのガチャの取扱があるお店が見つかりませんでした（公式の取扱店だけで探しています）。名前を短くしてみてください。"; return; }
           }
           var direct = end ? hav(start, end) : 0;
+          cand = cand.filter(function (s) { return !excluded[s[0]]; });
           cand = cand.map(function (s) { return { s: s, p: [s[3], s[4]] }; }).filter(function (x) {
             if (plan === "dest") { var extra = hav(start, x.p) + hav(x.p, end) - direct; return minsOf(extra, mode) <= detour; }
             return hav(start, x.p) <= reach;
@@ -701,7 +705,7 @@
           $("k-list").innerHTML = route.map(function (x, i) {
             var d = hav(p0, x.p) * DETOUR; p0 = x.p;
             return '<li><b>' + (i + 1) + '. <a href="' + root + "shop/" + esc(x.s[0]) + '.html">' + esc(x.s[1]) + "</a></b><small>前の場所から約" + (d < 1 ? Math.round(d * 1000) + "m" : d.toFixed(1) + "km") + "・" + Math.max(1, Math.round(minsOf(hav(i ? route[i - 1].p : start, x.p), mode))) + "分</small>" +
-              '<button type="button" class="k-pop" data-sid="' + esc(x.s[0]) + '" aria-expanded="false">▾ この店に在庫のある人気ガチャを見る</button><div class="k-pop-box" hidden></div></li>';
+              '<span class="k-acts"><button type="button" class="k-pop" data-sid="' + esc(x.s[0]) + '" aria-expanded="false">▾ この店に在庫のある人気ガチャを見る</button><button type="button" class="k-del" data-sid="' + esc(x.s[0]) + '">✕ この店を外す</button></span><div class="k-pop-box" hidden></div></li>';
           }).join("") + (end && plan === "dest" ? '<li><b>🏁 目的地</b></li>' : "");
           // Googleマップは経由地が9か所までなので、10店をこえるときは2つに分ける
           var ll = function (p) { return p[0].toFixed(6) + "," + p[1].toFixed(6); };
@@ -717,8 +721,10 @@
             var lab = links.length === 1 ? "Googleマップでナビを開く" : "Googleマップでナビ（" + (i === 0 ? "出発" : l.a + "店目") + "→" + (l.b > route.length ? "目的地" : l.b + "店目") + "）";
             return '<a class="btn' + (i === 0 ? " btn-gold" : "") + '" target="_blank" rel="noopener" href="' + esc(l.href) + '">' + lab + "</a>";
           }).join("");
+          var nEx = Object.keys(excluded).length;
+          $("k-ex").innerHTML = nEx ? "外したお店：" + nEx + '店　<button type="button" class="k-pop" id="k-ex-reset">外したお店を元に戻す</button>' : "";
           $("k-result").hidden = false;
-          kmsg.textContent = route.length >= MAXS && plan !== "count" ? "回るお店は15店までにしています。" : plan === "count" && route.length < n ? "近くのお店が" + route.length + "店だったので、" + route.length + "店で作りました。" : "";
+          kmsg.textContent = (noteAfter ? noteAfter + " " : "") + (route.length >= MAXS && plan !== "count" ? "回るお店は15店までにしています。" : plan === "count" && route.length < n ? "近くのお店が" + route.length + "店だったので、" + route.length + "店で作りました。" : ""); noteAfter = "";
           $("k-result").scrollIntoView({ behavior: "smooth", block: "nearest" });
         }).catch(function () { kmsg.textContent = "ルートを作れませんでした。時間をおいてもう一度お試しください。"; });
       };
@@ -729,6 +735,8 @@
         return fetch(K.getAttribute("data-quiz")).then(function (r) { return r.json(); }).then(function (a) { quizItems = {}; a.forEach(function (it) { quizItems[it.id] = it; }); return quizItems; });
       };
       $("k-list").addEventListener("click", function (e) {
+        var del = e.target.closest && e.target.closest(".k-del");
+        if (del) { excluded[del.getAttribute("data-sid")] = 1; noteAfter = "そのお店を外して、ルートを作り直しました。"; build(lastStart, true); return; }
         var b = e.target.closest && e.target.closest(".k-pop"); if (!b) return;
         var box = b.nextElementSibling, open = b.getAttribute("aria-expanded") === "true";
         if (open) { box.hidden = true; b.setAttribute("aria-expanded", "false"); b.textContent = "▾ この店に在庫のある人気ガチャを見る"; return; }
@@ -765,6 +773,7 @@
       };
       $("k-start-go").addEventListener("click", startByName);
       $("k-start").addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); startByName(); } });
+      $("k-ex").addEventListener("click", function (e) { if (e.target.id === "k-ex-reset" && lastStart) { excluded = {}; build(lastStart, true); } });
       $("k-clear").addEventListener("click", function () { routeLayer.clearLayers(); $("k-result").hidden = true; kmsg.textContent = ""; });
     })();
 

@@ -898,6 +898,7 @@ ${content}
       <div id="k-result" hidden>
         <p class="k-sum" id="k-sum"></p>
         <ol class="k-list" id="k-list"></ol>
+        <p class="fine" id="k-ex"></p>
         <div class="map-add-btns" id="k-gmaps"></div><div class="map-add-btns"><button class="btn btn-ghost" type="button" id="k-clear">ルートを消す</button></div>
         <p class="fine">距離はまっすぐ測った目安で、実際の道のりはもう少し長くなります。営業時間はお店でご確認ください。</p>
       </div>
