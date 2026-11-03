@@ -821,30 +821,38 @@ ${content}
       if (none.length) out.push({ w: null, list: none.sort(byPopular) });
       return { list, groups: out };
     };
+    // 週の見出し：日付を大きく。たくさんある週は最初の何件かだけ出して「この週をもっと見る」
+    const calCard = (it, c) => card(it, c).replace('class="card"', 'class="card cal-card"');
     const weekBlock = (m, g, c) => {
       const id = g.w ? `w${g.w.key}` : `w${m}-tbd`;
+      const n = g.list.length;
+      const cls = ["cal-week", g.w && g.w.key === WEEK.key ? "is-now" : "", g.w && g.w.key < WEEK.key ? "is-past" : "", n > 12 ? "many" : "", n > 9 ? "some" : ""].filter(Boolean).join(" ");
       const head = g.w
-        ? `<h3>${weekTitle(g.w)}${en ? " releases" : "発売"}<small>${g.w.range}${en ? "" : "ごろ"}・${g.list.length}${en ? " series" : "シリーズ"}</small>${weekBadge(g.w)}</h3>`
-        : `<h3>${en ? "Week not announced yet" : "週未定"}<small>${g.list.length}${en ? " series" : "シリーズ"}</small></h3>`;
-      return `<div class="week-block" id="${id}">${head}<div class="grid">${g.list.map((it) => card(it, c)).join("")}</div></div>`;
+        ? `<div class="cal-date"><span class="cal-no">${en ? `Week ${g.w.no}` : `第${g.w.no}週`}</span><b>${g.w.range}</b></div>
+          <div class="cal-info"><span>${weekTitle(g.w)}${en ? " releases" : "発売"}</span><small>${n}${en ? " series" : "シリーズ"}</small>${weekBadge(g.w)}</div>`
+        : `<div class="cal-date tbd"><span class="cal-no">${en ? "TBA" : "週未定"}</span><b>${en ? "Date TBA" : "発売日未定"}</b></div>
+          <div class="cal-info"><span>${en ? "Release week not announced" : "発売週がまだ発表されていない商品"}</span><small>${n}${en ? " series" : "シリーズ"}</small></div>`;
+      return `<section class="${cls}" id="${id}"><header class="cal-head">${head}</header>
+        <div class="grid cal-grid">${g.list.map((it) => calCard(it, c)).join("")}</div>
+        <p class="cal-more-wrap"><button type="button" class="btn cal-more-btn" data-open="${en ? `Show all ${n}` : `この週をもっと見る（全${n}件）`}" data-close="${en ? "Show less" : "閉じる"}">${en ? `Show all ${n}` : `この週をもっと見る（全${n}件）`}</button></p></section>`;
     };
     const monthBlock = (m, c) => {
       const [y, mo] = m.split("-");
       const { list, groups } = weeksOf(m);
-      return `<section class="month" id="m${m}"><div class="month-label"><b>${mo}</b><span>${t.calMonth(y, Number(mo), list.length)}</span>${m === thisMonth ? `<br><span class="now">${t.thisMonth}</span>` : ""}</div>
-      <div class="month-weeks">${groups.map((g) => weekBlock(m, g, c)).join("")}</div></section>`;
+      return `<div class="cal-month" id="m${m}"><h2 class="cal-month-head"><span class="cal-y">${y}</span><b>${en ? MONTH_EN[Number(mo) - 1] : `${Number(mo)}月`}</b><small>${list.length}${en ? " series" : "シリーズ"}</small>${m === thisMonth ? `<span class="now">${t.thisMonth}</span>` : ""}</h2>
+      ${groups.map((g) => weekBlock(m, g, c)).join("")}</div>`;
     };
-    // ページ上部の「週へジャンプ」（今月以降だけ）
+    // ページ上部の週タブ（今月以降だけ・横スクロール・上に固定）
     const jumpNav = () => {
-      const links = [];
+      const chips = [];
       for (const m of allMonths.filter((x) => x >= thisMonth)) {
-        const [y, mo] = m.split("-");
-        const chips = weeksOf(m).groups.map((g) => g.w
-          ? `<a href="#w${g.w.key}"${g.w.key === WEEK.key ? ' class="on"' : ""}>${en ? `W${g.w.no}` : `第${g.w.no}週`}<small>${g.list.length}</small></a>`
-          : `<a href="#w${m}-tbd">${en ? "TBA" : "週未定"}<small>${g.list.length}</small></a>`).join("");
-        links.push(`<div class="wk-row"><b>${en ? `${MONTH_EN[Number(mo) - 1].slice(0, 3)} ${y}` : `${Number(mo)}月`}</b>${chips}</div>`);
+        const [, mo] = m.split("-");
+        chips.push(`<span class="wt-month">${en ? MONTH_EN[Number(mo) - 1] : `${Number(mo)}月`}</span>`);
+        for (const g of weeksOf(m).groups) chips.push(g.w
+          ? `<a href="#w${g.w.key}"${g.w.key === WEEK.key ? ' class="on"' : ""}><b>${en ? `W${g.w.no}` : `第${g.w.no}週`}</b><small>${g.w.range.split("〜")[0]}〜・${g.list.length}</small></a>`
+          : `<a href="#w${m}-tbd" class="tbd"><b>${en ? "TBA" : "未定"}</b><small>${g.list.length}${en ? "" : "件"}</small></a>`);
       }
-      return links.length ? `<nav class="week-jump" aria-label="${en ? "Jump to week" : "週へジャンプ"}">${links.join("")}</nav>` : "";
+      return chips.length ? `<nav class="week-tabs" aria-label="${en ? "Jump to week" : "週へジャンプ"}"><div class="wt-in">${chips.join("")}</div></nav>` : "";
     };
     const archiveNav = (c) => past.length ? `<nav class="archive" aria-label="${t.calPast}"><h2>${t.calPast}</h2><div class="archive-list">${past.map((m) => {
       const [y, mo] = m.split("-");
@@ -855,7 +863,7 @@ ${content}
       const body = `<div class="wrap">
   <header class="page-head"><h1>${t.calH1}</h1><p class="lead">${t.calLead}</p></header>
   ${jumpNav()}
-  <div class="section" style="padding-top:24px">${recent.map((m) => monthBlock(m, c)).join("")}</div>
+  <div class="cal">${recent.map((m) => monthBlock(m, c)).join("")}</div>
   ${archiveNav(c)}
 </div>`;
       layout({ rel: "calendar.html", title: t.calTitle, description: t.calDesc, body, current: "calendar" });
@@ -868,7 +876,7 @@ ${content}
       const body = `<div class="wrap">
   <nav class="breadcrumb" aria-label="breadcrumb"><a href="${c.H}index.html">${t.home}</a><span>/</span><a href="${c.H}calendar.html">${t.calH1}</a><span>/</span><span>${esc(title)}</span></nav>
   <header class="page-head"><h1>${esc(title)}</h1></header>
-  <div class="section" style="padding-top:24px">${monthBlock(m, c)}</div>
+  <div class="cal">${monthBlock(m, c)}</div>
   ${archiveNav(c)}
 </div>`;
       layout({ rel, title, description: title, body, current: "calendar" });

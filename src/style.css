@@ -814,22 +814,69 @@ label.opt:focus-within { outline: none; }
 .row-scroll .card-meta, .row-scroll .card-foot { font-size: 11px; }
 .row-scroll .card:hover { transform: none; }
 
-/* 発売カレンダー：週ごとの一覧 */
-.month-weeks { min-width: 0; }
-.week-block { margin-bottom: 28px; scroll-margin-top: 90px; }
-.week-block:last-child { margin-bottom: 0; }
-.week-block h3 { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 0 0 12px; font-size: 18px; font-weight: 700; padding: 6px 14px; border-radius: 12px; background: var(--pink-soft, #fff0f6); }
-.week-block h3 small { font-size: 13px; font-weight: 500; color: var(--muted); }
+/* 発売カレンダー（週ごと） */
+.week-tabs { position: sticky; top: 0; z-index: 20; margin: 4px -16px 0; padding: 10px 16px; background: color-mix(in srgb, var(--bg, #f5f8ff) 92%, transparent); backdrop-filter: blur(6px); border-bottom: 2px solid var(--line); }
+.wt-in { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; align-items: center; }
+.wt-in::-webkit-scrollbar { display: none; }
+.wt-month { flex: none; font: 700 13px/1 var(--font-latin), sans-serif; color: #fff; background: var(--pink, #ff7eb6); padding: 7px 10px; border-radius: 999px; margin-left: 6px; }
+.wt-month:first-child { margin-left: 0; }
+.wt-in a { flex: none; display: grid; justify-items: center; gap: 2px; min-width: 64px; padding: 6px 10px; border-radius: 12px; background: #fff; border: 1.5px solid var(--line); color: var(--text); text-decoration: none; line-height: 1.1; }
+.wt-in a b { font-size: 13px; }
+.wt-in a small { font-size: 10.5px; color: var(--muted); font-family: var(--font-latin), sans-serif; }
+.wt-in a.on { background: var(--yellow); border-color: var(--yellow); }
+.wt-in a.tbd { background: transparent; border-style: dashed; }
+.cal { padding-top: 8px; }
+.cal-month { margin-top: 36px; }
+.cal-month-head { display: flex; align-items: baseline; gap: 10px; margin: 0 0 14px; padding-bottom: 10px; border-bottom: 3px solid var(--pink, #ff7eb6); }
+.cal-month-head b { font: 700 34px/1 var(--font-latin), sans-serif; color: var(--pink, #ff7eb6); }
+.cal-month-head .cal-y { font: 600 15px/1 var(--font-latin), sans-serif; color: var(--muted); }
+.cal-month-head small { font-size: 14px; color: var(--muted); font-weight: 500; }
+.cal-month-head .now { font-size: 12px; background: var(--yellow); color: var(--text); padding: 3px 10px; border-radius: 999px; }
+.cal-week { margin: 0 0 22px; padding: 14px; background: #fff; border-radius: 18px; border: 1.5px solid var(--line); scroll-margin-top: 80px; }
+.cal-week.is-now { border: 2px solid var(--yellow); box-shadow: 0 4px 0 color-mix(in srgb, var(--yellow) 40%, transparent); }
+.cal-head { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+.cal-date { flex: none; display: grid; justify-items: center; gap: 3px; min-width: 96px; padding: 8px 10px; border-radius: 14px; background: var(--pink-soft, #fff0f6); }
+.cal-week:nth-of-type(4n+2) .cal-date { background: #e7f4ff; }
+.cal-week:nth-of-type(4n+3) .cal-date { background: #e6f9f1; }
+.cal-week:nth-of-type(4n) .cal-date { background: #f2ecff; }
+.cal-week.is-now .cal-date { background: var(--yellow); }
+.cal-date.tbd { background: #f1f3f7 !important; }
+.cal-no { font-size: 12px; font-weight: 700; color: var(--muted); }
+.cal-week.is-now .cal-no { color: var(--text); }
+.cal-date b { font: 700 20px/1 var(--font-latin), sans-serif; letter-spacing: .01em; }
+.cal-date.tbd b { font-size: 14px; font-family: inherit; }
+.cal-info { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; min-width: 0; }
+.cal-info span:first-child { font-size: 16px; font-weight: 700; }
+.cal-info small { font-size: 13px; color: var(--muted); }
 .wk-now, .wk-past { font-size: 11px; font-weight: 700; padding: 2px 10px; border-radius: 999px; }
-.wk-now { background: var(--yellow, #ffe066); color: var(--text); }
+.wk-now { background: var(--yellow); color: var(--text); }
 .wk-past { background: var(--line); color: var(--muted); }
-.week-jump { display: grid; gap: 8px; margin: 8px 0 4px; padding: 14px; border: 2px dashed var(--line); border-radius: 16px; }
-.wk-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
-.wk-row b { min-width: 3.5em; font-size: 14px; }
-.wk-row a { display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; border-radius: 999px; background: #fff; border: 1.5px solid var(--line); font-size: 13px; font-weight: 700; color: var(--text); text-decoration: none; }
-.wk-row a small { font-size: 11px; color: var(--muted); font-weight: 500; }
-.wk-row a.on { background: var(--yellow, #ffe066); border-color: transparent; }
-.wk-row a:hover { border-color: var(--pink, #ff7eb6); }
+.cal-week.is-past { opacity: .92; }
+.grid.cal-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 18px 12px; }
+.cal-card { gap: 6px; }
+.cal-card .card-name { font-size: 12.5px; line-height: 1.45; }
+.cal-card .card-meta { font-size: 10.5px; }
+.cal-card .card-foot { font-size: 11px; }
+.cal-card .card-foot > span:last-child { display: none; }
+.cal-week:not(.open) .cal-grid > .card:nth-child(n+13) { display: none; }
+.cal-more-wrap { display: none; margin: 14px 0 0; text-align: center; }
+.cal-week.many .cal-more-wrap { display: block; }
+.cal-more-btn { font-size: 13px; }
+@media (max-width: 900px) { .grid.cal-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (max-width: 640px) {
+  .grid.cal-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px 8px; }
+  .cal-week { padding: 12px 10px; border-radius: 14px; }
+  .cal-head { gap: 10px; }
+  .cal-date { min-width: 80px; padding: 6px 8px; }
+  .cal-date b { font-size: 16px; }
+  .cal-info span:first-child { font-size: 14px; }
+  .cal-card .card-name { font-size: 11.5px; }
+  .cal-card .card-meta { display: none; }
+  .cal-card .card-foot { font-size: 10.5px; }
+  .cal-week:not(.open) .cal-grid > .card:nth-child(n+10) { display: none; }
+  .cal-week.some .cal-more-wrap { display: block; }
+}
+.cal-week.open .cal-grid > .card { display: flex !important; }
 
 /* 新着ガチャ：右端の「全部見る」 */
 .row-scroll > .see-all { display: flex; align-items: center; justify-content: center; min-height: 150px; border: 2px dashed var(--pink, #ff7eb6); border-radius: 16px; text-decoration: none; color: var(--text); background: #fff; }

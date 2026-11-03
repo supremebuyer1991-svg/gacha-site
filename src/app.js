@@ -492,6 +492,15 @@
     });
   });
 
+  /* ================= 発売カレンダー：「この週をもっと見る」 ================= */
+  [].forEach.call(document.querySelectorAll(".cal-more-btn"), function (b) {
+    b.addEventListener("click", function () {
+      var w = b.closest(".cal-week"); var open = w.classList.toggle("open");
+      b.textContent = b.getAttribute(open ? "data-close" : "data-open");
+      if (!open) w.scrollIntoView({ block: "start" });
+    });
+  });
+
   /* ================= 人気ランキング：6位以降は「もっと見る」で10件ずつ ================= */
   var rankMore = document.getElementById("rank-more");
   if (rankMore) rankMore.addEventListener("click", function () {
