@@ -648,6 +648,37 @@
       };
       var MAXS = 15;
       var excluded = {}, lastStart = null, noteAfter = "";
+      // ルートのお店ごとの☆・流れるコメントと、その場で☆・コメントする欄
+      var drawRev = function (el, v) {
+        var st = v.n ? '<span class="stars-v" style="--v:' + v.avg + '"></span><b>' + Number(v.avg).toFixed(1) + "</b><small>（" + v.n + "人）</small>" : '<small class="k-rev-none">まだ評価はありません</small>';
+        var cm = v.comments || [];
+        var tk = cm.length ? '<div class="k-tick"><div class="k-tick-in">' + cm.map(function (c) { return "<span>💬 " + esc(c.body) + "</span>"; }).join("") + "</div></div>" : '<small class="k-rev-none">コメントはまだありません</small>';
+        var sid2 = el.getAttribute("data-sid"), mine = 0; try { mine = Number(localStorage.getItem("rate:" + sid2)) || 0; } catch (e) {}
+        el.innerHTML = '<div class="k-rev-stars">' + st + '<button type="button" class="k-rv-open" aria-expanded="false">☆・コメントする</button></div>' + tk +
+          '<div class="k-rv-form" hidden><div class="rate-pick rate-pick-sm">' + [1, 2, 3, 4, 5].map(function (n) { return '<button type="button" data-v="' + n + '" class="' + (n <= mine ? "on" : "") + '" aria-label="' + n + 'つ星">★</button>'; }).join("") +
+          '</div><textarea maxlength="140" rows="2" placeholder="お店のようす（台数・場所・品ぞろえなど）140文字まで"></textarea><div class="map-add-btns"><button type="button" class="btn btn-gold k-rv-send">送る</button><span class="fine k-rv-msg" role="status"></span></div></div>';
+        var tin = el.querySelector(".k-tick-in"); if (tin) tin.style.animationDuration = Math.max(12, cm.reduce(function (a, c) { return a + c.body.length; }, 0) * 0.35) + "s";
+      };
+      var refreshRev = function (el) { var id = el.getAttribute("data-sid"); fetch(root + "api/shopsummary?ids=" + id + "&t=" + Date.now()).then(function (r) { return r.ok ? r.json() : {}; }).then(function (sm) { drawRev(el, sm[id] || {}); }).catch(function () {}); };
+      $("k-list").addEventListener("click", function (e) {
+        var t = e.target, el = t.closest && t.closest(".k-rev"); if (!el) return;
+        var f = el.querySelector(".k-rv-form"), sid2 = el.getAttribute("data-sid"), msg2 = el.querySelector(".k-rv-msg");
+        if (t.closest(".k-rv-open")) { f.hidden = !f.hidden; t.closest(".k-rv-open").setAttribute("aria-expanded", String(!f.hidden)); return; }
+        var sb = t.closest(".rate-pick button");
+        if (sb) { var v = Number(sb.getAttribute("data-v")); f.setAttribute("data-v", v); [].forEach.call(f.querySelectorAll(".rate-pick button"), function (b) { b.classList.toggle("on", Number(b.getAttribute("data-v")) <= v); }); return; }
+        if (t.closest(".k-rv-send")) {
+          var stars = Number(f.getAttribute("data-v")) || 0, body = f.querySelector("textarea").value.trim();
+          if (!stars && body.length < 2) { msg2.textContent = "☆をえらぶか、コメントを書いてください。"; return; }
+          msg2.textContent = "送っています…";
+          var jobs = [];
+          if (stars) jobs.push(post(root + "api/rate", { shop: sid2, stars: stars }).then(function (d) { if (!d.ok) throw new Error(d.error); try { localStorage.setItem("rate:" + sid2, stars); } catch (e2) {} }));
+          if (body.length >= 2) jobs.push(post(root + "api/comment", { shop: sid2, body: body }).then(function (d) { if (!d.ok) throw new Error(d.error); }));
+          Promise.all(jobs).then(function () { refreshRev(el); }).catch(function (er) {
+            var c = er && er.message;
+            msg2.textContent = c === "ng" ? "使えない言葉が入っています。書き方を変えてください。" : c === "limit" ? "今日はこれ以上送れません。また明日お願いします。" : c === "dup" ? "同じコメントはもう送っています。" : c === "length" ? "コメントは2〜140文字で書いてください。" : "送れませんでした。時間をおいてもう一度お試しください。";
+          });
+        }
+      });
       var build = function (start, keep) {
         if (!keep) excluded = {};
         lastStart = start;
@@ -751,14 +782,7 @@
           // 各お店の☆評価と新しいコメント
           var ids = route.map(function (x) { return x.s[0]; });
           fetch(root + "api/shopsummary?ids=" + ids.join(",")).then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; }).then(function (sm) {
-            [].forEach.call(document.querySelectorAll("#k-list .k-rev"), function (el) {
-              var v = sm[el.getAttribute("data-sid")] || {};
-              var st = v.n ? '<span class="stars-v" style="--v:' + v.avg + '"></span><b>' + Number(v.avg).toFixed(1) + '</b><small>（' + v.n + '人）</small>' : '<small class="k-rev-none">まだ評価はありません</small>';
-              var cm = (v.comments || []);
-              var tk = cm.length ? '<div class="k-tick"><div class="k-tick-in">' + cm.map(function (c) { return '<span>💬 ' + esc(c.body) + "</span>"; }).join("") + "</div></div>" : '<small class="k-rev-none">コメントはまだありません</small>';
-              el.innerHTML = '<div class="k-rev-stars">' + st + "</div>" + tk;
-              var tin = el.querySelector(".k-tick-in"); if (tin) tin.style.animationDuration = Math.max(12, cm.reduce(function (a, c) { return a + c.body.length; }, 0) * 0.35) + "s";
-            });
+            [].forEach.call(document.querySelectorAll("#k-list .k-rev"), function (el) { drawRev(el, sm[el.getAttribute("data-sid")] || {}); });
           });
           var wantRaw = $("k-item").value.trim();
           if (wantRaw) { var fw = aff(wantRaw + " ガチャ コンプ"); $("k-sum").innerHTML = esc($("k-sum").textContent) + '<span class="k-aff k-aff-big">「' + esc(wantRaw) + '」が見つからなかったら通販でも：<a href="' + esc(fw.a) + '" target="_blank" rel="sponsored noopener">Amazonで探す</a><a href="' + esc(fw.r) + '" target="_blank" rel="sponsored noopener">楽天で探す</a><i class="pr">PR</i></span>'; }
@@ -905,11 +929,38 @@
   if (shopEl) {
     var sid = shopEl.getAttribute("data-id");
     var lat = Number(shopEl.getAttribute("data-lat")), lng = Number(shopEl.getAttribute("data-lng"));
+    var shopMap = null, shopPin = null, liveLL = null;
     whenLeaflet(function () {
-      var L = window.L, m = L.map("shop-map", { scrollWheelZoom: false }).setView([lat, lng], 16);
-      tiles(m);
-      L.circleMarker([lat, lng], { radius: 9, weight: 3, color: "#fff", fillColor: "#ff4f7b", fillOpacity: 1 }).addTo(m);
+      var L = window.L, m = L.map("shop-map", { scrollWheelZoom: false }).setView([lat, lng], 17);
+      tiles(m); shopMap = m;
+      if (liveLL) m.setView(liveLL, 17);
+      shopPin = L.circleMarker(liveLL || [lat, lng], { radius: 9, weight: 3, color: "#fff", fillColor: "#ff4f7b", fillOpacity: 1 }).addTo(m);
     });
+    // ピンの位置を直す（だれでも）
+    (function () {
+      var st = document.getElementById("mv-start"); if (!st) return;
+      var box = document.getElementById("mv-box"), mm = document.getElementById("mv-msg"), me = document.getElementById("shop-map");
+      var stop = function () { box.hidden = true; st.hidden = false; me.classList.remove("is-adding"); if (shopMap) shopMap.scrollWheelZoom.disable(); };
+      st.addEventListener("click", function () {
+        if (!shopMap) return; box.hidden = false; st.hidden = true; mm.textContent = "";
+        me.classList.add("is-adding"); shopMap.scrollWheelZoom.enable(); shopMap.setView(shopPin.getLatLng(), 18);
+      });
+      document.getElementById("mv-cancel").addEventListener("click", function () { stop(); if (shopPin) shopMap.setView(shopPin.getLatLng(), 17); });
+      document.getElementById("mv-save").addEventListener("click", function () {
+        var c = shopMap.getCenter(); mm.textContent = "送っています…";
+        post(shopEl.getAttribute("data-root") + "api/move", { shop: sid, lat: c.lat, lng: c.lng }).then(function (d) {
+          if (d.ok) { shopPin.setLatLng([d.lat, d.lng]); stop(); mm.textContent = d.same ? "位置は変わっていません。" : "ピンの位置を直しました！ありがとうございます。地図やガチャ活にもすぐ反映されます。"; return; }
+          mm.textContent = d.error === "far" ? "1回に動かせるのは1kmまでです。少しずつ動かすか、正しい場所を確かめてください。" : d.error === "again" ? "このお店のピンは今日はもう直しています。また明日お願いします。" : d.error === "limit" ? "今日直せる回数をこえました。また明日お願いします。" : "直せませんでした。時間をおいてもう一度お試しください。";
+        }).catch(function () { mm.textContent = "送れませんでした。時間をおいてもう一度お試しください。"; });
+      });
+    })();
+    // Xでシェア：☆と新しいコメントを入れた文にする
+    var shareX = function (d) {
+      var a = document.getElementById("share-x"); if (!a) return;
+      var r = d && d.rating, cm = d && d.comments && d.comments[0];
+      var tx = "「" + a.getAttribute("data-name") + "」のガチャ情報" + (r ? "\n☆" + r.avg.toFixed(1) + "（" + r.n + "人の評価）" : "") + (cm ? "\n💬" + (cm.body.length > 60 ? cm.body.slice(0, 60) + "…" : cm.body) : "") + "\n#ガチャガチャ #ガチャ活";
+      a.href = "https://x.com/intent/post?text=" + encodeURIComponent(tx) + "&url=" + encodeURIComponent(a.getAttribute("data-url"));
+    };
     var known = [];
     try { known = JSON.parse(document.getElementById("shop-items").textContent); } catch (e) {}
     var listEl2 = document.getElementById("rep-list"), msgEl = document.getElementById("rep-msg");
@@ -981,7 +1032,7 @@
         drawRate({ avg: d.avg, n: d.n }); $("rate-msg").textContent = "☆" + v + "で評価しました。ありがとうございます！";
       }).catch(function (er) { $("rate-msg").textContent = er && er.message === "limit" ? "今日はこれ以上評価できません" : "送れませんでした。時間をおいてもう一度お試しください"; paintPick(myRate); });
     });
-    var reload = function () { return fetch(shopEl.getAttribute("data-api") + "?t=" + Date.now()).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) { draw(d); drawComments(d); drawRate(d && d.rating); }).catch(function () { draw(null); drawComments(null); }); };
+    var reload = function () { return fetch(shopEl.getAttribute("data-api") + "?t=" + Date.now()).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) { draw(d); drawComments(d); drawRate(d && d.rating); shareX(d); if (d && d.shop && d.shop.lat && document.getElementById("mv-box").hidden) { liveLL = [d.shop.lat, d.shop.lng]; if (shopPin) { shopPin.setLatLng(liveLL); shopMap.setView(liveLL, 17); } } }).catch(function () { draw(null); drawComments(null); }); };
     reload();
     [].forEach.call(document.querySelectorAll("#report-box [data-kind]"), function (b) {
       b.addEventListener("click", function () {

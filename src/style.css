@@ -781,3 +781,16 @@ label.opt:focus-within { outline: none; }
 .add-place-c:empty { display: none; }
 .add-place-c .sort { text-align: left; justify-content: flex-start; border-radius: 10px; white-space: normal; }
 .add-place-c small { color: var(--muted); }
+
+/* Xでシェア・ピンを直す・ガチャ活でその場で☆/コメント */
+.share-x { margin-top: 14px; }
+.btn-x { background: #0f1419; color: #fff; border-color: #0f1419; }
+.btn-x:hover { background: #272c30; color: #fff; }
+.shop-mapbox { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.shop-mapbox .map { position: relative; }
+.mv-box { background: var(--surface-2); border-radius: 12px; padding: 10px 12px; }
+.mv-box p { margin: 0 0 6px; }
+.k-rv-open { margin-left: 8px; padding: 2px 10px; font-size: 11.5px; border-radius: 999px; border: 1px solid var(--line-strong); background: var(--surface); color: var(--text-2); cursor: pointer; }
+.k-rv-form { display: flex; flex-direction: column; gap: 6px; padding: 8px 10px; background: var(--surface-2); border-radius: 12px; }
+.k-rv-form textarea { width: 100%; font: 13px var(--font-body); padding: 8px; border-radius: 8px; border: 1px solid var(--line-strong); resize: vertical; }
+.rate-pick-sm button { font-size: 24px; }

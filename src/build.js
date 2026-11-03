@@ -1006,7 +1006,11 @@ ${content}
       <div class="item-actions"><a class="btn" href="${esc(gmap)}" target="_blank" rel="noopener">Googleマップで開く</a><a class="btn" href="${c.R}map.html#${sh.id}">ガチャマップで見る</a></div>
     </header>
     <div class="shop-grid">
-      <div id="shop-map" class="map map-sm"></div>
+      <div class="shop-mapbox"><div id="shop-map" class="map map-sm"></div>
+        <div class="map-add-btns" id="mv-btns"><button class="sort" type="button" id="mv-start">📍 ピンの位置がずれていたら直す</button></div>
+        <div class="mv-box" id="mv-box" hidden><p class="fine"><b>地図を動かして、真ん中の＋を正しいお店の場所に合わせてください。</b>拡大すると建物やお店の名前が出ます（1回に動かせるのは1kmまで）。</p>
+          <div class="map-add-btns"><button class="btn btn-gold" type="button" id="mv-save">この位置に直す</button><button class="btn btn-ghost" type="button" id="mv-cancel">やめる</button></div></div>
+        <p class="fine" id="mv-msg" role="status"></p></div>
       <dl class="arr-stats shop-stats">
         <div><dt>取扱中のガチャ（公式）</dt><dd id="st-off">${off.length}種</dd></div>
         <div><dt>みんなの報告（30日）</dt><dd id="st-rep">${rp ? rp.n : 0}件</dd></div>
@@ -1036,6 +1040,7 @@ ${content}
       <p class="fine" style="margin:8px 0 4px">あなたの評価（タップでつけられます・つけ直しOK）</p>
       <div class="rate-pick" id="rate-pick" role="radiogroup" aria-label="☆の数">${[1, 2, 3, 4, 5].map((n) => `<button type="button" data-v="${n}" aria-label="${n}つ星">★</button>`).join("")}</div>
       <p class="fine" id="rate-msg" role="status"></p>
+      <div class="share-x"><a class="btn btn-x" id="share-x" href="https://x.com/intent/post?text=${encodeURIComponent(`「${sh.name}」のガチャ情報\n#ガチャガチャ #ガチャ活`)}&url=${encodeURIComponent(`${SITE_URL}/shop/${sh.id}.html`)}" target="_blank" rel="noopener" data-name="${esc(sh.name)}" data-url="${SITE_URL}/shop/${sh.id}.html">𝕏 このお店の☆とコメントをシェア</a></div>
     </section>
 
     <section class="section panel" id="com-box">

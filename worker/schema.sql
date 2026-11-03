@@ -20,3 +20,5 @@ CREATE INDEX IF NOT EXISTS comments_shop ON comments (shop_id, created_at);
 CREATE TABLE IF NOT EXISTS comment_flags (comment_id INTEGER NOT NULL, who TEXT NOT NULL, PRIMARY KEY (comment_id, who));
 -- お店の☆評価（1人1店1つ。つけ直すと上書き）
 CREATE TABLE IF NOT EXISTS ratings (shop_id TEXT NOT NULL, who TEXT NOT NULL, stars INTEGER NOT NULL, updated_at TEXT NOT NULL, PRIMARY KEY (shop_id, who));
+-- ピンの位置の手直し（だれでもOK。記録を残して、あとで戻せるように）
+CREATE TABLE IF NOT EXISTS pin_moves (id INTEGER PRIMARY KEY AUTOINCREMENT, shop_id TEXT NOT NULL, who TEXT NOT NULL, from_lat REAL, from_lng REAL, lat REAL NOT NULL, lng REAL NOT NULL, created_at TEXT NOT NULL);
