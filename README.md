@@ -21,7 +21,7 @@ Geminiへの説明は `GEMINI_GUIDE.md`、商品データの書き方は `DATA_G
 1. （Cloudflare の Pages プロジェクトは初回公開時に自動で作られる）
 2. GitHub のリポジトリ → Settings → Secrets and variables → Actions で次を登録
    - Secrets：`CLOUDFLARE_API_TOKEN`、`CLOUDFLARE_ACCOUNT_ID`（抽選ナビと同じ値でOK）
-   - Variables：`CF_PROJECT_NAME`（1で付けた名前）、`SITE_URL`（例：`https://gacha-site.pages.dev`）
+   - Variables：`CF_PROJECT_NAME`（1で付けた名前）、`SITE_URL`（例：`https://gachapla.com`）
 3. `data/site.json` の `amazon_tag`・`rakuten_affiliate_id`・`contact_url` を入れる
 
 ## 公開されるページ

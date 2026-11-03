@@ -832,6 +832,8 @@ ${pages.filter(([, r]) => r !== "search.html").map(urlEntry).join("\n")}
 </urlset>
 `);
 write("robots.txt", `User-agent: *\nAllow: /\nSitemap: ${SITE_URL}/sitemap.xml\n`);
+// Cloudflare の窓口（functions/）を動かすのは、ページと /api/ だけ（画像などでは動かさず、無料の回数を節約する）
+write("_routes.json", JSON.stringify({ version: 1, include: ["/", "/api/*", "/item/*", "/genre/*", "/type/*", "/maker/*", "/calendar*", "/search*", "/faq*", "/about*", "/en", "/en/", "/en/item/*", "/en/genre/*", "/en/type/*", "/en/maker/*", "/en/calendar*", "/en/search*", "/en/faq*", "/en/about*", "/index.html", "/en/index.html"], exclude: ["/assets/*", "/images/*", "/data/*"] }));
 write("_headers", `/assets/*\n  Cache-Control: public, max-age=86400\n/images/*\n  Cache-Control: public, max-age=604800\n/data/*\n  Cache-Control: public, max-age=300\n`);
 
 const noEn = items.filter((it) => !it.name_en).length;

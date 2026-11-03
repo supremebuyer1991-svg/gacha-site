@@ -7,7 +7,7 @@ workers_dev = false
 crons = ["*/10 * * * *"]
 
 [vars]
-SITE_URL = "https://gacha-site.pages.dev"
+SITE_URL = "https://gachapla.com"
 
 [[d1_databases]]
 binding = "DB"

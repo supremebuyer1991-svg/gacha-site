@@ -11,7 +11,7 @@ const { decode } = require("./import-schedule.js");
 const ROOT = path.join(__dirname, "..");
 const itemsPath = path.join(ROOT, "data", "items.json");
 const BASE = "https://www.takaratomy-arts.co.jp";
-const UA = "Mozilla/5.0 (compatible; GachaSiteBot/1.0; +" + (process.env.SITE_URL || "https://gacha-site.pages.dev") + ")";
+const UA = "Mozilla/5.0 (compatible; GachaSiteBot/1.0; +" + (process.env.SITE_URL || "https://gachapla.com") + ")";
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const WAIT_MS = 2000;
 const MAX_NEW = 40;

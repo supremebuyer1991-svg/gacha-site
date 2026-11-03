@@ -39,7 +39,7 @@ jobs:
         env:
           STOCK_IN_GITHUB: "0"
           FORCE_BACKFILL: ${{ github.event.inputs.backfill == 'true' && '1' || '0' }}
-          SITE_URL: ${{ vars.SITE_URL || 'https://gacha-site.pages.dev' }}
+          SITE_URL: https://gachapla.com
 
       - name: 取り込んだものを保存
         if: github.event_name != 'push'
@@ -53,14 +53,14 @@ jobs:
       - name: ハートの数を読み込む（人気ランキング用）
         continue-on-error: true
         run: |
-          curl -fsS --max-time 15 "${SITE_URL:-https://gacha-site.pages.dev}/api/votes" -o data/votes.json || echo '{}' > data/votes.json
+          curl -fsS --max-time 15 "${SITE_URL:-https://gachapla.com}/api/votes" -o data/votes.json || echo '{}' > data/votes.json
         env:
-          SITE_URL: ${{ vars.SITE_URL || 'https://gacha-site.pages.dev' }}
+          SITE_URL: https://gachapla.com
 
       - name: ページを作る
         run: node src/build.js
         env:
-          SITE_URL: ${{ vars.SITE_URL || 'https://gacha-site.pages.dev' }}
+          SITE_URL: https://gachapla.com
 
       - name: Cloudflare の在庫データベースを準備
         id: d1
