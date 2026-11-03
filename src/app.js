@@ -577,7 +577,7 @@
         var x = Math.sin(dLa / 2) * Math.sin(dLa / 2) + Math.cos(a[0] * t) * Math.cos(b[0] * t) * Math.sin(dLo / 2) * Math.sin(dLo / 2);
         return 2 * R * Math.asin(Math.sqrt(x));
       };
-      var SPEED = { walking: 4.5, transit: 18, driving: 25 }, DETOUR = 1.3; // 道のり＝まっすぐの距離×1.3 の目安
+      var SPEED = { walking: 4.5, bicycling: 12, transit: 18, driving: 25 }, DETOUR = 1.3; // 道のり＝まっすぐの距離×1.3 の目安
       var minsOf = function (km, mode) { return km * DETOUR / SPEED[mode] * 60; };
       // 作り方の切り替え
       [].forEach.call(K.querySelectorAll("[data-plan]"), function (b) {
@@ -620,7 +620,7 @@
         var stay = plan === "time" ? Number($("k-stay").value) : 0;
         var detour = plan === "dest" ? Number($("k-detour").value) : Infinity;
         // 探す範囲：移動の速さと時間から
-        var reach = plan === "time" ? SPEED[mode] * (budget / 60) / DETOUR / (back ? 2 : 1) : mode === "walking" ? 3 : mode === "transit" ? 10 : 20;
+        var reach = plan === "time" ? SPEED[mode] * (budget / 60) / DETOUR / (back ? 2 : 1) : ({ walking: 3, bicycling: 7, transit: 10, driving: 20 })[mode] || 5;
         kmsg.textContent = "ルートを作っています…";
         (want ? loadItems() : Promise.resolve(null)).then(function (si) {
           var cand = list;

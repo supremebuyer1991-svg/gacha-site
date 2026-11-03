@@ -883,7 +883,7 @@ ${content}
         <label data-for="time" hidden>ガチャ活の時間<select id="k-time"><option value="30">30分</option><option value="60" selected>1時間</option><option value="90">1時間半</option><option value="120">2時間</option><option value="180">3時間</option><option value="240">4時間</option></select></label>
         <label data-for="time" hidden>1店にいる時間<select id="k-stay"><option value="5">5分</option><option value="10" selected>10分</option><option value="15">15分</option><option value="20">20分</option></select></label>
         <label data-for="dest" hidden>寄り道してもいい時間<select id="k-detour"><option value="10">10分まで</option><option value="20" selected>20分まで</option><option value="30">30分まで</option><option value="60">1時間まで</option></select></label>
-        <label>移動<select id="k-mode"><option value="walking">歩き</option><option value="driving">車</option><option value="transit">電車・バス</option></select></label>
+        <label>交通手段<select id="k-mode"><option value="walking">徒歩</option><option value="bicycling">自転車</option><option value="transit">電車・バス</option><option value="driving">車</option></select></label>
         <label class="k-wide" data-for="dest" hidden>目的地（お店の名前か、下のボタンで地図をタップ）<input type="search" id="k-dest" list="k-shops" placeholder="例：ガシャポンのデパート 池袋総本店" autocomplete="off"><datalist id="k-shops"></datalist></label>
         <div class="k-wide" data-for="dest" hidden><button class="btn" type="button" id="k-pick">地図をタップして目的地を決める</button> <span class="fine" id="k-dest-note"></span></div>
         <label class="k-wide">探したいガチャ（なくてもOK）<input type="search" id="k-item" list="k-items" placeholder="例：ちいかわ めじるしアクセサリー3" autocomplete="off"><datalist id="k-items"></datalist></label>
