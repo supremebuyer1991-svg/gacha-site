@@ -700,7 +700,8 @@
           var p0 = start;
           $("k-list").innerHTML = route.map(function (x, i) {
             var d = hav(p0, x.p) * DETOUR; p0 = x.p;
-            return '<li><b>' + (i + 1) + '. <a href="' + root + "shop/" + esc(x.s[0]) + '.html">' + esc(x.s[1]) + "</a></b><small>前の場所から約" + (d < 1 ? Math.round(d * 1000) + "m" : d.toFixed(1) + "km") + "・" + Math.max(1, Math.round(minsOf(hav(i ? route[i - 1].p : start, x.p), mode))) + "分</small></li>";
+            return '<li><b>' + (i + 1) + '. <a href="' + root + "shop/" + esc(x.s[0]) + '.html">' + esc(x.s[1]) + "</a></b><small>前の場所から約" + (d < 1 ? Math.round(d * 1000) + "m" : d.toFixed(1) + "km") + "・" + Math.max(1, Math.round(minsOf(hav(i ? route[i - 1].p : start, x.p), mode))) + "分</small>" +
+              '<button type="button" class="k-pop" data-sid="' + esc(x.s[0]) + '" aria-expanded="false">▾ この店に在庫のある人気ガチャを見る</button><div class="k-pop-box" hidden></div></li>';
           }).join("") + (end && plan === "dest" ? '<li><b>🏁 目的地</b></li>' : "");
           // Googleマップは経由地が9か所までなので、10店をこえるときは2つに分ける
           var ll = function (p) { return p[0].toFixed(6) + "," + p[1].toFixed(6); };
@@ -721,6 +722,32 @@
           $("k-result").scrollIntoView({ behavior: "smooth", block: "nearest" });
         }).catch(function () { kmsg.textContent = "ルートを作れませんでした。時間をおいてもう一度お試しください。"; });
       };
+      // ルートのお店ごとに「在庫のある人気ガチャ」を開く・閉じる
+      var quizItems = null;
+      var loadQuiz = function () {
+        if (quizItems) return Promise.resolve(quizItems);
+        return fetch(K.getAttribute("data-quiz")).then(function (r) { return r.json(); }).then(function (a) { quizItems = {}; a.forEach(function (it) { quizItems[it.id] = it; }); return quizItems; });
+      };
+      $("k-list").addEventListener("click", function (e) {
+        var b = e.target.closest && e.target.closest(".k-pop"); if (!b) return;
+        var box = b.nextElementSibling, open = b.getAttribute("aria-expanded") === "true";
+        if (open) { box.hidden = true; b.setAttribute("aria-expanded", "false"); b.textContent = "▾ この店に在庫のある人気ガチャを見る"; return; }
+        b.setAttribute("aria-expanded", "true"); b.textContent = "▴ 閉じる"; box.hidden = false;
+        if (box.getAttribute("data-done")) return;
+        box.innerHTML = '<p class="fine">読み込み中…</p>';
+        Promise.all([loadItems(), loadQuiz()]).then(function (r) {
+          var si = r[0], qi = r[1], sid = b.getAttribute("data-sid");
+          var ids = (si.shops[sid] || []).map(function (i) { return si.items[i]; }).filter(function (id) { return qi[id]; });
+          ids.sort(function (a, b2) { return (qi[b2].popularity || 0) - (qi[a].popularity || 0) || (qi[b2].ad > qi[a].ad ? 1 : -1); });
+          box.innerHTML = ids.length ? '<ol class="k-pop-list">' + ids.slice(0, 10).map(function (id) {
+            var it = qi[id];
+            return '<li><a href="' + root + "item/" + esc(id) + '.html">' + (it.image ? '<img src="' + root + esc(it.image) + '" alt="" loading="lazy" width="40" height="40">' : "") + "<span>" + esc(it.name) + "</span><em>¥" + it.price + "</em></a></li>";
+          }).join("") + "</ol>" + (ids.length > 10 ? '<p class="fine">ほか' + (ids.length - 10) + '種。<a href="' + root + "shop/" + esc(sid) + '.html">お店のページで全部見る→</a></p>' : "") + '<p class="fine">バンダイ公式「ガシャポンどこ？」で取扱のあるガチャです（通信機能のあるマシンのみ）。</p>'
+            : '<p class="fine">公式の取扱情報がまだないお店です。<a href="' + root + "shop/" + esc(sid) + '.html">お店のページ</a>で、みんなの在庫報告を見られます。</p>';
+          box.setAttribute("data-done", "1");
+        }).catch(function () { box.innerHTML = '<p class="fine">読み込めませんでした。</p>'; });
+      });
+
       $("k-go").addEventListener("click", function () {
         if (!navigator.geolocation) { kmsg.textContent = "この端末では現在地が使えません。「地図の真ん中から作る」をお使いください。"; return; }
         kmsg.textContent = "現在地を調べています…（位置はこの端末の中だけで使います）";

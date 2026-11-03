@@ -658,3 +658,13 @@ label.opt:focus-within { outline: none; }
 .com-list p { margin: 0; font-size: 14px; white-space: pre-wrap; word-break: break-word; }
 .com-list small { color: var(--muted); font-size: 12px; }
 .com-flag { background: none; border: 0; padding: 0; color: var(--muted); font: inherit; text-decoration: underline; cursor: pointer; }
+.k-pop { align-self: flex-start; margin-top: 4px; background: none; border: 0; padding: 2px 0; color: var(--sky); font: 700 12.5px var(--font-body); cursor: pointer; border-bottom: 2px dotted var(--sky); }
+.k-pop-box { margin-top: 8px; background: #f0f7ff; border-radius: 12px; padding: 8px 10px; }
+.k-pop-list { list-style: decimal inside; margin: 0; padding: 0; }
+.k-pop-list li { padding: 4px 0; border-top: 1px solid #dfeafe; font-size: 13px; }
+.k-pop-list li:first-child { border-top: 0; }
+.k-pop-list a { display: inline-flex; align-items: center; gap: 8px; vertical-align: middle; width: calc(100% - 24px); }
+.k-pop-list img { width: 40px; height: 40px; object-fit: contain; background: #fff; border-radius: 8px; flex: none; }
+.k-pop-list span { flex: 1; min-width: 0; font-weight: 700; }
+.k-pop-list em { font-style: normal; color: var(--gold); font-weight: 700; font-family: var(--font-latin); }
+.k-pop-list a:hover span { color: var(--gold); }

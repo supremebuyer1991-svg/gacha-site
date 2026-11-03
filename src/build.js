@@ -873,7 +873,7 @@ ${content}
       <div class="map-add-btns"><button class="btn btn-gold" type="button" id="add-send">この場所で追加する</button><button class="btn btn-ghost" type="button" id="add-cancel">やめる</button></div>
       <p class="fine" id="add-msg" role="status"></p>
     </div>
-    <div class="katsu panel" id="katsu" data-items="${c.R}data/shop-items.json?v=${QUIZ_V}" data-search="${c.R}data/search-ja.json">
+    <div class="katsu panel" id="katsu" data-items="${c.R}data/shop-items.json?v=${QUIZ_V}" data-search="${c.R}data/search-ja.json" data-quiz="${c.R}data/quiz-ja.json?v=${QUIZ_V}">
       <h2 style="font-size:20px">🪐 ガチャ活ルートを作る</h2>
       <p class="fine" style="margin-top:4px">今いる場所から近いお店を、効率よく回れる順番に並べます。探したいガチャを入れると、そのガチャの取扱があるお店だけで作ります。</p>
       <div class="k-tabs" role="tablist">
