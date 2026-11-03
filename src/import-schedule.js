@@ -48,7 +48,9 @@ async function main() {
   const known = new Set(items.map((it) => ((it.official_url || "").match(/jan_code=(\d{13})/) || [])[1]).filter(Boolean));
   const now = new Date(Date.now() + 9 * 3600e3);
   const ym = (d) => `${d.getUTCFullYear()}${String(d.getUTCMonth() + 1).padStart(2, "0")}`;
-  const months = [ym(now), ym(new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + 1, 1)))];
+  // 今月から3か月先まで（公式にまだ載っていない月は下で飛ばす）
+  const months = [0, 1, 2, 3].map((off) => ym(new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + off, 1))));
+  const future = new Set(months.slice(1));
   const today = now.toISOString().slice(0, 10);
 
   // 過去分のさかのぼり：1回の実行で1か月ずつ（data/backfill.json に次に読む月を記録）
@@ -66,7 +68,12 @@ async function main() {
     let html;
     try { html = await getText(`https://gashapon.jp/schedule/?ym=${m}`); } catch (e) { console.log(`⚠ スケジュール ${m} を読めませんでした（${e.message}）`); continue; }
     // 公開されていない月は「未定」だけのページになるので、ページ内の月メニューに含まれているか確かめる
-    if (!html.includes(`?ym=${m}"`) && m !== months[0] && m !== backMonth) { console.log(`- ${m}：まだ公開されていません`); await sleep(WAIT_MS); continue; }
+    if (!html.includes(`?ym=${m}"`) && m !== months[0] && m !== backMonth) {
+      console.log(`- ${m}：まだ公開されていません`); await sleep(WAIT_MS);
+      // 先の月が未公開なら、それより先も未公開なので読みに行かない
+      if (future.has(m)) { const i = months.indexOf(m); for (const x of months.slice(i + 1)) if (future.has(x)) months.splice(months.indexOf(x), 1); }
+      continue;
+    }
     for (const w of html.split('<div class="week">').slice(1)) {
       const week = ((w.match(/pg-tit__week">([\s\S]*?)<(?:br|small)/) || [])[1] || "").replace(/<[^>]+>/g, "").trim();
       const re = /detail\.php\?jan_code=(\d+)" alt="([^"]*)"[\s\S]*?price--main">([\d,]+)/g;

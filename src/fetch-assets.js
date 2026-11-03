@@ -243,19 +243,11 @@ async function makeWeekOg() {
   let sharp;
   try { sharp = require("sharp"); } catch { return; }
   const now = new Date(Date.now() + 9 * 3600e3);
-  const d = now.getUTCDate(), m = now.getUTCMonth() + 1;
-  const firstDow = (new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1)).getUTCDay() + 6) % 7;
-  const weekNo = Math.ceil((d + firstDow) / 7);
-  const mon = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), d - ((now.getUTCDay() + 6) % 7)));
+  const { mondayOf, weekStartOf } = require("./release-week");
+  const mon = mondayOf(now);
   const sun = new Date(mon.getTime() + 6 * 864e5);
-  const inWeek = (it) => {
-    const n = it.release_note || "";
-    let r = n.match(/(\d+)月第(\d)週/);
-    if (r) return Number(r[1]) === m && Number(r[2]) === weekNo;
-    r = n.match(/(\d+)月(\d+)日週/);
-    if (r) { const dd = new Date(Date.UTC(now.getUTCFullYear(), Number(r[1]) - 1, Number(r[2]))); return dd >= mon && dd <= sun; }
-    return false;
-  };
+  const md = (x) => `${x.getUTCMonth() + 1}/${x.getUTCDate()}`;
+  const inWeek = (it) => { const s = weekStartOf(it); return !!s && s.getTime() === mon.getTime(); };
   const src = (id) => ["webp", "jpg", "jpeg", "png"].map((e) => path.join(ROOT, "images", `${id}.${e}`)).find((f) => fs.existsSync(f));
   const list = items.filter((it) => inWeek(it) && src(it.id)).sort((a, b) => (b.popularity || 0) - (a.popularity || 0)).slice(0, 8);
   if (!list.length) return;
@@ -263,7 +255,6 @@ async function makeWeekOg() {
   const layers = [];
   const titleP = path.join(ROOT, "brand", "og-week-title.png");
   if (fs.existsSync(titleP)) layers.push({ input: titleP, left: 60, top: 22 });
-  const md = (x) => `${x.getUTCMonth() + 1}/${x.getUTCDate()}`;
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="420" height="100"><text x="410" y="70" text-anchor="end" font-family="DejaVu Sans, sans-serif" font-weight="700" font-size="44" fill="#3aa0ff">${md(mon)} - ${md(sun)}</text></svg>`;
   layers.push({ input: Buffer.from(svg), left: W - 440, top: 18 });
   for (let i = 0; i < list.length; i++) {

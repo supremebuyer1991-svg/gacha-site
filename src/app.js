@@ -492,6 +492,14 @@
     });
   });
 
+  /* ================= 人気ランキング：6位以降は「もっと見る」で10件ずつ ================= */
+  var rankMore = document.getElementById("rank-more");
+  if (rankMore) rankMore.addEventListener("click", function () {
+    var rest = document.querySelectorAll(".rank li.rank-more[hidden]");
+    for (var i = 0; i < rest.length && i < 10; i++) rest[i].hidden = false;
+    if (rest.length <= 10) rankMore.parentNode.hidden = true;
+  });
+
   /* ================= 入荷速報（トップページ） ================= */
   var feed = document.getElementById("feed");
   if (feed && DATA && window.fetch) {
@@ -503,7 +511,7 @@
       return loadItems().then(function () { D.items.forEach(function (it) { byId[it.id] = it; }); return rows; });
     }).then(function (rows) {
       if (!rows) return;
-      var list = (rows || []).filter(function (r) { return byId[r.item_id]; }).slice(0, 8);
+      var list = (rows || []).filter(function (r) { return byId[r.item_id]; }).slice(0, 20);
       if (!list.length) return;
       document.getElementById("feed-grid").innerHTML = list.map(function (r) {
         var it = byId[r.item_id];

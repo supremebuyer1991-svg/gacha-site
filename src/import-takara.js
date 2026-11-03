@@ -41,15 +41,24 @@ async function main() {
   const now = new Date(Date.now() + 9 * 3600e3);
   const ym = (d) => `${d.getUTCFullYear()}${String(d.getUTCMonth() + 1).padStart(2, "0")}`;
   const mk = (off) => ym(new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + off, 1)));
-  const months = [mk(0), mk(1), mk(-1)];
+  // 今月・来月・先月に加えて、2〜3か月先も（載っていなければ飛ばす）
+  const months = [mk(0), mk(1), mk(-1), mk(2), mk(3)];
+  const farAhead = new Set([mk(2), mk(3)]);
+  let stopAhead = false;
   const today = now.toISOString().slice(0, 10);
   const byCode = new Map(items.filter((x) => x.maker === "タカラトミーアーツ").map((x) => [String(x.official_url || "").match(/n=(Y\d+)/)?.[1], x]).filter(([k]) => k));
   const byName = new Map(items.filter((x) => x.maker === "タカラトミーアーツ").map((x) => [norm(x.name), x]));
   const found = [];
   for (const m of months) {
+    if (stopAhead && farAhead.has(m)) continue;
     let html;
     try { html = await getText(`${BASE}/items/gacha/calendar/?ym=${m}`); } catch (e) { console.log(`⚠ タカラトミーアーツ ${m} を読めませんでした（${e.message}）`); continue; }
-    for (const g of html.split('<div class="group').slice(1)) {
+    const groups = html.split('<div class="group').slice(1);
+    // 先の月は、その月の見出し（「2月9日週発売」など）があるときだけ使う（別の月が表示されていたら取り込まない）
+    if (farAhead.has(m) && !groups.some((g) => strip((g.match(/<h3[^>]*>([\s\S]*?)<\/h3>/) || [])[1] || "").includes(`${Number(m.slice(4))}月`))) {
+      console.log(`- タカラトミーアーツ ${m}：まだ公開されていません`); stopAhead = true; await sleep(WAIT_MS); continue;
+    }
+    for (const g of groups) {
       const wk = strip((g.match(/<h3[^>]*>([\s\S]*?)<\/h3>/) || [])[1] || "").replace(/\s/g, "");
       const re = /item\.html\?n=(Y\d+)"[\s\S]*?<p[^>]*>([\s\S]*?)<\/p>/g;
       let x;

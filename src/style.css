@@ -813,3 +813,29 @@ label.opt:focus-within { outline: none; }
 .row-scroll .card-name { font-size: 12.5px; line-height: 1.45; }
 .row-scroll .card-meta, .row-scroll .card-foot { font-size: 11px; }
 .row-scroll .card:hover { transform: none; }
+
+/* 発売カレンダー：週ごとの一覧 */
+.month-weeks { min-width: 0; }
+.week-block { margin-bottom: 28px; scroll-margin-top: 90px; }
+.week-block:last-child { margin-bottom: 0; }
+.week-block h3 { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 0 0 12px; font-size: 18px; font-weight: 700; padding: 6px 14px; border-radius: 12px; background: var(--pink-soft, #fff0f6); }
+.week-block h3 small { font-size: 13px; font-weight: 500; color: var(--muted); }
+.wk-now, .wk-past { font-size: 11px; font-weight: 700; padding: 2px 10px; border-radius: 999px; }
+.wk-now { background: var(--yellow, #ffe066); color: var(--text); }
+.wk-past { background: var(--line); color: var(--muted); }
+.week-jump { display: grid; gap: 8px; margin: 8px 0 4px; padding: 14px; border: 2px dashed var(--line); border-radius: 16px; }
+.wk-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.wk-row b { min-width: 3.5em; font-size: 14px; }
+.wk-row a { display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; border-radius: 999px; background: #fff; border: 1.5px solid var(--line); font-size: 13px; font-weight: 700; color: var(--text); text-decoration: none; }
+.wk-row a small { font-size: 11px; color: var(--muted); font-weight: 500; }
+.wk-row a.on { background: var(--yellow, #ffe066); border-color: transparent; }
+.wk-row a:hover { border-color: var(--pink, #ff7eb6); }
+
+/* 新着ガチャ：右端の「全部見る」 */
+.row-scroll > .see-all { display: flex; align-items: center; justify-content: center; min-height: 150px; border: 2px dashed var(--pink, #ff7eb6); border-radius: 16px; text-decoration: none; color: var(--text); background: #fff; }
+.see-all-in { display: grid; justify-items: center; gap: 4px; font-size: 15px; }
+.see-all-in span { font: 700 26px/1 var(--font-latin); color: var(--pink, #ff7eb6); }
+.row-scroll > .see-all:hover { background: var(--pink-soft, #fff0f6); }
+/* 入荷速報：上の余白をつめる */
+.section.section-tight { padding-top: 28px; }
+.rank li[hidden] { display: none; }

@@ -102,7 +102,7 @@ const T = {
     genrePage: (g) => `${g}のガチャガチャ`, genreLead: (g, n) => `${g}ジャンルの新作・発売予定ガチャ${n}シリーズを新しい順に掲載しています。`,
     makerPage: (m) => `${m}のガチャガチャ`, makerLead: (m, n) => `${m}のガチャ${n}シリーズを新しい順に掲載しています。`,
     empty: "まだ掲載している商品はありません。",
-    calTitle: "ガチャガチャ発売カレンダー", calH1: "発売カレンダー", calLead: "月ごとの発売予定です。発売時期は地域や店舗によって前後することがあります。",
+    calTitle: "ガチャガチャ発売カレンダー", calH1: "発売カレンダー", calLead: "公式に発表されている先の月まで、発売週ごとに並べています。「第◯週」はその週から順次発売という意味で、お店や地域によって前後します。",
     calDesc: "新作ガチャガチャの発売予定を月ごとに一覧できるカレンダー。価格・種類数・メーカーもまとめて確認できます。",
     calPast: "過去の発売", calMonthTitle: (y, m) => `${y}年${m}月発売のガチャガチャ`,
     thisMonth: "今月", calMonth: (y, m, n) => `${y}年${m}月<br>${n}シリーズ`,
@@ -180,7 +180,7 @@ const T = {
     genrePage: (g) => `${g} capsule toys`, genreLead: (g, n) => `${n} new and upcoming ${g.toLowerCase()} gacha series, newest first.`,
     makerPage: (m) => `Capsule toys by ${m}`, makerLead: (m, n) => `${n} gacha series by ${m}, newest first.`,
     empty: "No items listed yet.",
-    calTitle: "Gacha release calendar", calH1: "Release calendar", calLead: "Upcoming capsule toys by month. Actual arrival in shops can vary by area and store.",
+    calTitle: "Gacha release calendar", calH1: "Release calendar", calLead: "Every announced capsule toy, grouped by release week. Arrival in shops can vary by a few days by area and store.",
     calDesc: "Monthly calendar of new Japanese capsule toy (gacha) releases with prices, number of designs and makers.",
     calPast: "Past releases", calMonthTitle: (y, m) => `Gacha released in ${MONTH_EN[m - 1]} ${y}`,
     thisMonth: "This month", calMonth: (y, m, n) => `${MONTH_EN[m - 1]} ${y}<br>${n} series`,
@@ -344,22 +344,15 @@ const liveLeaves = (g, x) => (x.leaves || []).map((l) => {
 const LEAF_SHOW = 12; // これより多いときは、しぼりこみ欄と「ぜんぶ見る」を出す
 
 /* ---------- 今週発売（バンダイ「11月第2週」、タカラトミーアーツ「11月9日週」の表記から判定） ---------- */
+/* ---------- 発売週 ----------
+   週は月曜はじまり。その月の最初の月曜日から始まる週を「第1週」とする（例：2026年11月の第1週＝11/2〜11/8）。
+   バンダイの「11月第2週」、タカラトミーアーツの「11月9日週」を、どちらも「その週の月曜日」にそろえる */
+const { mondayOf, weekStartOf, weekInfo } = require("./release-week");
 const WEEK = (() => {
-  const d = nowJST.getUTCDate(), m = nowJST.getUTCMonth() + 1;
-  const firstDow = (new Date(Date.UTC(nowJST.getUTCFullYear(), nowJST.getUTCMonth(), 1)).getUTCDay() + 6) % 7; // 月曜=0
-  const weekNo = Math.ceil((d + firstDow) / 7);
-  const mon = new Date(nowJST); mon.setUTCDate(d - ((nowJST.getUTCDay() + 6) % 7));
-  const sun = new Date(mon); sun.setUTCDate(mon.getUTCDate() + 6);
-  const md = (x) => `${x.getUTCMonth() + 1}/${x.getUTCDate()}`;
-  const inWeek = (it) => {
-    const n = it.release_note || "";
-    let r = n.match(/(\d+)月第(\d)週/);
-    if (r) return Number(r[1]) === m && Number(r[2]) === weekNo;
-    r = n.match(/(\d+)月(\d+)日週/);
-    if (r) { const dd = new Date(Date.UTC(nowJST.getUTCFullYear(), Number(r[1]) - 1, Number(r[2]))); return dd >= new Date(mon.toISOString().slice(0, 10)) && dd <= new Date(sun.toISOString().slice(0, 10)); }
-    return false;
-  };
-  return { m, weekNo, mon, sun, md, label: `${m}月第${weekNo}週`, range: `${md(mon)}〜${md(sun)}`, items: items.filter(inWeek).sort(byPopular) };
+  const mon = mondayOf(nowJST);
+  const w = weekInfo(mon);
+  const inWeek = (it) => { const s = weekStartOf(it); return !!s && s.getTime() === mon.getTime(); };
+  return { m: w.m, weekNo: w.no, key: w.key, label: `${w.m}月第${w.no}週`, range: w.range, items: items.filter(inWeek).sort(byPopular) };
 })();
 
 /* ---------- みんなのガチャマップ：お店 ---------- */
@@ -523,7 +516,7 @@ ${content}
   {
     const c = ctx("index.html");
     const newest = [...items].sort(byNewest).slice(0, 8);
-    const ranking = [...items].sort(byPopular).slice(0, 5);
+    const ranking = [...items].sort(byPopular).slice(0, 50); // 5位まで表示、6位以降は「もっと見る」
     const releasingNow = items.filter((it) => it.release === thisMonth).length;
     const stockedStores = new Set([...stockByItem.values()].flat().map((s) => s.name + s.address)).size;
     const embed = {
@@ -606,21 +599,22 @@ ${content}
 
   <section class="section" id="new">
     <div class="section-head"><h2>${t.newTitle}</h2><span><a class="more" href="${c.H}week.html">${lang === "en" ? "This week" : "今週発売"}</a>　<a class="more" href="${c.H}calendar.html">${t.toCalendar}</a></span></div>
-    <div class="grid row-scroll">${newest.map((it) => card(it, c)).join("")}</div>
+    <div class="grid row-scroll">${newest.map((it) => card(it, c)).join("")}<a class="card see-all" href="${c.H}new.html"><span class="see-all-in"><b>${lang === "en" ? "See all" : "全部見る"}</b><span>→</span></span></a></div>
   </section>
 
-  <section class="section" id="feed" data-api="${c.R}api/feed" hidden>
+  <section class="section section-tight" id="feed" data-api="${c.R}api/feed" hidden>
     <div class="section-head"><h2>${t.feedTitle}</h2></div>
-    <div class="grid" id="feed-grid"></div>
+    <div class="grid row-scroll" id="feed-grid"></div>
     <script type="application/json" id="feed-i18n">${JSON.stringify({ isNew: t.feedNew, back: t.feedBack, note: t.feedNote(9, 8).replace("8", "{s}").replace("9", "{n}"), note0: t.feedNote(0, 8).replace("8", "{s}") })}</script>
   </section>
 
   <section class="section" id="ranking">
     <div class="section-head"><h2>${t.rankTitle}</h2></div>
-    <ol class="rank">${ranking.map((it, i) => `<li><a href="${c.H}item/${it.id}.html">
+    <ol class="rank">${ranking.map((it, i) => `<li${i >= 5 ? ' class="rank-more" hidden' : ""}><a href="${c.H}item/${it.id}.html">
       <span class="rank-no">${i + 1}</span>${thumb(it, c.R, { badge: false })}
       <span style="min-width:0"><span class="card-name">${esc(nameOf(it, lang))}</span><span class="card-foot"><span><b>¥${it.price}</b></span><span>${heartsOf(it) ? `<em class="hearts">♥ ${heartsOf(it)}</em>` : t.month(it.release)}</span></span></span>
     </a></li>`).join("")}</ol>
+    ${ranking.length > 5 ? `<p class="more-wrap"><button type="button" class="btn" id="rank-more">${t.showMore}</button></p>` : ""}
   </section>
 
   <section class="section" id="types">
@@ -776,6 +770,12 @@ ${content}
     list: WEEK.items, current: "calendar",
     ogImage: fs.existsSync(path.join(ROOT, "images", "og", "week.jpg")) ? `${SITE_URL}/images/og/week.jpg?v=${today}` : "",
   });
+  // 新着ガチャ（トップの「全部見る」のリンク先）
+  listPage("new.html", {
+    title: lang === "en" ? "New gacha arrivals" : "新着ガチャ一覧",
+    lead: lang === "en" ? "The latest capsule toys added to the site, newest first." : "サイトに新しく載ったガチャを、新しい順に並べています。",
+    list: [...items].sort(byNewest).slice(0, 120), current: "new",
+  });
   for (const g of TYPES) {
     const list = inType(g.slug).sort(byNewest);
     if (list.length) listPage(`type/${g.slug}.html`, { title: t.typePage(genreLabel(g, lang)), lead: t.typeLead(genreLabel(g, lang), list.length), list, current: "genre" });
@@ -791,37 +791,71 @@ ${content}
     listPage(`maker/${makerSlug(maker)}.html`, { title: t.makerPage(label), lead: t.makerLead(label, list.length), list });
   }
 
-  /* ---------- 発売カレンダー（先月以降）と、過去の月ごとのページ ---------- */
+  /* ---------- 発売カレンダー（今月〜わかる範囲の先の月、週ごと）と、過去の月ごとのページ ---------- */
   {
-    const allMonths = [...new Set(items.map((it) => it.release))].sort();
+    // 発売週が分かる商品は、その週の月に入れる（バンダイの10月分に「11月第1週」発売が混ざるため）
+    const calMonthOf = (it) => { const s = weekStartOf(it); return s ? s.toISOString().slice(0, 7) : it.release; };
+    const allMonths = [...new Set(items.map(calMonthOf))].sort();
     const prevMonth = new Date(Date.UTC(nowJST.getUTCFullYear(), nowJST.getUTCMonth() - 1, 1)).toISOString().slice(0, 7);
-    // 今月 → 来月以降 → 先月 の順（今いちばん見たい月を先頭に）
+    // 今月 → 来月以降（公式に載っている分すべて）→ 先月 の順
     const recent = [...allMonths.filter((m) => m >= thisMonth), ...allMonths.filter((m) => m >= prevMonth && m < thisMonth)];
-    // 同じ月の中は発売週の早い順（「11月第2週」「11月9日週」など）。週が分からないものは後ろ
-    const weekKey = (it) => {
-      const n = it.release_note || "";
-      let m = n.match(/(\d+)月第(\d)週/);
-      if (m) return Number(m[1]) * 10 + Number(m[2]);
-      m = n.match(/(\d+)月(\d+)日週/);
-      if (m) return Number(m[1]) * 10 + Math.ceil(Number(m[2]) / 7);
-      return 999;
-    };
     const past = allMonths.filter((m) => m < prevMonth).reverse();
+    const en = lang === "en";
+    const weekTitle = (w) => en ? `${MONTH_EN[w.m - 1]} week ${w.no}` : `${w.m}月 第${w.no}週`;
+    const weekBadge = (w) => w.key === WEEK.key ? `<span class="wk-now">${en ? "This week" : "今週"}</span>`
+      : w.key < WEEK.key ? `<span class="wk-past">${en ? "Out now" : "発売済み"}</span>` : "";
+    // 1か月分を「週ごと」に分ける。週が分からないものは最後に「週未定」
+    const weeksOf = (m) => {
+      const list = items.filter((it) => calMonthOf(it) === m);
+      const groups = new Map();
+      const none = [];
+      for (const it of list) {
+        const s = weekStartOf(it);
+        if (!s) { none.push(it); continue; }
+        const w = weekInfo(s);
+        if (!groups.has(w.key)) groups.set(w.key, { w, list: [] });
+        groups.get(w.key).list.push(it);
+      }
+      const out = [...groups.values()].sort((a, b) => (a.w.key < b.w.key ? -1 : 1));
+      for (const g of out) g.list.sort(byPopular);
+      if (none.length) out.push({ w: null, list: none.sort(byPopular) });
+      return { list, groups: out };
+    };
+    const weekBlock = (m, g, c) => {
+      const id = g.w ? `w${g.w.key}` : `w${m}-tbd`;
+      const head = g.w
+        ? `<h3>${weekTitle(g.w)}${en ? " releases" : "発売"}<small>${g.w.range}${en ? "" : "ごろ"}・${g.list.length}${en ? " series" : "シリーズ"}</small>${weekBadge(g.w)}</h3>`
+        : `<h3>${en ? "Week not announced yet" : "週未定"}<small>${g.list.length}${en ? " series" : "シリーズ"}</small></h3>`;
+      return `<div class="week-block" id="${id}">${head}<div class="grid">${g.list.map((it) => card(it, c)).join("")}</div></div>`;
+    };
     const monthBlock = (m, c) => {
       const [y, mo] = m.split("-");
-      const list = items.filter((it) => it.release === m).sort((a, b) => weekKey(a) - weekKey(b) || byPopular(a, b));
+      const { list, groups } = weeksOf(m);
       return `<section class="month" id="m${m}"><div class="month-label"><b>${mo}</b><span>${t.calMonth(y, Number(mo), list.length)}</span>${m === thisMonth ? `<br><span class="now">${t.thisMonth}</span>` : ""}</div>
-      <div class="grid">${list.map((it) => card(it, c)).join("")}</div></section>`;
+      <div class="month-weeks">${groups.map((g) => weekBlock(m, g, c)).join("")}</div></section>`;
+    };
+    // ページ上部の「週へジャンプ」（今月以降だけ）
+    const jumpNav = () => {
+      const links = [];
+      for (const m of allMonths.filter((x) => x >= thisMonth)) {
+        const [y, mo] = m.split("-");
+        const chips = weeksOf(m).groups.map((g) => g.w
+          ? `<a href="#w${g.w.key}"${g.w.key === WEEK.key ? ' class="on"' : ""}>${en ? `W${g.w.no}` : `第${g.w.no}週`}<small>${g.list.length}</small></a>`
+          : `<a href="#w${m}-tbd">${en ? "TBA" : "週未定"}<small>${g.list.length}</small></a>`).join("");
+        links.push(`<div class="wk-row"><b>${en ? `${MONTH_EN[Number(mo) - 1].slice(0, 3)} ${y}` : `${Number(mo)}月`}</b>${chips}</div>`);
+      }
+      return links.length ? `<nav class="week-jump" aria-label="${en ? "Jump to week" : "週へジャンプ"}">${links.join("")}</nav>` : "";
     };
     const archiveNav = (c) => past.length ? `<nav class="archive" aria-label="${t.calPast}"><h2>${t.calPast}</h2><div class="archive-list">${past.map((m) => {
       const [y, mo] = m.split("-");
-      return `<a href="${c.H}calendar/${m}.html">${t.calMonth(y, Number(mo), items.filter((it) => it.release === m).length).replace("<br>", " ")}</a>`;
+      return `<a href="${c.H}calendar/${m}.html">${t.calMonth(y, Number(mo), items.filter((it) => calMonthOf(it) === m).length).replace("<br>", " ")}</a>`;
     }).join("")}</div></nav>` : "";
     {
       const c = ctx("calendar.html");
       const body = `<div class="wrap">
   <header class="page-head"><h1>${t.calH1}</h1><p class="lead">${t.calLead}</p></header>
-  <div class="section" style="padding-top:40px">${recent.map((m) => monthBlock(m, c)).join("")}</div>
+  ${jumpNav()}
+  <div class="section" style="padding-top:24px">${recent.map((m) => monthBlock(m, c)).join("")}</div>
   ${archiveNav(c)}
 </div>`;
       layout({ rel: "calendar.html", title: t.calTitle, description: t.calDesc, body, current: "calendar" });
@@ -1113,7 +1147,7 @@ ${pages.filter(([, r]) => r !== "search.html").map(urlEntry).join("\n")}
 `);
 write("robots.txt", `User-agent: *\nAllow: /\nSitemap: ${SITE_URL}/sitemap.xml\n`);
 // Cloudflare の窓口（functions/）を動かすのは、ページと /api/ だけ（画像などでは動かさず、無料の回数を節約する）
-write("_routes.json", JSON.stringify({ version: 1, include: ["/", "/api/*", "/item/*", "/shop/*", "/map*", "/gachakatsu*", "/shops/*", "/rules*", "/genre/*", "/type/*", "/maker/*", "/calendar*", "/search*", "/week*", "/faq*", "/about*", "/en", "/en/", "/en/item/*", "/en/genre/*", "/en/type/*", "/en/maker/*", "/en/calendar*", "/en/search*", "/en/week*", "/en/faq*", "/en/about*", "/index.html", "/en/index.html"], exclude: ["/assets/*", "/images/*", "/data/*"] }));
+write("_routes.json", JSON.stringify({ version: 1, include: ["/", "/api/*", "/item/*", "/shop/*", "/map*", "/gachakatsu*", "/shops/*", "/rules*", "/genre/*", "/type/*", "/maker/*", "/calendar*", "/search*", "/week*", "/new*", "/faq*", "/about*", "/en", "/en/", "/en/item/*", "/en/genre/*", "/en/type/*", "/en/maker/*", "/en/calendar*", "/en/search*", "/en/week*", "/en/new*", "/en/faq*", "/en/about*", "/index.html", "/en/index.html"], exclude: ["/assets/*", "/images/*", "/data/*"] }));
 // ガチャ活：お店ごとの取扱ガチャ（ガチャの番号の一覧）。探したいガチャで絞るときだけ読む
 {
   const ids = [...new Set(Object.values(SHOP_OFFICIAL).flat())].filter((id) => itemById.has(id));
@@ -1127,13 +1161,12 @@ write("data/shops.json", JSON.stringify(SHOPS.map((x) => [x.id, x.name, x.pref, 
 {
   const pack = (it) => ({ id: it.id, name: it.name, maker: it.maker, price: it.price, lineup: it.lineup, lineup_names: (it.lineup_names || []).slice(0, 12), release: it.release, release_note: it.release_note || "", genre: genreLabel(genreOf(it.genre), "ja"), img: it.image ? `${SITE_URL}/${thumbOf(it.image)}` : "", img_large: it.image ? `${SITE_URL}/${it.image}` : "", url: `${SITE_URL}/item/${it.id}`, hearts: heartsOf(it) });
   const week = WEEK.items.filter((it) => it.image);
-  const { m, weekNo, mon, sun, md } = WEEK;
   const d = nowJST.getUTCDate();
   // 紹介する新作の候補：画像があり、今月・来月発売。日付で順番に回す（同じ商品が続かないように）
   const pool = items.filter((it) => it.image && it.release >= thisMonth).sort((a, b) => (a.id < b.id ? -1 : 1));
   const dayNo = Math.floor(Date.UTC(nowJST.getUTCFullYear(), nowJST.getUTCMonth(), d) / 864e5);
   const picks = pool.length ? [0, 1, 2, 3].map((k) => pool[(dayNo * 2 + k) % pool.length]) : [];
-  write("data/x.json", JSON.stringify({ generated: new Date().toISOString(), today: today, week: { label: `${m}月第${weekNo}週`, from: md(mon), to: md(sun), count: week.length, items: week.slice(0, 12).map(pack) }, picks: picks.map(pack), site: SITE_URL }));
+  write("data/x.json", JSON.stringify({ generated: new Date().toISOString(), today: today, week: { label: WEEK.label, from: WEEK.range.split("〜")[0], to: WEEK.range.split("〜")[1], count: week.length, items: week.slice(0, 12).map(pack) }, picks: picks.map(pack), site: SITE_URL }));
 }
 write("_headers", `/assets/*\n  Cache-Control: public, max-age=86400\n/images/*\n  Cache-Control: public, max-age=604800\n  Access-Control-Allow-Origin: *\n/data/*\n  Cache-Control: public, max-age=300\n  Access-Control-Allow-Origin: *\n`);
 
