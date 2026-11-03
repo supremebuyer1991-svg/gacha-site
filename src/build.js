@@ -364,6 +364,7 @@ const SHOPS = (() => {
 const SHOP_OFFICIAL = shopsLive.official || {};
 const SHOP_REPORTS = shopsLive.reports || {};
 const PREF_ORDER = Object.keys(PREF_EN);
+const KIND_LABEL = { gacha: "ガチャ専門店", game: "ゲームセンター", mall: "ショッピングモール・スーパー", station: "駅・空港・サービスエリア", shop: "そのほかのお店" };
 const prefSlug = (p) => (PREF_EN[p] || "other").toLowerCase().replace(/[^a-z]+/g, "-");
 const itemById = new Map(items.map((it) => [it.id, it]));
 
@@ -855,18 +856,20 @@ ${content}
       const prefs = PREF_ORDER.filter((p) => SHOPS.some((x) => x.pref === p));
       const body = `<div class="wrap">
   <nav class="breadcrumb" aria-label="breadcrumb"><a href="${c.H}index.html">${t.home}</a><span>/</span><span>${katsu ? "ガチャ活" : "みんなのガチャマップ"}</span></nav>
-  <header class="page-head"><h1>${katsu ? "ガチャ活｜近くのガチャを効率よく回ろう" : "みんなのガチャマップ"}</h1><p class="lead">${katsu ? "ガチャ活は、ガチャのあるお店を巡ってお目当てのガチャを探すこと。今いる場所から近いお店を、回りやすい順番でご案内します。" : "全国のガチャのあるお店を地図で探せます。お店の在庫や台数は、みんなの報告で更新されます。地図にないお店は「お店を追加」から足せます。"}</p></header>
+  <header class="page-head"><h1>${katsu ? "ガチャ活｜近くのガチャを効率よく回ろう" : "みんなのガチャマップ"}</h1><p class="lead">${katsu ? "ガチャ活は、ガチャのあるお店を巡ってお目当てのガチャを探すこと。今いる場所から近いお店を、回りやすい順番でご案内します。" : "全国のガチャのあるお店を地図で探せます。お店の在庫や台数は、みんなの報告で更新されます。地図にないお店は「ガチャのある場所をピン」から、だれでも足せます。"}</p></header>
   <section class="map-wrap${katsu ? " is-katsu" : ""}">
     <div class="map-tools">
       <button class="btn btn-gold" type="button" id="map-geo">現在地のまわり</button>
       <input type="search" id="map-q" class="map-q" placeholder="お店の名前・地名・駅名で探す" autocomplete="off">
-      <button class="btn" type="button" id="map-add">＋ お店を追加</button>
+      <button class="btn" type="button" id="map-add">＋ ガチャのある場所をピン</button>
     </div>
     <div id="map" class="map" data-shops="${c.R}api/shops" data-fallback="${c.R}data/shops.json" data-root="${c.R}"></div>
     <div class="map-add" id="map-add-box" hidden>
       <p><b>地図を動かして、真ん中の＋をお店の場所に合わせてください。</b></p>
       <label>お店の名前<input type="text" id="add-name" maxlength="60" placeholder="例：ガシャポンのデパート 池袋総本店"></label>
       <label>住所（わかれば）<input type="text" id="add-addr" maxlength="120"></label>
+      <label>どんな場所？<select id="add-kind"><option value="gacha">ガチャ専門店</option><option value="game">ゲームセンター</option><option value="mall">ショッピングモール・スーパー</option><option value="station">駅・空港・サービスエリア</option><option value="shop">そのほかのお店（本屋・おもちゃ屋など）</option><option value="other">そのほか</option></select></label>
+      <label>ひとことコメント（なくてもOK）<textarea id="add-memo" maxlength="140" rows="2" placeholder="例：2階の奥に50台くらい。ちいかわ多め"></textarea></label>
       <div class="map-add-btns"><button class="btn btn-gold" type="button" id="add-send">この場所で追加する</button><button class="btn btn-ghost" type="button" id="add-cancel">やめる</button></div>
       <p class="fine" id="add-msg" role="status"></p>
     </div>
@@ -879,10 +882,10 @@ ${content}
         <button class="sort" type="button" data-plan="dest">目的地までの寄り道</button>
       </div>
       <div class="katsu-form">
-        <label data-for="count">回るお店の数<select id="k-n"><option>3</option><option selected>5</option><option>8</option></select></label>
-        <label data-for="time" hidden>ガチャ活の時間<select id="k-time"><option value="30">30分</option><option value="60" selected>1時間</option><option value="90">1時間半</option><option value="120">2時間</option><option value="180">3時間</option><option value="240">4時間</option></select></label>
+        <label data-for="count">回るお店の数<select id="k-n"><option>3</option><option selected>5</option><option>8</option><option>10</option><option>12</option><option>15</option></select></label>
+        <label data-for="time" hidden>ガチャ活の時間<select id="k-time"><option value="30">30分</option><option value="60" selected>1時間</option><option value="90">1時間半</option><option value="120">2時間</option><option value="180">3時間</option><option value="240">4時間</option><option value="300">5時間</option><option value="360">6時間</option></select></label>
         <label data-for="time" hidden>1店にいる時間<select id="k-stay"><option value="5">5分</option><option value="10" selected>10分</option><option value="15">15分</option><option value="20">20分</option></select></label>
-        <label data-for="dest" hidden>寄り道してもいい時間<select id="k-detour"><option value="10">10分まで</option><option value="20" selected>20分まで</option><option value="30">30分まで</option><option value="60">1時間まで</option></select></label>
+        <label data-for="dest" hidden>寄り道してもいい時間<select id="k-detour"><option value="10">10分まで</option><option value="20" selected>20分まで</option><option value="30">30分まで</option><option value="60">1時間まで</option><option value="90">1時間半まで</option><option value="120">2時間まで</option><option value="180">3時間まで</option></select></label>
         <label>交通手段<select id="k-mode"><option value="walking">徒歩</option><option value="bicycling">自転車</option><option value="transit">電車・バス</option><option value="driving">車</option></select></label>
         <label class="k-wide" data-for="dest" hidden>目的地（お店の名前か、下のボタンで地図をタップ）<input type="search" id="k-dest" list="k-shops" placeholder="例：ガシャポンのデパート 池袋総本店" autocomplete="off"><datalist id="k-shops"></datalist></label>
         <div class="k-wide" data-for="dest" hidden><button class="btn" type="button" id="k-pick">地図をタップして目的地を決める</button> <span class="fine" id="k-dest-note"></span></div>
@@ -895,7 +898,7 @@ ${content}
       <div id="k-result" hidden>
         <p class="k-sum" id="k-sum"></p>
         <ol class="k-list" id="k-list"></ol>
-        <div class="map-add-btns"><a class="btn btn-gold" id="k-gmap" target="_blank" rel="noopener">Googleマップでナビを開く</a><button class="btn btn-ghost" type="button" id="k-clear">ルートを消す</button></div>
+        <div class="map-add-btns" id="k-gmaps"></div><div class="map-add-btns"><button class="btn btn-ghost" type="button" id="k-clear">ルートを消す</button></div>
         <p class="fine">距離はまっすぐ測った目安で、実際の道のりはもう少し長くなります。営業時間はお店でご確認ください。</p>
       </div>
     </div>
@@ -929,9 +932,9 @@ ${content}
       const gmap = `https://www.google.com/maps/search/?api=1&query=${sh.lat},${sh.lng}`;
       const body = `<div class="wrap">
   <nav class="breadcrumb" aria-label="breadcrumb"><a href="${c.H}index.html">${t.home}</a><span>/</span><a href="${c.R}map.html">ガチャマップ</a><span>/</span>${sh.pref ? `<a href="${c.R}shops/${prefSlug(sh.pref)}.html">${esc(sh.pref)}</a><span>/</span>` : ""}<span>${esc(sh.name)}</span></nav>
-  <article class="shop" id="shop" data-id="${sh.id}" data-api="${c.R}api/shop/${sh.id}" data-report="${c.R}api/report" data-root="${c.R}" data-lat="${sh.lat}" data-lng="${sh.lng}">
+  <article class="shop" id="shop" data-id="${sh.id}" data-api="${c.R}api/shop/${sh.id}" data-report="${c.R}api/report" data-comment="${c.R}api/comment" data-root="${c.R}" data-lat="${sh.lat}" data-lng="${sh.lng}">
     <header class="page-head" style="padding-top:28px">
-      <p class="eyebrow">${sh.src === "user" ? "みんなが追加したお店" : "ガシャポン公式の取扱店"}</p>
+      <p class="eyebrow">${sh.src === "user" ? `みんなが追加した場所${KIND_LABEL[sh.kind] ? `・${KIND_LABEL[sh.kind]}` : ""}` : "ガシャポン公式の取扱店"}</p>
       <h1>${esc(sh.name)}</h1>
       <p class="lead">${esc(sh.address || sh.pref || "")}</p>
       <div class="item-actions"><a class="btn" href="${esc(gmap)}" target="_blank" rel="noopener">Googleマップで開く</a><a class="btn" href="${c.R}map.html#${sh.id}">ガチャマップで見る</a></div>
@@ -961,6 +964,15 @@ ${content}
       <p class="fine" id="rep-msg" role="status"></p>
     </section>
 
+    <section class="section panel" id="com-box">
+      <h2 style="font-size:20px">コメント</h2>
+      <p class="fine" style="margin-top:4px">お店のようす（台数・場所・品ぞろえなど）を自由に書けます。140文字まで。悪口・個人情報・宣伝などは書けません。</p>
+      <textarea id="com-body" maxlength="140" rows="3" placeholder="例：入口すぐ左にガチャコーナー。サンリオ系が多いです"></textarea>
+      <div class="map-add-btns"><button class="btn btn-gold" type="button" id="com-send">コメントする</button><span class="fine" id="com-count">0/140</span></div>
+      <p class="fine" id="com-msg" role="status"></p>
+      <ul class="com-list" id="com-list"></ul>
+    </section>
+
     <section class="section" id="rep-sec">
       <div class="section-head"><h2>みんなの在庫報告</h2></div>
       <ul class="rep-list" id="rep-list"><li class="fine">読み込み中…</li></ul>
@@ -981,7 +993,7 @@ ${content}
       const c = ctx("rules.html");
       const body = `<div class="wrap"><header class="page-head"><h1>投稿のきまり</h1><p class="lead">みんなのガチャマップに、お店や在庫を報告するときのきまりです。</p></header>
   <div class="prose">
-    <h2>報告できること</h2><p>ガチャのあるお店の場所・名前、ガチャがあった／なかった、ガチャの台数、閉店していたこと、の4つです。文章のコメントは受け付けていません。</p>
+    <h2>報告できること</h2><p>ガチャのあるお店の場所・名前、ガチャがあった／なかった、ガチャの台数、閉店していたこと、の4つです。お店へのコメント（140文字まで）も書けます。悪口・差別・性的な言葉・個人情報（電話番号・メールなど）・宣伝やURLを含むコメントは、自動で受け付けません。3人から通報されたコメントは見えなくなります。</p>
     <h2>してはいけないこと</h2><ul><li>うその報告、いたずらでお店を追加すること</li><li>お店や人の迷惑になる報告（個人の家・お店でない場所を登録するなど）</li><li>同じ報告を何度もくり返すこと</li></ul>
     <h2>報告の扱い</h2><p>報告は名前を出さずに表示します。いたずらを防ぐため、報告した端末を見分けるための読めない符号を記録します（IPアドレスそのものは保存しません）。1日に報告できる数に上限があります。みんなが追加したお店は、「閉店していた」「ここにガチャはない」の報告が3人から来ると、自動で地図から外れます。</p>
     <p>報告は利用者からの情報です。実際の在庫や営業状況と違うことがあります。おかしな情報を見つけたら、運営者情報のページからお知らせください。</p>

@@ -551,7 +551,7 @@
       return '<b>' + esc(s[1]) + '</b><br><span style="color:#6b7194">' + esc(s[2] || "") + (s[5] ? "・みんなが追加" : "") + '</span><br><a href="' + root + 'shop/' + esc(s[0]) + '.html">お店のページ（在庫・報告）→</a>';
     };
     var add = function (s) {
-      var m = L.circleMarker([s[3], s[4]], { radius: 7, weight: 2, color: "#fff", fillColor: s[5] ? "#2ccfa6" : "#ff4f7b", fillOpacity: 0.95 }).addTo(map).bindPopup(popup(s));
+      var m = L.circleMarker([s[3], s[4]], { radius: 7, weight: 2, color: "#fff", fillColor: s[5] ? (s[6] === "gacha" ? "#8b5cf6" : "#2ccfa6") : "#ff4f7b", fillOpacity: 0.95 }).addTo(map).bindPopup(popup(s));
       markers[s[0]] = m; list.push(s);
     };
     var load = function (u) { return fetch(u).then(function (r) { if (!r.ok) throw 0; return r.json(); }); };
@@ -619,7 +619,7 @@
         if (shopItems) return Promise.resolve(shopItems);
         return fetch(K.getAttribute("data-items")).then(function (r) { return r.json(); }).then(function (d) { shopItems = d; return d; });
       };
-      var MAXS = 9; // Googleマップの経由地の上限にあわせる
+      var MAXS = 15;
       var build = function (start) {
         var mode = $("k-mode").value, want = NORM($("k-item").value);
         var back = plan !== "dest" && $("k-back").checked;
@@ -702,12 +702,22 @@
             var d = hav(p0, x.p) * DETOUR; p0 = x.p;
             return '<li><b>' + (i + 1) + '. <a href="' + root + "shop/" + esc(x.s[0]) + '.html">' + esc(x.s[1]) + "</a></b><small>前の場所から約" + (d < 1 ? Math.round(d * 1000) + "m" : d.toFixed(1) + "km") + "・" + Math.max(1, Math.round(minsOf(hav(i ? route[i - 1].p : start, x.p), mode))) + "分</small></li>";
           }).join("") + (end && plan === "dest" ? '<li><b>🏁 目的地</b></li>' : "");
+          // Googleマップは経由地が9か所までなので、10店をこえるときは2つに分ける
           var ll = function (p) { return p[0].toFixed(6) + "," + p[1].toFixed(6); };
-          var gEnd = end || route[route.length - 1].p;
-          var wps = (end ? route : route.slice(0, -1)).map(function (x) { return ll(x.p); });
-          $("k-gmap").href = "https://www.google.com/maps/dir/?api=1&origin=" + ll(start) + "&destination=" + ll(gEnd) + (wps.length ? "&waypoints=" + encodeURIComponent(wps.join("|")) : "") + "&travelmode=" + mode;
+          var seq = [start].concat(route.map(function (x) { return x.p; })); if (end) seq.push(end);
+          var links = [], from = 0;
+          while (from < seq.length - 1) {
+            var to = Math.min(seq.length - 1, from + 10);
+            var mid = seq.slice(from + 1, to).map(ll);
+            links.push({ a: from, b: to, href: "https://www.google.com/maps/dir/?api=1&origin=" + ll(seq[from]) + "&destination=" + ll(seq[to]) + (mid.length ? "&waypoints=" + encodeURIComponent(mid.join("|")) : "") + "&travelmode=" + mode });
+            from = to;
+          }
+          $("k-gmaps").innerHTML = links.map(function (l, i) {
+            var lab = links.length === 1 ? "Googleマップでナビを開く" : "Googleマップでナビ（" + (i === 0 ? "出発" : l.a + "店目") + "→" + (l.b > route.length ? "目的地" : l.b + "店目") + "）";
+            return '<a class="btn' + (i === 0 ? " btn-gold" : "") + '" target="_blank" rel="noopener" href="' + esc(l.href) + '">' + lab + "</a>";
+          }).join("");
           $("k-result").hidden = false;
-          kmsg.textContent = route.length >= MAXS && plan !== "count" ? "Googleマップで一度に案内できる9店までにしています。" : plan === "count" && route.length < n ? "近くのお店が" + route.length + "店だったので、" + route.length + "店で作りました。" : "";
+          kmsg.textContent = route.length >= MAXS && plan !== "count" ? "回るお店は15店までにしています。" : plan === "count" && route.length < n ? "近くのお店が" + route.length + "店だったので、" + route.length + "店で作りました。" : "";
           $("k-result").scrollIntoView({ behavior: "smooth", block: "nearest" });
         }).catch(function () { kmsg.textContent = "ルートを作れませんでした。時間をおいてもう一度お試しください。"; });
       };
@@ -745,13 +755,13 @@
       if (map.getZoom() < 15) { msg.textContent = "場所がずれないよう、もっと地図を拡大してから追加してください。"; return; }
       var c = map.getCenter();
       msg.textContent = "送っています…";
-      post(root + "api/shops", { name: name, address: document.getElementById("add-addr").value.trim(), lat: c.lat, lng: c.lng }).then(function (d) {
+      post(root + "api/shops", { name: name, address: document.getElementById("add-addr").value.trim(), kind: document.getElementById("add-kind").value, memo: document.getElementById("add-memo").value.trim(), lat: c.lat, lng: c.lng }).then(function (d) {
         if (d.ok) {
           add([d.id, name, "", c.lat, c.lng, 1]); markers[d.id].openPopup();
           msg.textContent = "追加しました！ありがとうございます。お店のページは数時間後にできます。";
-          document.getElementById("add-name").value = ""; document.getElementById("add-addr").value = "";
+          document.getElementById("add-name").value = ""; document.getElementById("add-addr").value = ""; document.getElementById("add-memo").value = "";
           mapEl.classList.remove("is-adding");
-        } else msg.textContent = d.error === "dup" ? "このお店はもう地図にあります。" : d.error === "limit" ? "今日追加できる数を超えました。また明日お願いします。" : "追加できませんでした。名前と場所を確かめてください。";
+        } else msg.textContent = d.error === "ng" ? "使えない言葉が入っています。書き方を変えてください。" : d.error === "dup" ? "このお店はもう地図にあります。" : d.error === "limit" ? "今日追加できる数を超えました。また明日お願いします。" : "追加できませんでした。名前と場所を確かめてください。";
       }).catch(function () { msg.textContent = "送れませんでした。時間をおいてもう一度お試しください。"; });
     });
   });
@@ -795,7 +805,29 @@
       var n30 = reps.filter(function (r) { return Date.now() - Date.parse(r.created_at) < 30 * 864e5; }).length;
       document.getElementById("st-rep").textContent = n30 + "件";
     };
-    var reload = function () { return fetch(shopEl.getAttribute("data-api") + "?t=" + Date.now()).then(function (r) { return r.ok ? r.json() : null; }).then(draw).catch(function () { draw(null); }); };
+    var comList = document.getElementById("com-list"), comMsg = document.getElementById("com-msg"), comBody = document.getElementById("com-body");
+    var drawComments = function (d) {
+      var cs = (d && d.comments) || [];
+      comList.innerHTML = cs.length ? cs.map(function (c) {
+        return '<li><p>' + esc(c.body).replace(/\n/g, "<br>") + '</p><small>' + ago(c.created_at) + ' ・ <button type="button" class="com-flag" data-id="' + c.id + '">通報</button></small></li>';
+      }).join("") : '<li class="fine">まだコメントはありません。</li>';
+    };
+    comBody.addEventListener("input", function () { document.getElementById("com-count").textContent = comBody.value.length + "/140"; });
+    document.getElementById("com-send").addEventListener("click", function () {
+      var v = comBody.value.trim();
+      if (v.length < 2) { comMsg.textContent = "コメントを入れてください。"; return; }
+      comMsg.textContent = "送っています…";
+      post(shopEl.getAttribute("data-comment"), { shop: sid, body: v }).then(function (d) {
+        comMsg.textContent = d.ok ? "コメントしました。ありがとうございます！" : d.error === "ng" ? "使えない言葉（悪口・個人情報・宣伝・URLなど）が入っています。書き方を変えてください。" : d.error === "limit" ? "今日コメントできる数を超えました。" : d.error === "dup" ? "同じコメントはもう送られています。" : "コメントできませんでした。";
+        if (d.ok) { comBody.value = ""; reload(); }
+      }).catch(function () { comMsg.textContent = "送れませんでした。時間をおいてもう一度お試しください。"; });
+    });
+    comList.addEventListener("click", function (e) {
+      var b = e.target.closest && e.target.closest(".com-flag"); if (!b) return;
+      if (!window.confirm("このコメントを通報しますか？（3人から通報されると見えなくなります）")) return;
+      post(shopEl.getAttribute("data-comment"), { flag: Number(b.getAttribute("data-id")) }).then(function () { b.textContent = "通報しました"; b.disabled = true; }).catch(function () {});
+    });
+    var reload = function () { return fetch(shopEl.getAttribute("data-api") + "?t=" + Date.now()).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) { draw(d); drawComments(d); }).catch(function () { draw(null); drawComments(null); }); };
     reload();
     [].forEach.call(document.querySelectorAll("#report-box [data-kind]"), function (b) {
       b.addEventListener("click", function () {

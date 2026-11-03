@@ -14,3 +14,7 @@ CREATE TABLE IF NOT EXISTS reports (id INTEGER PRIMARY KEY AUTOINCREMENT, shop_i
 CREATE INDEX IF NOT EXISTS reports_shop ON reports (shop_id, created_at);
 CREATE INDEX IF NOT EXISTS reports_who ON reports (who, created_at);
 CREATE INDEX IF NOT EXISTS seen_shop ON seen (lower(shop));
+-- お店へのコメント（自由文。NGワードは受け付けない。通報が3人から来たら隠す）
+CREATE TABLE IF NOT EXISTS comments (id INTEGER PRIMARY KEY AUTOINCREMENT, shop_id TEXT NOT NULL, body TEXT NOT NULL, created_at TEXT NOT NULL, who TEXT NOT NULL, flags INTEGER DEFAULT 0, hidden INTEGER DEFAULT 0);
+CREATE INDEX IF NOT EXISTS comments_shop ON comments (shop_id, created_at);
+CREATE TABLE IF NOT EXISTS comment_flags (comment_id INTEGER NOT NULL, who TEXT NOT NULL, PRIMARY KEY (comment_id, who));

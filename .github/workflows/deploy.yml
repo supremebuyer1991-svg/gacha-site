@@ -77,6 +77,7 @@ jobs:
           if [ -z "$ID" ]; then echo "D1を用意できませんでした（APIトークンの権限を確認）"; exit 1; fi
           sed -i "s/__D1_ID__/$ID/" wrangler.toml worker/wrangler.toml
           $W d1 execute gacha-stock --remote --file worker/schema.sql
+          $W d1 execute gacha-stock --remote --file worker/migrate.sql > /dev/null 2>&1 || true
           # ガチャマップのお店（公式の取扱店）を入れる。すでにあるお店は変えない
           node src/shops-seed-sql.js > /tmp/seed-shops.sql && $W d1 execute gacha-stock --remote --file /tmp/seed-shops.sql > /dev/null || echo "お店の登録に失敗（次回また試します）"
           echo "ok=1" >> "$GITHUB_OUTPUT"

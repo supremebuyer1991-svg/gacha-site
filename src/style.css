@@ -650,3 +650,11 @@ label.opt:focus-within { outline: none; }
 .k-tabs .sort { font-size: 13px; padding: 7px 14px; }
 .k-start { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
 .k-start input { flex: 1 1 220px; height: 44px; padding: 0 14px; border-radius: 12px; border: 2px solid var(--line); background: #fff; font: 500 15px var(--font-body); }
+#com-box { margin-top: 24px; padding: 22px; }
+#com-box textarea, .map-add textarea { width: 100%; margin-top: 10px; padding: 10px 14px; border-radius: 12px; border: 2px solid var(--line); background: #fff; font: 500 15px/1.6 var(--font-body); resize: vertical; }
+.map-add select { height: 42px; padding: 0 12px; border-radius: 12px; border: 2px solid var(--line); background: #fff; font: 500 14px var(--font-body); }
+.com-list { list-style: none; margin: 14px 0 0; padding: 0; }
+.com-list li { padding: 12px 0; border-top: 1px solid var(--line); }
+.com-list p { margin: 0; font-size: 14px; white-space: pre-wrap; word-break: break-word; }
+.com-list small { color: var(--muted); font-size: 12px; }
+.com-flag { background: none; border: 0; padding: 0; color: var(--muted); font: inherit; text-decoration: underline; cursor: pointer; }

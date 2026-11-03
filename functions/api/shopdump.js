@@ -2,7 +2,7 @@
 import { json } from "../../lib/api-util.js";
 export async function onRequestGet({ env }) {
   if (!env.DB) return json({}, 503, 0);
-  const shops = (await env.DB.prepare("SELECT id, name, pref, address, lat, lng, src, hidden, created_at FROM shops").all()).results || [];
+  const shops = ((await env.DB.prepare("SELECT * FROM shops").all()).results || []).map((r) => { delete r.who; delete r.flags; return r; });
   const off = (await env.DB.prepare("SELECT lower(shop) s, item_id FROM seen WHERE in_now = 1").all()).results || [];
   const since = new Date(Date.now() - 30 * 864e5).toISOString();
   const rep = (await env.DB.prepare("SELECT shop_id s, count(*) n, max(created_at) last FROM reports WHERE created_at >= ?1 GROUP BY shop_id").bind(since).all()).results || [];

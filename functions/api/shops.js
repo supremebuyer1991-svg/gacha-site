@@ -1,9 +1,10 @@
 // ガチャマップ：お店の一覧（GET）と、お店を追加（POST）
 import { json, whoHash, todayJST, cleanText } from "../../lib/api-util.js";
+import { ngCheck } from "../../lib/ngwords.js";
 export async function onRequestGet({ env }) {
   if (!env.DB) return json([], 503);
-  const { results } = await env.DB.prepare("SELECT id, name, pref, lat, lng, src FROM shops WHERE hidden = 0").all();
-  return json((results || []).map((r) => [r.id, r.name, r.pref, r.lat, r.lng, r.src === "user" ? 1 : 0]), 200, 300);
+  const { results } = await env.DB.prepare("SELECT * FROM shops WHERE hidden = 0").all();
+  return json((results || []).map((r) => [r.id, r.name, r.pref, r.lat, r.lng, r.src === "user" ? 1 : 0, r.kind || ""]), 200, 300);
 }
 export async function onRequestPost({ env, request }) {
   if (!env.DB) return json({ ok: false }, 503, 0);
@@ -24,7 +25,19 @@ export async function onRequestPost({ env, request }) {
   if (dup) return json({ ok: false, error: "dup", id: dup.id }, 409, 0);
   const id = "u-" + crypto.randomUUID().replace(/-/g, "").slice(0, 10);
   const pref = cleanText(b.pref, 6) || "";
-  await env.DB.prepare("INSERT INTO shops (id, name, pref, address, lat, lng, src, created_at, who) VALUES (?1, ?2, ?3, ?4, ?5, ?6, 'user', ?7, ?8)")
-    .bind(id, name, pref, address, lat, lng, new Date().toISOString(), who).run();
+  const KINDS = ["gacha", "game", "mall", "station", "shop", "other"];
+  const kind = KINDS.includes(b.kind) ? b.kind : "other";
+  const memo = b.memo ? String(b.memo).normalize("NFKC").trim().slice(0, 140) : "";
+  if (memo && ngCheck(memo)) return json({ ok: false, error: "ng" }, 400, 0);
+  if (ngCheck(name) || (address && ngCheck(address))) return json({ ok: false, error: "ng" }, 400, 0);
+  const now = new Date().toISOString();
+  try {
+    await env.DB.prepare("INSERT INTO shops (id, name, pref, address, lat, lng, src, created_at, who, kind) VALUES (?1, ?2, ?3, ?4, ?5, ?6, 'user', ?7, ?8, ?9)")
+      .bind(id, name, pref, address, lat, lng, now, who, kind).run();
+  } catch {
+    await env.DB.prepare("INSERT INTO shops (id, name, pref, address, lat, lng, src, created_at, who) VALUES (?1, ?2, ?3, ?4, ?5, ?6, 'user', ?7, ?8)")
+      .bind(id, name, pref, address, lat, lng, now, who).run();
+  }
+  if (memo) await env.DB.prepare("INSERT INTO comments (shop_id, body, created_at, who) VALUES (?1, ?2, ?3, ?4)").bind(id, memo, now, who).run().catch(() => {});
   return json({ ok: true, id }, 200, 0);
 }
