@@ -913,7 +913,7 @@ ${content}
         <label class="k-wide">探したいガチャ（なくてもOK）<input type="search" id="k-item" list="k-items" placeholder="例：ちいかわ めじるしアクセサリー3" autocomplete="off"><datalist id="k-items"></datalist></label>
         <label class="k-check" data-for="count time"><input type="checkbox" id="k-back"> 最後に出発した場所へ戻る</label>
       </div>
-      <div class="k-start"><input type="search" id="k-start" placeholder="出発する場所を地名・駅名で（例：泉大津駅）" autocomplete="off"><button class="btn" type="button" id="k-start-go">この場所から作る</button></div>
+      <div class="k-start"><input type="search" id="k-start" placeholder="出発する場所を地名・駅名で（例：新宿駅、渋谷）" autocomplete="off"><button class="btn" type="button" id="k-start-go">この場所から作る</button></div>
       <div class="map-add-btns"><button class="btn btn-gold" type="button" id="k-go">現在地からルートを作る</button><button class="btn" type="button" id="k-here">地図の真ん中から作る</button></div>
       <p class="fine" id="k-msg" role="status"></p>
       <div id="k-result" hidden>

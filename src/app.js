@@ -840,7 +840,7 @@
         navigator.geolocation.getCurrentPosition(function (p) {
           build([p.coords.latitude, p.coords.longitude]);
           // パソコンなどGPSがない端末では、ネットの接続先から大まかに決まるので、何kmもずれることがある
-          if (p.coords.accuracy > 1000) setTimeout(function () { kmsg.textContent = "⚠ 現在地の精度が低いようです（誤差 約" + Math.round(p.coords.accuracy / 1000) + "km）。パソコンだと、ネットの接続先の場所（大きな駅の近くなど）になることがあります。ずれていたら、上の欄に「泉大津駅」のように出発する場所を入れて「この場所から作る」を押してください。"; }, 50);
+          if (p.coords.accuracy > 1000) setTimeout(function () { kmsg.textContent = "⚠ 現在地の精度が低いようです（誤差 約" + Math.round(p.coords.accuracy / 1000) + "km）。パソコンだと、ネットの接続先の場所（大きな駅の近くなど）になることがあります。ずれていたら、上の欄に「新宿駅」「渋谷」のように出発する場所を入れて「この場所から作る」を押してください。"; }, 50);
         }, function () { kmsg.textContent = "現在地がわかりませんでした。地図を動かして「地図の真ん中から作る」をお試しください。"; }, { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 });
       });
       $("k-here").addEventListener("click", function () { var c = map.getCenter(); build([c.lat, c.lng]); });
