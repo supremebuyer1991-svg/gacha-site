@@ -815,16 +815,37 @@ label.opt:focus-within { outline: none; }
 .row-scroll .card:hover { transform: none; }
 
 /* 発売カレンダー（週ごと） */
-.week-tabs { position: sticky; top: 0; z-index: 20; margin: 4px -16px 0; padding: 10px 16px; background: color-mix(in srgb, var(--bg, #f5f8ff) 92%, transparent); backdrop-filter: blur(6px); border-bottom: 2px solid var(--line); }
-.wt-in { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; align-items: center; }
-.wt-in::-webkit-scrollbar { display: none; }
-.wt-month { flex: none; font: 700 13px/1 var(--font-latin), sans-serif; color: #fff; background: var(--pink, #ff7eb6); padding: 7px 10px; border-radius: 999px; margin-left: 6px; }
-.wt-month:first-child { margin-left: 0; }
-.wt-in a { flex: none; display: grid; justify-items: center; gap: 2px; min-width: 64px; padding: 6px 10px; border-radius: 12px; background: #fff; border: 1.5px solid var(--line); color: var(--text); text-decoration: none; line-height: 1.1; }
-.wt-in a b { font-size: 13px; }
-.wt-in a small { font-size: 10.5px; color: var(--muted); font-family: var(--font-latin), sans-serif; }
-.wt-in a.on { background: var(--yellow); border-color: var(--yellow); }
-.wt-in a.tbd { background: transparent; border-style: dashed; }
+.week-grid { display: grid; gap: 8px; margin: 8px 0 0; padding: 12px; background: #fff; border: 1.5px solid var(--line); border-radius: 18px; }
+.wg-row { display: grid; grid-template-columns: 58px repeat(6, minmax(0, 1fr)); gap: 6px; align-items: stretch; }
+.wg-row > * { display: grid; justify-items: center; align-content: center; gap: 2px; min-width: 0; padding: 8px 2px; border-radius: 12px; text-decoration: none; color: var(--text); line-height: 1.1; text-align: center; }
+.wg-row b { font-size: 14px; white-space: nowrap; }
+.wg-row small { font-size: 10.5px; color: var(--muted); font-family: var(--font-latin), sans-serif; white-space: nowrap; }
+.wg-row i { font-style: normal; font-size: 11px; font-weight: 700; color: var(--pink, #ff7eb6); }
+.wg-row a { background: var(--bg); border: 1.5px solid var(--line); }
+.wg-row a:hover { border-color: var(--pink, #ff7eb6); }
+.wg-row a.past { background: #f1f3f7; }
+.wg-row a.past b { color: var(--muted); }
+.wg-row a.on { background: var(--yellow); border-color: var(--yellow); }
+.wg-row a.on i { color: var(--text); }
+.wg-row a.tbd { border-style: dashed; background: #fff; }
+.wg-row .off { opacity: .4; border: 1.5px dashed var(--line); }
+.wg-row .off i { color: var(--muted); }
+.wg-row .blank { visibility: hidden; }
+.wg-row .wg-month { background: var(--pink, #ff7eb6); border: 0; color: #fff; }
+.wg-row .wg-month b { font: 700 17px/1 var(--font-latin), sans-serif; }
+.wg-row .wg-month small { color: #fff; opacity: .85; }
+.wg-row.now .wg-month { background: var(--text, #2b2d42); }
+.wg-back { position: fixed; right: 14px; bottom: 16px; z-index: 30; display: inline-flex; align-items: center; gap: 6px; padding: 10px 16px; border-radius: 999px; background: var(--pink, #ff7eb6); color: #fff; font-size: 13px; font-weight: 700; text-decoration: none; box-shadow: 0 4px 14px rgba(0,0,0,.15); }
+#week-grid { scroll-margin-top: 12px; }
+@media (max-width: 640px) {
+  .week-grid { padding: 8px; gap: 6px; margin-inline: -4px; }
+  .wg-row { grid-template-columns: 40px repeat(6, minmax(0, 1fr)); gap: 4px; }
+  .wg-row > * { padding: 7px 1px; border-radius: 10px; }
+  .wg-row b { font-size: 12px; }
+  .wg-row small { font-size: 9px; }
+  .wg-row i { font-size: 10px; }
+  .wg-row .wg-month b { font-size: 14px; }
+}
 .cal { padding-top: 8px; }
 .cal-month { margin-top: 36px; }
 .cal-month-head { display: flex; align-items: baseline; gap: 10px; margin: 0 0 14px; padding-bottom: 10px; border-bottom: 3px solid var(--pink, #ff7eb6); }

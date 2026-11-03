@@ -842,17 +842,29 @@ ${content}
       return `<div class="cal-month" id="m${m}"><h2 class="cal-month-head"><span class="cal-y">${y}</span><b>${en ? MONTH_EN[Number(mo) - 1] : `${Number(mo)}月`}</b><small>${list.length}${en ? " series" : "シリーズ"}</small>${m === thisMonth ? `<span class="now">${t.thisMonth}</span>` : ""}</h2>
       ${groups.map((g) => weekBlock(m, g, c)).join("")}</div>`;
     };
-    // ページ上部の週タブ（今月以降だけ・横スクロール・上に固定）
+    // ページ上部の週ボタン：先月 → 今月 → 来月以降を1段ずつ。どの月も第1〜4週（あれば第5週）＋週未定が横一列におさまる
     const jumpNav = () => {
-      const chips = [];
-      for (const m of allMonths.filter((x) => x >= thisMonth)) {
-        const [, mo] = m.split("-");
-        chips.push(`<span class="wt-month">${en ? MONTH_EN[Number(mo) - 1] : `${Number(mo)}月`}</span>`);
-        for (const g of weeksOf(m).groups) chips.push(g.w
-          ? `<a href="#w${g.w.key}"${g.w.key === WEEK.key ? ' class="on"' : ""}><b>${en ? `W${g.w.no}` : `第${g.w.no}週`}</b><small>${g.w.range.split("〜")[0]}〜・${g.list.length}</small></a>`
-          : `<a href="#w${m}-tbd" class="tbd"><b>${en ? "TBA" : "未定"}</b><small>${g.list.length}${en ? "" : "件"}</small></a>`);
+      const rows = [];
+      for (const m of recent.slice().sort()) {
+        const [y, mo] = m.split("-").map(Number);
+        const groups = weeksOf(m).groups;
+        const byKey = new Map(groups.filter((g) => g.w).map((g) => [g.w.key, g]));
+        const tbd = groups.find((g) => !g.w);
+        const first = new Date(Date.UTC(y, mo - 1, 1));
+        const mondays = [];
+        for (let d = 1 + ((8 - first.getUTCDay()) % 7); d <= new Date(Date.UTC(y, mo, 0)).getUTCDate(); d += 7) mondays.push(new Date(Date.UTC(y, mo - 1, d)));
+        const cells = mondays.map((mon) => {
+          const w = weekInfo(mon), g = byKey.get(w.key);
+          const lab = `<b>${en ? `W${w.no}` : `第${w.no}週`}</b><small>${w.range.split("〜")[0]}〜</small>`;
+          const cls = [w.key === WEEK.key ? "on" : "", w.key < WEEK.key ? "past" : ""].filter(Boolean).join(" ");
+          return g ? `<a href="#w${w.key}"${cls ? ` class="${cls}"` : ""}>${lab}<i>${g.list.length}${en ? "" : "件"}</i></a>` : `<span class="off">${lab}<i>-</i></span>`;
+        });
+        if (mondays.length < 5) cells.push(`<span class="blank"></span>`);
+        cells.push(tbd ? `<a href="#w${m}-tbd" class="tbd"><b>${en ? "TBA" : "未定"}</b><small>${en ? "week" : "週未定"}</small><i>${tbd.list.length}${en ? "" : "件"}</i></a>` : `<span class="off tbd"><b>${en ? "TBA" : "未定"}</b><small>&nbsp;</small><i>-</i></span>`);
+        rows.push(`<div class="wg-row${m === thisMonth ? " now" : ""}"><a class="wg-month" href="#m${m}"><b>${en ? MONTH_EN[mo - 1] : `${mo}月`}</b><small>${weeksOf(m).list.length}${en ? "" : "件"}</small></a>${cells.join("")}</div>`);
       }
-      return chips.length ? `<nav class="week-tabs" aria-label="${en ? "Jump to week" : "週へジャンプ"}"><div class="wt-in">${chips.join("")}</div></nav>` : "";
+      return rows.length ? `<nav class="week-grid" id="week-grid" aria-label="${en ? "Jump to week" : "週へジャンプ"}">${rows.join("")}</nav>
+  <a class="wg-back" href="#week-grid" aria-label="${en ? "Back to weeks" : "週のボタンにもどる"}">${en ? "Weeks" : "週をえらぶ"}<span>▲</span></a>` : "";
     };
     const archiveNav = (c) => past.length ? `<nav class="archive" aria-label="${t.calPast}"><h2>${t.calPast}</h2><div class="archive-list">${past.map((m) => {
       const [y, mo] = m.split("-");
