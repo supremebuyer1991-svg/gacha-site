@@ -544,13 +544,25 @@
       var c = a[0].geometry.coordinates; return { ll: [c[1], c[0]], title: a[0].properties.title };
     });
   };
+  // 候補をいくつか返す（OpenStreetMapの検索2種類を合わせる。名前が少し違っても見つかるように）
+  var geocodeList = function (q, near) {
+    var c = near ? near.getCenter() : null;
+    var nomi = fetch("https://nominatim.openstreetmap.org/search?format=jsonv2&limit=5&countrycodes=jp&accept-language=ja&q=" + encodeURIComponent(q)).then(function (r) { return r.ok ? r.json() : []; }).then(function (a) {
+      return (a || []).map(function (x) { var ad = x.address || {}; var parts = (x.display_name || "").split(", "); return { ll: [Number(x.lat), Number(x.lon)], title: x.name || parts[0], area: parts.slice(1).reverse().filter(function (y) { return !/^(日本|\d{3}-\d{4})$/.test(y); }).slice(0, 3).join(""), addr: parts.slice(1).reverse().filter(function (y) { return !/^(日本|\d{3}-\d{4})$/.test(y); }).join(""), building: /mall|department_store|supermarket|retail|commercial|toys|variety_store/.test(x.type || "") }; });
+    }).catch(function () { return []; });
+    var pho = fetch("https://photon.komoot.io/api/?limit=6" + (c ? "&lat=" + c.lat.toFixed(4) + "&lon=" + c.lng.toFixed(4) : "") + "&q=" + encodeURIComponent(q)).then(function (r) { return r.ok ? r.json() : { features: [] }; }).then(function (a) {
+      return ((a && a.features) || []).filter(function (f) { return f.properties.countrycode === "JP" && !/bus_stop|bicycle_rental|parking|platform/.test(f.properties.osm_value || ""); }).map(function (f) { var p = f.properties; return { ll: [f.geometry.coordinates[1], f.geometry.coordinates[0]], title: p.name || "", area: [p.state, p.city || p.county, p.district || p.locality].filter(Boolean).join(""), addr: [p.state, p.city || p.county, p.district || p.locality, p.street, p.housenumber].filter(Boolean).join(""), building: /mall|department_store|supermarket|retail|commercial|toys|variety_store/.test(p.osm_value || "") }; });
+    }).catch(function () { return []; });
+    return Promise.all([nomi, pho]).then(function (r) {
+      var out = [];
+      r[0].concat(r[1]).forEach(function (x) { if (!x.title) return; if (out.some(function (y) { return Math.abs(y.ll[0] - x.ll[0]) < 0.001 && Math.abs(y.ll[1] - x.ll[1]) < 0.001; })) return; out.push(x); });
+      var key = NORM(q);
+      out.sort(function (a, b) { return (NORM(b.title).indexOf(key) !== -1) - (NORM(a.title).indexOf(key) !== -1); });
+      return out.slice(0, 6);
+    });
+  };
   var geocode = function (q, near) {
-    var u = "https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=jp&accept-language=ja&q=" + encodeURIComponent(q);
-    if (near) u += "&viewbox=" + [near.getWest(), near.getNorth(), near.getEast(), near.getSouth()].map(function (n) { return n.toFixed(4); }).join(",");
-    return fetch(u).then(function (r) { return r.ok ? r.json() : []; }).then(function (a) {
-      if (a && a.length) return { ll: [Number(a[0].lat), Number(a[0].lon)], title: a[0].name || a[0].display_name, addr: a[0].display_name, building: /^(mall|department_store|supermarket|retail|commercial)$/.test(a[0].type || "") || a[0].category === "building" };
-      return geocodeGsi(q);
-    }).catch(function () { return geocodeGsi(q); });
+    return geocodeList(q, near).then(function (a) { return a.length ? a[0] : geocodeGsi(q); }).catch(function () { return geocodeGsi(q); });
   };
   var post = function (url, body) {
     return fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }).then(function (r) { return r.json().then(function (d) { d._status = r.status; return d; }); });
@@ -822,12 +834,17 @@
     });
     var placeGo = function () {
       var q2 = document.getElementById("add-place").value.trim(); if (!q2) { msg.textContent = "建物やお店の名前を入れてください（例：イオンモール和泉府中）。"; return; }
-      msg.textContent = "探しています…";
-      geocode(q2, map.getBounds()).then(function (g) {
-        if (!g) { msg.textContent = "見つかりませんでした。名前を短くするか、住所で試してください。"; return; }
-        map.setView(g.ll, 18);
-        var ad = document.getElementById("add-addr"); if (!ad.value.trim() && g.addr) ad.value = g.addr.split(", ").reverse().filter(function (x) { return !/^(日本|\d{3}-\d{4})$/.test(x); }).join("").slice(0, 120);
-        msg.textContent = "「" + g.title + "」に移動しました。建物の中のお店の場所に＋を合わせて追加してください。";
+      var pc = document.getElementById("add-place-c"); pc.innerHTML = ""; msg.textContent = "探しています…";
+      geocodeList(q2, map.getBounds()).then(function (a) {
+        if (!a.length) { msg.textContent = "見つかりませんでした。「イオン 和泉府中」のように短く分けるか、住所や駅名で試してください。"; return; }
+        msg.textContent = "当てはまる場所をえらんでください。";
+        pc.innerHTML = a.map(function (g, i) { return '<button type="button" class="sort" data-i="' + i + '"><b>' + esc(g.title) + "</b> <small>" + esc(g.area || "") + "</small></button>"; }).join("");
+        pc.onclick = function (e) {
+          var bt = e.target.closest && e.target.closest("button"); if (!bt) return;
+          var g = a[Number(bt.getAttribute("data-i"))]; map.setView(g.ll, 18); pc.innerHTML = "";
+          var ad = document.getElementById("add-addr"); if (!ad.value.trim() && g.addr) ad.value = g.addr.slice(0, 120);
+          msg.textContent = "「" + g.title + "」に移動しました。建物の中のお店の場所に＋を合わせて追加してください。";
+        };
       }).catch(function () { msg.textContent = "探せませんでした。時間をおいてもう一度お試しください。"; });
     };
     document.getElementById("add-place-go").addEventListener("click", placeGo);

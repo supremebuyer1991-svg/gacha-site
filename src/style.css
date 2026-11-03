@@ -777,3 +777,7 @@ label.opt:focus-within { outline: none; }
 .add-place input { flex: 1; min-width: 0; }
 .nav .ns { display: none; }
 @media (max-width: 960px) { .nav .nl { display: none; } .nav .ns { display: inline; } .site-header .nav a { white-space: nowrap; font-size: 12px; } }
+.add-place-c { display: flex; flex-direction: column; gap: 4px; }
+.add-place-c:empty { display: none; }
+.add-place-c .sort { text-align: left; justify-content: flex-start; border-radius: 10px; white-space: normal; }
+.add-place-c small { color: var(--muted); }

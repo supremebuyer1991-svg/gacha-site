@@ -884,6 +884,7 @@ ${content}
       <p><b>地図を動かして、真ん中の＋をお店の場所に合わせてください。</b></p>
       <p class="fine" style="margin:0">イオンなどの中にあるお店は、まず建物の名前で探すとかんたんです。拡大すると地図に建物やお店の名前が出ます。</p>
       <div class="add-place"><input type="search" id="add-place" maxlength="60" placeholder="建物の名前で探す（例：イオンモール和泉府中）" autocomplete="off"><button class="btn" type="button" id="add-place-go">探す</button></div>
+      <div class="add-place-c" id="add-place-c"></div>
       <label>お店の名前<input type="text" id="add-name" maxlength="60" placeholder="例：ガシャポンのデパート 池袋総本店"></label>
       <label>住所（わかれば）<input type="text" id="add-addr" maxlength="120"></label>
       <label>どんな場所？<select id="add-kind"><option value="gacha">ガチャ専門店</option><option value="game">ゲームセンター</option><option value="mall">ショッピングモール・スーパー</option><option value="station">駅・空港・サービスエリア</option><option value="shop">そのほかのお店（本屋・おもちゃ屋など）</option><option value="other">そのほか</option></select></label>
