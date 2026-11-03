@@ -629,3 +629,20 @@ label.opt:focus-within { outline: none; }
 .rep-list li b { font-size: 14px; } .rep-list li b a:hover { color: var(--gold); }
 .rep-list li small { grid-column: 2; font-size: 12px; color: var(--muted); }
 .stores .s-name a { border-bottom: 1px dotted var(--sky); }
+
+/* ===== ガチャ活ルート ===== */
+.map-wrap { display: flex; flex-direction: column; }
+.map-wrap > * { margin-top: 12px; }
+.map-wrap.is-katsu .katsu { order: -1; margin-top: 0; margin-bottom: 4px; }
+.katsu { padding: 20px 22px; }
+.katsu-form { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 160px), 1fr)); gap: 10px; margin: 14px 0 12px; }
+.katsu-form label { display: flex; flex-direction: column; gap: 4px; font-size: 12.5px; font-weight: 700; color: var(--text-2); }
+.katsu-form .k-wide { grid-column: 1 / -1; }
+.katsu-form select, .katsu-form input[type="search"] { height: 40px; padding: 0 12px; border-radius: 12px; border: 2px solid var(--line); background: #fff; font: 500 14px var(--font-body); }
+.katsu-form .k-check { flex-direction: row; align-items: center; gap: 8px; grid-column: 1 / -1; }
+.k-sum { font-weight: 700; color: var(--text); margin: 14px 0 6px; }
+.k-list { list-style: none; margin: 0 0 12px; padding: 0; }
+.k-list li { padding: 8px 0; border-top: 1px solid var(--line); display: flex; flex-direction: column; }
+.k-list li a:hover { color: var(--gold); }
+.k-list small { color: var(--muted); font-size: 12px; }
+.k-pin { background: var(--gold); color: #fff; border: 3px solid #fff; border-radius: 50%; display: grid !important; place-items: center; font: 700 13px/1 var(--font-latin); box-shadow: 0 2px 6px rgba(0,0,0,.25); }

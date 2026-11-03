@@ -54,7 +54,7 @@ const T = {
     htmlLang: "ja", ogLocale: "ja_JP", switchLabel: "EN", switchAria: "English version",
     tagline: site.tagline, description: site.description,
     sampleBar: "ただいまサンプルデータを表示しています。商品・店舗・在庫はすべて架空です。",
-    nav: { map: "ガチャマップ", new: "新着", ranking: "人気", calendar: "発売カレンダー", genre: "ジャンル", faq: "よくある質問" },
+    nav: { map: "ガチャマップ", katsu: "ガチャ活", new: "新着", ranking: "人気", calendar: "発売カレンダー", genre: "ジャンル", faq: "よくある質問" },
     navAria: "メインメニュー", footAria: "サイト情報", about: "運営者情報・お問い合わせ",
     disclosure: "当サイトはAmazonアソシエイト・楽天アフィリエイトなどの広告プログラムに参加しています。掲載商品の画像・名称の権利は各メーカーに帰属します。",
     month: (ym) => { const [y, m] = ym.split("-"); return `${y}年${Number(m)}月`; },
@@ -131,7 +131,7 @@ const T = {
     htmlLang: "en", ogLocale: "en_US", switchLabel: "日本語", switchAria: "日本語版",
     tagline: site.tagline_en, description: site.description_en,
     sampleBar: "Showing sample data. All items, stores and stock levels are fictional.",
-    nav: { map: "Gacha map", new: "New", ranking: "Popular", calendar: "Calendar", genre: "Genres", faq: "FAQ" },
+    nav: { map: "Gacha map", katsu: "Gacha route", new: "New", ranking: "Popular", calendar: "Calendar", genre: "Genres", faq: "FAQ" },
     navAria: "Main menu", footAria: "Site information", about: "About & contact",
     disclosure: "As an Amazon Associate and Rakuten affiliate, we earn from qualifying purchases. Product images and names belong to their respective makers.",
     month: (ym) => { const [y, m] = ym.split("-"); return `${MONTH_EN[Number(m) - 1]} ${y}`; },
@@ -448,7 +448,7 @@ for (const lang of LANGS) {
     // 反対の言語の同じページへのリンク
     const switchHref = jaOnly ? `${c.H}en/index.html` : lang === "ja" ? `${c.H}en/${rel}` : `${c.R}${rel}`;
     const ld = jsonld.map((o) => `<script type="application/ld+json">${JSON.stringify(o).replace(/</g, "\\u003c")}</script>`).join("\n");
-    const NAV = [["index.html#new", "new"], ["index.html#ranking", "ranking"], ["calendar.html", "calendar"], ["@map.html", "map"], ["index.html#genres", "genre"], ["faq.html", "faq"]];
+    const NAV = [["index.html#new", "new"], ["index.html#ranking", "ranking"], ["calendar.html", "calendar"], ["@map.html", "map"], ["@gachakatsu.html", "katsu"], ["index.html#genres", "genre"], ["faq.html", "faq"]];
     const head = `<title>${esc(fullTitle)}</title>
 ${fragment ? '<meta name="claude:viewport-fit-sides" content="cover">' : ""}
 <meta name="site-lang" content="${lang}">
@@ -849,14 +849,14 @@ ${content}
   if (lang === "ja") {
     const LEAF = `<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin="" defer></script>`;
     const shopCard = (sh, c) => `<a class="shop-row" href="${c.R}shop/${sh.id}.html"><b>${esc(sh.name)}</b><span>${esc(sh.address || sh.pref || "")}</span>${(SHOP_OFFICIAL[sh.id] || []).length ? `<em>取扱中 ${(SHOP_OFFICIAL[sh.id] || []).length}種</em>` : ""}${sh.src === "user" ? '<i class="tag-user">みんなが追加</i>' : ""}</a>`;
-    // 地図ページ
-    {
-      const c = ctx("map.html");
+    // 地図ページ（map.html）と、ガチャ活ページ（gachakatsu.html：ルート作りを先頭に）
+    for (const [rel, katsu] of [["map.html", false], ["gachakatsu.html", true]]) {
+      const c = ctx(rel);
       const prefs = PREF_ORDER.filter((p) => SHOPS.some((x) => x.pref === p));
       const body = `<div class="wrap">
-  <nav class="breadcrumb" aria-label="breadcrumb"><a href="${c.H}index.html">${t.home}</a><span>/</span><span>みんなのガチャマップ</span></nav>
-  <header class="page-head"><h1>みんなのガチャマップ</h1><p class="lead">全国のガチャのあるお店を地図で探せます。お店の在庫や台数は、みんなの報告で更新されます。地図にないお店は「お店を追加」から足せます。</p></header>
-  <section class="map-wrap">
+  <nav class="breadcrumb" aria-label="breadcrumb"><a href="${c.H}index.html">${t.home}</a><span>/</span><span>${katsu ? "ガチャ活" : "みんなのガチャマップ"}</span></nav>
+  <header class="page-head"><h1>${katsu ? "ガチャ活｜近くのガチャを効率よく回ろう" : "みんなのガチャマップ"}</h1><p class="lead">${katsu ? "ガチャ活は、ガチャのあるお店を巡ってお目当てのガチャを探すこと。今いる場所から近いお店を、回りやすい順番でご案内します。" : "全国のガチャのあるお店を地図で探せます。お店の在庫や台数は、みんなの報告で更新されます。地図にないお店は「お店を追加」から足せます。"}</p></header>
+  <section class="map-wrap${katsu ? " is-katsu" : ""}">
     <div class="map-tools">
       <button class="btn btn-gold" type="button" id="map-geo">現在地のまわり</button>
       <input type="search" id="map-q" class="map-q" placeholder="お店の名前・地名で探す" autocomplete="off">
@@ -870,13 +870,31 @@ ${content}
       <div class="map-add-btns"><button class="btn btn-gold" type="button" id="add-send">この場所で追加する</button><button class="btn btn-ghost" type="button" id="add-cancel">やめる</button></div>
       <p class="fine" id="add-msg" role="status"></p>
     </div>
+    <div class="katsu panel" id="katsu" data-items="${c.R}data/shop-items.json?v=${QUIZ_V}" data-search="${c.R}data/search-ja.json">
+      <h2 style="font-size:20px">🪐 ガチャ活ルートを作る</h2>
+      <p class="fine" style="margin-top:4px">今いる場所から近いお店を、効率よく回れる順番に並べます。探したいガチャを入れると、そのガチャの取扱があるお店だけで作ります。</p>
+      <div class="katsu-form">
+        <label>回るお店の数<select id="k-n"><option>3</option><option selected>5</option><option>8</option></select></label>
+        <label>移動<select id="k-mode"><option value="walking">歩き</option><option value="driving">車</option><option value="transit">電車・バス</option></select></label>
+        <label class="k-wide">探したいガチャ（なくてもOK）<input type="search" id="k-item" list="k-items" placeholder="例：ちいかわ めじるしアクセサリー3" autocomplete="off"><datalist id="k-items"></datalist></label>
+        <label class="k-check"><input type="checkbox" id="k-back"> 最後に出発した場所へ戻る</label>
+      </div>
+      <div class="map-add-btns"><button class="btn btn-gold" type="button" id="k-go">現在地からルートを作る</button><button class="btn" type="button" id="k-here">地図の真ん中から作る</button></div>
+      <p class="fine" id="k-msg" role="status"></p>
+      <div id="k-result" hidden>
+        <p class="k-sum" id="k-sum"></p>
+        <ol class="k-list" id="k-list"></ol>
+        <div class="map-add-btns"><a class="btn btn-gold" id="k-gmap" target="_blank" rel="noopener">Googleマップでナビを開く</a><button class="btn btn-ghost" type="button" id="k-clear">ルートを消す</button></div>
+        <p class="fine">距離はまっすぐ測った目安で、実際の道のりはもう少し長くなります。営業時間はお店でご確認ください。</p>
+      </div>
+    </div>
     <p class="fine">地図：国土地理院の地図を使っています。お店の情報はバンダイ公式「ガシャポンどこ？」の取扱店と、みんなの報告をもとにしています。<a href="${c.R}rules.html">投稿のきまり</a></p>
   </section>
   <section class="section"><div class="section-head"><h2>都道府県から探す</h2></div>
     <div class="archive-list">${prefs.map((p) => `<a href="${c.R}shops/${prefSlug(p)}.html">${p}（${SHOPS.filter((x) => x.pref === p).length}）</a>`).join("")}</div>
   </section>
 </div>`;
-      layout({ rel: "map.html", title: "みんなのガチャマップ｜全国のガチャのあるお店", description: `全国${SHOPS.length}店のガチャのあるお店を地図で探せます。在庫や台数はみんなの報告で更新。地図にないお店も追加できます。`, body, current: "map", jaOnly: true, extraHead: LEAF });
+      layout({ rel, title: katsu ? "ガチャ活ルート｜近くのガチャのあるお店を効率よく回る" : "みんなのガチャマップ｜全国のガチャのあるお店", description: katsu ? "ガチャ活（ガチャ巡り）のルートを自動で作成。今いる場所から近いガチャのあるお店を、回りやすい順番でご案内。探したいガチャの取扱店だけで作ることもできます。" : `全国${SHOPS.length}店のガチャのあるお店を地図で探せます。在庫や台数はみんなの報告で更新。地図にないお店も追加できます。`, body, current: "map", jaOnly: true, extraHead: LEAF });
     }
     // 都道府県ごとのお店一覧
     for (const p of PREF_ORDER) {
@@ -991,7 +1009,15 @@ ${pages.filter(([, r]) => r !== "search.html").map(urlEntry).join("\n")}
 `);
 write("robots.txt", `User-agent: *\nAllow: /\nSitemap: ${SITE_URL}/sitemap.xml\n`);
 // Cloudflare の窓口（functions/）を動かすのは、ページと /api/ だけ（画像などでは動かさず、無料の回数を節約する）
-write("_routes.json", JSON.stringify({ version: 1, include: ["/", "/api/*", "/item/*", "/shop/*", "/map*", "/shops/*", "/rules*", "/genre/*", "/type/*", "/maker/*", "/calendar*", "/search*", "/week*", "/faq*", "/about*", "/en", "/en/", "/en/item/*", "/en/genre/*", "/en/type/*", "/en/maker/*", "/en/calendar*", "/en/search*", "/en/week*", "/en/faq*", "/en/about*", "/index.html", "/en/index.html"], exclude: ["/assets/*", "/images/*", "/data/*"] }));
+write("_routes.json", JSON.stringify({ version: 1, include: ["/", "/api/*", "/item/*", "/shop/*", "/map*", "/gachakatsu*", "/shops/*", "/rules*", "/genre/*", "/type/*", "/maker/*", "/calendar*", "/search*", "/week*", "/faq*", "/about*", "/en", "/en/", "/en/item/*", "/en/genre/*", "/en/type/*", "/en/maker/*", "/en/calendar*", "/en/search*", "/en/week*", "/en/faq*", "/en/about*", "/index.html", "/en/index.html"], exclude: ["/assets/*", "/images/*", "/data/*"] }));
+// ガチャ活：お店ごとの取扱ガチャ（ガチャの番号の一覧）。探したいガチャで絞るときだけ読む
+{
+  const ids = [...new Set(Object.values(SHOP_OFFICIAL).flat())].filter((id) => itemById.has(id));
+  const ix = new Map(ids.map((id, i) => [id, i]));
+  const shopsMap = {};
+  for (const [sid, list] of Object.entries(SHOP_OFFICIAL)) { const a = list.map((id) => ix.get(id)).filter((v) => v != null); if (a.length) shopsMap[sid] = a; }
+  write("data/shop-items.json", JSON.stringify({ items: ids, shops: shopsMap }));
+}
 write("data/shops.json", JSON.stringify(SHOPS.map((x) => [x.id, x.name, x.pref, x.lat, x.lng, x.src === "user" ? 1 : 0])));
 // X投稿用のデータ（毎朝の自動予約で使う）：今週発売・紹介する新作の候補
 {

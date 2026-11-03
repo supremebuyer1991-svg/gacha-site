@@ -567,6 +567,94 @@
       if (hits.length === 1) { map.setView([hits[0][3], hits[0][4]], 16); markers[hits[0][0]].openPopup(); }
       else map.fitBounds(L.latLngBounds(hits.map(function (s) { return [s[3], s[4]]; })), { maxZoom: 15, padding: [30, 30] });
     });
+    /* ---- ガチャ活：近いお店を効率よく回る順番を作る ---- */
+    var K = document.getElementById("katsu");
+    if (K) (function () {
+      var routeLayer = L.layerGroup().addTo(map), shopItems = null, itemIdx = null;
+      var kmsg = document.getElementById("k-msg");
+      var hav = function (a, b) {
+        var R = 6371, t = Math.PI / 180, dLa = (b[0] - a[0]) * t, dLo = (b[1] - a[1]) * t;
+        var x = Math.sin(dLa / 2) * Math.sin(dLa / 2) + Math.cos(a[0] * t) * Math.cos(b[0] * t) * Math.sin(dLo / 2) * Math.sin(dLo / 2);
+        return 2 * R * Math.asin(Math.sqrt(x));
+      };
+      // 候補のガチャ名（入力の候補）
+      fetch(K.getAttribute("data-search")).then(function (r) { return r.json(); }).then(function (idx) {
+        itemIdx = idx;
+        document.getElementById("k-items").innerHTML = idx.slice(0, 400).map(function (x) { return '<option value="' + esc(x.n) + '">'; }).join("");
+      }).catch(function () {});
+      var loadItems = function () {
+        if (shopItems) return Promise.resolve(shopItems);
+        return fetch(K.getAttribute("data-items")).then(function (r) { return r.json(); }).then(function (d) { shopItems = d; return d; });
+      };
+      var build = function (start) {
+        var n = Number(document.getElementById("k-n").value) || 5;
+        var mode = document.getElementById("k-mode").value;
+        var back = document.getElementById("k-back").checked;
+        var want = NORM(document.getElementById("k-item").value);
+        var radius = mode === "walking" ? 3 : mode === "transit" ? 10 : 20;
+        kmsg.textContent = "ルートを作っています…";
+        (want ? loadItems() : Promise.resolve(null)).then(function (si) {
+          var cand = list;
+          if (want && si) {
+            var hitIds = (itemIdx || []).filter(function (x) { return NORM(x.n).indexOf(want) !== -1; }).map(function (x) { return x.id; });
+            var wantIx = {}; si.items.forEach(function (id, i) { if (hitIds.indexOf(id) !== -1) wantIx[i] = 1; });
+            cand = list.filter(function (s) { return (si.shops[s[0]] || []).some(function (i) { return wantIx[i]; }); });
+            if (!cand.length) { kmsg.textContent = "そのガチャの取扱があるお店が見つかりませんでした（公式の取扱店だけで探しています）。名前を短くしてみてください。"; return; }
+          }
+          cand = cand.map(function (s) { return { s: s, d: hav(start, [s[3], s[4]]) }; }).filter(function (x) { return x.d <= radius; }).sort(function (a, b) { return a.d - b.d; }).slice(0, 30);
+          if (!cand.length) { kmsg.textContent = "近く（" + radius + "km以内）にお店が見つかりませんでした。移動を「車」にするか、地図を動かして「地図の真ん中から作る」をお試しください。"; return; }
+          // 近い順にたどって n 店を選び（いちばん近いお店から次々に）、そのあと入れ替えで道のりを短くする
+          var left = cand.slice(), route = [], cur = start;
+          while (route.length < n && left.length) {
+            var bi = 0, bd = Infinity;
+            left.forEach(function (x, i) { var d = hav(cur, [x.s[3], x.s[4]]); if (d < bd) { bd = d; bi = i; } });
+            var pick = left.splice(bi, 1)[0]; route.push(pick.s); cur = [pick.s[3], pick.s[4]];
+          }
+          var pts = function (r) { return [start].concat(r.map(function (s) { return [s[3], s[4]]; })).concat(back ? [start] : []); };
+          var len = function (r) { var p = pts(r), t = 0; for (var i = 1; i < p.length; i++) t += hav(p[i - 1], p[i]); return t; };
+          var improved = true, guard = 0;
+          while (improved && guard++ < 50) {
+            improved = false;
+            for (var i = 0; i < route.length - 1; i++) for (var j = i + 1; j < route.length; j++) {
+              var r2 = route.slice(0, i).concat(route.slice(i, j + 1).reverse(), route.slice(j + 1));
+              if (len(r2) + 1e-9 < len(route)) { route = r2; improved = true; }
+            }
+          }
+          // 地図に描く
+          routeLayer.clearLayers();
+          var line = pts(route);
+          L.polyline(line, { color: "#3aa0ff", weight: 4, opacity: 0.85, dashArray: "8 8" }).addTo(routeLayer);
+          L.circleMarker(start, { radius: 8, weight: 3, color: "#fff", fillColor: "#3aa0ff", fillOpacity: 1 }).addTo(routeLayer).bindTooltip("出発", { permanent: true, direction: "top" });
+          route.forEach(function (s, i) {
+            L.marker([s[3], s[4]], { icon: L.divIcon({ className: "k-pin", html: "<b>" + (i + 1) + "</b>", iconSize: [28, 28], iconAnchor: [14, 14] }) }).addTo(routeLayer).bindPopup(popup(s));
+          });
+          map.fitBounds(L.latLngBounds(line), { padding: [40, 40], maxZoom: 16 });
+          // 一覧と目安の時間（まっすぐの距離 × 1.3 を道のりの目安に）
+          var total = len(route) * 1.3, speed = mode === "walking" ? 4.5 : mode === "transit" ? 18 : 25, mins = Math.round(total / speed * 60);
+          var stay = route.length * 10;
+          document.getElementById("k-sum").textContent = route.length + "店を回るルート：道のり約" + total.toFixed(1) + "km・移動の目安 約" + mins + "分（お店で1店10分見ると合計 約" + (mins + stay) + "分）";
+          var p0 = start;
+          document.getElementById("k-list").innerHTML = route.map(function (s, i) {
+            var d = hav(p0, [s[3], s[4]]) * 1.3; p0 = [s[3], s[4]];
+            return '<li><b>' + (i + 1) + '. <a href="' + root + "shop/" + esc(s[0]) + '.html">' + esc(s[1]) + "</a></b><small>前の場所から約" + (d < 1 ? Math.round(d * 1000) + "m" : d.toFixed(1) + "km") + "</small></li>";
+          }).join("");
+          var ll = function (p) { return p[0].toFixed(6) + "," + p[1].toFixed(6); };
+          var dest = back ? start : [route[route.length - 1][3], route[route.length - 1][4]];
+          var wps = (back ? route : route.slice(0, -1)).map(function (s) { return ll([s[3], s[4]]); });
+          document.getElementById("k-gmap").href = "https://www.google.com/maps/dir/?api=1&origin=" + ll(start) + "&destination=" + ll(dest) + (wps.length ? "&waypoints=" + encodeURIComponent(wps.join("|")) : "") + "&travelmode=" + mode;
+          document.getElementById("k-result").hidden = false;
+          kmsg.textContent = route.length < n ? "近くのお店が" + route.length + "店だったので、" + route.length + "店で作りました。" : "";
+        }).catch(function () { kmsg.textContent = "ルートを作れませんでした。時間をおいてもう一度お試しください。"; });
+      };
+      document.getElementById("k-go").addEventListener("click", function () {
+        if (!navigator.geolocation) { kmsg.textContent = "この端末では現在地が使えません。「地図の真ん中から作る」をお使いください。"; return; }
+        kmsg.textContent = "現在地を調べています…（位置はこの端末の中だけで使います）";
+        navigator.geolocation.getCurrentPosition(function (p) { build([p.coords.latitude, p.coords.longitude]); }, function () { kmsg.textContent = "現在地がわかりませんでした。地図を動かして「地図の真ん中から作る」をお試しください。"; }, { enableHighAccuracy: true, timeout: 10000 });
+      });
+      document.getElementById("k-here").addEventListener("click", function () { var c = map.getCenter(); build([c.lat, c.lng]); });
+      document.getElementById("k-clear").addEventListener("click", function () { routeLayer.clearLayers(); document.getElementById("k-result").hidden = true; kmsg.textContent = ""; });
+    })();
+
     // お店を追加
     var box = document.getElementById("map-add-box"), msg = document.getElementById("add-msg");
     document.getElementById("map-add").addEventListener("click", function () {
