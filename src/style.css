@@ -783,9 +783,6 @@ label.opt:focus-within { outline: none; }
 .add-place-c small { color: var(--muted); }
 
 /* Xでシェア・ピンを直す・ガチャ活でその場で☆/コメント */
-.share-x { margin-top: 14px; }
-.btn-x { background: #0f1419; color: #fff; border-color: #0f1419; }
-.btn-x:hover { background: #272c30; color: #fff; }
 .shop-mapbox { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
 .shop-mapbox .map { position: relative; }
 .mv-box { background: var(--surface-2); border-radius: 12px; padding: 10px 12px; }

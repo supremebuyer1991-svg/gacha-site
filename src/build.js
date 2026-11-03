@@ -1040,7 +1040,6 @@ ${content}
       <p class="fine" style="margin:8px 0 4px">あなたの評価（タップでつけられます・つけ直しOK）</p>
       <div class="rate-pick" id="rate-pick" role="radiogroup" aria-label="☆の数">${[1, 2, 3, 4, 5].map((n) => `<button type="button" data-v="${n}" aria-label="${n}つ星">★</button>`).join("")}</div>
       <p class="fine" id="rate-msg" role="status"></p>
-      <div class="share-x"><a class="btn btn-x" id="share-x" href="https://x.com/intent/post?text=${encodeURIComponent(`「${sh.name}」のガチャ情報\n#ガチャガチャ #ガチャ活`)}&url=${encodeURIComponent(`${SITE_URL}/shop/${sh.id}.html`)}" target="_blank" rel="noopener" data-name="${esc(sh.name)}" data-url="${SITE_URL}/shop/${sh.id}.html">𝕏 このお店の☆とコメントをシェア</a></div>
     </section>
 
     <section class="section panel" id="com-box">

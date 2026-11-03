@@ -954,7 +954,6 @@
         }).catch(function () { mm.textContent = "送れませんでした。時間をおいてもう一度お試しください。"; });
       });
     })();
-    // Xでシェア：☆と新しいコメントを入れた文にする
     var shareX = function (d) {
       var a = document.getElementById("share-x"); if (!a) return;
       var r = d && d.rating, cm = d && d.comments && d.comments[0];
@@ -1032,7 +1031,7 @@
         drawRate({ avg: d.avg, n: d.n }); $("rate-msg").textContent = "☆" + v + "で評価しました。ありがとうございます！";
       }).catch(function (er) { $("rate-msg").textContent = er && er.message === "limit" ? "今日はこれ以上評価できません" : "送れませんでした。時間をおいてもう一度お試しください"; paintPick(myRate); });
     });
-    var reload = function () { return fetch(shopEl.getAttribute("data-api") + "?t=" + Date.now()).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) { draw(d); drawComments(d); drawRate(d && d.rating); shareX(d); if (d && d.shop && d.shop.lat && (!document.getElementById("mv-box") || document.getElementById("mv-box").hidden)) { liveLL = [d.shop.lat, d.shop.lng]; if (shopPin) { shopPin.setLatLng(liveLL); shopMap.setView(liveLL, 17); } } }).catch(function () { draw(null); drawComments(null); }); };
+    var reload = function () { return fetch(shopEl.getAttribute("data-api") + "?t=" + Date.now()).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) { draw(d); drawComments(d); drawRate(d && d.rating); if (d && d.shop && d.shop.lat && (!document.getElementById("mv-box") || document.getElementById("mv-box").hidden)) { liveLL = [d.shop.lat, d.shop.lng]; if (shopPin) { shopPin.setLatLng(liveLL); shopMap.setView(liveLL, 17); } } }).catch(function () { draw(null); drawComments(null); }); };
     reload();
     [].forEach.call(document.querySelectorAll("#report-box [data-kind]"), function (b) {
       b.addEventListener("click", function () {
