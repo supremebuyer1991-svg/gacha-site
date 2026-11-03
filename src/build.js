@@ -335,6 +335,25 @@ const liveLeaves = (g, x) => (x.leaves || []).map((l) => {
 }).filter((l) => l.n > 0).sort((a, b) => b.n - a.n);
 const LEAF_SHOW = 12; // これより多いときは、しぼりこみ欄と「ぜんぶ見る」を出す
 
+/* ---------- 今週発売（バンダイ「11月第2週」、タカラトミーアーツ「11月9日週」の表記から判定） ---------- */
+const WEEK = (() => {
+  const d = nowJST.getUTCDate(), m = nowJST.getUTCMonth() + 1;
+  const firstDow = (new Date(Date.UTC(nowJST.getUTCFullYear(), nowJST.getUTCMonth(), 1)).getUTCDay() + 6) % 7; // 月曜=0
+  const weekNo = Math.ceil((d + firstDow) / 7);
+  const mon = new Date(nowJST); mon.setUTCDate(d - ((nowJST.getUTCDay() + 6) % 7));
+  const sun = new Date(mon); sun.setUTCDate(mon.getUTCDate() + 6);
+  const md = (x) => `${x.getUTCMonth() + 1}/${x.getUTCDate()}`;
+  const inWeek = (it) => {
+    const n = it.release_note || "";
+    let r = n.match(/(\d+)月第(\d)週/);
+    if (r) return Number(r[1]) === m && Number(r[2]) === weekNo;
+    r = n.match(/(\d+)月(\d+)日週/);
+    if (r) { const dd = new Date(Date.UTC(nowJST.getUTCFullYear(), Number(r[1]) - 1, Number(r[2]))); return dd >= new Date(mon.toISOString().slice(0, 10)) && dd <= new Date(sun.toISOString().slice(0, 10)); }
+    return false;
+  };
+  return { m, weekNo, mon, sun, md, label: `${m}月第${weekNo}週`, range: `${md(mon)}〜${md(sun)}`, items: items.filter(inWeek).sort(byPopular) };
+})();
+
 /* ---------- 書き出し ---------- */
 const pages = []; // サイトマップ用 [lang, rel]
 const write = (rel, content) => {
@@ -348,6 +367,8 @@ fs.mkdirSync(path.join(OUT, "assets"), { recursive: true });
 fs.copyFileSync(path.join(__dirname, "style.css"), path.join(OUT, "assets/style.css"));
 fs.copyFileSync(path.join(__dirname, "app.js"), path.join(OUT, "assets/app.js"));
 if (fs.existsSync(path.join(ROOT, "images"))) fs.cpSync(path.join(ROOT, "images"), path.join(OUT, "images"), { recursive: true });
+fs.mkdirSync(path.join(OUT, "images", "og"), { recursive: true });
+if (fs.existsSync(path.join(ROOT, "brand", "header.png"))) fs.copyFileSync(path.join(ROOT, "brand", "header.png"), path.join(OUT, "images", "og", "site.png"));
 
 // 在庫を確認する商品の一覧（Cloudflareの在庫確認ワーカーが読む）：先月以降に発売のバンダイ商品
 {
@@ -429,8 +450,8 @@ ${fragment ? '<meta name="claude:viewport-fit-sides" content="cover">' : ""}
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:type" content="${ogType}">
 <meta property="og:url" content="${esc(canonical(lang, rel))}">
-${ogImage ? `<meta property="og:image" content="${esc(ogImage)}">` : ""}
-<meta name="twitter:card" content="${ogImage ? "summary_large_image" : "summary"}">
+<meta property="og:image" content="${esc(ogImage || `${SITE_URL}/images/og/site.png`)}">
+<meta name="twitter:card" content="summary_large_image">
 ${site.x_account ? `<meta name="twitter:site" content="@${esc(site.x_account.replace(/^@/, ""))}">` : ""}
 <meta name="theme-color" content="#121212">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -551,7 +572,7 @@ ${content}
   </section>
 
   <section class="section" id="new">
-    <div class="section-head"><h2>${t.newTitle}</h2><a class="more" href="${c.H}calendar.html">${t.toCalendar}</a></div>
+    <div class="section-head"><h2>${t.newTitle}</h2><span><a class="more" href="${c.H}week.html">${lang === "en" ? "This week" : "今週発売"}</a>　<a class="more" href="${c.H}calendar.html">${t.toCalendar}</a></span></div>
     <div class="grid">${newest.map((it) => card(it, c)).join("")}</div>
   </section>
 
@@ -706,15 +727,22 @@ ${content}
   }
 
   /* ---------- 一覧ページ（ジャンル別・メーカー別） ---------- */
-  const listPage = (rel, { title, lead, list, current = "" }) => {
+  const listPage = (rel, { title, lead, list, current = "", ogImage = "" }) => {
     const c = ctx(rel);
     const body = `<div class="wrap">
   <nav class="breadcrumb" aria-label="breadcrumb"><a href="${c.H}index.html">${t.home}</a><span>/</span><span>${esc(title)}</span></nav>
   <header class="page-head"><h1>${esc(title)}</h1><p class="lead">${esc(lead)}</p></header>
   <section class="section" style="padding-top:40px">${list.length ? `<div class="grid">${list.map((it) => card(it, c)).join("")}</div>` : `<p class="empty">${t.empty}</p>`}</section>
 </div>`;
-    layout({ rel, title, description: lead, body, current });
+    layout({ rel, title, description: lead, body, current, ogImage });
   };
+  // 今週発売のガチャ（X の「今週発売」投稿のリンク先）
+  listPage("week.html", {
+    title: lang === "en" ? `New gacha this week (${WEEK.range})` : `今週発売のガチャ（${WEEK.range}）`,
+    lead: lang === "en" ? `${WEEK.items.length} capsule toy series releasing this week, most popular first.` : `${WEEK.label}（${WEEK.range}）に発売されるガチャ${WEEK.items.length}シリーズを、人気の順に並べています。発売日は地域や店舗によって前後します。`,
+    list: WEEK.items, current: "calendar",
+    ogImage: fs.existsSync(path.join(ROOT, "images", "og", "week.jpg")) ? `${SITE_URL}/images/og/week.jpg?v=${today}` : "",
+  });
   for (const g of TYPES) {
     const list = inType(g.slug).sort(byNewest);
     if (list.length) listPage(`type/${g.slug}.html`, { title: t.typePage(genreLabel(g, lang)), lead: t.typeLead(genreLabel(g, lang), list.length), list, current: "genre" });
@@ -833,25 +861,13 @@ ${pages.filter(([, r]) => r !== "search.html").map(urlEntry).join("\n")}
 `);
 write("robots.txt", `User-agent: *\nAllow: /\nSitemap: ${SITE_URL}/sitemap.xml\n`);
 // Cloudflare の窓口（functions/）を動かすのは、ページと /api/ だけ（画像などでは動かさず、無料の回数を節約する）
-write("_routes.json", JSON.stringify({ version: 1, include: ["/", "/api/*", "/item/*", "/genre/*", "/type/*", "/maker/*", "/calendar*", "/search*", "/faq*", "/about*", "/en", "/en/", "/en/item/*", "/en/genre/*", "/en/type/*", "/en/maker/*", "/en/calendar*", "/en/search*", "/en/faq*", "/en/about*", "/index.html", "/en/index.html"], exclude: ["/assets/*", "/images/*", "/data/*"] }));
+write("_routes.json", JSON.stringify({ version: 1, include: ["/", "/api/*", "/item/*", "/genre/*", "/type/*", "/maker/*", "/calendar*", "/search*", "/week*", "/faq*", "/about*", "/en", "/en/", "/en/item/*", "/en/genre/*", "/en/type/*", "/en/maker/*", "/en/calendar*", "/en/search*", "/en/week*", "/en/faq*", "/en/about*", "/index.html", "/en/index.html"], exclude: ["/assets/*", "/images/*", "/data/*"] }));
 // X投稿用のデータ（毎朝の自動予約で使う）：今週発売・紹介する新作の候補
 {
-  const d = nowJST.getUTCDate(), m = nowJST.getUTCMonth() + 1;
-  const firstDow = (new Date(Date.UTC(nowJST.getUTCFullYear(), nowJST.getUTCMonth(), 1)).getUTCDay() + 6) % 7; // 月曜=0
-  const weekNo = Math.ceil((d + firstDow) / 7);
-  const mon = new Date(nowJST); mon.setUTCDate(d - ((nowJST.getUTCDay() + 6) % 7));
-  const sun = new Date(mon); sun.setUTCDate(mon.getUTCDate() + 6);
-  const md = (x) => `${x.getUTCMonth() + 1}/${x.getUTCDate()}`;
-  const inWeek = (it) => {
-    const n = it.release_note || "";
-    let r = n.match(/(\d+)月第(\d)週/);
-    if (r) return Number(r[1]) === m && Number(r[2]) === weekNo;
-    r = n.match(/(\d+)月(\d+)日週/);
-    if (r) { const dd = new Date(Date.UTC(nowJST.getUTCFullYear(), Number(r[1]) - 1, Number(r[2]))); return dd >= new Date(mon.toISOString().slice(0, 10)) && dd <= new Date(sun.toISOString().slice(0, 10)); }
-    return false;
-  };
   const pack = (it) => ({ id: it.id, name: it.name, maker: it.maker, price: it.price, lineup: it.lineup, lineup_names: (it.lineup_names || []).slice(0, 12), release: it.release, release_note: it.release_note || "", genre: genreLabel(genreOf(it.genre), "ja"), img: it.image ? `${SITE_URL}/${thumbOf(it.image)}` : "", img_large: it.image ? `${SITE_URL}/${it.image}` : "", url: `${SITE_URL}/item/${it.id}`, hearts: heartsOf(it) });
-  const week = items.filter((it) => inWeek(it) && it.image).sort(byPopular);
+  const week = WEEK.items.filter((it) => it.image);
+  const { m, weekNo, mon, sun, md } = WEEK;
+  const d = nowJST.getUTCDate();
   // 紹介する新作の候補：画像があり、今月・来月発売。日付で順番に回す（同じ商品が続かないように）
   const pool = items.filter((it) => it.image && it.release >= thisMonth).sort((a, b) => (a.id < b.id ? -1 : 1));
   const dayNo = Math.floor(Date.UTC(nowJST.getUTCFullYear(), nowJST.getUTCMonth(), d) / 864e5);

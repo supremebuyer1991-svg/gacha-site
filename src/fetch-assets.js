@@ -238,6 +238,44 @@ async function saveLineupSources() {
   return done;
 }
 
+// 「今週発売のガチャ」の共有画像（Xに貼ったときに出る画像）：今週発売の商品画像を並べる
+async function makeWeekOg() {
+  let sharp;
+  try { sharp = require("sharp"); } catch { return; }
+  const now = new Date(Date.now() + 9 * 3600e3);
+  const d = now.getUTCDate(), m = now.getUTCMonth() + 1;
+  const firstDow = (new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1)).getUTCDay() + 6) % 7;
+  const weekNo = Math.ceil((d + firstDow) / 7);
+  const mon = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), d - ((now.getUTCDay() + 6) % 7)));
+  const sun = new Date(mon.getTime() + 6 * 864e5);
+  const inWeek = (it) => {
+    const n = it.release_note || "";
+    let r = n.match(/(\d+)月第(\d)週/);
+    if (r) return Number(r[1]) === m && Number(r[2]) === weekNo;
+    r = n.match(/(\d+)月(\d+)日週/);
+    if (r) { const dd = new Date(Date.UTC(now.getUTCFullYear(), Number(r[1]) - 1, Number(r[2]))); return dd >= mon && dd <= sun; }
+    return false;
+  };
+  const src = (id) => ["webp", "jpg", "jpeg", "png"].map((e) => path.join(ROOT, "images", `${id}.${e}`)).find((f) => fs.existsSync(f));
+  const list = items.filter((it) => inWeek(it) && src(it.id)).sort((a, b) => (b.popularity || 0) - (a.popularity || 0)).slice(0, 8);
+  if (!list.length) return;
+  const W = 1200, H = 630, S = 230, G = 20, x0 = (W - (S * 4 + G * 3)) / 2;
+  const layers = [];
+  const titleP = path.join(ROOT, "brand", "og-week-title.png");
+  if (fs.existsSync(titleP)) layers.push({ input: titleP, left: 60, top: 22 });
+  const md = (x) => `${x.getUTCMonth() + 1}/${x.getUTCDate()}`;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="420" height="100"><text x="410" y="70" text-anchor="end" font-family="DejaVu Sans, sans-serif" font-weight="700" font-size="44" fill="#3aa0ff">${md(mon)} - ${md(sun)}</text></svg>`;
+  layers.push({ input: Buffer.from(svg), left: W - 440, top: 18 });
+  for (let i = 0; i < list.length; i++) {
+    const tile = await sharp(src(list[i].id)).resize(S, S, { fit: "contain", background: "#ffffff" }).flatten({ background: "#ffffff" })
+      .composite([{ input: Buffer.from(`<svg width="${S}" height="${S}"><rect x="0" y="0" width="${S}" height="${S}" rx="22" ry="22"/></svg>`), blend: "dest-in" }]).png().toBuffer();
+    layers.push({ input: tile, left: Math.round(x0 + (i % 4) * (S + G)), top: 145 + Math.floor(i / 4) * (S + G) });
+  }
+  fs.mkdirSync(path.join(ROOT, "images", "og"), { recursive: true });
+  await sharp({ create: { width: W, height: H, channels: 3, background: "#f2f5ff" } }).composite(layers).jpeg({ quality: 82 }).toFile(path.join(ROOT, "images", "og", "week.jpg"));
+  console.log(`- 今週発売の共有画像を作りました（${list.length}件）`);
+}
+
 // 一覧用の小さい画像を作る（まだ無いものだけ）。一覧ページの読み込みを軽くするため
 async function makeThumbs() {
   let sharp;
@@ -275,5 +313,6 @@ async function makeThumbs() {
   const geos = await geocodeStores();
   await saveLineupSources();
   await makeThumbs();
+  try { await makeWeekOg(); } catch (e) { console.log(`⚠ 今週発売の共有画像を作れませんでした（${e.message}）`); }
   console.log(`取り込み完了：画像 ${imgs}件、店舗 ${st.stores}件・在庫 ${st.rows}件、住所からの位置計算 ${geos}件`);
 })();
