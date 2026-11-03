@@ -54,7 +54,8 @@ const T = {
     htmlLang: "ja", ogLocale: "ja_JP", switchLabel: "EN", switchAria: "English version",
     tagline: site.tagline, description: site.description,
     sampleBar: "ただいまサンプルデータを表示しています。商品・店舗・在庫はすべて架空です。",
-    nav: { map: "ガチャマップ", katsu: "ガチャ活", new: "新着", ranking: "人気", calendar: "発売カレンダー", genre: "ジャンル", faq: "よくある質問" },
+    navShort: { calendar: "カレンダー", map: "マップ", toprated: "高評価店", faq: "Q&A" },
+    nav: { map: "ガチャマップ", katsu: "ガチャ活", week: "今週発売", lottery: "抽選情報", toprated: "評価の高いお店", new: "新着", ranking: "人気", calendar: "発売カレンダー", genre: "ジャンル", faq: "よくある質問" },
     navAria: "メインメニュー", footAria: "サイト情報", about: "運営者情報・お問い合わせ",
     disclosure: "当サイトはAmazonアソシエイト・楽天アフィリエイトなどの広告プログラムに参加しています。掲載商品の画像・名称の権利は各メーカーに帰属します。",
     month: (ym) => { const [y, m] = ym.split("-"); return `${y}年${Number(m)}月`; },
@@ -131,7 +132,8 @@ const T = {
     htmlLang: "en", ogLocale: "en_US", switchLabel: "日本語", switchAria: "日本語版",
     tagline: site.tagline_en, description: site.description_en,
     sampleBar: "Showing sample data. All items, stores and stock levels are fictional.",
-    nav: { map: "Gacha map", katsu: "Gacha route", new: "New", ranking: "Popular", calendar: "Calendar", genre: "Genres", faq: "FAQ" },
+    navShort: { map: "Map", katsu: "Route", toprated: "Top shops", lottery: "Lottery", ranking: "Popular" },
+    nav: { map: "Gacha map", katsu: "Gacha route", week: "This week", lottery: "Lotteries", toprated: "Top shops", new: "New", ranking: "Popular", calendar: "Calendar", genre: "Genres", faq: "FAQ" },
     navAria: "Main menu", footAria: "Site information", about: "About & contact",
     disclosure: "As an Amazon Associate and Rakuten affiliate, we earn from qualifying purchases. Product images and names belong to their respective makers.",
     month: (ym) => { const [y, m] = ym.split("-"); return `${MONTH_EN[Number(m) - 1]} ${y}`; },
@@ -369,6 +371,9 @@ const SHOPS = (() => {
 })();
 const SHOP_OFFICIAL = shopsLive.official || {};
 const SHOP_REPORTS = shopsLive.reports || {};
+const SHOP_RATINGS = shopsLive.ratings || {};
+const LOTTERY = (readJSON("lottery.json", { entries: [] }) || { entries: [] }).entries || [];
+const starsHtml = (r) => r && r.n ? `<span class="stars-v" style="--v:${r.avg}" aria-label="☆${r.avg}"></span><b class="stars-n">${Number(r.avg).toFixed(1)}</b><small>（${r.n}）</small>` : "";
 const PREF_ORDER = Object.keys(PREF_EN);
 const KIND_LABEL = { gacha: "ガチャ専門店", game: "ゲームセンター", mall: "ショッピングモール・スーパー", station: "駅・空港・サービスエリア", shop: "そのほかのお店" };
 const prefSlug = (p) => (PREF_EN[p] || "other").toLowerCase().replace(/[^a-z]+/g, "-");
@@ -455,7 +460,7 @@ for (const lang of LANGS) {
     // 反対の言語の同じページへのリンク
     const switchHref = jaOnly ? `${c.H}en/index.html` : lang === "ja" ? `${c.H}en/${rel}` : `${c.R}${rel}`;
     const ld = jsonld.map((o) => `<script type="application/ld+json">${JSON.stringify(o).replace(/</g, "\\u003c")}</script>`).join("\n");
-    const NAV = [["index.html#new", "new"], ["index.html#ranking", "ranking"], ["calendar.html", "calendar"], ["@map.html", "map"], ["@gachakatsu.html", "katsu"], ["index.html#genres", "genre"], ["faq.html", "faq"]];
+    const NAV = [["index.html#new", "new"], ["week.html", "week"], ["index.html#ranking", "ranking"], ["calendar.html", "calendar"], ["@lottery.html", "lottery"], ["@map.html", "map"], ["@gachakatsu.html", "katsu"], ["@toprated.html", "toprated"], ["index.html#genres", "genre"], ["faq.html", "faq"]];
     const head = `<title>${esc(fullTitle)}</title>
 ${fragment ? '<meta name="claude:viewport-fit-sides" content="cover">' : ""}
 <meta name="site-lang" content="${lang}">
@@ -483,7 +488,7 @@ ${ld}`;
     const content = `${site.sample_mode ? `<div class="sample-bar">${t.sampleBar}</div>` : ""}
 <header class="site-header"><div class="wrap">
   <a class="logo" href="${c.H}index.html" aria-label="${esc(site.name)} ${t.logoAria}"><span class="logo-en">${esc(site.name).split(" ").map((w, i) => `<span class="lw${i}">${w}</span>`).join(" ")}</span><span class="logo-ja">${esc(t.tagline)}</span></a>
-  <nav class="nav" aria-label="${t.navAria}">${NAV.map(([h, k]) => `<a href="${h[0] === "@" ? c.R + h.slice(1) : c.H + h}"${k === current ? ' aria-current="page"' : ""}>${t.nav[k]}</a>`).join("")}</nav>
+  <nav class="nav" aria-label="${t.navAria}">${NAV.map(([h, k]) => `<a href="${h[0] === "@" ? c.R + h.slice(1) : c.H + h}"${k === current ? ' aria-current="page"' : ""}>${t.navShort && t.navShort[k] ? `<span class="nl">${t.nav[k]}</span><span class="ns">${t.navShort[k]}</span>` : t.nav[k]}</a>`).join("")}</nav>
   <form class="search" role="search" action="${c.H}search.html" data-index="${c.R}data/search-${lang}.json" data-home="${c.H}" data-root="${c.R}">
     <input type="search" name="q" id="search-q" placeholder="${t.searchPh}" aria-label="${t.searchAria}" autocomplete="off" enterkeyhint="search">
     <div class="search-pop" id="search-pop" hidden></div>
@@ -860,7 +865,7 @@ ${content}
   /* ---------- みんなのガチャマップ（日本語だけ） ---------- */
   if (lang === "ja") {
     const LEAF = `<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin="" defer></script>`;
-    const shopCard = (sh, c) => `<a class="shop-row" href="${c.R}shop/${sh.id}.html"><b>${esc(sh.name)}</b><span>${esc(sh.address || sh.pref || "")}</span>${(SHOP_OFFICIAL[sh.id] || []).length ? `<em>取扱中 ${(SHOP_OFFICIAL[sh.id] || []).length}種</em>` : ""}${sh.src === "user" ? '<i class="tag-user">みんなが追加</i>' : ""}</a>`;
+    const shopCard = (sh, c) => `<a class="shop-row" href="${c.R}shop/${sh.id}.html"><b>${esc(sh.name)}</b><span>${esc(sh.address || sh.pref || "")}</span>${SHOP_RATINGS[sh.id] ? `<span class="shop-stars">${starsHtml(SHOP_RATINGS[sh.id])}</span>` : ""}${(SHOP_OFFICIAL[sh.id] || []).length ? `<em>取扱中 ${(SHOP_OFFICIAL[sh.id] || []).length}種</em>` : ""}${sh.src === "user" ? '<i class="tag-user">みんなが追加</i>' : ""}</a>`;
     // 地図ページ（map.html）と、ガチャ活ページ（gachakatsu.html：ルート作りを先頭に）
     for (const [rel, katsu] of [["map.html", false], ["gachakatsu.html", true]]) {
       const c = ctx(rel);
@@ -877,6 +882,8 @@ ${content}
     <div id="map" class="map" data-shops="${c.R}api/shops" data-fallback="${c.R}data/shops.json" data-root="${c.R}"></div>
     <div class="map-add" id="map-add-box" hidden>
       <p><b>地図を動かして、真ん中の＋をお店の場所に合わせてください。</b></p>
+      <p class="fine" style="margin:0">イオンなどの中にあるお店は、まず建物の名前で探すとかんたんです。拡大すると地図に建物やお店の名前が出ます。</p>
+      <div class="add-place"><input type="search" id="add-place" maxlength="60" placeholder="建物の名前で探す（例：イオンモール和泉府中）" autocomplete="off"><button class="btn" type="button" id="add-place-go">探す</button></div>
       <label>お店の名前<input type="text" id="add-name" maxlength="60" placeholder="例：ガシャポンのデパート 池袋総本店"></label>
       <label>住所（わかれば）<input type="text" id="add-addr" maxlength="120"></label>
       <label>どんな場所？<select id="add-kind"><option value="gacha">ガチャ専門店</option><option value="game">ゲームセンター</option><option value="mall">ショッピングモール・スーパー</option><option value="station">駅・空港・サービスエリア</option><option value="shop">そのほかのお店（本屋・おもちゃ屋など）</option><option value="other">そのほか</option></select></label>
@@ -918,13 +925,13 @@ ${content}
         <div class="kg-list">${[["🪙", "100円玉がすぐ出せるコインケース", "コインケース 100円玉 収納"], ["👜", "カプセルがまとまる巾着・エコバッグ", "エコバッグ コンパクト 折りたたみ"], ["🔋", "地図とナビの電池切れ対策に", "モバイルバッテリー 軽量 薄型"], ["🖼️", "集めたガチャを飾るコレクションケース", "コレクションケース フィギュア ミニ"]].map(([ic, label, q]) => { const a = affSearch(q); return `<div class="kg"><span class="kg-ic" aria-hidden="true">${ic}</span><span class="kg-l">${label}</span><span class="kg-b"><a href="${esc(a.amazon)}" target="_blank" rel="sponsored noopener">Amazon</a><a href="${esc(a.rakuten)}" target="_blank" rel="sponsored noopener">楽天</a></span></div>`; }).join("")}</div>
       </div>
     </div>
-    <p class="fine">地図：国土地理院の地図を使っています。お店の情報はバンダイ公式「ガシャポンどこ？」の取扱店と、みんなの報告をもとにしています。<a href="${c.R}rules.html">投稿のきまり</a></p>
+    <p class="fine">地図：国土地理院の地図と、拡大したときは OpenStreetMap を使っています。お店の情報はバンダイ公式「ガシャポンどこ？」の取扱店と、みんなの報告をもとにしています。<a href="${c.R}rules.html">投稿のきまり</a></p>
   </section>
   <section class="section"><div class="section-head"><h2>都道府県から探す</h2></div>
     <div class="archive-list">${prefs.map((p) => `<a href="${c.R}shops/${prefSlug(p)}.html">${p}（${SHOPS.filter((x) => x.pref === p).length}）</a>`).join("")}</div>
   </section>
 </div>`;
-      layout({ rel, title: katsu ? "ガチャ活ルート｜近くのガチャのあるお店を効率よく回る" : "みんなのガチャマップ｜全国のガチャのあるお店", description: katsu ? "ガチャ活（ガチャ巡り）のルートを自動で作成。今いる場所から近いガチャのあるお店を、回りやすい順番でご案内。探したいガチャの取扱店だけで作ることもできます。" : `全国${SHOPS.length}店のガチャのあるお店を地図で探せます。在庫や台数はみんなの報告で更新。地図にないお店も追加できます。`, body, current: "map", jaOnly: true, extraHead: LEAF });
+      layout({ rel, title: katsu ? "ガチャ活ルート｜近くのガチャのあるお店を効率よく回る" : "みんなのガチャマップ｜全国のガチャのあるお店", description: katsu ? "ガチャ活（ガチャ巡り）のルートを自動で作成。今いる場所から近いガチャのあるお店を、回りやすい順番でご案内。探したいガチャの取扱店だけで作ることもできます。" : `全国${SHOPS.length}店のガチャのあるお店を地図で探せます。在庫や台数はみんなの報告で更新。地図にないお店も追加できます。`, body, current: katsu ? "katsu" : "map", jaOnly: true, extraHead: LEAF });
     }
     // 都道府県ごとのお店一覧
     for (const p of PREF_ORDER) {
@@ -938,6 +945,48 @@ ${content}
   <section class="section" style="padding-top:32px"><div class="shop-list">${list.map((sh) => shopCard(sh, c)).join("")}</div></section>
 </div>`;
       layout({ rel, title: `${p}のガチャのあるお店（${list.length}店）`, description: `${p}でガチャガチャを置いているお店${list.length}店の一覧。取扱中のガチャ、在庫や台数のみんなの報告も見られます。`, body, current: "map", jaOnly: true });
+    }
+    // ☆評価の高いお店
+    {
+      const rel = "toprated.html", c = ctx(rel);
+      const byId = new Map(SHOPS.map((x) => [x.id, x]));
+      const score = (r) => (r.avg * r.n + 3.5 * 3) / (r.n + 3);
+      const top = Object.entries(SHOP_RATINGS).map(([id, r]) => ({ sh: byId.get(id), r })).filter((x) => x.sh).sort((a, b) => score(b.r) - score(a.r) || b.r.n - a.r.n).slice(0, 50);
+      const body = `<div class="wrap">
+  <nav class="breadcrumb" aria-label="breadcrumb"><a href="${c.H}index.html">${t.home}</a><span>/</span><a href="${c.R}map.html">ガチャマップ</a><span>/</span><span>評価の高いお店</span></nav>
+  <header class="page-head"><h1>☆評価の高いガチャのお店</h1><p class="lead">みんながつけた☆評価が高いお店のランキングです。評価の数が少ないお店が上に来すぎないように、評価の数も考えて並べています。</p></header>
+  <section class="section" style="padding-top:32px">
+    <ol class="top-shops" id="top-shops" data-api="${c.R}api/toprated" data-root="${c.R}">${top.length ? top.map((x, i) => `<li><span class="ts-rank">${i + 1}</span><a href="${c.R}shop/${x.sh.id}.html"><b>${esc(x.sh.name)}</b><span>${esc(x.sh.pref || "")}</span></a><span class="shop-stars">${starsHtml(x.r)}</span></li>`).join("") : '<li class="fine">まだ評価がありません。行ったことのあるお店のページで☆をつけてみてください。</li>'}</ol>
+    <p class="fine" style="margin-top:20px">☆は各お店のページでつけられます。<a href="${c.R}map.html">ガチャマップからお店を探す</a></p>
+  </section>
+</div>`;
+      layout({ rel, title: "☆評価の高いガチャのお店ランキング", description: "みんなの☆評価が高いガチャガチャのお店ランキング。品ぞろえや台数のコメントも見られます。", body, current: "toprated", jaOnly: true });
+    }
+    // 抽選情報
+    {
+      const rel = "lottery.html", c = ctx(rel);
+      const nowIso = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 16);
+      const live = LOTTERY.filter((x) => x.end >= nowIso).sort((a, b) => (a.end > b.end ? 1 : -1));
+      const KIND = { item: "商品の抽選", open: "オープン・入場", event: "イベント" };
+      const fmt = (d) => { const m = d.match(/^(\d{4})-(\d\d)-(\d\d)T(\d\d):(\d\d)/); if (!m) return d; const w = "日月火水木金土"[new Date(`${m[1]}-${m[2]}-${m[3]}T00:00:00+09:00`).getUTCDay()]; return `${+m[2]}/${+m[3]}(${w}) ${m[4]}:${m[5]}`; };
+      const prefs = [...new Set(live.map((x) => x.pref).filter(Boolean))].sort((a, b) => PREF_ORDER.indexOf(a) - PREF_ORDER.indexOf(b));
+      const body = `<div class="wrap">
+  <nav class="breadcrumb" aria-label="breadcrumb"><a href="${c.H}index.html">${t.home}</a><span>/</span><span>抽選情報</span></nav>
+  <header class="page-head"><h1>ガチャの抽選情報</h1><p class="lead">人気ガチャの抽選販売や、新しいお店のオープン日の入場整理券など、いま受付中・これから始まる抽選をまとめています。締め切りが近い順です。</p></header>
+  <section class="section" style="padding-top:24px">
+    ${prefs.length > 1 ? `<div class="lot-filter" id="lot-filter"><button class="sort is-on" type="button" data-pref="">すべて</button>${prefs.map((p) => `<button class="sort" type="button" data-pref="${p}">${p}</button>`).join("")}</div>` : ""}
+    <ul class="lot-list" id="lot-list">${live.length ? live.map((x) => `<li class="lot" data-pref="${esc(x.pref || "")}" data-start="${esc(x.start)}" data-end="${esc(x.end)}">
+      <div class="lot-top"><span class="lot-state"></span><span class="lot-kind">${KIND[x.kind] || "抽選"}</span>${x.pref ? `<span class="lot-pref">📍${esc(x.pref)}</span>` : ""}</div>
+      <h3>${esc(x.title)}</h3>
+      <p class="lot-store">${esc(x.store)}</p>
+      <p class="lot-when">受付：${fmt(x.start)} 〜 <b>${fmt(x.end)}</b></p>
+      <p class="lot-how">応募方法：${esc(x.method || "お店でご確認ください")}${x.note ? `　<small>${esc(x.note)}</small>` : ""}</p>
+      ${x.url ? `<a class="btn btn-gold" href="${esc(x.url)}" target="_blank" rel="noopener">応募ページを開く</a>` : ""}
+    </li>`).join("") : '<li class="fine">いま受付中の抽選はありません。</li>'}</ul>
+    <p class="fine" style="margin-top:20px">抽選の内容は変わることがあります。応募の前に、必ずお店の公式X・公式サイトで最新の情報をご確認ください。</p>
+  </section>
+</div>`;
+      layout({ rel, title: "ガチャの抽選情報（受付中・これから）", description: "人気ガチャの抽選販売、お店のオープン日の入場整理券など、受付中・これから始まるガチャの抽選情報まとめ。", body, current: "lottery", jaOnly: true });
     }
     // お店ごとのページ
     for (const sh of SHOPS) {
@@ -978,6 +1027,14 @@ ${content}
       </div>
       <div class="rep-more"><button class="sort" type="button" data-kind="closed">閉店していた</button><button class="sort" type="button" data-kind="wrong">ここにガチャはない</button></div>
       <p class="fine" id="rep-msg" role="status"></p>
+    </section>
+
+    <section class="section panel" id="rate-box">
+      <h2 style="font-size:20px">このお店の評価</h2>
+      <p class="rate-now"><span class="stars-v" id="rate-avg" style="--v:0"></span><b id="rate-num">—</b><span class="fine" id="rate-n">まだ評価はありません</span></p>
+      <p class="fine" style="margin:8px 0 4px">あなたの評価（タップでつけられます・つけ直しOK）</p>
+      <div class="rate-pick" id="rate-pick" role="radiogroup" aria-label="☆の数">${[1, 2, 3, 4, 5].map((n) => `<button type="button" data-v="${n}" aria-label="${n}つ星">★</button>`).join("")}</div>
+      <p class="fine" id="rate-msg" role="status"></p>
     </section>
 
     <section class="section panel" id="com-box">

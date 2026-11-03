@@ -6,9 +6,12 @@ export async function onRequestGet({ env }) {
   const off = (await env.DB.prepare("SELECT lower(shop) s, item_id FROM seen WHERE in_now = 1").all()).results || [];
   const since = new Date(Date.now() - 30 * 864e5).toISOString();
   const rep = (await env.DB.prepare("SELECT shop_id s, count(*) n, max(created_at) last FROM reports WHERE created_at >= ?1 GROUP BY shop_id").bind(since).all()).results || [];
+  const rts = (await env.DB.prepare("SELECT shop_id s, avg(stars) a, count(*) n FROM ratings GROUP BY shop_id").all().catch(() => ({ results: [] }))).results || [];
+  const ratings = {};
+  for (const r of rts) ratings[r.s] = { avg: Math.round(r.a * 10) / 10, n: r.n };
   const official = {};
   for (const r of off) (official[r.s] ||= []).push(r.item_id);
   const reports = {};
   for (const r of rep) reports[r.s] = { n: r.n, last: r.last };
-  return json({ generated: new Date().toISOString(), shops, official, reports }, 200, 0);
+  return json({ generated: new Date().toISOString(), shops, official, reports, ratings }, 200, 0);
 }

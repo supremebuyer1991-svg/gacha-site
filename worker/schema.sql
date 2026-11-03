@@ -18,3 +18,5 @@ CREATE INDEX IF NOT EXISTS seen_shop ON seen (lower(shop));
 CREATE TABLE IF NOT EXISTS comments (id INTEGER PRIMARY KEY AUTOINCREMENT, shop_id TEXT NOT NULL, body TEXT NOT NULL, created_at TEXT NOT NULL, who TEXT NOT NULL, flags INTEGER DEFAULT 0, hidden INTEGER DEFAULT 0);
 CREATE INDEX IF NOT EXISTS comments_shop ON comments (shop_id, created_at);
 CREATE TABLE IF NOT EXISTS comment_flags (comment_id INTEGER NOT NULL, who TEXT NOT NULL, PRIMARY KEY (comment_id, who));
+-- お店の☆評価（1人1店1つ。つけ直すと上書き）
+CREATE TABLE IF NOT EXISTS ratings (shop_id TEXT NOT NULL, who TEXT NOT NULL, stars INTEGER NOT NULL, updated_at TEXT NOT NULL, PRIMARY KEY (shop_id, who));

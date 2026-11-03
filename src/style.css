@@ -705,3 +705,75 @@ label.opt:focus-within { outline: none; }
   .search { flex: 0 1 200px; }
 }
 @media (min-width: 961px) and (max-width: 1180px) { .logo-ja { display: none; } .nav { gap: 10px; } .search { flex-basis: 160px; } }
+
+/* ---------- ☆評価 ---------- */
+.stars-v { --v: 0; position: relative; display: inline-block; font-size: 15px; line-height: 1; letter-spacing: 1px; vertical-align: -1px; }
+.stars-v::before { content: "★★★★★"; color: #d9dcea; }
+.stars-v::after { content: "★★★★★"; color: #ffb400; position: absolute; left: 0; top: 0; width: calc(var(--v) / 5 * 100%); overflow: hidden; white-space: nowrap; }
+.stars-n { margin-left: 4px; font-size: 14px; color: var(--text); }
+.shop-stars { display: inline-flex; align-items: center; gap: 2px; font-size: 12px; color: var(--muted); }
+.rate-now { display: flex; align-items: center; gap: 8px; margin: 8px 0 0; }
+.rate-now .stars-v { font-size: 24px; }
+.rate-now b { font-size: 22px; }
+.rate-pick { display: flex; gap: 4px; }
+.rate-pick button { font-size: 30px; line-height: 1; padding: 2px 4px; border: 0; background: none; color: #d9dcea; cursor: pointer; transition: transform .1s, color .1s; }
+.rate-pick button.on { color: #ffb400; }
+.rate-pick button:hover { transform: scale(1.12); }
+
+/* ガチャ活：お店ごとの☆と、流れるコメント */
+.k-rev { margin-top: 6px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.k-rev:empty { display: none; }
+.k-rev-stars { display: flex; align-items: center; gap: 4px; font-size: 12px; }
+.k-rev-stars small, .k-rev-none { color: var(--muted); font-size: 12px; }
+.k-tick { overflow: hidden; border-radius: 999px; background: var(--surface-2); padding: 4px 0; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+.k-tick-in { display: inline-flex; gap: 28px; white-space: nowrap; padding-left: 100%; animation: k-tick 20s linear infinite; font-size: 12.5px; }
+.k-tick:hover .k-tick-in { animation-play-state: paused; }
+@keyframes k-tick { from { transform: translateX(0); } to { transform: translateX(-100%); } }
+@media (prefers-reduced-motion: reduce) {
+  .k-tick { border-radius: 10px; padding: 6px 10px; -webkit-mask-image: none; mask-image: none; }
+  .k-tick-in { animation: none; padding-left: 0; flex-direction: column; gap: 2px; white-space: normal; }
+}
+
+/* ---------- メニューを2段に ---------- */
+.site-header .wrap { flex-wrap: wrap; }
+.site-header .nav { order: 4; flex-basis: 100%; margin-left: 0; display: grid; grid-template-columns: repeat(10, auto); justify-content: start; gap: 4px 18px; overflow: visible; }
+@media (min-width: 961px) {
+  .site-header .wrap { flex-wrap: wrap; gap: 10px 18px; padding-block: 14px 10px; }
+  .site-header .search { margin-left: auto; flex: 0 1 280px; }
+  .site-header .nav a { font-size: 13.5px; }
+}
+@media (max-width: 960px) {
+  .site-header .nav { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
+  .site-header .nav a { text-align: center; font-size: 11.5px; letter-spacing: 0; padding: 6px 2px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); white-space: normal; line-height: 1.25; display: flex; align-items: center; justify-content: center; min-height: 38px; }
+  .site-header .nav a[aria-current="page"] { border-color: var(--gold); }
+}
+
+/* ---------- 抽選情報 ---------- */
+.lot-filter { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+.lot-filter .is-on { background: var(--gold); color: #fff; border-color: var(--gold); }
+.lot-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+.lot { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 6px; }
+.lot.is-over { display: none; }
+.lot h3 { margin: 2px 0 0; font-size: 16px; line-height: 1.45; }
+.lot p { margin: 0; font-size: 13px; }
+.lot-store { font-weight: 700; color: var(--text-2); }
+.lot-when b { color: #e5484d; }
+.lot-how small { color: var(--muted); }
+.lot .btn { align-self: flex-start; margin-top: 6px; }
+.lot-top { display: flex; flex-wrap: wrap; gap: 6px; font-size: 11.5px; }
+.lot-top span { padding: 2px 8px; border-radius: 999px; background: var(--surface-2); }
+.lot-state.is-open { background: #22b573; color: #fff; }
+.lot-state.is-soon { background: #e5484d; color: #fff; }
+.lot-state.is-before { background: #3aa0ff; color: #fff; }
+
+/* ---------- 評価の高いお店 ---------- */
+.top-shops { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.top-shops li { display: grid; grid-template-columns: 36px minmax(0, 1fr) auto; align-items: center; gap: 10px; padding: 12px 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; }
+.top-shops a { display: flex; flex-direction: column; min-width: 0; }
+.top-shops a span { font-size: 12px; color: var(--muted); }
+.ts-rank { font: 700 18px var(--font-latin); color: var(--gold); text-align: center; }
+.shop-row .shop-stars { margin-top: 2px; }
+.add-place { display: flex; gap: 6px; margin: 4px 0; }
+.add-place input { flex: 1; min-width: 0; }
+.nav .ns { display: none; }
+@media (max-width: 960px) { .nav .nl { display: none; } .nav .ns { display: inline; } .site-header .nav a { white-space: nowrap; font-size: 12px; } }

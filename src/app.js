@@ -527,15 +527,30 @@
     if (window.L) return fn();
     var n = 0, iv = setInterval(function () { if (window.L) { clearInterval(iv); fn(); } else if (++n > 100) clearInterval(iv); }, 100);
   };
+  // 広い範囲は国土地理院の淡色地図、近づくとOpenStreetMap（イオンなど建物・お店の名前が出る）に切りかえ
   var tiles = function (map) {
-    window.L.tileLayer("https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png", { maxZoom: 18, minZoom: 4, attribution: '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener">国土地理院</a>' }).addTo(map);
+    var L = window.L;
+    var gsi = L.tileLayer("https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png", { maxZoom: 19, maxNativeZoom: 18, minZoom: 4, attribution: '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener">国土地理院</a>' });
+    var osm = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, minZoom: 4, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>' });
+    var NEAR = 15, cur = null;
+    var pick = function () { var want = map.getZoom() >= NEAR ? osm : gsi; if (cur === want) return; if (cur) map.removeLayer(cur); want.addTo(map); cur = want; };
+    map.on("zoomend", pick); map.whenReady ? map.whenReady(pick) : pick();
   };
-  // 地名・駅名から場所を探す（国土地理院の住所検索。無料・登録なし）
-  var geocode = function (q) {
+  // 建物・お店の名前（イオンモール○○など）、地名・駅名から場所を探す
+  // まずOpenStreetMapの検索、見つからなければ国土地理院の住所検索
+  var geocodeGsi = function (q) {
     return fetch("https://msearch.gsi.go.jp/address-search/AddressSearch?q=" + encodeURIComponent(q)).then(function (r) { return r.json(); }).then(function (a) {
       if (!a || !a.length) return null;
       var c = a[0].geometry.coordinates; return { ll: [c[1], c[0]], title: a[0].properties.title };
     });
+  };
+  var geocode = function (q, near) {
+    var u = "https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=jp&accept-language=ja&q=" + encodeURIComponent(q);
+    if (near) u += "&viewbox=" + [near.getWest(), near.getNorth(), near.getEast(), near.getSouth()].map(function (n) { return n.toFixed(4); }).join(",");
+    return fetch(u).then(function (r) { return r.ok ? r.json() : []; }).then(function (a) {
+      if (a && a.length) return { ll: [Number(a[0].lat), Number(a[0].lon)], title: a[0].name || a[0].display_name, addr: a[0].display_name, building: /^(mall|department_store|supermarket|retail|commercial)$/.test(a[0].type || "") || a[0].category === "building" };
+      return geocodeGsi(q);
+    }).catch(function () { return geocodeGsi(q); });
   };
   var post = function (url, body) {
     return fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }).then(function (r) { return r.json().then(function (d) { d._status = r.status; return d; }); });
@@ -573,7 +588,7 @@
       e.preventDefault();
       var v = NORM(q.value); if (!v) return;
       var hits = list.filter(function (s) { return NORM(s[1] + (s[2] || "")).indexOf(v) !== -1; });
-      if (!hits.length) { geocode(q.value.trim()).then(function (g) { if (g) map.setView(g.ll, 14); }).catch(function () {}); return; }
+      if (!hits.length) { geocode(q.value.trim(), map.getBounds()).then(function (g) { if (g) map.setView(g.ll, g.building ? 17 : 15); }).catch(function () {}); return; }
       if (hits.length === 1) { map.setView([hits[0][3], hits[0][4]], 16); markers[hits[0][0]].openPopup(); }
       else map.fitBounds(L.latLngBounds(hits.map(function (s) { return [s[3], s[4]]; })), { maxZoom: 15, padding: [30, 30] });
     });
@@ -705,7 +720,7 @@
           $("k-list").innerHTML = route.map(function (x, i) {
             var d = hav(p0, x.p) * DETOUR; p0 = x.p;
             return '<li><b>' + (i + 1) + '. <a href="' + root + "shop/" + esc(x.s[0]) + '.html">' + esc(x.s[1]) + "</a></b><small>前の場所から約" + (d < 1 ? Math.round(d * 1000) + "m" : d.toFixed(1) + "km") + "・" + Math.max(1, Math.round(minsOf(hav(i ? route[i - 1].p : start, x.p), mode))) + "分</small>" +
-              '<span class="k-acts"><button type="button" class="k-pop" data-sid="' + esc(x.s[0]) + '" aria-expanded="false">▾ この店に在庫のある人気ガチャを見る</button><button type="button" class="k-del" data-sid="' + esc(x.s[0]) + '">✕ この店を外す</button></span><div class="k-pop-box" hidden></div></li>';
+              '<span class="k-acts"><button type="button" class="k-pop" data-sid="' + esc(x.s[0]) + '" aria-expanded="false">▾ この店に在庫のある人気ガチャを見る</button><button type="button" class="k-del" data-sid="' + esc(x.s[0]) + '">✕ この店を外す</button></span><div class="k-pop-box" hidden></div><div class="k-rev" data-sid="' + esc(x.s[0]) + '"></div></li>';
           }).join("") + (end && plan === "dest" ? '<li><b>🏁 目的地</b></li>' : "");
           // Googleマップは経由地が9か所までなので、10店をこえるときは2つに分ける
           var ll = function (p) { return p[0].toFixed(6) + "," + p[1].toFixed(6); };
@@ -721,6 +736,18 @@
             var lab = links.length === 1 ? "Googleマップでナビを開く" : "Googleマップでナビ（" + (i === 0 ? "出発" : l.a + "店目") + "→" + (l.b > route.length ? "目的地" : l.b + "店目") + "）";
             return '<a class="btn' + (i === 0 ? " btn-gold" : "") + '" target="_blank" rel="noopener" href="' + esc(l.href) + '">' + lab + "</a>";
           }).join("");
+          // 各お店の☆評価と新しいコメント
+          var ids = route.map(function (x) { return x.s[0]; });
+          fetch(root + "api/shopsummary?ids=" + ids.join(",")).then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; }).then(function (sm) {
+            [].forEach.call(document.querySelectorAll("#k-list .k-rev"), function (el) {
+              var v = sm[el.getAttribute("data-sid")] || {};
+              var st = v.n ? '<span class="stars-v" style="--v:' + v.avg + '"></span><b>' + Number(v.avg).toFixed(1) + '</b><small>（' + v.n + '人）</small>' : '<small class="k-rev-none">まだ評価はありません</small>';
+              var cm = (v.comments || []);
+              var tk = cm.length ? '<div class="k-tick"><div class="k-tick-in">' + cm.map(function (c) { return '<span>💬 ' + esc(c.body) + "</span>"; }).join("") + "</div></div>" : '<small class="k-rev-none">コメントはまだありません</small>';
+              el.innerHTML = '<div class="k-rev-stars">' + st + "</div>" + tk;
+              var tin = el.querySelector(".k-tick-in"); if (tin) tin.style.animationDuration = Math.max(12, cm.reduce(function (a, c) { return a + c.body.length; }, 0) * 0.35) + "s";
+            });
+          });
           var wantRaw = $("k-item").value.trim();
           if (wantRaw) { var fw = aff(wantRaw + " ガチャ コンプ"); $("k-sum").innerHTML = esc($("k-sum").textContent) + '<span class="k-aff k-aff-big">「' + esc(wantRaw) + '」が見つからなかったら通販でも：<a href="' + esc(fw.a) + '" target="_blank" rel="sponsored noopener">Amazonで探す</a><a href="' + esc(fw.r) + '" target="_blank" rel="sponsored noopener">楽天で探す</a><i class="pr">PR</i></span>'; }
           var nEx = Object.keys(excluded).length;
@@ -793,6 +820,18 @@
       if (map.getZoom() < 15) msg.textContent = "地図を拡大して、お店の場所に＋を合わせてください。";
       box.scrollIntoView({ behavior: "smooth", block: "nearest" });
     });
+    var placeGo = function () {
+      var q2 = document.getElementById("add-place").value.trim(); if (!q2) { msg.textContent = "建物やお店の名前を入れてください（例：イオンモール和泉府中）。"; return; }
+      msg.textContent = "探しています…";
+      geocode(q2, map.getBounds()).then(function (g) {
+        if (!g) { msg.textContent = "見つかりませんでした。名前を短くするか、住所で試してください。"; return; }
+        map.setView(g.ll, 18);
+        var ad = document.getElementById("add-addr"); if (!ad.value.trim() && g.addr) ad.value = g.addr.split(", ").reverse().filter(function (x) { return !/^(日本|\d{3}-\d{4})$/.test(x); }).join("").slice(0, 120);
+        msg.textContent = "「" + g.title + "」に移動しました。建物の中のお店の場所に＋を合わせて追加してください。";
+      }).catch(function () { msg.textContent = "探せませんでした。時間をおいてもう一度お試しください。"; });
+    };
+    document.getElementById("add-place-go").addEventListener("click", placeGo);
+    document.getElementById("add-place").addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); placeGo(); } });
     document.getElementById("add-cancel").addEventListener("click", function () { box.hidden = true; mapEl.classList.remove("is-adding"); msg.textContent = ""; });
     document.getElementById("add-send").addEventListener("click", function () {
       var name = document.getElementById("add-name").value.trim();
@@ -810,6 +849,40 @@
       }).catch(function () { msg.textContent = "送れませんでした。時間をおいてもう一度お試しください。"; });
     });
   });
+
+  // 抽選情報：受付中・開始前の表示と、終わったものを隠す、都道府県でしぼる
+  var lotList = document.getElementById("lot-list");
+  if (lotList) {
+    var jstNow = function () { return new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 16); };
+    var paintLot = function () {
+      var n = jstNow(), soon = new Date(Date.now() + 9 * 3600e3 + 24 * 3600e3).toISOString().slice(0, 16);
+      [].forEach.call(lotList.querySelectorAll(".lot"), function (li) {
+        var st = li.getAttribute("data-start"), en = li.getAttribute("data-end"), lab = li.querySelector(".lot-state");
+        if (en < n) { li.classList.add("is-over"); lab.textContent = "受付終了"; return; }
+        if (st > n) { lab.textContent = "開始前"; lab.className = "lot-state is-before"; }
+        else if (en <= soon) { lab.textContent = "まもなく締切"; lab.className = "lot-state is-soon"; }
+        else { lab.textContent = "受付中"; lab.className = "lot-state is-open"; }
+      });
+    };
+    paintLot(); setInterval(paintLot, 60000);
+    var lf = document.getElementById("lot-filter");
+    if (lf) lf.addEventListener("click", function (e) {
+      var b = e.target.closest && e.target.closest("button"); if (!b) return;
+      [].forEach.call(lf.querySelectorAll("button"), function (x) { x.classList.toggle("is-on", x === b); });
+      var p = b.getAttribute("data-pref");
+      [].forEach.call(lotList.querySelectorAll(".lot"), function (li) { li.hidden = !!p && li.getAttribute("data-pref") !== p; });
+    });
+  }
+
+  // ☆評価の高いお店：最新の順位に入れかえ
+  var topEl = document.getElementById("top-shops");
+  if (topEl) fetch(topEl.getAttribute("data-api")).then(function (r) { return r.ok ? r.json() : null; }).then(function (a) {
+    if (!a || !a.length) return;
+    var R = topEl.getAttribute("data-root");
+    topEl.innerHTML = a.map(function (x, i) {
+      return '<li><span class="ts-rank">' + (i + 1) + '</span><a href="' + R + "shop/" + esc(x.id) + '.html"><b>' + esc(x.name) + "</b><span>" + esc(x.pref || "") + '</span></a><span class="shop-stars"><span class="stars-v" style="--v:' + x.avg + '"></span><b class="stars-n">' + Number(x.avg).toFixed(1) + "</b><small>（" + x.n + "）</small></span></li>";
+    }).join("");
+  }).catch(function () {});
 
   var shopEl = document.getElementById("shop");
   if (shopEl) {
@@ -872,7 +945,26 @@
       if (!window.confirm("このコメントを通報しますか？（3人から通報されると見えなくなります）")) return;
       post(shopEl.getAttribute("data-comment"), { flag: Number(b.getAttribute("data-id")) }).then(function () { b.textContent = "通報しました"; b.disabled = true; }).catch(function () {});
     });
-    var reload = function () { return fetch(shopEl.getAttribute("data-api") + "?t=" + Date.now()).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) { draw(d); drawComments(d); }).catch(function () { draw(null); drawComments(null); }); };
+    var $ = function (id) { return document.getElementById(id); };
+    var drawRate = function (r) {
+      if (!$("rate-avg")) return;
+      $("rate-avg").style.setProperty("--v", r ? r.avg : 0);
+      $("rate-num").textContent = r ? r.avg.toFixed(1) : "—";
+      $("rate-n").textContent = r ? "（" + r.n + "人の評価）" : "まだ評価はありません";
+    };
+    var myRate = 0; try { myRate = Number(localStorage.getItem("rate:" + sid)) || 0; } catch (e) {}
+    var paintPick = function (v) { [].forEach.call(document.querySelectorAll("#rate-pick button"), function (b) { b.classList.toggle("on", Number(b.getAttribute("data-v")) <= v); }); };
+    paintPick(myRate);
+    if ($("rate-pick")) $("rate-pick").addEventListener("click", function (e) {
+      var b = e.target.closest && e.target.closest("button"); if (!b) return;
+      var v = Number(b.getAttribute("data-v")); paintPick(v); $("rate-msg").textContent = "送信中…";
+      post(shopEl.getAttribute("data-root") + "api/rate", { shop: sid, stars: v }).then(function (d) {
+        if (!d.ok) throw new Error(d.error || "x");
+        myRate = v; try { localStorage.setItem("rate:" + sid, v); } catch (e2) {}
+        drawRate({ avg: d.avg, n: d.n }); $("rate-msg").textContent = "☆" + v + "で評価しました。ありがとうございます！";
+      }).catch(function (er) { $("rate-msg").textContent = er && er.message === "limit" ? "今日はこれ以上評価できません" : "送れませんでした。時間をおいてもう一度お試しください"; paintPick(myRate); });
+    });
+    var reload = function () { return fetch(shopEl.getAttribute("data-api") + "?t=" + Date.now()).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) { draw(d); drawComments(d); drawRate(d && d.rating); }).catch(function () { draw(null); drawComments(null); }); };
     reload();
     [].forEach.call(document.querySelectorAll("#report-box [data-kind]"), function (b) {
       b.addEventListener("click", function () {

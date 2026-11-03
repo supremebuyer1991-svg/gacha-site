@@ -10,5 +10,6 @@ export async function onRequestGet({ env, params }) {
   const since = new Date(Date.now() - 60 * 864e5).toISOString();
   const rep = await env.DB.prepare("SELECT kind, item_id, item_name, value, created_at FROM reports WHERE shop_id = ?1 AND created_at >= ?2 ORDER BY created_at DESC LIMIT 300").bind(id, since).all();
   const com = await env.DB.prepare("SELECT id, body, created_at FROM comments WHERE shop_id = ?1 AND hidden = 0 ORDER BY created_at DESC LIMIT 50").bind(id).all().catch(() => ({ results: [] }));
-  return json({ comments: com.results || [], shop, official: (off.results || []).map((r) => ({ id: r.item_id, in: !!r.in_now, since: r.first_seen })), reports: rep.results || [] }, 200, 60);
+  const rt = await env.DB.prepare("SELECT avg(stars) a, count(*) n FROM ratings WHERE shop_id = ?1").bind(id).first().catch(() => null);
+  return json({ rating: rt && rt.n ? { avg: Math.round(rt.a * 10) / 10, n: rt.n } : null, comments: com.results || [], shop, official: (off.results || []).map((r) => ({ id: r.item_id, in: !!r.in_now, since: r.first_seen })), reports: rep.results || [] }, 200, 60);
 }
