@@ -3602,7 +3602,7 @@
     "maker_en": "Bandai",
     "price": 400,
     "release": "2026-11",
-    "release_note": "",
+    "release_note": "11月第1週より順次",
     "genre": "anime",
     "moods": [
       "kawaii",
@@ -22804,6 +22804,54 @@
     ],
     "q_genders": [
       "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y909177",
+    "name": "青鬼 ラバーマスコットキーホルダー",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-10",
+    "release_note": "10月12日週発売",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "lineup_names": [
+      "青鬼",
+      "フワッティー",
+      "スクワット鬼",
+      "クラゲ鬼",
+      "青鬼 ひろし捕食Ver.",
+      "パンダ鬼"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y909177",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-04",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "type:plush",
+      "type:charm"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
     ],
     "tags_auto": true
   }
