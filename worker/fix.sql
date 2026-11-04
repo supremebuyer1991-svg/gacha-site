@@ -46,3 +46,6 @@ UPDATE shops SET pref = '熊本県' WHERE (pref IS NULL OR pref = '') AND addres
 UPDATE shops SET pref = '大分県' WHERE (pref IS NULL OR pref = '') AND address LIKE '大分県%';
 UPDATE shops SET pref = '宮崎県' WHERE (pref IS NULL OR pref = '') AND address LIKE '宮崎県%';
 UPDATE shops SET pref = '沖縄県' WHERE (pref IS NULL OR pref = '') AND address LIKE '沖縄県%';
+-- 11/5 ユーザーの指示で住所を直す（みんなが追加したピン）
+UPDATE shops SET address = '大阪府泉大津市東豊中町一丁目' WHERE id = 'u-c341ca0101';
+UPDATE shops SET address = '大阪府泉大津市東豊中町二丁目第二阪和国道' WHERE id = 'u-c1f223d9b0';
