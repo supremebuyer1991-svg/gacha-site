@@ -392,6 +392,8 @@ fs.copyFileSync(path.join(__dirname, "app.js"), path.join(OUT, "assets/app.js"))
 if (fs.existsSync(path.join(ROOT, "images"))) fs.cpSync(path.join(ROOT, "images"), path.join(OUT, "images"), { recursive: true });
 fs.mkdirSync(path.join(OUT, "images", "og"), { recursive: true });
 if (fs.existsSync(path.join(ROOT, "brand", "header.png"))) fs.copyFileSync(path.join(ROOT, "brand", "header.png"), path.join(OUT, "images", "og", "site.png"));
+// SNSの共有画像（1200×630。Xのカードは横長すぎる画像だと出ないため）
+if (fs.existsSync(path.join(ROOT, "brand", "og-site.jpg"))) fs.copyFileSync(path.join(ROOT, "brand", "og-site.jpg"), path.join(OUT, "images", "og", "site.jpg"));
 
 // 在庫を確認する商品の一覧（Cloudflareの在庫確認ワーカーが読む）：先月以降に発売のバンダイ商品
 {
@@ -473,7 +475,7 @@ ${jaOnly ? "" : `<link rel="alternate" hreflang="ja" href="${esc(canonical("ja",
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:type" content="${ogType}">
 <meta property="og:url" content="${esc(canonical(lang, rel))}">
-<meta property="og:image" content="${esc(ogImage || `${SITE_URL}/images/og/site.png`)}">
+<meta property="og:image" content="${esc(ogImage || `${SITE_URL}/images/og/site.jpg`)}">
 <meta name="twitter:card" content="summary_large_image">
 ${site.x_account ? `<meta name="twitter:site" content="@${esc(site.x_account.replace(/^@/, ""))}">` : ""}
 <meta name="theme-color" content="#121212">
@@ -1209,6 +1211,7 @@ write("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>
 ${pages.filter(([, r]) => r !== "search.html").map(urlEntry).join("\n")}
 </urlset>
 `);
+write("x-img.html", fs.readFileSync(path.join(__dirname, "tpl", "x-img.html"), "utf8").replace("__FONTS__", FONTS));
 write("robots.txt", `User-agent: *\nAllow: /\nSitemap: ${SITE_URL}/sitemap.xml\n`);
 // Cloudflare の窓口（functions/）を動かすのは、ページと /api/ だけ（画像などでは動かさず、無料の回数を節約する）
 write("_routes.json", JSON.stringify({ version: 1, include: ["/", "/api/*", "/item/*", "/shop/*", "/map*", "/gachakatsu*", "/shops/*", "/rules*", "/genre/*", "/type/*", "/maker/*", "/calendar*", "/search*", "/week*", "/new*", "/faq*", "/about*", "/en", "/en/", "/en/item/*", "/en/genre/*", "/en/type/*", "/en/maker/*", "/en/calendar*", "/en/search*", "/en/week*", "/en/new*", "/en/faq*", "/en/about*", "/index.html", "/en/index.html"], exclude: ["/assets/*", "/images/*", "/data/*"] }));
