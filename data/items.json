@@ -1927,7 +1927,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "MOMENT RING",
+      "A song for You! You? You!!",
+      "永久hours",
+      "Just Believe!!!",
+      "Dream Believers"
+    ]
   },
   {
     "id": "bandai-4582770069075",
@@ -2182,7 +2189,15 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "モンキー・D・ルフィ",
+      "ナミ",
+      "トラファルガー・ロー",
+      "ユースタス・キッド",
+      "ヤマト",
+      "光月おでん"
+    ]
   },
   {
     "id": "bandai-4549660664437",
@@ -2218,7 +2233,15 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ロロノア・ゾロ",
+      "サンジ",
+      "ドンキホーテ・ドフラミンゴ",
+      "コラソン",
+      "キラー",
+      "カイドウ"
+    ]
   },
   {
     "id": "bandai-4570118121493",
@@ -2252,7 +2275,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "まめっちケース",
+      "くちぱっちケース",
+      "みみっちケース",
+      "ますくっちケース",
+      "くりてんケース"
+    ]
   },
   {
     "id": "bandai-4570118211132",
@@ -2289,7 +2319,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "カピバラさん",
+      "ホワイトさん",
+      "仔カピ",
+      "リーゼントくん",
+      "ひだまりさん",
+      "なまけものくん"
+    ]
   },
   {
     "id": "bandai-4570118211354",
@@ -2327,7 +2365,18 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "青ピクミン",
+      "黄ピクミン",
+      "赤ピクミン",
+      "氷ピクミン",
+      "ヒカリピクミン",
+      "羽ピクミン",
+      "岩ピクミン",
+      "白ピクミン",
+      "紫ピクミン"
+    ]
   },
   {
     "id": "bandai-4582769752896",
@@ -2364,7 +2413,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ケロロ軍曹",
+      "タママ二等兵",
+      "ギロロ伍長",
+      "クルル曹長",
+      "ドロロ兵長"
+    ]
   },
   {
     "id": "bandai-4582769769207",
@@ -2399,7 +2455,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ハローキティ",
+      "コロコロクリリン",
+      "シナモロール",
+      "タキシードサム",
+      "ポチャッコ",
+      "ハンギョドン"
+    ]
   },
   {
     "id": "bandai-4582769889752",
@@ -2435,7 +2499,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "いちごっち",
+      "まめっち",
+      "ふらわっち",
+      "めめっち",
+      "くちぱっち",
+      "ケーたま"
+    ]
   },
   {
     "id": "bandai-4582769898327",
@@ -2472,7 +2544,11 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "スヌーピー",
+      "チャーリー・ブラウン"
+    ]
   },
   {
     "id": "bandai-4582769898525",
@@ -2509,7 +2585,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "しんのすけ",
+      "ひまわり",
+      "ひろし",
+      "シロ",
+      "アクション仮面"
+    ]
   },
   {
     "id": "bandai-4582769809545",
@@ -2545,7 +2628,22 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "CHOITCHERRY",
+      "JJONGTORAM",
+      "SHUASUMI",
+      "O.C.L.",
+      "TAMTAM",
+      "FOXDUNGEE",
+      "PPYOPULI",
+      "THEpalee",
+      "KIMJA",
+      "DOA",
+      "BBOOGYULI",
+      "NONVER",
+      "CHANDALEE"
+    ]
   },
   {
     "id": "bandai-4582769890260",
@@ -2581,7 +2679,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ちびケロ",
+      "ちびギロ",
+      "ちびゼロ",
+      "ちびクル",
+      "タママ"
+    ]
   },
   {
     "id": "bandai-4582769876028",
@@ -2617,7 +2722,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "南極熊",
+      "首元温め熊",
+      "カメラ熊",
+      "柿どうぞ熊",
+      "おすもう熊"
+    ]
   },
   {
     "id": "bandai-4582770055764",
@@ -2655,7 +2767,8 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": []
   },
   {
     "id": "bandai-4582769978005",
@@ -22648,7 +22761,7 @@
   {
     "id": "bandai-4570118186522",
     "name": "aespa ミニチュアパッケージチャーム",
-    "name_en": "",
+    "name_en": "aespa Miniature Package Charms",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -22672,29 +22785,26 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
       "oshi:idol",
       "type:charm",
       "type:minipkg",
-      "real:miniature"
+      "kawaii:accessory",
+      "hobby:music"
     ],
     "q_ages": [
       "10",
-      "20",
-      "30",
-      "40",
-      "50"
+      "20"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770068535",
     "name": "ロボット パルタ めじるしアクセサリー",
-    "name_en": "",
+    "name_en": "Robot Paruta Mejirushi Accessory",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -22718,26 +22828,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:mascot",
       "kawaii:accessory",
-      "cool:robot",
-      "type:mejirushi",
-      "type:fashion"
+      "type:mejirushi"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118186362",
     "name": "RIIZE つまんでつなげてますこっと でらっくす! LITTLE RIIZE ver.",
-    "name_en": "",
+    "name_en": "RIIZE Pinch & Link Mascots Deluxe! LITTLE RIIZE ver.",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 400,
@@ -22758,7 +22865,10 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "oshi:idol"
+      "oshi:idol",
+      "type:plush",
+      "type:charm",
+      "hobby:music"
     ],
     "q_ages": [
       "10",
@@ -22767,12 +22877,12 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770068238",
     "name": "SKZOO フーディースタイルフィギュア",
-    "name_en": "",
+    "name_en": "SKZOO Hoodie Style Figure",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -22796,7 +22906,9 @@
     "auto": true,
     "q_subs": [
       "oshi:idol",
-      "type:figure"
+      "kawaii:character",
+      "type:figure",
+      "hobby:music"
     ],
     "q_ages": [
       "10",
@@ -22805,12 +22917,12 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "tarts-y909177",
     "name": "青鬼 ラバーマスコットキーホルダー",
-    "name_en": "",
+    "name_en": "Ao Oni Rubber Mascot Keychain",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 300,
@@ -22840,19 +22952,18 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
-      "type:plush",
+      "cool:dark",
+      "oshi:game",
       "type:charm"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   }
 ]
