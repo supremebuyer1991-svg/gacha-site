@@ -6,13 +6,14 @@
     { "title": "ちいかわ めじるしアクセサリー3", "store": "#C-pla 博多駅博多口", "pref": "福岡県", "kind": "item", "start": "2026-10-31T19:30", "end": "2026-11-04T23:59", "method": "LivePocket", "url": "https://livepocket.jp/e/22wy6" },
     { "title": "どうぶつの森 めじるしアクセサリー", "store": "#C-pla+ アリオ倉敷", "pref": "岡山県", "kind": "item", "start": "2026-11-02T10:00", "end": "2026-11-04T23:59", "method": "LivePocket", "url": "https://livepocket.jp/e/j-1v0", "note": "販売日は11/9。1人3個まで" },
     { "title": "PEANUTS めじるしアクセサリー SUMMER", "store": "#C-pla コロワ甲子園", "pref": "兵庫県", "kind": "item", "start": "2026-11-02T11:00", "end": "2026-11-04T23:59", "method": "LivePocket", "url": "https://livepocket.jp/e/gfibg", "note": "販売日は11/10。1人2個まで" },
+    { "title": "ちいかわ めじるしアクセサリー3", "store": "#C-pla イオンモール熱田", "pref": "愛知県", "kind": "item", "start": "2026-11-01T15:00", "end": "2026-11-05T23:59", "method": "LivePocket", "url": "https://livepocket.jp/e/cy3--" },
     { "title": "どうぶつの森 めじるしアクセサリー", "store": "ガシャポンバンダイオフィシャルショップ 未来屋書店 明石", "pref": "兵庫県", "kind": "item", "start": "2026-11-04T00:00", "end": "2026-11-06T23:59", "method": "未来屋書店アプリ", "url": "", "note": "くわしくはお店の公式Xで" },
     { "title": "どうぶつの森 めじるしアクセサリー", "store": "ガシャポンバンダイオフィシャルショップ 未来屋書店 三田ウッディタウン", "pref": "兵庫県", "kind": "item", "start": "2026-11-04T00:00", "end": "2026-11-06T23:59", "method": "未来屋書店アプリ", "url": "", "note": "くわしくはお店の公式Xで" },
     { "title": "どうぶつの森 めじるしアクセサリー", "store": "ガシャポンバンダイオフィシャルショップ 未来屋書店 宇品", "pref": "広島県", "kind": "item", "start": "2026-11-04T12:00", "end": "2026-11-06T23:59", "method": "未来屋書店アプリ", "url": "", "note": "受付開始はお昼ごろ" },
-    { "title": "ちいかわ めじるしアクセサリー3", "store": "#C-pla イオンモール熱田", "pref": "愛知県", "kind": "item", "start": "2026-11-01T15:00", "end": "2026-11-05T23:59", "method": "LivePocket", "url": "https://livepocket.jp/e/cy3--" },
     { "title": "どうぶつの森 めじるしアクセサリー", "store": "#C-pla+ mozoワンダーシティ", "pref": "愛知県", "kind": "item", "start": "2026-11-03T08:32", "end": "2026-11-06T23:59", "method": "LivePocket", "url": "https://livepocket.jp/e/qdldb" },
+    { "title": "オープン日の入場整理券", "store": "ドリームカプセル イオンモール橿原", "pref": "奈良県", "kind": "open", "start": "2026-11-01T10:00", "end": "2026-11-08T21:00", "method": "LivePocket", "url": "https://livepocket.jp/e/20261113_kashihara" },
     { "title": "ちいかわ めじるしアクセサリー3", "store": "#C-pla+ イオンモール大高", "pref": "愛知県", "kind": "item", "start": "2026-10-30T08:42", "end": "2026-11-08T23:59", "method": "LivePocket", "url": "https://livepocket.jp/e/tkd_d" },
-    { "title": "どうぶつの森 めじるしアクセサリー", "store": "#C-pla+ イオンモール大高", "pref": "愛知県", "kind": "item", "start": "2026-11-03T15:54", "end": "2026-11-15T23:59", "method": "LivePocket", "url": "https://livepocket.jp/e/ay1kc" },
-    { "title": "オープン日の入場整理券", "store": "ドリームカプセル イオンモール橿原", "pref": "奈良県", "kind": "open", "start": "2026-11-01T10:00", "end": "2026-11-08T21:00", "method": "LivePocket", "url": "https://livepocket.jp/e/20261113_kashihara" }
+    { "title": "オープン日の入場整理券", "store": "gashacoco ビッグエコー天王寺あべの駅前", "pref": "大阪府", "kind": "open", "start": "2026-11-05T12:00", "end": "2026-11-08T23:59", "method": "gashacocoアプリ", "url": "", "note": "オープンは11/11。くわしくはお店の公式Xで" },
+    { "title": "どうぶつの森 めじるしアクセサリー", "store": "#C-pla+ イオンモール大高", "pref": "愛知県", "kind": "item", "start": "2026-11-03T15:54", "end": "2026-11-15T23:59", "method": "LivePocket", "url": "https://livepocket.jp/e/ay1kc" }
   ]
 }
