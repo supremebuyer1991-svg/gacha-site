@@ -8,7 +8,7 @@
 <script>
 // X（@gachapla）の投稿に付ける画像を作るページ。
 // ?kind=pick&id=商品id / ?kind=feed&ids=a,b,c,d&title=… / ?kind=week
-// 作った画像は、このページを埋め込んだ x.com に postMessage で渡す（直接開いたときは画面に表示）
+// 作った画像は window.name に入れる（このあと同じタブで x.com/compose/post を開くと受け取れる）。&add=1 で前の画像に足す（最大4枚）
 (async function () {
   var q = new URLSearchParams(location.search), kind = q.get("kind") || "pick";
   var W = 1200, H = 675, F = '"Zen Maru Gothic","Yu Gothic","Hiragino Sans","Noto Sans CJK JP",sans-serif', FL = '"Fredoka",' + F;
@@ -65,6 +65,9 @@
   var msg = { type: "gachapla-img", name: name, dataURL: url, kind: kind };
   if (window.parent !== window) window.parent.postMessage(msg, "https://x.com");
   if (window.opener) window.opener.postMessage(msg, "https://x.com");
+  // 同じタブで x.com に移ると window.name は残るので、そこから画像を受け取れる（x.com は外のサイトの画像を読めないため）
+  try { var prev = []; try { var o = JSON.parse(window.name || "{}"); if (o && o.type === "gachapla-imgs") prev = o.list || []; } catch (e) {} if (q.get("add") !== "1") prev = []; prev.push(msg); window.name = JSON.stringify({ type: "gachapla-imgs", list: prev }); } catch (e) {}
+  window.__done = true;
   document.getElementById("st").textContent = "できました（" + Math.round(url.length * 0.75 / 1024) + "KB）";
   var img = new Image(); img.src = url; document.getElementById("out").appendChild(img);
 })();
