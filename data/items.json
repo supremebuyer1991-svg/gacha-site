@@ -2803,7 +2803,13 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ハローキティ",
+      "クロミ",
+      "マイメロディ",
+      "シュガーバニーズ"
+    ]
   },
   {
     "id": "bandai-4582769968501",
@@ -2840,7 +2846,17 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ペペルトポロン",
+      "ピコットポロン",
+      "リズムタップ",
+      "ジュエリーポロン",
+      "コロンタップ",
+      "フワフワポロン",
+      "魔法玉",
+      "魔法の実"
+    ]
   },
   {
     "id": "bandai-4535123852138",
@@ -2878,7 +2894,13 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "坂田銀時",
+      "志村新八",
+      "神楽",
+      "土方十四郎"
+    ]
   },
   {
     "id": "bandai-4570118181541",
@@ -2915,7 +2937,13 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ブロッサム",
+      "バブルス",
+      "バターカップ",
+      "オクティ"
+    ]
   },
   {
     "id": "bandai-4570118181589",
@@ -2953,7 +2981,10 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ギズモ"
+    ]
   },
   {
     "id": "bandai-4570118181701",
@@ -2990,7 +3021,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "がんこちゃん",
+      "がんぺーちゃん",
+      "ワニのバンバン",
+      "カタツムリのツム",
+      "カエルのケロ"
+    ]
   },
   {
     "id": "bandai-4570118184450",
@@ -3024,7 +3062,13 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ニック・ワイルド",
+      "ジュディ・ホップス",
+      "チップ",
+      "デール"
+    ]
   },
   {
     "id": "bandai-4570118184474",
@@ -3061,7 +3105,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "くまのプーさん",
+      "ピグレット",
+      "ディズニー スティッチ",
+      "エンジェル",
+      "ダンボ"
+    ]
   },
   {
     "id": "bandai-4570118185099",
@@ -3098,7 +3149,20 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "探偵ガリレオ",
+      "予知夢",
+      "容疑者Xの献身",
+      "ガリレオの苦悩",
+      "聖女の救済",
+      "真夏の方程式",
+      "虚像の道化師",
+      "禁断の魔術",
+      "沈黙のパレード",
+      "透明な螺旋",
+      "永遠の記憶"
+    ]
   },
   {
     "id": "bandai-4570118185587",
@@ -3136,7 +3200,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ドラえもん",
+      "のび太",
+      "ドラミ",
+      "ころばし屋",
+      "アンキパン"
+    ]
   },
   {
     "id": "bandai-4570118186485",
@@ -3207,7 +3278,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ルビー",
+      "ガーネット",
+      "サフィー",
+      "ダイアナ",
+      "ラブラ",
+      "エンジェラ"
+    ]
   },
   {
     "id": "bandai-4570118198433",
@@ -3243,7 +3322,13 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "Tinky Winky",
+      "Dipsy",
+      "Laa-Laa",
+      "Po"
+    ]
   },
   {
     "id": "bandai-4570118198471",
@@ -3280,7 +3365,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "おまる",
+      "ファーコート",
+      "パック",
+      "ねそべり",
+      "ぷかぷか"
+    ]
   },
   {
     "id": "bandai-4570118201843",
@@ -3316,7 +3408,13 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ハリー・ポッター",
+      "ロン・ウィーズリー",
+      "ハーマイオニー・グレンジャー",
+      "アルバス・ダンブルドア"
+    ]
   },
   {
     "id": "bandai-4570118202550",
@@ -3386,7 +3484,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "キュアモ",
+      "キュアモジューレ",
+      "モフルン",
+      "スターカラーペンダント",
+      "トロピカルパクト"
+    ]
   },
   {
     "id": "bandai-4570118206602",
@@ -22969,7 +23074,7 @@
   {
     "id": "bandai-4582770122442",
     "name": "仮面ライダーシリーズ ビジュアルアートコレクション",
-    "name_en": "",
+    "name_en": "Kamen Rider Series Visual Art Collection",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -22990,21 +23095,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "cool:hero"
+      "cool:hero",
+      "hobby:art"
     ],
     "q_ages": [
-      "40",
-      "50"
+      "20",
+      "30",
+      "40"
     ],
     "q_genders": [
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770131253",
     "name": "【フラットガシャポン】ガンダムシリーズ マウスシートコレクション",
-    "name_en": "",
+    "name_en": "[Flat Gashapon] Gundam Series Mouse Pad Collection",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -23035,12 +23142,12 @@
     "q_genders": [
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118197115",
     "name": "MINECRAFT めじるしアクセサリー スタンダード",
-    "name_en": "",
+    "name_en": "MINECRAFT Mejirushi Accessory Standard",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -23063,25 +23170,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
       "oshi:game",
-      "type:mejirushi",
-      "type:fashion"
+      "kawaii:accessory",
+      "type:mejirushi"
     ],
     "q_ages": [
       "10",
-      "30"
+      "20"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118184894",
     "name": "【フラットガシャポン】お文具といっしょ ガーゼタオルなのです。",
-    "name_en": "",
+    "name_en": "[Flat Gashapon] Obungu to Issho Gauze Towel Nanodesu.",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -23103,24 +23209,22 @@
     "auto": true,
     "q_subs": [
       "kawaii:character",
-      "type:stationery",
+      "type:useful",
       "funny:neta"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118196736",
     "name": "NARUTO-ナルト- 疾風伝 めじるしアクセサリー",
-    "name_en": "",
+    "name_en": "NARUTO Shippuden Mejirushi Accessory",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -23143,25 +23247,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
       "cool:shonen",
-      "type:mejirushi",
-      "type:fashion"
+      "kawaii:accessory",
+      "type:mejirushi"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769792977",
     "name": "IVE FROM STARSHIP ENTERTAINMENT WITH AMUSE アクリルビーズチャーム",
-    "name_en": "",
+    "name_en": "IVE FROM STARSHIP ENTERTAINMENT WITH AMUSE Acrylic Bead Charm",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -23184,24 +23287,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
-      "kawaii:yumekawa",
-      "type:charm"
+      "oshi:idol",
+      "hobby:music",
+      "type:charm",
+      "kawaii:accessory"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769979477",
     "name": "TVアニメ『逃げ上手の若君』 まちぼうけ",
-    "name_en": "",
+    "name_en": "The Elusive Samurai Machibouke",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 500,
@@ -23224,24 +23327,26 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "type:figure",
-      "funny:machibouke"
+      "oshi:trend",
+      "cool:shonen",
+      "funny:machibouke",
+      "type:figure"
     ],
     "q_ages": [
+      "10",
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770054095",
     "name": "プリキュアオールスターズ プリキュアあそーと2026",
-    "name_en": "",
+    "name_en": "Pretty Cure All Stars Precure Assort 2026",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -23262,20 +23367,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "oshi:girls"
+      "oshi:girls",
+      "oshi:kids"
     ],
     "q_ages": [
-      "10"
+      "20",
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770056150",
     "name": "いきもの大図鑑アドバンス タマムシとウグイスコガネ",
-    "name_en": "",
+    "name_en": "Ikimono Daizukan Advance Jewel Beetle and Uguisu Kogane",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 1500,
@@ -23296,22 +23403,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "real:creature"
+      "real:creature",
+      "type:figure"
     ],
     "q_ages": [
+      "30",
       "40",
       "50"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770069082",
     "name": "仮面ライダーシリーズ めじるしアクセサリー5",
-    "name_en": "",
+    "name_en": "Kamen Rider Series Mejirushi Accessory 5",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -23334,25 +23442,25 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
       "cool:hero",
-      "type:mejirushi",
-      "type:fashion"
+      "kawaii:accessory",
+      "type:mejirushi"
     ],
     "q_ages": [
-      "40",
-      "50"
+      "20",
+      "30",
+      "40"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "tarts-y905001",
     "name": "お部屋ぐまルーミー ほのぼのマスコット",
-    "name_en": "",
+    "name_en": "Oheyaguma Roomy Honobono Mascot",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 300,
@@ -23381,24 +23489,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:animal",
       "kawaii:mascot",
       "type:plush"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "tarts-y906022",
     "name": "ディズニーキャラクター ぴたぷりっマスコット",
-    "name_en": "",
+    "name_en": "Disney Characters Pitapuri Mascot",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 400,
@@ -23431,18 +23538,19 @@
       "type:plush"
     ],
     "q_ages": [
+      "10",
       "20",
       "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "tarts-y906527",
     "name": "スター・ウォーズ グローグーいっぱいコレクション3",
-    "name_en": "",
+    "name_en": "Star Wars Grogu Ippai Collection 3",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 400,
@@ -23469,7 +23577,8 @@
     "auto": true,
     "q_subs": [
       "cool:western",
-      "hobby:movie"
+      "hobby:movie",
+      "type:figure"
     ],
     "q_ages": [
       "20",
@@ -23480,12 +23589,12 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "tarts-y096457",
     "name": "パワーパフガールズ ぬいぐるみといっしょフィギュア",
-    "name_en": "",
+    "name_en": "The Powerpuff Girls Figure with Plush",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 400,
@@ -23514,24 +23623,25 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
+      "kawaii:character",
       "type:figure",
       "type:plush",
+      "cool:western",
       "retro:heisei"
     ],
     "q_ages": [
-      "30",
-      "40"
+      "20",
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "tarts-y912993",
     "name": "ハリー・ポッター 魔法の杖コレクション ～ハリー・ポッターと賢者の石～",
-    "name_en": "",
+    "name_en": "Harry Potter Wand Collection: Harry Potter and the Philosopher's Stone",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 300,
@@ -23560,9 +23670,11 @@
     "auto": true,
     "q_subs": [
       "cool:western",
-      "hobby:movie"
+      "hobby:movie",
+      "real:miniature"
     ],
     "q_ages": [
+      "20",
       "30",
       "40"
     ],
@@ -23570,12 +23682,12 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "tarts-y091582",
     "name": "ホビーガチャ ワイルド・スピード/ジェットブレイク",
-    "name_en": "",
+    "name_en": "Hobby Gacha Fast & Furious 9",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 500,
@@ -23600,22 +23712,26 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "cool:western",
+      "hobby:movie",
+      "real:vehicle",
+      "real:miniature"
+    ],
     "q_ages": [
-      "20",
       "30",
-      "40"
+      "40",
+      "50"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "tarts-y094743",
     "name": "アナと雪の女王 アイテムコレクション",
-    "name_en": "",
+    "name_en": "Frozen Item Collection",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 400,
@@ -23641,17 +23757,18 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:disney"
+      "kawaii:disney",
+      "hobby:movie",
+      "real:miniature"
     ],
     "q_ages": [
+      "10",
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   }
 ]
