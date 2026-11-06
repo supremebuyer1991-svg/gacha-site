@@ -5377,7 +5377,7 @@
     "maker_en": "Bandai",
     "price": 400,
     "release": "2026-11",
-    "release_note": "",
+    "release_note": "11月第1週より順次",
     "genre": "anime",
     "moods": [],
     "tags": [],
@@ -30365,6 +30365,6179 @@
       "kawaii:mascot",
       "type:figure",
       "type:plush"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770027471",
+    "name": "VIRUSWEETS figure collection ～Summer Festival～",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-08",
+    "release_note": "8月第4週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770027471000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770027471",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770053951",
+    "name": "mojojojo ぬいぐるみクリップ",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-08",
+    "release_note": "8月第4週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770053951000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770053951",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "kawaii:accessory",
+      "type:plush",
+      "type:fashion",
+      "retro:heisei"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770068344",
+    "name": "【フラットガシャポン】サンリオキャラクターズ いちご新聞クリアラバーコースター",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-08",
+    "release_note": "8月第4週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770068344000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770068344",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:sanrio",
+      "type:useful"
+    ],
+    "q_ages": [
+      "10",
+      "20",
+      "30"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770069471",
+    "name": "はしもとみおのブレーメンの音楽隊彫ってみた。2",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 1000,
+    "release": "2026-08",
+    "release_note": "8月第4週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 3,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770069471000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770069471",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770095012",
+    "name": "豆ガシャ本 「週刊少年ジャンプ ジャンプコミックスコレクション」05",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-08",
+    "release_note": "8月第4週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770095012000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770095012",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "hobby:books"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770095494",
+    "name": "アニメ『呪術廻戦』5周年 シールグッズコレクション",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-08",
+    "release_note": "8月第4週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 10,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770095494000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770095494",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "cool:shonen",
+      "cool:dark",
+      "type:stationery"
+    ],
+    "q_ages": [
+      "10"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118183637",
+    "name": "FLAVORS めじるしアクセサリー2",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-08",
+    "release_note": "8月第4週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118183637000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118183637",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "type:mejirushi",
+      "type:fashion"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118196064",
+    "name": "ぜんまいざむらい めじるしアクセサリー2",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-08",
+    "release_note": "8月第4週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118196064000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118196064",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "oshi:kids",
+      "type:mejirushi",
+      "type:fashion"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118203366",
+    "name": "ホロライブ ガシャポンパレット フェアリースイング1",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-08",
+    "release_note": "8月第4週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118203366000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118203366",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "oshi:vtuber",
+      "hobby:music"
+    ],
+    "q_ages": [
+      "10",
+      "20"
+    ],
+    "q_genders": [
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769972430",
+    "name": "【フラットガシャポン】たまごっち ミニおりたたみコンテナ2",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-08",
+    "release_note": "8月第4週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769972430000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769972430",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:useful",
+      "retro:heisei"
+    ],
+    "q_ages": [
+      "30"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769979316",
+    "name": "バレエモチーフ めじるしアクセサリー2",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 200,
+    "release": "2026-08",
+    "release_note": "8月第4週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769979316000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769979316",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "type:mejirushi",
+      "type:fashion"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770027235",
+    "name": "クレヨンしんちゃん なつやすみマスコット",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-08",
+    "release_note": "8月第4週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770027235000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770027235",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "oshi:kids",
+      "type:plush"
+    ],
+    "q_ages": [
+      "10"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770027754",
+    "name": "【フラットガシャポン】クリアポーチコレクション スーパー戦隊",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-08",
+    "release_note": "8月第4週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770027754000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770027754",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "cool:hero",
+      "type:useful"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770027877",
+    "name": "ガンダムカードゲーム アクリルチャームコレクション",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-08",
+    "release_note": "8月第4週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 20,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770027877000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770027877",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "cool:robot",
+      "type:charm"
+    ],
+    "q_ages": [
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770055320",
+    "name": "ナルミヤキャラクターズ ミニチュアパッケージチャーム",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-08",
+    "release_note": "8月第4週より順次",
+    "genre": "miniature",
+    "moods": [
+      "kawaii",
+      "real"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 8,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770055320000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770055320",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "type:charm",
+      "type:minipkg",
+      "real:miniature",
+      "retro:heisei"
+    ],
+    "q_ages": [
+      "30",
+      "40",
+      "50"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770069013",
+    "name": "Fate/Grand Order 宝具コレクション",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-08",
+    "release_note": "8月第4週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770069013000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770069013",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770076790",
+    "name": "いきもの大図鑑レプティ 恐竜05",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-08",
+    "release_note": "8月第4週より順次",
+    "genre": "animal",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770076790000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770076790",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "real:creature",
+      "real:dino"
+    ],
+    "q_ages": [
+      "40",
+      "50"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769708466",
+    "name": "まちぼうけ たまごっち",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "anime",
+    "moods": [
+      "funny"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769708466000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769708466",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:figure",
+      "retro:heisei",
+      "funny:machibouke"
+    ],
+    "q_ages": [
+      "30"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769927867",
+    "name": "豆ガシャ本 「ジョジョの奇妙な冒険」",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769927867000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769927867",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "cool:shonen",
+      "hobby:books"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769916649",
+    "name": "【ガシャポンバンダイオフィシャルショップ限定再販】サンリオキャラクターズ ミニチュアパッケージコレクション",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "miniature",
+    "moods": [
+      "real"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769916649000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769916649",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:sanrio",
+      "type:minipkg",
+      "real:miniature"
+    ],
+    "q_ages": [
+      "10",
+      "20",
+      "30",
+      "40",
+      "50"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769847486",
+    "name": "スポンジ・ボブ マスコットチャーム",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769847486000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769847486",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:character",
+      "kawaii:mascot",
+      "kawaii:accessory",
+      "type:plush",
+      "type:charm"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118181763",
+    "name": "パーフェクトピギー めじるしアクセサリー",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118181763000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118181763",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "type:mejirushi",
+      "type:fashion"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118182128",
+    "name": "TOM and JERRY ぎゅーこっと",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118182128000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118182128",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:character",
+      "funny:machibouke"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118183552",
+    "name": "ホイッピ＆ラッピ めじるしアクセサリー",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118183552000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118183552",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "type:mejirushi",
+      "type:fashion"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118183798",
+    "name": "プリキュアオールスターズ Q posket ミニチュアコレクション２",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "miniature",
+    "moods": [
+      "real"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118183798000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118183798",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "oshi:girls",
+      "real:miniature"
+    ],
+    "q_ages": [
+      "10",
+      "30",
+      "40",
+      "50"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118184092",
+    "name": "ホロライブ すわらせ隊 アクリルスタンド カラーライズ4",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 8,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118184092000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118184092",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "oshi:vtuber",
+      "hobby:music"
+    ],
+    "q_ages": [
+      "10",
+      "20"
+    ],
+    "q_genders": [
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118184696",
+    "name": "ハリー・ポッター ミニチュアコレクション ～魔法の杖～",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "miniature",
+    "moods": [
+      "real"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118184696000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118184696",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "cool:western",
+      "real:miniature",
+      "hobby:movie"
+    ],
+    "q_ages": [
+      "30",
+      "40",
+      "50"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118184733",
+    "name": "スーパーマン つまんでつなげてますこっと",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 8,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118184733000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118184733",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "cool:western"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118185211",
+    "name": "CRAZY RACCOON つまんでつなげてますこっと1",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 12,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118185211000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118185211",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "oshi:vtuber"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118185235",
+    "name": "CRAZY RACCOON つまんでつなげてますこっと2",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 12,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118185235000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118185235",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "oshi:vtuber"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118186607",
+    "name": "TOY STORY5 ブリスターチャームコレクション",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118186607000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118186607",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "type:charm"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118197016",
+    "name": "アルティメットルミナスプレミアム 仮面ライダー",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 1000,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118197016000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118197016",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "cool:hero"
+    ],
+    "q_ages": [
+      "40",
+      "50"
+    ],
+    "q_genders": [
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118197214",
+    "name": "まちぼうけ 牙狼＜GARO＞シリーズの場合",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "anime",
+    "moods": [
+      "funny"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118197214000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118197214",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:figure",
+      "funny:machibouke"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118198112",
+    "name": "とっとこハム太郎 手作りおやつチャーム #平成女児チョコ",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 7,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118198112000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118198112",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "type:charm",
+      "real:food",
+      "retro:heisei"
+    ],
+    "q_ages": [
+      "30"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118198297",
+    "name": "名探偵コナン Q posket ミニチュアコレクション",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "miniature",
+    "moods": [
+      "real"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118198297000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118198297",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "oshi:kids",
+      "real:miniature"
+    ],
+    "q_ages": [
+      "10",
+      "20",
+      "30",
+      "40",
+      "50"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118233042",
+    "name": "パンどろぼう フィギュアウォッチコレクション",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "anime",
+    "moods": [
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 3,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118233042000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118233042",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:character",
+      "type:figure",
+      "real:food"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118234360",
+    "name": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 カプセルラバーマスコット",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 10,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118234360000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118234360",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "oshi:trend",
+      "type:plush",
+      "hobby:movie"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769775659",
+    "name": "８番らーめん ミニチュアフィギュアチャームコレクション",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "miniature",
+    "moods": [
+      "kawaii",
+      "real",
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769775659000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769775659",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "type:figure",
+      "type:charm",
+      "real:miniature"
+    ],
+    "q_ages": [
+      "30",
+      "40",
+      "50"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769792953",
+    "name": "IVE FROM STARSHIP ENTERTAINMENT WITH AMUSE ミニCDコレクション",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769792953000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769792953",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:minipkg",
+      "type:sound",
+      "real:miniature",
+      "hobby:music"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769836466",
+    "name": "東京ラーメンストリート ミニチュアフィギュアチャームコレクション01",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "miniature",
+    "moods": [
+      "kawaii",
+      "real",
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 9,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769836466000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769836466",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "type:figure",
+      "type:charm",
+      "real:miniature"
+    ],
+    "q_ages": [
+      "30",
+      "40",
+      "50"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769837067",
+    "name": "テレタビーズ ふわふわカラともマスコット",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769837067000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769837067",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:character",
+      "kawaii:mascot",
+      "kawaii:yumekawa",
+      "type:plush"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769891816",
+    "name": "それいけ！アンパンマン ぽちっとプロジェクター2",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 3,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769891816000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769891816",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "oshi:kids",
+      "type:sound",
+      "real:food"
+    ],
+    "q_ages": [
+      "10"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769911033",
+    "name": "機動戦士ガンダム MSメカニカルバストDX ユニコーンガンダム2号機 バンシィ",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 800,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 3,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769911033000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769911033",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "cool:robot"
+    ],
+    "q_ages": [
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769911095",
+    "name": "【箱売】機動戦士ガンダム MSメカニカルバストDX ユニコーンガンダム2号機 バンシィ",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 880,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 3,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769911095000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769911095",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "cool:robot"
+    ],
+    "q_ages": [
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769911255",
+    "name": "米津玄師 ミニCDコレクション",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 11,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769911255000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769911255",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:minipkg",
+      "type:sound",
+      "real:miniature",
+      "hobby:music"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769917301",
+    "name": "クレヨンしんちゃん ゆらゆらフェイスミニチャーム",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769917301000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769917301",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "oshi:kids",
+      "type:charm"
+    ],
+    "q_ages": [
+      "10"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769936098",
+    "name": "機動戦士ガンダム ガシャポン戦士ZERO 02",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 15,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769936098000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769936098",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "cool:robot"
+    ],
+    "q_ages": [
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769978920",
+    "name": "サンリオキャラクターズ みんなでおめかしフィギュア",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "anime",
+    "moods": [
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769978920000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769978920",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:sanrio",
+      "type:figure"
+    ],
+    "q_ages": [
+      "10",
+      "20",
+      "30"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769981807",
+    "name": "HUNTER×HUNTER ガシャポン！コレクション キメラアント編",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769981807000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769981807",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "cool:shonen"
+    ],
+    "q_ages": [
+      "30"
+    ],
+    "q_genders": [
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769995439",
+    "name": "ジョジョの奇妙な冒険 JOJO球 カプセルヒーローズ04",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769995439000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769995439",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "cool:shonen"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769995767",
+    "name": "僕のヒーローアカデミア すわらせ隊2",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769995767000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769995767",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "cool:shonen"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770026047",
+    "name": "ハリー・ポッター＆ファンタスティック・ビースト 魔法生物 capsule flockies チャーム",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770026047000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770026047",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "cool:western",
+      "type:charm",
+      "hobby:movie"
+    ],
+    "q_ages": [
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770027143",
+    "name": "はなかっぱ つまんでつなげてますこっと",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 10,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770027143000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770027143",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "oshi:kids"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770027785",
+    "name": "ウルトラマン カラフルマルチチャーム",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 3,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770027785000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770027785",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "cool:hero",
+      "type:charm",
+      "retro:showa"
+    ],
+    "q_ages": [
+      "40",
+      "50"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770053869",
+    "name": "カプキャラ にゃんこ大戦争12",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "animal",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "age_min": 6,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770053869000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770053869",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:animal"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770054132",
+    "name": "ポケットモンスター スイングコレクション Type:Grass",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 6,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770054132000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770054132",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:pokemon",
+      "kawaii:mascot"
+    ],
+    "q_ages": [
+      "10",
+      "20",
+      "30"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770054149",
+    "name": "ジェムリーズ ポケットモンスター13 Summer",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770054149000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770054149",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:pokemon"
+    ],
+    "q_ages": [
+      "10",
+      "20",
+      "30"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770054231",
+    "name": "パンどろぼう ミニチュアパッケージチャーム",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "miniature",
+    "moods": [
+      "kawaii",
+      "real"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770054231000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770054231",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:character",
+      "kawaii:accessory",
+      "type:charm",
+      "type:minipkg",
+      "real:miniature",
+      "real:food"
+    ],
+    "q_ages": [
+      "30",
+      "40",
+      "50"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770054460",
+    "name": "hololive DEV_IS ReGLOSS ぷくっとリング",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 8,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770054460000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770054460",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "oshi:vtuber",
+      "type:fashion"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770054545",
+    "name": "まちぼうけ おもちゃの場合",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "anime",
+    "moods": [
+      "funny"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770054545000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770054545",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:figure",
+      "funny:machibouke"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770055634",
+    "name": "＠CTION RIDE（アクションライド） 仮面ライダー6",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770055634000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770055634",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "cool:hero"
+    ],
+    "q_ages": [
+      "40",
+      "50"
+    ],
+    "q_genders": [
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770055689",
+    "name": "ゴジにゃ。",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770055689000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770055689",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770055795",
+    "name": "ケロロ軍曹 ぎゅーこっと",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770055795000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770055795",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "oshi:kids",
+      "retro:heisei",
+      "funny:machibouke"
+    ],
+    "q_ages": [
+      "30"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770055856",
+    "name": "BOUNTY HUNTER 『スカルくん』ミニチュアフィギュアコレクション",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "miniature",
+    "moods": [
+      "real",
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770055856000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770055856",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "cool:shonen",
+      "type:figure",
+      "real:miniature"
+    ],
+    "q_ages": [
+      "30",
+      "40",
+      "50"
+    ],
+    "q_genders": [
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770069198",
+    "name": "めざましコラショ ガシャポンミニチュアコレクション",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "miniature",
+    "moods": [
+      "real"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770069198000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770069198",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "real:miniature"
+    ],
+    "q_ages": [
+      "30",
+      "40",
+      "50"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770069457",
+    "name": "ブルーロック めじるしアクセサリー ＃ハッシュタグつけるver.",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 10,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770069457000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770069457",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "cool:shonen",
+      "type:mejirushi",
+      "type:fashion"
+    ],
+    "q_ages": [
+      "10"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770069488",
+    "name": "取り込んじゃった！おばけさんこれくしょん！",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770069488000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770069488",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "cool:dark"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770076738",
+    "name": "おジャ魔女どれみ ピリカピリララコンパクトミラー パールカラーver.",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-08",
+    "release_note": "8月第5週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770076738000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770076738",
+    "popularity": 50,
+    "added": "2026-08-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "oshi:girls",
+      "type:fashion",
+      "type:useful",
+      "retro:heisei"
+    ],
+    "q_ages": [
+      "30"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y905049",
+    "name": "パンダの穴 猫虫",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-08",
+    "release_note": "8月28日週発売",
+    "genre": "animal",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "lineup_names": [
+      "しま虫",
+      "むぎ虫",
+      "とら虫",
+      "赤ちゃんぶち虫",
+      "もふ虫"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y905049",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:animal",
+      "real:food"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y905179",
+    "name": "肩ズンFig. カーズ",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-08",
+    "release_note": "8月28日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "lineup_names": [
+      "メーター",
+      "ライトニング・マックィーン",
+      "サリー",
+      "ドック・ハドソン"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y905179",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:figure",
+      "funny:machibouke"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y905247",
+    "name": "サンリオキャラクターズ ぞうきんがけレースフィギュア",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-08",
+    "release_note": "8月24日週発売",
+    "genre": "anime",
+    "moods": [
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "lineup_names": [
+      "ハローキティ",
+      "シナモロール",
+      "ポムポムプリン",
+      "ポチャッコ",
+      "けろけろけろっぴ"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y905247",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:sanrio",
+      "type:figure"
+    ],
+    "q_ages": [
+      "10",
+      "20",
+      "30"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y905797",
+    "name": "きかんしゃトーマス ファニーなフェイスのめじるしガチャマスコット",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-08",
+    "release_note": "8月24日週発売",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "lineup_names": [
+      "てへぺろトーマス",
+      "にやりトーマス",
+      "ぷく顔パーシー",
+      "くしゃくしゃパーシー",
+      "あかはなジェームス",
+      "きょとんジェームス"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y905797",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "kawaii:accessory",
+      "type:plush",
+      "type:mejirushi"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y905858",
+    "name": "ミニオンズ＆モンスターズ スタンドフィギュア",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-08",
+    "release_note": "8月24日週発売",
+    "genre": "anime",
+    "moods": [
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "lineup_names": [
+      "ジェームス",
+      "ヘンリー",
+      "エド",
+      "グーミー"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y905858",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:figure"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y906336",
+    "name": "踊る大捜査線 N.E.W.×ガチャポリス",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-08",
+    "release_note": "8月28日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "lineup_names": [
+      "警告サイレン",
+      "緊急ランプ",
+      "親指手錠",
+      "警棒",
+      "拳銃",
+      "警察手帳型テープ"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y906336",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y906879",
+    "name": "カプセルプラレール 赤い電車大集合編",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-08",
+    "release_note": "8月28日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 13,
+    "lineup_names": [
+      "イースト・アイ（ゼンマイ車）",
+      "イースト・アイ（中間車）＋直線レール2本",
+      "イースト・アイ（後尾車）＋曲線レール2本",
+      "E6系新幹線こまち（ゼンマイ車）",
+      "E6系新幹線こまち（中間車）＋直線レール2本",
+      "E6系新幹線こまち（後尾車）＋曲線レール2本",
+      "小田急ロマンスカー GSE70000形（ゼンマイ車）",
+      "小田急ロマンスカー GSE70000形（中間車）＋直線レール2本",
+      "小田急ロマンスカー GSE70000形（後尾車）＋曲線レール2本",
+      "近鉄名阪特急ひのとり（ゼンマイ車）",
+      "近鉄名阪特急ひのとり（中間車）＋直線レール2本",
+      "近鉄名阪特急ひのとり（後尾車）＋曲線レール2本",
+      "EF510レッドサンダー（ゼンマイ車）"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y906879",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "real:vehicle"
+    ],
+    "q_ages": [
+      "50"
+    ],
+    "q_genders": [
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y909405",
+    "name": "ファグラー もふもふポーシェット Vol.2",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 500,
+    "release": "2026-08",
+    "release_note": "8月28日週発売",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "lineup_names": [
+      "アノイド",
+      "スケッチー",
+      "ワイドアイ",
+      "グリングリン",
+      "インデサイシブ",
+      "ギャップトゥース"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y909405",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "type:plush"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y909542",
+    "name": "ohora ディズニー ツイステッドワンダーランド ミニチュアパッケージコレクション",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-08",
+    "release_note": "8月24日週発売",
+    "genre": "miniature",
+    "moods": [
+      "real"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 7,
+    "lineup_names": [
+      "ハーツラビュル",
+      "サバナクロー",
+      "オクタヴィネル",
+      "スカラビア",
+      "ポムフィオーレ",
+      "イグニハイド",
+      "ディアソムニア"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y909542",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:disney",
+      "type:minipkg",
+      "real:miniature"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40",
+      "50"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y909580",
+    "name": "肩ズンFig. ズートピア in サバンナ・セントラル",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-08",
+    "release_note": "8月28日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "lineup_names": [
+      "フラッシュ",
+      "フィニック",
+      "ニック・ワイルド",
+      "ジュディ・ホップス",
+      "クロウハウザー",
+      "レミングのビジネスマン"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y909580",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:disney",
+      "type:figure",
+      "funny:machibouke",
+      "hobby:movie"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y909887",
+    "name": "ぴた!でふぉめ 鬼滅の刃 無限城編 アクリルめじるしガチャマスコット",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-08",
+    "release_note": "8月28日週発売",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 8,
+    "lineup_names": [
+      "竈門炭治郎",
+      "我妻善逸",
+      "冨岡義勇",
+      "胡蝶しのぶ＆栗花落カナヲ",
+      "鬼舞辻無惨",
+      "童磨",
+      "猗窩座",
+      "獪岳"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y909887",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "kawaii:accessory",
+      "cool:shonen",
+      "cool:weaponry",
+      "type:plush",
+      "type:mejirushi"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y097232",
+    "name": "チャギントン フェイスウォッチコレクション",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-08",
+    "release_note": "8月31日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 3,
+    "lineup_names": [
+      "ウィルソン",
+      "ココ",
+      "ブルースター"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y097232",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y098406",
+    "name": "肩ズンFig. ぐ〜チョコランタン",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-08",
+    "release_note": "8月31日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "lineup_names": [
+      "スプー",
+      "アネム",
+      "ズズ",
+      "ジャコビ"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y098406",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "oshi:kids",
+      "type:figure",
+      "real:food",
+      "funny:machibouke"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y900846",
+    "name": "ミニオンズ＆モンスターズ プロジェクターライト",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-08",
+    "release_note": "8月31日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "lineup_names": [
+      "デザインA",
+      "デザインB",
+      "デザインC",
+      "デザインD"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y900846",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:useful",
+      "type:sound"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y903380",
+    "name": "肩ズンFig. シュガー・ラッシュ",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-08",
+    "release_note": "8月31日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "lineup_names": [
+      "ラルフ",
+      "ヴァネロペ・フォン・シュウィーツ",
+      "タフィタ・マトンファッジ",
+      "サワー・ビル"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y903380",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:figure",
+      "funny:machibouke"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y904394",
+    "name": "でふぉラバ! TVアニメ『地縛少年花子くん2』キールホルダー",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-08",
+    "release_note": "8月31日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 7,
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y904394",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y905919",
+    "name": "肩ズンFig 呪術廻戦 -参-",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-08",
+    "release_note": "8月31日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "lineup_names": [
+      "虎杖 悠仁",
+      "伏黒 恵",
+      "乙骨 憂太",
+      "脹相"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y905919",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "cool:shonen",
+      "cool:dark",
+      "type:figure",
+      "funny:machibouke"
+    ],
+    "q_ages": [
+      "10"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y906039",
+    "name": "肩ズンFig. ディズニープリンセス",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-08",
+    "release_note": "8月31日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "lineup_names": [
+      "ジャスミン",
+      "ベル",
+      "ラプンツェル",
+      "モアナ",
+      "アリエル"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y906039",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:disney",
+      "type:figure",
+      "funny:machibouke"
+    ],
+    "q_ages": [
+      "20",
+      "30"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y908200",
+    "name": "でふぉラバ! 忍たま乱太郎 めじるしガチャマスコット",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-08",
+    "release_note": "8月31日週発売",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 13,
+    "lineup_names": [
+      "乱太郎＆きり丸＆しんべヱ＆ヘムヘム",
+      "土井半助",
+      "久々知兵助",
+      "尾浜勘右衛門",
+      "不破雷蔵",
+      "鉢屋三郎",
+      "竹谷八左ヱ門",
+      "潮江文次郎",
+      "立花仙蔵",
+      "中在家長次",
+      "七松小平太",
+      "善法寺伊作",
+      "食満留三郎"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y908200",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "kawaii:accessory",
+      "oshi:kids",
+      "type:plush",
+      "type:mejirushi"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y908828",
+    "name": "サンリオキャラクターズ ファッションリング オーロラコレクション2",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-08",
+    "release_note": "8月31日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 12,
+    "lineup_names": [
+      "ポチャッコ（クリアver.）",
+      "タキシードサム（クリアver.）",
+      "バッドばつ丸（クリアver.）",
+      "あひるのペックル（クリアver.）",
+      "けろけろけろっぴ（クリアver.）",
+      "ハンギョドン（クリアver.）",
+      "ポチャッコ（オーロラクリアver.）",
+      "タキシードサム（オーロラクリアver.）",
+      "バッドばつ丸（オーロラクリアver.）",
+      "あひるのペックル（オーロラクリアver.）",
+      "けろけろけろっぴ（オーロラクリアver.）",
+      "ハンギョドン（オーロラクリアver.）"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y908828",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:sanrio",
+      "kawaii:accessory",
+      "kawaii:yumekawa",
+      "type:fashion"
+    ],
+    "q_ages": [
+      "10",
+      "20",
+      "30"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y909498",
+    "name": "サンリオキャラクターズ ふわわフロッキーマスコット2 ～ハンサムブルー～",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-08",
+    "release_note": "8月31日週発売",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "lineup_names": [
+      "ポチャッコ",
+      "けろけろけろっぴ",
+      "バッドばつ丸",
+      "ハンギョドン",
+      "タキシードサム",
+      "あひるのペックル"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y909498",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:sanrio",
+      "kawaii:mascot",
+      "type:plush"
+    ],
+    "q_ages": [
+      "10",
+      "20",
+      "30"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y909641",
+    "name": "ふんばり～ぬ -どこでもふんばり～ぬ-",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-08",
+    "release_note": "8月31日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "lineup_names": [
+      "柴犬",
+      "トイプードル",
+      "ポメラニアン",
+      "パグ",
+      "チワワ（ブラックタン）",
+      "チワワ（クリーム）"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y909641",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:plush"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y086113",
+    "name": "肩ズンFig. ディズニー ツイステッドワンダーランド ハーツラビュル寮",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "2026年7月6日週再発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "lineup_names": [
+      "リドル・ローズハート",
+      "エース・トラッポラ",
+      "デュース・スペード",
+      "トレイ・クローバー",
+      "ケイト・ダイヤモンド"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y086113",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:disney",
+      "type:figure",
+      "funny:machibouke"
+    ],
+    "q_ages": [
+      "20",
+      "30"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y094156",
+    "name": "ポケモン とことこポッチャマ",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "7月6日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y094156",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:pokemon"
+    ],
+    "q_ages": [
+      "10",
+      "20"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y903137",
+    "name": "くまのプーさん Hide&Seek かくれんぼフィギュア",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "7月6日週発売",
+    "genre": "animal",
+    "moods": [
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "lineup_names": [
+      "プー?-枕-",
+      "プー?-ハニーポット-",
+      "プー?-王冠A-",
+      "プー?-王冠B-"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y903137",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:disney",
+      "kawaii:animal",
+      "type:figure"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y903649",
+    "name": "サンリオキャラクターズ もこもこパンダフロッキーマスコット",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "7月6日週発売",
+    "genre": "animal",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "lineup_names": [
+      "マイメロディ",
+      "クロミ",
+      "シナモロール",
+      "ポムポムプリン",
+      "ポチャッコ"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y903649",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:sanrio",
+      "kawaii:animal",
+      "kawaii:mascot",
+      "type:plush",
+      "real:food"
+    ],
+    "q_ages": [
+      "10",
+      "20",
+      "30"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y906855",
+    "name": "DUNG BEAT POSSE アクリルめじるしガチャマスコット",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月6日週発売",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 7,
+    "lineup_names": [
+      "FORCE&ne;剣",
+      "MICHI&ne;中西椋雅",
+      "AYASE&ne;渡邉廉",
+      "VinceP&ne;JIMMY",
+      "HARUTO&ne;小波津志",
+      "HANKICHI&ne;半田龍臣",
+      "MALIK&ne;WEESA"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y906855",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "kawaii:accessory",
+      "type:plush",
+      "type:mejirushi"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y907593",
+    "name": "都市伝説解体センター ギミックアクリルキーホルダー",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "7月6日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "lineup_names": [
+      "廻屋 渉【特定】",
+      "廻屋 渉【解体】",
+      "福来 あざみ【装着】",
+      "ジャスミン【混濁】",
+      "あざみ＆ジャスミン【車窓】",
+      "谷原 きのこ【配信】"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y907593",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:charm"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y907647",
+    "name": "トミカ BOX型シリコンポーチ",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "7月6日週発売",
+    "genre": "miniature",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "lineup_names": [
+      "日産 NV350キャラバン 救急車",
+      "日産 NISSAN GT-R",
+      "トヨタ タウンエース ハンバーガーカー",
+      "トヨタ クラウン パトロールカー"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y907647",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "type:useful",
+      "real:vehicle"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y092282",
+    "name": "塔の上のラプンツェル ゆらゆらつながるマスコット",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "9月22日週発売・2026年7月13日週再発売",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "lineup_names": [
+      "ラプンツェル",
+      "ラプンツェル（くるくる）",
+      "フリン・ライダー",
+      "パスカル"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y092282",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "type:plush"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y094729",
+    "name": "肩ズンFig. カラフルピーチ vol.1",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 500,
+    "release": "2026-07",
+    "release_note": "7月13日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "lineup_names": [
+      "じゃぱぱ",
+      "のあ",
+      "なおきり",
+      "ヒロ",
+      "シヴァ"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y094729",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:figure",
+      "funny:machibouke"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y099762",
+    "name": "映画 すみっコぐらし 空の王国とふたりのコ めじるしガチャマスコット",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月13日週発売",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "lineup_names": [
+      "とんかつ",
+      "えびふらいのしっぽ",
+      "しろくま",
+      "とかげ"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y099762",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:character",
+      "kawaii:mascot",
+      "kawaii:accessory",
+      "type:plush",
+      "type:mejirushi",
+      "hobby:movie"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y901065",
+    "name": "肩ズンFig. カラフルピーチ vol.2",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 500,
+    "release": "2026-07",
+    "release_note": "7月13日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "lineup_names": [
+      "ゆあんくん",
+      "たっつん",
+      "どぬく",
+      "えと",
+      "うり",
+      "もふ"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y901065",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:figure",
+      "funny:machibouke"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y901119",
+    "name": "おいんぼいん ふわふわてんしちゃん めじるしガチャマスコット",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月13日週発売",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "lineup_names": [
+      "ねこちゃん",
+      "わんちゃん",
+      "きつねちゃん",
+      "くまちゃん"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y901119",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "kawaii:accessory",
+      "type:plush",
+      "type:mejirushi"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y901560",
+    "name": "ミニオンズ Belloworld 世界の旅フィギュア2",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "7月13日週発売",
+    "genre": "anime",
+    "moods": [
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 3,
+    "lineup_names": [
+      "アメリカ",
+      "イタリア",
+      "メキシコ"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y901560",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:figure"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y903977",
+    "name": "onちゃんのフロッキーフィギュアだオン",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "7月13日週発売",
+    "genre": "anime",
+    "moods": [
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "lineup_names": [
+      "おすまし",
+      "バッテリー切れ",
+      "オンやすみ",
+      "プシュー"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y903977",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:figure",
+      "type:plush"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y904271",
+    "name": "ハリー・ポッター/ファンタスティック・ビースト 魔法生物 めじるしガチャマスコット",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "7月13日週発売",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "lineup_names": [
+      "ヘドウィグ",
+      "二フラー",
+      "マンドレイク",
+      "ピグミーパフ",
+      "ピケット"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y904271",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "kawaii:accessory",
+      "cool:western",
+      "type:plush",
+      "type:mejirushi",
+      "hobby:movie"
+    ],
+    "q_ages": [
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y904387",
+    "name": "ソウルイーター ピンズコレクション",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月13日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 7,
+    "lineup_names": [
+      "魂ロゴ",
+      "死神様",
+      "月",
+      "太陽",
+      "ソウル",
+      "イーター",
+      "聖剣エクスカリバー"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y904387",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y905209",
+    "name": "富士ホーロー MOOMIN ミニコレクション2",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "7月13日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "lineup_names": [
+      "ドリップケトル",
+      "キャニスター",
+      "マグ",
+      "浅型各容器",
+      "ミルクパン"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y905209",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:character"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y905483",
+    "name": "つながリングチャーム やさいのようせい",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月13日週発売",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "lineup_names": [
+      "芽キャベツ",
+      "ガーリック",
+      "レタス",
+      "白ナス"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y905483",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "type:charm",
+      "type:fashion"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y905940",
+    "name": "サンリオキャラクターズ くるくるヘアカーラーフィギュア",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月13日週発売",
+    "genre": "anime",
+    "moods": [
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "lineup_names": [
+      "シナモロール",
+      "ポムポムプリン",
+      "ポチャッコ",
+      "ハンギョドン",
+      "バッドばつ丸"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y905940",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:sanrio",
+      "type:figure"
+    ],
+    "q_ages": [
+      "10",
+      "20",
+      "30"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y905988",
+    "name": "つながリングチャーム ワーリーフレンズ",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月13日週発売",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "lineup_names": [
+      "ワーリー",
+      "ラブリー",
+      "パプリー",
+      "ホーリー",
+      "レイリー"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y905988",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "type:charm",
+      "type:fashion"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y907340",
+    "name": "BUTTER Family ふわもこフォトホルダー",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "7月13日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "lineup_names": [
+      "BUTTERGOON",
+      "MILK CAT",
+      "SCRABBIT",
+      "BUTTERGOM"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y907340",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y908668",
+    "name": "モンスターズ・インク もふもふポーシェット",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 500,
+    "release": "2026-07",
+    "release_note": "7月13日週発売",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "lineup_names": [
+      "サリー",
+      "マイク",
+      "ブー",
+      "ランドール",
+      "ロズ",
+      "セリア"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y908668",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:disney",
+      "kawaii:mascot",
+      "type:plush"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y098505",
+    "name": "不思議の国のアリス チェシャ猫いっぱいコレクション",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "７月20日週発売",
+    "genre": "animal",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "lineup_names": [
+      "チェシャ猫（A）",
+      "チェシャ猫（B）",
+      "チェシャ猫（C）",
+      "チェシャ猫（D）",
+      "チェシャ猫（E）"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y098505",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:disney",
+      "kawaii:animal"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y900648",
+    "name": "お勉強タイムFig. ハイキュー!!",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 500,
+    "release": "2026-07",
+    "release_note": "７月20日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y900648",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "cool:shonen",
+      "type:figure"
+    ],
+    "q_ages": [
+      "10",
+      "20"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y900853",
+    "name": "ブルーイ カメラ型プロジェクター",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "７月20日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "lineup_names": [
+      "ブルーイ",
+      "ビンゴ",
+      "マフィン",
+      "フレンズ"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y900853",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:sound"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y901508",
+    "name": "トムとジェリー 天使と悪魔めじるしガチャマスコット",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "７月20日週発売",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "lineup_names": [
+      "天使のジェリー",
+      "天使のトム",
+      "悪魔のトム",
+      "悪魔のジェリー"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y901508",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:character",
+      "kawaii:mascot",
+      "kawaii:accessory",
+      "kawaii:yumekawa",
+      "cool:dark",
+      "type:plush",
+      "type:mejirushi"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y902062",
+    "name": "あそべる生物フィギュアシリーズ ガチャアクション THE恐竜 太古からのメッセージ",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "７月20日週発売",
+    "genre": "animal",
+    "moods": [
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "lineup_names": [
+      "スピノサウルス",
+      "アンキロサウルス",
+      "プレシオサウルス",
+      "ティラノサウルス 化石ver."
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y902062",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:figure",
+      "real:dino"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y902529",
+    "name": "ミニオンズ フェイス型シリコンケース",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "７月20日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "lineup_names": [
+      "ボブ",
+      "スチュアート",
+      "デイブ",
+      "ティム"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y902529",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:useful"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y903182",
+    "name": "トップハム・ハット卿 めじるしガチャマスコット",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "７月20日週発売",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "lineup_names": [
+      "トップハム・ハット卿（水着）",
+      "トップハム・ハット卿",
+      "トップハム・ハット卿（ハロウィン）",
+      "トップハム・ハット卿（帽子持ち）"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y903182",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "kawaii:accessory",
+      "type:plush",
+      "type:mejirushi"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y903410",
+    "name": "ディズニーキャラクター ぷかぷかフロートタイム",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "７月20日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "lineup_names": [
+      "プー",
+      "ベイマックス",
+      "ドナルドダック",
+      "ディズニー スティッチ"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y903410",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:disney"
+    ],
+    "q_ages": [
+      "20",
+      "30"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y903472",
+    "name": "SR+ スパイダーマン -DELUXE EDITION-",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 500,
+    "release": "2026-07",
+    "release_note": "７月20日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "lineup_names": [
+      "スパイダーマン/戦闘",
+      "スパイダーマン/自撮り",
+      "スパイダーマン/ピザ",
+      "スパイダーマン/デイリー・ビューグル",
+      "スパイダーマン/スパイダーセンス"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y903472",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "cool:western"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y903885",
+    "name": "かえるの合唱団♪",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "７月20日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 7,
+    "lineup_names": [
+      "のんびり屋さんなソプラノ",
+      "まじめなメゾソプラノ",
+      "楽観的なアルト",
+      "ムードメーカーなテノール",
+      "食いしん坊なバス",
+      "紳士なバリトン",
+      "情熱的な指揮者"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y903885",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y904196",
+    "name": "ミスター＆ミセス・ポテトヘッド めじるしガチャマスコット",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "７月20日週発売",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "lineup_names": [
+      "ミスター・ポテトヘッドA",
+      "ミスター・ポテトヘッドB",
+      "ミスター・ポテトヘッドC",
+      "ミスター・ポテトヘッドD",
+      "ミセス・ポテトヘッド"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y904196",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "kawaii:accessory",
+      "type:plush",
+      "type:mejirushi"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y904400",
+    "name": "春夏秋冬代行者 春の舞 アクリルスタンド",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "７月20日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 8,
+    "lineup_names": [
+      "花葉雛菊",
+      "姫鷹さくら",
+      "葉桜瑠璃",
+      "葉桜あやめ",
+      "祝月撫子",
+      "阿左美竜胆",
+      "寒椿狼星",
+      "寒月凍蝶"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y904400",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y904820",
+    "name": "ディズニープリンセス バニティバックチャーム",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "７月20日週発売",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 8,
+    "lineup_names": [
+      "シンデレラ",
+      "ベル",
+      "アリエル",
+      "ラプンツェル",
+      "プリンセスたち",
+      "ジャスミン",
+      "モアナ"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y904820",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:disney",
+      "kawaii:accessory",
+      "type:charm"
+    ],
+    "q_ages": [
+      "20",
+      "30"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y905452",
+    "name": "サンリオキャラクターズ しょくぱんず",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "７月20日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "lineup_names": [
+      "ハローキティ",
+      "ポムポムプリン",
+      "シナモロール",
+      "ポチャッコ",
+      "はなまるおばけ"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y905452",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:sanrio"
+    ],
+    "q_ages": [
+      "10",
+      "20",
+      "30"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y905803",
+    "name": "CHUMSおにぎりフレンズ つながリングチャーム",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "７月20日週発売",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 7,
+    "lineup_names": [
+      "おにぎり",
+      "うめ",
+      "てんむす",
+      "しそ",
+      "まめ",
+      "やき",
+      "しお"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y905803",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "type:charm",
+      "type:fashion"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y909115",
+    "name": "夏目友人帳〜音劇の章 夏霞〜 アクリルスタンド",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "７月20日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 7,
+    "lineup_names": [
+      "斑と夏目と垂申",
+      "夏目とニャンコ先生",
+      "ニャンコ先生",
+      "葵とニャンコ先生と夏目",
+      "香と葵",
+      "夏目と燕",
+      "夏目友人帳〜音劇の章 夏霞〜キービジュアル"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y909115",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y093340",
+    "name": "トイ・ストーリー アンディが来た！",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 500,
+    "release": "2026-07",
+    "release_note": "8月11日週発売・2026年7月27日週再発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "lineup_names": [
+      "ウッディ",
+      "スリンキー・ドッグ",
+      "ジェシー",
+      "ブルズアイ"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y093340",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:disney"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y098284",
+    "name": "MOTHER2 チャームマスコット",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "12月22日週発売・2026年7月27日週再発売",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 7,
+    "lineup_names": [
+      "ネス",
+      "ポーラ",
+      "ジェフ",
+      "プー",
+      "どせいさん",
+      "ゲップー",
+      "かえってきたゲップー（レア）"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y098284",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "kawaii:accessory",
+      "type:plush",
+      "type:charm"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y099755",
+    "name": "お茶犬 温泉まったり ゆらゆらつながるマスコット",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月27日週発売",
+    "genre": "animal",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "lineup_names": [
+      "リョク",
+      "ハナ",
+      "チャイ",
+      "アール"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y099755",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:character",
+      "kawaii:animal",
+      "kawaii:mascot",
+      "type:plush",
+      "retro:heisei"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y900723",
+    "name": "あそべる生物フィギュアシリーズ ザ・シャーク vs 最強の捕食者",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月27日週発売",
+    "genre": "anime",
+    "moods": [
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "lineup_names": [
+      "シロワニ",
+      "シャチ",
+      "ジンベエザメ",
+      "コバンザメ"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y900723",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:figure"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y901225",
+    "name": "Pokémon Pixel Art つれあるきマスコット",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月27日週発売",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y901225",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "type:plush"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y901232",
+    "name": "体格ブラザーズ ビッグボディー♨コレクション",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 500,
+    "release": "2026-07",
+    "release_note": "7月27日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "lineup_names": [
+      "秋山さん（リュウ）BIGフィギュア",
+      "平子さん（ユウ）BIGフィギュア",
+      "秋山さん（リュウ）額装キーホルダー",
+      "平子さん（ユウ）額装キーホルダー"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y901232",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y902116",
+    "name": "サンリオキャラクターズ バレエリボンフィギュア2",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月27日週発売",
+    "genre": "anime",
+    "moods": [
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "lineup_names": [
+      "ハローキティ",
+      "ポムポムプリン",
+      "ウサハナ",
+      "ポチャッコ"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y902116",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:sanrio",
+      "type:figure"
+    ],
+    "q_ages": [
+      "10",
+      "20",
+      "30"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y902963",
+    "name": "サンリオキャラクターズ ぬいぐるみといっしょフィギュア2",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月27日週発売",
+    "genre": "anime",
+    "moods": [
+      "kawaii",
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "lineup_names": [
+      "ハローキティ",
+      "クロミ",
+      "シナモロール",
+      "あひるのペックル"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y902963",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:sanrio",
+      "kawaii:mascot",
+      "type:figure",
+      "type:plush"
+    ],
+    "q_ages": [
+      "10",
+      "20",
+      "30"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y902970",
+    "name": "サンリオキャラクターズ きらきらこんぺいとうチャーム",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月27日週発売",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "lineup_names": [
+      "ハローキティ",
+      "シナモロール",
+      "マイメロディ",
+      "クロミ",
+      "ポムポムプリン"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y902970",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:sanrio",
+      "kawaii:accessory",
+      "type:charm"
+    ],
+    "q_ages": [
+      "10",
+      "20",
+      "30"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y903083",
+    "name": "サンリオキャラクターズ なかよしドロップチャーム",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "2月16日週発売・2026年7月27日週再発売",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "lineup_names": [
+      "ハローキティ&times;ハローミミィ",
+      "マイメロディ&times;クロミ",
+      "ポムポムプリン&times;チームプリン",
+      "リトルツインスターズ"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y903083",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:sanrio",
+      "kawaii:accessory",
+      "type:charm"
+    ],
+    "q_ages": [
+      "10",
+      "20",
+      "30"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y903151",
+    "name": "ニック＆ジュディ コスチュームフィギュアコレクション",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "7月27日週発売",
+    "genre": "anime",
+    "moods": [
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "lineup_names": [
+      "ニック・ワイルド（タキシード）",
+      "ジュディ・ホップス（ドレス）",
+      "ニック・ワイルド（変装）",
+      "ジュディ・ホップス（変装）※専用台座付き"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y903151",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:figure",
+      "real:miniature"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y903328",
+    "name": "ポケモン わざすなっぷ いろいろなわざ Part3",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月27日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y903328",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:pokemon"
+    ],
+    "q_ages": [
+      "10",
+      "20"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y903984",
+    "name": "ポケモン根付マスコット Let's Sing!",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月27日週発売",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y903984",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:pokemon",
+      "kawaii:mascot",
+      "type:plush"
+    ],
+    "q_ages": [
+      "10",
+      "20"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y904134",
+    "name": "たたかわない!トランスフォーマー ぬいぐるみマスコット",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 500,
+    "release": "2026-07",
+    "release_note": "7月27日週発売",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "lineup_names": [
+      "おぷさん",
+      "びーさん",
+      "めがさん",
+      "すたすくさん"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y904134",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "type:plush"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y904790",
+    "name": "トイ・ストーリー５ ファッションリング",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月27日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 8,
+    "lineup_names": [
+      "ウッディ",
+      "バズ・ライトイヤー",
+      "ジェシー",
+      "ブルズアイ",
+      "リリーパッド",
+      "エイリアン",
+      "バターカップ",
+      "ピクサー・ボール"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y904790",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:disney",
+      "kawaii:accessory",
+      "type:fashion"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y905230",
+    "name": "サメ日和 めじるしガチャマスコット",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月27日週発売",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "lineup_names": [
+      "目覚めザメ",
+      "湯冷めザメ",
+      "興醒めザメ",
+      "酔い覚めザメ"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y905230",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "kawaii:accessory",
+      "type:plush",
+      "type:mejirushi"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y905551",
+    "name": "ポケモン 30周年 メタルチャームマスコット 〜シンオウ、イッシュ、カロス〜",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月27日週発売",
+    "genre": "anime",
+    "moods": [
+      "kawaii",
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 7,
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y905551",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:pokemon",
+      "kawaii:mascot",
+      "kawaii:accessory",
+      "type:plush",
+      "type:charm"
+    ],
+    "q_ages": [
+      "10",
+      "20"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y906244",
+    "name": "カプセルプラレール きかんしゃトーマス パーシーとジェームスが大変身!?編",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月27日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 10,
+    "lineup_names": [
+      "マジシャンになったトーマス（連結パーツ付）",
+      "チョコまみれのパーシー（ゼンマイ車）",
+      "ジェットコースターパーシー（連結パーツ付）",
+      "シルバージェームス（ゼンマイ車）",
+      "ハチにさされたジェームス（連結パーツ付）",
+      "はたらきばちジェームス（連結パーツ付）",
+      "ゴールレール",
+      "消えるマジシャン",
+      "レールセット（直線レール（黄&times;2、青&times;1）、曲線レール（黄&times;1、青&times;2））",
+      "まがレール"
+    ],
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y906244",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "real:vehicle"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y908989",
+    "name": "パンダの穴 もちばけ 結ノ巻",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月27日週発売",
+    "genre": "animal",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": null,
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y908989",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:animal",
+      "real:food"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y908996",
+    "name": "パンダの穴 トリピカルズみっくす",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月27日週発売",
+    "genre": "animal",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": null,
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y908996",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:animal",
+      "real:food"
     ],
     "q_ages": [
       "20",
