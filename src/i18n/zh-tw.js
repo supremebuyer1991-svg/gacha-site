@@ -442,6 +442,21 @@ module.exports = {
     "Disney": "迪士尼",
     "Mejirushi Accessory": "標記吊飾",
   },
+  // 週別頁面・列表頁（src/hubs.js）
+  hub: {
+    sep: "、", count: (k) => `（${k}）`,
+    weekLabel: (m, no) => `${m}月第${no}週`, weekShort: (no) => `第${no}週`,
+    weekTitle: (lab, range, n) => `${lab}（${range}）發售的日本扭蛋新品 共 ${n} 個系列｜發售日・價格`,
+    weekH1: (lab, range) => `${lab}（${range}）發售的扭蛋`, weekSub: (n) => `共 ${n} 個系列`,
+    weekLead: (lab, range, n) => `${lab}（${range}）在日本發售的扭蛋共 ${n} 個系列，依人氣排列。「第◯週」是指從這一週開始陸續上架，依店家和地區可能會早幾天或晚幾天。`,
+    including: (names) => `包括${names.join("、")}等。`, weekNavAria: "上一週・下一週", toMonth: (label) => `${label}全部扭蛋`,
+    badgeNow: "本週", badgeNext: "下週", badgePast: "已發售",
+    perma: (lab, range) => `查看${lab}（${range}）的頁面 →`, weekIdx: "依週查看", weekPage: "本週頁面 →",
+    monthIntro: (label, n, future, tops) => `${label}${future ? "將發售" : "發售了"} ${n} 個系列的扭蛋。${tops ? `數量最多的是${tops}。` : ""}`,
+    hubH1: (L) => `${L} 扭蛋`, hubSub: (n, month, future) => `共 ${n} 個系列・最新：${month}${future ? "（預計發售）" : ""}`,
+    more: (n) => `查看更多（還有 ${n} 款）`, pageTitle: (title, k) => `${title}（第 ${k} 頁）`, pagesAria: "頁碼",
+    prevItem: "上一彈", nextItem: "下一彈", seqH: (L) => `${L} 的上一彈・下一彈`, seqH0: "同系列的上一彈・下一彈",
+  },
   // 診断の選択肢（系統・詳細・キャラ）
   quiz: {
     "Accessories & beauty": "飾品・美妝",

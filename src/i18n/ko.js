@@ -177,6 +177,21 @@ module.exports = {
     retro: "쇼와·헤이세이 레트로", funny: "개그·병맛", culture: "아트·컬처", other: "기타",
     charm: "참·키링", mascot: "마스코트·봉제인형", figure: "피규어", goods: "잡화·생활용품", sound: "빛·소리 나는 장난감",
   },
+  // 주별 페이지·목록 페이지 (src/hubs.js)
+  hub: {
+    sep: ", ", count: (k) => ` (${k})`,
+    weekLabel: (m, no) => `${m}월 ${no}주차`, weekShort: (no) => `${no}주차`,
+    weekTitle: (lab, range, n) => `${lab} (${range}) 발매 일본 가챠 신작 ${n}개 시리즈 | 발매일·가격`,
+    weekH1: (lab, range) => `${lab} (${range}) 발매 가챠`, weekSub: (n) => `${n}개 시리즈`,
+    weekLead: (lab, range, n) => `${lab} (${range})에 일본에서 발매되는 캡슐토이 ${n}개 시리즈를 인기순으로 모았어요. '◯주차'는 그 주부터 순차적으로 발매된다는 뜻이라, 매장이나 지역에 따라 며칠 빠르거나 늦을 수 있어요.`,
+    including: (names) => `${names.join(", ")} 등이 있어요.`, weekNavAria: "이전 주·다음 주", toMonth: (label) => `${label} 전체 보기`,
+    badgeNow: "이번 주", badgeNext: "다음 주", badgePast: "발매 중",
+    perma: (lab, range) => `${lab} (${range}) 페이지 보기 →`, weekIdx: "주별 페이지", weekPage: "이 주 페이지 →",
+    monthIntro: (label, n, future, tops) => `${label}에 ${future ? "발매되는" : "발매된"} 가챠는 ${n}개 시리즈예요.${tops ? ` 많이 나오는 작품: ${tops}.` : ""}`,
+    hubH1: (L) => `${L} 가챠`, hubSub: (n, month, future) => `${n}개 시리즈 · 최신: ${month}${future ? " (발매 예정)" : ""}`,
+    more: (n) => `더보기 (${n}개 더)`, pageTitle: (title, k) => `${title} (${k}페이지)`, pagesAria: "페이지",
+    prevItem: "이전 작품", nextItem: "다음 작품", seqH: (L) => `${L} 이전·다음 작품`, seqH0: "같은 시리즈 이전·다음 작품",
+  },
   quiz: {
     "Accessories & beauty": "액세서리·뷰티", "Animals": "동물", "Anime & idols": "애니·아이돌", "Anime for girls": "여아용 애니",
     "Art & designer toys": "아트·디자이너 토이", "Bags & handy goods": "가방·생활 소품", "Bags & pouches": "가방·파우치", "Beauty": "뷰티",
