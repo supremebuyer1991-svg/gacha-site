@@ -850,7 +850,16 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "和泉一織",
+      "二階堂大和",
+      "和泉三月",
+      "四葉環",
+      "逢坂壮五",
+      "六弥ナギ",
+      "七瀬陸"
+    ]
   },
   {
     "id": "bandai-4570118202307",
@@ -886,7 +895,13 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "デブかるび ハンバーガー",
+      "デブかるび ポテト",
+      "赤見かるび フロート",
+      "赤見かるび マルくん"
+    ]
   },
   {
     "id": "bandai-4582770054651",
@@ -1206,7 +1221,14 @@
     "q_genders": [
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "BONE SHAKER",
+      "KEI SWAP",
+      "SUPERCHARGED",
+      "MIGHTY K",
+      "TURBINE SUBLIME"
+    ]
   },
   {
     "id": "bandai-4582770054767",
@@ -1327,7 +1349,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "スパイダーマン（スイングポーズ）",
+      "スパイダーマン（ひらりポーズ）",
+      "スパイダーマン（ランディングポーズ）",
+      "スパイダーマン（さかさまポーズ）",
+      "スパイダーマン（アクロバットポーズ）"
+    ]
   },
   {
     "id": "bandai-4582770071467",
@@ -1633,7 +1662,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "エンジェリーバニーティアラ",
+      "フューチャリングインカム",
+      "アゲハトークハット",
+      "レインボーアイスカチューシャ",
+      "ロリゴシックホワイトブリム",
+      "パーティームーンアクセ"
+    ]
   },
   {
     "id": "bandai-4582769846588",
@@ -1975,7 +2012,16 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "母乳実感 哺乳びん",
+      "母乳実感 哺乳びん Bear",
+      "母乳実感 哺乳びん Flower garden",
+      "おしゃぶり FunFriends くじら柄",
+      "magmag 成長実感 ごくごくストロー",
+      "おしりナップ オイル配合 なめらか厚手仕上げ",
+      "ピジョンキッズ 魔法のあわあわボディソープ"
+    ]
   },
   {
     "id": "bandai-4582770070613",
@@ -2011,7 +2057,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "まぐろ",
+      "えび",
+      "かっぱまき",
+      "いくら",
+      "おいなりさん"
+    ]
   },
   {
     "id": "bandai-4582770071634",
@@ -3452,7 +3505,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "月島きらり",
+      "風真宙人",
+      "日渡星司",
+      "小倉エリナ",
+      "なーさん",
+      "なーやん"
+    ]
   },
   {
     "id": "bandai-4570118206565",
@@ -3531,7 +3592,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ルフィわんちゃん",
+      "ゾロわんちゃん",
+      "サンジわんちゃん",
+      "ロビンわんちゃん",
+      "ブルックわんちゃん"
+    ]
   },
   {
     "id": "bandai-4582769777059",
@@ -3596,7 +3664,16 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "藤岡ハルヒ",
+      "須王環",
+      "鳳鏡夜",
+      "常陸院光",
+      "常陸院馨",
+      "埴之塚光邦",
+      "銛之塚崇"
+    ]
   },
   {
     "id": "bandai-4582769968518",
@@ -3670,7 +3747,13 @@
     "q_genders": [
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ラピ",
+      "アニス",
+      "ネオン",
+      "リトルマーメイド"
+    ]
   },
   {
     "id": "bandai-4582769995224",
@@ -3738,7 +3821,13 @@
     "q_genders": [
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "νガンダム",
+      "アリュゼウス",
+      "GFreD",
+      "軍警ザク"
+    ]
   },
   {
     "id": "bandai-4582769995750",
@@ -3776,7 +3865,10 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "初音ミク"
+    ]
   },
   {
     "id": "bandai-4582770026610",
@@ -3814,7 +3906,14 @@
     "q_genders": [
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "923形 ドクターイエロー",
+      "E6系 こまち",
+      "W7系 かがやき",
+      "N700系 さくら",
+      "E233系 埼京線"
+    ]
   },
   {
     "id": "bandai-4582770026689",
@@ -3850,7 +3949,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ハートフルコミューン（キュアブラック）",
+      "ハートフルコミューン（キュアホワイト）",
+      "ワンダフルパクト",
+      "シャイニーキャッツパクト",
+      "アイドルハートブローチ"
+    ]
   },
   {
     "id": "bandai-4582770026788",
@@ -26987,7 +27093,7 @@
   {
     "id": "tarts-y093210",
     "name": "肩ズンFig. ディズニー ツイステッドワンダーランドVol.3 サバナクロー寮&イグニハイド寮",
-    "name_en": "",
+    "name_en": "Kata Zun Fig. Disney Twisted-Wonderland Vol.3 Savanaclaw & Ignihyde",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 500,
@@ -27015,23 +27121,24 @@
     "auto": true,
     "q_subs": [
       "kawaii:disney",
-      "type:figure",
-      "funny:machibouke"
+      "oshi:game",
+      "type:figure"
     ],
     "q_ages": [
+      "10",
       "20",
       "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y097089",
     "name": "ニャッキ! フィギュアマスコット 〜とっておき名場面篇〜",
-    "name_en": "",
+    "name_en": "Nyakki! Figure Mascot: Best Scenes",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 300,
@@ -27061,12 +27168,11 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
+      "kawaii:character",
       "type:figure",
-      "type:plush"
+      "retro:heisei"
     ],
     "q_ages": [
-      "20",
       "30",
       "40"
     ],
@@ -27074,13 +27180,13 @@
       "female",
       "male"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y097256",
     "name": "肩ズンFig. ガチャピン・ムックと仲間たち",
-    "name_en": "",
+    "name_en": "Kata Zun Fig. Gachapin, Mukku & Friends",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 400,
@@ -27106,25 +27212,27 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
+      "oshi:kids",
       "type:figure",
-      "funny:machibouke"
+      "retro:showa"
     ],
     "q_ages": [
-      "20",
       "30",
-      "40"
+      "40",
+      "50"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y901089",
     "name": "でふぉフィグ! 薬屋のひとりごと キーホルダー vol.2",
-    "name_en": "",
+    "name_en": "Defo Fig! The Apothecary Diaries Keychain vol.2",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 400,
@@ -27151,24 +27259,24 @@
     "auto": true,
     "q_subs": [
       "oshi:trend",
-      "type:charm"
+      "type:charm",
+      "type:figure"
     ],
     "q_ages": [
+      "10",
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y903168",
     "name": "ディズニーキャラクター しゃぼリズム!",
-    "name_en": "",
+    "name_en": "Disney Characters Shaborhythm!",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 400,
@@ -27194,22 +27302,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:disney"
+      "kawaii:disney",
+      "type:figure"
     ],
     "q_ages": [
+      "10",
       "20",
       "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y903502",
     "name": "おさるのジョージ のりもの めじるしガチャマスコット",
-    "name_en": "",
+    "name_en": "Curious George Vehicles Mejirushi Gacha Mascot",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 400,
@@ -27237,28 +27347,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:animal",
-      "kawaii:mascot",
-      "kawaii:accessory",
-      "type:plush",
-      "type:mejirushi"
+      "kawaii:character",
+      "type:mejirushi",
+      "real:vehicle"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y905018",
     "name": "お部屋ぐまルーミー もふもふポーシェット",
-    "name_en": "",
+    "name_en": "Oheya Guma Roomie Fluffy Pochette",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 500,
@@ -27288,24 +27394,23 @@
     "auto": true,
     "q_subs": [
       "kawaii:mascot",
-      "type:plush"
+      "type:plush",
+      "type:useful"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y906367",
     "name": "BEYBLADE X 歴代カプセルシューター大集合",
-    "name_en": "",
+    "name_en": "BEYBLADE X Capsule Shooter All-Stars",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 300,
@@ -27332,23 +27437,25 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "cool:robot",
+      "oshi:kids",
+      "hobby:sports"
+    ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y906558",
     "name": "ポケモン プロジェクターライト 旅立ちの三匹編",
-    "name_en": "",
+    "name_en": "Pokémon Projector Light: First Partners",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 300,
@@ -27369,24 +27476,24 @@
     "auto": true,
     "q_subs": [
       "kawaii:pokemon",
-      "type:useful",
       "type:sound"
     ],
     "q_ages": [
       "10",
-      "20"
+      "20",
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y908170",
     "name": "東京靴流通センター 靴下＆靴袋コレクション",
-    "name_en": "",
+    "name_en": "Tokyo Shoes Retailing Center Socks & Shoe Bag Collection",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 400,
@@ -27412,7 +27519,11 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "real:miniature",
+      "hobby:brand",
+      "funny:neta"
+    ],
     "q_ages": [
       "20",
       "30",
@@ -27422,13 +27533,13 @@
       "female",
       "male"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y909566",
     "name": "tomica PREMIUM BOX型シリコンポーチ2",
-    "name_en": "",
+    "name_en": "tomica PREMIUM Box Silicone Pouch 2",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 400,
@@ -27454,24 +27565,25 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
-      "type:useful"
+      "real:vehicle",
+      "type:useful",
+      "hobby:brand"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y911118",
     "name": "ミニチュアカードゲーム コレクションBEST版",
-    "name_en": "",
+    "name_en": "Miniature Card Game Collection BEST",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 400,
@@ -27499,7 +27611,9 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "real:miniature"
+      "real:miniature",
+      "oshi:game",
+      "retro:heisei"
     ],
     "q_ages": [
       "30",
@@ -27507,16 +27621,15 @@
       "50"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y900945",
     "name": "くまのプーさん コスチュームフィギュアコレクション4",
-    "name_en": "",
+    "name_en": "Winnie the Pooh Costume Figure Collection 4",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 400,
@@ -27545,26 +27658,22 @@
     "auto": true,
     "q_subs": [
       "kawaii:disney",
-      "kawaii:animal",
-      "type:figure",
-      "real:miniature"
+      "type:figure"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y903120",
     "name": "ファンタスティック・ビースト ニフラー Hide&Seek かくれんぼフィギュア",
-    "name_en": "",
+    "name_en": "Fantastic Beasts Niffler Hide & Seek Figure",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 400,
@@ -27591,24 +27700,25 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "type:figure"
+      "type:figure",
+      "hobby:movie",
+      "cool:western"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y904288",
     "name": "サンリオキャラクターズ 和んこフィギュア",
-    "name_en": "",
+    "name_en": "Sanrio Characters Wanko Figure",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 400,
@@ -27637,7 +27747,8 @@
     "auto": true,
     "q_subs": [
       "kawaii:sanrio",
-      "type:figure"
+      "type:figure",
+      "kawaii:animal"
     ],
     "q_ages": [
       "10",
@@ -27647,13 +27758,13 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y904332",
     "name": "モンスターズ・インク アイテムコレクション2",
-    "name_en": "",
+    "name_en": "Monsters, Inc. Item Collection 2",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 400,
@@ -27680,24 +27791,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:disney"
+      "kawaii:disney",
+      "real:miniature"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y904455",
     "name": "ディズニーキャラクター バレエリボンフィギュア",
-    "name_en": "",
+    "name_en": "Disney Characters Ballet Ribbon Figure",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 400,
@@ -27729,19 +27840,20 @@
       "type:figure"
     ],
     "q_ages": [
+      "10",
       "20",
       "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y904462",
     "name": "ディズニープリンセス Hide&Seek かくれんぼフィギュア",
-    "name_en": "",
+    "name_en": "Disney Princess Hide & Seek Figure",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 400,
@@ -27773,19 +27885,20 @@
       "type:figure"
     ],
     "q_ages": [
+      "10",
       "20",
       "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y905384",
     "name": "『ペルソナ3 リロード』 ピンバッジコレクション",
-    "name_en": "",
+    "name_en": "Persona 3 Reload Pin Badge Collection",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 300,
@@ -27815,25 +27928,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
-      "oshi:game"
+      "oshi:game",
+      "type:fashion"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y905667",
     "name": "サンリオキャラクターズ つながるキャンディチャーム",
-    "name_en": "",
+    "name_en": "Sanrio Characters Linking Candy Charm",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 300,
@@ -27863,8 +27975,8 @@
     "auto": true,
     "q_subs": [
       "kawaii:sanrio",
-      "kawaii:accessory",
-      "type:charm"
+      "type:charm",
+      "kawaii:yumekawa"
     ],
     "q_ages": [
       "10",
@@ -27874,13 +27986,13 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y905759",
     "name": "MOOMIN Flowers for you マスコット",
-    "name_en": "",
+    "name_en": "MOOMIN Flowers for you Mascot",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 400,
@@ -27909,7 +28021,6 @@
     "auto": true,
     "q_subs": [
       "kawaii:character",
-      "kawaii:mascot",
       "type:plush"
     ],
     "q_ages": [
@@ -27918,16 +28029,15 @@
       "40"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y905926",
     "name": "肩ズンFig. アニメ『呪術廻戦』5周年",
-    "name_en": "",
+    "name_en": "Kata Zun Fig. JUJUTSU KAISEN Anime 5th Anniversary",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 400,
@@ -27954,24 +28064,24 @@
     "auto": true,
     "q_subs": [
       "cool:shonen",
-      "cool:dark",
-      "type:figure",
-      "funny:machibouke"
+      "oshi:trend",
+      "type:figure"
     ],
     "q_ages": [
-      "10"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y906985",
     "name": "ポケモン へんしんが苦手なメタモン! つやふるチャームマスコット",
-    "name_en": "",
+    "name_en": "Pokémon Ditto Who's Bad at Transforming! Glossy Charm Mascot",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 300,
@@ -27994,25 +28104,24 @@
     "auto": true,
     "q_subs": [
       "kawaii:pokemon",
-      "kawaii:mascot",
-      "kawaii:accessory",
-      "type:plush",
-      "type:charm"
+      "type:charm",
+      "type:plush"
     ],
     "q_ages": [
       "10",
       "20"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y907036",
     "name": "miffy もふもふポーシェット",
-    "name_en": "",
+    "name_en": "miffy Fluffy Pochette",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 500,
@@ -28042,8 +28151,8 @@
     "auto": true,
     "q_subs": [
       "kawaii:character",
-      "kawaii:mascot",
-      "type:plush"
+      "type:plush",
+      "type:useful"
     ],
     "q_ages": [
       "20",
@@ -28051,16 +28160,15 @@
       "40"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y907739",
     "name": "宇宙からの輪ゴムGUN",
-    "name_en": "",
+    "name_en": "Rubber Band Gun from Space",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 200,
@@ -28087,25 +28195,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "type:fashion",
-      "real:space"
+      "real:space",
+      "funny:neta"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y907746",
     "name": "『踊る大捜査線N.E.W.』 めじるしガチャマスコット",
-    "name_en": "",
+    "name_en": "Bayside Shakedown N.E.W. Mejirushi Gacha Mascot",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 400,
@@ -28135,27 +28241,25 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
-      "kawaii:accessory",
-      "type:plush",
-      "type:mejirushi"
+      "hobby:movie",
+      "type:mejirushi",
+      "retro:heisei"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "40",
+      "50"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y907838",
     "name": "おねがいアイプリ アクリルカードチャーム",
-    "name_en": "",
+    "name_en": "Onegai AiPri Acrylic Card Charm",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 300,
@@ -28186,25 +28290,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
       "oshi:girls",
+      "oshi:idol",
       "type:charm"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y909771",
     "name": "ピクサーキャラクター ぷくちゃーむ",
-    "name_en": "",
+    "name_en": "Pixar Characters Puku Charm",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 400,
@@ -28231,22 +28333,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:disney"
+      "kawaii:disney",
+      "type:charm"
     ],
     "q_ages": [
+      "10",
       "20",
       "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y910623",
     "name": "アニメ『呪術廻戦』5周年 キービジュアルポーチでらっくす",
-    "name_en": "",
+    "name_en": "JUJUTSU KAISEN Anime 5th Anniversary Key Visual Pouch Deluxe",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 400,
@@ -28276,24 +28380,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
       "cool:shonen",
-      "cool:dark",
+      "oshi:trend",
       "type:useful"
     ],
     "q_ages": [
-      "10"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y903304",
     "name": "ポケモン しゃぼんたいむマスコット",
-    "name_en": "",
+    "name_en": "Pokémon Bubble Time Mascot",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 400,
@@ -28316,7 +28420,6 @@
     "auto": true,
     "q_subs": [
       "kawaii:pokemon",
-      "kawaii:mascot",
       "type:plush"
     ],
     "q_ages": [
@@ -28327,13 +28430,13 @@
       "female",
       "male"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y903601",
     "name": "トイ・ストーリー5 ゆらゆらつながるマスコット Part1",
-    "name_en": "",
+    "name_en": "Toy Story 5 Swaying Linked Mascot Part1",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 400,
@@ -28364,25 +28467,25 @@
     "auto": true,
     "q_subs": [
       "kawaii:disney",
-      "kawaii:mascot",
-      "type:plush"
+      "type:plush",
+      "hobby:movie"
     ],
     "q_ages": [
+      "10",
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y904806",
     "name": "トムとジェリー なかよくけんかしな ニコイチマスコット",
-    "name_en": "",
+    "name_en": "Tom and Jerry Best Frenemies Pair Mascot",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 400,
@@ -28411,8 +28514,8 @@
     "auto": true,
     "q_subs": [
       "kawaii:character",
-      "kawaii:mascot",
-      "type:plush"
+      "type:plush",
+      "cool:western"
     ],
     "q_ages": [
       "20",
@@ -28423,13 +28526,13 @@
       "female",
       "male"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y905377",
     "name": "『真・女神転生』シリーズ 悪魔いっぱいコレクション",
-    "name_en": "",
+    "name_en": "Shin Megami Tensei Series Demon Collection",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 400,
@@ -28456,7 +28559,9 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "cool:dark"
+      "oshi:game",
+      "cool:dark",
+      "type:figure"
     ],
     "q_ages": [
       "20",
@@ -28464,16 +28569,15 @@
       "40"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y905841",
     "name": "パンダの穴 マッチョ棒",
-    "name_en": "",
+    "name_en": "Panda's Hole Macho Stick",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 300,
@@ -28500,25 +28604,25 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "funny:neta",
       "kawaii:animal",
-      "real:food"
+      "type:figure"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y905896",
     "name": "おさるのジョージ 85th ハートフィギュア",
-    "name_en": "",
+    "name_en": "Curious George 85th Heart Figure",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 400,
@@ -28546,25 +28650,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:animal",
+      "kawaii:character",
       "type:figure"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y905995",
     "name": "ポムポムヒーロー",
-    "name_en": "",
+    "name_en": "Pompom Hero",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 400,
@@ -28590,24 +28692,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:sanrio"
+      "funny:neta",
+      "type:figure"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y906923",
     "name": "あんもにゃいと2",
-    "name_en": "",
+    "name_en": "Anmonyaito 2",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 200,
@@ -28634,23 +28736,25 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "kawaii:animal",
+      "type:figure",
+      "real:creature"
+    ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y906954",
     "name": "パンダの穴 マウンテンタートルズ2",
-    "name_en": "",
+    "name_en": "Panda's Hole Mountain Turtles 2",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 300,
@@ -28670,25 +28774,25 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "funny:neta",
       "kawaii:animal",
-      "real:food"
+      "type:figure"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y908965",
     "name": "トミカキーホルダー8",
-    "name_en": "",
+    "name_en": "Tomica Keychain 8",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 300,
@@ -28714,8 +28818,9 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "real:vehicle",
       "type:charm",
-      "real:vehicle"
+      "hobby:brand"
     ],
     "q_ages": [
       "20",
@@ -28723,10 +28828,9 @@
       "40"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
@@ -36737,7 +36841,7 @@
   {
     "id": "kitan-osanpokaeru-fithouseki",
     "name": "おさんぽカエル Fit 宝石箱",
-    "name_en": "",
+    "name_en": "Osanpo Kaeru Fit Jewelry Box",
     "maker": "キタンクラブ",
     "maker_en": "Kitan Club",
     "price": 300,
@@ -36764,22 +36868,25 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "kawaii:animal",
+      "type:figure",
+      "funny:neta"
+    ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "kitan-noppo-usagi",
     "name": "のっぽちゃんぬいぐるみ うさぎ",
-    "name_en": "",
+    "name_en": "Noppo-chan Plush Rabbit",
     "maker": "キタンクラブ",
     "maker_en": "Kitan Club",
     "price": 500,
@@ -36807,23 +36914,21 @@
     "auto": true,
     "q_subs": [
       "kawaii:animal",
-      "kawaii:mascot",
       "type:plush"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "kitan-sanrio-watch4",
     "name": "サンリオキャラクターズ ダンボールウォッチ４",
-    "name_en": "",
+    "name_en": "Sanrio Characters Cardboard Watch 4",
     "maker": "キタンクラブ",
     "maker_en": "Kitan Club",
     "price": 500,
@@ -36850,7 +36955,8 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:sanrio"
+      "kawaii:sanrio",
+      "type:fashion"
     ],
     "q_ages": [
       "10",
@@ -36860,12 +36966,12 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "kitan-peaceanimals-mc",
     "name": "ピースするどうぶつ マーカーチャーム",
-    "name_en": "",
+    "name_en": "Peace Sign Animals Marker Charm",
     "maker": "キタンクラブ",
     "maker_en": "Kitan Club",
     "price": 300,
@@ -36894,23 +37000,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
+      "kawaii:animal",
       "type:charm"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "kitan-akachan-bu-bu2",
     "name": "おおのたろう 赤ちゃんブーブコレクション２",
-    "name_en": "",
+    "name_en": "Taro Ohno Baby Boo-Boo Collection 2",
     "maker": "キタンクラブ",
     "maker_en": "Kitan Club",
     "price": 500,
@@ -36937,22 +37042,26 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "kawaii:animal",
+      "type:figure",
+      "hobby:art",
+      "funny:neta"
+    ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "kitan-inofigure",
     "name": "胃 フィギュアマスコット",
-    "name_en": "",
+    "name_en": "Stomach Figure Mascot",
     "maker": "キタンクラブ",
     "maker_en": "Kitan Club",
     "price": 400,
@@ -36983,9 +37092,8 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
       "type:figure",
-      "type:plush"
+      "funny:neta"
     ],
     "q_ages": [
       "20",
@@ -36996,12 +37104,12 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "kitan-osanpokaeru-fit2",
     "name": "おさんぽカエル Fit V2.0",
-    "name_en": "",
+    "name_en": "Osanpo Kaeru Fit V2.0",
     "maker": "キタンクラブ",
     "maker_en": "Kitan Club",
     "price": 300,
@@ -37029,22 +37137,25 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "kawaii:animal",
+      "type:figure",
+      "funny:neta"
+    ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2146",
     "name": "通勤ねこ マスコットボールチェーン ２",
-    "name_en": "",
+    "name_en": "Tsukin Neko Mascot Ball Chain 2",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 300,
@@ -37067,25 +37178,23 @@
     "auto": true,
     "q_subs": [
       "kawaii:animal",
-      "kawaii:mascot",
       "type:plush",
-      "type:charm"
+      "type:charm",
+      "funny:neta"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2145",
     "name": "カンフーブー スタンドフィギュア",
-    "name_en": "",
+    "name_en": "Kung Fu Boo Stand Figure",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 300,
@@ -37107,23 +37216,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "type:figure"
+      "kawaii:animal",
+      "type:figure",
+      "funny:neta"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2132",
     "name": "あまやどり マスコットフィギュア",
-    "name_en": "",
+    "name_en": "Amayadori Mascot Figure",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 300,
@@ -37146,25 +37256,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
-      "type:figure",
-      "type:plush"
+      "kawaii:animal",
+      "type:figure"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2107",
     "name": "おサルのぬいぐるみ",
-    "name_en": "",
+    "name_en": "Monkey Plush",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 400,
@@ -37186,23 +37293,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
+      "kawaii:animal",
       "type:plush"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2144",
     "name": "こびとづかん めじるしフレンズ",
-    "name_en": "",
+    "name_en": "Kobito Dukan Mejirushi Friends",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 400,
@@ -37224,8 +37330,10 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
-      "type:mejirushi"
+      "kawaii:character",
+      "type:mejirushi",
+      "funny:neta",
+      "retro:heisei"
     ],
     "q_ages": [
       "20",
@@ -37236,12 +37344,12 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2133",
     "name": "miffy（ミッフィー） フェイスポーチ",
-    "name_en": "",
+    "name_en": "miffy Face Pouch",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 500,
@@ -37262,7 +37370,6 @@
     "auto": true,
     "q_subs": [
       "kawaii:character",
-      "kawaii:accessory",
       "type:useful"
     ],
     "q_ages": [
@@ -37273,12 +37380,12 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2131",
     "name": "スタジオハヌル×サンリオキャラクターズ(Studio Haneul×Sanrio characters)ふわふわぬいぐるみ",
-    "name_en": "",
+    "name_en": "Studio Haneul × Sanrio Characters Fluffy Plush",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 500,
@@ -37301,23 +37408,21 @@
     "auto": true,
     "q_subs": [
       "kawaii:sanrio",
-      "kawaii:mascot",
       "type:plush"
     ],
     "q_ages": [
       "10",
-      "20",
-      "30"
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2130",
     "name": "セサミストリートのぬいぐるみ ２",
-    "name_en": "",
+    "name_en": "Sesame Street Plush 2",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 500,
@@ -37339,23 +37444,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
-      "type:plush"
+      "kawaii:character",
+      "type:plush",
+      "hobby:movie"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2128",
     "name": "こびとづかんのぬいぐるみ３",
-    "name_en": "",
+    "name_en": "Kobito Dukan Plush 3",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 500,
@@ -37377,8 +37482,9 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
-      "type:plush"
+      "kawaii:character",
+      "type:plush",
+      "funny:neta"
     ],
     "q_ages": [
       "20",
@@ -37386,14 +37492,15 @@
       "40"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2127",
     "name": "こびとづかん めじるしラバーマスコット",
-    "name_en": "",
+    "name_en": "Kobito Dukan Mejirushi Rubber Mascot",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 300,
@@ -37415,10 +37522,9 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
-      "kawaii:accessory",
-      "type:plush",
-      "type:mejirushi"
+      "kawaii:character",
+      "type:mejirushi",
+      "funny:neta"
     ],
     "q_ages": [
       "20",
@@ -37429,12 +37535,12 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2126",
     "name": "こびとづかん 抱きつきリングコレクション",
-    "name_en": "",
+    "name_en": "Kobito Dukan Hugging Ring Collection",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 400,
@@ -37454,8 +37560,9 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
-      "type:fashion"
+      "kawaii:character",
+      "type:figure",
+      "funny:neta"
     ],
     "q_ages": [
       "20",
@@ -37463,14 +37570,15 @@
       "40"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2125",
     "name": "こびとづかんのぬいぐるみ２",
-    "name_en": "",
+    "name_en": "Kobito Dukan Plush 2",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 500,
@@ -37492,8 +37600,9 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
-      "type:plush"
+      "kawaii:character",
+      "type:plush",
+      "funny:neta"
     ],
     "q_ages": [
       "20",
@@ -37501,14 +37610,15 @@
       "40"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2124",
     "name": "セサミストリート プリントミニトート ２",
-    "name_en": "",
+    "name_en": "Sesame Street Print Mini Tote 2",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 400,
@@ -37528,23 +37638,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
       "type:useful"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2123",
     "name": "サルゲッチュ ふわふわスクエアポーチ",
-    "name_en": "",
+    "name_en": "Ape Escape Fluffy Square Pouch",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 500,
@@ -37566,27 +37675,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
-      "kawaii:accessory",
       "oshi:game",
-      "type:plush",
       "type:useful",
       "retro:heisei"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2122",
     "name": "ぷりぷりうちゅうじんのぬいぐるみ",
-    "name_en": "",
+    "name_en": "Puripuri Uchujin Plush",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 500,
@@ -37609,22 +37715,23 @@
     "auto": true,
     "q_subs": [
       "kawaii:mascot",
-      "type:plush"
+      "type:plush",
+      "funny:neta"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2121",
     "name": "モンチッチ×ハローキティ フェイスマスコット",
-    "name_en": "",
+    "name_en": "Monchhichi × Hello Kitty Face Mascot",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 500,
@@ -37647,25 +37754,23 @@
     "auto": true,
     "q_subs": [
       "kawaii:sanrio",
-      "kawaii:character",
-      "kawaii:mascot",
       "type:plush",
       "retro:showa"
     ],
     "q_ages": [
-      "20",
       "30",
-      "40"
+      "40",
+      "50"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2120",
     "name": "こびとづかん メタルフィギュアコレクション",
-    "name_en": "",
+    "name_en": "Kobito Dukan Metal Figure Collection",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 500,
@@ -37687,8 +37792,9 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
       "type:figure",
-      "real:miniature"
+      "funny:neta"
     ],
     "q_ages": [
       "20",
@@ -37699,12 +37805,12 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2119",
     "name": "こびとづかん ファンシー刺繍缶バッジ ２",
-    "name_en": "",
+    "name_en": "Kobito Dukan Fancy Embroidered Can Badge 2",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 300,
@@ -37724,7 +37830,9 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory"
+      "kawaii:character",
+      "type:fashion",
+      "funny:neta"
     ],
     "q_ages": [
       "20",
@@ -37735,12 +37843,12 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2118",
     "name": "ギャルネコ もこもこフェイスポーチ",
-    "name_en": "",
+    "name_en": "Gal Neko Fluffy Face Pouch",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 400,
@@ -37760,23 +37868,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
+      "kawaii:animal",
       "type:useful"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2117",
     "name": "メイリーパーラー めじるしフレンズ",
-    "name_en": "",
+    "name_en": "Meiry Parlor Mejirushi Friends",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 400,
@@ -37798,24 +37905,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
+      "kawaii:mascot",
       "type:mejirushi"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2116",
     "name": "くたくま もこもこポーチ",
-    "name_en": "",
+    "name_en": "Kutakuma Fluffy Pouch",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 400,
@@ -37836,23 +37941,21 @@
     "auto": true,
     "q_subs": [
       "kawaii:animal",
-      "kawaii:accessory",
       "type:useful"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2115",
     "name": "バターベア(Butterbear©) フェイスポーチ",
-    "name_en": "",
+    "name_en": "Butterbear Face Pouch",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 500,
@@ -37872,23 +37975,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
+      "kawaii:character",
+      "kawaii:animal",
       "type:useful"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2134",
     "name": "お仕事を頑張っている人の応援 アクリルキーホルダー ４",
-    "name_en": "",
+    "name_en": "Cheering for Hard Workers Acrylic Keychain 4",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 300,
@@ -37908,7 +38011,8 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "type:charm"
+      "type:charm",
+      "funny:neta"
     ],
     "q_ages": [
       "20",
@@ -37919,12 +38023,12 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2129",
     "name": "ゴースティ― めじるしフレンズ",
-    "name_en": "",
+    "name_en": "Ghosty Mejirushi Friends",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 300,
@@ -37946,24 +38050,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
+      "kawaii:mascot",
       "type:mejirushi"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2114",
     "name": "TOMOYASAKAI Art Figure リコレクション シリーズ",
-    "name_en": "",
+    "name_en": "TOMOYASAKAI Art Figure Recollection Series",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 500,
@@ -37982,7 +38084,10 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "type:figure",
+      "hobby:art"
+    ],
     "q_ages": [
       "20",
       "30",
@@ -37992,12 +38097,12 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2113",
     "name": "たべものサウルス ぬいぐるみ",
-    "name_en": "",
+    "name_en": "Tabemono Saurus Plush",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 500,
@@ -38020,22 +38125,24 @@
     "auto": true,
     "q_subs": [
       "kawaii:mascot",
-      "type:plush"
+      "type:plush",
+      "real:dino",
+      "real:food"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2112",
     "name": "みんなのかわいい おやしらズ マスコットボールチェーン",
-    "name_en": "",
+    "name_en": "Minna no Kawaii Oyashirazu Mascot Ball Chain",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 400,
@@ -38059,23 +38166,23 @@
     "q_subs": [
       "kawaii:mascot",
       "type:plush",
-      "type:charm"
+      "type:charm",
+      "funny:neta"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2111",
     "name": "お酒好きのためのアクリルキーホルダー 2",
-    "name_en": "",
+    "name_en": "Acrylic Keychain for Drink Lovers 2",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 300,
@@ -38095,7 +38202,9 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "type:charm"
+      "type:charm",
+      "real:food",
+      "funny:neta"
     ],
     "q_ages": [
       "20",
@@ -38106,12 +38215,12 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2110",
     "name": "おちゃめなはにわ めじるしフレンズ",
-    "name_en": "",
+    "name_en": "Ochame na Haniwa Mejirushi Friends",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 300,
@@ -38133,8 +38242,9 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
-      "type:mejirushi"
+      "kawaii:mascot",
+      "type:mejirushi",
+      "hobby:japan"
     ],
     "q_ages": [
       "20",
@@ -38145,12 +38255,12 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2109",
     "name": "なつかない猫 ぬいぐるみ 3",
-    "name_en": "",
+    "name_en": "Natsukanai Neko Plush 3",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 500,
@@ -38173,23 +38283,21 @@
     "auto": true,
     "q_subs": [
       "kawaii:animal",
-      "kawaii:mascot",
       "type:plush"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2108",
     "name": "MOYACOのおくすり マスコットボールチェーン",
-    "name_en": "",
+    "name_en": "MOYACO's Medicine Mascot Ball Chain",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 400,
@@ -38213,23 +38321,23 @@
     "q_subs": [
       "kawaii:mascot",
       "type:plush",
-      "type:charm"
+      "type:charm",
+      "funny:neta"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2143",
     "name": "にっこりーノ モスバーガーのぬいぐるみ",
-    "name_en": "",
+    "name_en": "Nikkorino MOS Burger Plush",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 500,
@@ -38252,22 +38360,24 @@
     "auto": true,
     "q_subs": [
       "kawaii:mascot",
-      "type:plush"
+      "type:plush",
+      "real:food",
+      "hobby:brand"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2142",
     "name": "にっこりーノ わけあいっこマスコット 2",
-    "name_en": "",
+    "name_en": "Nikkorino Sharing Mascot 2",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 400,
@@ -38294,19 +38404,17 @@
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2141",
     "name": "にっこりーノ 元気なカラダのシャカシャカアクリルキーホルダー",
-    "name_en": "",
+    "name_en": "Nikkorino Healthy Body Shaker Acrylic Keychain",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 300,
@@ -38326,24 +38434,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:yumekawa",
-      "type:charm"
+      "kawaii:mascot",
+      "type:charm",
+      "funny:neta"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2140",
     "name": "にっこりーノ パンのぬいぐるみ3",
-    "name_en": "",
+    "name_en": "Nikkorino Bread Plush 3",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 400,
@@ -38371,18 +38479,17 @@
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2139",
     "name": "にっこりーノ おむすびもこもこ巾着2",
-    "name_en": "",
+    "name_en": "Nikkorino Onigiri Fluffy Drawstring Bag 2",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 400,
@@ -38401,22 +38508,24 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "kawaii:mascot",
+      "type:useful",
+      "real:food"
+    ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2138",
     "name": "にっこりーノ ハミガキのぬいぐるみ2",
-    "name_en": "",
+    "name_en": "Nikkorino Toothbrushing Plush 2",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 400,
@@ -38439,22 +38548,22 @@
     "auto": true,
     "q_subs": [
       "kawaii:mascot",
-      "type:plush"
+      "type:plush",
+      "funny:neta"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2137",
     "name": "にっこりーノ アイドルのバラエティコレクション",
-    "name_en": "",
+    "name_en": "Nikkorino Idol Variety Collection",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 400,
@@ -38474,23 +38583,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "oshi:idol"
+      "kawaii:mascot",
+      "type:figure",
+      "funny:neta"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2136",
     "name": "にっこりーノ クリスマスのぬいぐるみ2 ニューカラーバージョン",
-    "name_en": "",
+    "name_en": "Nikkorino Christmas Plush 2 New Color Version",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 400,
@@ -38517,18 +38626,17 @@
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2135",
     "name": "にっこりーノ 縁起物のぬいぐるみ",
-    "name_en": "",
+    "name_en": "Nikkorino Lucky Charm Plush",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 400,
@@ -38551,22 +38659,22 @@
     "auto": true,
     "q_subs": [
       "kawaii:mascot",
-      "type:plush"
+      "type:plush",
+      "hobby:japan"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2106",
     "name": "こびとづかん めじるしフレンズ クリアver.",
-    "name_en": "",
+    "name_en": "Kobito Dukan Mejirushi Friends Clear ver.",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 400,
@@ -38588,8 +38696,9 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
-      "type:mejirushi"
+      "kawaii:character",
+      "type:mejirushi",
+      "funny:neta"
     ],
     "q_ages": [
       "20",
@@ -38600,12 +38709,12 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2105",
     "name": "すみっコぐらしとニフレルのいきものたち3 マスコットボールチェーン",
-    "name_en": "",
+    "name_en": "Sumikkogurashi & NIFREL Creatures 3 Mascot Ball Chain",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 400,
@@ -38628,26 +38737,24 @@
     "auto": true,
     "q_subs": [
       "kawaii:character",
-      "kawaii:mascot",
       "type:plush",
       "type:charm",
       "real:creature"
     ],
     "q_ages": [
+      "10",
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2073",
     "name": "はにわとどぐうとこふんの巾着",
-    "name_en": "",
+    "name_en": "Haniwa, Dogu & Kofun Drawstring Bag",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 400,
@@ -38666,7 +38773,10 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "type:useful",
+      "hobby:japan"
+    ],
     "q_ages": [
       "20",
       "30",
@@ -38676,12 +38786,12 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2071",
     "name": "タニクの妖精 マスコットフィギュア 2",
-    "name_en": "",
+    "name_en": "Taniku no Yosei Mascot Figure 2",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 400,
@@ -38705,24 +38815,22 @@
     "auto": true,
     "q_subs": [
       "kawaii:mascot",
-      "type:figure",
-      "type:plush"
+      "type:figure"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2066",
     "name": "シャキッとしな菜！３",
-    "name_en": "",
+    "name_en": "Shakitto Shinana! 3",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 300,
@@ -38741,22 +38849,25 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "type:figure",
+      "real:food",
+      "funny:neta"
+    ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2104",
     "name": "スポンジボブ ふわふわスクエアポーチ",
-    "name_en": "",
+    "name_en": "SpongeBob Fluffy Square Pouch",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 400,
@@ -38778,25 +38889,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
-      "kawaii:accessory",
-      "type:plush",
+      "kawaii:character",
       "type:useful"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2102",
     "name": "ピングー（PINGU）™ のぬいぐるみ2",
-    "name_en": "",
+    "name_en": "PINGU Plush 2",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 500,
@@ -38818,7 +38926,7 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
+      "kawaii:character",
       "type:plush"
     ],
     "q_ages": [
@@ -38829,12 +38937,12 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2094",
     "name": "こびとづかん カプリウムコレクション",
-    "name_en": "",
+    "name_en": "Kobito Dukan Capsule Terrarium Collection",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 500,
@@ -38853,7 +38961,12 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "kawaii:character",
+      "type:figure",
+      "real:miniature",
+      "funny:neta"
+    ],
     "q_ages": [
       "20",
       "30",
@@ -38863,12 +38976,12 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2091",
     "name": "セサミストリート サークルポーチ",
-    "name_en": "",
+    "name_en": "Sesame Street Circle Pouch",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 500,
@@ -38888,23 +39001,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
+      "kawaii:character",
       "type:useful"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2090",
     "name": "ピングー（PINGU）プリントミニトート",
-    "name_en": "",
+    "name_en": "PINGU Print Mini Tote",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 400,
@@ -38924,6 +39036,7 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
       "type:useful"
     ],
     "q_ages": [
@@ -38932,15 +39045,14 @@
       "40"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2089",
     "name": "ンめねこ フェイス巾着",
-    "name_en": "",
+    "name_en": "Nmeneko Face Drawstring Bag",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 400,
@@ -38960,23 +39072,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:animal"
+      "kawaii:animal",
+      "type:useful",
+      "funny:neta"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2088",
     "name": "ナンジャモンジャのぬいぐるみ",
-    "name_en": "",
+    "name_en": "Nanja Monja Plush",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 500,
@@ -38999,7 +39111,8 @@
     "auto": true,
     "q_subs": [
       "kawaii:mascot",
-      "type:plush"
+      "type:plush",
+      "oshi:game"
     ],
     "q_ages": [
       "20",
@@ -39007,14 +39120,15 @@
       "40"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2087",
     "name": "ミッフィー 貯金箱",
-    "name_en": "",
+    "name_en": "miffy Coin Bank",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 500,
@@ -39034,7 +39148,8 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:character"
+      "kawaii:character",
+      "type:useful"
     ],
     "q_ages": [
       "20",
@@ -39042,15 +39157,14 @@
       "40"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2086",
     "name": "こびとづかん コインケース",
-    "name_en": "",
+    "name_en": "Kobito Dukan Coin Case",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 400,
@@ -39070,7 +39184,9 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "type:useful"
+      "kawaii:character",
+      "type:useful",
+      "funny:neta"
     ],
     "q_ages": [
       "20",
@@ -39081,12 +39197,12 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2085",
     "name": "キース・へリング クッションマスコット",
-    "name_en": "",
+    "name_en": "Keith Haring Cushion Mascot",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 500,
@@ -39108,10 +39224,8 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
-      "kawaii:accessory",
       "type:plush",
-      "type:fashion"
+      "hobby:art"
     ],
     "q_ages": [
       "20",
@@ -39119,14 +39233,15 @@
       "40"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2084",
     "name": "コジコジのぬいぐるみ",
-    "name_en": "",
+    "name_en": "Kojikoji Plush",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 500,
@@ -39148,9 +39263,9 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
-      "oshi:kids",
-      "type:plush"
+      "kawaii:character",
+      "type:plush",
+      "retro:heisei"
     ],
     "q_ages": [
       "20",
@@ -39160,12 +39275,12 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2083",
     "name": "アヒル隊長 もこもこポーチ",
-    "name_en": "",
+    "name_en": "Captain Duck Fluffy Pouch",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 400,
@@ -39185,7 +39300,7 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
+      "kawaii:character",
       "type:useful"
     ],
     "q_ages": [
@@ -39196,12 +39311,12 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2067",
     "name": "こびとづかん ソフビフィギュア2",
-    "name_en": "",
+    "name_en": "Kobito Dukan Soft Vinyl Figure 2",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 400,
@@ -39223,7 +39338,9 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "type:figure"
+      "kawaii:character",
+      "type:figure",
+      "funny:neta"
     ],
     "q_ages": [
       "20",
@@ -39234,12 +39351,12 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2101",
     "name": "つまんだどうぶつたち3 マスコットボールチェーン",
-    "name_en": "",
+    "name_en": "Tsumanda Dobutsu-tachi 3 Mascot Ball Chain",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 300,
@@ -39261,25 +39378,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
+      "kawaii:animal",
       "type:plush",
       "type:charm"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2100",
     "name": "すきまハムスター マスコットフィギュア2",
-    "name_en": "",
+    "name_en": "Sukima Hamster Mascot Figure 2",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 400,
@@ -39302,25 +39417,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
-      "type:figure",
-      "type:plush"
+      "kawaii:animal",
+      "type:figure"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2099",
     "name": "コギまるけ マスコットフィギュア コーギーとシジュウカラ",
-    "name_en": "",
+    "name_en": "Kogimaruke Mascot Figure Corgi & Tit",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 400,
@@ -39343,25 +39456,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
-      "type:figure",
-      "type:plush"
+      "kawaii:animal",
+      "type:figure"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2098",
     "name": "みんなのかわいい おやしらズ ぬいぐるみ",
-    "name_en": "",
+    "name_en": "Minna no Kawaii Oyashirazu Plush",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 400,
@@ -39384,22 +39494,23 @@
     "auto": true,
     "q_subs": [
       "kawaii:mascot",
-      "type:plush"
+      "type:plush",
+      "funny:neta"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2097",
     "name": "DaisukeKondo もこもこポーチ",
-    "name_en": "",
+    "name_en": "DaisukeKondo Fluffy Pouch",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 400,
@@ -39419,23 +39530,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
-      "type:useful"
+      "kawaii:animal",
+      "type:useful",
+      "hobby:art"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2078",
     "name": "まなつ ＆ まふゆ フィギュアコレクション",
-    "name_en": "",
+    "name_en": "Manatsu & Mafuyu Figure Collection",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 500,
@@ -39458,23 +39569,22 @@
     "auto": true,
     "q_subs": [
       "type:figure",
-      "real:miniature"
+      "hobby:art"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2077",
     "name": "空想寝相シリーズ マスコットフィギュア",
-    "name_en": "",
+    "name_en": "Kuso Nezo Series Mascot Figure",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 400,
@@ -39497,25 +39607,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
+      "kawaii:animal",
       "type:figure",
-      "type:plush"
+      "funny:neta"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2076",
     "name": "ゴースティースタンドフィギュア5",
-    "name_en": "",
+    "name_en": "Ghosty Stand Figure 5",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 400,
@@ -39537,23 +39646,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:mascot",
       "type:figure"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2075",
     "name": "カラフルレトロゼリィヌ マスコットフィギュア",
-    "name_en": "",
+    "name_en": "Colorful Retro Jellyine Mascot Figure",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 400,
@@ -39578,22 +39686,22 @@
     "q_subs": [
       "kawaii:mascot",
       "type:figure",
-      "type:plush",
+      "real:food",
       "retro:showa"
     ],
     "q_ages": [
-      "50"
+      "20",
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2074",
     "name": "ブチャグルミ いろいろきんちゃく",
-    "name_en": "",
+    "name_en": "Buchagurumi Assorted Drawstring Bags",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 400,
@@ -39612,22 +39720,23 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "kawaii:animal",
+      "type:useful"
+    ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2082",
     "name": "にっこりーノ トーストのぬいぐるみ",
-    "name_en": "",
+    "name_en": "Nikkorino Toast Plush",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 400,
@@ -39650,22 +39759,22 @@
     "auto": true,
     "q_subs": [
       "kawaii:mascot",
-      "type:plush"
+      "type:plush",
+      "real:food"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2081",
     "name": "にっこりーノ フランスのぬいぐるみ",
-    "name_en": "",
+    "name_en": "Nikkorino France Plush",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 400,
@@ -39688,22 +39797,22 @@
     "auto": true,
     "q_subs": [
       "kawaii:mascot",
-      "type:plush"
+      "type:plush",
+      "real:food"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2080",
     "name": "にっこりーノ のりもののぬいぐるみ２",
-    "name_en": "",
+    "name_en": "Nikkorino Vehicle Plush 2",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 400,
@@ -39726,22 +39835,22 @@
     "auto": true,
     "q_subs": [
       "kawaii:mascot",
-      "type:plush"
+      "type:plush",
+      "real:vehicle"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2079",
     "name": "にっこりーノ 丼もののぬいぐるみ",
-    "name_en": "",
+    "name_en": "Nikkorino Rice Bowl Plush",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 400,
@@ -39764,22 +39873,22 @@
     "auto": true,
     "q_subs": [
       "kawaii:mascot",
-      "type:plush"
+      "type:plush",
+      "real:food"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2103",
     "name": "神獣ベコたち 世界の伝承編",
-    "name_en": "",
+    "name_en": "Shinju Beko World Legends Edition",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 400,
@@ -39798,7 +39907,10 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "type:figure",
+      "hobby:japan"
+    ],
     "q_ages": [
       "20",
       "30",
@@ -39808,12 +39920,12 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2070",
     "name": "海の生き物のぬいぐるみ",
-    "name_en": "",
+    "name_en": "Sea Creature Plush",
     "maker": "クオリア",
     "maker_en": "Qualia",
     "price": 400,
@@ -39835,19 +39947,18 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
+      "kawaii:animal",
       "type:plush",
       "real:creature"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2058",
