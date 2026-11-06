@@ -937,3 +937,30 @@ body { font-variant-numeric: tabular-nums lining-nums; }
 .logo-main { font: 900 25px/1.1 "Zen Maru Gothic", sans-serif; letter-spacing: .04em; background: linear-gradient(90deg, #ff4f7b, #a855f7 55%, #3aa0ff); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 2px 0 rgba(168, 85, 247, .25)); }
 .logo-main-en { font: 700 24px/1.1 var(--font-logo); letter-spacing: .03em; }
 @media (max-width: 600px) { .logo-pl { width: 32px; height: 32px; } .logo-main { font-size: 21px; } .logo-small { font-size: 9px; letter-spacing: .26em; } }
+
+/* 商品ページ：通販・フリマのリンクとJANコード */
+.shop-links { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 12px; }
+.sl-pr { font: 800 10px/1 var(--font-latin); color: var(--muted); border: 1px solid var(--line-strong); border-radius: 4px; padding: 3px 5px; }
+.sl { display: inline-flex; align-items: center; padding: 7px 12px; border-radius: 999px; font-size: 12.5px; font-weight: 700; text-decoration: none; border: 1.5px solid; background: #fff; }
+.sl-rak { color: #bf0000; border-color: #f0b3b3; }
+.sl-amz { color: #232f3e; border-color: #ffd28a; }
+.sl-yah { color: #ff0033; border-color: #ffb3c2; }
+.sl-mer { color: #ff4f50; border-color: #ffc2c2; }
+.sl:hover { filter: brightness(.95); }
+.jan { margin: 8px 0 0; font-size: 12px; color: var(--muted); }
+.jan span { font: 700 13px var(--font-latin); color: var(--text-2); letter-spacing: .04em; user-select: all; }
+/* トップ：人気ランキングの上の余白を、新着ガチャと入荷速報の間と同じくらいに */
+#ranking { padding-top: 28px; }
+
+/* トップ：人気シリーズのタイル */
+.series-tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 700px) { .series-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.st { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; padding: 16px; border-radius: 18px; text-decoration: none; color: var(--text); border: 1px solid var(--line); background: #fff; transition: transform .15s; }
+.st:hover { transform: translateY(-2px); }
+.st-e { font-size: 26px; line-height: 1; }
+.st-l { font-weight: 900; font-size: 16px; }
+.st-n { font-size: 12px; color: var(--muted); font-weight: 700; }
+.st-sanrio { background: linear-gradient(135deg, #fff0f6, #fff); }
+.st-disney { background: linear-gradient(135deg, #eef4ff, #fff); }
+.st-tamagotchi { background: linear-gradient(135deg, #fff8e6, #fff); }
+.st-mejirushi { background: linear-gradient(135deg, #f2fbf4, #fff); }

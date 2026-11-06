@@ -33,7 +33,8 @@ function parseItem(html) {
   const lm = t.match(/ラインナップは\s*(.+?)の全\s*(\d+)\s*種/);
   if (lm) names = [...lm[1].matchAll(/「([^」]+)」/g)].map((m) => m[1].trim()).filter(Boolean);
   const total = Number((t.match(/全\s*(\d+)\s*種/) || [])[1]) || (names.length || null);
-  return { price, week, names: [...new Set(names)], total };
+  const jan = ((t.match(/JAN[^\d]{0,10}(4\d{12})/) || t.match(/\b(4904790\d{6})\b/) || [])[1]) || "";
+  return { price, week, names: [...new Set(names)], total, jan };
 }
 
 async function main() {
@@ -66,10 +67,14 @@ async function main() {
     }
     await sleep(WAIT_MS);
   }
-  let added = 0, fixed = 0;
+  let added = 0, fixed = 0, janTried = 0;
   for (const f of found) {
     const old = byCode.get(f.code) || byName.get(norm(f.name));
-    if (old && old.official_url && old.lineup_names) continue;
+    // JANコードをまだ確かめていない商品は、1回に40件まで読み直す
+    const needJan = old && !old.jan && !old.jan_checked;
+    if (old && old.official_url && old.lineup_names && !needJan) continue;
+    if (old && old.official_url && old.lineup_names && needJan && janTried >= 40) continue;
+    if (needJan) janTried++;
     if (!old && added >= MAX_NEW) continue;
     const url = `${BASE}/items/item.html?n=${f.code}`;
     let d;
@@ -79,6 +84,7 @@ async function main() {
       if (d.names.length) old.lineup_names = d.names;
       if (!old.lineup && d.total) old.lineup = d.total;
       if (d.week && !old.release_note) old.release_note = d.week;
+      if (d.jan) old.jan = d.jan; else old.jan_checked = true;
       byCode.set(f.code, old);
       fixed++;
     } else {
@@ -87,6 +93,7 @@ async function main() {
         id: `tarts-${f.code.toLowerCase()}`, name: f.name, name_en: "", maker: "タカラトミーアーツ", maker_en: "Takara Tomy A.R.T.S",
         price: d.price, release: f.month, release_note: d.week || f.week || "", genre: "other", moods: [], tags: [], tags_en: [], lineup: d.total,
         ...(d.names.length ? { lineup_names: d.names } : {}),
+        ...(d.jan ? { jan: d.jan } : { jan_checked: true }),
         image: "", official_url: url, store_search_url: "", popularity: 50, added: today, description: "", description_en: "", auto: true,
       };
       try { const s = require("./import-schedule.js"); if (s.guessGenre) { it.genre = s.guessGenre(it.name); it.moods = s.guessMoods(it.name); } } catch {}

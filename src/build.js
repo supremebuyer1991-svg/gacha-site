@@ -307,6 +307,32 @@ const affiliate = (it) => {
   return { amazon, rakuten };
 };
 
+// JANコード（バンダイは公式URLや商品IDに入っている。タカラトミーアーツは取り込み時に jan に入れる）
+const janOf = (it) => {
+  if (it.jan && /^\d{13}$/.test(it.jan)) return it.jan;
+  const m = (it.official_url || "").match(/jan_code=(\d{13})/) || String(it.id).match(/^bandai-(4[59]\d{11})$/);
+  return m ? m[1] : "";
+};
+// 通販・フリマで探すリンク（JANがあればJANで、なければ商品名で）
+const shopLinks = (it) => {
+  const jan = janOf(it), name = it.name.replace(/【[^】]*】/g, "").trim();
+  const q = jan || `${name} ガチャ`;
+  const a = affSearch(q);
+  const ys = `https://shopping.yahoo.co.jp/search?p=${encodeURIComponent(q)}`;
+  const yahoo = site.yahoo_vc_sid && site.yahoo_vc_pid ? `https://ck.jp.ap.valuecommerce.com/servlet/referral?sid=${site.yahoo_vc_sid}&pid=${site.yahoo_vc_pid}&vc_url=${encodeURIComponent(ys)}` : ys;
+  const mercari = `https://jp.mercari.com/search?keyword=${encodeURIComponent(`${name} ガチャ`)}&status=on_sale`;
+  return { jan, rakuten: a.rakuten, amazon: a.amazon, yahoo, mercari };
+};
+
+// 人気シリーズだけのページ（/series/〇〇.html）
+const SERIES = [
+  { slug: "sanrio", label: "サンリオ", en: "Sanrio", emoji: "🎀", re: /サンリオ|ハローキティ|キティ|マイメロ|クロミ|シナモロール|ポムポムプリン|ポチャッコ|ハンギョドン|けろけろけろっぴ|キキ&ララ|キキララ|タキシードサム|ばつ丸|ぐでたま|Sanrio/i },
+  { slug: "disney", label: "ディズニー", en: "Disney", emoji: "🏰", re: /ディズニー|ミッキー|ミニー|ドナルド|くまのプーさん|スティッチ|ピクサー|トイ・ストーリー|ラプンツェル|アナと雪|プリンセス|ツイステ|Disney/i },
+  { slug: "tamagotchi", label: "たまごっち", en: "Tamagotchi", emoji: "🥚", re: /たまごっち|Tamagotchi/i },
+  { slug: "mejirushi", label: "めじるしアクセサリー", en: "Mejirushi Accessory", emoji: "🔖", re: /めじるし/ },
+];
+const seriesItems = (sr) => items.filter((it) => sr.re.test([it.name, it.name_en, (it.lineup_names || []).join(" ")].join(" ")));
+
 /* ---------- 診断：作品名カタログで細かい項目を作る ---------- */
 // 商品名に作品名が入っていれば、その作品が属する項目（例 oshi:kids）を自動で足す
 const subKeys = new Set((site.quiz_groups || []).flatMap((g) => g.subs.map((x) => `${g.slug}:${x.slug}`)));
@@ -630,6 +656,11 @@ ${content}
     ${ranking.length > 5 ? `<p class="more-wrap"><button type="button" class="btn" id="rank-more">${t.showMore}</button></p>` : ""}
   </section>
 
+  <section class="section section-tight" id="series">
+    <div class="section-head"><h2>${lang === "ja" ? "人気シリーズ" : "Popular series"}</h2></div>
+    <div class="series-tiles">${SERIES.map((sr) => { const n = seriesItems(sr).length; return n ? `<a class="st st-${sr.slug}" href="${c.H}series/${sr.slug}.html"><span class="st-e" aria-hidden="true">${sr.emoji}</span><span class="st-l">${lang === "ja" ? sr.label : sr.en}</span><span class="st-n">${t.series(n)}</span></a>` : ""; }).join("")}</div>
+  </section>
+
   <section class="section" id="types">
     <div class="section-head"><h2>${t.typeTitle}</h2></div>
     <div class="genres types">${TYPES.filter((g) => inType(g.slug).length).map((g) => `<a href="${c.H}type/${g.slug}.html"><span class="ja">${phr(genreLabel(g, lang))}</span><span class="n">${t.series(inType(g.slug).length)}</span></a>`).join("")}</div>
@@ -693,6 +724,7 @@ ${content}
         ${it.official_url ? `<a class="btn" href="${esc(it.official_url)}" target="_blank" rel="noopener">${t.official}</a>` : ""}
         <button type="button" class="heart" data-vote="${c.R}api/vote/${it.id}" data-id="${it.id}" aria-label="${t.heartAria}" title="${t.heartNote}"><i aria-hidden="true">♥</i><span>${t.heart}</span><b>${heartsOf(it)}</b></button>
       </div>
+      ${(() => { const L = shopLinks(it); return `<div class="shop-links"><span class="sl-pr">PR</span><a class="sl sl-rak" href="${esc(L.rakuten)}" target="_blank" rel="sponsored noopener">楽天市場</a><a class="sl sl-amz" href="${esc(L.amazon)}" target="_blank" rel="sponsored noopener">Amazon</a><a class="sl sl-yah" href="${esc(L.yahoo)}" target="_blank" rel="sponsored noopener">Yahoo!ショッピング</a><a class="sl sl-mer" href="${esc(L.mercari)}" target="_blank" rel="noopener">メルカリ</a></div>${L.jan ? `<p class="jan">JANコード：<span>${L.jan}</span></p>` : ""}`; })()}
     </div>
   </article>
   ${(it.lineup_names || []).length ? `<section class="section lineup-sec">
@@ -790,6 +822,16 @@ ${content}
     ];
     layout({ rel, title, description: lead, body, current, ogImage, jsonld });
   };
+  // 人気シリーズだけのページ
+  for (const sr of SERIES) {
+    const list = seriesItems(sr).sort(byNewest);
+    const L = lang === "ja" ? sr.label : sr.en;
+    listPage(`series/${sr.slug}.html`, {
+      title: lang === "ja" ? `${L}のガチャガチャ一覧（新作・発売日）${list.length}シリーズ` : `${L} gacha (capsule toys) – ${list.length} series`,
+      lead: lang === "ja" ? `${L}のガチャだけを集めました。新しく載った順に、発売月・価格・全何種かがひと目でわかります。` : `All ${L} capsule toys on the site, newest first.`,
+      list,
+    });
+  }
   // 今週発売のガチャ（X の「今週発売」投稿のリンク先）
   listPage("week.html", {
     title: lang === "en" ? `New gacha releasing this week (${WEEK.range}) – ${WEEK.items.length} series` : `今週発売のガチャガチャ新作（${WEEK.range}）${WEEK.items.length}シリーズ`,
