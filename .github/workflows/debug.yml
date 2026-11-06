@@ -1,14 +1,15 @@
-name: debug-probe
+name: debug-shot
 on: { push: { branches: [debug] } }
 jobs:
-  probe:
+  shot:
     runs-on: ubuntu-latest
     permissions: { contents: write }
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with: { node-version: 22 }
-      - run: node probe/probe.js
+      - run: npm i playwright@1.48.2 && npx playwright install --with-deps chromium
+      - run: node brand/shot-en.js
       - run: |
           git config user.name bot; git config user.email bot@example.com
-          git add -f probe/html && git commit -m probe-result && git push
+          git add -f brand/en-*.png && git commit -m shots && git push
