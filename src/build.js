@@ -578,6 +578,7 @@ for (const lang of LANGS) {
     const head = `<title>${esc(fullTitle)}</title>
 ${fragment ? '<meta name="claude:viewport-fit-sides" content="cover">' : ""}
 <meta name="site-lang" content="${lang}">
+${site.vc_linkswitch_pid ? `<script>var vc_pid = "${esc(site.vc_linkswitch_pid)}";</script><script src="//aml.valuecommerce.com/vcdal.js" async></script>` : ""}
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${esc(canonical(lang, rel))}">
 ${noindex ? `<meta name="robots" content="noindex, follow">\n` : ""}${jaOnly || noAlt ? "" : `<link rel="alternate" hreflang="ja" href="${esc(canonical("ja", rel))}">
