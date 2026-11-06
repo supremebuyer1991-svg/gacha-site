@@ -306,6 +306,7 @@ T.ja.u = {
   makersH: "メーカーから探す", prefsLink: "都道府県からガチャガチャ設置店を探す",
   optional: "答えなくてもOK", skipQ: "スキップ",
   charaHit: "{l}のガチャ一覧（{n}）→",
+  push: { on: "発売日にお知らせを受け取る", off: "お知らせをやめる", lead: "★で保存したガチャが発売される週の月曜の朝に、通知でお知らせします（会員登録はいりません）。", onNow: "お知らせ受け取り中：★のガチャが発売される週にお知らせします。", done: "お知らせをオンにしました。", offDone: "お知らせをやめました。", denied: "通知がブロックされています。ブラウザの設定で、このサイトの通知を許可してください。", error: "うまくいきませんでした。時間をおいてもう一度お試しください。", ios: "iPhone・iPadでは、ホーム画面に追加すると通知を受け取れます。Safariの共有ボタン（□↑）→「ホーム画面に追加」→ 追加したアイコンから開いて、このボタンを押してください。", busy: "設定中…" },
 };
 T.en.u = {
   followTxt: "New releases & restocks every week", followCta: (a) => `Follow @${a}`,
@@ -320,6 +321,7 @@ T.en.u = {
   makersH: "Browse by maker", prefsLink: "",
   optional: "Optional", skipQ: "Skip",
   charaHit: "{l} gacha ({n}) →",
+  push: { on: "Notify me on release", off: "Stop notifications", lead: "Get a notification on Monday morning (Japan time) of the week your ★ saved gacha are released. No account needed.", onNow: "Notifications on: we'll tell you the week your ★ gacha are released.", done: "Notifications are on.", offDone: "Notifications are off.", denied: "Notifications are blocked. Please allow them for this site in your browser settings.", error: "Something went wrong. Please try again later.", ios: "On iPhone/iPad, notifications work after adding this site to your Home Screen: tap Share (□↑) → “Add to Home Screen”, open it from the new icon, then tap this button.", busy: "Setting up…" },
 };
 
 /* ---------- 商品ページの「このガチャについて」（データだけから作る短い文章。v はページごとの言い回しの番号） ----------
@@ -449,6 +451,11 @@ for (const row of stockFile.stock || []) {
 
 /* ---------- 便利関数 ---------- */
 const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+// 発売週のお知らせ（Web Push）のボタン。通知に対応したブラウザでだけ app.js が表示する（kind：ml＝マイリスト、item＝商品ページ）
+const pushBox = (t, kind, favId = "") => {
+  const P = (t.u && t.u.push) || T.en.u.push;
+  return `<div class="push-box push-${kind}" data-push="${esc(JSON.stringify(P))}"${favId ? ` data-fav-id="${esc(favId)}"` : ""} hidden>${kind === "ml" ? `<p class="push-lead">${esc(P.lead)}</p>` : ""}<div class="push-row"><button type="button" class="push-on">${esc(P.on)}</button><button type="button" class="push-off" hidden>${esc(P.off)}</button></div><p class="push-msg" role="status" hidden></p><p class="push-ios" hidden>${esc(P.ios)}</p></div>`;
+};
 const up = (n) => "../".repeat(n);
 const langDir = (lang) => (lang === "ja" ? "" : `${lang}/`);
 const canonical = (lang, p) => SITE_URL + "/" + langDir(lang) + p.replace(/^index\.html$/, "").replace(/\.html$/, "");
@@ -1211,6 +1218,7 @@ ${content}
         <a class="btn btn-sub" href="#stock">${esc(t.u.findLater)}</a>` : `<a class="btn btn-gold" href="#stock">${t.findStores}</a>`}
         ${it.official_url ? `<a class="btn" href="${esc(it.official_url)}" target="_blank" rel="noopener">${t.official}</a>` : ""}
         <button type="button" class="fav-item" data-fav="${it.id}" aria-pressed="false"><i aria-hidden="true">★</i><span>${esc(t.u.save)}</span></button>
+        ${pushBox(t, "item", it.id)}
         <button type="button" class="heart" data-vote="${c.R}api/vote/${it.id}" data-id="${it.id}" aria-label="${t.heartAria}" title="${t.heartNote}"><i aria-hidden="true">♥</i><span>${t.heart}</span><b>${heartsOf(it)}</b></button>
       </div>
       ${lang !== "ja" ? (() => { const O = overseas(it); const L = shopLinks(it); const XLG = lang !== "en"; const b = [
@@ -1641,6 +1649,7 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
     const body = `<div class="wrap">
   <nav class="breadcrumb" aria-label="breadcrumb"><a href="${c.H}index.html">${t.home}</a><span>/</span><span>${esc(t.u.mylist)}</span></nav>
   <header class="page-head"><h1>★ ${esc(t.u.mylistTitle)}</h1><p class="lead">${esc(t.u.mylistLead)}</p></header>
+  ${pushBox(t, "ml")}
   <div id="mylist" class="mylist" data-index="${c.R}data/search-${lang}.json" data-home="${c.H}" data-root="${c.R}" data-l="${esc(JSON.stringify({ now: t.u.mlNow, soon: t.u.mlSoon, out: t.u.mlOut }))}">
     <p class="empty ml-empty" hidden>${esc(t.u.mlEmpty)}<br><a class="btn" href="${c.H}week.html" style="margin-top:14px">${esc(t.u.mlBrowse)} →</a></p>
   </div>
@@ -2077,6 +2086,7 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
       ["みんなの報告・コメントについて", "ガチャマップへの在庫報告・評価・コメントは、名前を出さずに表示します。いたずら防止のため、端末を見分けるための読めない符号を記録しますが、IPアドレスそのものは保存しません。"],
       ["位置情報について", "「現在地から探す」などで使う現在地は、近いお店を並べる計算だけに使い、どこにも送信しません。"],
       ["マイリスト（★保存）・ハートについて", "★で保存したガチャ（マイリスト）と、ハートを押した記録は、お使いのブラウザの中（ローカルストレージ）だけに保存され、当サイトのサーバーには送信されません。ブラウザのデータを消すと、保存した内容も消えます。ハートの数（人気ランキング）だけは、名前などを含まない形で集計しています。"],
+      ["発売日のお知らせ（プッシュ通知）について", "「発売日にお知らせを受け取る」を選んだ場合だけ、通知の送り先（ブラウザが発行するプッシュ通知用のアドレスと暗号化の鍵）と、★で保存したガチャの番号・表示言語を当サイトのサーバーに保存します。名前・メールアドレスなどは受け取りません。いたずら防止のため、端末を見分けるための読めない符号も記録します（IPアドレスそのものは保存しません）。「お知らせをやめる」を押せば、いつでもすぐに削除されます。"],
       ["免責事項", "掲載している発売日・価格・取扱店・在庫などの情報は、公式情報とみんなの報告をもとにしていますが、正確さを保証するものではありません。最新の情報は各メーカーの公式サイトやお店でご確認ください。"],
       ["改定", "この方針は、必要に応じて変更することがあります。"],
     ];
@@ -2128,12 +2138,20 @@ write("_redirects", [
   "/chara/sanrio-characters-all /chara/sanrio 301", "/en/chara/sanrio-characters-all /en/chara/sanrio 301",
 ].join("\n") + "\n");
 write("data/mercari-item-ids.json", JSON.stringify({ ids: [...MERCARI_ITEM_IDS] }));
+// 発売週のお知らせ（Web Push）：ワーカーが月曜の朝に読む「今週・来週発売のガチャ」（ビルドが日曜でも月曜でも合うように2週分）
+{
+  const wk = (W) => ({ week_key: W.key, items: W.items.map((it) => ({ id: it.id, ...Object.fromEntries(LANGS.map((l) => [`name_${l}`, nameOf(it, l)])), url: `/item/${it.id}` })) });
+  const weeks = [wk(WEEK), wk(NEXT_WEEK)];
+  write("data/push-week.json", JSON.stringify({ ...weeks[0], weeks }));
+}
+// 通知を受け取るための Service Worker（通知の表示と、押したときにページを開くだけ。キャッシュはしない）
+write("sw.js", fs.readFileSync(path.join(__dirname, "sw.js"), "utf8"));
 write("x-img.html", fs.readFileSync(path.join(__dirname, "tpl", "x-img.html"), "utf8").replace("__FONTS__", FONTS));
 if (fs.existsSync(path.join(ROOT, "brand", "logo-lab.html"))) write("logo-lab.html", fs.readFileSync(path.join(ROOT, "brand", "logo-lab.html"), "utf8"));
 if (site.indexnow_key) fs.writeFileSync(path.join(OUT, site.indexnow_key + ".txt"), site.indexnow_key);
 write("robots.txt", `User-agent: *\nAllow: /\nDisallow: /api/\nDisallow: /x-img\nDisallow: /logo-lab\nSitemap: ${SITE_URL}/sitemap.xml\n`);
 // Cloudflare の窓口（functions/）を動かすのは、ページと /api/ だけ（画像などでは動かさず、無料の回数を節約する）
-write("_routes.json", JSON.stringify({ version: 1, include: ["/", "/api/*", "/item/*", "/shop/*", "/map*", "/gachakatsu*", "/shops/*", "/rules*", "/genre/*", "/type/*", "/maker/*", "/calendar*", "/search*", "/week*", "/new*", "/faq*", "/about*", "/en", "/en/", "/en/item/*", "/en/genre/*", "/en/type/*", "/en/maker/*", "/en/calendar*", "/en/search*", "/en/week*", "/en/new*", "/en/faq*", "/en/about*", "/index.html", "/en/index.html", "/chara*", "/series/*", "/lottery*", "/toprated*", "/next-week*", "/privacy*", "/en/chara*", "/en/series/*", "/en/next-week*", "/station*", "/chain*", "/en/station*", "/collection*", "/saihan*", "/stats*", "/price/*", "/en/collection*", "/en/saihan*", "/en/stats*", "/zh-cn", "/zh-cn/*", "/zh-tw", "/zh-tw/*", "/ko", "/ko/*"], exclude: ["/assets/*", "/images/*", "/data/*"] }));
+write("_routes.json", JSON.stringify({ version: 1, include: ["/", "/api/*", "/item/*", "/shop/*", "/map*", "/gachakatsu*", "/shops/*", "/rules*", "/genre/*", "/type/*", "/maker/*", "/calendar*", "/search*", "/week*", "/new*", "/faq*", "/about*", "/en", "/en/", "/en/item/*", "/en/genre/*", "/en/type/*", "/en/maker/*", "/en/calendar*", "/en/search*", "/en/week*", "/en/new*", "/en/faq*", "/en/about*", "/index.html", "/en/index.html", "/chara*", "/series/*", "/lottery*", "/toprated*", "/next-week*", "/privacy*", "/en/chara*", "/en/series/*", "/en/next-week*", "/station*", "/chain*", "/en/station*", "/collection*", "/saihan*", "/stats*", "/price/*", "/en/collection*", "/en/saihan*", "/en/stats*", "/zh-cn", "/zh-cn/*", "/zh-tw", "/zh-tw/*", "/ko", "/ko/*"], exclude: ["/assets/*", "/images/*", "/data/*", "/sw.js"] }));
 // ガチャ活：お店ごとの取扱ガチャ（ガチャの番号の一覧）。探したいガチャで絞るときだけ読む
 {
   const ids = [...new Set(Object.values(SHOP_OFFICIAL).flat())].filter((id) => itemById.has(id));
@@ -2210,7 +2228,7 @@ write("data/shops.json", JSON.stringify(SHOPS.map((x) => [x.id, x.name, x.pref, 
     return { daily, week: { range: WEEK.range, count: WEEK.items.length, url: `${SITE_URL}/en/week`, items: wk.slice(0, 4).map(packEn) } };
   })(), fav_ids: favIds, site: SITE_URL }));
 }
-write("_headers", `/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n/assets/*\n  Cache-Control: public, max-age=31536000, immutable\n/images/*\n  Cache-Control: public, max-age=604800\n  Access-Control-Allow-Origin: *\n/data/*\n  Cache-Control: public, max-age=300\n  Access-Control-Allow-Origin: *\n`);
+write("_headers", `/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n/assets/*\n  Cache-Control: public, max-age=31536000, immutable\n/images/*\n  Cache-Control: public, max-age=604800\n  Access-Control-Allow-Origin: *\n/data/*\n  Cache-Control: public, max-age=300\n  Access-Control-Allow-Origin: *\n/sw.js\n  Cache-Control: no-cache\n`);
 
 const noEn = items.filter((it) => !it.name_en).length;
 if (noEn) warnings.push(`英語名（name_en）がまだない商品が${noEn}件あります（英語ページでは日本語名を表示）`);

@@ -32,6 +32,7 @@ module.exports = {
     sampleBar: "当前显示的是示例数据，所有商品、店铺和库存均为虚构。",
     navShort: { map: "地图", katsu: "路线", toprated: "好评店", lottery: "抽签", ranking: "人气" },
     u: {
+      push: { on: "发售时通知我", off: "停止通知", lead: "在你用★收藏的扭蛋发售那一周的周一早上（日本时间）发送通知。无需注册。", onNow: "通知已开启：★收藏的扭蛋发售的那一周会通知你。", done: "已开启通知。", offDone: "已停止通知。", denied: "通知已被阻止。请在浏览器设置中允许本网站的通知。", error: "操作失败，请稍后再试。", ios: "在 iPhone/iPad 上，需要先添加到主屏幕才能接收通知：点 Safari 的分享按钮（□↑）→“添加到主屏幕”，再从新图标打开并点此按钮。", busy: "设置中…" },
       followTxt: "每周在 X 上发布新品和到货速报", followCta: (a) => `关注 @${a}`,
       homeH1: (ym) => `日本扭蛋新品・发售日一览（${ym.y}年${ym.m}月）`,
       addedLine: (d, w) => `今日新增 ${d} 件・本周新增 ${w} 件`,

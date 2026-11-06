@@ -657,6 +657,139 @@
     document.addEventListener("gp-fav", drawML);
   }
 
+  /* ================= 発売週のお知らせ（Web Push）。押した人だけ。★が変わったら送り先の情報も直す ================= */
+  (function () {
+    var PUSH_KEY = "gp-push", SIG_KEY = "gp-push-sig";
+    var lsGet = function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } };
+    var lsSet = function (k, v) { try { if (v == null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) {} };
+    var supported = false;
+    try { supported = "serviceWorker" in navigator && "PushManager" in window && "Notification" in window && window.isSecureContext !== false && !!window.fetch; } catch (e) {}
+    var ua = navigator.userAgent || "";
+    var isIOS = /iP(hone|ad|od)/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+    var standalone = false;
+    try { standalone = navigator.standalone === true || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches); } catch (e) {}
+    var b64ToBytes = function (s) {
+      s = String(s).replace(/-/g, "+").replace(/_/g, "/");
+      while (s.length % 4) s += "=";
+      var bin = atob(s), out = new Uint8Array(bin.length);
+      for (var i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
+      return out;
+    };
+    var getSub = function () {
+      if (!supported) return Promise.resolve(null);
+      return navigator.serviceWorker.getRegistration("/").then(function (reg) { return reg ? reg.pushManager.getSubscription() : null; }).catch(function () { return null; });
+    };
+    var api = function (method, body) {
+      return fetch("/api/push/subscribe", { method: method, headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
+        .then(function (r) { return r.json().catch(function () { return { ok: false }; }).then(function (d) { if (!r.ok || !d.ok) throw new Error(d.error || ("HTTP " + r.status)); return d; }); });
+    };
+    var sigOf = function (a) { return LANG + ":" + a.slice().sort().join(","); };
+    var sync = function (sub) {
+      var fav = favGet().slice(0, 200);
+      var s = sub.toJSON ? sub.toJSON() : sub;
+      return api("POST", { subscription: { endpoint: s.endpoint, keys: s.keys }, favorites: fav, lang: LANG }).then(function (d) { lsSet(SIG_KEY, sigOf(fav)); return d; });
+    };
+    // ★が変わったら（このページでも、ほかのタブでも）少し待ってから送り直す
+    var syncT = null;
+    var resync = function (force) {
+      if (lsGet(PUSH_KEY) !== "1") return;
+      if (!force && lsGet(SIG_KEY) === sigOf(favGet().slice(0, 200))) return;
+      clearTimeout(syncT);
+      syncT = setTimeout(function () {
+        getSub().then(function (sub) {
+          if (!sub) { lsSet(PUSH_KEY, null); lsSet(SIG_KEY, null); paintAll(); return; }
+          return sync(sub);
+        }).catch(function () {});
+      }, 1500);
+    };
+    document.addEventListener("gp-fav", function () { resync(false); });
+
+    var boxes = [].slice.call(document.querySelectorAll(".push-box"));
+    var state = { on: false, busy: false };
+    var paint = function (box) {
+      var P = box._P, kind = box.classList.contains("push-ml") ? "ml" : "item";
+      var on = box.querySelector(".push-on"), off = box.querySelector(".push-off"), ios = box.querySelector(".push-ios");
+      if (!supported) {
+        // iPhone・iPad の Safari（ホーム画面に追加していない）は、追加のしかただけ出す
+        box.hidden = !(isIOS && !standalone);
+        on.hidden = true; off.hidden = true; ios.hidden = box.hidden;
+        return;
+      }
+      box.hidden = kind === "item" && state.on && !box._justOn;
+      ios.hidden = true;
+      on.hidden = state.on; off.hidden = !state.on || kind === "item";
+      on.disabled = off.disabled = state.busy;
+      if (kind === "ml" && state.on && !box._msgSet) showMsg(box, P.onNow);
+    };
+    var paintAll = function () { boxes.forEach(paint); };
+    var showMsg = function (box, text) {
+      var m = box.querySelector(".push-msg");
+      m.textContent = text || ""; m.hidden = !text;
+      box._msgSet = !!text;
+    };
+    boxes.forEach(function (box) {
+      try { box._P = JSON.parse(box.getAttribute("data-push") || "{}"); } catch (e) { box._P = {}; }
+      var P = box._P;
+      box.querySelector(".push-on").addEventListener("click", function () {
+        if (state.busy) return;
+        var perm = "default"; try { perm = Notification.permission; } catch (e) {}
+        if (perm === "denied") { showMsg(box, P.denied); return; }
+        state.busy = true; paintAll(); showMsg(box, P.busy);
+        // 商品ページで押したときは、その商品も★に入れておく
+        var fid = box.getAttribute("data-fav-id");
+        if (fid && favGet().indexOf(fid) === -1) { favToggle(fid); paintFav(); }
+        var reqPerm = function () {
+          try {
+            return new Promise(function (res) { var p = Notification.requestPermission(res); if (p && p.then) p.then(res, function () { res("default"); }); });
+          } catch (e) { return Promise.resolve("default"); }
+        };
+        reqPerm().then(function (p) {
+          if (p !== "granted") throw new Error(p === "denied" ? "denied" : "dismissed");
+          return navigator.serviceWorker.register("/sw.js", { scope: "/" }).then(function () { return navigator.serviceWorker.ready; });
+        }).then(function (reg) {
+          return reg.pushManager.getSubscription().then(function (sub) {
+            if (sub) return sub;
+            return fetch("/api/push/key").then(function (r) { return r.json(); }).then(function (d) {
+              if (!d || !d.key) throw new Error("key");
+              return reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: b64ToBytes(d.key) });
+            });
+          });
+        }).then(function (sub) {
+          return sync(sub).catch(function (e) { try { sub.unsubscribe(); } catch (e2) {} throw e; });
+        }).then(function () {
+          lsSet(PUSH_KEY, "1"); state.on = true; state.busy = false; box._justOn = true;
+          paintAll(); showMsg(box, P.done);
+          try { document.dispatchEvent(new Event("gp-fav")); } catch (e) {}
+        }).catch(function (e) {
+          state.busy = false; paintAll();
+          showMsg(box, e && e.message === "denied" ? P.denied : e && e.message === "dismissed" ? "" : P.error);
+        });
+      });
+      box.querySelector(".push-off").addEventListener("click", function () {
+        if (state.busy) return;
+        state.busy = true; paintAll();
+        getSub().then(function (sub) {
+          if (!sub) return;
+          var ep = sub.endpoint;
+          return api("DELETE", { endpoint: ep }).catch(function () {}).then(function () { return sub.unsubscribe(); });
+        }).then(function () {
+          lsSet(PUSH_KEY, null); lsSet(SIG_KEY, null);
+          state.on = false; state.busy = false; paintAll(); showMsg(box, P.offDone);
+        }).catch(function () { state.busy = false; paintAll(); showMsg(box, P.error); });
+      });
+    });
+    paintAll();
+    // いまお知らせを受け取っているか（ブラウザの登録を見る。登録が消えていたら印も消す）
+    if (supported && (boxes.length || lsGet(PUSH_KEY) === "1")) {
+      getSub().then(function (sub) {
+        state.on = !!sub && lsGet(PUSH_KEY) === "1";
+        if (!sub && lsGet(PUSH_KEY) === "1") { lsSet(PUSH_KEY, null); lsSet(SIG_KEY, null); }
+        paintAll();
+        if (state.on) resync(false);
+      });
+    }
+  })();
+
   /* ================= 発売カレンダー：「この週をもっと見る」 ================= */
   [].forEach.call(document.querySelectorAll(".cal-more-btn"), function (b) {
     b.addEventListener("click", function () {
