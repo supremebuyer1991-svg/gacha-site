@@ -928,3 +928,12 @@ body { font-variant-numeric: tabular-nums lining-nums; }
 .price small, .price span { font-size: 12.5px; }
 .card-foot b { color: var(--text-2); font-size: 13px; font-weight: 800; }
 .sp-price { color: var(--text-2); font-weight: 700; font-size: 13.5px; }
+
+/* ---------- ロゴ（B3：惑星マーク＋グラデーションの「ガチャプラネット」） ---------- */
+.logo-b3 { flex-direction: row; align-items: center; gap: 8px; text-decoration: none; }
+.logo-pl { width: 40px; height: 40px; flex: none; }
+.logo-txt { display: flex; flex-direction: column; line-height: 1.05; }
+.logo-small { font: 700 10.5px/1 var(--font-logo); letter-spacing: .32em; color: #a855f7; margin-bottom: 3px; }
+.logo-main { font: 900 25px/1.1 "Zen Maru Gothic", sans-serif; letter-spacing: .04em; background: linear-gradient(90deg, #ff4f7b, #a855f7 55%, #3aa0ff); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 2px 0 rgba(168, 85, 247, .25)); }
+.logo-main-en { font: 700 24px/1.1 var(--font-logo); letter-spacing: .03em; }
+@media (max-width: 600px) { .logo-pl { width: 32px; height: 32px; } .logo-main { font-size: 21px; } .logo-small { font-size: 9px; letter-spacing: .26em; } }
