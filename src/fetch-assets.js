@@ -300,6 +300,7 @@ async function makeThumbs() {
   await require("./import-schedule.js")();
   try { await require("./import-takara.js")(); } catch (e) { console.log(`⚠ タカラトミーアーツの取り込みに失敗しました（${e.message}）`); }
   try { await require("./import-others.js")(); } catch (e) { console.log(`⚠ ほかのメーカーの取り込みに失敗しました（${e.message}）`); }
+  try { await require("./import-more.js")(); } catch (e) { console.log(`⚠ さらにほかのメーカー（トイズキャビン・ブシロードクリエイティブ・SO-TA・ケンエレファント）の取り込みに失敗しました（${e.message}）`); }
   items = read("items.json");
   // 新しく入った商品に診断用のタグを仮に付ける（毎晩Claudeが見直す）
   const tagged = require("./auto-tags.js")(items, site.quiz_groups);
