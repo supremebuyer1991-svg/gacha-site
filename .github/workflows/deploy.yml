@@ -99,7 +99,7 @@ jobs:
       - name: 新しいページを検索サイトに知らせる（IndexNow：Bing・Naver など）
         continue-on-error: true
         env:
-          INDEXNOW_DAYS: "30"
+          INDEXNOW_DAYS: "3"
         run: node src/indexnow.js
 
       - name: 在庫確認ワーカーを公開
