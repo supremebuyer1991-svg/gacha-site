@@ -141,6 +141,42 @@
       "note": "販売日は11/12。1人3個まで"
     },
     {
+      "title": "ちいかわ めじるしアクセサリー3",
+      "store": "#C-pla 浜松メイワン",
+      "pref": "静岡県",
+      "kind": "item",
+      "start": "2026-11-06T10:00",
+      "end": "2026-11-07T23:59",
+      "method": "LivePocket",
+      "url": "https://livepocket.jp/e/idq_y",
+      "note": "販売日は11/11。1人4個まで",
+      "added": "2026-11-06"
+    },
+    {
+      "title": "ちいかわ めじるしアクセサリー3",
+      "store": "#C-pla 静岡PARCO",
+      "pref": "静岡県",
+      "kind": "item",
+      "start": "2026-11-06T10:00",
+      "end": "2026-11-07T23:59",
+      "method": "LivePocket",
+      "url": "https://livepocket.jp/e/i6wo4",
+      "note": "販売日は11/11。1人4個まで",
+      "added": "2026-11-06"
+    },
+    {
+      "title": "ちいかわ めじるしアクセサリー3",
+      "store": "#C-pla 静岡パルシェ",
+      "pref": "静岡県",
+      "kind": "item",
+      "start": "2026-11-06T10:00",
+      "end": "2026-11-07T23:59",
+      "method": "LivePocket",
+      "url": "https://livepocket.jp/e/x79ya",
+      "note": "販売日は11/12。1人4個まで",
+      "added": "2026-11-06"
+    },
+    {
       "title": "オープン日の入場整理券",
       "store": "ドリームカプセル イオンモール橿原",
       "pref": "奈良県",
@@ -173,6 +209,150 @@
     },
     {
       "title": "どうぶつの森 めじるしアクセサリー",
+      "store": "#C-pla 三宮センター街",
+      "pref": "兵庫県",
+      "kind": "item",
+      "start": "2026-11-06T10:00",
+      "end": "2026-11-08T23:59",
+      "method": "LivePocket",
+      "url": "https://livepocket.jp/e/wpe09",
+      "note": "販売日は11/12。1人3個まで",
+      "added": "2026-11-06"
+    },
+    {
+      "title": "ちいかわ めじるしアクセサリー3",
+      "store": "#C-pla 三宮センター街",
+      "pref": "兵庫県",
+      "kind": "item",
+      "start": "2026-11-06T10:00",
+      "end": "2026-11-08T23:59",
+      "method": "LivePocket",
+      "url": "https://livepocket.jp/e/k7pnm",
+      "note": "販売日は11/12。1人4個まで",
+      "added": "2026-11-06"
+    },
+    {
+      "title": "どうぶつの森 めじるしアクセサリー",
+      "store": "#C-pla コロワ甲子園",
+      "pref": "兵庫県",
+      "kind": "item",
+      "start": "2026-11-06T10:00",
+      "end": "2026-11-08T23:59",
+      "method": "LivePocket",
+      "url": "https://livepocket.jp/e/lzpr1",
+      "note": "販売日は11/12。1人4個まで",
+      "added": "2026-11-06"
+    },
+    {
+      "title": "ちいかわ めじるしアクセサリー3",
+      "store": "#C-pla コロワ甲子園",
+      "pref": "兵庫県",
+      "kind": "item",
+      "start": "2026-11-06T10:00",
+      "end": "2026-11-08T23:59",
+      "method": "LivePocket",
+      "url": "https://livepocket.jp/e/uxd5w",
+      "note": "販売日は11/13。1人4個まで",
+      "added": "2026-11-06"
+    },
+    {
+      "title": "ちいかわ めじるしアクセサリー3",
+      "store": "#C-pla 天神西通り2号",
+      "pref": "福岡県",
+      "kind": "item",
+      "start": "2026-11-05T19:00",
+      "end": "2026-11-08T23:59",
+      "method": "LivePocket",
+      "url": "https://livepocket.jp/e/zz1en",
+      "note": "販売日は11/12。1人5個まで",
+      "added": "2026-11-06"
+    },
+    {
+      "title": "ちいかわ めじるしアクセサリー3",
+      "store": "#C-pla 長崎ハマクロス411",
+      "pref": "長崎県",
+      "kind": "item",
+      "start": "2026-11-06T12:00",
+      "end": "2026-11-08T23:59",
+      "method": "LivePocket",
+      "url": "https://livepocket.jp/e/e9i_n",
+      "note": "販売日は11/12",
+      "added": "2026-11-06"
+    },
+    {
+      "title": "どうぶつの森 めじるしアクセサリー",
+      "store": "#C-pla ゆめタウン福山",
+      "pref": "広島県",
+      "kind": "item",
+      "start": "2026-11-06T10:00",
+      "end": "2026-11-08T23:59",
+      "method": "LivePocket",
+      "url": "https://livepocket.jp/e/zxvl_",
+      "note": "販売日は11/12。1人2個まで",
+      "added": "2026-11-06"
+    },
+    {
+      "title": "サンリオキャラクターズ ふわふわめじるしアクセサリー ～Baby～",
+      "store": "#C-pla ゆめタウン福山",
+      "pref": "広島県",
+      "kind": "item",
+      "start": "2026-11-06T10:00",
+      "end": "2026-11-08T23:59",
+      "method": "LivePocket",
+      "url": "https://livepocket.jp/e/uwhwc",
+      "note": "販売日は11/13。1人2個まで",
+      "added": "2026-11-06"
+    },
+    {
+      "title": "HYSTERIC MINI めじるしアクセサリー ～アナザーカラー～ / ちいかわ めじるしアクセサリー3 / どうぶつの森 めじるしアクセサリー / サンリオキャラクターズ ふわふわめじるしアクセサリー ～Baby～ / サンリオキャラクターズ ボンボンドロップミニチュアチャーム2 / それいけ！アンパンマン めじるしアクセサリー",
+      "store": "#C-pla ゆめタウン山口",
+      "pref": "山口県",
+      "kind": "item",
+      "start": "2026-11-05T10:00",
+      "end": "2026-11-09T23:59",
+      "method": "LivePocket",
+      "url": "",
+      "note": "販売日は11/14。商品ごとに申込ページが分かれています。くわしくはお店の公式Xで",
+      "added": "2026-11-06"
+    },
+    {
+      "title": "どうぶつの森 めじるしアクセサリー",
+      "store": "#C-pla 浜松メイワン",
+      "pref": "静岡県",
+      "kind": "item",
+      "start": "2026-11-05T19:22",
+      "end": "2026-11-11T23:59",
+      "method": "LivePocket",
+      "url": "https://livepocket.jp/e/dtkc1",
+      "note": "販売日は11/16。1人4個まで",
+      "added": "2026-11-06"
+    },
+    {
+      "title": "どうぶつの森 めじるしアクセサリー",
+      "store": "#C-pla 静岡PARCO",
+      "pref": "静岡県",
+      "kind": "item",
+      "start": "2026-11-06T10:00",
+      "end": "2026-11-11T23:59",
+      "method": "LivePocket",
+      "url": "https://livepocket.jp/e/i5_pm",
+      "note": "販売日は11/18。1人4個まで",
+      "added": "2026-11-06"
+    },
+    {
+      "title": "どうぶつの森 めじるしアクセサリー",
+      "store": "#C-pla 静岡パルシェ",
+      "pref": "静岡県",
+      "kind": "item",
+      "start": "2026-11-06T10:00",
+      "end": "2026-11-11T23:59",
+      "method": "LivePocket",
+      "url": "https://livepocket.jp/e/vxblr",
+      "note": "販売日は11/16。1人4個まで",
+      "added": "2026-11-06"
+    },
+    {
+      "title": "どうぶつの森 めじるしアクセサリー",
       "store": "#C-pla+ イオンモール大高",
       "pref": "愛知県",
       "kind": "item",
@@ -180,6 +360,18 @@
       "end": "2026-11-15T23:59",
       "method": "LivePocket",
       "url": "https://livepocket.jp/e/ay1kc"
+    },
+    {
+      "title": "オープン5日間の優先入場券",
+      "store": "#C-pla イオン豊橋南",
+      "pref": "愛知県",
+      "kind": "open",
+      "start": "2026-11-05T10:00",
+      "end": "2026-11-15T23:59",
+      "method": "LivePocket",
+      "url": "",
+      "note": "オープンは11/19。日ごとに申込ページが分かれています。くわしくはお店の公式Xで",
+      "added": "2026-11-06"
     }
   ]
 }
