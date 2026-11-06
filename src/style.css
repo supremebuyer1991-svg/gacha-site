@@ -972,3 +972,28 @@ body { font-variant-numeric: tabular-nums lining-nums; }
 .chara-chip small { color: var(--text-2); font-weight: 700; font-size: 11.5px; }
 .chara-chip:hover { border-color: var(--accent, #ff5c8a); }
 .chara-more { background: transparent; color: var(--accent, #ff5c8a); }
+
+/* 商品ページ：どこで売ってる？・よくある質問 */
+.where-sec p { line-height: 1.8; }
+.where-shops { list-style: none; padding: 0; margin: 12px 0 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 6px 16px; }
+.where-shops li { display: flex; justify-content: space-between; gap: 8px; font-size: 14px; border-bottom: 1px dashed var(--line, #e6e6ee); padding: 6px 0; }
+.where-shops a { color: var(--text); font-weight: 700; }
+.where-shops span { color: var(--text-2); font-size: 12px; white-space: nowrap; }
+.comp-cost { margin-top: 14px; padding: 10px 14px; border-radius: 12px; background: var(--bg-2, #f6f4ff); }
+.comp-cost small { display: block; color: var(--text-2); font-size: 11.5px; }
+.item-qa { margin: 8px 0 0; }
+.item-qa > div { padding: 10px 0; border-top: 1px solid var(--line, #e6e6ee); }
+.item-qa dt { font-weight: 800; }
+.item-qa dt::before { content: "Q. "; color: var(--accent, #ff5c8a); }
+.item-qa dd { margin: 4px 0 0; line-height: 1.75; color: var(--text-2); }
+.item-qa dd::before { content: "A. "; font-weight: 800; color: var(--text); }
+
+/* カードの発売状態 */
+.rel-st { font-style: normal; font-size: 11.5px; font-weight: 800; color: var(--text-2); }
+em.rel-st { padding: 2px 8px; border-radius: 999px; }
+.rel-now { background: #ff5c8a; color: #fff !important; }
+.rel-soon { background: #e8f3ff; color: #1f6fd1 !important; }
+.share-btns { display: inline-flex; gap: 6px; flex-wrap: wrap; }
+.share { display: inline-flex; align-items: center; padding: 8px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; color: #fff; text-decoration: none; }
+.share-x { background: #111; }
+.share-line { background: #06c755; }

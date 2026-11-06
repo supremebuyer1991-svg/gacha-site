@@ -54,7 +54,7 @@
   };
 
   // トップに ?q=〇〇 で来たら検索ページへ（Xの投稿のリンク用）
-  (function () { try { var qq = new URLSearchParams(location.search).get("q"); if (qq && /^\/(en\/)?(index(\.html)?)?$/.test(location.pathname)) location.replace(location.pathname.replace(/index(\.html)?$/, "") + "search.html?q=" + encodeURIComponent(qq)); } catch (e) {} })();
+  (function () { try { var qq = new URLSearchParams(location.search).get("q"); if (qq && /^\/(en\/)?(index(\.html)?)?$/.test(location.pathname)) location.replace(location.pathname.replace(/index(\.html)?$/, "") + "search?q=" + encodeURIComponent(qq)); } catch (e) {} })();
   var esc = function (s) {
     return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
@@ -95,7 +95,7 @@
       var hits = find(q);
       sPop.innerHTML = hits.length
         ? hits.slice(0, 8).map(function (x) {
-            return '<a class="sp-item" href="' + home + "item/" + esc(x.id) + '.html">' + thumbHTML(x) + '<span class="sp-name">' + esc(x.n) + '</span><span class="sp-price">¥' + x.p + "</span></a>";
+            return '<a class="sp-item" href="' + home + "item/" + esc(x.id) + '">' + thumbHTML(x) + '<span class="sp-name">' + esc(x.n) + '</span><span class="sp-price">¥' + x.p + "</span></a>";
           }).join("") + (hits.length > 8 ? '<button class="sp-all" type="submit">' + esc(M.searchAll(hits.length)) + "</button>" : "")
         : '<p class="sp-none">' + esc(M.searchNone) + "</p>";
       sPop.hidden = false;
@@ -335,7 +335,7 @@
     var img = it.image
       ? '<img src="' + esc(/^https?:/.test(it.image) ? it.image : data.root + it.image) + '" alt="' + esc(it.name) + '" loading="lazy" width="400" height="400">'
       : '<div class="capsule" aria-hidden="true"><i></i><span>NO IMAGE</span></div>';
-    return '<a class="card" href="' + data.home + "item/" + esc(it.id) + '.html">' +
+    return '<a class="card" href="' + data.home + "item/" + esc(it.id) + '">' +
       '<div class="thumb">' + img + "</div>" +
       '<div class="card-meta"><span>' + esc(it.genre_label) + "</span>" + (pct != null ? '<span class="match">' + M.match + " " + pct + "%</span>" : "") + "</div>" +
       '<div class="card-name">' + esc(it.name) + "</div>" +
@@ -420,7 +420,7 @@
         var nm = (EN && s.name_en) || s.name;
         var ad = EN ? (s.address_en ? s.address_en + ", " + s.prefecture_en : s.address) : s.address;
         return '<li class="' + (s.status === "out_of_stock" ? "is-off" : "") + '">' +
-          '<span class="s-name">' + (function () { var m = /shop_code=(S\d+)/i.exec(s.url || ""); return m && !EN ? '<a href="' + stock.getAttribute("data-api").replace(/api\/stock\/.*$/, "") + "shop/" + m[1].toLowerCase() + '.html">' + esc(nm) + "</a>" : esc(nm); })() + "</span>" +
+          '<span class="s-name">' + (function () { var m = /shop_code=(S\d+)/i.exec(s.url || ""); return m && !EN ? '<a href="' + stock.getAttribute("data-api").replace(/api\/stock\/.*$/, "") + "shop/" + m[1].toLowerCase() + '">' + esc(nm) + "</a>" : esc(nm); })() + "</span>" +
           '<span class="s-addr">' + esc(ad) + (EN && s.name_en ? ' <span lang="ja">' + esc(s.name) + "</span>" : "") + "</span>" +
           '<span class="s-right">' + (r.d != null ? '<span class="s-dist">' + fmt(r.d) + "</span>" : "") +
           '<span class="pill ' + s.status + '">' + LABEL[s.status] + "</span></span></li>";
@@ -617,7 +617,7 @@
     tiles(map);
     var markers = {}, list = [];
     var popup = function (s) {
-      return '<b>' + esc(s[1]) + '</b><br><span style="color:#6b7194">' + esc(s[2] || "") + (s[5] ? "・みんなが追加" : "") + '</span><br><a href="' + root + 'shop/' + esc(s[0]) + '.html">お店のページ（在庫・報告）→</a>';
+      return '<b>' + esc(s[1]) + '</b><br><span style="color:#6b7194">' + esc(s[2] || "") + (s[5] ? "・みんなが追加" : "") + '</span><br><a href="' + root + 'shop/' + esc(s[0]) + '">お店のページ（在庫・報告）→</a>';
     };
     var add = function (s) {
       var m = L.circleMarker([s[3], s[4]], { radius: 7, weight: 2, color: "#fff", fillColor: s[5] ? (s[6] === "gacha" ? "#8b5cf6" : "#2ccfa6") : "#ff4f7b", fillOpacity: 0.95 }).addTo(map).bindPopup(popup(s));
@@ -810,7 +810,7 @@
           var p0 = start;
           $("k-list").innerHTML = route.map(function (x, i) {
             var d = hav(p0, x.p) * DETOUR; p0 = x.p;
-            return '<li><b>' + (i + 1) + '. <a href="' + root + "shop/" + esc(x.s[0]) + '.html">' + esc(x.s[1]) + "</a></b><small>前の場所から約" + (d < 1 ? Math.round(d * 1000) + "m" : d.toFixed(1) + "km") + "・" + Math.max(1, Math.round(minsOf(hav(i ? route[i - 1].p : start, x.p), mode))) + "分</small>" +
+            return '<li><b>' + (i + 1) + '. <a href="' + root + "shop/" + esc(x.s[0]) + '">' + esc(x.s[1]) + "</a></b><small>前の場所から約" + (d < 1 ? Math.round(d * 1000) + "m" : d.toFixed(1) + "km") + "・" + Math.max(1, Math.round(minsOf(hav(i ? route[i - 1].p : start, x.p), mode))) + "分</small>" +
               '<span class="k-acts"><button type="button" class="k-pop" data-sid="' + esc(x.s[0]) + '" aria-expanded="false">▾ この店に在庫のある人気ガチャを見る</button><button type="button" class="k-del" data-sid="' + esc(x.s[0]) + '">✕ この店を外す</button></span><div class="k-pop-box" hidden></div><div class="k-rev" data-sid="' + esc(x.s[0]) + '"></div></li>';
           }).join("") + (end && plan === "dest" ? '<li><b>🏁 目的地</b></li>' : "");
           // Googleマップは経由地が9か所までなので、10店をこえるときは2つに分ける
@@ -868,10 +868,10 @@
           box.innerHTML = ids.length ? '<ol class="k-pop-list">' + ids.slice(0, 10).map(function (id) {
             var it = qi[id];
             var f = aff(it.jn + " ガチャ コンプ");
-            return '<li><a href="' + root + "item/" + esc(id) + '.html">' + (it.image ? '<img src="' + root + esc(it.image) + '" alt="" loading="lazy" width="40" height="40">' : "") + "<span>" + esc(it.name) + "</span><em>¥" + it.price + "</em></a>" +
+            return '<li><a href="' + root + "item/" + esc(id) + '">' + (it.image ? '<img src="' + root + esc(it.image) + '" alt="" loading="lazy" width="40" height="40">' : "") + "<span>" + esc(it.name) + "</span><em>¥" + it.price + "</em></a>" +
               '<span class="k-aff">売り切れなら通販で：<a href="' + esc(f.a) + '" target="_blank" rel="sponsored noopener">Amazon</a><a href="' + esc(f.r) + '" target="_blank" rel="sponsored noopener">楽天</a><i class="pr">PR</i></span></li>';
-          }).join("") + "</ol>" + (ids.length > 10 ? '<p class="fine">ほか' + (ids.length - 10) + '種。<a href="' + root + "shop/" + esc(sid) + '.html">お店のページで全部見る→</a></p>' : "") + '<p class="fine">バンダイ公式「ガシャポンどこ？」で取扱のあるガチャです（通信機能のあるマシンのみ）。</p>'
-            : '<p class="fine">公式の取扱情報がまだないお店です。<a href="' + root + "shop/" + esc(sid) + '.html">お店のページ</a>で、みんなの在庫報告を見られます。</p>';
+          }).join("") + "</ol>" + (ids.length > 10 ? '<p class="fine">ほか' + (ids.length - 10) + '種。<a href="' + root + "shop/" + esc(sid) + '">お店のページで全部見る→</a></p>' : "") + '<p class="fine">バンダイ公式「ガシャポンどこ？」で取扱のあるガチャです（通信機能のあるマシンのみ）。</p>'
+            : '<p class="fine">公式の取扱情報がまだないお店です。<a href="' + root + "shop/" + esc(sid) + '">お店のページ</a>で、みんなの在庫報告を見られます。</p>';
           box.setAttribute("data-done", "1");
         }).catch(function () { box.innerHTML = '<p class="fine">読み込めませんでした。</p>'; });
       });
@@ -977,7 +977,7 @@
     var drawTop = function () {
       var p = sel.value, a = all.filter(function (x) { return !p || x.pref === p; }).slice(0, 30);
       topEl.innerHTML = a.length ? a.map(function (x, i) {
-        return '<li><span class="ts-rank">' + (i + 1) + '</span><a href="' + R + "shop/" + esc(x.id) + '.html"><b>' + esc(x.name) + "</b><span>" + esc(x.pref || "") + '</span></a><span class="shop-stars"><span class="stars-v" style="--v:' + x.avg + '"></span><b class="stars-n">' + Number(x.avg).toFixed(1) + "</b><small>（" + x.n + "）</small></span></li>";
+        return '<li><span class="ts-rank">' + (i + 1) + '</span><a href="' + R + "shop/" + esc(x.id) + '"><b>' + esc(x.name) + "</b><span>" + esc(x.pref || "") + '</span></a><span class="shop-stars"><span class="stars-v" style="--v:' + x.avg + '"></span><b class="stars-n">' + Number(x.avg).toFixed(1) + "</b><small>（" + x.n + "）</small></span></li>";
       }).join("") : '<li class="fine">' + (p ? p + "のお店には" : "") + 'まだ評価がありません。行ったことのあるお店のページで☆をつけてみてください。</li>';
     };
     var h = decodeURIComponent(location.hash.slice(1)), saved = ""; try { saved = localStorage.getItem("ts-pref") || ""; } catch (e) {}
@@ -1033,7 +1033,7 @@
       });
       listEl2.innerHTML = order.length ? order.slice(0, 40).map(function (k) {
         var x = byItem[k], st = x.last.kind === "in";
-        var name = x.id ? '<a href="' + shopEl.getAttribute("data-root") + 'item/' + esc(x.id) + '.html">' + esc(x.name) + "</a>" : esc(x.name);
+        var name = x.id ? '<a href="' + shopEl.getAttribute("data-root") + 'item/' + esc(x.id) + '">' + esc(x.name) + "</a>" : esc(x.name);
         return '<li><span class="pill ' + (st ? "in_stock" : "out_of_stock") + '">' + (st ? "あった" : "なかった") + "</span><b>" + name + "</b><small>" + ago(x.last.created_at) + "（あった" + x.inN + "・なかった" + x.outN + "）</small></li>";
       }).join("") : '<li class="fine">まだ報告はありません。お店で見たガチャを教えてください。</li>';
       var mac = {}; reps.forEach(function (r) { if (r.kind === "machines") mac[r.value] = (mac[r.value] || 0) + 1; });
