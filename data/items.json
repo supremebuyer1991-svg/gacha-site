@@ -2823,7 +2823,7 @@
     "maker_en": "Bandai",
     "price": 300,
     "release": "2026-11",
-    "release_note": "",
+    "release_note": "11月第2週より順次",
     "genre": "anime",
     "moods": [
       "kawaii"
@@ -4345,7 +4345,7 @@
     "maker_en": "Bandai",
     "price": 500,
     "release": "2026-11",
-    "release_note": "",
+    "release_note": "11月第1週より順次",
     "genre": "anime",
     "moods": [
       "cool"
@@ -5092,7 +5092,7 @@
     "maker_en": "Bandai",
     "price": 1500,
     "release": "2026-11",
-    "release_note": "11月第3週より順次",
+    "release_note": "11月第4週より順次",
     "genre": "anime",
     "moods": [],
     "tags": [],
@@ -28376,7 +28376,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y904806",
@@ -28422,7 +28423,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y905377",
@@ -28465,7 +28467,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y905841",
@@ -28509,7 +28512,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y905896",
@@ -28554,7 +28558,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y905995",
@@ -28596,7 +28601,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y906923",
@@ -28638,7 +28644,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y906954",
@@ -28719,7 +28726,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y909160",
@@ -28763,7 +28771,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y910838",
@@ -28814,7 +28823,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y911422",
@@ -28855,7 +28865,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y098826",
@@ -28941,7 +28952,8 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y904233",
@@ -28986,7 +28998,8 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y904448",
@@ -29035,7 +29048,8 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y904837",
@@ -29080,7 +29094,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y905568",
@@ -29162,7 +29177,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y907005",
@@ -29206,7 +29222,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y907852",
@@ -29252,7 +29269,8 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y093265",
@@ -29298,7 +29316,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y903403",
@@ -29344,7 +29363,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y904479",
@@ -29388,7 +29408,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y905216",
@@ -29428,7 +29449,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y905650",
@@ -29471,7 +29493,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y905742",
@@ -29515,7 +29538,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y906480",
@@ -29555,7 +29579,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y906893",
@@ -29606,7 +29631,8 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y907821",
@@ -29647,7 +29673,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y908187",
@@ -29689,7 +29716,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y909023",
@@ -29731,7 +29759,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y909108",
@@ -29817,7 +29846,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y909573",
@@ -29859,7 +29889,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y909634",
@@ -29905,7 +29936,8 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y072116",
@@ -29945,7 +29977,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y091636",
@@ -29992,7 +30025,8 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y092794",
@@ -30036,7 +30070,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y094149",
@@ -30125,7 +30160,8 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y099557",
@@ -30166,7 +30202,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y901096",
@@ -30208,7 +30245,8 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y901133",
@@ -30290,7 +30328,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y901515",
@@ -30335,7 +30374,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y901966",
@@ -39274,6 +39314,767 @@
     "q_genders": [
       "female",
       "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "qualia-2099",
+    "name": "コギまるけ マスコットフィギュア コーギーとシジュウカラ",
+    "name_en": "",
+    "maker": "クオリア",
+    "maker_en": "Qualia",
+    "price": 400,
+    "release": "2026-10",
+    "release_note": "10月",
+    "genre": "anime",
+    "moods": [
+      "kawaii",
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "image": "",
+    "official_url": "https://www.qualia-45.jp/product/view/2099",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "type:figure",
+      "type:plush"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "qualia-2098",
+    "name": "みんなのかわいい おやしらズ ぬいぐるみ",
+    "name_en": "",
+    "maker": "クオリア",
+    "maker_en": "Qualia",
+    "price": 400,
+    "release": "2026-10",
+    "release_note": "10月",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "image": "",
+    "official_url": "https://www.qualia-45.jp/product/view/2098",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "type:plush"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "qualia-2097",
+    "name": "DaisukeKondo もこもこポーチ",
+    "name_en": "",
+    "maker": "クオリア",
+    "maker_en": "Qualia",
+    "price": 400,
+    "release": "2026-10",
+    "release_note": "10月",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "image": "",
+    "official_url": "https://www.qualia-45.jp/product/view/2097",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "type:useful"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "qualia-2078",
+    "name": "まなつ ＆ まふゆ フィギュアコレクション",
+    "name_en": "",
+    "maker": "クオリア",
+    "maker_en": "Qualia",
+    "price": 500,
+    "release": "2026-10",
+    "release_note": "10月",
+    "genre": "anime",
+    "moods": [
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "image": "",
+    "official_url": "https://www.qualia-45.jp/product/view/2078",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:figure",
+      "real:miniature"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "qualia-2077",
+    "name": "空想寝相シリーズ マスコットフィギュア",
+    "name_en": "",
+    "maker": "クオリア",
+    "maker_en": "Qualia",
+    "price": 400,
+    "release": "2026-10",
+    "release_note": "10月",
+    "genre": "anime",
+    "moods": [
+      "kawaii",
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "image": "",
+    "official_url": "https://www.qualia-45.jp/product/view/2077",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "type:figure",
+      "type:plush"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "qualia-2076",
+    "name": "ゴースティースタンドフィギュア5",
+    "name_en": "",
+    "maker": "クオリア",
+    "maker_en": "Qualia",
+    "price": 400,
+    "release": "2026-10",
+    "release_note": "10月",
+    "genre": "anime",
+    "moods": [
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 7,
+    "image": "",
+    "official_url": "https://www.qualia-45.jp/product/view/2076",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:figure"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "qualia-2075",
+    "name": "カラフルレトロゼリィヌ マスコットフィギュア",
+    "name_en": "",
+    "maker": "クオリア",
+    "maker_en": "Qualia",
+    "price": 400,
+    "release": "2026-10",
+    "release_note": "10月",
+    "genre": "retro",
+    "moods": [
+      "kawaii",
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "image": "",
+    "official_url": "https://www.qualia-45.jp/product/view/2075",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "type:figure",
+      "type:plush",
+      "retro:showa"
+    ],
+    "q_ages": [
+      "50"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "qualia-2074",
+    "name": "ブチャグルミ いろいろきんちゃく",
+    "name_en": "",
+    "maker": "クオリア",
+    "maker_en": "Qualia",
+    "price": 400,
+    "release": "2026-10",
+    "release_note": "10月",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "image": "",
+    "official_url": "https://www.qualia-45.jp/product/view/2074",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "qualia-2082",
+    "name": "にっこりーノ トーストのぬいぐるみ",
+    "name_en": "",
+    "maker": "クオリア",
+    "maker_en": "Qualia",
+    "price": 400,
+    "release": "2026-10",
+    "release_note": "10月",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "image": "",
+    "official_url": "https://www.qualia-45.jp/product/view/2082",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "type:plush"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "qualia-2081",
+    "name": "にっこりーノ フランスのぬいぐるみ",
+    "name_en": "",
+    "maker": "クオリア",
+    "maker_en": "Qualia",
+    "price": 400,
+    "release": "2026-10",
+    "release_note": "10月",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "image": "",
+    "official_url": "https://www.qualia-45.jp/product/view/2081",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "type:plush"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "qualia-2080",
+    "name": "にっこりーノ のりもののぬいぐるみ２",
+    "name_en": "",
+    "maker": "クオリア",
+    "maker_en": "Qualia",
+    "price": 400,
+    "release": "2026-10",
+    "release_note": "10月",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "image": "",
+    "official_url": "https://www.qualia-45.jp/product/view/2080",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "type:plush"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "qualia-2079",
+    "name": "にっこりーノ 丼もののぬいぐるみ",
+    "name_en": "",
+    "maker": "クオリア",
+    "maker_en": "Qualia",
+    "price": 400,
+    "release": "2026-10",
+    "release_note": "10月",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "image": "",
+    "official_url": "https://www.qualia-45.jp/product/view/2079",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "type:plush"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "qualia-2103",
+    "name": "神獣ベコたち 世界の伝承編",
+    "name_en": "",
+    "maker": "クオリア",
+    "maker_en": "Qualia",
+    "price": 400,
+    "release": "2026-10",
+    "release_note": "10月",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "image": "",
+    "official_url": "https://www.qualia-45.jp/product/view/2103",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "qualia-2070",
+    "name": "海の生き物のぬいぐるみ",
+    "name_en": "",
+    "maker": "クオリア",
+    "maker_en": "Qualia",
+    "price": 400,
+    "release": "2026-10",
+    "release_note": "10月",
+    "genre": "animal",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "image": "",
+    "official_url": "https://www.qualia-45.jp/product/view/2070",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "type:plush",
+      "real:creature"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "qualia-2058",
+    "name": "酔いスキー 長期熟成ver. マスコットフィギュア",
+    "name_en": "",
+    "maker": "クオリア",
+    "maker_en": "Qualia",
+    "price": 400,
+    "release": "2026-09",
+    "release_note": "9月",
+    "genre": "anime",
+    "moods": [
+      "kawaii",
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "image": "",
+    "official_url": "https://www.qualia-45.jp/product/view/2058",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "type:figure",
+      "type:plush"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "qualia-2057",
+    "name": "レインコート犬 マスコットフィギュア",
+    "name_en": "",
+    "maker": "クオリア",
+    "maker_en": "Qualia",
+    "price": 300,
+    "release": "2026-09",
+    "release_note": "9月",
+    "genre": "animal",
+    "moods": [
+      "kawaii",
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "image": "",
+    "official_url": "https://www.qualia-45.jp/product/view/2057",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:animal",
+      "kawaii:mascot",
+      "type:figure",
+      "type:plush"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "qualia-2053",
+    "name": "はにわとどぐう 巾着＜再販＞",
+    "name_en": "",
+    "maker": "クオリア",
+    "maker_en": "Qualia",
+    "price": 400,
+    "release": "2026-09",
+    "release_note": "9月",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "image": "",
+    "official_url": "https://www.qualia-45.jp/product/view/2053",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "qualia-2037",
+    "name": "ブタの貯金箱とその仲間たち3 クリアバージョン",
+    "name_en": "",
+    "maker": "クオリア",
+    "maker_en": "Qualia",
+    "price": 300,
+    "release": "2026-09",
+    "release_note": "9月",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "image": "",
+    "official_url": "https://www.qualia-45.jp/product/view/2037",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "qualia-2036",
+    "name": "グレネコ マスコットフィギュア 3",
+    "name_en": "",
+    "maker": "クオリア",
+    "maker_en": "Qualia",
+    "price": 300,
+    "release": "2026-09",
+    "release_note": "9月",
+    "genre": "anime",
+    "moods": [
+      "kawaii",
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 7,
+    "image": "",
+    "official_url": "https://www.qualia-45.jp/product/view/2036",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "type:figure",
+      "type:plush"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "qualia-2055",
+    "name": "忍たま乱太郎 スクエアポーチ",
+    "name_en": "",
+    "maker": "クオリア",
+    "maker_en": "Qualia",
+    "price": 400,
+    "release": "2026-09",
+    "release_note": "9月",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "image": "",
+    "official_url": "https://www.qualia-45.jp/product/view/2055",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-06",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "oshi:kids",
+      "type:useful"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
     ],
     "tags_auto": true
   }
