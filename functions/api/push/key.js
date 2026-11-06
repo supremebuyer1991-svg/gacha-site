@@ -7,6 +7,6 @@ export async function onRequestGet({ env }) {
     const k = await getVapidKeys(env.DB);
     return json({ ok: true, key: k.publicRaw }, 200, 3600);
   } catch (e) {
-    return json({ ok: false }, 503, 0);
+    return json({ ok: false, error: String((e && e.message) || e).slice(0, 200) }, 503, 0);
   }
 }
