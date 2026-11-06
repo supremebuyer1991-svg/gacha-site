@@ -74,9 +74,16 @@
     // 1つだけのときは写真を大きく（正方形の画像に、写真をできるだけ大きく）
     var x2 = by[q.get("id")] || {};
     var im3 = await load(big(x2));
+    // 写真のまわりの白い余白を切り取る（取り込むときに正方形の白地にしているため）
+    if (im3) { try {
+      var tc = document.createElement("canvas"); tc.width = im3.width; tc.height = im3.height; var tg = tc.getContext("2d"); tg.drawImage(im3, 0, 0);
+      var d = tg.getImageData(0, 0, tc.width, tc.height).data, x0 = tc.width, y0 = tc.height, x1 = 0, y1 = 0;
+      for (var yy = 0; yy < tc.height; yy += 2) for (var xx = 0; xx < tc.width; xx += 2) { var k = (yy * tc.width + xx) * 4; if (d[k] < 245 || d[k + 1] < 245 || d[k + 2] < 245) { if (xx < x0) x0 = xx; if (xx > x1) x1 = xx; if (yy < y0) y0 = yy; if (yy > y1) y1 = yy; } }
+      if (x1 > x0 && y1 > y0 && (x1 - x0) * (y1 - y0) < tc.width * tc.height * 0.95) { var cc = document.createElement("canvas"); cc.width = x1 - x0 + 2; cc.height = y1 - y0 + 2; cc.getContext("2d").drawImage(tc, x0, y0, cc.width, cc.height, 0, 0, cc.width, cc.height); im3 = cc; }
+    } catch (e) {} }
     // 写真の縦横の形に合わせて、横幅いっぱいに大きく
     var PH = im3 ? Math.round(Math.min(1100, Math.max(560, (W - 60) * im3.height / im3.width + 12))) : 700;
-    W = 1200; H = 96 + PH + 150; c.width = W; c.height = H;
+    W = 1200; H = 96 + PH + 175; c.width = W; c.height = H;
     bg();
     rr(24, 96, W - 48, PH, 26); g.fillStyle = "#fff"; g.fill(); g.save(); rr(24, 96, W - 48, PH, 26); g.clip(); fit(im3, 24, 96, W - 48, PH, 6); g.restore();
     badge(q.get("label") || (EN ? "New in Japan" : "注目の新作"), 24, 26, "#3aa0ff"); brand(48);
