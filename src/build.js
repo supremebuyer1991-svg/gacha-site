@@ -1269,20 +1269,21 @@ write("data/shops.json", JSON.stringify(SHOPS.map((x) => [x.id, x.name, x.pref, 
   if (picks.length < 4) for (let k = 0; picks.length < 4 && k < pool.length; k++) { const it = pool[(dayNo * 2 + k) % pool.length]; if (!picks.includes(it)) picks.push(it); }
   const favIds = items.filter(isFav).map((it) => it.id);
   write("data/x.json", JSON.stringify({ generated: new Date().toISOString(), today: today, week: { label: WEEK.label, from: WEEK.range.split("〜")[0], to: WEEK.range.split("〜")[1], count: week.length, items: week.slice(0, 12).map(pack) }, picks: picks.map(pack), morning: (() => {
-    // 朝7:30の日替わり紹介（月曜は今週発売なので休み）：たまごっち→サンリオ→ディズニー→ポケモン→めじるし の順
-    const CATS = [["たまごっち", "#たまごっち", FAV_CATS[0]], ["サンリオ", "#サンリオ", FAV_CATS[1]], ["ディズニー", "#ディズニー", FAV_CATS[2]], ["ポケモン", "#ポケモン", FAV_CATS[3]], ["めじるし", "#めじるしアクセサリー", FAV_CATS[4]]];
-    const base = Date.UTC(2026, 10, 10); // 11/10（火）を「たまごっち」の日に
-    const day = Date.UTC(nowJST.getUTCFullYear(), nowJST.getUTCMonth(), nowJST.getUTCDate());
-    let n = 0; for (let d = base; d < day; d += 864e5) if (new Date(d).getUTCDay() !== 1) n++;
-    if (day < base) n = ((Math.round((day - base) / 864e5) % 5) + 5) % 5;
-    const [label, tag, re] = CATS[n % CATS.length];
+    // 朝の「ジャンルまとめ」：毎日1ジャンルを4つまとめて紹介。たまごっち・サンリオ・ディズニー・ポケモン・めじるし・人気アニメを中心に、ときどきほかのジャンルも
+    const MAIN = [["たまごっち", "#たまごっち", (it) => favRank(it) === 0], ["サンリオ", "#サンリオ", (it) => favRank(it) === 1], ["ディズニー", "#ディズニー", (it) => favRank(it) === 2], ["ポケモン", "#ポケモン", (it) => favRank(it) === 3], ["めじるしアクセサリー", "#めじるしアクセサリー", (it) => favRank(it) === 4], ["人気アニメ", "#アニメ", (it) => favRank(it) === 5]];
+    const OTHER = ["animal", "food", "miniature", "accessory", "funny", "retro", "oshi", "game"].map((g) => { const gg = genreOf(g); return [genreLabel(gg, "ja"), "", (it) => (it._genres || []).includes(g) && !isFav(it)]; });
+    const day = Date.UTC(nowJST.getUTCFullYear(), nowJST.getUTCMonth(), nowJST.getUTCDate()), dn = Math.round(day / 864e5);
     const from = new Date(Date.UTC(nowJST.getUTCFullYear(), nowJST.getUTCMonth() - 2, 1)).toISOString().slice(0, 7);
     const used = new Set(picks.map((it) => it.id));
-    const list = items.filter((it) => it.image && it.release >= from && re.test(txt(it))).sort((a, b) => (b.release > a.release ? 1 : b.release < a.release ? -1 : a.id < b.id ? -1 : 1));
-    const cand = list.filter((it) => !used.has(it.id));
-    const pool2 = cand.length ? cand : list;
-    const it = pool2.length ? pool2[Math.floor(n / CATS.length) % pool2.length] : null;
-    return { active: day >= base && new Date(day).getUTCDay() !== 1, monday: new Date(day).getUTCDay() === 1, category: label, tag, item: it ? pack(it) : null, count: list.length };
+    const poolOf = (f) => items.filter((it) => it.image && it.release >= from && f(it) && !used.has(it.id)).sort((a, b) => (b.release > a.release ? 1 : b.release < a.release ? -1 : a.id < b.id ? -1 : 1));
+    // 7日で1周：メイン6ジャンル＋ほかのジャンル1つ（ほかのジャンルは週ごとに入れかえ）
+    const cycle = MAIN.concat([OTHER[Math.floor(dn / 7) % OTHER.length]]);
+    let pick = null, k = 0;
+    for (let t = 0; t < cycle.length && !pick; t++) { const c = cycle[(dn + t) % cycle.length]; const pl = poolOf(c[2]); if (pl.length >= 3) { pick = c; k = pl; } }
+    if (!pick) return { active: false };
+    const round = Math.floor(dn / cycle.length), n = 4, start = (round * n) % Math.max(1, k.length);
+    const four = [...k.slice(start), ...k.slice(0, start)].slice(0, n);
+    return { active: true, monday: new Date(day).getUTCDay() === 1, category: pick[0], tag: pick[1], count: k.length, items: four.map(pack) };
   })(), new_info: (() => { const y = new Date(Date.UTC(nowJST.getUTCFullYear(), nowJST.getUTCMonth(), nowJST.getUTCDate() - 1)).toISOString().slice(0, 10); const rk = favRank; const list = items.filter((it) => it.added === y && it.image && it.release >= thisMonth).map((it, i) => [it, i]).sort((a, b) => rk(a[0]) - rk(b[0]) || a[1] - b[1]).map((x) => x[0]); return { added: y, count: list.length, fav_count: list.filter(isFav).length, items: list.slice(0, 8).map((it) => ({ ...pack(it), fav: isFav(it) })) }; })(), next_week: (() => { const nw = NEXT_WEEK.items.filter((it) => it.image); const rk = favRank; const list = nw.map((it, i) => [it, i]).sort((a, b) => rk(a[0]) - rk(b[0]) || a[1] - b[1]).map((x) => x[0]); return { label: NEXT_WEEK.label, from: NEXT_WEEK.range.split("〜")[0], to: NEXT_WEEK.range.split("〜")[1], count: NEXT_WEEK.items.length, items: list.slice(0, 16).map((it) => ({ ...pack(it), fav: isFav(it) })) }; })(), fav_ids: favIds, site: SITE_URL }));
 }
 write("_headers", `/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n/assets/*\n  Cache-Control: public, max-age=31536000, immutable\n/images/*\n  Cache-Control: public, max-age=604800\n  Access-Control-Allow-Origin: *\n/data/*\n  Cache-Control: public, max-age=300\n  Access-Control-Allow-Origin: *\n`);
