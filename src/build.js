@@ -902,7 +902,8 @@ for (const lang of LANGS) {
     const head = `<title>${esc(fullTitle)}</title>
 ${fragment ? '<meta name="claude:viewport-fit-sides" content="cover">' : ""}
 <meta name="site-lang" content="${lang}">${I18N[lang] && I18N[lang].appM ? `\n<script>window.__M=${JSON.stringify(I18N[lang].appM).replace(/</g, "\\u003c")};</script>` : ""}
-${site.vc_linkswitch_pid ? `<script>var vc_pid = "${esc(site.vc_linkswitch_pid)}";</script><script src="//aml.valuecommerce.com/vcdal.js" async></script>` : ""}
+${site.ga4_id ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${esc(site.ga4_id)}"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","${esc(site.ga4_id)}");</script>
+` : ""}${site.vc_linkswitch_pid ? `<script>var vc_pid = "${esc(site.vc_linkswitch_pid)}";</script><script src="//aml.valuecommerce.com/vcdal.js" async></script>` : ""}
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${esc(canonical(lang, rel))}">
 ${noindex ? `<meta name="robots" content="noindex, follow">\n` : /name="robots"/.test(extraHead) ? "" : `<meta name="robots" content="max-image-preview:large">\n`}${noindex || noAlt || ALT.length < 2 ? "" : ALT.flatMap((l) => [LANG_META[l].hreflang, ...(LANG_META[l].extra || [])].map((code) => `<link rel="alternate" hreflang="${code}" href="${esc(canonical(l, rel))}">`)).join("\n") + `\n<link rel="alternate" hreflang="x-default" href="${esc(canonical(xDefault(rel, ALT), rel))}">`}
@@ -2072,7 +2073,7 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
     const secs = [
       ["広告について", "当サイトは、Amazonアソシエイト・プログラム、楽天アフィリエイト、バリューコマース（Yahoo!ショッピング）、メルカリアンバサダーなどのアフィリエイトプログラムに参加しています。商品へのリンクから購入された場合、当サイトに紹介料が支払われることがあります。これらのリンクには「PR」と表示しています。"],
       ["Cookie（クッキー）について", "広告の提供元（Amazon、楽天、バリューコマース、メルカリなど）は、リンクのクリックや購入を確認するためにCookieを使うことがあります。Cookieはブラウザの設定で無効にできます。"],
-      ["アクセス解析について", "サイトの改善のため、Cloudflareのアクセス解析を使うことがあります。個人を特定できる情報は集めていません。"],
+      ["アクセス解析について", "サイトの改善のため、Googleアナリティクス（Google LLC）とCloudflareのアクセス解析を使っています。Googleアナリティクスはデータ収集のためにCookieを使いますが、個人を特定できる情報は集めていません。データの収集はブラウザのCookie設定や「Googleアナリティクス オプトアウト アドオン」で止められます。くわしくはGoogleのポリシーと規約をご覧ください。"],
       ["みんなの報告・コメントについて", "ガチャマップへの在庫報告・評価・コメントは、名前を出さずに表示します。いたずら防止のため、端末を見分けるための読めない符号を記録しますが、IPアドレスそのものは保存しません。"],
       ["位置情報について", "「現在地から探す」などで使う現在地は、近いお店を並べる計算だけに使い、どこにも送信しません。"],
       ["マイリスト（★保存）・ハートについて", "★で保存したガチャ（マイリスト）と、ハートを押した記録は、お使いのブラウザの中（ローカルストレージ）だけに保存され、当サイトのサーバーには送信されません。ブラウザのデータを消すと、保存した内容も消えます。ハートの数（人気ランキング）だけは、名前などを含まない形で集計しています。"],
