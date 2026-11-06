@@ -71,15 +71,17 @@
     }
     name = "nyuka.jpg";
   } else {
+    // 1つだけのときは写真を大きく（正方形の画像に、写真をできるだけ大きく）
     var x2 = by[q.get("id")] || {};
+    W = 1200; H = 1200; c.width = W; c.height = H;
     bg();
-    var im3 = await load(big(x2));
-    rr(40, 96, W - 80, 400, 26); g.fillStyle = "#fff"; g.fill(); g.save(); rr(40, 96, W - 80, 400, 26); g.clip(); fit(im3, 40, 96, W - 80, 400, 12); g.restore();
-    badge(q.get("label") || (EN ? "New in Japan" : "注目の新作"), 40, 30, "#3aa0ff"); brand(52);
-    g.fillStyle = "#1f2440"; g.font = "900 34px " + F; g.textBaseline = "middle";
-    var ln = wrap(x2.n || "", 44, 540, W - 88, 44, 2);
-    g.font = "700 24px " + F; g.fillStyle = "#ff4f7b";
-    g.fillText(EN ? (x2.p ? "¥" + x2.p + " per play" : "") + (x2.l ? "  ·  " + x2.l + " designs" : "") + (x2.r ? "  ·  " + x2.r : "") : (x2.p ? "1回" + x2.p + "円" : "") + (x2.l ? "　全" + x2.l + "種" : "") + (x2.r ? "　" + x2.r : ""), 44, 540 + ln * 44 + 8);
+    var im3 = await load(big(x2)), PH = 900;
+    rr(24, 96, W - 48, PH, 26); g.fillStyle = "#fff"; g.fill(); g.save(); rr(24, 96, W - 48, PH, 26); g.clip(); fit(im3, 24, 96, W - 48, PH, 6); g.restore();
+    badge(q.get("label") || (EN ? "New in Japan" : "注目の新作"), 24, 26, "#3aa0ff"); brand(48);
+    g.fillStyle = "#1f2440"; g.font = "900 40px " + F; g.textBaseline = "middle";
+    var ln = wrap(x2.n || "", 36, 96 + PH + 48, W - 72, 48, 2);
+    g.font = "700 30px " + F; g.fillStyle = "#ff4f7b";
+    g.fillText(EN ? (x2.p ? "¥" + x2.p + " per play" : "") + (x2.l ? "  ·  " + x2.l + " designs" : "") + (x2.r ? "  ·  " + x2.r : "") : (x2.p ? "1回" + x2.p + "円" : "") + (x2.l ? "　全" + x2.l + "種" : "") + (x2.r ? "　" + x2.r : ""), 36, 96 + PH + 48 + ln * 48 + 6);
     name = (q.get("id") || "pick") + ".jpg";
   }
   var url = c.toDataURL("image/jpeg", 0.88);
