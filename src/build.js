@@ -313,6 +313,10 @@ const janOf = (it) => {
   const m = (it.official_url || "").match(/jan_code=(\d{13})/) || String(it.id).match(/^bandai-(4[59]\d{11})$/);
   return m ? m[1] : "";
 };
+// メルカリアンバサダーのリンク（公式ツールで作ったものをそのまま使う。書きかえない）
+const MERCARI_AF = (readJSON("mercari-links.json", { links: [] }) || { links: [] }).links || [];
+const KW_ALIAS = { "ポケモン": /ポケモン|ポケットモンスター|ピカチュウ/, "ワンピース": /ワンピース|ONE PIECE/i, "ハローキティ": /ハローキティ|キティ/, "マイメロディ": /マイメロ/, "ジブリ": /ジブリ|トトロ|千と千尋|魔女の宅急便/, "めじるしアクセサリー": /めじるし/ };
+const mercariAf = (it) => { const tx = [it.name, (it.lineup_names || []).join(" ")].join(" "); const hit = MERCARI_AF.find(([k]) => (KW_ALIAS[k] || new RegExp(k)).test(tx)); return hit ? { kw: hit[0], url: hit[1] } : null; };
 // 通販・フリマで探すリンク（JANがあればJANで、なければ商品名で）
 const shopLinks = (it) => {
   const jan = janOf(it), name = it.name.replace(/【[^】]*】/g, "").trim();
@@ -320,8 +324,9 @@ const shopLinks = (it) => {
   const a = affSearch(q);
   const ys = `https://shopping.yahoo.co.jp/search?p=${encodeURIComponent(q)}`;
   const yahoo = site.yahoo_vc_sid && site.yahoo_vc_pid ? `https://ck.jp.ap.valuecommerce.com/servlet/referral?sid=${site.yahoo_vc_sid}&pid=${site.yahoo_vc_pid}&vc_url=${encodeURIComponent(ys)}` : ys;
-  const mercari = `https://jp.mercari.com/search?keyword=${encodeURIComponent(`${name} ガチャ`)}&status=on_sale`;
-  return { jan, rakuten: a.rakuten, amazon: a.amazon, yahoo, mercari };
+  const maf = mercariAf(it);
+  const mercari = maf ? maf.url : `https://jp.mercari.com/search?keyword=${encodeURIComponent(`${name} ガチャ`)}&status=on_sale`;
+  return { jan, rakuten: a.rakuten, amazon: a.amazon, yahoo, mercari, mercariLabel: maf ? `メルカリ（${maf.kw}）` : "メルカリ", mercariAf: !!maf };
 };
 
 // 人気シリーズだけのページ（/series/〇〇.html）
@@ -724,7 +729,7 @@ ${content}
         ${it.official_url ? `<a class="btn" href="${esc(it.official_url)}" target="_blank" rel="noopener">${t.official}</a>` : ""}
         <button type="button" class="heart" data-vote="${c.R}api/vote/${it.id}" data-id="${it.id}" aria-label="${t.heartAria}" title="${t.heartNote}"><i aria-hidden="true">♥</i><span>${t.heart}</span><b>${heartsOf(it)}</b></button>
       </div>
-      ${(() => { const L = shopLinks(it); return `<div class="shop-links"><span class="sl-pr">PR</span><a class="sl sl-rak" href="${esc(L.rakuten)}" target="_blank" rel="sponsored noopener">楽天市場</a><a class="sl sl-amz" href="${esc(L.amazon)}" target="_blank" rel="sponsored noopener">Amazon</a><a class="sl sl-yah" href="${esc(L.yahoo)}" target="_blank" rel="sponsored noopener">Yahoo!ショッピング</a><a class="sl sl-mer" href="${esc(L.mercari)}" target="_blank" rel="noopener">メルカリ</a></div>${L.jan ? `<p class="jan">JANコード：<span>${L.jan}</span></p>` : ""}`; })()}
+      ${(() => { const L = shopLinks(it); return `<div class="shop-links"><span class="sl-pr">PR</span><a class="sl sl-rak" href="${esc(L.rakuten)}" target="_blank" rel="sponsored noopener">楽天市場</a><a class="sl sl-amz" href="${esc(L.amazon)}" target="_blank" rel="sponsored noopener">Amazon</a><a class="sl sl-yah" href="${esc(L.yahoo)}" target="_blank" rel="sponsored noopener">Yahoo!ショッピング</a><a class="sl sl-mer" href="${esc(L.mercari)}" target="_blank" rel="${L.mercariAf ? "sponsored noopener" : "noopener"}">${esc(L.mercariLabel)}</a></div>${L.jan ? `<p class="jan">JANコード：<span>${L.jan}</span></p>` : ""}`; })()}
     </div>
   </article>
   ${(it.lineup_names || []).length ? `<section class="section lineup-sec">
