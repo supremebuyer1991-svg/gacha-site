@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "morning か evening"
+        description: "morning・evening・instagram（Instagramだけ）"
         default: "evening"
 
 concurrency:

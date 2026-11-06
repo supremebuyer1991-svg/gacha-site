@@ -111,7 +111,7 @@ async function igPost(tok, caption, ids) {
     } else log("Threads：出せる商品がありません");
   }
 
-  if (MODE === "evening") {
+  if (MODE === "evening" || MODE === "instagram") {
     const m = x.morning || {};
     const fromPool = async (name, pool) => { const done = recent(name); const out = []; for (const it of pool) { if (out.length >= 4) break; if (!it || done[it.id] || out.some((o) => o.id === it.id)) continue; if (await imgOk(it.id)) out.push(it); } return out; };
     // 朝のテーマ（サンリオ・ディズニーなど）で3つ以上そろえばそれ、だめなら今週発売
@@ -120,7 +120,7 @@ async function igPost(tok, caption, ids) {
       if (m.active) { const L = await fromPool(name, m.items || []); if (L.length >= 3) { cat = m.category; q = `${SITE}/?q=${encodeURIComponent(m.category)}`; themed = true; return L; } }
       cat = "今週発売"; q = `${SITE}/week`; themed = false; return fromPool(name, (x.week && x.week.items) || []);
     };
-    if (thSecret || DRY) {
+    if ((thSecret || DRY) && MODE !== "instagram") {
       const L = await pick("threads");
       if (L.length >= 2) {
         const text = [`✨今日の${cat}ガチャ${L.length}選`, ``, ...L.map((it) => `・${short(cleanName(it.name), 34)}（${it.price}円）`), ``, `発売日・ラインナップ・近くの取扱店はこちら👇`, q, ``, `#ガチャガチャ`].join("\n");
