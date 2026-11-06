@@ -96,6 +96,12 @@ jobs:
           $W pages project create "$PROJECT" --production-branch=main 2>/dev/null || true
           $W pages deploy dist --project-name="$PROJECT" --branch=main
 
+      - name: 新しいページを検索サイトに知らせる（IndexNow：Bing・Naver など）
+        continue-on-error: true
+        env:
+          INDEXNOW_DAYS: "30"
+        run: node src/indexnow.js
+
       - name: 在庫確認ワーカーを公開
         if: steps.d1.outputs.ok == '1'
         continue-on-error: true
