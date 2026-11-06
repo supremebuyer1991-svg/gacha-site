@@ -44,7 +44,7 @@
     var n = ids.length || 1, cols = n === 4 ? 2 : n, rows = n === 4 ? 2 : 1, top = 96, gap = 14, side = 24;
     var gw = (1200 - side * 2 - (cols - 1) * gap) / cols, gh = gw + 46;
     W = 1200; H = top + rows * gh + (rows - 1) * gap + 24; c.width = W; c.height = H;
-    bg(); badge("⚡ " + title, side, 26, "#ff4f7b"); brand(48);
+    bg(); badge((q.get("icon") || "⚡") + " " + title, side, 26, q.get("color") || "#ff4f7b"); brand(48);
     for (var i = 0; i < ids.length; i++) {
       var x = by[ids[i]], cx = side + (i % cols) * (gw + gap), cy = top + Math.floor(i / cols) * (gh + gap);
       rr(cx, cy, gw, gh, 20); g.fillStyle = "#fff"; g.fill();

@@ -358,6 +358,14 @@ const WEEK = (() => {
   return { m: w.m, weekNo: w.no, key: w.key, label: `${w.m}月第${w.no}週`, range: w.range, items: items.filter(inWeek).sort(byPopular) };
 })();
 
+// 来週発売（土日の「来週発売のガチャ」ポスト・next-week.html 用）
+const NEXT_WEEK = (() => {
+  const mon = new Date(mondayOf(nowJST).getTime() + 7 * 864e5);
+  const w = weekInfo(mon);
+  const inWeek = (it) => { const s = weekStartOf(it); return !!s && s.getTime() === mon.getTime(); };
+  return { m: w.m, weekNo: w.no, key: w.key, label: `${w.m}月第${w.no}週`, range: w.range, items: items.filter(inWeek).sort(byPopular) };
+})();
+
 /* ---------- みんなのガチャマップ：お店 ---------- */
 const shopsLive = readJSON("shops-live.json", {}) || {};
 const SHOPS = (() => {
@@ -788,6 +796,11 @@ ${content}
     lead: lang === "en" ? `${WEEK.items.length} capsule toy series releasing this week, most popular first.` : `${WEEK.label}（${WEEK.range}）に発売されるガチャ${WEEK.items.length}シリーズを、人気の順に並べています。発売日は地域や店舗によって前後します。`,
     list: WEEK.items, current: "calendar",
     ogImage: fs.existsSync(path.join(ROOT, "images", "og", "week.jpg")) ? `${SITE_URL}/images/og/week.jpg?v=${today}` : "",
+  });
+  listPage("next-week.html", {
+    title: lang === "en" ? `Gacha releasing next week (${NEXT_WEEK.range}) – ${NEXT_WEEK.items.length} series` : `来週発売のガチャガチャ新作（${NEXT_WEEK.range}）${NEXT_WEEK.items.length}シリーズ`,
+    lead: lang === "en" ? `${NEXT_WEEK.items.length} capsule toy series releasing next week.` : `${NEXT_WEEK.label}（${NEXT_WEEK.range}）に発売予定のガチャ${NEXT_WEEK.items.length}シリーズです。発売日は地域や店舗によって前後します。`,
+    list: NEXT_WEEK.items, current: "calendar",
   });
   // 新着ガチャ（トップの「全部見る」のリンク先）
   listPage("new.html", {
@@ -1248,7 +1261,7 @@ write("data/shops.json", JSON.stringify(SHOPS.map((x) => [x.id, x.name, x.pref, 
   }
   if (picks.length < 4) for (let k = 0; picks.length < 4 && k < pool.length; k++) { const it = pool[(dayNo * 2 + k) % pool.length]; if (!picks.includes(it)) picks.push(it); }
   const favIds = items.filter(isFav).map((it) => it.id);
-  write("data/x.json", JSON.stringify({ generated: new Date().toISOString(), today: today, week: { label: WEEK.label, from: WEEK.range.split("〜")[0], to: WEEK.range.split("〜")[1], count: week.length, items: week.slice(0, 12).map(pack) }, picks: picks.map(pack), fav_ids: favIds, site: SITE_URL }));
+  write("data/x.json", JSON.stringify({ generated: new Date().toISOString(), today: today, week: { label: WEEK.label, from: WEEK.range.split("〜")[0], to: WEEK.range.split("〜")[1], count: week.length, items: week.slice(0, 12).map(pack) }, picks: picks.map(pack), next_week: (() => { const nw = NEXT_WEEK.items.filter((it) => it.image); const rk = (it) => { if (!isFav(it)) return 9; const i = FAV_CATS.slice(0, 3).findIndex((r) => r.test(txt(it))); return i === -1 ? 3 : i; }; const list = nw.map((it, i) => [it, i]).sort((a, b) => rk(a[0]) - rk(b[0]) || a[1] - b[1]).map((x) => x[0]); return { label: NEXT_WEEK.label, from: NEXT_WEEK.range.split("〜")[0], to: NEXT_WEEK.range.split("〜")[1], count: NEXT_WEEK.items.length, items: list.slice(0, 16).map((it) => ({ ...pack(it), fav: isFav(it) })) }; })(), fav_ids: favIds, site: SITE_URL }));
 }
 write("_headers", `/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n/assets/*\n  Cache-Control: public, max-age=31536000, immutable\n/images/*\n  Cache-Control: public, max-age=604800\n  Access-Control-Allow-Origin: *\n/data/*\n  Cache-Control: public, max-age=300\n  Access-Control-Allow-Origin: *\n`);
 
