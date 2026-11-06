@@ -14,7 +14,7 @@ const BASE = "https://www.takaratomy-arts.co.jp";
 const UA = "Mozilla/5.0 (compatible; GachaSiteBot/1.0; +" + (process.env.SITE_URL || "https://gachapla.com") + ")";
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const WAIT_MS = 2000;
-const MAX_NEW = 40;
+const MAX_NEW = 80;
 const norm = (s) => String(s || "").normalize("NFKC").replace(/[\s　・!！?？'’"“”:：\-‐–—~〜～、。,.\/／|｜【】\[\]「」『』()（）™®]/g, "").toLowerCase();
 const strip = (h) => decode(h.replace(/<script[\s\S]*?<\/script>/gi, "").replace(/<style[\s\S]*?<\/style>/gi, "").replace(/<[^>]+>/g, " ")).replace(/\s+/g, " ");
 
@@ -42,7 +42,7 @@ async function main() {
   const ym = (d) => `${d.getUTCFullYear()}${String(d.getUTCMonth() + 1).padStart(2, "0")}`;
   const mk = (off) => ym(new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + off, 1)));
   // 今月・来月・先月に加えて、2〜3か月先も（載っていなければ飛ばす）
-  const months = [mk(0), mk(1), mk(-1), mk(2), mk(3)];
+  const months = [mk(0), mk(1), mk(-1), mk(2), mk(3), mk(-2), mk(-3), mk(-4)];
   const farAhead = new Set([mk(2), mk(3)]);
   let stopAhead = false;
   const today = now.toISOString().slice(0, 10);
