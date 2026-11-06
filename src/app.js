@@ -52,6 +52,28 @@
     nearNg: function (km) { return "現在地から" + km + "km以内に在庫のある店舗が見つかりませんでした。ネット通販もご検討ください。"; },
     count: function (n) { return n + "店舗に在庫があります。「現在地から探す」で近い順に並べ替えられます。"; }
   };
+  // ブラウザの言語が中国語・韓国語なのに別の言語のページを見ているとき、その言語のページを1回だけ案内する（自動では移動しない）
+  (function () {
+    try {
+      if (localStorage.getItem("lang-hint")) return;
+      var nl = (navigator.languages || [navigator.language || ""]).map(function (x) { return String(x).toLowerCase(); });
+      var want = null;
+      for (var i = 0; i < nl.length && !want; i++) {
+        var l = nl[i];
+        if (/^ja/.test(l) || /^en/.test(l)) break;
+        if (/^zh-(tw|hk|mo|hant)/.test(l)) want = "zh-tw"; else if (/^zh/.test(l)) want = "zh-cn"; else if (/^ko/.test(l)) want = "ko";
+      }
+      if (!want || want === LANG) return;
+      var a = document.querySelector('.lang-list a[hreflang="' + ({ "zh-tw": "zh-Hant", "zh-cn": "zh-Hans", ko: "ko" })[want] + '"]');
+      if (!a) return;
+      var txt = { "zh-tw": "有繁體中文版喔：", "zh-cn": "本站有简体中文版：", ko: "한국어 페이지가 있어요: " }[want];
+      var box = document.createElement("div"); box.className = "lang-hint"; box.setAttribute("lang", want === "ko" ? "ko" : want === "zh-tw" ? "zh-TW" : "zh-CN");
+      box.innerHTML = '<span>' + txt + ' <a href="' + a.getAttribute("href") + '">' + a.textContent + '</a></span><button type="button" aria-label="close">×</button>';
+      box.querySelector("button").onclick = function () { box.remove(); try { localStorage.setItem("lang-hint", "1"); } catch (e) {} };
+      box.querySelector("a").onclick = function () { try { localStorage.setItem("lang-hint", "1"); } catch (e) {} };
+      document.body.appendChild(box);
+    } catch (e) {}
+  })();
   // 中国語・韓国語の文言（ページに埋め込まれた window.__M）。{n} {s} {km} は数字に置きかえる
   if (window.__M) Object.keys(window.__M).forEach(function (k) {
     var v = window.__M[k];
