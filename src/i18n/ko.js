@@ -161,6 +161,7 @@ module.exports = {
   },
   makers: { "バンダイ": "반다이", "タカラトミーアーツ": "타카라토미 아츠", "キタンクラブ": "키탄클럽", "クオリア": "퀄리아", "ブシロード": "부시로드" },
   chara: {
+    "Sanrio": "산리오", "Disney": "디즈니", "Mejirushi Accessory": "메지루시 액세서리",
     "Hello Kitty": "헬로키티", "My Melody": "마이멜로디", "Kuromi": "쿠로미", "Cinnamoroll": "시나모롤", "Pochacco": "포차코",
     "Pompompurin": "폼폼푸린", "Hangyodon": "한교동", "Gudetama": "구데타마", "Keroppi": "케로케로케로피", "Tuxedosam": "턱시도샘",
     "Badtz-Maru": "배드바츠마루", "Little Twin Stars": "리틀트윈스타", "Kogimyun": "코기뮨", "Sugarbunnies": "슈가버니즈", "Hapidanbui": "하피단부이",
