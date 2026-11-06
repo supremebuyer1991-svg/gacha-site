@@ -49,7 +49,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           mkdir -p lineup-src
-          git add images lineup-src data/items.json data/stores.json data/stock.json data/backfill.json
+          git add images lineup-src data/items.json data/stores.json data/stock.json data/backfill.json data/import-skip.json
           git diff --cached --quiet || (git commit -m "画像・店舗・在庫を自動取り込み" && git push)
 
       - name: ハートの数・ガチャマップのお店を読み込む
