@@ -53,6 +53,8 @@
     count: function (n) { return n + "店舗に在庫があります。「現在地から探す」で近い順に並べ替えられます。"; }
   };
 
+  // トップに ?q=〇〇 で来たら検索ページへ（Xの投稿のリンク用）
+  (function () { try { var qq = new URLSearchParams(location.search).get("q"); if (qq && /^\/(en\/)?(index(\.html)?)?$/.test(location.pathname)) location.replace(location.pathname.replace(/index(\.html)?$/, "") + "search.html?q=" + encodeURIComponent(qq)); } catch (e) {} })();
   var esc = function (s) {
     return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
