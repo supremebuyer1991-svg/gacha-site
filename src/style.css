@@ -1021,3 +1021,90 @@ em.rel-st { padding: 2px 8px; border-radius: 999px; }
 .lang-hint { position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 60; max-width: 520px; margin: 0 auto; display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 16px; background: #1d2140; color: #fff; box-shadow: 0 10px 30px rgba(0, 0, 0, .25); font-size: 14px; font-weight: 700; }
 .lang-hint a { color: #ffe04a; text-decoration: underline; }
 .lang-hint button { margin-left: auto; background: none; border: 0; color: #fff; font-size: 20px; cursor: pointer; line-height: 1; }
+
+/* ---------- X のフォロー案内（シェアではなくフォロー） ---------- */
+.x-follow { display: grid; grid-template-columns: 34px minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 12px 16px; border-radius: var(--radius); background: var(--surface); border: 2px solid var(--line); color: var(--text); text-decoration: none; transition: border-color .2s; }
+.x-follow:hover { border-color: var(--text); }
+.xf-ic { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: #0f1419; color: #fff; }
+.xf-t { font-size: 13.5px; font-weight: 700; line-height: 1.45; }
+.xf-go { font-size: 13px; font-weight: 700; color: var(--sky); white-space: nowrap; }
+@media (max-width: 520px) { .x-follow { grid-template-columns: 34px minmax(0, 1fr); row-gap: 0; padding: 10px 14px; } .xf-ic { grid-row: span 2; } .xf-go { grid-column: 2; } }
+.follow-end { margin-top: 8px; margin-bottom: 40px; }
+.foot-x { flex-basis: 100%; display: inline-flex; align-items: center; gap: 8px; min-height: 36px; color: var(--text-2); font-weight: 700; }
+.foot-x svg { flex: none; }
+.foot-x b { color: var(--sky); }
+
+/* ---------- ★保存（マイリスト） ---------- */
+.hd-fav { position: relative; display: inline-grid; place-items: center; flex: none; width: 40px; height: 40px; border-radius: 50%; background: var(--surface-2); color: #ffb400; font-size: 20px; line-height: 1; text-decoration: none; }
+.hd-fav:hover { background: #fff4d6; }
+.hd-fav-n { position: absolute; top: -2px; right: -4px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 999px; background: var(--gold); color: #fff; font: 700 11px/18px var(--font-latin); text-align: center; }
+/* スマホ・タブレット：★は検索欄の右に並べる（1段目はロゴと言語のまま） */
+@media (max-width: 960px) { .hd-fav { order: 3; width: 44px; height: 44px; margin-left: -6px; } .site-header .search { flex: 1 1 calc(100% - 60px); min-width: 0; } }
+.card-fav { position: absolute; top: 6px; right: 6px; display: grid; place-items: center; width: 34px; height: 34px; padding: 0; border: 0; border-radius: 50%; background: rgba(255,255,255,.92); box-shadow: 0 2px 6px rgba(29,33,64,.18); color: #c9d0ea; font-size: 18px; line-height: 1; cursor: pointer; }
+.card-fav i, .fav-item i, .ib-fav i { font-style: normal; }
+.card-fav.is-on { color: #ffb400; }
+.card-fav.pop, .fav-item.pop, .ib-fav.pop { animation: fav-pop .35s ease; }
+@keyframes fav-pop { 50% { transform: scale(1.25); } }
+@media (prefers-reduced-motion: reduce) { .card-fav.pop, .fav-item.pop, .ib-fav.pop { animation: none; } }
+.fav-item { display: inline-flex; align-items: center; gap: 6px; min-height: 46px; padding: 0 18px; border-radius: 999px; border: 2px solid #ffe2a0; background: #fff; color: #b07800; font: 700 14px var(--font-body); cursor: pointer; }
+.fav-item i { font-size: 18px; line-height: 1; color: #d9dcea; }
+.fav-item.is-on { background: #fff7df; }
+.fav-item.is-on i { color: #ffb400; }
+.ml-group h2 small { font: 700 14px var(--font-latin); color: var(--muted); margin-left: 4px; }
+.mylist .empty a { display: inline-flex; }
+
+/* ---------- 商品ページ：発売の状態・公式の店舗検索・下のバー ---------- */
+.price { flex-wrap: wrap; row-gap: 6px; }
+.rel-pill { align-self: center; font-style: normal; font-size: 12.5px; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: var(--surface-2); color: var(--text-2); }
+.rel-pill.rel-now { background: var(--gold); color: #fff; }
+.rel-pill.rel-soon { background: #e6f3ff; color: #1f7ad6; }
+.btn-sub { border-color: transparent; background: transparent; color: var(--muted); font-size: 13px; text-decoration: underline; text-underline-offset: 3px; }
+.buy-sec { padding-top: 8px; }
+.buy-sec .buy + .buy { margin-top: 14px; }
+.item-bar { display: none; }
+@media (max-width: 820px) {
+  .item-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 8px; padding: 8px 12px calc(8px + env(safe-area-inset-bottom)); background: rgba(255,255,255,.96); box-shadow: 0 -2px 12px rgba(29,33,64,.12); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+  .item-bar > * { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; border-radius: 999px; border: 2px solid var(--line-strong); background: #fff; color: var(--text); font: 700 14px var(--font-body); text-decoration: none; cursor: pointer; }
+  .item-bar .ib-fav i { color: #d9dcea; font-size: 17px; }
+  .item-bar .ib-fav.is-on { border-color: #ffd36b; background: #fff7df; }
+  .item-bar .ib-fav.is-on i { color: #ffb400; }
+  .item-bar .ib-stock { border-color: var(--gold); background: var(--gold); color: #fff; }
+  .item-bar .ib-mer small { font-size: 9.5px; color: var(--muted); border: 1px solid var(--line-strong); border-radius: 4px; padding: 0 3px; }
+  body:has(.item-bar) .site-footer { padding-bottom: calc(84px + env(safe-area-inset-bottom)); }
+  body:has(.item-bar) .lang-hint { bottom: calc(72px + env(safe-area-inset-bottom)); }
+}
+
+/* ---------- トップ：見出し・リンク集 ---------- */
+.hero-h1 { margin: 0 0 8px; font-family: var(--font-display); font-weight: 900; font-size: clamp(20px, 2.6vw, 30px); line-height: 1.45; color: var(--text); }
+.hero-h1 { text-wrap: wrap; }
+.hero-h1 .h1-ym { display: inline-block; color: var(--gold); }
+p.hero-lead { font-size: clamp(15px, 1.7vw, 20px); font-weight: 700; color: var(--text-2); line-height: 1.6; }
+@media (min-width: 901px) { .hero-text p.hero-lead { white-space: normal; font-size: 18px; } }
+@media (max-width: 599px) { .hero-stats { display: none !important; } .hero-intro { padding-bottom: 0; } .hero-sub { margin-top: 6px; font-size: 13px; } }
+.hero #thisweek { padding-top: 0; }
+.home-links .hl-h { font-size: 16px; margin: 18px 0 10px; }
+.hl-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.hl-row a { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 6px 14px; border-radius: 999px; background: var(--surface); border: 2px solid var(--line); font-weight: 700; font-size: 13.5px; }
+.hl-row a:hover { border-color: var(--gold); }
+.hl-row a b { color: var(--gold); }
+.hl-row a small { color: var(--muted); font: 600 12px var(--font-latin); }
+.hl-pref { margin: 18px 0 0; }
+.hl-pref a { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 18px; border-radius: 14px; background: var(--surface-2); font-weight: 700; color: var(--text); }
+
+/* 診断：答えなくてもいい質問 */
+.q-opt { display: inline-block; margin-left: 8px; padding: 1px 8px; border-radius: 999px; background: var(--surface-2); color: var(--muted); font: 700 11.5px var(--font-body); vertical-align: middle; }
+
+/* 検索の候補：作品の一覧ページと発売の状態 */
+.sp-chara { display: block; margin-bottom: 4px; padding: 10px 12px; border-radius: 12px; background: #fff4f7; color: var(--gold-soft); font-weight: 700; font-size: 13.5px; }
+.sp-chara:hover { background: #ffe6ee; }
+.sp-rel { display: block; font-size: 11px; font-weight: 700; color: var(--muted); text-align: right; white-space: nowrap; }
+.sp-rel.sp-now { color: var(--gold-soft); }
+.sp-rel.sp-soon { color: #1f7ad6; }
+
+/* ---------- スマホ：iOS で入力欄が拡大されないように・押しやすさ ---------- */
+@media (max-width: 960px) {
+  input[type="text"], input[type="search"], input[type="email"], input[type="number"], input:not([type]), select, textarea { font-size: 16px !important; }
+  .site-header .search input { height: 44px; }
+  .site-footer nav a, .foot-langs a { display: inline-flex; align-items: center; min-height: 32px; }
+  .more { display: inline-flex; align-items: center; min-height: 32px; }
+}

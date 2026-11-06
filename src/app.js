@@ -88,6 +88,14 @@
     });
   };
 
+  // 日本時間の今日（YYYY-MM-DD）と、今週の月曜日
+  var todayJST = function () { return new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10); };
+  var thisMonday = function () {
+    var d = new Date(Date.now() + 9 * 3600e3);
+    return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() - ((d.getUTCDay() + 6) % 7))).toISOString().slice(0, 10);
+  };
+  var relOf = function (x) { return { k: "", t: x.r || "" }; }; // 検索欄があるページで置きかえる
+
   /* ================= 検索（全ページのヘッダー） ================= */
   var sForm = document.querySelector("form.search");
   if (sForm) {
@@ -116,19 +124,54 @@
     var thumbHTML = function (x) {
       return x.img ? '<img src="' + esc(/^https?:/.test(x.img) ? x.img : root + x.img) + '" alt="" loading="lazy" width="48" height="48">' : '<span class="sp-cap" aria-hidden="true"></span>';
     };
+    // キャラクター・作品の一覧ページ（ことばが作品名に当たったら、候補のいちばん上に出す）
+    var cIndex = null, cLoading = null;
+    var loadChara = function () {
+      if (!cLoading) cLoading = fetch(sForm.getAttribute("data-chara")).then(function (r) { return r.ok ? r.json() : []; }).then(function (d) {
+        cIndex = (d || []).map(function (x) { try { x._rx = new RegExp(x.m, "i"); } catch (e) { x._rx = null; } x._s = [x.l, x.j, x.e].map(norm); return x; });
+        return cIndex;
+      }).catch(function () { cIndex = []; return cIndex; });
+      return cLoading;
+    };
+    var charaFor = function (q) {
+      if (!cIndex) return null;
+      var nq = norm(q);
+      if (nq.length < 2) return null;
+      var hit = cIndex.filter(function (x) { return (x._rx && x._rx.test(q)) || x._s.some(function (s) { return s && s.indexOf(nq) === 0; }); });
+      hit.sort(function (a, b) { return a.n - b.n; }); // いちばん絞りこんだ作品（例：サンリオよりハローキティ）
+      return hit[0] || null;
+    };
+    // 発売の状態（今週発売・◯/◯〜発売・発売中）
+    var REL = {}; try { REL = JSON.parse(sForm.getAttribute("data-rel") || "{}"); } catch (e) {}
+    relOf = function (x) {
+      var mon = thisMonday(), ym = mon.slice(0, 7);
+      if (x.w) {
+        if (x.w === mon) return { k: "now", t: REL.now };
+        if (x.w > mon) return { k: "soon", t: String(REL.from || "").replace("{m}", +x.w.slice(5, 7)).replace("{d}", +x.w.slice(8, 10)) };
+        return { k: "out", t: REL.out };
+      }
+      var cur = todayJST().slice(0, 7);
+      if (x.ym && x.ym > cur) return { k: "soon", t: x.r };
+      if (x.ym && x.ym < cur) return { k: "out", t: REL.out };
+      return { k: x.ym === ym ? "now-month" : "out", t: x.r };
+    };
     var render = function () {
       var q = sInput.value.trim();
       if (!q || !sIndex) { sPop.hidden = true; return; }
       var hits = find(q);
-      sPop.innerHTML = hits.length
+      var ch = charaFor(q);
+      var chRow = ch ? '<a class="sp-chara" href="' + home + "chara/" + esc(ch.s) + '">' + esc(String(sForm.getAttribute("data-chara-tpl") || "").replace("{l}", ch.l).replace("{n}", ch.n)) + "</a>" : "";
+      sPop.innerHTML = chRow + (hits.length
         ? hits.slice(0, 8).map(function (x) {
-            return '<a class="sp-item" href="' + home + "item/" + esc(x.id) + '">' + thumbHTML(x) + '<span class="sp-name">' + esc(x.n) + '</span><span class="sp-price">¥' + x.p + "</span></a>";
+            var st = relOf(x);
+            return '<a class="sp-item" href="' + home + "item/" + esc(x.id) + '">' + thumbHTML(x) + '<span class="sp-name">' + esc(x.n) + '</span><span class="sp-price">¥' + x.p + (st.t ? '<small class="sp-rel sp-' + st.k + '">' + esc(st.t) + "</small>" : "") + "</span></a>";
           }).join("") + (hits.length > 8 ? '<button class="sp-all" type="submit">' + esc(M.searchAll(hits.length)) + "</button>" : "")
-        : '<p class="sp-none">' + esc(M.searchNone) + "</p>";
+        : '<p class="sp-none">' + esc(M.searchNone) + "</p>");
       sPop.hidden = false;
     };
+    sInput.addEventListener("focus", loadChara);
     sInput.addEventListener("focus", load);
-    sInput.addEventListener("input", function () { load().then(render); });
+    sInput.addEventListener("input", function () { Promise.all([load(), loadChara()]).then(render); });
     sInput.addEventListener("keydown", function (e) { if (e.key === "Escape") { sPop.hidden = true; sInput.blur(); } });
     document.addEventListener("click", function (e) { if (!sForm.contains(e.target)) sPop.hidden = true; });
 
@@ -187,9 +230,13 @@
       stepEl.textContent = (cur + 1) + " / " + steps.length;
       barEl.style.width = ((cur + 1) / steps.length * 100) + "%";
       backBtn.hidden = cur === 0;
-      nextBtn.hidden = true;
-      submitBtn.hidden = cur !== steps.length - 1;
+      // 1問目（好きな系統）のあとは答えなくてもOK：「次へ／スキップ」と「診断する」をいつでも出す
+      var last = cur === steps.length - 1;
+      nextBtn.hidden = last;
+      nextBtn.textContent = nextBtn.getAttribute(steps[cur].hasAttribute("data-optional") ? "data-skip" : "data-next") || nextBtn.textContent;
+      submitBtn.hidden = false;
     }
+    nextBtn.addEventListener("click", function () { show(cur + 1, 1); });
     steps.forEach(function (f) {
       if (!f.hasAttribute("data-auto")) return;
       // 選んだら次へ。戻ってきて同じ答えをもう一度押したときも進む（そのときは「change」が起きないので「click」で見る）
@@ -198,7 +245,7 @@
         if (!e.target.matches || !e.target.matches('input[type="radio"]')) return;
         var me = steps.indexOf(f);
         if (timer || me !== cur) return;
-        timer = setTimeout(function () { timer = null; if (cur === me) show(me + 1, 1); }, 220);
+        timer = setTimeout(function () { timer = null; if (cur !== me) return; if (me === steps.length - 1) submitBtn.click(); else show(me + 1, 1); }, 220);
       });
     });
     backBtn.addEventListener("click", function () { show(cur - 1, -1); });
@@ -520,6 +567,95 @@
       });
     });
   });
+
+  /* ================= ★保存（マイリスト）：このブラウザの中だけに保存する ================= */
+  var FAV_KEY = "gp-fav";
+  var favGet = function () {
+    try { var a = JSON.parse(localStorage.getItem(FAV_KEY) || "[]"); return Array.isArray(a) ? a.filter(function (x) { return typeof x === "string"; }) : []; } catch (e) { return []; }
+  };
+  var favSet = function (a) { try { localStorage.setItem(FAV_KEY, JSON.stringify(a.slice(0, 500))); } catch (e) {} };
+  var favToggle = function (id) {
+    var a = favGet(), i = a.indexOf(id);
+    if (i === -1) a.unshift(id); else a.splice(i, 1);
+    favSet(a);
+    return i === -1;
+  };
+  var hdFav = document.querySelector(".hd-fav");
+  var FL = {
+    add: (hdFav && hdFav.getAttribute("data-add")) || "Save", del: (hdFav && hdFav.getAttribute("data-del")) || "Remove",
+    save: (hdFav && hdFav.getAttribute("data-save")) || "Save", saved: (hdFav && hdFav.getAttribute("data-saved")) || "Saved"
+  };
+  var paintFav = function () {
+    var a = favGet();
+    [].forEach.call(document.querySelectorAll("[data-fav]"), function (b) {
+      var on = a.indexOf(b.getAttribute("data-fav")) !== -1;
+      b.classList.toggle("is-on", on);
+      b.setAttribute("aria-pressed", on ? "true" : "false");
+      b.setAttribute("aria-label", on ? FL.del : FL.add);
+      b.title = on ? FL.del : FL.add;
+      var s = b.querySelector("span"); if (s) s.textContent = on ? FL.saved : FL.save;
+    });
+    if (hdFav) { var n = hdFav.querySelector(".hd-fav-n"); if (n) { n.textContent = String(a.length); n.hidden = !a.length; } }
+  };
+  // 商品カードに★ボタンを足す（カードはリンクなので、★を押したときはページを移らない）
+  var decorate = function () {
+    [].forEach.call(document.querySelectorAll('a.card[href*="item/"]'), function (cd) {
+      if (cd.querySelector(".card-fav")) return;
+      var m = /item\/([a-z0-9-]+)/.exec(cd.getAttribute("href") || ""), th = cd.querySelector(".thumb");
+      if (!m || !th) return;
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "card-fav"; b.setAttribute("data-fav", m[1]);
+      b.innerHTML = '<i aria-hidden="true">★</i>';
+      th.appendChild(b);
+    });
+    paintFav();
+  };
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest && e.target.closest("[data-fav]");
+    if (!b) return;
+    e.preventDefault(); e.stopPropagation();
+    var on = favToggle(b.getAttribute("data-fav"));
+    paintFav();
+    if (on) { b.classList.remove("pop"); void b.offsetWidth; b.classList.add("pop"); }
+    try { document.dispatchEvent(new Event("gp-fav")); } catch (e2) {}
+  }, true);
+  window.addEventListener("storage", function (e) { if (e.key === FAV_KEY) { paintFav(); try { document.dispatchEvent(new Event("gp-fav")); } catch (e2) {} } });
+  decorate();
+  // 検索結果・診断結果など、あとから出るカードにも付ける
+  if (window.MutationObserver) {
+    var favQ = false;
+    new MutationObserver(function () {
+      if (favQ) return; favQ = true;
+      (window.requestAnimationFrame || setTimeout)(function () { favQ = false; decorate(); });
+    }).observe(document.querySelector("main") || document.body, { childList: true, subtree: true });
+  }
+
+  /* マイリストのページ：保存した商品を「今週発売・来週以降・発売中」に分けて出す */
+  var ml = document.getElementById("mylist");
+  if (ml && window.fetch) {
+    var MLL = {}; try { MLL = JSON.parse(ml.getAttribute("data-l") || "{}"); } catch (e) {}
+    var mlEmpty = ml.querySelector(".ml-empty");
+    var mlBox = document.createElement("div"); ml.appendChild(mlBox);
+    var mlIdx = null;
+    var drawML = function () {
+      if (!mlIdx) return;
+      var ids = favGet(), list = ids.map(function (id) { return mlIdx[id]; }).filter(Boolean);
+      mlEmpty.hidden = list.length > 0;
+      var g = { now: [], soon: [], out: [] };
+      list.forEach(function (x) { var st = relOf(x); (st.k === "now" ? g.now : st.k === "soon" ? g.soon : g.out).push({ x: x, st: st }); });
+      g.soon.sort(function (a, b) { return (a.x.w || a.x.ym + "-99").localeCompare(b.x.w || b.x.ym + "-99"); });
+      var d = { home: ml.getAttribute("data-home"), root: ml.getAttribute("data-root") };
+      mlBox.innerHTML = ["now", "soon", "out"].filter(function (k) { return g[k].length; }).map(function (k) {
+        return '<section class="section section-tight ml-group"><div class="section-head"><h2>' + esc(MLL[k] || k) + " <small>" + g[k].length + '</small></h2></div><div class="grid">' +
+          g[k].map(function (o) { return cardHTML({ id: o.x.id, name: o.x.n, price: o.x.p, lineup: o.x.l, image: o.x.img, genre_label: o.x.g, release_label: o.st.t || o.x.r }, d, null); }).join("") + "</div></section>";
+      }).join("");
+    };
+    fetch(ml.getAttribute("data-index")).then(function (r) { return r.json(); }).then(function (idx) {
+      mlIdx = {}; idx.forEach(function (x) { mlIdx[x.id] = x; });
+      drawML();
+    }).catch(function () { mlEmpty.hidden = false; });
+    document.addEventListener("gp-fav", drawML);
+  }
 
   /* ================= 発売カレンダー：「この週をもっと見る」 ================= */
   [].forEach.call(document.querySelectorAll(".cal-more-btn"), function (b) {
