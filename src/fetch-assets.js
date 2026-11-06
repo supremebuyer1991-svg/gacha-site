@@ -212,7 +212,7 @@ async function importStock() {
  * 公式ページではラインナップ名が画像の中にしか書かれていないので、毎晩Claudeがこの画像を見て名前を入力し、
  * 入力が済んだ画像は src/lineup-apply.js が消す。1回に MAX_LINEUP_PER_RUN 件まで、新しい商品から。
  */
-const MAX_LINEUP_PER_RUN = 15;
+const MAX_LINEUP_PER_RUN = 60;
 async function saveLineupSources() {
   let sharp;
   try { sharp = require("sharp"); } catch { return 0; }
@@ -224,7 +224,7 @@ async function saveLineupSources() {
   const todo = items.filter((it) => !Array.isArray(it.lineup_names) && it.official_url && allowed.includes(it.maker) && hasImage(it.id)
     && !fs.existsSync(path.join(dir, `${it.id}.jpg`))).sort((a, b) => (b.release || "").localeCompare(a.release || ""));
   for (const it of todo) {
-    if (done + waiting >= 40 || done >= MAX_LINEUP_PER_RUN) break;
+    if (done + waiting >= 200 || done >= MAX_LINEUP_PER_RUN) break;
     try {
       const html = await getText(it.official_url);
       const imgUrl = pickImage(html, it.official_url);
