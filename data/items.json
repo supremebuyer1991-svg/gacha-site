@@ -205,7 +205,18 @@
     ],
     "tags_auto": false,
     "release_note": "予定",
-    "jan_checked": true
+    "jan_checked": true,
+    "lineup_names": [
+      "イーブイ",
+      "シャワーズ",
+      "サンダース",
+      "ブースター",
+      "エーフィ",
+      "ブラッキー",
+      "リーフィア",
+      "グレイシア",
+      "ニンフィア"
+    ]
   },
   {
     "id": "bandai-pokemon-swing-water-2026-11",
@@ -249,7 +260,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ニョロゾ",
+      "シャワーズ",
+      "スイクン",
+      "ラブカス",
+      "ポッチャマ"
+    ]
   },
   {
     "id": "bandai-onepiece-wanpi-no-mi-27-2026-11",
@@ -293,7 +311,15 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "モンキー・D・ルフィ ギア5（エルバフver.）",
+      "トニートニー・チョッパー（エルバフver.）",
+      "フランキー（エルバフver.）",
+      "ロキ",
+      "Dr.くれは",
+      "Dr.ヒルルク"
+    ]
   },
   {
     "id": "bandai-chiikawa-pondecouleur-powder-2026-11",
@@ -336,7 +362,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ちいかわ",
+      "ハチワレ",
+      "うさぎ",
+      "モモンガ",
+      "ちいかわ・ハチワレ・うさぎ",
+      "ちいかわ・ハチワレ"
+    ]
   },
   {
     "id": "bandai-gundam-robot-damashii-miniature-2026-11",
@@ -381,7 +415,13 @@
     "q_genders": [
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "RX-78-2 GUNDAM ver. A.N.I.M.E.",
+      "RX-77-2 GUNCANNON ver. A.N.I.M.E.",
+      "MS-06S ZAKU II CHAR'S CUSTOM MODEL ver. A.N.I.M.E.",
+      "MS-06 ZAKU II ver. A.N.I.M.E."
+    ]
   },
   {
     "id": "bandai-shinchan-machibouke-8-2026-11",
@@ -424,7 +464,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "しんちゃん",
+      "ひまわり",
+      "ラベンダー",
+      "ローズ",
+      "レモン"
+    ]
   },
   {
     "id": "bandai-conan-gyukotto-2-2026-11",
@@ -468,7 +515,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "工藤新一",
+      "灰原哀",
+      "諸伏高明",
+      "赤井秀一",
+      "萩原千速"
+    ]
   },
   {
     "id": "bandai-capin-gallery-sanrio-sugar-spice-2026-11",
@@ -511,7 +565,13 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ハローキティ",
+      "シナモロール",
+      "マイメロディ",
+      "クロミ"
+    ]
   },
   {
     "id": "bandai-sanrio-matcha-figure-2026-11",
@@ -554,7 +614,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ハローキティ",
+      "クロミ",
+      "シナモロール",
+      "ポチャッコ",
+      "チョコキャット"
+    ]
   },
   {
     "id": "bandai-disney-holiday-ornament-charm-2026-11",
@@ -597,7 +664,13 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ミッキーマウス",
+      "ミニーマウス",
+      "くまのプーさん",
+      "ディズニー スティッチ&スクランプ"
+    ]
   },
   {
     "id": "bandai-tamagotchi-mejirushi-30th-2026-11",
@@ -640,7 +713,17 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "まめっち",
+      "くちぱっち",
+      "めめっち",
+      "おやじっち",
+      "くろまめっち",
+      "ラブリっち",
+      "たまごっち 白",
+      "Tamagotchi P's ピンク"
+    ]
   },
   {
     "id": "bandai-tom-jerry-hamburger-charm-2026-11",
@@ -686,7 +769,13 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "トム（BLTバーガー）",
+      "ジェリー（チーズバーガー）",
+      "タフィー（エッグバーガー）",
+      "マッスル（アボカドバーガー）"
+    ]
   },
   {
     "id": "bandai-anpanman-kururin-face-2026-11",
@@ -726,7 +815,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "アンパンマン",
+      "ばいきんまん",
+      "ドキンちゃん",
+      "コキンちゃん",
+      "カレーパンマン"
+    ]
   },
   {
     "id": "bandai-4582769981838",
@@ -1017,7 +1113,15 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "1巻",
+      "2巻",
+      "6巻",
+      "8巻",
+      "9巻",
+      "14巻"
+    ]
   },
   {
     "id": "bandai-4582770141306",
@@ -1051,7 +1155,17 @@
     "q_genders": [
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ゴジラ-0.0(ゴジラ)",
+      "ゴジラ-0.0(ロゴ)",
+      "ゴジラ-1.0",
+      "ゴジラ-1.0/C",
+      "シン・ゴジラ",
+      "ゴジラVSメカゴジラ",
+      "ゴジラVSキングギドラ",
+      "ゴジラ FINAL WARS"
+    ]
   },
   {
     "id": "bandai-4570118105998",
@@ -1393,7 +1507,13 @@
     "q_genders": [
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "坊屋春道（クローズ）",
+      "九能龍信（クローズ）",
+      "花木九里虎（WORST）",
+      "河内鉄生（WORST）"
+    ]
   },
   {
     "id": "bandai-4582770081763",
@@ -1432,7 +1552,13 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "パモ",
+      "モクロー",
+      "ミミッキュ",
+      "クスネ"
+    ]
   },
   {
     "id": "bandai-4582770095418",
@@ -1470,7 +1596,15 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "アイアンマン",
+      "キャプテン・アメリカ",
+      "ソー",
+      "ハルク",
+      "ブラック・ウィドウ",
+      "ホークアイ"
+    ]
   },
   {
     "id": "bandai-4582770098730",
@@ -1506,7 +1640,13 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "かぐや/現実",
+      "かぐや/VR",
+      "酒寄彩葉/VR",
+      "月見ヤチヨ"
+    ]
   },
   {
     "id": "bandai-4582770139204",
@@ -1541,7 +1681,15 @@
     "q_genders": [
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "トンボシードエグズ",
+      "ウィザードシードエグズ",
+      "ゴーストシードエグズ",
+      "G3シードエグズ",
+      "バースシードエグズ",
+      "マッハシードエグズ"
+    ]
   },
   {
     "id": "bandai-4570118184993",
@@ -2100,7 +2248,13 @@
     "q_genders": [
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ゴジラ(2026)",
+      "ゴジラ(2001)",
+      "魏怒羅(ギドラ)(2001)",
+      "ガルガル(1996)"
+    ]
   },
   {
     "id": "bandai-4582770094824",
@@ -2137,7 +2291,13 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ハイハイのねこちゃん",
+      "ハイハイのくまちゃん",
+      "ハイハイのわんちゃん",
+      "ハイハイのうさちゃん"
+    ]
   },
   {
     "id": "bandai-4582770129953",
@@ -2174,7 +2334,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ジバニャン",
+      "コマさん",
+      "コマじろう",
+      "ウィスパー",
+      "フユニャン"
+    ]
   },
   {
     "id": "bandai-4582770139730",
@@ -4029,7 +4196,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "じょせまる",
+      "じょせまる（くろ）",
+      "らて",
+      "いちごみるく",
+      "ごまみるく"
+    ]
   },
   {
     "id": "bandai-4582770026863",
@@ -4105,7 +4279,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "サリー",
+      "マイク",
+      "ピクサー・ボール",
+      "エイリアン",
+      "ロッツォ",
+      "レッサーパンダ メイ"
+    ]
   },
   {
     "id": "bandai-4582770027587",
@@ -4139,7 +4321,19 @@
     "q_genders": [
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "11巻",
+      "12巻",
+      "13巻",
+      "14巻",
+      "15巻",
+      "16巻",
+      "17巻",
+      "18巻",
+      "19巻",
+      "1巻"
+    ]
   },
   {
     "id": "bandai-4582770053920",
@@ -4177,7 +4371,12 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "モンチッチくん",
+      "モンチッチちゃん",
+      "スウィートロリポップ"
+    ]
   },
   {
     "id": "bandai-4582770054026",
@@ -4217,7 +4416,16 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "串おでんお文具",
+      "はんぺんお文具",
+      "もち巾着プリンさん",
+      "赤ちょうちんゼリーさん",
+      "からし子猫さん",
+      "たこ足猫さん",
+      "昆布締め名も無き者"
+    ]
   },
   {
     "id": "bandai-4582770054583",
@@ -4253,7 +4461,11 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "クマども",
+      "ネコども"
+    ]
   },
   {
     "id": "bandai-4582770054774",
@@ -4291,7 +4503,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ハローキティ",
+      "マイメロディ",
+      "クロミ",
+      "ウサハナ",
+      "しろうさ（シュガーバニーズ）",
+      "くろうさ（シュガーバニーズ）"
+    ]
   },
   {
     "id": "bandai-4582770054866",
@@ -4329,7 +4549,13 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "さくら",
+      "ケロちゃん",
+      "知世",
+      "小狼"
+    ]
   },
   {
     "id": "bandai-4582770054996",
@@ -4366,7 +4592,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "リコ",
+      "レグ",
+      "ナナチ",
+      "ファプタ",
+      "壺ミーティ"
+    ]
   },
   {
     "id": "bandai-4582770055504",
@@ -4404,7 +4637,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "坂田銀時（猫）",
+      "定春",
+      "マヨラー星の王子",
+      "ジャスタウェイ",
+      "長谷川泰三（マダオ）"
+    ]
   },
   {
     "id": "bandai-4582770055559",
@@ -4441,7 +4681,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ムーニー",
+      "パッチ",
+      "ドッゴ",
+      "ムーニー（王冠ver.）",
+      "ムーニー（ガシャポンver.）"
+    ]
   },
   {
     "id": "bandai-4582770055627",
@@ -4477,7 +4724,13 @@
     "q_genders": [
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "仮面ライダーマイス",
+      "仮面ライダービルド",
+      "仮面ライダー響鬼",
+      "仮面ライダー剣"
+    ]
   },
   {
     "id": "bandai-4582770055931",
@@ -4512,7 +4765,14 @@
     "q_genders": [
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "マンダロリアン",
+      "グローグー",
+      "アンゼラン",
+      "ゼブ",
+      "エンボ"
+    ]
   },
   {
     "id": "bandai-4582770061741",
@@ -4549,7 +4809,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "莉犬",
+      "るぅと",
+      "ころん",
+      "さとみ",
+      "ジェル"
+    ]
   },
   {
     "id": "bandai-4582770068269",
@@ -4588,7 +4855,13 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ヘクター",
+      "ミゲル",
+      "デラクルス",
+      "ダンテ"
+    ]
   },
   {
     "id": "bandai-4582770068313",
@@ -4626,7 +4899,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "くまのプーさん",
+      "ベイマックス",
+      "ディズニー マリー",
+      "ジュディ・ホップス",
+      "ニック・ワイルド"
+    ]
   },
   {
     "id": "bandai-4582770068351",
@@ -4665,7 +4945,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ハローキティ",
+      "シナモロール",
+      "マイメロディ",
+      "クロミ",
+      "ポチャッコ"
+    ]
   },
   {
     "id": "bandai-4582770068450",
@@ -4701,7 +4988,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "コッシー",
+      "サボさん",
+      "オフロスキー",
+      "レグ",
+      "スワリン"
+    ]
   },
   {
     "id": "bandai-4582770068580",
@@ -4740,7 +5034,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "こじま",
+      "だめぎつね",
+      "のりおにぎり",
+      "カワウソ",
+      "ラッコ",
+      "カニ"
+    ]
   },
   {
     "id": "bandai-4582770068832",
@@ -4777,7 +5079,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "キーフリー",
+      "ココ",
+      "フデムシA",
+      "フデムシB",
+      "フデムシC"
+    ]
   },
   {
     "id": "bandai-4582770069136",
@@ -4815,7 +5124,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "クリーパー",
+      "エンダーマン",
+      "アレイ",
+      "ウーパールーパー",
+      "TNT"
+    ]
   },
   {
     "id": "bandai-4582770069327",
@@ -4852,7 +5168,17 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "コロモン",
+      "ツノモン",
+      "ピョコモン",
+      "モチモン",
+      "タネモン",
+      "プカモン",
+      "トコモン",
+      "ニャロモン"
+    ]
   },
   {
     "id": "bandai-4582770070446",
@@ -4888,7 +5214,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "Naughty",
+      "You never know",
+      "Snuggles",
+      "Bling-Bling",
+      "Chocolate"
+    ]
   },
   {
     "id": "bandai-4582770070644",
@@ -4926,7 +5259,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "看板",
+      "ジュークボックス",
+      "ソファ",
+      "ハンバーガー＆ポテト",
+      "ミルクシェイク"
+    ]
   },
   {
     "id": "bandai-4582770070774",
@@ -4964,7 +5304,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "てんびん座（ハローキティ）",
+      "さそり座（クロミ）",
+      "しし座（ポムポムプリン）",
+      "いて座（ウサハナ）",
+      "かに座（ポチャッコ）",
+      "うお座（ハンギョドン）"
+    ]
   },
   {
     "id": "bandai-4582770070781",
@@ -5002,7 +5350,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "おとめ座（マイメロディ）",
+      "やぎ座（シナモロール）",
+      "ふたご座（リトルツインスターズ）",
+      "おひつじ座（マイスウィートピアノ）",
+      "おうし座（バッドばつ丸）",
+      "みずがめ座（けろけろけろっぴ）"
+    ]
   },
   {
     "id": "bandai-4582770070873",
@@ -5038,7 +5394,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "チアベア",
+      "ファンシャインベア",
+      "ウィッシュベア",
+      "グッドラックベア",
+      "シェアベア",
+      "オールウェイズゼアベア"
+    ]
   },
   {
     "id": "bandai-4582770070897",
@@ -5074,7 +5438,13 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "やだもん",
+      "もぐもぐ",
+      "たずら",
+      "ぶるる"
+    ]
   },
   {
     "id": "bandai-4582770071115",
@@ -5115,7 +5485,15 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "なめこ",
+      "枯れなめこ",
+      "白なめこ",
+      "ななめこ",
+      "マッスルなめこ",
+      "王様なめこ"
+    ]
   },
   {
     "id": "bandai-4582770071160",
@@ -5151,7 +5529,15 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ウシさん",
+      "ウシさん（イチゴ）",
+      "ウシさん（フルーツ）",
+      "ニワトリ",
+      "ヒヨコ",
+      "ウマ"
+    ]
   },
   {
     "id": "bandai-4582770076783",
@@ -5259,7 +5645,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "とろけるアイス",
+      "タコクラゲ",
+      "キーウィ",
+      "ゼリーフィッシュ",
+      "とろけるハート"
+    ]
   },
   {
     "id": "bandai-4582770081565",
@@ -5296,7 +5689,10 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ニャンちゅう"
+    ]
   },
   {
     "id": "bandai-4582770081596",
@@ -5331,7 +5727,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "MOUSSE（天使）",
+      "MOUSSE（悪魔）",
+      "LATTE（天使）",
+      "CAMMY（悪魔）",
+      "SOUFFLE（天使）"
+    ]
   },
   {
     "id": "bandai-4582770094367",
@@ -5369,7 +5772,15 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "クリスマスツリー",
+      "トナカイ",
+      "プレゼントボックス",
+      "くつした",
+      "雪うさぎ",
+      "だるま"
+    ]
   },
   {
     "id": "bandai-4582770094725",
@@ -5407,7 +5818,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "しんちゃん",
+      "ボーちゃん",
+      "かざまくん",
+      "シロ",
+      "怪獣シリマルダシ"
+    ]
   },
   {
     "id": "bandai-4582770094862",
@@ -5443,7 +5861,17 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ベリエちゃん",
+      "ブルーベリエちゃん",
+      "ナカムラくん",
+      "ハナちゃん",
+      "ミントくん",
+      "ピコ",
+      "ルッキー",
+      "ミンキー"
+    ]
   },
   {
     "id": "bandai-4582770095142",
@@ -5477,7 +5905,18 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "フリーレン",
+      "フェルン",
+      "シュタルク",
+      "ヒンメル",
+      "ハイター",
+      "アイゼン",
+      "メトーデ",
+      "ゲナウ",
+      "南の勇者"
+    ]
   },
   {
     "id": "bandai-4582770095357",
@@ -5512,7 +5951,11 @@
     "q_genders": [
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "内野手モデル",
+      "キャッチャーミット"
+    ]
   },
   {
     "id": "bandai-4582770095487",
@@ -5550,7 +5993,16 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "日向翔陽",
+      "影山飛雄",
+      "月島蛍",
+      "西谷夕",
+      "田中龍之介",
+      "牛島若利",
+      "北信介"
+    ]
   },
   {
     "id": "bandai-4582770098372",
@@ -5587,7 +6039,13 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ギャバン・インフィニティ",
+      "ギャバン・ブシドー",
+      "ギャバン・ルミナス",
+      "キャプテン・オメガホーン"
+    ]
   },
   {
     "id": "bandai-4582770121650",
@@ -5626,7 +6084,16 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ビス・イエロー",
+      "いちごもち",
+      "きなこもち",
+      "ちょこもち",
+      "ホワイトクッキー",
+      "冬ちろる",
+      "アーモンドゴールド"
+    ]
   },
   {
     "id": "bandai-4582770121773",
@@ -5664,7 +6131,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "大神ミオ",
+      "兎田ぺこら",
+      "角巻わため",
+      "獅白ぼたん",
+      "尾丸ポルカ"
+    ]
   },
   {
     "id": "bandai-4582770122138",
@@ -5700,7 +6174,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ミスターコンタック",
+      "ミスターコンタック マペットタイプ",
+      "新コンタック600プラスs",
+      "新コンタック鼻炎Z",
+      "新コンタックかぜ総合DX"
+    ]
   },
   {
     "id": "bandai-4582770122527",
@@ -5738,7 +6219,15 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ゴモラ",
+      "ピグモン",
+      "バルタン星人",
+      "ゼットン",
+      "ブースカ",
+      "ネロンガ"
+    ]
   },
   {
     "id": "bandai-4582770129175",
@@ -5775,7 +6264,16 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ハローキティ",
+      "マイメロディ",
+      "シナモロール",
+      "ポムポムプリン",
+      "ハンギョドン",
+      "ポチャッコ",
+      "バッドばつ丸"
+    ]
   },
   {
     "id": "bandai-4582770129199",
@@ -5810,7 +6308,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "しろうさ＆くろうさ",
+      "ももうさ＆はなうさ",
+      "ストロベリーうさ＆ブルーベリーうさ",
+      "集合（ハート）",
+      "集合（星）"
+    ]
   },
   {
     "id": "bandai-4582770129786",
@@ -5847,7 +6352,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "タコピー",
+      "ハッピーカメラ",
+      "パタパタつばさ",
+      "ふまれるタコピー",
+      "わかんないっピ"
+    ]
   },
   {
     "id": "bandai-4582770129830",
@@ -5950,7 +6462,19 @@
     "q_genders": [
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "1巻",
+      "5巻",
+      "11巻",
+      "16巻",
+      "31巻",
+      "33巻",
+      "44巻",
+      "54巻",
+      "62巻",
+      "65巻"
+    ]
   },
   {
     "id": "bandai-4582770140125",
@@ -5988,7 +6512,15 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ダンス",
+      "じゃ",
+      "ぐうたら",
+      "かき氷",
+      "フラダンス",
+      "お茶"
+    ]
   },
   {
     "id": "bandai-4582770070675",
@@ -6619,7 +7151,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ハローキティ",
+      "マイメロディ",
+      "ポムポムプリン",
+      "シナモロール",
+      "ポチャッコ"
+    ]
   },
   {
     "id": "bandai-4570118197733",
@@ -7486,7 +8025,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "食パン",
+      "目玉焼きトースト",
+      "チョココロネ",
+      "メロンパン",
+      "フランスパン"
+    ]
   },
   {
     "id": "bandai-4570118181503",
@@ -8557,7 +9103,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ちいかわ",
+      "ハチワレ",
+      "うさぎ",
+      "モモンガ",
+      "古本屋"
+    ]
   },
   {
     "id": "bandai-4582769823299",
@@ -8633,7 +9186,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "キリッとメロ",
+      "キリッとタビ",
+      "しょぼんメロ",
+      "にこっとタビ",
+      "メロカー"
+    ]
   },
   {
     "id": "bandai-4570118184634",
@@ -8671,7 +9231,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "スヌーピーA",
+      "スヌーピーB",
+      "スヌーピーC",
+      "オラフ",
+      "ウッドストック"
+    ]
   },
   {
     "id": "bandai-4582769739422",
@@ -8961,7 +9528,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "スポンジ・ボブ（きらきら）",
+      "スポンジ・ボブ（口開け）",
+      "パトリック",
+      "サンディ",
+      "ハロルド"
+    ]
   },
   {
     "id": "bandai-4582769911262",
@@ -9979,7 +10553,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "パンどろぼう（かくれみのじゅつ）",
+      "パンどろぼう（はやあし）",
+      "パンどろぼう（へんしん）",
+      "パンどろぼう（びっくり）",
+      "にせパンどろぼう（とうじょう）"
+    ]
   },
   {
     "id": "bandai-4582769866340",
@@ -10281,7 +10862,13 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ちいかわ",
+      "ハチワレ",
+      "うさぎ",
+      "モモンガ"
+    ]
   },
   {
     "id": "bandai-4570118196545",
@@ -11709,7 +12296,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "てんしっちのたまごっち パールピンク（くりてん）",
+      "たまごっち スケルトン（おやじっち）",
+      "たまごっち クリアピンク（まめっち）",
+      "新種発見!!たまごっち 白・柄（みみっち）",
+      "新種発見!!たまごっち イエロー（ぽちっち）"
+    ]
   },
   {
     "id": "bandai-4570118129611",
@@ -11745,7 +12339,14 @@
     "q_genders": [
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "R35",
+      "BNR34",
+      "BCNR33",
+      "BNR32",
+      "KPGC10/KPGC110"
+    ]
   },
   {
     "id": "bandai-4570118206145",
@@ -11815,7 +12416,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "リラックマ＆まめゴマ",
+      "モノクロブー＆みかんぼうや",
+      "たれぱんだ＆次の日ケロリ",
+      "にゃんにゃんにゃんこ＆ぶるぶるどっぐ",
+      "アフロ犬＆こげぱん"
+    ]
   },
   {
     "id": "bandai-4582769911231",
@@ -11853,7 +12461,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "メンダコ水まんじゅう",
+      "メンダコ桜もち",
+      "サメの苺大福",
+      "ジンベエ桜もち",
+      "みたらしジンベエ",
+      "サメの三色だんご"
+    ]
   },
   {
     "id": "bandai-4582769911538",
@@ -11893,7 +12509,15 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "モリゾー＆キッコロA",
+      "キッコロA",
+      "モリゾーA",
+      "モリゾー＆キッコロB",
+      "キッコロB",
+      "モリゾーB"
+    ]
   },
   {
     "id": "bandai-4582769860621",
@@ -11933,7 +12557,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "DX妖怪ウォッチ",
+      "DX妖怪ウォッチ フミちゃんVer.",
+      "DX妖怪ウォッチU プロトタイプ",
+      "妖怪メダル第1章",
+      "妖怪メダル第2章"
+    ]
   },
   {
     "id": "bandai-4570118205940",
@@ -11972,7 +12603,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ハナ",
+      "リョク",
+      "サクラ",
+      "ラン",
+      "ミン",
+      "ソー"
+    ]
   },
   {
     "id": "bandai-4582769995774",
@@ -12011,7 +12650,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "日向翔陽",
+      "影山飛雄",
+      "月島蛍",
+      "宮侑",
+      "宮治",
+      "北信介"
+    ]
   },
   {
     "id": "bandai-4570118197252",
@@ -12050,7 +12697,15 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "カメラ男A",
+      "カメラ男B",
+      "パトランプ男A",
+      "パトランプ男B",
+      "ポップコーン男",
+      "ジュース男"
+    ]
   },
   {
     "id": "bandai-4582769832642",
@@ -12124,7 +12779,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "走るピーターラビット™",
+      "ラディッシュを食べるピーターラビット™",
+      "たたずむピーターラビット™",
+      "にんじんを抱えるピーターラビット™",
+      "ベンジャミン・バニー™",
+      "あひるのジマイマ™"
+    ]
   },
   {
     "id": "bandai-4582769836558",
@@ -12163,7 +12826,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "鬼太郎",
+      "目玉おやじ",
+      "ねずみ男",
+      "ねこ娘",
+      "ぬりかべ"
+    ]
   },
   {
     "id": "bandai-4582769911477",
@@ -12242,7 +12912,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ラブなめこ",
+      "なめこ",
+      "白なめこ",
+      "マサル",
+      "イチゴなめこ"
+    ]
   },
   {
     "id": "bandai-4570118197955",
@@ -12279,7 +12956,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ぷちきゅあ めっぷる",
+      "ぷちきゅあ みっぷる",
+      "ぷちきゅあ ぱふ",
+      "ぷちきゅあ ふわ",
+      "ぷちきゅあ ぷりるん",
+      "ぷちきゅあ めろろん"
+    ]
   },
   {
     "id": "bandai-4582770095234",
@@ -12318,7 +13003,19 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "インパクトカプセム",
+      "ポッピングミゴチゾウ",
+      "オレンジロックシード",
+      "タカメダル",
+      "サイクロンメモリ",
+      "ジョーカーメモリ",
+      "キバットバット三世",
+      "ライダーパス",
+      "ファイズフォン",
+      "カードデッキ（龍騎）"
+    ]
   },
   {
     "id": "bandai-4570118205483",
@@ -12356,7 +13053,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "白雪姫",
+      "シンデレラ",
+      "ラプンツェル",
+      "ベル",
+      "オーロラ姫"
+    ]
   },
   {
     "id": "bandai-4582769979019",
@@ -12391,7 +13095,12 @@
     "q_genders": [
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "スライム",
+      "スライムつむり",
+      "はぐれメタル"
+    ]
   },
   {
     "id": "bandai-4582770071092",
@@ -13671,7 +14380,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ハローキティ",
+      "マイメロディ",
+      "クロミ",
+      "ポムポムプリン",
+      "ポチャッコ",
+      "ハンギョドン"
+    ]
   },
   {
     "id": "bandai-4570118187284",
@@ -14138,7 +14855,24 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "兎田ぺこら",
+      "不知火フレア",
+      "白銀ノエル",
+      "宝鐘マリン",
+      "角巻わため",
+      "常闇トワ",
+      "姫森ルーナ",
+      "雪花ラミィ",
+      "桃鈴ねね",
+      "獅白ぼたん",
+      "尾丸ポルカ",
+      "ラプラス・ダークネス",
+      "鷹嶺ルイ",
+      "博衣こより",
+      "風真いろは"
+    ]
   },
   {
     "id": "bandai-4570118184399",
@@ -14177,7 +14911,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ミッキーマウス（おばけデザイン）",
+      "くまのプーさん",
+      "チップ",
+      "デール",
+      "ゼロ"
+    ]
   },
   {
     "id": "bandai-4570118187208",
@@ -14754,7 +15495,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "シナモロール",
+      "マイメロディ",
+      "ハローキティ",
+      "ポムポムプリン",
+      "クロミ"
+    ]
   },
   {
     "id": "bandai-4582769809712",
@@ -15627,7 +16375,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "リサA",
+      "ガスパールA",
+      "リサB",
+      "ガスパールB",
+      "リサとガスパール"
+    ]
   },
   {
     "id": "bandai-4570118183651",
@@ -15747,7 +16502,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "カビゴン",
+      "ピカチュウ",
+      "コイル",
+      "ゲンガー",
+      "スターミー"
+    ]
   },
   {
     "id": "bandai-4570118184252",
@@ -15824,7 +16586,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "くろうさ（シュガーバニーズ）",
+      "しろうさ（シュガーバニーズ）",
+      "ポムポムプリン",
+      "ハローキティ",
+      "コロコロクリリン"
+    ]
   },
   {
     "id": "bandai-4570118184597",
@@ -15904,7 +16673,17 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "お文具A",
+      "お文具B",
+      "プリンさん",
+      "名も無き者",
+      "猫さん",
+      "ゼリーさん",
+      "子猫さん",
+      "耳"
+    ]
   },
   {
     "id": "bandai-4570118187185",
@@ -15943,7 +16722,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ラビッドラビット",
+      "ミスターボタン",
+      "マンチマンチ",
+      "ギャップトゥース",
+      "グリングリン"
+    ]
   },
   {
     "id": "tarts-y088759",
@@ -16488,7 +17274,13 @@
       "male"
     ],
     "tags_auto": false,
-    "jan_checked": true
+    "jan_checked": true,
+    "lineup_names": [
+      "ランクルス",
+      "サニーゴ（ガラルのすがた）",
+      "ユキハミ",
+      "シャンデラ"
+    ]
   },
   {
     "id": "tarts-y905711",
@@ -16939,7 +17731,14 @@
       "male"
     ],
     "tags_auto": false,
-    "jan_checked": true
+    "jan_checked": true,
+    "lineup_names": [
+      "プリン",
+      "イーブイ",
+      "ジラーチ",
+      "ヌメラ",
+      "ニャオハ"
+    ]
   },
   {
     "id": "tarts-y909207",
@@ -17311,7 +18110,13 @@
       "female"
     ],
     "tags_auto": false,
-    "jan_checked": true
+    "jan_checked": true,
+    "lineup_names": [
+      "〈BEAMS BOY〉ロゴバッグ",
+      "〈BEAMS BOY〉ロゴキャップ",
+      "〈BEAMS BOY〉サインロゴスニーカー",
+      "復刻!〈BEAMS BOY〉ロゴショッパー"
+    ]
   },
   {
     "id": "tarts-y912153",
@@ -17352,7 +18157,14 @@
       "male"
     ],
     "tags_auto": false,
-    "jan_checked": true
+    "jan_checked": true,
+    "lineup_names": [
+      "ピカチュウ",
+      "ポッチャマ",
+      "ヒバニー",
+      "マホミル",
+      "プリン"
+    ]
   },
   {
     "id": "tarts-y907104",
@@ -19971,7 +20783,17 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "風スライム",
+      "岩スライム",
+      "雷スライム",
+      "変異雷スライム",
+      "草スライム",
+      "水スライム",
+      "炎スライム",
+      "氷スライム"
+    ]
   },
   {
     "id": "bandai-4582769888403",
@@ -20167,7 +20989,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ミッキーマウス",
+      "ミニーマウス",
+      "ディズニー スティッチ",
+      "エンジェル",
+      "ジャック",
+      "ゼロ"
+    ]
   },
   {
     "id": "bandai-4570118184436",
@@ -20207,7 +21037,13 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ミッキーマウス",
+      "ドナルドダック",
+      "ディズニー スティッチ",
+      "オラフ"
+    ]
   },
   {
     "id": "bandai-4570118185198",
@@ -20246,7 +21082,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "チャターフォン（クラシック）",
+      "バイリンガル・ゲームコントローラー",
+      "コーンポッパー",
+      "コーヒーカップ歯固め",
+      "チャターフォン"
+    ]
   },
   {
     "id": "bandai-4570118196217",
@@ -20365,7 +21208,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ホイポイカプセル",
+      "ブルマのバイク",
+      "大猿悟空",
+      "カリン",
+      "仙豆"
+    ]
   },
   {
     "id": "bandai-4582769928154",
@@ -23057,7 +23907,13 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "うしわか丸",
+      "ネコクジラ",
+      "狂乱のネコ",
+      "メタルネコ"
+    ]
   },
   {
     "id": "bandai-4570118186522",
@@ -23379,7 +24235,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "スティーブ",
+      "アレックス",
+      "TNT",
+      "クリーパー",
+      "エンダーマン"
+    ]
   },
   {
     "id": "bandai-4570118184894",
@@ -23456,7 +24319,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "うずまきナルト",
+      "うちはサスケ",
+      "春野サクラ",
+      "はたけカカシ",
+      "我愛羅"
+    ]
   },
   {
     "id": "bandai-4582769792977",
@@ -24013,7 +24883,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "lineup_names": [
+      "ミッキーマウス",
+      "ドナルドダック",
+      "ディズニー スティッチ",
+      "くまのプーさん",
+      "ロッツォ",
+      "エイリアン"
+    ]
   },
   {
     "id": "bandai-4582769995132",
@@ -24439,7 +25317,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "lineup_names": [
+      "けろけろけろっぴ",
+      "ハローキティ",
+      "ポムポムプリン",
+      "クロミ",
+      "マイメロディ"
+    ]
   },
   {
     "id": "bandai-4570118186720",
@@ -24480,7 +25365,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "lineup_names": [
+      "ポチャッコ",
+      "ハローキティ",
+      "マイメロディ",
+      "クロミ",
+      "ポムポムプリン",
+      "シナモロール"
+    ]
   },
   {
     "id": "bandai-4570118186928",
@@ -24521,7 +25414,17 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "lineup_names": [
+      "ルビー",
+      "サフィー",
+      "ガーネット",
+      "ペリドット",
+      "ダイアナ",
+      "ルナ",
+      "ルーア",
+      "ジャスパー"
+    ]
   },
   {
     "id": "bandai-4570118187123",
@@ -24602,7 +25505,21 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "lineup_names": [
+      "PAC-MAN（Round ver.）",
+      "BLINKY（Round ver.）",
+      "PINKY（Round ver.）",
+      "INKY（Round ver.）",
+      "CLYDE（Round ver.）",
+      "TURN-TO-BLUE（Round ver.）",
+      "PAC-MAN（Dot ver.）",
+      "BLINKY（Dot ver.）",
+      "PINKY（Dot ver.）",
+      "INKY（Dot ver.）",
+      "CLYDE（Dot ver.）",
+      "TURN-TO-BLUE（Dot ver.）"
+    ]
   },
   {
     "id": "bandai-4570118196699",
@@ -26303,7 +27220,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "lineup_names": [
+      "クロミ",
+      "マイメロディ",
+      "ポチャッコ",
+      "ハローキティ",
+      "ポムポムプリン"
+    ]
   },
   {
     "id": "bandai-4582769776267",
@@ -26460,7 +27384,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "lineup_names": [
+      "佳ケンジ",
+      "キング・カズマ Ver.2",
+      "ラブマシーン",
+      "マンスケ",
+      "ボクのアバター"
+    ]
   },
   {
     "id": "bandai-4570118184412",
@@ -26540,7 +27471,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "lineup_names": [
+      "ジェシー",
+      "ブルズアイ",
+      "フォーキー",
+      "リリーパッド",
+      "スマーティー・パンツ"
+    ]
   },
   {
     "id": "bandai-4570118187000",
@@ -26580,7 +27518,20 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "lineup_names": [
+      "じゃぱぱ",
+      "のあ",
+      "たっつん",
+      "ゆあんくん",
+      "シヴァ",
+      "どぬく",
+      "うり",
+      "えと",
+      "ヒロ",
+      "なおきり",
+      "もふ"
+    ]
   },
   {
     "id": "bandai-4570118206626",
@@ -30917,7 +31868,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "lineup_names": [
+      "デリシャスチーズバーガー",
+      "ストロベリーカーニバル",
+      "チョコレートショートケーキ",
+      "ストロベリーショートケーキ",
+      "トロピカルカーニバル",
+      "デリシャステリヤキバーガー"
+    ]
   },
   {
     "id": "bandai-4570118196064",
@@ -30958,7 +31917,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "lineup_names": [
+      "ぜんまいざむらい",
+      "ずきんちゃん",
+      "ぼたんちゃん",
+      "必笑七色だんご剣",
+      "だんごやおばば",
+      "まっちゃ"
+    ]
   },
   {
     "id": "bandai-4570118203366",
@@ -31503,7 +32470,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "lineup_names": [
+      "ピギーちゃん（ON）",
+      "ピギーちゃん（OFF）",
+      "ベアーくん",
+      "ミアちゃん",
+      "ガウくん",
+      "リリーちゃん"
+    ]
   },
   {
     "id": "bandai-4570118182128",
@@ -31581,7 +32556,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "lineup_names": [
+      "ホイッピA",
+      "ホイッピB",
+      "ラッピA",
+      "ラッピB",
+      "ホイッピC",
+      "ラッピC"
+    ]
   },
   {
     "id": "bandai-4570118183798",
@@ -31657,7 +32640,17 @@
     "q_genders": [
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "lineup_names": [
+      "雪花ラミィ",
+      "桃鈴ねね",
+      "獅白ぼたん",
+      "尾丸ポルカ",
+      "ラプラス・ダークネス",
+      "鷹嶺ルイ",
+      "博衣こより",
+      "風真いろは"
+    ]
   },
   {
     "id": "bandai-4570118184696",
@@ -37189,7 +38182,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "くろ",
+      "ちゃはち",
+      "さび",
+      "ぶち",
+      "ろしあんぶるー",
+      "きじとら"
+    ]
   },
   {
     "id": "qualia-2145",
@@ -37266,7 +38267,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "セキセイインコ",
+      "シマエナガ",
+      "フクロウ",
+      "ハシビロコウ",
+      "ワシ"
+    ]
   },
   {
     "id": "qualia-2107",
@@ -37303,7 +38311,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "リスザル",
+      "オランウータン",
+      "ニホンザル",
+      "チンパンジー",
+      "ワオキツネザル"
+    ]
   },
   {
     "id": "qualia-2144",
@@ -37344,7 +38359,15 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ホトケアカバネ",
+      "リトルハナガシラ",
+      "シボリオオチチ",
+      "カクレモモジリ",
+      "スモモノウチ",
+      "ベニキノコビト"
+    ]
   },
   {
     "id": "qualia-2133",
@@ -37380,7 +38403,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ミッフィー",
+      "くまちゃん",
+      "ボリス",
+      "グランティ",
+      "メラニー"
+    ]
   },
   {
     "id": "qualia-2131",
@@ -37417,7 +38447,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "バム",
+      "タルト",
+      "ポポ",
+      "ポムポムプリン",
+      "ハローキティ",
+      "シナモロール"
+    ]
   },
   {
     "id": "qualia-2130",
@@ -37455,7 +38493,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "アーニー",
+      "エルモ",
+      "バート",
+      "カウント伯爵",
+      "スナッフィー"
+    ]
   },
   {
     "id": "qualia-2128",
@@ -37495,7 +38540,15 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ユウバリウリホウバリ",
+      "シノビイエコビト",
+      "カクレケダマ",
+      "ノミビョウタン",
+      "ヒヨッコマネッコ",
+      "ハルゴロモ"
+    ]
   },
   {
     "id": "qualia-2127",
@@ -37535,7 +38588,15 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "カクレモモジリ",
+      "ベニキノコビト",
+      "クサマダラオオコビト",
+      "リトルハナガシラ",
+      "シボリオオチチ",
+      "スモモノウチ"
+    ]
   },
   {
     "id": "qualia-2126",
@@ -37573,7 +38634,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "サファイヤダイコウブツ",
+      "ルビーダイコウブツ",
+      "ダイヤダイコウブツ",
+      "イシノケッショウ",
+      "ターコイズダイコウブツ"
+    ]
   },
   {
     "id": "qualia-2125",
@@ -37613,7 +38681,15 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "アラシクロバネ",
+      "イチゴクレナイ",
+      "マモリコモリ",
+      "タカラコガネ",
+      "オオヒレカワコビト",
+      "シボリオオチチ"
+    ]
   },
   {
     "id": "qualia-2124",
@@ -37687,7 +38763,15 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "黄パンツ",
+      "赤パンツ",
+      "水パンツ",
+      "白パンツ",
+      "緑パンツ",
+      "黒パンツ"
+    ]
   },
   {
     "id": "qualia-2122",
@@ -37726,7 +38810,15 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ぷりぷりうちゅうじん",
+      "ぷりぷりうちゅうじん（もも）",
+      "おしりうさぎ",
+      "カチカチうちゅうじん",
+      "いいおしり",
+      "ぷんち"
+    ]
   },
   {
     "id": "qualia-2121",
@@ -37765,7 +38857,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "モンチッチくん",
+      "ハローキティ",
+      "ベビチッチくん",
+      "モンチッチちゃん",
+      "ベビチッチちゃん"
+    ]
   },
   {
     "id": "qualia-2120",
@@ -37805,7 +38904,15 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "カクレモモジリ",
+      "スモモノウチ",
+      "リトルハナガシラ",
+      "ホトケアカバネ",
+      "シボリオオチチ",
+      "ベニキノコビト"
+    ]
   },
   {
     "id": "qualia-2119",
@@ -37843,7 +38950,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ミカンキッケ",
+      "スモモノウチ",
+      "ハイブスマダラ",
+      "アラシクロバネ",
+      "カクレケダマ"
+    ]
   },
   {
     "id": "qualia-2118",
@@ -37878,7 +38992,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ギャルネコだよ",
+      "いーネッ♪",
+      "じゃ、勝ち",
+      "ごン",
+      "もうしわけニン",
+      "カニぞう"
+    ]
   },
   {
     "id": "qualia-2117",
@@ -37915,7 +39037,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "バターサンドクッキーのくまちゃん",
+      "カラフルチョコレートクッキーのくまちゃん",
+      "チョコチップクッキーのくまちゃん",
+      "いちごジャムクッキーのくまちゃん",
+      "プレッツェルクッキーのくまちゃん"
+    ]
   },
   {
     "id": "qualia-2116",
@@ -37950,7 +39079,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "くたくま",
+      "くたくま（しょんぼり）",
+      "くたくま（チェンソー）",
+      "うるるん",
+      "うるるん（うちわ）",
+      "うるるん（だらだら）"
+    ]
   },
   {
     "id": "qualia-2115",
@@ -38023,7 +39160,16 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "虚無",
+      "休みなし",
+      "ぜんぶわたしが悪い",
+      "聞いてもすぐ忘れる！",
+      "人に会いたくなし",
+      "寝てもねむい寝ても",
+      "仕事は金のため やりがいなんて一切ない"
+    ]
   },
   {
     "id": "qualia-2129",
@@ -38137,7 +39283,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ステゴサウルス（生クリーム）",
+      "ステゴサウルス（苺）",
+      "ステゴサウルス（バナナ）",
+      "ステゴサウルス（チョコ）",
+      "ステゴサウルス（抹茶）"
+    ]
   },
   {
     "id": "qualia-2112",
@@ -38177,7 +39330,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "スコヤカ",
+      "カンムリ",
+      "ズツウ",
+      "ツヨイ",
+      "カワイイ"
+    ]
   },
   {
     "id": "qualia-2111",
@@ -38215,7 +39375,17 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "瓶ビール",
+      "泡盛",
+      "焼酎",
+      "泥酔",
+      "ワイン",
+      "テキーラ",
+      "ほろ酔い",
+      "のんべえ"
+    ]
   },
   {
     "id": "qualia-2110",
@@ -38255,7 +39425,15 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "おどろくはにわ",
+      "セクシーはにわ",
+      "いねむりはにわ",
+      "おちゃめなはにわ",
+      "かんがえるはにわ",
+      "ひとやすみはにわ"
+    ]
   },
   {
     "id": "qualia-2109",
@@ -38292,7 +39470,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "友達の猫",
+      "実家の猫の兄弟",
+      "郵便局の猫",
+      "喫茶店の猫",
+      "花屋さんの猫"
+    ]
   },
   {
     "id": "qualia-2108",
@@ -38332,7 +39517,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "「たのしい」ひよこ錠",
+      "「あんしん」ぺんぎん錠",
+      "「おだやか」ぱんだ錠",
+      "「やさしさ」うさぎ錠",
+      "「げんき」くま錠"
+    ]
   },
   {
     "id": "qualia-2143",
@@ -38372,7 +39564,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ドリンク",
+      "リルモス",
+      "モスチキン",
+      "モスバーガー",
+      "オニポテ"
+    ]
   },
   {
     "id": "qualia-2142",
@@ -38409,7 +39608,13 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "おにぎり",
+      "ライチ",
+      "肉まん",
+      "あんず"
+    ]
   },
   {
     "id": "qualia-2141",
@@ -38446,7 +39651,15 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "だいちょう",
+      "しんぞう",
+      "い",
+      "だいのう",
+      "かんぞう",
+      "はい"
+    ]
   },
   {
     "id": "qualia-2140",
@@ -38484,7 +39697,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ツイストロール",
+      "ベーグル",
+      "チョコチップメロンパン",
+      "バタートースト",
+      "カニのぱん",
+      "ウインナーロール"
+    ]
   },
   {
     "id": "qualia-2139",
@@ -38520,7 +39741,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "うめ",
+      "しそごま",
+      "チャーハン",
+      "枝豆",
+      "煮たまご",
+      "チキンライス"
+    ]
   },
   {
     "id": "qualia-2138",
@@ -38558,7 +39787,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "インプラント",
+      "矯正",
+      "金歯",
+      "ハミガキ粉つき",
+      "デンタルフロス",
+      "ハブラシ"
+    ]
   },
   {
     "id": "qualia-2137",
@@ -38594,7 +39831,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ランチクロスA",
+      "ランチクロスB",
+      "ランチクロスC",
+      "巾着A",
+      "巾着B",
+      "巾着C"
+    ]
   },
   {
     "id": "qualia-2136",
@@ -38631,7 +39876,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "クリスマスツリー",
+      "サンタクロース",
+      "リース",
+      "プレゼントボックス",
+      "ジンジャークッキー"
+    ]
   },
   {
     "id": "qualia-2135",
@@ -38669,7 +39921,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "招き猫",
+      "だるま",
+      "ひょうたん",
+      "御守り",
+      "めで鯛",
+      "地蔵菩薩"
+    ]
   },
   {
     "id": "qualia-2106",
@@ -38709,7 +39969,15 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ホトケアカバネ",
+      "リトルハナガシラ",
+      "シボリオオチチ",
+      "カクレモモジリ",
+      "スモモノウチ",
+      "ベニキノコビト"
+    ]
   },
   {
     "id": "qualia-2105",
@@ -38749,7 +40017,13 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ナンヨウハギとしろくま",
+      "オーストラリアガマグチヨタカとねこ",
+      "クロウミウマととかげ",
+      "ホワイトタイガーとえびふらいのしっぽ"
+    ]
   },
   {
     "id": "qualia-2073",
