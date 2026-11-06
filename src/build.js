@@ -1232,8 +1232,23 @@ write("data/shops.json", JSON.stringify(SHOPS.map((x) => [x.id, x.name, x.pref, 
   // 紹介する新作の候補：画像があり、今月・来月発売。日付で順番に回す（同じ商品が続かないように）
   const pool = items.filter((it) => it.image && it.release >= thisMonth).sort((a, b) => (a.id < b.id ? -1 : 1));
   const dayNo = Math.floor(Date.UTC(nowJST.getUTCFullYear(), nowJST.getUTCMonth(), d) / 864e5);
-  const picks = pool.length ? [0, 1, 2, 3].map((k) => pool[(dayNo * 2 + k) % pool.length]) : [];
-  write("data/x.json", JSON.stringify({ generated: new Date().toISOString(), today: today, week: { label: WEEK.label, from: WEEK.range.split("〜")[0], to: WEEK.range.split("〜")[1], count: week.length, items: week.slice(0, 12).map(pack) }, picks: picks.map(pack), site: SITE_URL }));
+  // ユーザーの希望：サンリオ・たまごっち・ディズニー・めじるし・チャーム系を主に紹介する
+  const FAV_RE = /サンリオ|ハローキティ|キティ|マイメロ|クロミ|シナモロール|ポムポムプリン|ポチャッコ|ハンギョドン|けろけろけろっぴ|リトルツインスターズ|キキ&ララ|キキララ|タキシードサム|バッドばつ丸|ばつ丸|ぐでたま|あひるのペックル|たまごっち|ディズニー|ミッキー|ミニー|ドナルド|プー|スティッチ|ピクサー|トイ・ストーリー|ラプンツェル|アナと雪|プリンセス|ツイステ|めじるし|チャーム|Sanrio|Disney|Tamagotchi/i;
+  const charmIds = new Set(inType("charm").map((it) => it.id));
+  const isFav = (it) => charmIds.has(it.id) || FAV_RE.test([it.name, it.name_en, it.title, (it.lineup_names || []).join(" ")].join(" "));
+  // 種類ごとに順番に回す（めじるしばかりにならないように）
+  const FAV_CATS = [/サンリオ|ハローキティ|キティ|マイメロ|クロミ|シナモロール|ポムポムプリン|ポチャッコ|ハンギョドン|けろけろけろっぴ|キキ&ララ|キキララ|タキシードサム|ばつ丸|ぐでたま|Sanrio/i, /たまごっち|Tamagotchi/i, /ディズニー|ミッキー|ミニー|ドナルド|プー|スティッチ|ピクサー|トイ・ストーリー|ラプンツェル|アナと雪|プリンセス|ツイステ|Disney/i, /めじるし/, null];
+  const recent = items.filter((it) => it.image && it.release >= new Date(Date.UTC(nowJST.getUTCFullYear(), nowJST.getUTCMonth() - 1, 1)).toISOString().slice(0, 7) && isFav(it)).sort((a, b) => (a.id < b.id ? -1 : 1));
+  const txt = (it) => [it.name, it.name_en, it.title, (it.lineup_names || []).join(" ")].join(" ");
+  const buckets = FAV_CATS.map((re, i) => recent.filter((it) => re ? re.test(txt(it)) : !FAV_CATS.slice(0, 4).some((r) => r.test(txt(it))))).filter((b) => b.length);
+  const picks = [];
+  if (buckets.length) for (let k = 0; picks.length < 4 && k < 20; k++) {
+    const slot = dayNo * 2 + k, b = buckets[slot % buckets.length], it = b[Math.floor(slot / buckets.length) % b.length];
+    if (!picks.includes(it)) picks.push(it);
+  }
+  if (picks.length < 4) for (let k = 0; picks.length < 4 && k < pool.length; k++) { const it = pool[(dayNo * 2 + k) % pool.length]; if (!picks.includes(it)) picks.push(it); }
+  const favIds = items.filter(isFav).map((it) => it.id);
+  write("data/x.json", JSON.stringify({ generated: new Date().toISOString(), today: today, week: { label: WEEK.label, from: WEEK.range.split("〜")[0], to: WEEK.range.split("〜")[1], count: week.length, items: week.slice(0, 12).map(pack) }, picks: picks.map(pack), fav_ids: favIds, site: SITE_URL }));
 }
 write("_headers", `/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n/assets/*\n  Cache-Control: public, max-age=31536000, immutable\n/images/*\n  Cache-Control: public, max-age=604800\n  Access-Control-Allow-Origin: *\n/data/*\n  Cache-Control: public, max-age=300\n  Access-Control-Allow-Origin: *\n`);
 
