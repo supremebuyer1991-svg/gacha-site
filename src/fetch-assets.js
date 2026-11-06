@@ -45,7 +45,8 @@ function pickImage(html, pageUrl) {
     || html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i);
   let src = og && og[1];
   if (!src || /logo|ogp_default|noimage/i.test(src)) {
-    const m = html.match(/<img[^>]+src=["']([^"']+\/img\/model\/[^"']+\.(?:jpg|jpeg|png|webp))["']/i);
+    const m = html.match(/<img[^>]+src=["']([^"']+\/img\/model\/[^"']+\.(?:jpg|jpeg|png|webp))["']/i)
+      || html.match(/<img[^>]+src=["'](https:\/\/www\.qualia-45\.jp\/media\/[^"']+\.(?:jpg|jpeg|png|webp)[^"']*)["']/i);
     src = m && m[1];
   }
   return src ? new URL(src, pageUrl).href : null;
@@ -294,6 +295,7 @@ async function makeThumbs() {
   fs.mkdirSync(path.join(ROOT, "images"), { recursive: true });
   await require("./import-schedule.js")();
   try { await require("./import-takara.js")(); } catch (e) { console.log(`⚠ タカラトミーアーツの取り込みに失敗しました（${e.message}）`); }
+  try { await require("./import-others.js")(); } catch (e) { console.log(`⚠ ほかのメーカーの取り込みに失敗しました（${e.message}）`); }
   items = read("items.json");
   // 新しく入った商品に診断用のタグを仮に付ける（毎晩Claudeが見直す）
   const tagged = require("./auto-tags.js")(items, site.quiz_groups);

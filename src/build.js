@@ -316,6 +316,10 @@ const janOf = (it) => {
 // メルカリアンバサダーのリンク（公式ツールで作ったものをそのまま使う。書きかえない）
 const MERCARI_AF = (readJSON("mercari-links.json", { links: [] }) || { links: [] }).links || [];
 const KW_ALIAS = { "ポケモン": /ポケモン|ポケットモンスター|ピカチュウ/, "ワンピース": /ワンピース|ONE PIECE/i, "ハローキティ": /ハローキティ|キティ/, "マイメロディ": /マイメロ/, "ジブリ": /ジブリ|トトロ|千と千尋|魔女の宅急便/, "めじるしアクセサリー": /めじるし/ };
+// 商品ごとのメルカリリンク：メルカリの公式ツールで1件ずつ作って、ツールが出したものと同じだと確かめた商品のID
+const MERCARI_ITEM_IDS = new Set((readJSON("mercari-item-ids.json", { ids: [] }) || { ids: [] }).ids || []);
+const mercariQ = (it) => `${it.name.replace(/【[^】]*】/g, "").trim()} ガチャ`;
+const mercariItemUrl = (it) => MERCARI_ITEM_IDS.has(it.id) ? "https://jp.mercari.com/search?afid=1350793153&" + new URLSearchParams({ keyword: mercariQ(it), status: "on_sale" }).toString() : "";
 const mercariAf = (it) => { const tx = [it.name, (it.lineup_names || []).join(" ")].join(" "); const hit = MERCARI_AF.find(([k]) => (KW_ALIAS[k] || new RegExp(k)).test(tx)); return hit ? { kw: hit[0], url: hit[1] } : null; };
 // 通販・フリマで探すリンク（JANがあればJANで、なければ商品名で）
 const shopLinks = (it) => {
@@ -324,9 +328,9 @@ const shopLinks = (it) => {
   const a = affSearch(q);
   const ys = `https://shopping.yahoo.co.jp/search?p=${encodeURIComponent(q)}`;
   const yahoo = site.yahoo_vc_sid && site.yahoo_vc_pid ? `https://ck.jp.ap.valuecommerce.com/servlet/referral?sid=${site.yahoo_vc_sid}&pid=${site.yahoo_vc_pid}&vc_url=${encodeURIComponent(ys)}` : ys;
-  const maf = mercariAf(it);
-  const mercari = maf ? maf.url : `https://jp.mercari.com/search?keyword=${encodeURIComponent(`${name} ガチャ`)}&status=on_sale`;
-  return { jan, rakuten: a.rakuten, amazon: a.amazon, yahoo, mercari, mercariLabel: maf ? `メルカリ（${maf.kw}）` : "メルカリ", mercariAf: !!maf };
+  const mi = mercariItemUrl(it), maf = mi ? null : mercariAf(it);
+  const mercari = mi ? mi : maf ? maf.url : `https://jp.mercari.com/search?keyword=${encodeURIComponent(`${name} ガチャ`)}&status=on_sale`;
+  return { jan, rakuten: a.rakuten, amazon: a.amazon, yahoo, mercari, mercariLabel: maf ? `メルカリ（${maf.kw}）` : "メルカリ", mercariAf: !!(mi || maf) };
 };
 
 // 人気シリーズだけのページ（/series/〇〇.html）
@@ -1271,6 +1275,7 @@ write("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>
 ${pages.filter(([, r]) => r !== "search.html").map(urlEntry).join("\n")}
 </urlset>
 `);
+write("data/mercari-item-ids.json", JSON.stringify({ ids: [...MERCARI_ITEM_IDS] }));
 write("x-img.html", fs.readFileSync(path.join(__dirname, "tpl", "x-img.html"), "utf8").replace("__FONTS__", FONTS));
 if (fs.existsSync(path.join(ROOT, "brand", "logo-lab.html"))) write("logo-lab.html", fs.readFileSync(path.join(ROOT, "brand", "logo-lab.html"), "utf8"));
 write("robots.txt", `User-agent: *\nAllow: /\nSitemap: ${SITE_URL}/sitemap.xml\n`);
