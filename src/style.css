@@ -993,7 +993,3 @@ body { font-variant-numeric: tabular-nums lining-nums; }
 em.rel-st { padding: 2px 8px; border-radius: 999px; }
 .rel-now { background: #ff5c8a; color: #fff !important; }
 .rel-soon { background: #e8f3ff; color: #1f6fd1 !important; }
-.share-btns { display: inline-flex; gap: 6px; flex-wrap: wrap; }
-.share { display: inline-flex; align-items: center; padding: 8px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; color: #fff; text-decoration: none; }
-.share-x { background: #111; }
-.share-line { background: #06c755; }
