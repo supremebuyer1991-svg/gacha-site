@@ -4,6 +4,8 @@ name: サイトを公開
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - "data/social-state.json"
   workflow_dispatch:
     inputs:
       backfill:
@@ -62,6 +64,12 @@ jobs:
         run: node src/build.js
         env:
           SITE_URL: https://gachapla.com
+
+      - name: SNS（Threads・Instagram・Pinterest）用の画像を作る
+        continue-on-error: true
+        run: |
+          npm install --no-save --no-package-lock sharp@0.33.5 > /dev/null 2>&1 || true
+          node src/social-img.js
 
       - name: Cloudflare の在庫データベースを準備
         id: d1

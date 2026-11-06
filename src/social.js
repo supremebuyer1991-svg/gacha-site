@@ -111,10 +111,13 @@ async function igPost(tok, caption, ids) {
 
   if (MODE === "evening") {
     const m = x.morning || {};
-    const pool = (m.active ? m.items || [] : []).concat((x.week && x.week.items) || []);
-    const pick = async (name) => { const done = recent(name); const out = []; for (const it of pool) { if (out.length >= 4) break; if (!it || done[it.id] || out.some((o) => o.id === it.id)) continue; if (await imgOk(it.id)) out.push(it); } return out; };
-    const cat = m.active ? m.category : "今週発売";
-    const q = m.active ? `${SITE}/?q=${encodeURIComponent(m.category)}` : `${SITE}/week`;
+    const fromPool = async (name, pool) => { const done = recent(name); const out = []; for (const it of pool) { if (out.length >= 4) break; if (!it || done[it.id] || out.some((o) => o.id === it.id)) continue; if (await imgOk(it.id)) out.push(it); } return out; };
+    // 朝のテーマ（サンリオ・ディズニーなど）で3つ以上そろえばそれ、だめなら今週発売
+    let cat = "今週発売", q = `${SITE}/week`, themed = false;
+    const pick = async (name) => {
+      if (m.active) { const L = await fromPool(name, m.items || []); if (L.length >= 3) { cat = m.category; q = `${SITE}/?q=${encodeURIComponent(m.category)}`; themed = true; return L; } }
+      cat = "今週発売"; q = `${SITE}/week`; themed = false; return fromPool(name, (x.week && x.week.items) || []);
+    };
     if (thSecret || DRY) {
       const L = await pick("threads");
       if (L.length >= 2) {
@@ -126,7 +129,7 @@ async function igPost(tok, caption, ids) {
     if (igSecret || DRY) {
       const L = await pick("instagram");
       if (L.length >= 2) {
-        const tags = ["#ガチャガチャ", "#ガチャ", "#カプセルトイ", "#ガシャポン", "#新作ガチャ", "#ガチャ活", m.active && m.tag ? m.tag : "#今週発売"];
+        const tags = ["#ガチャガチャ", "#ガチャ", "#カプセルトイ", "#ガシャポン", "#新作ガチャ", "#ガチャ活", themed && m.tag ? m.tag : "#今週発売"];
         const cap = [`✨今日の${cat}ガチャ${L.length}選`, ``, ...L.map((it, i) => `${i + 1}. ${cleanName(it.name)}\n　1回${it.price}円・全${it.lineup}種｜${relText(it)}`), ``, `発売日・ラインナップ・近くの取扱店は、プロフィールのリンク（gachapla.com）から検索できます🪐`, `保存しておくと、ガチャ屋さんで見返せます📌`, ``, [...new Set(tags)].join(" ")].join("\n");
         try { const tok = await refresh("instagram", igSecret, tokenOf("instagram", igSecret), "https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token="); await igPost(tok, cap.slice(0, 2100), L.map((i) => i.id)); for (const it of L) recent("instagram")[it.id] = today; changed = true; log("Instagram：4選を投稿", cat); }
         catch (e) { log("⚠ Instagram の投稿に失敗", e.message); }

@@ -13,13 +13,17 @@ const bg = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" hei
 <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff1f6"/><stop offset="1" stop-color="#eef6ff"/></linearGradient></defs>
 <rect width="${W}" height="${H}" fill="url(#g)"/>
 <rect x="${(W - CARD) / 2}" y="60" width="${CARD}" height="${CARD}" rx="44" fill="#ffffff"/>
-<text x="${W / 2}" y="${H - 170}" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif" font-weight="700" font-size="58"><tspan fill="#ff4f7b">GACHA&#160;</tspan><tspan fill="#3aa0ff">PLANET</tspan></text>
+<text x="${W / 2 - 12}" y="${H - 170}" text-anchor="end" font-family="DejaVu Sans, Arial, sans-serif" font-weight="700" font-size="58" fill="#ff4f7b">GACHA</text><text x="${W / 2 + 12}" y="${H - 170}" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" font-weight="700" font-size="58" fill="#3aa0ff">PLANET</text>
 <text x="${W / 2}" y="${H - 100}" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif" font-weight="700" font-size="34" fill="#6b7194">gachapla.com</text>
 </svg>`);
 (async () => {
   fs.mkdirSync(OUT, { recursive: true });
-  const list = items.filter((it) => (it.release || "") >= from && fs.existsSync(path.join(ROOT, "images", `${it.id}.webp`)))
-    .sort((a, b) => (b.release || "").localeCompare(a.release || "")).slice(0, 400);
+  // X・SNSで使う商品（x.json のまとめ・注目・今週・来週）は発売月が古くても必ず作る
+  const want = new Set();
+  try { const x = JSON.parse(fs.readFileSync(path.join(ROOT, "dist", "data", "x.json"), "utf8")); for (const k of ["morning", "week", "next_week", "new_info"]) for (const it of (x[k] && x[k].items) || []) want.add(it.id); for (const it of x.picks || []) want.add(it.id); } catch (e) {}
+  const has = (it) => fs.existsSync(path.join(ROOT, "images", `${it.id}.webp`));
+  const list = [...items.filter((it) => want.has(it.id) && has(it)),
+    ...items.filter((it) => !want.has(it.id) && (it.release || "") >= from && has(it)).sort((a, b) => (b.release || "").localeCompare(a.release || "")).slice(0, 300)];
   let n = 0;
   for (const it of list) {
     const out = path.join(OUT, `${it.id}.jpg`);
@@ -27,7 +31,7 @@ const bg = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" hei
       // 白い余白を切ってから、カードの中にできるだけ大きく
       const photo = await sharp(path.join(ROOT, "images", `${it.id}.webp`)).flatten({ background: "#ffffff" }).trim({ background: "#ffffff", threshold: 12 })
         .resize(CARD - 60, CARD - 60, { fit: "contain", background: "#ffffff" }).toBuffer();
-      await sharp(bg).composite([{ input: photo, left: (W - (CARD - 60)) / 2, top: 90 }]).jpeg({ quality: 80, mozjpeg: true }).toFile(out);
+      await sharp(bg).composite([{ input: photo, left: (W - (CARD - 60)) / 2, top: 90 }]).jpeg({ quality: 80 }).toFile(out);
       n++;
     } catch (e) { console.log(`⚠ ${it.id}: ${e.message}`); }
   }

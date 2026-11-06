@@ -1,0 +1,40 @@
+# Threads・Instagram（ガチャ用アカウント）への自動投稿
+# 朝 8:07（Threads：今日の注目ガチャ）と 夜 20:37（Threads と Instagram：今日のテーマのガチャ4選）
+name: SNSに投稿
+
+on:
+  schedule:
+    - cron: "7 23 * * *"   # 日本時間 8:07
+    - cron: "37 11 * * *"  # 日本時間 20:37
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "morning か evening"
+        default: "evening"
+
+concurrency:
+  group: social
+  cancel-in-progress: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: 投稿する
+        env:
+          GACHA_THREADS_TOKEN: ${{ secrets.GACHA_THREADS_TOKEN }}
+          GACHA_IG_TOKEN: ${{ secrets.GACHA_IG_TOKEN }}
+          MODE: ${{ github.event.inputs.mode || (github.event.schedule == '7 23 * * *' && 'morning' || 'evening') }}
+        run: node src/social.js
+      - name: 投稿した記録を保存
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/social-state.json 2>/dev/null || true
+          git diff --cached --quiet || (git commit -m "SNSの投稿記録" && (git push || (git pull --rebase && git push)))
