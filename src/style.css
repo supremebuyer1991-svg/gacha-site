@@ -964,3 +964,11 @@ body { font-variant-numeric: tabular-nums lining-nums; }
 .st-disney { background: linear-gradient(135deg, #eef4ff, #fff); }
 .st-tamagotchi { background: linear-gradient(135deg, #fff8e6, #fff); }
 .st-mejirushi { background: linear-gradient(135deg, #f2fbf4, #fff); }
+
+/* キャラクター・作品から探す */
+.chara-list { display: flex; flex-wrap: wrap; gap: 8px; }
+.chara-list-top { margin-top: 16px; }
+.chara-chip { display: inline-flex; align-items: center; gap: 6px; padding: 7px 13px; border-radius: 999px; background: var(--surface, #fff); border: 1px solid var(--line, #e6e6ee); color: var(--text); font-weight: 700; font-size: 13.5px; text-decoration: none; }
+.chara-chip small { color: var(--text-2); font-weight: 700; font-size: 11.5px; }
+.chara-chip:hover { border-color: var(--accent, #ff5c8a); }
+.chara-more { background: transparent; color: var(--accent, #ff5c8a); }

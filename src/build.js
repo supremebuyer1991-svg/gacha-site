@@ -77,7 +77,7 @@ const T = {
     groupsHint: "詳しく選ばない場合は、その系統のすべてが対象になります。詳しい項目を選ぶと、さらに細かい項目が出てきます。",
     budgets: [["any", "こだわらない"], ["300", "300円まで"], ["500", "400〜500円"], ["premium", "600円以上"]],
     quizBtn: "診断する", results: "診断結果",
-    newTitle: "新着ガチャ", toCalendar: "発売カレンダーを見る", rankTitle: "人気ランキング", genreTitle: "ジャンルから探す", typeTitle: "種類から探す", typePage: (g) => `${g}のガチャガチャ`, typeLead: (g, n) => `${g}のガチャ${n}シリーズを新しい順に掲載しています。`,
+    newTitle: "新着ガチャ", toCalendar: "発売カレンダーを見る", rankTitle: "人気ランキング", genreTitle: "ジャンルから探す", typeTitle: "種類から探す", typePage: (g) => `${g}のガチャガチャ新作・発売日一覧【${YM_NOW}】`, typeLead: (g, n) => `${g}のガチャ${n}シリーズを新しい順に掲載しています。`,
     maker: "メーカー", release: "発売月", genre: "ジャンル", tags: "タグ",
     findStores: "近くの在庫店を探す", official: "公式サイトで見る",
     storesTitle: "近くの在庫店", geoBtn: "現在地から探す", or: "または", prefAria: "都道府県で絞り込む", loading: "読み込み中…",
@@ -97,10 +97,10 @@ const T = {
     feedTitle: "入荷速報", feedNew: "新入荷", feedBack: "在庫復活", feedNote: (n, s) => `${s}店で在庫あり${n ? `・補充${n}回` : ""}`,
     oshiLabel: "推しの名前・キャラ名（あれば）", oshiPh: "例：タママ、ちいかわ、ルフィ",
     related: "同じジャンルのガチャ", seeAll: (g) => `${g}をすべて見る`,
-    itemTitle: (n) => `${n}｜発売日・価格・在庫店`,
+    itemTitle: (n) => `${n}${/ガチャ|ガシャ/.test(n) ? "" : "（ガチャ）"}｜発売日・値段・どこで売ってる？`,
     itemDesc: (it, n, mk, mo) => `${n}（${mk}）は${mo}発売${it.price ? `、1回${it.price}円` : ""}${it.lineup ? `・全${it.lineup}種` : ""}のガチャガチャ。${it.description ? it.description + " " : ""}近くの在庫店や通販での入手方法もまとめています。`,
-    genrePage: (g) => `${g}のガチャガチャ`, genreLead: (g, n) => `${g}ジャンルの新作・発売予定ガチャ${n}シリーズを新しい順に掲載しています。`,
-    makerPage: (m) => `${m}のガチャガチャ`, makerLead: (m, n) => `${m}のガチャ${n}シリーズを新しい順に掲載しています。`,
+    genrePage: (g) => `${g}のガチャガチャ新作・発売日一覧【${YM_NOW}】`, genreLead: (g, n) => `${g}ジャンルの新作・発売予定ガチャ${n}シリーズを新しい順に掲載しています。`,
+    makerPage: (m) => `${m}のガチャガチャ新作・発売日一覧【${YM_NOW}】`, makerLead: (m, n) => `${m}のガチャ${n}シリーズを新しい順に掲載しています。`,
     empty: "まだ掲載している商品はありません。",
     calTitle: "ガチャガチャ発売カレンダー", calH1: "発売カレンダー", calLead: "公式に発表されている先の月まで、発売週ごとに並べています。「第◯週」はその週から順次発売という意味で、お店や地域によって前後します。",
     calDesc: "新作ガチャガチャの発売予定を月ごとに一覧できるカレンダー。価格・種類数・メーカーもまとめて確認できます。",
@@ -346,6 +346,20 @@ const seriesItems = (sr) => items.filter((it) => sr.re.test([it.name, it.name_en
 // 商品名に作品名が入っていれば、その作品が属する項目（例 oshi:kids）を自動で足す
 const subKeys = new Set((site.quiz_groups || []).flatMap((g) => g.subs.map((x) => `${g.slug}:${x.slug}`)));
 const titleRx = titles.map((tt) => ({ ...tt, rx: new RegExp(tt.match, "i") }));
+// キャラクター・作品ごとのページ（作品名カタログから、3シリーズ以上あるものだけ）
+const CHARAS = (() => {
+  const by = new Map(); // 同じ作品がカタログに2回あるときはまとめる
+  for (const tt of titleRx) {
+    const slug = String(tt.en || "").normalize("NFKD").replace(/[^\w\s-]/g, "").trim().toLowerCase().replace(/[\s_]+/g, "-").replace(/-+/g, "-") || makerSlug(tt.label);
+    const list = items.filter((it) => tt.rx.test([it.name, it.name_en, (it.lineup_names || []).join(" ")].join(" ")));
+    const cur = by.get(slug);
+    if (cur) { for (const it of list) if (!cur.list.includes(it)) cur.list.push(it); }
+    else by.set(slug, { label: tt.label, en: tt.en || tt.label, slug, list });
+  }
+  return [...by.values()].filter((x) => x.list.length >= 3).sort((a, b) => b.list.length - a.list.length);
+})();
+const charasOf = (it) => CHARAS.filter((ch) => ch.list.includes(it));
+const YM_NOW = `${nowJST.getUTCFullYear()}年${nowJST.getUTCMonth() + 1}月`;
 const autoSubs = (site.quiz_groups || []).flatMap((g) => g.subs.filter((x) => x.auto && x.match).map((x) => ({ key: `${g.slug}:${x.slug}`, rx: new RegExp(x.match) })));
 const LEGACY_GENRE = { anime: "anime", miniature: "miniature", animal: "animal", retro: "retro", other: "other" };
 for (const it of items) {
@@ -499,7 +513,7 @@ for (const lang of LANGS) {
   const layout = ({ rel, title, description, body, jsonld = [], ogImage = "", ogType = "website", current = "", jaOnly = false, extraHead = "" }) => {
     const c = ctx(rel);
     const fragment = PREVIEW && lang === "ja" && rel === "index.html";
-    const fullTitle = rel === "index.html" ? (lang === "en" ? `${site.name} | New Japanese gacha (capsule toys), release dates & shops` : `${site.name}（ガチャプラネット）｜ガチャガチャ新作・発売日・在庫店まとめ`) : `${title}｜${site.name}`;
+    const fullTitle = rel === "index.html" ? (lang === "en" ? `${site.name} | New Japanese gacha (capsule toys), release dates & shops` : `${site.name}（ガチャプラネット）｜ガチャガチャ新作・発売日・在庫店まとめ`) : `${title}｜${lang === "ja" ? "ガチャプラネット" : site.name}`;
     // 反対の言語の同じページへのリンク
     const switchHref = jaOnly ? `${c.H}en/index.html` : lang === "ja" ? `${c.H}en/${rel}` : `${c.R}${rel}`;
     const ld = jsonld.map((o) => `<script type="application/ld+json">${JSON.stringify(o).replace(/</g, "\\u003c")}</script>`).join("\n");
@@ -668,6 +682,7 @@ ${content}
   <section class="section section-tight" id="series">
     <div class="section-head"><h2>${lang === "ja" ? "人気シリーズ" : "Popular series"}</h2></div>
     <div class="series-tiles">${SERIES.map((sr) => { const n = seriesItems(sr).length; return n ? `<a class="st st-${sr.slug}" href="${c.H}series/${sr.slug}.html"><span class="st-e" aria-hidden="true">${sr.emoji}</span><span class="st-l">${lang === "ja" ? sr.label : sr.en}</span><span class="st-n">${t.series(n)}</span></a>` : ""; }).join("")}</div>
+    <div class="chara-list chara-list-top">${CHARAS.slice(0, 15).map((ch) => `<a class="chara-chip" href="${c.H}chara/${ch.slug}.html">${esc(lang === "ja" ? ch.label : ch.en)}<small>${ch.list.length}</small></a>`).join("")}<a class="chara-chip chara-more" href="${c.H}chara.html">${lang === "ja" ? "キャラクター・作品をすべて見る →" : "All characters →"}</a></div>
   </section>
 
   <section class="section" id="types">
@@ -792,6 +807,7 @@ ${content}
     </aside>
   </section>
 
+  ${charasOf(it).length ? `<section class="section section-tight"><div class="section-head"><h2>${lang === "ja" ? "このキャラクター・作品のガチャ" : "More from this series"}</h2></div><div class="chara-list">${charasOf(it).map((ch) => `<a class="chara-chip" href="${c.H}chara/${ch.slug}.html">${esc(lang === "ja" ? ch.label : ch.en)}のガチャ一覧<small>${ch.list.length}</small></a>`).join("")}</div></section>` : ""}
   ${related.length ? `<section class="section">
     <div class="section-head"><h2>${t.related}</h2><a class="more" href="${c.H}genre/${g.slug}.html">${t.seeAll(gl)}</a></div>
     <div class="grid">${related.map((x) => card(x, c)).join("")}</div>
@@ -836,10 +852,34 @@ ${content}
     const list = seriesItems(sr).sort(byNewest);
     const L = lang === "ja" ? sr.label : sr.en;
     listPage(`series/${sr.slug}.html`, {
-      title: lang === "ja" ? `${L}のガチャガチャ一覧（新作・発売日）${list.length}シリーズ` : `${L} gacha (capsule toys) – ${list.length} series`,
+      title: lang === "ja" ? `${L}のガチャガチャ新作・発売日一覧【${YM_NOW}最新】` : `${L} gacha (capsule toys) – ${list.length} series`,
       lead: lang === "ja" ? `${L}のガチャだけを集めました。新しく載った順に、発売月・価格・全何種かがひと目でわかります。` : `All ${L} capsule toys on the site, newest first.`,
       list,
     });
+  }
+  // キャラクター・作品ごとのページ
+  for (const ch of CHARAS) {
+    const list = [...ch.list].sort(byNewest);
+    const L = lang === "ja" ? ch.label : ch.en;
+    const top = list[0];
+    listPage(`chara/${ch.slug}.html`, {
+      title: lang === "ja" ? `${L}のガチャガチャ新作・発売日一覧【${YM_NOW}最新】` : `${L} gacha (capsule toys) – new releases & dates`,
+      lead: lang === "ja"
+        ? `${L}のガチャガチャ${list.length}シリーズを新しい順にまとめました。最新は「${top.name}」（${t.month(top.release)}・1回${top.price}円）。それぞれのページで発売日・値段・全何種か・どこで売っているか（在庫店）を確認できます。`
+        : `${list.length} ${L} capsule toy series, newest first, with release dates, prices and where to buy.`,
+      list, current: "genre",
+    });
+  }
+  {
+    const rel = "chara.html", c = ctx(rel);
+    const title = lang === "ja" ? "キャラクター・作品からガチャガチャを探す" : "Gacha by character & series";
+    const lead = lang === "ja" ? `サンリオ・ポケモン・ディズニーなど${CHARAS.length}のキャラクター・作品ごとに、新作ガチャガチャの発売日・値段をまとめています。` : `Find capsule toys by character or franchise – ${CHARAS.length} lists.`;
+    const body = `<div class="wrap">
+  <nav class="breadcrumb" aria-label="breadcrumb"><a href="${c.H}index.html">${t.home}</a><span>/</span><span>${esc(title)}</span></nav>
+  <header class="page-head"><h1>${esc(title)}</h1><p class="lead">${esc(lead)}</p></header>
+  <section class="section" style="padding-top:32px"><div class="chara-list">${CHARAS.map((ch) => `<a class="chara-chip" href="${c.H}chara/${ch.slug}.html">${esc(lang === "ja" ? ch.label : ch.en)}<small>${ch.list.length}</small></a>`).join("")}</div></section>
+</div>`;
+    layout({ rel, title, description: lead, body, current: "genre", jsonld: [] });
   }
   // 今週発売のガチャ（X の「今週発売」投稿のリンク先）
   listPage("week.html", {
