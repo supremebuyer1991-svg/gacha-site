@@ -73,9 +73,11 @@
   } else {
     // 1つだけのときは写真を大きく（正方形の画像に、写真をできるだけ大きく）
     var x2 = by[q.get("id")] || {};
-    W = 1200; H = 1200; c.width = W; c.height = H;
+    var im3 = await load(big(x2));
+    // 写真の縦横の形に合わせて、横幅いっぱいに大きく
+    var PH = im3 ? Math.round(Math.min(1100, Math.max(560, (W - 60) * im3.height / im3.width + 12))) : 700;
+    W = 1200; H = 96 + PH + 150; c.width = W; c.height = H;
     bg();
-    var im3 = await load(big(x2)), PH = 900;
     rr(24, 96, W - 48, PH, 26); g.fillStyle = "#fff"; g.fill(); g.save(); rr(24, 96, W - 48, PH, 26); g.clip(); fit(im3, 24, 96, W - 48, PH, 6); g.restore();
     badge(q.get("label") || (EN ? "New in Japan" : "注目の新作"), 24, 26, "#3aa0ff"); brand(48);
     g.fillStyle = "#1f2440"; g.font = "900 40px " + F; g.textBaseline = "middle";
