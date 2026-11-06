@@ -2,7 +2,7 @@
 module.exports = {
   t: ({ site, MONTH_EN, jstParts }) => ({
     switchLabel: "日本語", switchAria: "日本語版",
-    tagline: "日本扭蛋（轉蛋）新品發售日・價格・找店家，一站搞定",
+    tagline: "日本扭蛋（轉蛋）新品・價格・店家一站查",
     description: "日本扭蛋（轉蛋）新品的發售日、價格、陣容一次看，還能從目前位置找附近的扭蛋店。給來日本旅遊的台灣・香港朋友和角色迷的扭蛋情報站。",
     sampleBar: "目前顯示的是範例資料，商品、店家與庫存皆為虛構。",
     navShort: { map: "地圖", katsu: "路線", toprated: "好評店家", lottery: "抽選", ranking: "人氣" },
