@@ -36,7 +36,24 @@
   };
   var badge = function (text, x, y, col) { g.font = "900 24px " + F; var w = g.measureText(text).width + 36; rr(x, y, w, 46, 23); g.fillStyle = col; g.fill(); g.fillStyle = "#fff"; g.textBaseline = "middle"; g.fillText(text, x + 18, y + 24); return w; };
   var name = "gachapla.jpg";
-  if (kind === "week") {
+  if (kind === "lottery") {
+    // 抽選情報：今日入った抽選を最大4件、文字のカードで
+    var xj = {}; try { xj = await fetch("/data/x.json", { cache: "no-store" }).then(function (r) { return r.json(); }); } catch (e) {}
+    var L = (xj.lottery_today || []).slice(0, 4), rowH = 128;
+    W = 1200; H = 120 + Math.max(1, L.length) * (rowH + 14) + 30; c.width = W; c.height = H;
+    bg(); badge("🎯 ガチャ抽選情報", 24, 26, "#e5484d"); brand(48);
+    var md = function (d) { var m = String(d).match(/-(\d\d)-(\d\d)T(\d\d):(\d\d)/); return m ? (+m[1]) + "/" + (+m[2]) + " " + m[3] + ":" + m[4] : d; };
+    L.forEach(function (x, i) {
+      var y = 110 + i * (rowH + 14);
+      rr(24, y, W - 48, rowH, 20); g.fillStyle = "#fff"; g.fill();
+      rr(24, y, 10, rowH, 5); g.fillStyle = "#e5484d"; g.fill();
+      g.textBaseline = "middle"; g.fillStyle = "#1f2440"; g.font = "900 30px " + F; wrap(x.title, 56, y + 36, W - 320, 34, 1);
+      g.fillStyle = "#6b7194"; g.font = "700 22px " + F; wrap((x.pref ? "📍" + x.pref + "　" : "") + x.store, 56, y + 78, W - 320, 26, 1);
+      g.fillStyle = "#4a5070"; g.font = "700 20px " + F; g.fillText("応募：" + (x.method || "お店で確認"), 56, y + 110);
+      g.textAlign = "right"; g.fillStyle = "#e5484d"; g.font = "900 22px " + F; g.fillText("締切", W - 56, y + 46); g.font = "900 30px " + F; g.fillText(md(x.end), W - 56, y + 84); g.textAlign = "left";
+    });
+    name = "lottery.jpg";
+  } else if (kind === "week") {
     var im = await load("/images/og/week.jpg?v=" + Date.now()); c.width = 1200; c.height = 630; if (im) g.drawImage(im, 0, 0, 1200, 630); name = "week.jpg";
   } else if (kind === "feed") {
     // 写真を大きく：4つなら正方形の画像に2×2、3つなら横に3つ、2つなら横に2つ
