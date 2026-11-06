@@ -700,6 +700,11 @@ ${content}
     <p class="more-wrap"><button type="button" class="btn" id="results-more" hidden>${t.showMore}</button></p>
   </section>
 
+  ${WEEK.items.length ? `<section class="section section-tight" id="thisweek">
+    <div class="section-head"><h2>${lang === "en" ? "Releasing this week" : "今週発売のガチャ"}</h2><a class="more" href="${c.H}week.html">${lang === "en" ? `${WEEK.range} · all ${WEEK.items.length}` : `${WEEK.range}・全${WEEK.items.length}件`}</a></div>
+    <div class="grid row-scroll">${WEEK.items.slice(0, 12).map((it) => card(it, c)).join("")}<a class="card see-all" href="${c.H}week.html"><span class="see-all-in"><b>${lang === "en" ? "See all" : "全部見る"}</b><span>→</span></span></a></div>
+  </section>` : ""}
+
   <section class="section" id="new">
     <div class="section-head"><h2>${t.newTitle}</h2><span><a class="more" href="${c.H}week.html">${lang === "en" ? "This week" : "今週発売"}</a>　<a class="more" href="${c.H}calendar.html">${t.toCalendar}</a></span></div>
     <div class="grid row-scroll">${newest.map((it) => card(it, c)).join("")}<a class="card see-all" href="${c.H}new.html"><span class="see-all-in"><b>${lang === "en" ? "See all" : "全部見る"}</b><span>→</span></span></a></div>
