@@ -1521,7 +1521,25 @@ write("data/shops.json", JSON.stringify(SHOPS.map((x) => [x.id, x.name, x.pref, 
     const round = Math.floor(dn / cycle.length), n = 4, start = (round * n) % Math.max(1, k.length);
     const four = [...k.slice(start), ...k.slice(0, start)].slice(0, n);
     return { active: true, monday: new Date(day).getUTCDay() === 1, category: pick[0], tag: pick[1], count: k.length, items: four.map(pack) };
-  })(), new_info: (() => { const y = new Date(Date.UTC(nowJST.getUTCFullYear(), nowJST.getUTCMonth(), nowJST.getUTCDate() - 1)).toISOString().slice(0, 10); const rk = favRank; const list = items.filter((it) => it.added === y && it.image && it.release >= thisMonth).map((it, i) => [it, i]).sort((a, b) => rk(a[0]) - rk(b[0]) || a[1] - b[1]).map((x) => x[0]); return { added: y, count: list.length, fav_count: list.filter(isFav).length, items: list.slice(0, 8).map((it) => ({ ...pack(it), fav: isFav(it) })) }; })(), next_week: (() => { const nw = NEXT_WEEK.items.filter((it) => it.image); const rk = favRank; const list = nw.map((it, i) => [it, i]).sort((a, b) => rk(a[0]) - rk(b[0]) || a[1] - b[1]).map((x) => x[0]); return { label: NEXT_WEEK.label, from: NEXT_WEEK.range.split("〜")[0], to: NEXT_WEEK.range.split("〜")[1], count: NEXT_WEEK.items.length, items: list.slice(0, 16).map((it) => ({ ...pack(it), fav: isFav(it) })) }; })(), fav_ids: favIds, site: SITE_URL }));
+  })(), new_info: (() => { const y = new Date(Date.UTC(nowJST.getUTCFullYear(), nowJST.getUTCMonth(), nowJST.getUTCDate() - 1)).toISOString().slice(0, 10); const rk = favRank; const list = items.filter((it) => it.added === y && it.image && it.release >= thisMonth).map((it, i) => [it, i]).sort((a, b) => rk(a[0]) - rk(b[0]) || a[1] - b[1]).map((x) => x[0]); return { added: y, count: list.length, fav_count: list.filter(isFav).length, items: list.slice(0, 8).map((it) => ({ ...pack(it), fav: isFav(it) })) }; })(), next_week: (() => { const nw = NEXT_WEEK.items.filter((it) => it.image); const rk = favRank; const list = nw.map((it, i) => [it, i]).sort((a, b) => rk(a[0]) - rk(b[0]) || a[1] - b[1]).map((x) => x[0]); return { label: NEXT_WEEK.label, from: NEXT_WEEK.range.split("〜")[0], to: NEXT_WEEK.range.split("〜")[1], count: NEXT_WEEK.items.length, items: list.slice(0, 16).map((it) => ({ ...pack(it), fav: isFav(it) })) }; })(), en: (() => {
+    // 英語版X（海外向け）用：英語名のある商品だけ。日本語版とは別の順番で回す
+    const packEn = (it) => ({ id: it.id, name: it.name_en, price: it.price, lineup: it.lineup || 0, release: (() => { const w = weekStartOf(it); return w ? `week of ${MONTH_EN[w.getUTCMonth()]} ${w.getUTCDate()}` : (([y, m]) => `${MONTH_EN[+m - 1]} ${y}`)(it.release.split("-")); })(), maker: it.maker === "バンダイ" ? "Bandai" : it.maker === "タカラトミーアーツ" ? "Takara Tomy A.R.T.S" : it.maker === "キタンクラブ" ? "Kitan Club" : it.maker === "クオリア" ? "Qualia" : it.maker, img_large: absImg(it).replace("/thumb/", "/"), url: `${SITE_URL}/en/item/${it.id}` });
+    const CATS = [["Tamagotchi", "#Tamagotchi", 0], ["Sanrio", "#Sanrio", 1], ["Disney", "#Disney", 2], ["Pokémon", "#Pokemon", 3], ["Mejirushi charms", "#gachapon", 4], ["Anime", "#anime", 5]];
+    const day = Date.UTC(nowJST.getUTCFullYear(), nowJST.getUTCMonth(), nowJST.getUTCDate()), dn = Math.round(day / 864e5) + 3;
+    const from = new Date(Date.UTC(nowJST.getUTCFullYear(), nowJST.getUTCMonth() - 2, 1)).toISOString().slice(0, 7);
+    const ok = (it) => it.image && it.name_en && it.release >= from;
+    let daily = { active: false };
+    for (let t = 0; t < CATS.length; t++) {
+      const c = CATS[(dn + t) % CATS.length];
+      const pl = items.filter((it) => ok(it) && favRank(it) === c[2]).sort((a, b) => (b.release > a.release ? 1 : b.release < a.release ? -1 : a.id < b.id ? -1 : 1));
+      if (pl.length < 3) continue;
+      const start = (Math.floor(dn / CATS.length) * 4) % pl.length;
+      daily = { active: true, category: c[0], tag: c[1], count: pl.length, items: [...pl.slice(start), ...pl.slice(0, start)].slice(0, 4).map(packEn) };
+      break;
+    }
+    const wk = WEEK.items.filter((it) => it.image && it.name_en).map((it, i) => [it, i]).sort((a, b) => favRank(a[0]) - favRank(b[0]) || a[1] - b[1]).map((x) => x[0]);
+    return { daily, week: { range: WEEK.range, count: WEEK.items.length, url: `${SITE_URL}/en/week`, items: wk.slice(0, 4).map(packEn) } };
+  })(), fav_ids: favIds, site: SITE_URL }));
 }
 write("_headers", `/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n/assets/*\n  Cache-Control: public, max-age=31536000, immutable\n/images/*\n  Cache-Control: public, max-age=604800\n  Access-Control-Allow-Origin: *\n/data/*\n  Cache-Control: public, max-age=300\n  Access-Control-Allow-Origin: *\n`);
 

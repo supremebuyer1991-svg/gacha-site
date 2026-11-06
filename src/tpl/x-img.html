@@ -13,7 +13,8 @@
   var q = new URLSearchParams(location.search), kind = q.get("kind") || "pick";
   var W = 1200, H = 675, F = '"Zen Maru Gothic","Yu Gothic","Hiragino Sans","Noto Sans CJK JP",sans-serif', FL = '"Fredoka",' + F;
   try { await Promise.all([document.fonts.load('900 40px "Zen Maru Gothic"'), document.fonts.load('700 40px "Zen Maru Gothic"'), document.fonts.load('700 40px "Fredoka"')]); } catch (e) {}
-  var idx = []; try { idx = await fetch("/data/search-ja.json", { cache: "no-store" }).then(function (r) { return r.json(); }); } catch (e) {}
+  var EN = q.get("lang") === "en";
+  var idx = []; try { idx = await fetch(EN ? "/data/search-en.json" : "/data/search-ja.json", { cache: "no-store" }).then(function (r) { return r.json(); }); } catch (e) {}
   var by = {}; idx.forEach(function (x) { by[x.id] = x; });
   var load = function (src) { return new Promise(function (ok) { var i = new Image(); i.onload = function () { ok(i); }; i.onerror = function () { ok(null); }; i.src = src; }); };
   var big = function (x) { return x && x.img ? "/" + x.img.replace("thumb/", "") : ""; };
@@ -25,11 +26,11 @@
     g.textBaseline = "middle"; g.textAlign = "right";
     g.font = "700 30px " + FL; var t2 = "PLANET", w2 = g.measureText(t2).width;
     g.fillStyle = "#3aa0ff"; g.fillText(t2, W - 40, y); g.fillStyle = "#ff4f7b"; g.fillText("GACHA ", W - 40 - w2, y);
-    g.font = "700 18px " + F; g.fillStyle = "#6b7194"; g.fillText("gachapla.com", W - 40, y + 30); g.textAlign = "left";
+    g.font = "700 18px " + F; g.fillStyle = "#6b7194"; g.fillText(EN ? "gachapla.com/en" : "gachapla.com", W - 40, y + 30); g.textAlign = "left";
   };
   var wrap = function (text, x, y, maxW, lh, maxLines) {
     var lines = [], cur = "";
-    for (var ch of text) { if (g.measureText(cur + ch).width > maxW && cur) { lines.push(cur); cur = ch; } else cur += ch; }
+    for (var ch of (EN ? text.split(/(?<= )/) : text)) { if (g.measureText(cur + ch).width > maxW && cur) { lines.push(cur); cur = ch; } else cur += ch; }
     if (cur) lines.push(cur);
     if (lines.length > maxLines) { lines = lines.slice(0, maxLines); lines[maxLines - 1] = lines[maxLines - 1].slice(0, -1) + "…"; }
     lines.forEach(function (l, i) { g.fillText(l, x, y + i * lh); }); return lines.length;
@@ -57,7 +58,7 @@
     var im = await load("/images/og/week.jpg?v=" + Date.now()); c.width = 1200; c.height = 630; if (im) g.drawImage(im, 0, 0, 1200, 630); name = "week.jpg";
   } else if (kind === "feed") {
     // 写真を大きく：4つなら正方形の画像に2×2、3つなら横に3つ、2つなら横に2つ
-    var ids = (q.get("ids") || "").split(",").filter(Boolean).slice(0, 4), title = q.get("title") || "ガチャ入荷速報";
+    var ids = (q.get("ids") || "").split(",").filter(Boolean).slice(0, 4), title = q.get("title") || (EN ? "New gacha in Japan" : "ガチャ入荷速報");
     var n = ids.length || 1, cols = n === 4 ? 2 : n, rows = n === 4 ? 2 : 1, top = 96, gap = 14, side = 24;
     var gw = (1200 - side * 2 - (cols - 1) * gap) / cols, gh = gw + 46;
     W = 1200; H = top + rows * gh + (rows - 1) * gap + 24; c.width = W; c.height = H;
@@ -74,11 +75,11 @@
     bg();
     var im3 = await load(big(x2));
     rr(40, 96, W - 80, 400, 26); g.fillStyle = "#fff"; g.fill(); g.save(); rr(40, 96, W - 80, 400, 26); g.clip(); fit(im3, 40, 96, W - 80, 400, 12); g.restore();
-    badge(q.get("label") || "注目の新作", 40, 30, "#3aa0ff"); brand(52);
+    badge(q.get("label") || (EN ? "New in Japan" : "注目の新作"), 40, 30, "#3aa0ff"); brand(52);
     g.fillStyle = "#1f2440"; g.font = "900 34px " + F; g.textBaseline = "middle";
     var ln = wrap(x2.n || "", 44, 540, W - 88, 44, 2);
     g.font = "700 24px " + F; g.fillStyle = "#ff4f7b";
-    g.fillText((x2.p ? "1回" + x2.p + "円" : "") + (x2.l ? "　全" + x2.l + "種" : "") + (x2.r ? "　" + x2.r : ""), 44, 540 + ln * 44 + 8);
+    g.fillText(EN ? (x2.p ? "¥" + x2.p + " per play" : "") + (x2.l ? "  ·  " + x2.l + " designs" : "") + (x2.r ? "  ·  " + x2.r : "") : (x2.p ? "1回" + x2.p + "円" : "") + (x2.l ? "　全" + x2.l + "種" : "") + (x2.r ? "　" + x2.r : ""), 44, 540 + ln * 44 + 8);
     name = (q.get("id") || "pick") + ".jpg";
   }
   var url = c.toDataURL("image/jpeg", 0.88);
