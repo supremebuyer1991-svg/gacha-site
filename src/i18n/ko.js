@@ -177,6 +177,22 @@ module.exports = {
     retro: "쇼와·헤이세이 레트로", funny: "개그·병맛", culture: "아트·컬처", other: "기타",
     charm: "참·키링", mascot: "마스코트·봉제인형", figure: "피규어", goods: "잡화·생활용품", sound: "빛·소리 나는 장난감",
   },
+  // 상품 페이지 '이 가챠에 대해' (데이터에 있는 사실만 사용. build.js 의 T.en.ab 번역)
+  ab: {
+    h: "이 가챠에 대해",
+    intro: [
+      (d) => `'${d.name}'은(는) ${d.maker}의 가챠${d.price || d.n ? `로, ${[d.price ? `1회 ${d.price}엔` : "", d.n ? `전 ${d.n}종` : ""].filter(Boolean).join(", ")}` : ""}이에요.`,
+      (d) => `${d.maker}에서 나온 '${d.name}'은(는) ${[d.n ? `전 ${d.n}종` : "", d.price ? `1회 ${d.price}엔` : ""].filter(Boolean).join(", ") || "캡슐토이"}이에요.`,
+    ],
+    rel: (r, v, re) => (re ? "이번에는 재판매(복각) 상품으로, " : "") + ({
+      wkUp: `${r.month} ${r.range} 주부터 일본에서 순차 발매될 예정이에요.`, wkNow: `이번 주(${r.range})부터 일본에서 순차 발매돼요.`, wkPast: `${r.month} ${r.range} 주에 일본에서 발매됐어요.`,
+      moUp: `${r.month} 발매 예정이에요.`, moNow: `${r.month} 발매 상품이에요.`, moPast: `${r.month}에 발매됐어요.`,
+    }[r.kind]),
+    chara: (d, v) => !d.ch ? "" : [`${d.ch} 가챠 중 하나로, 이 사이트에 ${d.k}개 시리즈가 있어요.`, `${d.ch}을(를) 좋아한다면 이 사이트에서 다른 ${d.k - 1}개 시리즈도 볼 수 있어요.`][v % 2],
+    series: (d) => d.prev && d.next ? `같은 시리즈의 이전 작품은 '${d.prev}', 다음 작품은 '${d.next}'이에요.` : d.prev ? `같은 시리즈의 이전 작품은 '${d.prev}'이에요.` : d.next ? `같은 시리즈의 다음 작품 '${d.next}'${d.nextUp ? "도 발매 예정이에요" : "도 발매됐어요"}.` : "",
+    shops: (d) => `반다이 공식 매장 정보에 따르면 일본의 ${d.shops}개 매장에서 판매하고 있어요.`,
+    prefs: false, dash: "~",
+  },
   // 주별 페이지·목록 페이지 (src/hubs.js)
   hub: {
     sep: ", ", count: (k) => ` (${k})`,

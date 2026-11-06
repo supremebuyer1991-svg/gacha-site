@@ -1121,6 +1121,14 @@
         else if (en <= soon) { lab.textContent = "まもなく締切"; lab.className = "lot-state is-soon"; }
         else { lab.textContent = "受付中"; lab.className = "lot-state is-open"; }
       });
+      lotGroups();
+    };
+    // 商品ごとのカード：見えるお店がひとつもなければカードごと隠す
+    var lotGroups = function () {
+      [].forEach.call(lotList.querySelectorAll(".lot-group"), function (g) {
+        var vis = [].some.call(g.querySelectorAll(".lot"), function (li) { return !li.hidden && !li.classList.contains("is-over"); });
+        g.hidden = !vis;
+      });
     };
     paintLot(); setInterval(paintLot, 60000);
     var lf = document.getElementById("lot-filter");
@@ -1129,6 +1137,7 @@
       [].forEach.call(lf.querySelectorAll("button"), function (x) { x.classList.toggle("is-on", x === b); });
       var p = b.getAttribute("data-pref");
       [].forEach.call(lotList.querySelectorAll(".lot"), function (li) { li.hidden = !!p && li.getAttribute("data-pref") !== p; });
+      lotGroups();
     });
   }
 

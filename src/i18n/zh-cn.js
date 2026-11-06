@@ -165,6 +165,22 @@ module.exports = {
     nearNg: "{km} 公里内没有有货的店铺，可以试试下方的网购。",
     count: "{n} 家店有货。点击「从当前位置查找附近的扭蛋店」可按距离排序。",
   },
+  // 商品页「关于这款扭蛋」（只用数据里的事实，build.js 里 T.en.ab 的翻译）
+  ab: {
+    h: "关于这款扭蛋",
+    intro: [
+      (d) => `「${d.name}」是${d.maker}推出的扭蛋${d.price ? `，每次${d.price}日元` : ""}${d.n ? `，全${d.n}款` : ""}。`,
+      (d) => `${d.maker}的「${d.name}」${d.n ? `全${d.n}款` : ""}${d.price ? `${d.n ? "，" : ""}每次${d.price}日元` : ""}。`,
+    ],
+    rel: (r, v, re) => (re ? "本次为再版，" : "") + ({
+      wkUp: `预计从${r.month}${r.range}这一周起在日本陆续发售。`, wkNow: `本周（${r.range}）在日本陆续发售。`, wkPast: `已于${r.month}（${r.range}这一周）在日本发售。`,
+      moUp: `预计${r.month}发售。`, moNow: `${r.month}发售。`, moPast: `已于${r.month}发售。`,
+    }[r.kind]),
+    chara: (d, v) => !d.ch ? "" : [`这是${d.ch}的扭蛋，本站共收录了${d.k}个系列。`, `喜欢${d.ch}的话，本站还收录了另外${d.k - 1}个系列。`][v % 2],
+    series: (d) => d.prev && d.next ? `同系列的上一款是「${d.prev}」，下一款是「${d.next}」。` : d.prev ? `同系列的上一款是「${d.prev}」。` : d.next ? `同系列的下一款「${d.next}」${d.nextUp ? "也已预定发售" : "也已发售"}。` : "",
+    shops: (d) => `根据万代（BANDAI）官方的店铺信息，日本共有${d.shops}家店铺销售这款扭蛋。`,
+    prefs: false, dash: "",
+  },
   // 周别页面・列表页（src/hubs.js）
   hub: {
     sep: "、", count: (k) => `（${k}）`,

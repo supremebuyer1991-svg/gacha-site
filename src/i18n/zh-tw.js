@@ -442,6 +442,22 @@ module.exports = {
     "Disney": "迪士尼",
     "Mejirushi Accessory": "標記吊飾",
   },
+  // 商品頁「關於這款扭蛋」（只用資料裡的事實，build.js 裡 T.en.ab 的翻譯）
+  ab: {
+    h: "關於這款扭蛋",
+    intro: [
+      (d) => `「${d.name}」是${d.maker}推出的扭蛋${d.price ? `，一轉${d.price}日圓` : ""}${d.n ? `，全${d.n}種` : ""}。`,
+      (d) => `${d.maker}的「${d.name}」${d.n ? `全${d.n}種` : ""}${d.price ? `${d.n ? "，" : ""}一轉${d.price}日圓` : ""}。`,
+    ],
+    rel: (r, v, re) => (re ? "本次為再版，" : "") + ({
+      wkUp: `預計從${r.month}${r.range}這一週起在日本陸續發售。`, wkNow: `本週（${r.range}）在日本陸續發售。`, wkPast: `已於${r.month}（${r.range}這一週）在日本發售。`,
+      moUp: `預計${r.month}發售。`, moNow: `${r.month}發售。`, moPast: `已於${r.month}發售。`,
+    }[r.kind]),
+    chara: (d, v) => !d.ch ? "" : [`這是${d.ch}的扭蛋，本站共收錄了${d.k}個系列。`, `喜歡${d.ch}的話，本站還收錄了另外${d.k - 1}個系列。`][v % 2],
+    series: (d) => d.prev && d.next ? `同系列的上一款是「${d.prev}」，下一款是「${d.next}」。` : d.prev ? `同系列的上一款是「${d.prev}」。` : d.next ? `同系列的下一款「${d.next}」${d.nextUp ? "也已預定發售" : "也已發售"}。` : "",
+    shops: (d) => `根據萬代（BANDAI）官方的店鋪資訊，日本共有${d.shops}家店鋪販售這款扭蛋。`,
+    prefs: false, dash: "",
+  },
   // 週別頁面・列表頁（src/hubs.js）
   hub: {
     sep: "、", count: (k) => `（${k}）`,

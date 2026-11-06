@@ -1163,3 +1163,55 @@ p.hero-lead { font-size: clamp(15px, 1.7vw, 20px); font-weight: 700; color: var(
   .site-footer nav a, .foot-langs a { display: inline-flex; align-items: center; min-height: 32px; }
   .more { display: inline-flex; align-items: center; min-height: 32px; }
 }
+
+/* ---------- 商品ページ：このガチャについて ---------- */
+.about-item h2 { font-size: 18px; margin: 0 0 8px; }
+.about-item p { margin: 0; line-height: 1.85; color: var(--text-2); font-size: 15px; }
+.about-item a { color: var(--gold-soft); border-bottom: 1px solid var(--line-strong, var(--line)); }
+
+/* ---------- 抽選情報：商品ごとのカード ---------- */
+.lot-list { display: flex; flex-direction: column; gap: 16px; }
+.lot-group { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 16px; }
+.lot-head { display: flex; gap: 12px; align-items: center; margin-bottom: 12px; }
+.lot-thumb img { display: block; width: 64px; height: 64px; object-fit: contain; border-radius: 12px; background: #fff; border: 1px solid var(--line); }
+.lot-head h3 { margin: 0; font-size: 16px; line-height: 1.45; }
+.lot-head h3 a { color: var(--text); border-bottom: 1px solid var(--gold); }
+.lot-n { margin: 4px 0 0; font-size: 13px; color: var(--muted); font-weight: 700; }
+.lot-n a { color: var(--gold-soft); }
+.lot-stores { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
+.lot-stores .lot { background: var(--surface-2); border: 0; border-radius: 12px; padding: 12px; }
+.lot p.lot-note { font-size: 13px; color: var(--text-2); font-weight: 700; }
+.lot-caution { margin-top: 20px; font-size: 13px; color: var(--text-2); }
+
+/* ---------- 統計ページ ---------- */
+.st-kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 24px; }
+.st-kpis > div { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 14px; display: flex; flex-direction: column; gap: 2px; }
+.st-kpis small { font-size: 12px; color: var(--muted); font-weight: 700; }
+.st-kpis b { font: 700 clamp(24px, 6vw, 34px)/1.1 var(--font-latin); color: var(--text); }
+.st-kpis span { font-size: 12px; color: var(--muted); }
+.st-summary { margin-top: 18px; line-height: 1.85; color: var(--text-2); max-width: 46em; }
+.st-sec h2 { font-size: 18px; margin: 0 0 12px; }
+.st-bars { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+.st-bar { display: grid; grid-template-columns: minmax(48px, auto) 1fr auto; align-items: center; gap: 10px; font-size: 13px; }
+.st-bl { color: var(--text-2); font-weight: 700; white-space: nowrap; min-width: 48px; }
+.st-bt { height: 16px; background: transparent; }
+.st-bt i { display: block; height: 100%; background: #3aa0ff; border-radius: 0 4px 4px 0; }
+.st-bar b { font: 700 13px var(--font-latin); color: var(--text); min-width: 56px; text-align: right; }
+.st-stacks { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+.st-srow { display: grid; grid-template-columns: 48px 1fr; align-items: center; gap: 10px; font-size: 13px; }
+.st-stack { display: flex; height: 18px; gap: 2px; }
+.st-stack i:first-child { border-radius: 4px 0 0 4px; }
+.st-stack i:last-child { border-radius: 0 4px 4px 0; }
+.sb-le200 { background: #cfe6ff; } .sb-p300 { background: #8fc6ff; } .sb-p400 { background: #3aa0ff; } .sb-p500 { background: #1f7ad6; } .sb-ge600 { background: #154f8f; }
+.st-legend { list-style: none; display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 0 0 10px; padding: 0; font-size: 12.5px; color: var(--text-2); }
+.st-legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; }
+.st-tw { margin-top: 6px; }
+.st-t caption { text-align: left; padding: 10px 12px 0; font-size: 12.5px; font-weight: 700; color: var(--muted); }
+.st-t th, .st-t td { padding: 8px 12px; text-align: right; white-space: nowrap; border-top: 1px solid var(--line); }
+.st-t th[scope="row"], .st-t thead th:first-child { text-align: left; }
+.st-tops { margin: 0; padding-left: 1.4em; }
+.st-tops li { padding: 4px 0; }
+.st-tops li a { color: var(--gold-soft); font-weight: 700; }
+.st-tops li b { margin-left: 8px; font: 700 13px var(--font-latin); color: var(--muted); }
+.st-two { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; }
+@media (max-width: 640px) { .st-two { grid-template-columns: 1fr; } .st-kpis { gap: 6px; } .st-kpis > div { padding: 10px; } }
