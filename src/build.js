@@ -492,7 +492,15 @@ const SHOPS = (() => {
   for (const x of list) if (!x.pref && x.address) x.pref = PN.find((p) => String(x.address).startsWith(p)) || "";
   return list.filter((x) => !x.hidden && x.lat && x.lng && /^[a-z0-9-]+$/.test(x.id));
 })();
-const SHOP_OFFICIAL = shopsLive.official || {};
+// 公式の取扱：サイトのデータベース（shopdump）と、取り込んだ公式の取扱店（stock.json）を合わせる。
+// shopdump が読めなかった日も、お店のページが「中身なし」にならないように
+const SHOP_OFFICIAL = (() => {
+  const m = {};
+  const add = (sid, id) => { if (!sid || !id) return; (m[sid] ||= new Set()).add(id); };
+  for (const [sid, ids] of Object.entries(shopsLive.official || {})) for (const id of ids || []) add(sid, id);
+  for (const r of stockFile.stock || []) if (/^g-s\d+$/i.test(r.store_id)) add(r.store_id.slice(2).toLowerCase(), r.item_id);
+  const o = {}; for (const [k, v] of Object.entries(m)) o[k] = [...v]; return o;
+})();
 const SHOP_REPORTS = shopsLive.reports || {};
 const SHOP_BY_ID = new Map(SHOPS.map((x) => [x.id, x]));
 // 商品 → 公式の取扱店（お店ごとの一覧を逆引き）
