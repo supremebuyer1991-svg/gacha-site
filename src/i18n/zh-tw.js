@@ -7,6 +7,7 @@ module.exports = {
     sampleBar: "目前顯示的是範例資料，商品、店家與庫存皆為虛構。",
     navShort: { map: "地圖", katsu: "路線", toprated: "好評店家", lottery: "抽選", ranking: "人氣" },
     u: {
+      push: { on: "發售時通知我", off: "停止通知", lead: "在你用★收藏的扭蛋發售那一週的週一早上（日本時間）傳送通知。不需註冊。", onNow: "通知已開啟：★收藏的扭蛋發售的那一週會通知你。", done: "已開啟通知。", offDone: "已停止通知。", denied: "通知已被封鎖。請在瀏覽器設定中允許本網站的通知。", error: "操作失敗，請稍後再試。", ios: "在 iPhone/iPad 上，需要先加入主畫面才能接收通知：點 Safari 的分享按鈕（□↑）→「加入主畫面」，再從新圖示開啟並點此按鈕。", busy: "設定中…" },
       followTxt: "每週在 X 上發布新品與到貨速報", followCta: (a) => `追蹤 @${a}`,
       homeH1: (ym) => `日本扭蛋新品・發售日一覽（${ym.y}年${ym.m}月）`,
       addedLine: (d, w) => `今日新增 ${d} 件・本週新增 ${w} 件`,

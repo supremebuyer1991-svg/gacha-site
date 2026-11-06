@@ -22,3 +22,9 @@ CREATE TABLE IF NOT EXISTS comment_flags (comment_id INTEGER NOT NULL, who TEXT 
 CREATE TABLE IF NOT EXISTS ratings (shop_id TEXT NOT NULL, who TEXT NOT NULL, stars INTEGER NOT NULL, updated_at TEXT NOT NULL, PRIMARY KEY (shop_id, who));
 -- ピンの位置の手直し（だれでもOK。記録を残して、あとで戻せるように）
 CREATE TABLE IF NOT EXISTS pin_moves (id INTEGER PRIMARY KEY AUTOINCREMENT, shop_id TEXT NOT NULL, who TEXT NOT NULL, from_lat REAL, from_lng REAL, lat REAL NOT NULL, lng REAL NOT NULL, created_at TEXT NOT NULL);
+-- 発売週のお知らせ（Web Push）：通知の送り先と、★で保存したガチャの番号だけ。「お知らせをやめる」で消える
+CREATE TABLE IF NOT EXISTS push_subs (endpoint TEXT PRIMARY KEY, p256dh TEXT NOT NULL, auth TEXT NOT NULL, lang TEXT NOT NULL DEFAULT 'ja', favorites TEXT NOT NULL DEFAULT '[]', created_at TEXT NOT NULL, updated_at TEXT NOT NULL, last_sent_week TEXT, who TEXT);
+CREATE INDEX IF NOT EXISTS push_subs_week ON push_subs (last_sent_week);
+CREATE INDEX IF NOT EXISTS push_subs_who ON push_subs (who, created_at);
+-- 通知の送り主の鍵（VAPID）。最初に使うときに自動で作る（1つだけ）
+CREATE TABLE IF NOT EXISTS push_keys (id INTEGER PRIMARY KEY, public_raw TEXT NOT NULL, private_jwk TEXT NOT NULL, created_at TEXT);
