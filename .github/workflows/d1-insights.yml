@@ -1,0 +1,19 @@
+# データベース（D1）でどの読み込みが多いかを調べる（手動で動かす）
+name: D1の使用量を調べる
+on:
+  workflow_dispatch:
+jobs:
+  insights:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: 読み込みの多い問い合わせ
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          npx --yes wrangler@4 d1 insights gacha-stock --sort-type=sum --sort-by=reads --timePeriod=1d --limit=15 --json | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{try{for(const q of JSON.parse(s)){console.log(q.totalRowsRead||q.sum_rows_read, q.numberOfTimesRun||q.count, String(q.query).slice(0,220))}}catch(e){console.log(s.slice(0,4000))}})'
+          npx --yes wrangler@4 d1 execute gacha-stock --remote --command "SELECT 'seen', count(*) FROM seen UNION ALL SELECT 'shops', count(*) FROM shops UNION ALL SELECT 'reports', count(*) FROM reports UNION ALL SELECT 'item_obs', count(*) FROM item_obs UNION ALL SELECT 'stock', count(*) FROM stock" || true
