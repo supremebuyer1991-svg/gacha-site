@@ -56,7 +56,9 @@ jobs:
         continue-on-error: true
         run: |
           curl -fsS --max-time 15 "${SITE_URL:-https://gachapla.com}/api/votes" -o data/votes.json || echo '{}' > data/votes.json
-          curl -fsS --max-time 30 "${SITE_URL:-https://gachapla.com}/api/shopdump" -o data/shops-live.json || echo '{}' > data/shops-live.json
+          # お店の一覧は重いので、決まった時間の公開（1日3回）のときだけ新しく読む。ふだんの公開はサイト側のキャッシュ（3時間）を使う
+          if [ "${{ github.event_name }}" = "push" ]; then Q=""; else Q="?fresh=1"; fi
+          curl -fsS --max-time 30 "${SITE_URL:-https://gachapla.com}/api/shopdump$Q" -o data/shops-live.json || echo '{}' > data/shops-live.json
         env:
           SITE_URL: https://gachapla.com
 

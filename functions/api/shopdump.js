@@ -2,8 +2,12 @@
 // どれかの読み込みに失敗しても、読めた分だけ返す（全部が 500 になって、お店のページが空になるのを防ぐ）
 import { json } from "../../lib/api-util.js";
 const q = async (env, sql, ...bind) => { try { const st = env.DB.prepare(sql); return ((await (bind.length ? st.bind(...bind) : st).all()).results) || []; } catch (e) { return null; } };
-export async function onRequestGet({ env }) {
+export async function onRequestGet({ env, request }) {
   if (!env.DB) return json({}, 503, 0);
+  // 重い（全部の取扱を読む）ので、結果を3時間キャッシュする。D1 の無料枠（1日の読み込み行数）を使い切らないため
+  const cache = caches.default, key = new Request(new URL("/api/shopdump?v=1", request.url).toString());
+  const hit = await cache.match(key);
+  if (hit && !new URL(request.url).searchParams.has("fresh")) return hit;
   const errors = [];
   const shopsRaw = await q(env, "SELECT * FROM shops");
   if (!shopsRaw) errors.push("shops");
@@ -20,5 +24,7 @@ export async function onRequestGet({ env }) {
   for (const r of off || []) (official[String(r.shop).toLowerCase()] ||= []).push(r.item_id);
   const reports = {};
   for (const r of rep || []) reports[r.s] = { n: r.n, last: r.last };
-  return json({ generated: new Date().toISOString(), shops, official, reports, ratings, errors }, 200, 0);
+  const res = json({ generated: new Date().toISOString(), shops, official, reports, ratings, errors }, 200, 0);
+  if (!errors.length) { const c = new Response(res.clone().body, res); c.headers.set("Cache-Control", "public, max-age=10800"); await cache.put(key, c); }
+  return res;
 }
