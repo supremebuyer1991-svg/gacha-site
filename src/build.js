@@ -251,6 +251,8 @@ for (const l of XL) {
   I18N_GENRE[l] = m.genres || {}; I18N_MAKER[l] = m.makers || {}; I18N_CHARA[l] = m.chara || {};
   T[l] = { ...T.en, ...(typeof m.t === "function" ? m.t({ site, MONTH_EN, jstParts }) : m.t || {}), htmlLang: LANG_META[l].html, ogLocale: LANG_META[l].og };
 }
+// 診断の選択肢（英語名をキーに、中国語・韓国語は i18n の quiz → chara の順で探す）
+const qLabel = (o, lang) => (lang === "ja" ? o.label : (I18N[lang] && I18N[lang].quiz && I18N[lang].quiz[o.en]) || (I18N_CHARA[lang] && I18N_CHARA[lang][o.en]) || o.en || o.label);
 const charaLabel = (ch, lang) => (lang === "ja" ? ch.label : (I18N_CHARA[lang] && I18N_CHARA[lang][ch.en]) || ch.en);
 
 /* ---------- 画像：images/商品id.jpg（.webp .png .jpeg）を置けば自動で使う ---------- */
@@ -740,14 +742,14 @@ ${content}
       <fieldset data-last><legend><b>3</b>${t.qGroups}</legend>
         <p class="q-hint">${t.groupsHint}</p>
         <div class="groups">${(site.quiz_groups || []).map((g) => `<div class="grp" data-group="${g.slug}">
-          <label class="grp-main"><input type="checkbox" name="group" value="${g.slug}"><span>${lang !== "ja" ? g.en : g.label}</span></label>
+          <label class="grp-main"><input type="checkbox" name="group" value="${g.slug}"><span>${qLabel(g, lang)}</span></label>
           <button type="button" class="grp-more" aria-expanded="false" aria-controls="sub-${g.slug}" data-more="${t.more}" data-less="${t.less}">${t.more}</button>
           <div class="grp-subs" id="sub-${g.slug}" hidden>
-            <div class="opts">${liveSubs(g).map((x) => opt("sub", "checkbox", `${g.slug}:${x.slug}`, lang !== "ja" ? x.en : x.label)).join("")}</div>
+            <div class="opts">${liveSubs(g).map((x) => opt("sub", "checkbox", `${g.slug}:${x.slug}`, qLabel(x, lang))).join("")}</div>
             ${liveSubs(g).map((x) => ({ x, leaves: liveLeaves(g, x) })).filter((v) => v.leaves.length > 1).map(({ x, leaves }) => `<div class="leaf-row" data-sub="${g.slug}:${x.slug}" hidden>
-              <span class="leaf-label">${t.leafPrefix(lang !== "ja" ? x.en : x.label)}</span>
+              <span class="leaf-label">${t.leafPrefix(qLabel(x, lang))}</span>
               ${leaves.length > LEAF_SHOW ? `<input class="leaf-filter" type="search" placeholder="${t.leafFilter}" aria-label="${t.leafFilter}">` : ""}
-              <div class="opts opts-sm${leaves.length > LEAF_SHOW ? " is-clipped" : ""}">${leaves.map((l, i) => opt("leaf", "checkbox", `${g.slug}:${x.slug}:${l.slug}`, `${esc(lang !== "ja" ? l.en : l.label)}<small>${l.n}</small>`).replace('<label class="opt"', i >= LEAF_SHOW ? '<label class="opt is-extra"' : '<label class="opt"')).join("")}</div>
+              <div class="opts opts-sm${leaves.length > LEAF_SHOW ? " is-clipped" : ""}">${leaves.map((l, i) => opt("leaf", "checkbox", `${g.slug}:${x.slug}:${l.slug}`, `${esc(qLabel(l, lang))}<small>${l.n}</small>`).replace('<label class="opt"', i >= LEAF_SHOW ? '<label class="opt is-extra"' : '<label class="opt"')).join("")}</div>
               ${leaves.length > LEAF_SHOW ? `<p class="leaf-none" hidden>${t.leafNone}</p><button type="button" class="leaf-all">${t.leafAll(leaves.length)}</button>` : ""}
             </div>`).join("")}
           </div>

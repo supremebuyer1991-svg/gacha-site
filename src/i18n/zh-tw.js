@@ -62,7 +62,7 @@ module.exports = {
       relNow: "本週", relFrom: (m, d) => `${m}/${d} 起`, relOut: "已發售",
       popSeries: "人氣系列", allChara: "全部角色 →", moreSeries: "同系列的其他扭蛋", charaChip: (L) => `${L} 扭蛋`,
       listMore: (max, n, href) => `顯示最新的 ${max} 款（共 ${n} 款）。更早的扭蛋請看<a href="${href}">發售月曆</a>。`,
-      charaTitle: (L, ym) => { const y = (String(ym).match(/\d{4}/) || [""])[0]; return `${L} 扭蛋新品・發售日一覽（${y}最新）`; },
+      charaTitle: (L, ym) => { const y = ym && typeof ym === "object" ? ym.y : (String(ym || "").match(/\d{4}/) || [""])[0]; return `${L} 扭蛋新品・發售日一覽（${y}最新）`; },
       charaLead: (L, n) => `${L} 扭蛋共 ${n} 個系列，由新到舊排列，附發售日、價格和購買方式。`,
       charaIdxTitle: "依角色・作品找扭蛋",
       charaIdxLead: (n) => `在找本命角色嗎？依角色或作品瀏覽在日本販售的扭蛋——共 ${n} 個清單。`,
@@ -399,5 +399,9 @@ module.exports = {
     "Katamari Damacy": "塊魂",
     "Expo mascots": "博覽會吉祥物",
     "San-X": "San-X",
+    // 系列（build.js の SERIES）も同じ辞書で引かれる
+    "Sanrio": "三麗鷗",
+    "Disney": "迪士尼",
+    "Mejirushi Accessory": "標記吊飾",
   },
 };

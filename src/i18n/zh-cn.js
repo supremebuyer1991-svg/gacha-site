@@ -81,8 +81,7 @@ module.exports = {
     faqTitle: "日本扭蛋常见问题", faqLead: "第一次玩扭蛋？这里告诉你怎么玩、去哪找扭蛋机、怎么付款。",
     faqDesc: "日本扭蛋怎么玩、去哪找扭蛋机、硬币和付款方式，以及发售周和库存信息怎么看。",
     faqs: [
-      ["什么是扭蛋（GASHAPON）？", "扭蛋是遍布日本各地的胶囊玩具售卖机。投入硬币、转动把手，就能从机器上展示的系列中随机得到一款。具体抽到哪一款没法选——这正是乐趣所在！"],
-      ["扭蛋和盲盒有什么区别？", "扭蛋是日本的胶囊玩具机，每次几百日元，机器上会展示全款阵容，转动把手随机出一个胶囊。和盲盒一样抽到哪款是随机的、可能重复，但单价通常更低。"],
+      ["什么是扭蛋（GASHAPON）？和盲盒有什么区别？", "扭蛋是遍布日本各地的胶囊玩具售卖机。投入硬币、转动把手，就能从机器上展示的系列中随机得到一款。具体抽到哪一款没法选——这正是乐趣所在！和盲盒一样是随机出货、可能重复，但扭蛋每次只要几百日元，机器上就能看到全款阵容。"],
       ["怎么玩？", "1）先看机器上的价格（通常 200～500 日元）。2）投入 100 日元硬币。3）顺时针转动把手，直到胶囊掉出来。4）打开享受吧。大多数店铺在扭蛋机旁都放有回收空胶囊的箱子。"],
       ["在哪里能找到扭蛋机？", "几乎到处都有：车站、商场、电器店、书店、机场，还有摆着几百台机器的扭蛋店。东京的秋叶原、池袋，大阪的难波等地都很容易找到大型扭蛋店。可以用本站的地图，或每款扭蛋页面上的「从当前位置查找附近的扭蛋店」按钮。"],
       ["需要什么硬币？能刷信用卡吗？", "大多数扭蛋机只收 100 日元硬币。扭蛋店通常有兑币机（可以把 1000 日元纸币换成 100 日元硬币）。部分新款机器也支持 Suica、PASMO 等交通 IC 卡，但一般不能用信用卡。"],
@@ -188,7 +187,7 @@ module.exports = {
     "Macross Frontier": "超时空要塞F", "Pachinko & pachislot": "柏青哥・柏青嫂", "Company & brand goods": "企业・品牌周边", "Nyanchu": "Nyanchu",
     "Showa-era anime & tokusatsu": "昭和动漫・特摄", "Morning Musume / Hello! Project": "早安少女组。・Hello! Project",
     "Nogizaka46": "乃木坂46", "Sakurazaka46": "樱坂46", "Hinatazaka46": "日向坂46", "AKB48 group": "AKB48集团", "=LOVE": "=LOVE", "≠ME": "≠ME", "≒JOY": "≒JOY",
-    "FRUITS ZIPPER": "FRUITS ZIPPER", "CANDY TUNE": "CANDY TUNE", "CUTIE STREET": "CUTIE STREET", "Cho Tokimeki Sendenbu": "超ときめき♡宣伝部",
+    "FRUITS ZIPPER": "FRUITS ZIPPER", "CANDY TUNE": "CANDY TUNE", "CUTIE STREET": "CUTIE STREET", "Cho Tokimeki Sendenbu": "Cho Tokimeki Sendenbu",
     "Iginari Tohokusan": "Iginari Tohokusan", "Momoiro Clover Z": "桃色幸运草Z", "Shiritsu Ebisu Chugaku": "私立惠比寿中学", "BiSH / WACK": "BiSH・WACK",
     "Live idols (indie)": "地下偶像", "Snow Man": "Snow Man", "SixTONES": "SixTONES", "Naniwa Danshi": "浪花男子", "JO1 / INI": "JO1・INI",
     "BE:FIRST": "BE:FIRST", "Shaun the Sheep": "小羊肖恩", "Katamari Damacy": "块魂", "Expo mascots": "世博会吉祥物", "San-X": "San-X",
