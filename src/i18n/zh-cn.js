@@ -127,6 +127,21 @@ module.exports = {
     nearNg: "{km} 公里内没有有货的店铺，可以试试下方的网购。",
     count: "{n} 家店有货。点击「从当前位置查找附近的扭蛋店」可按距离排序。",
   },
+  // 周别页面・列表页（src/hubs.js）
+  hub: {
+    sep: "、", count: (k) => `（${k}）`,
+    weekLabel: (m, no) => `${m}月第${no}周`, weekShort: (no) => `第${no}周`,
+    weekTitle: (lab, range, n) => `${lab}（${range}）发售的日本扭蛋新品 共${n}个系列 - 发售日・价格`,
+    weekH1: (lab, range) => `${lab}（${range}）发售的扭蛋`, weekSub: (n) => `共${n}个系列`,
+    weekLead: (lab, range, n) => `${lab}（${range}）在日本发售的扭蛋共 ${n} 个系列，按人气排序。「第◯周」指从这一周开始陆续上架，不同店铺和地区可能会早几天或晚几天。`,
+    including: (names) => `包括${names.join("、")}等。`, weekNavAria: "上一周・下一周", toMonth: (label) => `${label}全部扭蛋`,
+    badgeNow: "本周", badgeNext: "下周", badgePast: "现已发售",
+    perma: (lab, range) => `查看${lab}（${range}）的页面 →`, weekIdx: "按周查看", weekPage: "本周页面 →",
+    monthIntro: (label, n, future, tops) => `${label}${future ? "将发售" : "发售了"} ${n} 个系列的扭蛋。${tops ? `数量最多的是${tops}。` : ""}`,
+    hubH1: (L) => `${L} 扭蛋`, hubSub: (n, month, future) => `共${n}个系列・最新：${month}${future ? "（预计发售）" : ""}`,
+    more: (n) => `查看更多（还有 ${n} 款）`, pageTitle: (title, k) => `${title}（第${k}页）`, pagesAria: "页码",
+    prevItem: "上一弹", nextItem: "下一弹", seqH: (L) => `${L} 的上一弹・下一弹`, seqH0: "同系列的上一弹・下一弹",
+  },
   quiz: {
     "Accessories & beauty": "饰品・美妆", "Animals": "动物", "Anime & idols": "动漫・偶像", "Anime for girls": "少女向动漫",
     "Art & designer toys": "艺术・设计师玩具", "Bags & handy goods": "包袋・实用小物", "Bags & pouches": "包包・收纳袋", "Beauty": "美妆",

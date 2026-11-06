@@ -898,6 +898,61 @@ label.opt:focus-within { outline: none; }
   .cal-week.some .cal-more-wrap { display: block; }
 }
 .cal-week.open .cal-grid > .card { display: flex !important; }
+/* カレンダーの小さいカード：週の見出しに「今週」があるので、カードの「今週発売」などは出さない。値段・種類数は1行に */
+.cal-card .card-foot > .rel-st { display: none; }
+.cal-card .card-foot > span:first-child { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cal-wlink { font-size: 12px; font-weight: 700; color: var(--accent, #ff5c8a); text-decoration: none; white-space: nowrap; }
+.cal-wlink:hover { text-decoration: underline; }
+
+/* ---------- 一覧ページ（週ごと・シリーズ・再販・値段：src/hubs.js） ---------- */
+.hub-sub { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 8px 0 0; font-weight: 800; color: var(--text-2); }
+.wk-next { font-size: 11px; font-weight: 700; padding: 2px 10px; border-radius: 999px; background: #e8f3ff; color: #1f6fd1; }
+.month-intro a { color: var(--text); font-weight: 700; border-bottom: 1px solid var(--line-strong); text-decoration: none; }
+.hub-links { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 16px 0 0; }
+.hub-links > b { font-size: 13px; color: var(--muted); margin-right: 2px; }
+.hub-links > a:not(.btn), .hub-links > .cur { display: inline-flex; align-items: baseline; gap: 6px; padding: 7px 14px; border-radius: 999px; background: #fff; border: 1.5px solid var(--line); font-size: 13.5px; font-weight: 700; color: var(--text); text-decoration: none; }
+.hub-links > a:not(.btn):hover, .week-idx > a.on { border-color: var(--pink, #ff7eb6); }
+.hub-links > .cur { background: var(--pink, #ff7eb6); border-color: var(--pink, #ff7eb6); color: #fff; }
+.hub-links small { font-size: 11.5px; font-weight: 700; color: var(--muted); }
+.list-more { min-width: 240px; }
+.list-pages { display: flex; justify-content: center; flex-wrap: wrap; gap: 6px; margin: 18px 0 0; }
+.list-pages a, .list-pages .cur { min-width: 40px; padding: 8px 12px; border-radius: 999px; border: 1.5px solid var(--line); background: #fff; text-align: center; font-weight: 700; font-size: 14px; color: var(--text); text-decoration: none; }
+.list-pages .cur { background: var(--text); border-color: var(--text); color: #fff; }
+.section-head h2 .hub-n { margin-left: 8px; font-size: 13px; color: var(--muted); font-weight: 700; }
+/* 商品ページ：シリーズの前作・次作 */
+.series-nav { margin: 28px 0 0; }
+.sn-h { margin: 0 0 8px; font-size: 13px; font-weight: 800; color: var(--muted); }
+.sn-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.sn-pair a { display: grid; gap: 2px; padding: 10px 14px; border-radius: 14px; background: #fff; border: 1.5px solid var(--line); color: var(--text); text-decoration: none; min-width: 0; }
+.sn-pair a:hover { border-color: var(--pink, #ff7eb6); }
+.sn-pair small { font-size: 11.5px; font-weight: 800; color: var(--accent, #ff5c8a); }
+.sn-pair span { font-size: 13px; font-weight: 700; line-height: 1.45; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.sn-next { text-align: right; }
+.sn-all { display: inline-block; margin-top: 10px; font-size: 13px; font-weight: 700; color: var(--accent, #ff5c8a); text-decoration: none; }
+.sn-all:hover { text-decoration: underline; }
+/* シリーズ・再販の表 */
+.ct-wrap { overflow-x: auto; background: #fff; border: 1.5px solid var(--line); border-radius: 16px; }
+.ct { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+.ct th { text-align: left; font-size: 12px; color: var(--muted); font-weight: 800; padding: 10px 12px; border-bottom: 1.5px solid var(--line); white-space: nowrap; }
+.ct td { padding: 8px 12px; border-top: 1px solid var(--line); vertical-align: middle; }
+.ct tr.is-latest td { background: #fff8e1; }
+.ct tr.is-next td { background: #f2f8ff; }
+.ct-name a { display: flex; align-items: center; gap: 10px; color: var(--text); font-weight: 700; text-decoration: none; min-width: 200px; }
+.ct-name a:hover span { text-decoration: underline; }
+.ct-name img, .ct-noimg { flex: none; width: 48px; height: 48px; border-radius: 10px; object-fit: cover; background: var(--line); }
+.ct-rel, .ct-p, .ct-n, .ct-vol, .ct-orig { white-space: nowrap; color: var(--text-2); }
+.ct-vol { font-weight: 800; text-align: center; }
+.ct-orig a { color: var(--accent, #ff5c8a); font-weight: 700; white-space: nowrap; }
+.ct-tag { margin-left: 6px; padding: 1px 8px; border-radius: 999px; font: 800 11px/1.6 var(--font-body, sans-serif); font-style: normal; background: var(--yellow); color: var(--text); white-space: nowrap; }
+.ct-tag.ct-up { background: #e8f3ff; color: #1f6fd1; }
+.ct-tag.ct-re { background: var(--line); color: var(--text-2); }
+@media (max-width: 640px) { .ct { font-size: 12.5px; } .ct td, .ct th { padding: 8px; } .ct-name a { min-width: 170px; } .ct-name img, .ct-noimg { width: 40px; height: 40px; } }
+.col-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; }
+.col-tile { display: grid; gap: 3px; padding: 14px 16px; border-radius: 16px; background: #fff; border: 1.5px solid var(--line); color: var(--text); text-decoration: none; }
+.col-tile:hover { border-color: var(--pink, #ff7eb6); }
+.col-tile b { font-size: 15.5px; }
+.col-tile small { font-size: 12px; font-weight: 800; color: var(--accent, #ff5c8a); }
+.col-tile span { font-size: 12px; color: var(--muted); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 
 /* 新着ガチャ：右端の「全部見る」 */
 .row-scroll > .see-all { display: flex; align-items: center; justify-content: center; min-height: 150px; border: 2px dashed var(--pink, #ff7eb6); border-radius: 16px; text-decoration: none; color: var(--text); background: #fff; }
