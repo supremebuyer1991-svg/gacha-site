@@ -81,14 +81,18 @@ async function importImages() {
   await removePlaceholders(sharp);
   const allowed = site.image_allowed_makers || [];
   let done = 0;
-  for (const it of items) {
+  // 新しい発売月の商品から先に取り込む
+  const order = [...items].sort((a, b) => String(b.release || "").localeCompare(String(a.release || "")));
+  for (const it of order) {
     if (done >= MAX_IMAGES_PER_RUN) break;
     if (hasImage(it.id) || !it.official_url) continue;
     if (!allowed.includes(it.maker)) continue;
     try {
       const html = await getText(it.official_url);
       const title = pageTitle(html);
-      if (!norm(title).includes(norm(it.name)) && !norm(it.name).includes(norm(title))) {
+      const nameOk = (title && (norm(title).includes(norm(it.name)) || norm(it.name).includes(norm(title))))
+        || norm(require("./import-schedule.js").decode(html.replace(/<[^>]+>/g, " "))).includes(norm(it.name));
+      if (!nameOk) {
         console.log(`⚠ ${it.id}: 公式ページの商品名「${title}」が一致しないので取り込みませんでした（official_url を確認してください）`);
         await sleep(WAIT_MS);
         continue;
