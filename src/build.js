@@ -428,7 +428,7 @@ const QUIZ_V = crypto.createHash("md5").update(JSON.stringify(rawItems) + JSON.s
 const CSS_V = ver("style.css");
 const JS_V = ver("app.js");
 
-const FONTS = "https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Zen+Maru+Gothic:wght@500;700;900&display=swap";
+const FONTS = "https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&family=Zen+Maru+Gothic:wght@500;700;900&display=swap";
 
 /* ================= 言語ごとにページを作る ================= */
 for (const lang of LANGS) {

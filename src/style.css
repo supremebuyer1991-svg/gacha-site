@@ -916,3 +916,15 @@ label.opt:focus-within { outline: none; }
 .archive-list .cur { display: inline-flex; align-items: center; padding: 9px 16px; border-radius: 999px; background: var(--pink, #ff7eb6); color: #fff; font-size: 14px; font-weight: 700; }
 @media (max-width: 640px) { .month-pager a { padding: 9px 10px; font-size: 12.5px; } }
 .rel-note:hover { background: #d6eaff; }
+
+/* ---------- 数字を見やすく・値段を控えめに ---------- */
+/* 数字は読みやすい丸めのフォント（Nunito）に。ロゴだけは Fredoka のまま */
+:root { --font-latin: "Nunito", "Zen Maru Gothic", system-ui, sans-serif; --font-logo: "Fredoka", "Zen Maru Gothic", sans-serif; }
+.logo-en { font-family: var(--font-logo); }
+body { font-variant-numeric: tabular-nums lining-nums; }
+/* 値段は目立たせすぎない（色を本文に近く・小さめに） */
+.price { margin-top: 14px; gap: 6px; }
+.price b { font: 800 26px/1 var(--font-latin); color: var(--text); }
+.price small, .price span { font-size: 12.5px; }
+.card-foot b { color: var(--text-2); font-size: 13px; font-weight: 800; }
+.sp-price { color: var(--text-2); font-weight: 700; font-size: 13.5px; }
