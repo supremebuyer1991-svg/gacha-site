@@ -39,14 +39,17 @@
   if (kind === "week") {
     var im = await load("/images/og/week.jpg?v=" + Date.now()); c.width = 1200; c.height = 630; if (im) g.drawImage(im, 0, 0, 1200, 630); name = "week.jpg";
   } else if (kind === "feed") {
+    // 写真を大きく：4つなら正方形の画像に2×2、3つなら横に3つ、2つなら横に2つ
     var ids = (q.get("ids") || "").split(",").filter(Boolean).slice(0, 4), title = q.get("title") || "ガチャ入荷速報";
-    bg(); badge("⚡ " + title, 40, 30, "#ff4f7b"); brand(52);
-    var n = ids.length || 1, cols = n <= 3 ? n : 2, rows = n <= 3 ? 1 : 2, top = 110, gw = (W - 80 - (cols - 1) * 20) / cols, gh = (H - top - 30 - (rows - 1) * 20) / rows;
+    var n = ids.length || 1, cols = n === 4 ? 2 : n, rows = n === 4 ? 2 : 1, top = 96, gap = 14, side = 24;
+    var gw = (1200 - side * 2 - (cols - 1) * gap) / cols, gh = gw + 46;
+    W = 1200; H = top + rows * gh + (rows - 1) * gap + 24; c.width = W; c.height = H;
+    bg(); badge("⚡ " + title, side, 26, "#ff4f7b"); brand(48);
     for (var i = 0; i < ids.length; i++) {
-      var x = by[ids[i]], cx = 40 + (i % cols) * (gw + 20), cy = top + Math.floor(i / cols) * (gh + 20);
-      rr(cx, cy, gw, gh, 22); g.fillStyle = "#fff"; g.fill();
-      var im2 = await load(big(x)); g.save(); rr(cx, cy, gw, gh - 50, 22); g.clip(); fit(im2, cx, cy, gw, gh - 50, 10); g.restore();
-      g.fillStyle = "#1f2440"; g.font = "700 22px " + F; g.textBaseline = "middle"; wrap(x ? x.n : "", cx + 18, cy + gh - 26, gw - 36, 26, 1);
+      var x = by[ids[i]], cx = side + (i % cols) * (gw + gap), cy = top + Math.floor(i / cols) * (gh + gap);
+      rr(cx, cy, gw, gh, 20); g.fillStyle = "#fff"; g.fill();
+      var im2 = await load(big(x)); g.save(); rr(cx, cy, gw, gw, 20); g.clip(); fit(im2, cx, cy, gw, gw, 4); g.restore();
+      g.fillStyle = "#1f2440"; g.font = "700 " + (cols >= 3 ? 20 : 24) + "px " + F; g.textBaseline = "middle"; wrap(x ? x.n : "", cx + 16, cy + gw + 23, gw - 32, 26, 1);
     }
     name = "nyuka.jpg";
   } else {
