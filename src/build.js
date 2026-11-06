@@ -143,10 +143,10 @@ const T = {
     lineup: (n) => `${n} designs`, perPlay: "per play", series: (n) => `${n} series`,
     home: "Home", logoAria: "Home",
     heroH1: "Find Japan's finest<br>capsule toys first.",
-    heroLead: "New gacha release dates, prices and lineups, plus the shops near you that have them.",
-    heroSub: "Your guide to capsule toys in Japan.",
-    stats: ["Series listed", "Out this month", "Shops"],
-    quizTitle: "Find your gacha", qGender: "You are…", qAge: "Your age", q1: "Genres you like (pick any)", q2: "Your style (pick any)", q3: "Budget per play",
+    heroLead: "Found a capsule toy you love? See when it comes out, how much it costs, and which shops in Japan have it — near where you are right now.",
+    heroSub: "The capsule toy guide for visitors and residents in Japan. Look for signs that say ガチャ or ガシャポン!",
+    stats: ["Toys listed", "Out this month", "Shops on the map"],
+    quizTitle: "Find a gacha you'll love", qGender: "You are…", qAge: "Your age", q1: "Genres you like (pick any)", q2: "Your style (pick any)", q3: "Budget per play",
     genders: [["male", "Male"], ["female", "Female"], ["none", "Prefer not to say"]],
     ages: [["10", "Teens"], ["20", "20s"], ["30", "30s"], ["40", "40s"], ["50", "50+"]],
     next: "Next", skip: "No preference", back: "Back",
@@ -157,50 +157,52 @@ const T = {
     groupsHint: "If you don't narrow it down, everything in that group counts. Pick a detail to see even finer options.",
     budgets: [["any", "Any"], ["300", "Up to ¥300"], ["500", "¥400–500"], ["premium", "¥600+"]],
     quizBtn: "Show my matches", results: "Your matches",
-    newTitle: "New arrivals", toCalendar: "See release calendar", rankTitle: "Most loved", genreTitle: "Browse by genre", typeTitle: "Browse by type", typePage: (g) => `Gacha ${g.toLowerCase()}`, typeLead: (g, n) => `${n} gacha series in ${g.toLowerCase()}, newest first.`,
+    newTitle: "New in Japan", toCalendar: "Release calendar", rankTitle: "Most popular right now", genreTitle: "Browse by genre", typeTitle: "Browse by type", typePage: (g) => `${g} capsule toys in Japan – new releases`, typeLead: (g, n) => `${n} ${g.toLowerCase()} gacha series sold in Japan, newest first. Tap one to see the price, release week and shops that have it.`,
     maker: "Maker", release: "Release", genre: "Genre", tags: "Tags",
-    findStores: "Find shops near me", official: "Official page",
-    storesTitle: "Shops with stock", geoBtn: "Use my location", or: "or", prefAria: "Filter by prefecture", loading: "Loading…",
+    findStores: "Where can I buy it?", official: "Maker's page (Japanese)",
+    storesTitle: "Shops in Japan that have it", geoBtn: "Show shops near me", or: "or", prefAria: "Filter by prefecture", loading: "Loading…",
     stockLoading: "Loading stock information…", stockNone: "No stock information for this item yet.",
-    stockFine: "Shop information is based on Bandai's official Gashapon store finder (shops with connected machines only). Stock may differ from what is shown. Please check opening hours with each shop. Your location is only used on your device to calculate distances and is never sent anywhere.",
-    officialStores: "Check the official shop finder",
-    buyTitle: "Sold out nearby? Get the full set online", buyLead: "Couldn't get the one you wanted, or no shop nearby? Complete sets are available from Japanese online stores.",
-    buyAria: "Buy online", amazon: "Search Amazon Japan", rakuten: "Search Rakuten",
-    fleaTitle: "Want just one design? Try resale markets", fleaLead: "Japanese flea-market and auction sites often have single pieces.", mercari: "Search Mercari", yahoo: "Search Yahoo! Auctions", rakuma: "Search Rakuma",
-    lineupTitle: (n) => `Lineup (${n} designs)`, lineupNote: "Based on the maker's official product information (names in Japanese).", ageMin: (n) => `Ages ${n}+`, ageLabel: "Ages",
-    heart: "Love it", heartAria: "Send a heart (counts toward the popularity ranking)", heartNote: "Hearts count toward the popularity ranking (once a day)",
-    arrTitle: "Arrivals", arrLoading: "Loading arrival data…", arrNone: "No arrivals confirmed yet. Shops will appear here as soon as it lands.",
+    stockFine: "Shop list comes from Bandai's official Gashapon shop finder (only shops with online-connected machines). Popular toys sell out fast, so stock may be different when you arrive. Please check opening hours before you go. Your location stays on your phone — it is only used to sort shops by distance.",
+    officialStores: "Check Bandai's official shop finder (Japanese)",
+    buyTitle: "Sold out? Buy the full set online", buyLead: "Couldn't find it in shops? Japanese online stores often sell the complete set. If you are staying in Japan, you can usually have it delivered to a Japanese address — many hotels will hold a parcel for guests (ask your hotel first).",
+    buyAria: "Buy online", amazon: "Search on Amazon Japan", rakuten: "Search on Rakuten",
+    fleaTitle: "Want just one design? Try resale apps", fleaLead: "People in Japan often resell single pieces they got twice. Japanese resale apps and auction sites are a good place to look.", mercari: "Search on Mercari", yahoo: "Search on Yahoo! Auctions", rakuma: "Search on Rakuma",
+    lineupTitle: (n) => `Lineup (${n} designs)`, lineupNote: "From the maker's official information. Names are shown in Japanese, as they appear on the machine.", ageMin: (n) => `Ages ${n}+`, ageLabel: "Ages",
+    heart: "Like", heartAria: "Send a like (counts toward the popularity ranking)", heartNote: "Likes count toward the popularity ranking (once a day)",
+    arrTitle: "When did shops get it?", arrLoading: "Loading arrival data…", arrNone: "No shop has it yet. Shops will appear here as soon as it arrives.",
     arrIn: "In stock", arrRestock: "Restocks", arrFirst: "First seen", arrShops: (n) => `${n} shops`, arrTimes: (n) => `${n}`,
     arrFastTitle: "Fastest shops", arrFastNote: "How soon after first sighting each shop got it (including sold-out shops).",
     arrPrefTitle: "By prefecture", arrPrefNote: "Shops that got it, and the average of the 10 fastest (within 14 days of first sighting).",
     arrAvg: (d) => `avg ${d} days`, arrNoAvg: "none within 14 days", arrStockOn: "in stock", arrStockOff: "sold out",
-    feedTitle: "Just restocked", feedNew: "New arrival", feedBack: "Back in stock", feedNote: (n, s) => `In stock at ${s} shops${n ? ` · ${n} restocks` : ""}`,
-    oshiLabel: "Favorite character or member (optional)", oshiPh: "e.g. Chiikawa, Luffy",
-    related: "More in this genre", seeAll: (g) => `See all ${g}`,
-    itemTitle: (n) => `${n} | Release date, price & shops`,
-    itemDesc: (it, n, mk, mo) => `${n} by ${mk}: released ${mo}${it.price ? `, ¥${it.price} per play` : ""}${it.lineup ? `, ${it.lineup} designs` : ""}. ${it.description_en ? it.description_en + " " : ""}Find shops in Japan that have it in stock, or buy the set online.`,
-    genrePage: (g) => `${g} capsule toys`, genreLead: (g, n) => `${n} new and upcoming ${g.toLowerCase()} gacha series, newest first.`,
-    makerPage: (m) => `Capsule toys by ${m}`, makerLead: (m, n) => `${n} gacha series by ${m}, newest first.`,
+    feedTitle: "Just arrived in shops", feedNew: "New arrival", feedBack: "Back in stock", feedNote: (n, s) => `In stock at ${s} shops${n ? ` · ${n} restocks` : ""}`,
+    oshiLabel: "Favorite character (optional)", oshiPh: "e.g. Pokémon, Hello Kitty, Chiikawa",
+    related: "You might also like", seeAll: (g) => `See all ${g}`,
+    itemTitle: (n) => `${n} | Gacha in Japan: price, release date & where to buy`,
+    itemDesc: (it, n, mk, mo) => `${n} by ${mk}: released ${mo}${it.price ? `, ¥${it.price} per play` : ""}${it.lineup ? `, ${it.lineup} designs` : ""}. ${it.description_en ? it.description_en + " " : ""}See which shops in Japan have it, or buy the full set online.`,
+    genrePage: (g) => `${g} capsule toys in Japan – new releases`, genreLead: (g, n) => `${n} new and upcoming ${g.toLowerCase()} gacha in Japan, newest first. Tap one to see the price, release week and shops that have it.`,
+    makerPage: (m) => `${m} capsule toys – new releases in Japan`, makerLead: (m, n) => `${n} gacha series by ${m}, newest first.`,
     empty: "No items listed yet.",
-    calTitle: "Gacha release calendar", calH1: "Release calendar", calLead: "Every announced capsule toy, grouped by release week. Arrival in shops can vary by a few days by area and store.",
+    calTitle: "Japan gacha release calendar", calH1: "Gacha release calendar", calLead: "Every announced capsule toy in Japan, sorted by release week. Visiting soon? Check what comes out during your trip. Shops can get them a few days earlier or later.",
     calDesc: "Monthly calendar of new Japanese capsule toy (gacha) releases with prices, number of designs and makers.",
     calPast: "Past releases", calMonthTitle: (y, m) => `Gacha released in ${MONTH_EN[m - 1]} ${y}`,
     thisMonth: "This month", calMonth: (y, m, n) => `${MONTH_EN[m - 1]} ${y}<br>${n} series`,
-    faqTitle: "FAQ", faqLead: "How to read stock information and how to buy online.",
-    faqDesc: "Answers about stock accuracy, location privacy, buying gacha online and visiting shops in Japan.",
+    faqTitle: "Gacha in Japan: FAQ", faqLead: "New to gacha? Here is how to play, where to find machines, and how to pay.",
+    faqDesc: "How to play gacha in Japan, where to find capsule toy machines, coins and payment, and how to read release weeks and stock information.",
     faqs: [
-      ["What does \"week 2 of November\" mean?", "We count the week starting on the first Monday of the month as week 1 (for November 2026, week 1 is Nov 2–8 and week 2 is Nov 9–15). Makers announce a release week rather than a date, and machines are restocked during that week, so arrival can vary by a few days from shop to shop."],
-      ["What is gacha (gashapon)?", "Gacha are capsule toy vending machines found all over Japan. Insert coins, turn the handle, and get one random item from the series. Most machines take ¥100 coins only, so bring change."],
-      ["How accurate is the stock information?", "We collect stock information from shops regularly. Items can sell out or be restocked between updates, so treat it as a guide. Each item page shows when the information was collected."],
-      ["Is my location sent anywhere?", "No. Your location is only used on your own device to calculate the distance to each shop. It is never stored or sent to our server or anyone else."],
-      ["What if no shop nearby has it?", "Use the Amazon Japan or Rakuten buttons on the item page to look for complete sets. New releases are often restocked in shops a few days later."],
-      ["Can I use a credit card at gacha machines?", "Most machines take coins only. Many dedicated gacha shops have change machines, and some newer machines accept IC cards such as Suica."],
-      ["I found a mistake on the site.", "Please let us know through the contact details on the About page and we will correct it."],
+      ["What is gacha (gashapon)?", "Gacha are capsule toy vending machines you can find all over Japan. You put in coins, turn the handle, and get one random toy from the series shown on the machine. You can't choose which one you get — that's part of the fun!"],
+      ["How do I play?", "1) Check the price on the machine (usually ¥200–¥500). 2) Put in ¥100 coins. 3) Turn the handle clockwise until the capsule drops. 4) Open it and enjoy. Most shops have a box next to the machines for empty capsules."],
+      ["Where can I find gacha machines?", "Almost everywhere: train stations, shopping malls, electronics stores, bookstores, airports and dedicated gacha shops with hundreds of machines. Big gacha shops are easy to find in areas like Akihabara and Ikebukuro in Tokyo, or Namba in Osaka. Use our map or the \"Show shops near me\" button on each toy's page."],
+      ["What coins do I need? Can I use a credit card?", "Most machines take ¥100 coins only. Gacha shops usually have a change machine (it turns ¥1,000 bills into ¥100 coins). Some newer machines also accept IC cards like Suica or PASMO, but credit cards generally can't be used."],
+      ["What does \"week 2 of November\" mean?", "Makers announce a release week, not an exact date. We count the week starting on the first Monday of the month as week 1 (in November 2026, week 1 is Nov 2–8 and week 2 is Nov 9–15). Shops add new toys during that week, so they may appear a few days earlier or later depending on the shop."],
+      ["How accurate is the stock information?", "We collect it from shops regularly, but popular toys can sell out quickly. Please use it as a guide. Each toy's page shows when the information was last updated."],
+      ["What if it's sold out everywhere?", "Shops often restock a few days after release. You can also look for the full set on Amazon Japan or Rakuten, or a single piece on Japanese resale apps, using the buttons on each toy's page."],
+      ["Is my location sent anywhere?", "No. Your location is only used on your own phone to sort shops by distance. It is never saved or sent to us or anyone else."],
+      ["I found a mistake on the site.", "Please let us know through the contact details on the About page and we will fix it."],
     ],
     aboutTitle: "About & contact", aboutH1: "About", aboutDesc: `About ${site.name}, contact details, advertising and disclaimer.`,
     contactForm: "Contact form", contactX: (x) => `Send a DM to <b>@${x}</b> on X (Twitter).`, contactNone: "Contact details coming soon.",
     aboutSections: (s) => [
-      ["About this site", `${s.name} is a guide to capsule toys (gacha) in Japan. We bring release dates, prices, lineups and nearby shops with stock together in one place.`],
+      ["About this site", `${s.name} is a guide to capsule toys (gacha) in Japan for visitors and residents. We bring release dates, prices, lineups and the shops that have them together in one place, so you can find the toy you want during your stay.`],
       ["Operator", s.operator_en || s.operator],
       ["Contact", null],
       ["Advertising", "As an Amazon Associate we earn from qualifying purchases. We also take part in the Rakuten affiliate program. Buttons marked \"PR\" on item pages are affiliate links."],
@@ -554,7 +556,7 @@ for (const lang of LANGS) {
   const layout = ({ rel, title, description, body, jsonld = [], ogImage = "", ogType = "website", current = "", jaOnly = false, extraHead = "", noindex = false, noAlt = false, lastmod = "" }) => {
     const c = ctx(rel);
     const fragment = PREVIEW && lang === "ja" && rel === "index.html";
-    const fullTitle = rel === "index.html" ? (lang === "en" ? `${site.name} | New Japanese gacha (capsule toys), release dates & shops` : `ガチャガチャ新作・発売日一覧【${YM_NOW}最新】在庫店・入荷速報｜ガチャプラネット`) : `${title}｜${lang === "ja" ? "ガチャプラネット" : site.name}`;
+    const fullTitle = rel === "index.html" ? (lang === "en" ? `${site.name} | Gacha (capsule toys) in Japan: new releases & shops near you` : `ガチャガチャ新作・発売日一覧【${YM_NOW}最新】在庫店・入荷速報｜ガチャプラネット`) : `${title}${lang === "ja" ? "｜ガチャプラネット" : ` | ${site.name}`}`;
     // 反対の言語の同じページへのリンク
     const switchHref = jaOnly ? `${c.H}en/index.html` : lang === "ja" ? `${c.H}en/${rel}` : `${c.R}${rel}`;
     const ld = jsonld.map((o) => `<script type="application/ld+json">${JSON.stringify(o).replace(/</g, "\\u003c")}</script>`).join("\n");
@@ -939,7 +941,7 @@ ${content}
     const L = lang === "ja" ? ch.label : ch.en;
     const top = list[0];
     listPage(`chara/${ch.slug}.html`, {
-      title: lang === "ja" ? `${L}のガチャガチャ新作・発売日一覧【${YM_NOW}最新】` : `${L} gacha (capsule toys) – new releases & dates`,
+      title: lang === "ja" ? `${L}のガチャガチャ新作・発売日一覧【${YM_NOW}最新】` : `${L} gacha (capsule toys) in Japan – new releases & where to buy`,
       lead: lang === "ja"
         ? `${L}のガチャガチャ${list.length}シリーズを新しい順にまとめました。最新は「${top.name}」（${t.month(top.release)}・1回${top.price}円）。それぞれのページで発売日・値段・全何種か・どこで売っているか（在庫店）を確認できます。`
         : `${list.length} ${L} capsule toy series, newest first, with release dates, prices and where to buy.`,
@@ -949,7 +951,7 @@ ${content}
   {
     const rel = "chara.html", c = ctx(rel);
     const title = lang === "ja" ? "キャラクター・作品からガチャガチャを探す" : "Gacha by character & series";
-    const lead = lang === "ja" ? `サンリオ・ポケモン・ディズニーなど${CHARAS.length}のキャラクター・作品ごとに、新作ガチャガチャの発売日・値段をまとめています。` : `Find capsule toys by character or franchise – ${CHARAS.length} lists.`;
+    const lead = lang === "ja" ? `サンリオ・ポケモン・ディズニーなど${CHARAS.length}のキャラクター・作品ごとに、新作ガチャガチャの発売日・値段をまとめています。` : `Looking for a favorite character? Browse capsule toys sold in Japan by character or series – ${CHARAS.length} lists.`;
     const body = `<div class="wrap">
   <nav class="breadcrumb" aria-label="breadcrumb"><a href="${c.H}index.html">${t.home}</a><span>/</span><span>${esc(title)}</span></nav>
   <header class="page-head"><h1>${esc(title)}</h1><p class="lead">${esc(lead)}</p></header>
