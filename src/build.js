@@ -1246,14 +1246,21 @@ write("data/shops.json", JSON.stringify(SHOPS.map((x) => [x.id, x.name, x.pref, 
   const pool = items.filter((it) => it.image && it.release >= thisMonth).sort((a, b) => (a.id < b.id ? -1 : 1));
   const dayNo = Math.floor(Date.UTC(nowJST.getUTCFullYear(), nowJST.getUTCMonth(), d) / 864e5);
   // ユーザーの希望：サンリオ・たまごっち・ディズニー・めじるし・チャーム系を主に紹介する
-  const FAV_RE = /サンリオ|ハローキティ|キティ|マイメロ|クロミ|シナモロール|ポムポムプリン|ポチャッコ|ハンギョドン|けろけろけろっぴ|リトルツインスターズ|キキ&ララ|キキララ|タキシードサム|バッドばつ丸|ばつ丸|ぐでたま|あひるのペックル|たまごっち|ディズニー|ミッキー|ミニー|ドナルド|プー|スティッチ|ピクサー|トイ・ストーリー|ラプンツェル|アナと雪|プリンセス|ツイステ|めじるし|チャーム|Sanrio|Disney|Tamagotchi/i;
-  const charmIds = new Set(inType("charm").map((it) => it.id));
-  const isFav = (it) => charmIds.has(it.id) || FAV_RE.test([it.name, it.name_en, it.title, (it.lineup_names || []).join(" ")].join(" "));
-  // 種類ごとに順番に回す（めじるしばかりにならないように）
-  const FAV_CATS = [/サンリオ|ハローキティ|キティ|マイメロ|クロミ|シナモロール|ポムポムプリン|ポチャッコ|ハンギョドン|けろけろけろっぴ|キキ&ララ|キキララ|タキシードサム|ばつ丸|ぐでたま|Sanrio/i, /たまごっち|Tamagotchi/i, /ディズニー|ミッキー|ミニー|ドナルド|プー|スティッチ|ピクサー|トイ・ストーリー|ラプンツェル|アナと雪|プリンセス|ツイステ|Disney/i, /めじるし/, null];
-  const recent = items.filter((it) => it.image && it.release >= new Date(Date.UTC(nowJST.getUTCFullYear(), nowJST.getUTCMonth() - 1, 1)).toISOString().slice(0, 7) && isFav(it)).sort((a, b) => (a.id < b.id ? -1 : 1));
+  // ユーザーの希望：たまごっち・サンリオ・ディズニー・ポケモン・めじるし・有名アニメ をメインに紹介する（この順に優先）
+  const FAV_CATS = [
+    /たまごっち|Tamagotchi/i,
+    /サンリオ|ハローキティ|キティ|マイメロ|クロミ|シナモロール|ポムポムプリン|ポチャッコ|ハンギョドン|けろけろけろっぴ|キキ&ララ|キキララ|タキシードサム|ばつ丸|ぐでたま|Sanrio/i,
+    /ディズニー|ミッキー|ミニー|ドナルド|プー|スティッチ|ピクサー|トイ・ストーリー|ラプンツェル|アナと雪|プリンセス|ツイステ|Disney/i,
+    /ポケモン|ポケットモンスター|ピカチュウ|Pok[eé]mon/i,
+    /めじるし/,
+    /ちいかわ|ONE PIECE|ワンピース|鬼滅の刃|呪術廻戦|ドラえもん|ジブリ|トトロ|魔女の宅急便|千と千尋|名探偵コナン|クレヨンしんちゃん|SPY×FAMILY|スパイファミリー|推しの子|ドラゴンボール|NARUTO|ナルト|進撃の巨人|ハイキュー|セーラームーン|プリキュア|アンパンマン|ちびまる子|すみっコぐらし|リラックマ|僕のヒーローアカデミア|ヒロアカ|東京リベンジャーズ|チェンソーマン|葬送のフリーレン|ブルーロック|銀魂|カードキャプターさくら|おジャ魔女|星のカービィ|スーパーマリオ|マリオ|ガンダム|エヴァンゲリオン|ウルトラマン|仮面ライダー|ゴジラ|ハローキティ|ムーミン|ミッフィー|スヌーピー|ピーナッツ|サンエックス/i,
+  ];
   const txt = (it) => [it.name, it.name_en, it.title, (it.lineup_names || []).join(" ")].join(" ");
-  const buckets = FAV_CATS.map((re, i) => recent.filter((it) => re ? re.test(txt(it)) : !FAV_CATS.slice(0, 4).some((r) => r.test(txt(it))))).filter((b) => b.length);
+  const favRank = (it) => { const i = FAV_CATS.findIndex((r) => r.test(txt(it))); return i === -1 ? 9 : i; };
+  const isFav = (it) => favRank(it) < 9;
+  // 種類ごとに順番に回す（めじるしばかりにならないように）
+  const recent = items.filter((it) => it.image && it.release >= new Date(Date.UTC(nowJST.getUTCFullYear(), nowJST.getUTCMonth() - 1, 1)).toISOString().slice(0, 7) && isFav(it)).sort((a, b) => (a.id < b.id ? -1 : 1));
+  const buckets = FAV_CATS.map((re, i) => recent.filter((it) => favRank(it) === i)).filter((b) => b.length);
   const picks = [];
   if (buckets.length) for (let k = 0; picks.length < 4 && k < 20; k++) {
     const slot = dayNo * 2 + k, b = buckets[slot % buckets.length], it = b[Math.floor(slot / buckets.length) % b.length];
@@ -1263,7 +1270,7 @@ write("data/shops.json", JSON.stringify(SHOPS.map((x) => [x.id, x.name, x.pref, 
   const favIds = items.filter(isFav).map((it) => it.id);
   write("data/x.json", JSON.stringify({ generated: new Date().toISOString(), today: today, week: { label: WEEK.label, from: WEEK.range.split("〜")[0], to: WEEK.range.split("〜")[1], count: week.length, items: week.slice(0, 12).map(pack) }, picks: picks.map(pack), morning: (() => {
     // 朝7:30の日替わり紹介（月曜は今週発売なので休み）：たまごっち→サンリオ→ディズニー→ポケモン→めじるし の順
-    const CATS = [["たまごっち", "#たまごっち", FAV_CATS[1]], ["サンリオ", "#サンリオ", FAV_CATS[0]], ["ディズニー", "#ディズニー", FAV_CATS[2]], ["ポケモン", "#ポケモン", /ポケモン|ポケットモンスター|ピカチュウ|Pok[eé]mon/i], ["めじるし", "#めじるしアクセサリー", /めじるし/]];
+    const CATS = [["たまごっち", "#たまごっち", FAV_CATS[0]], ["サンリオ", "#サンリオ", FAV_CATS[1]], ["ディズニー", "#ディズニー", FAV_CATS[2]], ["ポケモン", "#ポケモン", FAV_CATS[3]], ["めじるし", "#めじるしアクセサリー", FAV_CATS[4]]];
     const base = Date.UTC(2026, 10, 10); // 11/10（火）を「たまごっち」の日に
     const day = Date.UTC(nowJST.getUTCFullYear(), nowJST.getUTCMonth(), nowJST.getUTCDate());
     let n = 0; for (let d = base; d < day; d += 864e5) if (new Date(d).getUTCDay() !== 1) n++;
@@ -1276,7 +1283,7 @@ write("data/shops.json", JSON.stringify(SHOPS.map((x) => [x.id, x.name, x.pref, 
     const pool2 = cand.length ? cand : list;
     const it = pool2.length ? pool2[Math.floor(n / CATS.length) % pool2.length] : null;
     return { active: day >= base && new Date(day).getUTCDay() !== 1, monday: new Date(day).getUTCDay() === 1, category: label, tag, item: it ? pack(it) : null, count: list.length };
-  })(), new_info: (() => { const y = new Date(Date.UTC(nowJST.getUTCFullYear(), nowJST.getUTCMonth(), nowJST.getUTCDate() - 1)).toISOString().slice(0, 10); const rk = (it) => { if (!isFav(it)) return 9; const i = FAV_CATS.slice(0, 3).findIndex((r) => r.test(txt(it))); return i === -1 ? 3 : i; }; const list = items.filter((it) => it.added === y && it.image && it.release >= thisMonth).map((it, i) => [it, i]).sort((a, b) => rk(a[0]) - rk(b[0]) || a[1] - b[1]).map((x) => x[0]); return { added: y, count: list.length, fav_count: list.filter(isFav).length, items: list.slice(0, 8).map((it) => ({ ...pack(it), fav: isFav(it) })) }; })(), next_week: (() => { const nw = NEXT_WEEK.items.filter((it) => it.image); const rk = (it) => { if (!isFav(it)) return 9; const i = FAV_CATS.slice(0, 3).findIndex((r) => r.test(txt(it))); return i === -1 ? 3 : i; }; const list = nw.map((it, i) => [it, i]).sort((a, b) => rk(a[0]) - rk(b[0]) || a[1] - b[1]).map((x) => x[0]); return { label: NEXT_WEEK.label, from: NEXT_WEEK.range.split("〜")[0], to: NEXT_WEEK.range.split("〜")[1], count: NEXT_WEEK.items.length, items: list.slice(0, 16).map((it) => ({ ...pack(it), fav: isFav(it) })) }; })(), fav_ids: favIds, site: SITE_URL }));
+  })(), new_info: (() => { const y = new Date(Date.UTC(nowJST.getUTCFullYear(), nowJST.getUTCMonth(), nowJST.getUTCDate() - 1)).toISOString().slice(0, 10); const rk = favRank; const list = items.filter((it) => it.added === y && it.image && it.release >= thisMonth).map((it, i) => [it, i]).sort((a, b) => rk(a[0]) - rk(b[0]) || a[1] - b[1]).map((x) => x[0]); return { added: y, count: list.length, fav_count: list.filter(isFav).length, items: list.slice(0, 8).map((it) => ({ ...pack(it), fav: isFav(it) })) }; })(), next_week: (() => { const nw = NEXT_WEEK.items.filter((it) => it.image); const rk = favRank; const list = nw.map((it, i) => [it, i]).sort((a, b) => rk(a[0]) - rk(b[0]) || a[1] - b[1]).map((x) => x[0]); return { label: NEXT_WEEK.label, from: NEXT_WEEK.range.split("〜")[0], to: NEXT_WEEK.range.split("〜")[1], count: NEXT_WEEK.items.length, items: list.slice(0, 16).map((it) => ({ ...pack(it), fav: isFav(it) })) }; })(), fav_ids: favIds, site: SITE_URL }));
 }
 write("_headers", `/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n/assets/*\n  Cache-Control: public, max-age=31536000, immutable\n/images/*\n  Cache-Control: public, max-age=604800\n  Access-Control-Allow-Origin: *\n/data/*\n  Cache-Control: public, max-age=300\n  Access-Control-Allow-Origin: *\n`);
 
