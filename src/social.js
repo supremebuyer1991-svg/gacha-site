@@ -70,21 +70,23 @@ async function thPost(tok, text, ids) {
   return true;
 }
 
-// ---- Instagram（Instagram ログインのAPI）----
-const IG = "https://graph.instagram.com/v21.0";
+// ---- Instagram（Facebookページにつないだ Instagram。ページのアクセストークン＝期限なしで投稿する）----
+const IG = "https://graph.facebook.com/v21.0";
+let IG_ID = process.env.GACHA_IG_USER_ID || "17841473598073198"; // @gacha_pla
 async function igPost(tok, caption, ids) {
   const urls = ids.map((id) => `${SITE}/images/social/${id}.jpg`);
   if (DRY) { log("[DRY instagram]", caption, urls); return true; }
   const call = async (p, params) => { const r = await fetch(`${IG}/${p}`, { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: new URLSearchParams({ ...params, access_token: tok }) }).then((x) => x.json()); if (!r.id) throw new Error(JSON.stringify(r).slice(0, 300)); return r.id; };
   const wait = async (id) => { for (let i = 0; i < 20; i++) { const r = await fetch(`${IG}/${id}?fields=status_code&access_token=${encodeURIComponent(tok)}`).then((x) => x.json()); if (r.status_code === "FINISHED") return; if (r.status_code === "ERROR") throw new Error("画像の処理に失敗"); await sleep(3000); } };
+  if (!IG_ID) { const r = await fetch(`${IG}/me?fields=instagram_business_account&access_token=${encodeURIComponent(tok)}`).then((x) => x.json()); IG_ID = r.instagram_business_account && r.instagram_business_account.id; if (!IG_ID) throw new Error("Instagram のアカウントが見つかりません " + JSON.stringify(r).slice(0, 200)); }
   let cid;
-  if (urls.length === 1) { cid = await call("me/media", { image_url: urls[0], caption }); }
+  if (urls.length === 1) { cid = await call(`${IG_ID}/media`, { image_url: urls[0], caption }); }
   else {
-    const kids = []; for (const u of urls) { const k = await call("me/media", { image_url: u, is_carousel_item: "true" }); await wait(k); kids.push(k); }
-    cid = await call("me/media", { media_type: "CAROUSEL", children: kids.join(","), caption });
+    const kids = []; for (const u of urls) { const k = await call(`${IG_ID}/media`, { image_url: u, is_carousel_item: "true" }); await wait(k); kids.push(k); }
+    cid = await call(`${IG_ID}/media`, { media_type: "CAROUSEL", children: kids.join(","), caption });
   }
   await wait(cid);
-  await call("me/media_publish", { creation_id: cid });
+  await call(`${IG_ID}/media_publish`, { creation_id: cid });
   return true;
 }
 
@@ -131,7 +133,7 @@ async function igPost(tok, caption, ids) {
       if (L.length >= 2) {
         const tags = ["#ガチャガチャ", "#ガチャ", "#カプセルトイ", "#ガシャポン", "#新作ガチャ", "#ガチャ活", themed && m.tag ? m.tag : "#今週発売"];
         const cap = [`✨今日の${cat}ガチャ${L.length}選`, ``, ...L.map((it, i) => `${i + 1}. ${cleanName(it.name)}\n　1回${it.price}円・全${it.lineup}種｜${relText(it)}`), ``, `発売日・ラインナップ・近くの取扱店は、プロフィールのリンク（gachapla.com）から検索できます🪐`, `保存しておくと、ガチャ屋さんで見返せます📌`, ``, [...new Set(tags)].join(" ")].join("\n");
-        try { const tok = await refresh("instagram", igSecret, tokenOf("instagram", igSecret), "https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token="); await igPost(tok, cap.slice(0, 2100), L.map((i) => i.id)); for (const it of L) recent("instagram")[it.id] = today; changed = true; log("Instagram：4選を投稿", cat); }
+        try { const tok = igSecret; await igPost(tok, cap.slice(0, 2100), L.map((i) => i.id)); for (const it of L) recent("instagram")[it.id] = today; changed = true; log("Instagram：4選を投稿", cat); }
         catch (e) { log("⚠ Instagram の投稿に失敗", e.message); }
       }
     }
