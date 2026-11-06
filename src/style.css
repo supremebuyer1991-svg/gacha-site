@@ -993,3 +993,5 @@ body { font-variant-numeric: tabular-nums lining-nums; }
 em.rel-st { padding: 2px 8px; border-radius: 999px; }
 .rel-now { background: #ff5c8a; color: #fff !important; }
 .rel-soon { background: #e8f3ff; color: #1f6fd1 !important; }
+.sl-ebay { border-color: #e53238; color: #0064d2; }
+.sl-buyee { border-color: #f08300; color: #c25e00; }

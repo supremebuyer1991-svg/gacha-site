@@ -311,6 +311,20 @@ const affiliate = (it) => {
   return { amazon, rakuten };
 };
 
+// 英語ページ用：海外の人向けのリンク（site.json にIDを入れたものだけ出す）
+//   amazon_us_tag：アメリカのAmazonアソシエイトのトラッキングID（OneLink で見た人の国のAmazonへ）
+//   ebay_campid：eBay Partner Network のキャンペーンID
+//   buyee_link：Buyee のアフィリエイトリンク（飛び先の場所に {url} と書いておく）
+const overseas = (it) => {
+  const base = (it.name_en || it.name.replace(/【[^】]*】/g, "").trim());
+  const q = `${base} gashapon`;
+  const out = {};
+  if (site.amazon_us_tag) out.amazon = `https://www.amazon.com/s?k=${encodeURIComponent(q)}&tag=${encodeURIComponent(site.amazon_us_tag)}`;
+  if (site.ebay_campid) out.ebay = `https://www.ebay.com/sch/i.html?${new URLSearchParams({ _nkw: q, mkcid: "1", mkrid: "711-53200-19255-0", siteid: "0", campid: String(site.ebay_campid), customid: "gachapla", toolid: "10001", mkevt: "1" }).toString()}`;
+  if (site.buyee_link && site.buyee_link.includes("{url}")) out.buyee = site.buyee_link.replace("{url}", encodeURIComponent(`https://buyee.jp/mercari/search?keyword=${encodeURIComponent(it.name.replace(/【[^】]*】/g, "").trim())}`));
+  return out;
+};
+
 // JANコード（バンダイは公式URLや商品IDに入っている。タカラトミーアーツは取り込み時に jan に入れる）
 const janOf = (it) => {
   if (it.jan && /^\d{13}$/.test(it.jan)) return it.jan;
@@ -802,7 +816,12 @@ ${content}
         ${it.official_url ? `<a class="btn" href="${esc(it.official_url)}" target="_blank" rel="noopener">${t.official}</a>` : ""}
         <button type="button" class="heart" data-vote="${c.R}api/vote/${it.id}" data-id="${it.id}" aria-label="${t.heartAria}" title="${t.heartNote}"><i aria-hidden="true">♥</i><span>${t.heart}</span><b>${heartsOf(it)}</b></button>
       </div>
-      ${(() => { const L = shopLinks(it); return `<div class="shop-links"><span class="sl-pr">PR</span><a class="sl sl-rak" href="${esc(L.rakuten)}" target="_blank" rel="sponsored noopener">楽天市場</a><a class="sl sl-amz" href="${esc(L.amazon)}" target="_blank" rel="sponsored noopener">Amazon</a><a class="sl sl-yah" href="${esc(L.yahoo)}" target="_blank" rel="sponsored noopener">Yahoo!ショッピング</a><a class="sl sl-mer" href="${esc(L.mercari)}" target="_blank" rel="${L.mercariAf ? "sponsored noopener" : "noopener"}">${esc(L.mercariLabel)}</a></div>${L.jan ? `<p class="jan">JANコード：<span>${L.jan}</span></p>` : ""}`; })()}
+      ${lang === "en" ? (() => { const O = overseas(it); const L = shopLinks(it); const b = [
+        ["sl-amz", O.amazon || L.amazon, O.amazon ? "Amazon" : "Amazon Japan"],
+        ...(O.ebay ? [["sl-ebay", O.ebay, "eBay"]] : []),
+        ...(O.buyee ? [["sl-buyee", O.buyee, "Buyee (Mercari Japan)"]] : []),
+        ["sl-rak", L.rakuten, "Rakuten Japan"],
+      ]; return `<div class="shop-links"><span class="sl-pr">PR</span>${b.map(([k, u, l]) => `<a class="sl ${k}" href="${esc(u)}" target="_blank" rel="sponsored noopener">${l}</a>`).join("")}</div>${L.jan ? `<p class="jan">JAN code: <span>${L.jan}</span></p>` : ""}`; })() : (() => { const L = shopLinks(it); return `<div class="shop-links"><span class="sl-pr">PR</span><a class="sl sl-rak" href="${esc(L.rakuten)}" target="_blank" rel="sponsored noopener">楽天市場</a><a class="sl sl-amz" href="${esc(L.amazon)}" target="_blank" rel="sponsored noopener">Amazon</a><a class="sl sl-yah" href="${esc(L.yahoo)}" target="_blank" rel="sponsored noopener">Yahoo!ショッピング</a><a class="sl sl-mer" href="${esc(L.mercari)}" target="_blank" rel="${L.mercariAf ? "sponsored noopener" : "noopener"}">${esc(L.mercariLabel)}</a></div>${L.jan ? `<p class="jan">JANコード：<span>${L.jan}</span></p>` : ""}`; })()}
     </div>
   </article>
   ${(it.lineup_names || []).length ? `<section class="section lineup-sec">
@@ -876,7 +895,8 @@ ${content}
         <p>${t.buyLead}</p>
       </div>
       <div class="btns">
-        <a class="btn btn-gold" href="${esc(aff.amazon)}" target="_blank" rel="sponsored noopener">${t.amazon}</a>
+        ${lang === "en" && overseas(it).amazon ? `<a class="btn btn-gold" href="${esc(overseas(it).amazon)}" target="_blank" rel="sponsored noopener">Search on Amazon</a>` : `<a class="btn btn-gold" href="${esc(aff.amazon)}" target="_blank" rel="sponsored noopener">${t.amazon}</a>`}
+        ${lang === "en" && overseas(it).ebay ? `<a class="btn" href="${esc(overseas(it).ebay)}" target="_blank" rel="sponsored noopener">Search on eBay</a>` : ""}
         <a class="btn" href="${esc(aff.rakuten)}" target="_blank" rel="sponsored noopener">${t.rakuten}</a>
       </div>
     </aside>
@@ -886,13 +906,14 @@ ${content}
         <p>${t.fleaLead}</p>
       </div>
       <div class="btns">
+        ${lang === "en" && overseas(it).buyee ? `<a class="btn btn-gold" href="${esc(overseas(it).buyee)}" target="_blank" rel="sponsored noopener">Buy from Mercari Japan via Buyee</a>` : ""}
         ${[["mercari", `https://jp.mercari.com/search?keyword=${encodeURIComponent(it.name)}`], ["yahoo", `https://auctions.yahoo.co.jp/search/search?p=${encodeURIComponent(it.name)}`], ["rakuma", `https://fril.jp/s?query=${encodeURIComponent(it.name)}`]]
           .map(([k, u]) => `<a class="btn" href="${esc(u)}" target="_blank" rel="noopener">${t[k]}</a>`).join("")}
       </div>
     </aside>
   </section>
 
-  ${charasOf(it).length ? `<section class="section section-tight"><div class="section-head"><h2>${lang === "ja" ? "このキャラクター・作品のガチャ" : "More from this series"}</h2></div><div class="chara-list">${charasOf(it).map((ch) => `<a class="chara-chip" href="${c.H}chara/${ch.slug}.html">${esc(lang === "ja" ? ch.label : ch.en)}のガチャ一覧<small>${ch.list.length}</small></a>`).join("")}</div></section>` : ""}
+  ${charasOf(it).length ? `<section class="section section-tight"><div class="section-head"><h2>${lang === "ja" ? "このキャラクター・作品のガチャ" : "More from this series"}</h2></div><div class="chara-list">${charasOf(it).map((ch) => `<a class="chara-chip" href="${c.H}chara/${ch.slug}.html">${esc(lang === "ja" ? `${ch.label}のガチャ一覧` : `${ch.en} gacha`)}<small>${ch.list.length}</small></a>`).join("")}</div></section>` : ""}
   ${related.length ? `<section class="section">
     <div class="section-head"><h2>${lang === "ja" ? "関連するガチャ" : t.related}</h2><a class="more" href="${c.H}genre/${g.slug}.html">${t.seeAll(gl)}</a></div>
     <div class="grid">${related.map((x) => card(x, c)).join("")}</div>
