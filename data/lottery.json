@@ -2,59 +2,6 @@
   "note": "ガチャの抽選販売・整理券・入場抽選。時刻は日本時間。毎晩の見回りで追加・更新。 新しく足した抽選には added（足した日 \"2026-11-06\" の形）を入れる。20時のXポストは added が今日の抽選だけを載せる。",
   "entries": [
     {
-      "title": "ちいかわ めじるしアクセサリー3 / どうぶつの森 めじるしアクセサリー / サンリオ エモキュン パステルカラーver.",
-      "store": "ガシャポンバンダイオフィシャルショップ キャナルシティ博多",
-      "pref": "福岡県",
-      "kind": "item",
-      "start": "2026-11-04T12:00",
-      "end": "2026-11-04T18:00",
-      "method": "店頭で整理券",
-      "url": "",
-      "note": "くわしくはお店の公式Xで"
-    },
-    {
-      "title": "ちいかわ めじるしアクセサリー3",
-      "store": "フェスタランド鳳",
-      "pref": "大阪府",
-      "kind": "item",
-      "start": "2026-11-01T12:00",
-      "end": "2026-11-04T23:59",
-      "method": "LivePocket",
-      "url": "https://livepocket.jp/e/604u2"
-    },
-    {
-      "title": "ちいかわ めじるしアクセサリー3",
-      "store": "#C-pla 博多駅博多口",
-      "pref": "福岡県",
-      "kind": "item",
-      "start": "2026-10-31T19:30",
-      "end": "2026-11-04T23:59",
-      "method": "LivePocket",
-      "url": "https://livepocket.jp/e/22wy6"
-    },
-    {
-      "title": "どうぶつの森 めじるしアクセサリー",
-      "store": "#C-pla+ アリオ倉敷",
-      "pref": "岡山県",
-      "kind": "item",
-      "start": "2026-11-02T10:00",
-      "end": "2026-11-04T23:59",
-      "method": "LivePocket",
-      "url": "https://livepocket.jp/e/j-1v0",
-      "note": "販売日は11/9。1人3個まで"
-    },
-    {
-      "title": "PEANUTS めじるしアクセサリー SUMMER",
-      "store": "#C-pla コロワ甲子園",
-      "pref": "兵庫県",
-      "kind": "item",
-      "start": "2026-11-02T11:00",
-      "end": "2026-11-04T23:59",
-      "method": "LivePocket",
-      "url": "https://livepocket.jp/e/gfibg",
-      "note": "販売日は11/10。1人2個まで"
-    },
-    {
       "title": "ちいかわ めじるしアクセサリー3",
       "store": "#C-pla イオンモール熱田",
       "pref": "愛知県",
