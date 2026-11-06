@@ -15,7 +15,16 @@ const PREF_EN = require("./prefectures.js");
 const ROOT = path.join(__dirname, "..");
 const PREVIEW = process.argv.includes("--preview");
 const OUT = path.join(ROOT, PREVIEW ? "dist-preview" : "dist");
-const LANGS = ["ja", "en"];
+const LANGS = ["ja", "en", "zh-cn", "zh-tw", "ko"];
+// 言語ごとの情報（hreflang・htmlのlang・OGP・切り替えメニューの表示名）
+const LANG_META = {
+  ja: { hreflang: "ja", html: "ja", og: "ja_JP", label: "日本語" },
+  en: { hreflang: "en", html: "en", og: "en_US", label: "English" },
+  "zh-cn": { hreflang: "zh-Hans", html: "zh-Hans", og: "zh_CN", label: "简体中文" },
+  "zh-tw": { hreflang: "zh-Hant", html: "zh-Hant", og: "zh_TW", label: "繁體中文" },
+  ko: { hreflang: "ko", html: "ko", og: "ko_KR", label: "한국어" },
+};
+const XL = ["zh-cn", "zh-tw", "ko"]; // 英語をもとに訳した言語（文言がないところは英語で出す）
 
 /* ---------- 読み込み ---------- */
 const readJSON = (f, fallback) => {
@@ -213,6 +222,17 @@ const T = {
   },
 };
 
+/* ---------- 中国語・韓国語：src/i18n/<lang>.js（画面の文言など）と data/i18n/names-<lang>.json（商品名） ---------- */
+const I18N = {}, I18N_GENRE = {}, I18N_MAKER = {}, I18N_CHARA = {};
+for (const l of XL) {
+  const f = path.join(__dirname, "i18n", `${l}.js`);
+  const m = fs.existsSync(f) ? require(f) : {};
+  I18N[l] = m;
+  I18N_GENRE[l] = m.genres || {}; I18N_MAKER[l] = m.makers || {}; I18N_CHARA[l] = m.chara || {};
+  T[l] = { ...T.en, ...(typeof m.t === "function" ? m.t({ site, MONTH_EN, jstParts }) : m.t || {}), htmlLang: LANG_META[l].html, ogLocale: LANG_META[l].og };
+}
+const charaLabel = (ch, lang) => (lang === "ja" ? ch.label : (I18N_CHARA[lang] && I18N_CHARA[lang][ch.en]) || ch.en);
+
 /* ---------- 画像：images/商品id.jpg（.webp .png .jpeg）を置けば自動で使う ---------- */
 const findImage = (id) => {
   for (const ext of ["webp", "jpg", "jpeg", "png"]) {
@@ -229,6 +249,7 @@ const thumbOf = (img) => {
 /* ---------- 商品データのチェック（おかしい商品は飛ばして警告） ---------- */
 const warnings = [];
 const seen = new Set();
+const I18N_NAMES = Object.fromEntries(XL.map((l) => [l, readJSON(`i18n/names-${l}.json`, {}) || {}]));
 const items = rawItems.filter((it, i) => {
   const where = `items.json ${i + 1}件目（${it && it.name ? it.name : "名前なし"}）`;
   const need = ["id", "name", "maker", "price", "release", "genre"];
@@ -248,6 +269,7 @@ const items = rawItems.filter((it, i) => {
   price: Number(it.price),
   legacy_genre: it.genre,
   moods: (it.moods || []).filter((m) => moodSlugs.includes(m)),
+  names: Object.fromEntries(XL.map((l) => [l, (I18N_NAMES[l] || {})[it.id] || ""]).filter(([, v]) => v)),
 }));
 
 const validStores = stores.filter((s) => {
@@ -283,17 +305,19 @@ const heartsOf = (it) => Number(votes[it.id]) || 0;
 const byPopular = (a, b) => heartsOf(b) - heartsOf(a) || b.popularity - a.popularity;
 
 // 言語ごとの表示名
-const nameOf = (it, lang) => (lang === "en" && it.name_en) || it.name;
-const makerOf = (it, lang) => (lang === "en" && it.maker_en) || it.maker;
-const descOf = (it, lang) => (lang === "en" ? it.description_en : it.description);
-const tagsOf = (it, lang) => (lang === "en" && it.tags_en.length ? it.tags_en : it.tags);
-const genreLabel = (g, lang) => (lang === "en" ? g.en : g.label);
+// 中国語・韓国語の商品名は data/i18n/names-<lang>.json（なければ英語名→日本語名）
+const nameOf = (it, lang) => (lang === "ja" ? it.name : (lang !== "en" && it.names && it.names[lang]) || it.name_en || it.name);
+const hasName = (it, lang) => lang === "ja" || (lang === "en" ? !!it.name_en : !!(it.names && it.names[lang]));
+const makerOf = (it, lang) => (lang === "ja" ? it.maker : (I18N_MAKER[lang] && I18N_MAKER[lang][it.maker]) || it.maker_en || it.maker);
+const descOf = (it, lang) => (lang === "ja" ? it.description : lang === "en" ? it.description_en : "");
+const tagsOf = (it, lang) => (lang !== "ja" && it.tags_en.length ? it.tags_en : it.tags);
+const genreLabel = (g, lang) => (lang === "ja" ? g.label : (I18N_GENRE[lang] && I18N_GENRE[lang][g.slug]) || g.en);
 // 「・」の後ろでだけ改行する（言葉の途中で折り返さない）
 const phr = (s) => esc(s).split(/(?<=・)/).map((w) => `<span class="ph">${w}</span>`).join("");
 const inGenre = (slug) => items.filter((it) => it._genres.includes(slug));
 const TYPES = site.types || [];
 const inType = (slug) => { const ty = TYPES.find((x) => x.slug === slug); return ty ? items.filter((it) => it._qs.some((k) => ty.subs.includes(k))) : []; };
-const moodLabel = (m, lang) => (lang === "en" ? m.en || m.label : m.label);
+const moodLabel = (m, lang) => (lang !== "ja" ? m.en || m.label : m.label);
 
 const affSearch = (q) => {
   const amazon = `https://www.amazon.co.jp/s?k=${encodeURIComponent(q)}${site.amazon_tag ? `&tag=${encodeURIComponent(site.amazon_tag)}` : ""}`;
@@ -525,7 +549,6 @@ const FONTS = "https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700
 /* ================= 言語ごとにページを作る ================= */
 for (const lang of LANGS) {
   const t = T[lang];
-  const other = lang === "ja" ? "en" : "ja";
 
   /*
    * rel   … 言語フォルダの中での場所（例 item/abc.html）
@@ -567,23 +590,24 @@ for (const lang of LANGS) {
   <div class="card-foot"><span><b>¥${it.price}</b>${it.lineup ? ` / ${t.lineup(it.lineup)}` : ""}</span>${relLabel(it)}</div>
 </a>`;
 
-  const layout = ({ rel, title, description, body, jsonld = [], ogImage = "", ogType = "website", current = "", jaOnly = false, extraHead = "", noindex = false, noAlt = false, lastmod = "" }) => {
+  const layout = ({ rel, title, description, body, jsonld = [], ogImage = "", ogType = "website", current = "", jaOnly = false, extraHead = "", noindex = false, noAlt = false, lastmod = "", alts = null }) => {
+    // この内容がある言語（hreflang と言語メニューに使う）
+    const ALT = jaOnly ? ["ja"] : alts || LANGS;
     const c = ctx(rel);
     const fragment = PREVIEW && lang === "ja" && rel === "index.html";
-    const fullTitle = rel === "index.html" ? (lang === "en" ? `${site.name} | Gacha (capsule toys) in Japan: new releases & shops near you` : `ガチャガチャ新作・発売日一覧【${YM_NOW}最新】在庫店・入荷速報｜ガチャプラネット`) : `${title}${lang === "ja" ? "｜ガチャプラネット" : ` | ${site.name}`}`;
+    const fullTitle = rel === "index.html" ? (lang !== "ja" ? `${site.name} | Gacha (capsule toys) in Japan: new releases & shops near you` : `ガチャガチャ新作・発売日一覧【${YM_NOW}最新】在庫店・入荷速報｜ガチャプラネット`) : `${title}${lang === "ja" ? "｜ガチャプラネット" : ` | ${site.name}`}`;
     // 反対の言語の同じページへのリンク
-    const switchHref = jaOnly ? `${c.H}en/index.html` : lang === "ja" ? `${c.H}en/${rel}` : `${c.R}${rel}`;
+    const toLang = (l) => { const base = c.R + (l === "ja" ? "" : `${l}/`); return jaOnly && l !== "ja" ? `${base}index.html` : `${base}${rel}`; };
+    const langMenu = `<details class="lang-menu"><summary aria-label="Language">🌐 <span>${LANG_META[lang].label}</span></summary><div class="lang-list">${LANGS.map((l) => `<a href="${toLang(l)}" hreflang="${LANG_META[l].hreflang}" lang="${LANG_META[l].html}"${l === lang ? ' aria-current="true"' : ""}>${LANG_META[l].label}</a>`).join("")}</div></details>`;
     const ld = jsonld.map((o) => `<script type="application/ld+json">${JSON.stringify(o).replace(/</g, "\\u003c")}</script>`).join("\n");
     const NAV = [["index.html#new", "new"], ["week.html", "week"], ["index.html#ranking", "ranking"], ["calendar.html", "calendar"], ["@lottery.html", "lottery"], ["@map.html", "map"], ["@gachakatsu.html", "katsu"], ["@toprated.html", "toprated"], ["index.html#types", "genre"], ["faq.html", "faq"]];
     const head = `<title>${esc(fullTitle)}</title>
 ${fragment ? '<meta name="claude:viewport-fit-sides" content="cover">' : ""}
-<meta name="site-lang" content="${lang}">
+<meta name="site-lang" content="${lang}">${I18N[lang] && I18N[lang].appM ? `\n<script>window.__M=${JSON.stringify(I18N[lang].appM).replace(/</g, "\\u003c")};</script>` : ""}
 ${site.vc_linkswitch_pid ? `<script>var vc_pid = "${esc(site.vc_linkswitch_pid)}";</script><script src="//aml.valuecommerce.com/vcdal.js" async></script>` : ""}
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${esc(canonical(lang, rel))}">
-${noindex ? `<meta name="robots" content="noindex, follow">\n` : ""}${jaOnly || noAlt ? "" : `<link rel="alternate" hreflang="ja" href="${esc(canonical("ja", rel))}">
-<link rel="alternate" hreflang="en" href="${esc(canonical("en", rel))}">
-<link rel="alternate" hreflang="x-default" href="${esc(canonical("ja", rel))}">`}
+${noindex ? `<meta name="robots" content="noindex, follow">\n` : ""}${noindex || noAlt || ALT.length < 2 ? "" : ALT.map((l) => `<link rel="alternate" hreflang="${LANG_META[l].hreflang}" href="${esc(canonical(l, rel))}">`).join("\n") + `\n<link rel="alternate" hreflang="x-default" href="${esc(canonical("ja", rel))}">`}
 <meta property="og:site_name" content="${esc(site.name)}">
 <meta property="og:locale" content="${t.ogLocale}">
 <meta property="og:title" content="${esc(fullTitle)}">
@@ -594,9 +618,9 @@ ${noindex ? `<meta name="robots" content="noindex, follow">\n` : ""}${jaOnly || 
 <meta name="twitter:card" content="summary_large_image">
 ${site.x_account ? `<meta name="twitter:site" content="@${esc(site.x_account.replace(/^@/, ""))}">` : ""}
 <meta name="theme-color" content="#121212">
-<link rel="preconnect" href="https://fonts.googleapis.com">
+${lang === "zh-cn" ? "" : `<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="${FONTS}">
+<link rel="stylesheet" href="${FONTS}">`}
 <link rel="stylesheet" href="${c.R}assets/style.css?v=${CSS_V}">
 ${extraHead}
 ${ld}`;
@@ -608,12 +632,13 @@ ${ld}`;
     <input type="search" name="q" id="search-q" placeholder="${t.searchPh}" aria-label="${t.searchAria}" autocomplete="off" enterkeyhint="search">
     <div class="search-pop" id="search-pop" hidden></div>
   </form>
-  <a class="lang-switch" href="${switchHref}" hreflang="${other}" lang="${other}" aria-label="${t.switchAria}">${t.switchLabel}</a>
+  ${langMenu}
 </div></header>
 <main>${body}</main>
 <footer class="site-footer"><div class="wrap">
   <div>© ${nowJST.getUTCFullYear()} ${esc(site.name)}</div>
-  <nav aria-label="${t.footAria}"><a href="${c.H}faq.html">${t.nav.faq}</a><a href="${c.H}about.html">${t.about}</a>${lang === "ja" ? `<a href="${c.H}privacy.html">プライバシーポリシー</a>` : ""}<a href="${c.H}calendar.html">${t.nav.calendar}</a><a href="${switchHref}" hreflang="${other}" lang="${other}">${t.switchLabel}</a></nav>
+  <nav aria-label="${t.footAria}"><a href="${c.H}faq.html">${t.nav.faq}</a><a href="${c.H}about.html">${t.about}</a>${lang === "ja" ? `<a href="${c.H}privacy.html">プライバシーポリシー</a>` : ""}<a href="${c.H}calendar.html">${t.nav.calendar}</a></nav>
+  <nav class="foot-langs" aria-label="Language">${LANGS.map((l) => `<a href="${toLang(l)}" hreflang="${LANG_META[l].hreflang}" lang="${LANG_META[l].html}">${LANG_META[l].label}</a>`).join("")}</nav>
   <p class="disclosure">${t.disclosure}</p>
 </div></footer>
 <script src="${c.R}assets/app.js?v=${JS_V}" defer></script>`;
@@ -629,7 +654,7 @@ ${content}
 </body>
 </html>`;
     write(langDir(lang) + rel, html);
-    pages.push([lang, rel, jaOnly || noAlt, noindex, lastmod]);
+    pages.push([lang, rel, noAlt ? [lang] : ALT, noindex, lastmod]);
   };
 
   /* ---------- トップページ ---------- */
@@ -666,8 +691,8 @@ ${content}
     </div>
     <a class="katsu-banner" href="${c.R}gachakatsu.html">
       <span class="kb-art" aria-hidden="true"><i class="kb-dot a">1</i><i class="kb-dot b">2</i><i class="kb-dot c">3</i><svg viewBox="0 0 120 60"><path d="M10 50 C 35 10, 60 55, 85 18 S 112 30, 112 30" fill="none" stroke="#3aa0ff" stroke-width="3" stroke-dasharray="6 6"/></svg></span>
-      <span class="kb-text"><b>${lang === "en" ? "NEW｜Gacha route planner" : "NEW｜ガチャ活しよう！"}</b><span>${lang === "en" ? "Find capsule-toy shops near you and get the most efficient route — by number of shops, time limit, or stops on the way." : "近くのガチャのお店を、いちばん効率よく回るルートを自動で作成。お店の数・時間・目的地までの寄り道から選べます。"}</span></span>
-      <span class="kb-go">${lang === "en" ? "Plan a route →" : "ルートを作る →"}</span>
+      <span class="kb-text"><b>${lang !== "ja" ? "NEW｜Gacha route planner" : "NEW｜ガチャ活しよう！"}</b><span>${lang !== "ja" ? "Find capsule-toy shops near you and get the most efficient route — by number of shops, time limit, or stops on the way." : "近くのガチャのお店を、いちばん効率よく回るルートを自動で作成。お店の数・時間・目的地までの寄り道から選べます。"}</span></span>
+      <span class="kb-go">${lang !== "ja" ? "Plan a route →" : "ルートを作る →"}</span>
     </a>
     <form class="quiz" id="quiz" aria-labelledby="quiz-title">
       <div class="quiz-head">
@@ -685,14 +710,14 @@ ${content}
       <fieldset data-last><legend><b>3</b>${t.qGroups}</legend>
         <p class="q-hint">${t.groupsHint}</p>
         <div class="groups">${(site.quiz_groups || []).map((g) => `<div class="grp" data-group="${g.slug}">
-          <label class="grp-main"><input type="checkbox" name="group" value="${g.slug}"><span>${lang === "en" ? g.en : g.label}</span></label>
+          <label class="grp-main"><input type="checkbox" name="group" value="${g.slug}"><span>${lang !== "ja" ? g.en : g.label}</span></label>
           <button type="button" class="grp-more" aria-expanded="false" aria-controls="sub-${g.slug}" data-more="${t.more}" data-less="${t.less}">${t.more}</button>
           <div class="grp-subs" id="sub-${g.slug}" hidden>
-            <div class="opts">${liveSubs(g).map((x) => opt("sub", "checkbox", `${g.slug}:${x.slug}`, lang === "en" ? x.en : x.label)).join("")}</div>
+            <div class="opts">${liveSubs(g).map((x) => opt("sub", "checkbox", `${g.slug}:${x.slug}`, lang !== "ja" ? x.en : x.label)).join("")}</div>
             ${liveSubs(g).map((x) => ({ x, leaves: liveLeaves(g, x) })).filter((v) => v.leaves.length > 1).map(({ x, leaves }) => `<div class="leaf-row" data-sub="${g.slug}:${x.slug}" hidden>
-              <span class="leaf-label">${t.leafPrefix(lang === "en" ? x.en : x.label)}</span>
+              <span class="leaf-label">${t.leafPrefix(lang !== "ja" ? x.en : x.label)}</span>
               ${leaves.length > LEAF_SHOW ? `<input class="leaf-filter" type="search" placeholder="${t.leafFilter}" aria-label="${t.leafFilter}">` : ""}
-              <div class="opts opts-sm${leaves.length > LEAF_SHOW ? " is-clipped" : ""}">${leaves.map((l, i) => opt("leaf", "checkbox", `${g.slug}:${x.slug}:${l.slug}`, `${esc(lang === "en" ? l.en : l.label)}<small>${l.n}</small>`).replace('<label class="opt"', i >= LEAF_SHOW ? '<label class="opt is-extra"' : '<label class="opt"')).join("")}</div>
+              <div class="opts opts-sm${leaves.length > LEAF_SHOW ? " is-clipped" : ""}">${leaves.map((l, i) => opt("leaf", "checkbox", `${g.slug}:${x.slug}:${l.slug}`, `${esc(lang !== "ja" ? l.en : l.label)}<small>${l.n}</small>`).replace('<label class="opt"', i >= LEAF_SHOW ? '<label class="opt is-extra"' : '<label class="opt"')).join("")}</div>
               ${leaves.length > LEAF_SHOW ? `<p class="leaf-none" hidden>${t.leafNone}</p><button type="button" class="leaf-all">${t.leafAll(leaves.length)}</button>` : ""}
             </div>`).join("")}
           </div>
@@ -718,13 +743,13 @@ ${content}
   </section>
 
   ${WEEK.items.length ? `<section class="section section-tight" id="thisweek">
-    <div class="section-head"><h2>${lang === "en" ? "Releasing this week" : "今週発売のガチャ"}</h2><a class="more" href="${c.H}week.html">${lang === "en" ? `${WEEK.range} · all ${WEEK.items.length}` : `${WEEK.range}・全${WEEK.items.length}件`}</a></div>
-    <div class="grid row-scroll">${WEEK.items.slice(0, 12).map((it) => card(it, c)).join("")}<a class="card see-all" href="${c.H}week.html"><span class="see-all-in"><b>${lang === "en" ? "See all" : "全部見る"}</b><span>→</span></span></a></div>
+    <div class="section-head"><h2>${lang !== "ja" ? "Releasing this week" : "今週発売のガチャ"}</h2><a class="more" href="${c.H}week.html">${lang !== "ja" ? `${WEEK.range} · all ${WEEK.items.length}` : `${WEEK.range}・全${WEEK.items.length}件`}</a></div>
+    <div class="grid row-scroll">${WEEK.items.slice(0, 12).map((it) => card(it, c)).join("")}<a class="card see-all" href="${c.H}week.html"><span class="see-all-in"><b>${lang !== "ja" ? "See all" : "全部見る"}</b><span>→</span></span></a></div>
   </section>` : ""}
 
   <section class="section" id="new">
-    <div class="section-head"><h2>${t.newTitle}</h2><span><a class="more" href="${c.H}week.html">${lang === "en" ? "This week" : "今週発売"}</a>　<a class="more" href="${c.H}calendar.html">${t.toCalendar}</a></span></div>
-    <div class="grid row-scroll">${newest.map((it) => card(it, c)).join("")}<a class="card see-all" href="${c.H}new.html"><span class="see-all-in"><b>${lang === "en" ? "See all" : "全部見る"}</b><span>→</span></span></a></div>
+    <div class="section-head"><h2>${t.newTitle}</h2><span><a class="more" href="${c.H}week.html">${lang !== "ja" ? "This week" : "今週発売"}</a>　<a class="more" href="${c.H}calendar.html">${t.toCalendar}</a></span></div>
+    <div class="grid row-scroll">${newest.map((it) => card(it, c)).join("")}<a class="card see-all" href="${c.H}new.html"><span class="see-all-in"><b>${lang !== "ja" ? "See all" : "全部見る"}</b><span>→</span></span></a></div>
   </section>
 
   <section class="section section-tight" id="feed" data-api="${c.R}api/feed" hidden>
@@ -744,8 +769,8 @@ ${content}
 
   <section class="section section-tight" id="series">
     <div class="section-head"><h2>${lang === "ja" ? "人気シリーズ" : "Popular series"}</h2></div>
-    <div class="series-tiles">${SERIES.map((sr) => { const n = seriesItems(sr).length; return n ? `<a class="st st-${sr.slug}" href="${c.H}chara/${sr.slug}.html"><span class="st-e" aria-hidden="true">${sr.emoji}</span><span class="st-l">${lang === "ja" ? sr.label : sr.en}</span><span class="st-n">${t.series(n)}</span></a>` : ""; }).join("")}</div>
-    <div class="chara-list chara-list-top">${CHARAS.slice(0, 15).map((ch) => `<a class="chara-chip" href="${c.H}chara/${ch.slug}.html">${esc(lang === "ja" ? ch.label : ch.en)}<small>${ch.list.length}</small></a>`).join("")}<a class="chara-chip chara-more" href="${c.H}chara.html">${lang === "ja" ? "キャラクター・作品をすべて見る →" : "All characters →"}</a></div>
+    <div class="series-tiles">${SERIES.map((sr) => { const n = seriesItems(sr).length; return n ? `<a class="st st-${sr.slug}" href="${c.H}chara/${sr.slug}.html"><span class="st-e" aria-hidden="true">${sr.emoji}</span><span class="st-l">${lang === "ja" ? sr.label : (I18N_CHARA[lang] && I18N_CHARA[lang][sr.en]) || sr.en}</span><span class="st-n">${t.series(n)}</span></a>` : ""; }).join("")}</div>
+    <div class="chara-list chara-list-top">${CHARAS.slice(0, 15).map((ch) => `<a class="chara-chip" href="${c.H}chara/${ch.slug}.html">${esc(charaLabel(ch, lang))}<small>${ch.list.length}</small></a>`).join("")}<a class="chara-chip chara-more" href="${c.H}chara.html">${lang === "ja" ? "キャラクター・作品をすべて見る →" : "All characters →"}</a></div>
   </section>
 
   <section class="section" id="types">
@@ -790,7 +815,7 @@ ${content}
     })();
     // 説明文：発売週とラインナップ名も入れて、ページごとに中身の違う説明にする
     const ws = weekStartOf(it), wi = ws ? weekInfo(ws) : null;
-    const mo = wi ? (lang === "en" ? `${t.month(it.release)} (week of ${wi.range.split("〜")[0]})` : `${wi.m}月第${wi.no}週（${wi.range.split("〜")[0]}〜）`) : t.month(it.release);
+    const mo = wi ? (lang !== "ja" ? `${t.month(it.release)} (week of ${wi.range.split("〜")[0]})` : `${wi.m}月第${wi.no}週（${wi.range.split("〜")[0]}〜）`) : t.month(it.release);
     const ln = (it.lineup_names || []).slice(0, 3);
     let desc = t.itemDesc(it, name, maker, mo);
     if (ln.length && lang === "ja") desc = desc.replace("のガチャガチャ。", `のガチャガチャ。ラインナップは${ln.join("、")}${it.lineup > ln.length ? "など" : ""}。`);
@@ -802,8 +827,8 @@ ${content}
     <div>${thumb(it, c.R, { eager: true })}</div>
     <div>
       <h1>${esc(name)}</h1>
-      ${lang === "en" && it.name_en ? `<p class="name-ja" lang="ja">${esc(it.name)}</p>` : ""}
-      <div class="price"><small>${lang === "ja" ? t.perPlay : ""}</small><b>¥${it.price}</b><span>${lang === "en" ? t.perPlay : ""}${it.lineup ? `${lang === "en" ? " · " : ""}${t.lineup(it.lineup)}` : ""}</span></div>
+      ${lang !== "ja" && it.name_en ? `<p class="name-ja" lang="ja">${esc(it.name)}</p>` : ""}
+      <div class="price"><small>${lang === "ja" ? t.perPlay : ""}</small><b>¥${it.price}</b><span>${lang !== "ja" ? t.perPlay : ""}${it.lineup ? `${lang !== "ja" ? " · " : ""}${t.lineup(it.lineup)}` : ""}</span></div>
       <dl class="spec">
         <dt>${t.maker}</dt><dd><a href="${c.H}maker/${makerSlug(it.maker)}.html">${esc(maker)}</a></dd>
         <dt>${t.release}</dt><dd><a href="${c.H}calendar/${ws ? ws.toISOString().slice(0, 7) : it.release}.html">${t.month(it.release)}</a>${lang === "ja" && it.release_note ? (ws ? `<a class="rel-note" href="${c.H}calendar/${ws.toISOString().slice(0, 7)}.html#w${wi.key}">${esc(it.release_note)}</a>` : `<span class="rel-note">${esc(it.release_note)}</span>`) : ""}</dd>
@@ -817,7 +842,7 @@ ${content}
         ${it.official_url ? `<a class="btn" href="${esc(it.official_url)}" target="_blank" rel="noopener">${t.official}</a>` : ""}
         <button type="button" class="heart" data-vote="${c.R}api/vote/${it.id}" data-id="${it.id}" aria-label="${t.heartAria}" title="${t.heartNote}"><i aria-hidden="true">♥</i><span>${t.heart}</span><b>${heartsOf(it)}</b></button>
       </div>
-      ${lang === "en" ? (() => { const O = overseas(it); const L = shopLinks(it); const b = [
+      ${lang !== "ja" ? (() => { const O = overseas(it); const L = shopLinks(it); const b = [
         ["sl-amz", O.amazon || L.amazon, O.amazon ? "Amazon" : "Amazon Japan"],
         ...(O.ebay ? [["sl-ebay", O.ebay, "eBay"]] : []),
         ...(O.buyee ? [["sl-buyee", O.buyee, "Buyee (Mercari Japan)"]] : []),
@@ -896,8 +921,8 @@ ${content}
         <p>${t.buyLead}</p>
       </div>
       <div class="btns">
-        ${lang === "en" && overseas(it).amazon ? `<a class="btn btn-gold" href="${esc(overseas(it).amazon)}" target="_blank" rel="sponsored noopener">Search on Amazon</a>` : `<a class="btn btn-gold" href="${esc(aff.amazon)}" target="_blank" rel="sponsored noopener">${t.amazon}</a>`}
-        ${lang === "en" && overseas(it).ebay ? `<a class="btn" href="${esc(overseas(it).ebay)}" target="_blank" rel="sponsored noopener">Search on eBay</a>` : ""}
+        ${lang !== "ja" && overseas(it).amazon ? `<a class="btn btn-gold" href="${esc(overseas(it).amazon)}" target="_blank" rel="sponsored noopener">Search on Amazon</a>` : `<a class="btn btn-gold" href="${esc(aff.amazon)}" target="_blank" rel="sponsored noopener">${t.amazon}</a>`}
+        ${lang !== "ja" && overseas(it).ebay ? `<a class="btn" href="${esc(overseas(it).ebay)}" target="_blank" rel="sponsored noopener">Search on eBay</a>` : ""}
         <a class="btn" href="${esc(aff.rakuten)}" target="_blank" rel="sponsored noopener">${t.rakuten}</a>
       </div>
     </aside>
@@ -907,7 +932,7 @@ ${content}
         <p>${t.fleaLead}</p>
       </div>
       <div class="btns">
-        ${lang === "en" && overseas(it).buyee ? `<a class="btn btn-gold" href="${esc(overseas(it).buyee)}" target="_blank" rel="sponsored noopener">Buy from Mercari Japan via Buyee</a>` : ""}
+        ${lang !== "ja" && overseas(it).buyee ? `<a class="btn btn-gold" href="${esc(overseas(it).buyee)}" target="_blank" rel="sponsored noopener">Buy from Mercari Japan via Buyee</a>` : ""}
         ${[["mercari", `https://jp.mercari.com/search?keyword=${encodeURIComponent(it.name)}`], ["yahoo", `https://auctions.yahoo.co.jp/search/search?p=${encodeURIComponent(it.name)}`], ["rakuma", `https://fril.jp/s?query=${encodeURIComponent(it.name)}`]]
           .map(([k, u]) => `<a class="btn" href="${esc(u)}" target="_blank" rel="noopener">${t[k]}</a>`).join("")}
       </div>
@@ -936,7 +961,7 @@ ${content}
       ],
     };
     layout({ rel, title: t.itemTitle(name), description: desc, body, jsonld: [product, crumbs], ogImage: absImg(it), ogType: "product",
-      noindex: lang === "en" && !it.name_en, noAlt: !it.name_en, lastmod: it.updated || it.added || "" });
+      noindex: !hasName(it, lang), alts: LANGS.filter((l) => hasName(it, l)), lastmod: it.updated || it.added || "" });
   }
 
   /* ---------- 一覧ページ（ジャンル別・メーカー別） ---------- */
@@ -960,7 +985,7 @@ ${content}
   // キャラクター・作品ごとのページ
   for (const ch of CHARAS) {
     const list = [...ch.list].sort(byNewest);
-    const L = lang === "ja" ? ch.label : ch.en;
+    const L = charaLabel(ch, lang);
     const top = list[0];
     listPage(`chara/${ch.slug}.html`, {
       title: lang === "ja" ? `${L}のガチャガチャ新作・発売日一覧【${YM_NOW}最新】` : `${L} gacha (capsule toys) in Japan – new releases & where to buy`,
@@ -977,26 +1002,26 @@ ${content}
     const body = `<div class="wrap">
   <nav class="breadcrumb" aria-label="breadcrumb"><a href="${c.H}index.html">${t.home}</a><span>/</span><span>${esc(title)}</span></nav>
   <header class="page-head"><h1>${esc(title)}</h1><p class="lead">${esc(lead)}</p></header>
-  <section class="section" style="padding-top:32px"><div class="chara-list">${CHARAS.map((ch) => `<a class="chara-chip" href="${c.H}chara/${ch.slug}.html">${esc(lang === "ja" ? ch.label : ch.en)}<small>${ch.list.length}</small></a>`).join("")}</div></section>
+  <section class="section" style="padding-top:32px"><div class="chara-list">${CHARAS.map((ch) => `<a class="chara-chip" href="${c.H}chara/${ch.slug}.html">${esc(charaLabel(ch, lang))}<small>${ch.list.length}</small></a>`).join("")}</div></section>
 </div>`;
     layout({ rel, title, description: lead, body, current: "genre", jsonld: [] });
   }
   // 今週発売のガチャ（X の「今週発売」投稿のリンク先）
   listPage("week.html", {
-    title: lang === "en" ? `New gacha releasing this week (${WEEK.range}) – ${WEEK.items.length} series` : `今週発売のガチャガチャ新作（${WEEK.range}）${WEEK.items.length}シリーズ`,
-    lead: lang === "en" ? `${WEEK.items.length} capsule toy series releasing this week, most popular first.` : `${WEEK.label}（${WEEK.range}）に発売されるガチャ${WEEK.items.length}シリーズを、人気の順に並べています。発売日は地域や店舗によって前後します。`,
+    title: lang !== "ja" ? `New gacha releasing this week (${WEEK.range}) – ${WEEK.items.length} series` : `今週発売のガチャガチャ新作（${WEEK.range}）${WEEK.items.length}シリーズ`,
+    lead: lang !== "ja" ? `${WEEK.items.length} capsule toy series releasing this week, most popular first.` : `${WEEK.label}（${WEEK.range}）に発売されるガチャ${WEEK.items.length}シリーズを、人気の順に並べています。発売日は地域や店舗によって前後します。`,
     list: WEEK.items, current: "calendar",
     ogImage: fs.existsSync(path.join(ROOT, "images", "og", "week.jpg")) ? `${SITE_URL}/images/og/week.jpg?v=${today}` : "",
   });
   listPage("next-week.html", {
-    title: lang === "en" ? `Gacha releasing next week (${NEXT_WEEK.range}) – ${NEXT_WEEK.items.length} series` : `来週発売のガチャガチャ新作（${NEXT_WEEK.range}）${NEXT_WEEK.items.length}シリーズ`,
-    lead: lang === "en" ? `${NEXT_WEEK.items.length} capsule toy series releasing next week.` : `${NEXT_WEEK.label}（${NEXT_WEEK.range}）に発売予定のガチャ${NEXT_WEEK.items.length}シリーズです。発売日は地域や店舗によって前後します。`,
+    title: lang !== "ja" ? `Gacha releasing next week (${NEXT_WEEK.range}) – ${NEXT_WEEK.items.length} series` : `来週発売のガチャガチャ新作（${NEXT_WEEK.range}）${NEXT_WEEK.items.length}シリーズ`,
+    lead: lang !== "ja" ? `${NEXT_WEEK.items.length} capsule toy series releasing next week.` : `${NEXT_WEEK.label}（${NEXT_WEEK.range}）に発売予定のガチャ${NEXT_WEEK.items.length}シリーズです。発売日は地域や店舗によって前後します。`,
     list: NEXT_WEEK.items, current: "calendar",
   });
   // 新着ガチャ（トップの「全部見る」のリンク先）
   listPage("new.html", {
-    title: lang === "en" ? "Latest gacha (capsule toys) added" : "新着ガチャガチャ一覧（最新の新作情報）",
-    lead: lang === "en" ? "The latest Japanese capsule toys added to the site, newest first, with release month, price and number of designs." : "バンダイ・タカラトミーアーツなどの新作ガチャガチャを、サイトに載った新しい順に並べています。発売月・価格・全何種かもひと目でわかります。",
+    title: lang !== "ja" ? "Latest gacha (capsule toys) added" : "新着ガチャガチャ一覧（最新の新作情報）",
+    lead: lang !== "ja" ? "The latest Japanese capsule toys added to the site, newest first, with release month, price and number of designs." : "バンダイ・タカラトミーアーツなどの新作ガチャガチャを、サイトに載った新しい順に並べています。発売月・価格・全何種かもひと目でわかります。",
     list: [...items].sort(byNewest).slice(0, 120), current: "new",
   });
   for (const g of TYPES) {
@@ -1023,7 +1048,7 @@ ${content}
     // 今月 → 来月以降（公式に載っている分すべて）→ 先月 の順
     const recent = [...allMonths.filter((m) => m >= thisMonth), ...allMonths.filter((m) => m >= prevMonth && m < thisMonth)];
     const past = allMonths.filter((m) => m < prevMonth).reverse();
-    const en = lang === "en";
+    const en = lang !== "ja";
     const weekTitle = (w) => en ? `${MONTH_EN[w.m - 1]} week ${w.no}` : `${w.m}月 第${w.no}週`;
     const weekBadge = (w) => w.key === WEEK.key ? `<span class="wk-now">${en ? "This week" : "今週"}</span>`
       : w.key < WEEK.key ? `<span class="wk-past">${en ? "Out now" : "発売済み"}</span>` : "";
@@ -1164,7 +1189,7 @@ ${content}
     layout({ rel: "search.html", title: t.searchTitle, description: t.searchTitle, body, extraHead: `<meta name="robots" content="noindex, follow">` });
   }
   write(`data/search-${lang}.json`, JSON.stringify(items.map((it) => ({
-    id: it.id, n: nameOf(it, lang), a: lang === "en" ? it.name : it.name_en, m: makerOf(it, lang), img: thumbOf(it.image), p: it.price, l: it.lineup, r: t.month(it.release), g: genreLabel(genreOf(it.genre), lang),
+    id: it.id, n: nameOf(it, lang), a: lang !== "ja" ? it.name : it.name_en, m: makerOf(it, lang), img: thumbOf(it.image), p: it.price, l: it.lineup, r: t.month(it.release), g: genreLabel(genreOf(it.genre), lang),
     k: [...(it.tags || []), ...(it.tags_en || []), ...(it.lineup_names || [])].join(" "),
   }))));
 
@@ -1427,17 +1452,16 @@ write("404.html", `<!doctype html><html lang="ja"><head><meta charset="utf-8"><m
 <p style="margin-top:24px;display:flex;gap:10px;flex-wrap:wrap"><a class="btn btn-gold" href="/">トップへ戻る</a><a class="btn" href="/en/" lang="en">English home</a></p></header></div></main></body></html>`);
 
 const lm = (d) => (d ? `<lastmod>${String(d).slice(0, 10)}</lastmod>` : "");
-const urlEntry = ([lang, rel, jaOnly, , lastmod]) => jaOnly ? `  <url><loc>${esc(canonical(lang, rel))}</loc>${lm(lastmod)}</url>` : `  <url><loc>${esc(canonical(lang, rel))}</loc>${lm(lastmod)}
-    <xhtml:link rel="alternate" hreflang="ja" href="${esc(canonical("ja", rel))}"/>
-    <xhtml:link rel="alternate" hreflang="en" href="${esc(canonical("en", rel))}"/>
+const urlEntry = ([lang, rel, alts, , lastmod]) => alts.length < 2 ? `  <url><loc>${esc(canonical(lang, rel))}</loc>${lm(lastmod)}</url>` : `  <url><loc>${esc(canonical(lang, rel))}</loc>${lm(lastmod)}
+${alts.map((l) => `    <xhtml:link rel="alternate" hreflang="${LANG_META[l].hreflang}" href="${esc(canonical(l, rel))}"/>`).join("\n")}
   </url>`;
 // サイトマップは種類ごとに分けて、sitemap.xml はその目次にする（Search Console で種類ごとの登録状況が見える）
 {
-  const groups = { items: [], hubs: [], shops: [], en: [] };
+  const groups = { items: [], hubs: [], shops: [], ...Object.fromEntries(LANGS.filter((l) => l !== "ja").map((l) => [l, []])) };
   for (const pg of pages) {
     const [lang, rel, , noindex] = pg;
     if (noindex || rel === "search.html" || rel === "404.html") continue;
-    const g = lang === "en" ? "en" : /^item\//.test(rel) ? "items" : /^(shop|shops)\//.test(rel) ? "shops" : "hubs";
+    const g = lang !== "ja" ? lang : /^item\//.test(rel) ? "items" : /^(shop|shops)\//.test(rel) ? "shops" : "hubs";
     groups[g].push(pg);
   }
   const maxLm = (list) => list.reduce((m, p) => (p[4] && p[4] > m ? p[4] : m), "");

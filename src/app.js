@@ -4,7 +4,7 @@
 
   var langMeta = document.querySelector('meta[name="site-lang"]');
   var LANG = langMeta ? langMeta.content : "ja";
-  var EN = LANG === "en";
+  var EN = LANG !== "ja"; // 英語・中国語・韓国語（訳がないところは英語）
   // ひらがな・カタカナ、全角・半角、大文字・小文字の違いをなくして比べる
   var NORM = function (v) {
     return String(v || "").normalize("NFKC").toLowerCase()
@@ -52,6 +52,11 @@
     nearNg: function (km) { return "現在地から" + km + "km以内に在庫のある店舗が見つかりませんでした。ネット通販もご検討ください。"; },
     count: function (n) { return n + "店舗に在庫があります。「現在地から探す」で近い順に並べ替えられます。"; }
   };
+  // 中国語・韓国語の文言（ページに埋め込まれた window.__M）。{n} {s} {km} は数字に置きかえる
+  if (window.__M) Object.keys(window.__M).forEach(function (k) {
+    var v = window.__M[k];
+    M[k] = typeof v === "string" && /\{(n|s|km)\}/.test(v) ? (function (tpl) { return function (a) { return tpl.replace(/\{(n|s|km)\}/g, a); }; })(v) : v;
+  });
 
   // トップに ?q=〇〇 で来たら検索ページへ（Xの投稿のリンク用）
   (function () { try { var qq = new URLSearchParams(location.search).get("q"); if (qq && /^\/(en\/)?(index(\.html)?)?$/.test(location.pathname)) location.replace(location.pathname.replace(/index(\.html)?$/, "") + "search?q=" + encodeURIComponent(qq)); } catch (e) {} })();

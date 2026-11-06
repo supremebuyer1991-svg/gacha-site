@@ -995,3 +995,20 @@ em.rel-st { padding: 2px 8px; border-radius: 999px; }
 .rel-soon { background: #e8f3ff; color: #1f6fd1 !important; }
 .sl-ebay { border-color: #e53238; color: #0064d2; }
 .sl-buyee { border-color: #f08300; color: #c25e00; }
+
+/* 言語の切り替えメニュー */
+.lang-menu { position: relative; flex: none; }
+.lang-menu summary { list-style: none; cursor: pointer; min-height: 34px; padding: 0 14px; display: inline-flex; align-items: center; gap: 4px; border-radius: 999px; background: var(--yellow); color: var(--text); font-weight: 700; font-size: 12.5px; white-space: nowrap; }
+.lang-menu summary::-webkit-details-marker { display: none; }
+.lang-list { position: absolute; right: 0; top: calc(100% + 6px); z-index: 50; min-width: 150px; padding: 6px; border-radius: 14px; background: var(--surface, #fff); box-shadow: 0 10px 30px rgba(30, 30, 80, .18); display: grid; }
+.lang-list a { padding: 9px 12px; border-radius: 10px; color: var(--text); font-size: 14px; font-weight: 700; text-decoration: none; }
+.lang-list a:hover { background: var(--surface-2, #f3f4fa); }
+.lang-list a[aria-current] { color: #ff4f7b; }
+@media (max-width: 960px) { .lang-menu { margin-left: auto; } }
+.foot-langs { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 8px; font-size: 12.5px; }
+/* 中国語・韓国語は、その言語の字形のフォントで表示する（日本語用の丸ゴシックだと漢字の形が違う） */
+:root:lang(zh-Hans) { --font-body: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", "Source Han Sans SC", sans-serif; --font-display: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", "Source Han Sans SC", sans-serif; }
+:root:lang(zh-Hant) { --font-body: "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", "Source Han Sans TC", sans-serif; --font-display: "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", "Source Han Sans TC", sans-serif; }
+:root:lang(ko) { --font-body: "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif; --font-display: "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif; }
+:lang(zh-Hans) body, :lang(zh-Hant) body, :lang(ko) body { font-family: var(--font-body); }
+:lang(zh-Hans) .logo-main, :lang(zh-Hant) .logo-main, :lang(ko) .logo-main { font-family: var(--font-logo, "Fredoka"), sans-serif; }
