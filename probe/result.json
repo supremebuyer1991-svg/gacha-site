@@ -1,0 +1,268 @@
+[
+ {
+  "u": "https://kitan.jp/",
+  "status": 200,
+  "final": "https://kitan.jp/",
+  "title": "株式会社キタンクラブ",
+  "nlinks": 207,
+  "sample": [
+   "https://kitan.jp/products/",
+   "https://kitan.jp/news/",
+   "https://kitan.jp/press-release_list/",
+   "https://kitan.jp/capsulefoundation/",
+   "https://kitan.jp/products_category/%e3%82%ad%e3%82%bf%e3%83%b3%e3%82%af%e3%83%a9%e3%83%96%e3%82%aa%e3%83%aa%e3%82%b8%e3%83%8a%e3%83%ab/",
+   "https://kitan.jp/products_category/%e4%bc%81%e6%a5%ad%e3%82%b3%e3%83%a9%e3%83%9c/",
+   "https://kitan.jp/products_category/%e3%81%a1%e3%81%84%e3%81%8b%e3%82%8f/",
+   "https://kitan.jp/products_category/mofusand/",
+   "https://kitan.jp/products_category/%e6%98%9f%e3%81%ae%e3%82%ab%e3%83%bc%e3%83%93%e3%82%a3/",
+   "https://kitan.jp/products_category/%e3%82%b5%e3%83%b3%e3%83%aa%e3%82%aa/",
+   "https://kitan.jp/products_category/%e3%83%a0%e3%83%bc%e3%83%9f%e3%83%b3/",
+   "https://kitan.jp/products_category/%e3%83%9d%e3%82%b1%e3%83%a2%e3%83%b3/",
+   "https://kitan.jp/products_category/%e3%82%b3%e3%82%a6%e3%83%9a%e3%83%b3%e3%81%a1%e3%82%83%e3%82%93/",
+   "https://kitan.jp/products_category/%e5%8f%af%e6%84%9b%e3%81%84%e5%98%98%e3%81%ae%e3%82%ab%e3%83%af%e3%82%a6%e3%82%bd/",
+   "https://kitan.jp/oem/hashimotomio_marineworld/",
+   "https://kitan.jp/products/osanpokaeru_fithouseki/",
+   "https://kitan.jp/products/noppo_usagi/",
+   "https://kitan.jp/products/sanrio_watch4/",
+   "https://kitan.jp/products/peaceanimals_mc/",
+   "https://kitan.jp/products/akachan_bu-bu2/",
+   "https://kitan.jp/products/inofigure/",
+   "https://kitan.jp/products/osanpokaeru_fit2/",
+   "https://kitan.jp/products/dogeza2_mc/",
+   "/products",
+   "https://kitan.jp/product-info/64303/"
+  ],
+  "robots": "200 User-agent: *\r\nDisallow: /wp-admin/\r\nAllow: /wp-admin/admin-ajax.php\r\n\r\nSitemap: https://kitan.jp/sitemap.xml\r\nSitemap: https://kitan.jp/sitemap.rss\n"
+ },
+ {
+  "u": "https://kitan.jp/products/",
+  "status": 200,
+  "final": "https://kitan.jp/products/",
+  "title": "カプセルトイ｜株式会社キタンクラブ",
+  "nlinks": 200,
+  "sample": [
+   "https://kitan.jp/products/?wovn=zh-CHS",
+   "https://kitan.jp/products/?wovn=zh-CHT",
+   "https://kitan.jp/products/?wovn=en",
+   "https://kitan.jp/products/",
+   "https://kitan.jp/products/page/2/",
+   "https://kitan.jp/products/feed/",
+   "https://kitan.jp/news/",
+   "https://kitan.jp/press-release_list/",
+   "https://kitan.jp/capsulefoundation/",
+   "https://kitan.jp/products_category/%e3%82%ad%e3%82%bf%e3%83%b3%e3%82%af%e3%83%a9%e3%83%96%e3%82%aa%e3%83%aa%e3%82%b8%e3%83%8a%e3%83%ab/",
+   "https://kitan.jp/products_category/%e4%bc%81%e6%a5%ad%e3%82%b3%e3%83%a9%e3%83%9c/",
+   "https://kitan.jp/products_category/%e3%81%a1%e3%81%84%e3%81%8b%e3%82%8f/",
+   "https://kitan.jp/products_category/mofusand/",
+   "https://kitan.jp/products_category/%e6%98%9f%e3%81%ae%e3%82%ab%e3%83%bc%e3%83%93%e3%82%a3/",
+   "https://kitan.jp/products_category/%e3%82%b5%e3%83%b3%e3%83%aa%e3%82%aa/",
+   "https://kitan.jp/products_category/%e3%83%a0%e3%83%bc%e3%83%9f%e3%83%b3/",
+   "https://kitan.jp/products_category/%e3%83%9d%e3%82%b1%e3%83%a2%e3%83%b3/",
+   "https://kitan.jp/products_category/%e3%82%b3%e3%82%a6%e3%83%9a%e3%83%b3%e3%81%a1%e3%82%83%e3%82%93/",
+   "https://kitan.jp/products_category/%e5%8f%af%e6%84%9b%e3%81%84%e5%98%98%e3%81%ae%e3%82%ab%e3%83%af%e3%82%a6%e3%82%bd/",
+   "https://kitan.jp/oem/hashimotomio_marineworld/",
+   "https://kitan.jp/products_category/%e3%82%aa%e3%83%aa%e3%82%b8%e3%83%8a%e3%83%ab/",
+   "https://kitan.jp/products_category/%e3%82%ad%e3%83%a3%e3%83%a9%e3%82%af%e3%82%bf%e3%83%bc/",
+   "https://kitan.jp/products_category/%e3%82%a2%e3%83%bc%e3%83%86%e3%82%a3%e3%82%b9%e3%83%88/",
+   "https://kitan.jp/products_category/%e3%82%b3%e3%83%83%e3%83%97%e3%81%ae%e3%83%95%e3%83%81%e5%ad%90/",
+   "https://kitan.jp/products_category/putitto/"
+  ]
+ },
+ {
+  "u": "https://epoch.jp/ct/",
+  "status": 404,
+  "final": "https://epoch.jp/ct/",
+  "title": "ページが見つかりません｜エポック社公式サイト",
+  "nlinks": 65,
+  "sample": [
+   "https://epoch.jp/products/",
+   "https://epoch.jp/pressrelease/"
+  ],
+  "robots": "200 User-agent: *\r\nAllow: /\r\nDisallow: /sv/important_20110329.html\r\n\r\nUser-agent: Baiduspider\r\nDisallow: /\r\nUser-agent: BaiduImagespider\r\nDisallow: /"
+ },
+ {
+  "u": "https://www.epoch.jp/ct/",
+  "err": "fetch failed"
+ },
+ {
+  "u": "https://capsule.epoch.jp/",
+  "err": "fetch failed"
+ },
+ {
+  "u": "https://kenelephant.co.jp/",
+  "status": 200,
+  "final": "https://kenelephant.co.jp/",
+  "title": "Kenelephant ケンエレファント公式サイト",
+  "nlinks": 222,
+  "sample": [
+   "https://kenelestore.jp/collections/newsed",
+   "https://kenelephant.co.jp/newsed/",
+   "https://kenelestore.jp/products/gc0780c",
+   "https://kenelestore.jp/products/gc0789z",
+   "https://kenelestore.jp/products/gc0784z",
+   "https://kenelestore.jp/products/gc0790z",
+   "https://kenelestore.jp/products/gc0786z",
+   "https://kenelestore.jp/products/gc0787z",
+   "https://kenelestore.jp/products/vi0589u",
+   "https://kenelestore.jp/products/vi0664c",
+   "https://kenelestore.jp/products/vi0664d",
+   "https://kenelestore.jp/products/sf0305n",
+   "https://kenelestore.jp/products/sf0339-set",
+   "https://kenelestore.jp/products/sf0339g",
+   "https://kenelestore.jp/products/sf0311e",
+   "https://kenelestore.jp/products/vi0613p",
+   "https://kenelestore.jp/products/gc0754c",
+   "https://kenelestore.jp/products/vi0620jkl",
+   "https://kenelestore.jp/products/vi0620v",
+   "https://kenelestore.jp/products/vi0647e",
+   "https://kenelestore.jp/products/vi0647f",
+   "https://kenelestore.jp/products/vi0589r",
+   "https://kenelestore.jp/products/vi0589s",
+   "https://kenelestore.jp/products/vi0589t",
+   "https://kenelestore.jp/products/vi0618p"
+  ],
+  "robots": "200 User-agent: *\nDisallow: /wp-admin/\nAllow: /wp-admin/admin-ajax.php\n\nSitemap: https://kenelephant.co.jp/sitemap.xml\n"
+ },
+ {
+  "u": "https://kenelephant.co.jp/capsule/",
+  "status": 404,
+  "final": "https://kenelephant.co.jp/capsule/",
+  "title": "404: ページが見つかりませんでした | Kenelephant ケンエレファント公式サイト",
+  "nlinks": 46,
+  "sample": [
+   "https://kenelestore.jp/collections/newsed",
+   "https://kenelephant.co.jp/newsed/"
+  ]
+ },
+ {
+  "u": "https://www.toysspirits.co.jp/",
+  "err": "fetch failed"
+ },
+ {
+  "u": "https://toysspirits.co.jp/",
+  "err": "fetch failed"
+ },
+ {
+  "u": "https://so-ta.jp/",
+  "err": "fetch failed"
+ },
+ {
+  "u": "https://www.so-ta.jp/",
+  "err": "fetch failed"
+ },
+ {
+  "u": "https://qualia-45.jp/",
+  "status": 200,
+  "final": "https://www.qualia-45.jp/",
+  "title": "Qualia | 株式会社Qualia（クオリア）は、カプセルトイ商品（ガチャガチャ）等の企画・製造を行っております。",
+  "nlinks": 99,
+  "sample": [
+   "https://www.qualia-45.jp/product/view/2146",
+   "https://www.qualia-45.jp/product/view/2145",
+   "https://www.qualia-45.jp/product/view/2132",
+   "https://www.qualia-45.jp/product/view/2107",
+   "https://www.qualia-45.jp/product/view/2144",
+   "https://www.qualia-45.jp/product/view/2133",
+   "https://www.qualia-45.jp/product/view/2131",
+   "https://www.qualia-45.jp/product/view/2130",
+   "https://www.qualia-45.jp/product/view/2128",
+   "https://www.qualia-45.jp/product/view/2127",
+   "https://www.qualia-45.jp/product/view/2126",
+   "https://www.qualia-45.jp/product/view/2125",
+   "https://www.qualia-45.jp/product/view/2124",
+   "https://www.qualia-45.jp/product/view/2123",
+   "https://www.qualia-45.jp/product/view/2122",
+   "https://www.qualia-45.jp/product/view/2121",
+   "https://www.qualia-45.jp/product/view/2120",
+   "https://www.qualia-45.jp/product/view/2119",
+   "https://www.qualia-45.jp/product/view/2118",
+   "https://www.qualia-45.jp/product/view/2117",
+   "https://www.qualia-45.jp/product/view/2116",
+   "https://www.qualia-45.jp/product/view/2115",
+   "https://www.qualia-45.jp/product/view/2134",
+   "https://www.qualia-45.jp/product/view/2129",
+   "https://www.qualia-45.jp/product/view/2114"
+  ],
+  "robots": "200 User-agent: *\r\nDisallow: /admin/\r\nDisallow: /data_files/\r\nDisallow: /media/\r\nDisallow: /ez_collector/\r\nDisallow: /ez_collector_test/\r\nDisallow: /maintenance.html\r\n"
+ },
+ {
+  "u": "https://bushiroad-creative.com/",
+  "status": 200,
+  "final": "https://bushiroad-creative.com/",
+  "title": "ブシロードクリエイティブ",
+  "nlinks": 98,
+  "sample": [
+   "https://bushiroad-creative.com/products/",
+   "https://bushiroad-creative.com/news/106851/",
+   "https://bushiroad-creative.com/news/106841/",
+   "https://bushiroad-creative.com/news/106642/",
+   "https://bushiroad-creative.com/news/105672/",
+   "https://bushiroad-creative.com/news/105255/",
+   "https://bushiroad-creative.com/news/104921/",
+   "https://bushiroad-creative.com/news/104666/",
+   "https://bushiroad-creative.com/news/66/",
+   "https://bushiroad-creative.com/items/106255/",
+   "https://bushiroad-creative.com/items/106250/",
+   "https://bushiroad-creative.com/items/98991/",
+   "https://bushiroad-creative.com/items/100974/",
+   "https://bushiroad-creative.com/items/96192/",
+   "https://bushiroad-creative.com/items/95627/",
+   "https://bushiroad-creative.com/items/95428/",
+   "https://bushiroad-creative.com/items/97203/",
+   "https://bushiroad-creative.com/items/96365/",
+   "https://bushiroad-creative.com/items/96364/",
+   "https://bushiroad-creative.com/products",
+   "https://capsule.bushiroad-creative.com",
+   "https://bushiroad-creative.com/news/105254/",
+   "https://bushiroad-creative.com/news"
+  ],
+  "robots": "200 User-agent: *\nDisallow: /wordpress/wp-admin/\nAllow: /wordpress/wp-admin/admin-ajax.php\n\nSitemap: https://bushiroad-creative.com/wp-sitemap.xml\n\nUser-agent: *\nDisallow: /wordpress/wp-content/uploads/wpo/wpo-plugins-tables-list.json\n"
+ },
+ {
+  "u": "https://www.j-dream.co.jp/",
+  "err": "fetch failed"
+ },
+ {
+  "u": "https://www.yell-japan.co.jp/",
+  "err": "fetch failed"
+ },
+ {
+  "u": "https://tarlin.co.jp/",
+  "err": "fetch failed"
+ },
+ {
+  "u": "https://www.kaiyodo.co.jp/",
+  "status": 200,
+  "final": "https://kaiyodo.co.jp/",
+  "title": "フィギュアの造形企画製作、販売の株式会社海洋堂",
+  "nlinks": 330,
+  "sample": [
+   "https://kaiyodo.co.jp/items/revoltech/nr150/",
+   "https://kaiyodo.co.jp/items/revoltech/nr153/",
+   "https://kaiyodo.co.jp/items/revoltech/nr149/",
+   "https://kaiyodo.co.jp/items/plasticmodel/ap061/",
+   "https://kaiyodo.co.jp/news/campaign/2623/",
+   "/news/",
+   "https://kaiyodo.co.jp/items/revoltech/nr142/",
+   "https://kaiyodo.co.jp/items/revoltech/nr141/",
+   "https://kaiyodo.co.jp/items/revoltech/nr157/",
+   "https://kaiyodo.co.jp/items/revoltech/nr156/",
+   "https://kaiyodo.co.jp/items/revoltech/nr155/",
+   "https://kaiyodo.co.jp/items/revoltech/nr154/",
+   "https://kaiyodo.co.jp/items/revoltech/nr115/",
+   "https://kaiyodo.co.jp/items/revoltech/nr114/",
+   "https://kaiyodo.co.jp/items/revoltech/nr133/",
+   "https://kaiyodo.co.jp/items/revoltech/nr134/",
+   "https://kaiyodo.co.jp/items/revoltech/nr135/",
+   "https://kaiyodo.co.jp/items/revoltech/nr152/",
+   "https://kaiyodo.co.jp/items/revoltech/nr143/",
+   "https://kaiyodo.co.jp/items/revoltech/nr146/",
+   "https://kaiyodo.co.jp/items/others/kd123/",
+   "https://kaiyodo.co.jp/items/others/kd119/",
+   "https://kaiyodo.co.jp/items/others/kd118/",
+   "https://kaiyodo.co.jp/items/revoltech/nr145/",
+   "https://kaiyodo.co.jp/items/others/kd120b/"
+  ],
+  "robots": "200 User-agent: *\nDisallow: /wp-admin/\nAllow: /wp-admin/admin-ajax.php\n\nSitemap: https://kaiyodo.co.jp/sitemap.xml\n"
+ }
+]
