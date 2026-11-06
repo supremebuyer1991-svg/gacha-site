@@ -242,6 +242,36 @@ const T = {
   },
 };
 
+// 使いやすさの改善で足した文言（X のフォロー・マイリスト・商品ページの下のバーなど）。中国語・韓国語は i18n の t.u で訳す
+T.ja.u = {
+  followTxt: "毎週の新作・入荷速報をXで配信中", followCta: (a) => `@${a} をフォロー`,
+  homeH1: (ym) => `ガチャガチャ新作・発売日一覧【${ym.y}年${ym.m}月】`,
+  addedLine: (d, w) => `今日追加 ${d}件・今週追加 ${w}件`,
+  save: "保存", saved: "保存済み", saveAria: "マイリストに保存", unsaveAria: "マイリストから外す",
+  mylist: "マイリスト", mylistTitle: "マイリスト（保存したガチャ）", mylistLead: "★で保存したガチャを、発売の状態ごとにまとめています。保存はこのブラウザの中だけで、ログインはいりません。",
+  mlNow: "今週発売", mlSoon: "来週以降", mlOut: "発売中", mlEmpty: "まだ保存したガチャはありません。商品の★を押すと、ここに集まります。", mlBrowse: "今週発売のガチャを見る",
+  stockShort: "在庫店", mercari: "メルカリ", whereBtn: "ガシャポンどこ？で探す（公式）", findLater: "このサイトの在庫店リスト",
+  relOut: "発売中", relSoon: (m) => `${m}月発売予定`,
+  monthsH: "月別の発売カレンダー", thisM: "今月", nextM: "来月", prevM: "先月",
+  makersH: "メーカーから探す", prefsLink: "都道府県からガチャガチャ設置店を探す",
+  optional: "答えなくてもOK", skipQ: "スキップ",
+  charaHit: "{l}のガチャ一覧（{n}）→",
+};
+T.en.u = {
+  followTxt: "New releases & restocks every week", followCta: (a) => `Follow @${a}`,
+  homeH1: (ym) => `New gacha in Japan: release dates (${MONTH_EN[ym.m - 1]} ${ym.y})`,
+  addedLine: (d, w) => `Added today: ${d} · This week: ${w}`,
+  save: "Save", saved: "Saved", saveAria: "Save to My list", unsaveAria: "Remove from My list",
+  mylist: "My list", mylistTitle: "My list (saved gacha)", mylistLead: "Gacha you saved with ★, grouped by release status. They are kept only in this browser — no account needed.",
+  mlNow: "Releasing this week", mlSoon: "Coming soon", mlOut: "Out now", mlEmpty: "Nothing saved yet. Tap ★ on any gacha to keep it here.", mlBrowse: "See this week's releases",
+  stockShort: "Shops", mercari: "Mercari", whereBtn: "Find shops on Bandai's official finder", findLater: "Shop list on this site",
+  relOut: "Out now", relSoon: (m) => `Coming ${MONTH_EN[m - 1]}`,
+  monthsH: "Release calendar by month", thisM: "This month", nextM: "Next month", prevM: "Last month",
+  makersH: "Browse by maker", prefsLink: "",
+  optional: "Optional", skipQ: "Skip",
+  charaHit: "{l} gacha ({n}) →",
+};
+
 /* ---------- 中国語・韓国語：src/i18n/<lang>.js（画面の文言など）と data/i18n/names-<lang>.json（商品名） ---------- */
 const I18N = {}, I18N_GENRE = {}, I18N_MAKER = {}, I18N_CHARA = {};
 for (const l of XL) {
@@ -317,11 +347,14 @@ const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&":
 const up = (n) => "../".repeat(n);
 const langDir = (lang) => (lang === "ja" ? "" : `${lang}/`);
 const canonical = (lang, p) => SITE_URL + "/" + langDir(lang) + p.replace(/^index\.html$/, "").replace(/\.html$/, "");
+// hreflang の x-default：トップは英語、ほかのページ（商品・一覧）は日本語の元ページ
+const xDefault = (rel, alts) => (rel === "index.html" && alts.includes("en") ? "en" : alts.includes("ja") ? "ja" : alts.includes("en") ? "en" : alts[0]);
 const absImg = (it) => (!it.image ? "" : /^https?:/.test(it.image) ? it.image : SITE_URL + "/" + it.image);
 const hashSlug = (name) => { let h = 0; for (const c of name) h = (h * 31 + c.codePointAt(0)) >>> 0; return "m" + h.toString(36); };
 const MAKER_SLUG = { "バンダイ": "bandai", "タカラトミーアーツ": "takara-tomy-arts", "キタンクラブ": "kitan-club", "クオリア": "qualia", "ブシロード": "bushiroad", "エポック社": "epoch", "ケンエレファント": "kenelephant" };
 const makerSlug = (name) => MAKER_SLUG[name] || hashSlug(name);
-const isNew = (it) => daysBetween(it.added, today) <= 7;
+// NEW：サイトに載って3日以内で、発売月が過ぎていないもの（まとめて取り込んだ古い商品にNEWを付けない）
+const isNew = (it) => daysBetween(it.added, today) <= 3 && it.release >= thisMonth;
 const byNewest = (a, b) => (b.added > a.added ? 1 : b.added < a.added ? -1 : b.popularity - a.popularity);
 const heartsOf = (it) => Number(votes[it.id]) || 0;
 const byPopular = (a, b) => heartsOf(b) - heartsOf(a) || b.popularity - a.popularity;
@@ -409,20 +442,25 @@ const seriesItems = (sr) => items.filter((it) => sr.re.test([it.name, it.name_en
 /* ---------- 診断：作品名カタログで細かい項目を作る ---------- */
 // 商品名に作品名が入っていれば、その作品が属する項目（例 oshi:kids）を自動で足す
 const subKeys = new Set((site.quiz_groups || []).flatMap((g) => g.subs.map((x) => `${g.slug}:${x.slug}`)));
-const titleRx = titles.map((tt) => ({ ...tt, rx: new RegExp(tt.match, "i") }));
+const titleRx = titles.map((tt) => ({ ...tt, rx: new RegExp(tt.match, "i"), exact: new RegExp(`^(?:${tt.match})$`, "i") }));
+// ラインナップ名だけで当たったとき、ほかの意味もある言葉（「黒のハチワレ」＝猫の柄）では作品に入れない。
+// 商品名に作品名があるか、ラインナップ名がその言葉ぴったりのときだけ
+const CHARA_AMBIG = /ハチワレ/g;
+const charaHit = (tt, it) => tt.rx.test([it.name, it.name_en].join(" "))
+  || (it.lineup_names || []).some((n) => tt.rx.test(n) && (tt.rx.test(n.replace(CHARA_AMBIG, "")) || tt.exact.test(String(n).trim())));
 // キャラクター・作品ごとのページ（作品名カタログから、3シリーズ以上あるものだけ）
 const CHARAS = (() => {
   const by = new Map(); // 同じ作品がカタログに2回あるときはまとめる
   for (const tt of titleRx) {
     const slug = String(tt.en || "").normalize("NFKD").replace(/[^\w\s-]/g, "").trim().toLowerCase().replace(/[\s_]+/g, "-").replace(/-+/g, "-") || hashSlug(tt.label);
-    const list = items.filter((it) => tt.rx.test([it.name, it.name_en, (it.lineup_names || []).join(" ")].join(" ")));
+    const list = items.filter((it) => charaHit(tt, it));
     const cur = by.get(slug);
-    if (cur) { for (const it of list) if (!cur.list.includes(it)) cur.list.push(it); }
-    else by.set(slug, { label: tt.label, en: tt.en || tt.label, slug, list });
+    if (cur) { for (const it of list) if (!cur.list.includes(it)) cur.list.push(it); cur.match += "|" + tt.match; }
+    else by.set(slug, { label: tt.label, en: tt.en || tt.label, slug, list, match: tt.match });
   }
   // 人気シリーズ（サンリオ・ディズニー・たまごっち・めじるし）も同じ形のページに（/series/ は /chara/ へ転送）
   for (const k of ["sanrio-characters-all", "tamagotchi"]) by.delete(k);
-  for (const sr of SERIES) by.set(sr.slug, { label: sr.label, en: sr.en, slug: sr.slug, list: seriesItems(sr) });
+  for (const sr of SERIES) by.set(sr.slug, { label: sr.label, en: sr.en, slug: sr.slug, list: seriesItems(sr), match: sr.re.source });
   return [...by.values()].filter((x) => x.list.length >= 3).sort((a, b) => b.list.length - a.list.length);
 })();
 const charasOf = (it) => CHARAS.filter((ch) => ch.list.includes(it));
@@ -542,8 +580,31 @@ const write = (rel, content) => {
 
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(path.join(OUT, "assets"), { recursive: true });
-fs.copyFileSync(path.join(__dirname, "style.css"), path.join(OUT, "assets/style.css"));
-fs.copyFileSync(path.join(__dirname, "app.js"), path.join(OUT, "assets/app.js"));
+// CSS・JS を軽くして書き出す（ライブラリなし。文字列の中は触らない）
+const minifyCSS = (src) => {
+  const keep = [];
+  return src
+    .replace(/"(?:[^"\\\n]|\\.)*"|'(?:[^'\\\n]|\\.)*'/g, (m) => `\u0000${keep.push(m) - 1}\u0000`)
+    .replace(/\/\*[\s\S]*?\*\//g, "")
+    .replace(/\s+/g, " ")
+    .replace(/\s*([{};,>])\s*/g, "$1")
+    .replace(/;}/g, "}")
+    .replace(/\u0000(\d+)\u0000/g, (m, i) => keep[Number(i)])
+    .trim();
+};
+// JS は安全なところだけ：1行まるごとのコメントと、行頭の空白を消す（app.js はテンプレート文字列を使っていない）
+const minifyJS = (src) => /`/.test(src) ? src : src.split("\n").map((l) => l.trim()).filter((l) => l && !/^\/\/(?!#)/.test(l) && !/^\/\*(?:(?!\*\/).)*\*\/$/.test(l)).join("\n") + "\n";
+fs.writeFileSync(path.join(OUT, "assets/style.css"), minifyCSS(fs.readFileSync(path.join(__dirname, "style.css"), "utf8")));
+fs.writeFileSync(path.join(OUT, "assets/app.js"), minifyJS(fs.readFileSync(path.join(__dirname, "app.js"), "utf8")));
+// ファビコン・ホーム画面のアイコン・ウェブアプリの設定（brand/icons/ の PNG は brand/favicon.svg を画像にしたもの）
+if (fs.existsSync(path.join(ROOT, "brand", "icons"))) fs.cpSync(path.join(ROOT, "brand", "icons"), path.join(OUT, "images", "icons"), { recursive: true });
+if (fs.existsSync(path.join(ROOT, "brand", "favicon.svg"))) fs.copyFileSync(path.join(ROOT, "brand", "favicon.svg"), path.join(OUT, "favicon.svg"));
+fs.writeFileSync(path.join(OUT, "manifest.webmanifest"), JSON.stringify({
+  name: "ガチャプラネット", short_name: "ガチャプラネット", description: site.description, lang: "ja",
+  start_url: "/?src=pwa", scope: "/", display: "standalone", background_color: "#f6f8ff", theme_color: "#f6f8ff",
+  icons: [192, 512].map((n) => ({ src: `/images/icons/icon-${n}.png`, sizes: `${n}x${n}`, type: "image/png", purpose: "any" }))
+    .concat([{ src: "/images/icons/icon-maskable-512.png", sizes: "512x512", type: "image/png", purpose: "maskable" }]),
+}, null, 1));
 if (fs.existsSync(path.join(ROOT, "images"))) fs.cpSync(path.join(ROOT, "images"), path.join(OUT, "images"), { recursive: true });
 fs.mkdirSync(path.join(OUT, "images", "og"), { recursive: true });
 if (fs.existsSync(path.join(ROOT, "brand", "header.png"))) fs.copyFileSync(path.join(ROOT, "brand", "header.png"), path.join(OUT, "images", "og", "site.png"));
@@ -617,6 +678,18 @@ for (const lang of LANGS) {
     if (it.release > NOW_YM) return lang === "ja" ? `<em class="rel-st rel-soon">${+it.release.slice(5)}月発売予定</em>` : `<em class="rel-st rel-soon">${t.month(it.release)}</em>`;
     return `<span>${t.month(it.release)}</span>`;
   };
+  // 商品ページの価格の横に出す発売の状態（発売週がわからない過去の商品も「発売中」）
+  const relPill = (it) => {
+    const s = relLabel(it);
+    return /class="rel-st/.test(s) ? s.replace("rel-st", "rel-st rel-pill") : `<span class="rel-st rel-pill">${it.release < NOW_YM ? t.u.relOut : esc(t.month(it.release))}</span>`;
+  };
+  // 検索の候補・マイリストで使う、発売の状態の文言（{m}{d} はブラウザで置きかえる）
+  const REL_JS = lang === "ja" ? { now: "今週発売", from: "{m}/{d}〜発売", out: "発売中" } : { now: t.x.relNow, from: t.x.relFrom("{m}", "{d}"), out: t.x.relOut };
+  // X のフォロー案内（シェアボタンではない）。日本語は @gachapla、ほかの言語は海外向けの @gacha_jpn
+  const xAcc = String((lang === "ja" ? site.x_account : site.x_account_en || site.x_account) || "").replace(/^@/, "");
+  const X_SVG = `<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>`;
+  const followCard = () => xAcc ? `<a class="x-follow" href="https://x.com/${esc(xAcc)}" target="_blank" rel="noopener"><span class="xf-ic">${X_SVG}</span><span class="xf-t">${esc(t.u.followTxt)}</span><span class="xf-go">${esc(t.u.followCta(xAcc))} →</span></a>` : "";
+  const FOLLOW_AFTER = new Set(["week.html", "next-week.html", "new.html", "lottery.html"]);
   const card = (it, c) => `<a class="card" href="${c.H}item/${it.id}.html">
   ${thumb(it, c.R)}
   <div class="card-meta">${esc(genreLabel(genreOf(it.genre), lang))}</div>
@@ -641,7 +714,7 @@ ${fragment ? '<meta name="claude:viewport-fit-sides" content="cover">' : ""}
 ${site.vc_linkswitch_pid ? `<script>var vc_pid = "${esc(site.vc_linkswitch_pid)}";</script><script src="//aml.valuecommerce.com/vcdal.js" async></script>` : ""}
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${esc(canonical(lang, rel))}">
-${noindex ? `<meta name="robots" content="noindex, follow">\n` : ""}${noindex || noAlt || ALT.length < 2 ? "" : ALT.flatMap((l) => [LANG_META[l].hreflang, ...(LANG_META[l].extra || [])].map((code) => `<link rel="alternate" hreflang="${code}" href="${esc(canonical(l, rel))}">`)).join("\n") + `\n<link rel="alternate" hreflang="x-default" href="${esc(canonical(ALT.includes("en") ? "en" : "ja", rel))}">`}
+${noindex ? `<meta name="robots" content="noindex, follow">\n` : ""}${noindex || noAlt || ALT.length < 2 ? "" : ALT.flatMap((l) => [LANG_META[l].hreflang, ...(LANG_META[l].extra || [])].map((code) => `<link rel="alternate" hreflang="${code}" href="${esc(canonical(l, rel))}">`)).join("\n") + `\n<link rel="alternate" hreflang="x-default" href="${esc(canonical(xDefault(rel, ALT), rel))}">`}
 ${site.naver_verification ? `<meta name="naver-site-verification" content="${esc(site.naver_verification)}">\n` : ""}${site.baidu_verification ? `<meta name="baidu-site-verification" content="${esc(site.baidu_verification)}">\n` : ""}${site.bing_verification ? `<meta name="msvalidate.01" content="${esc(site.bing_verification)}">\n` : ""}${lang === "zh-cn" ? `<meta http-equiv="content-language" content="zh-CN">
 <meta http-equiv="Cache-Control" content="no-transform">
 <meta http-equiv="Cache-Control" content="no-siteapp">
@@ -656,7 +729,11 @@ ${site.naver_verification ? `<meta name="naver-site-verification" content="${esc
 <meta property="og:image" content="${esc(ogImage || `${SITE_URL}/images/og/site.jpg`)}">
 <meta name="twitter:card" content="summary_large_image">
 ${site.x_account ? `<meta name="twitter:site" content="@${esc(site.x_account.replace(/^@/, ""))}">` : ""}
-<meta name="theme-color" content="#121212">
+<meta name="theme-color" content="#f6f8ff">
+<link rel="icon" href="${c.R}favicon.svg" type="image/svg+xml">
+<link rel="icon" href="${c.R}images/icons/icon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="${c.R}images/icons/apple-touch-icon.png">
+<link rel="manifest" href="${c.R}manifest.webmanifest">
 ${lang === "zh-cn" ? "" : `<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="${FONTS_OF(lang)}" media="print" onload="this.media='all'">
@@ -668,14 +745,16 @@ ${ld}`;
 <header class="site-header"><div class="wrap">
   <a class="logo logo-b3" href="${c.H}index.html" aria-label="${esc(site.name)} ${t.logoAria}"><svg class="logo-pl" viewBox="0 0 48 48" aria-hidden="true"><defs><clipPath id="lgcp"><circle cx="24" cy="24" r="14"/></clipPath></defs><ellipse cx="24" cy="25" rx="22" ry="7" fill="none" stroke="#3aa0ff" stroke-width="3" transform="rotate(-18 24 25)"/><g clip-path="url(#lgcp)"><rect x="8" y="8" width="32" height="15" fill="#ff5c8a"/><rect x="8" y="23" width="32" height="2.4" fill="#fff"/><rect x="8" y="25.4" width="32" height="16" fill="#ffc23c"/></g><path d="M4.5 31 A22 7 -18 0 0 44 19" fill="none" stroke="#3aa0ff" stroke-width="3"/></svg><span class="logo-txt">${lang === "ja" ? `<span class="logo-small">GACHA PLANET</span><span class="logo-main">ガチャプラネット</span>` : `<span class="logo-small">${esc(t.tagline)}</span><span class="logo-main logo-main-en">GACHA PLANET</span>`}</span></a>
   <nav class="nav" aria-label="${t.navAria}">${NAV.map(([h, k]) => `<a href="${h[0] === "@" ? c.R + h.slice(1) : c.H + h}"${k === current ? ' aria-current="page"' : ""}>${t.navShort && t.navShort[k] ? `<span class="nl">${t.nav[k]}</span><span class="ns">${t.navShort[k]}</span>` : t.nav[k]}</a>`).join("")}</nav>
-  <form class="search" role="search" action="${c.H}search.html" data-index="${c.R}data/search-${lang}.json" data-home="${c.H}" data-root="${c.R}">
+  <form class="search" role="search" action="${c.H}search.html" data-index="${c.R}data/search-${lang}.json" data-home="${c.H}" data-root="${c.R}" data-chara="${c.R}data/chara-${lang}.json?v=${QUIZ_V}" data-chara-tpl="${esc(t.u.charaHit)}" data-rel="${esc(JSON.stringify(REL_JS))}">
     <input type="search" name="q" id="search-q" placeholder="${t.searchPh}" aria-label="${t.searchAria}" autocomplete="off" enterkeyhint="search">
     <div class="search-pop" id="search-pop" hidden></div>
   </form>
+  <a class="hd-fav" href="${c.H}mylist.html" aria-label="${esc(t.u.mylist)}" title="${esc(t.u.mylist)}" data-add="${esc(t.u.saveAria)}" data-del="${esc(t.u.unsaveAria)}" data-save="${esc(t.u.save)}" data-saved="${esc(t.u.saved)}"><span aria-hidden="true">★</span><b class="hd-fav-n" hidden></b></a>
   ${langMenu}
 </div></header>
-<main>${body}</main>
+<main>${body}${FOLLOW_AFTER.has(rel) ? `\n<div class="wrap follow-end">${followCard()}</div>` : ""}</main>
 <footer class="site-footer"><div class="wrap">
+  ${xAcc ? `<a class="foot-x" href="https://x.com/${esc(xAcc)}" target="_blank" rel="noopener">${X_SVG}<span>${esc(t.u.followTxt)} → <b>${esc(t.u.followCta(xAcc))}</b></span></a>` : ""}
   <div>© ${nowJST.getUTCFullYear()} ${esc(site.name)}</div>
   <nav aria-label="${t.footAria}"><a href="${c.H}faq.html">${t.nav.faq}</a><a href="${c.H}about.html">${t.about}</a>${lang === "ja" ? `<a href="${c.H}privacy.html">プライバシーポリシー</a>` : ""}<a href="${c.H}calendar.html">${t.nav.calendar}</a></nav>
   <nav class="foot-langs" aria-label="Language">${LANGS.map((l) => `<a href="${toLang(l)}" hreflang="${LANG_META[l].hreflang}" lang="${LANG_META[l].html}">${LANG_META[l].label}</a>`).join("")}</nav>
@@ -721,7 +800,8 @@ ${content}
   <section class="hero">
     <div class="hero-intro">
       <div class="hero-text">
-        <h1 class="hero-lead">${t.heroLead}</h1>
+        <h1 class="hero-h1">${esc(t.u.homeH1(YM_NOW_EN)).replace(/\s*([【（(][^【（(]*)$/, ' <span class="h1-ym">$1</span>')}</h1>
+        <p class="hero-lead">${t.heroLead}</p>
         <div class="hero-planet" aria-hidden="true"><i class="ring"></i><i class="orb"></i><i class="ring ring-front"></i><i class="moon"></i></div>
         <p class="hero-sub">${t.heroSub}</p>
         <dl class="hero-stats">
@@ -729,6 +809,11 @@ ${content}
         </dl>
       </div>
     </div>
+  ${WEEK.items.length ? `<section class="section section-tight" id="thisweek">
+    <div class="section-head"><h2>${lang !== "ja" ? t.x.weekH : "今週発売のガチャ"}</h2><a class="more" href="${c.H}week.html">${lang !== "ja" ? t.x.weekMore(WEEK.range, WEEK.items.length) : `${WEEK.range}・全${WEEK.items.length}件`}</a></div>
+    <div class="grid row-scroll">${WEEK.items.slice(0, 12).map((it) => card(it, c)).join("")}<a class="card see-all" href="${c.H}week.html"><span class="see-all-in"><b>${lang !== "ja" ? t.x.seeAll : "全部見る"}</b><span>→</span></span></a></div>
+  </section>` : ""}
+    ${followCard()}
     <a class="katsu-banner" href="${c.R}gachakatsu.html">
       <span class="kb-art" aria-hidden="true"><i class="kb-dot a">1</i><i class="kb-dot b">2</i><i class="kb-dot c">3</i><svg viewBox="0 0 120 60"><path d="M10 50 C 35 10, 60 55, 85 18 S 112 30, 112 30" fill="none" stroke="#3aa0ff" stroke-width="3" stroke-dasharray="6 6"/></svg></span>
       <span class="kb-text"><b>${lang !== "ja" ? t.x.kbTitle : "NEW｜ガチャ活しよう！"}</b><span>${lang !== "ja" ? t.x.kbText : "近くのガチャのお店を、いちばん効率よく回るルートを自動で作成。お店の数・時間・目的地までの寄り道から選べます。"}</span></span>
@@ -741,13 +826,7 @@ ${content}
       </div>
       <div class="quiz-bar" aria-hidden="true"><i id="quiz-bar"></i></div>
       <div class="quiz-qs">
-      <fieldset data-auto><legend><b>1</b>${t.qGender}</legend>
-        <div class="opts opts-lg">${t.genders.map(([v, l]) => opt("gender", "radio", v, l)).join("")}</div>
-      </fieldset>
-      <fieldset data-auto><legend><b>2</b>${t.qAge}</legend>
-        <div class="opts opts-lg opts-age">${t.ages.map(([v, l]) => opt("age", "radio", v, l)).join("")}</div>
-      </fieldset>
-      <fieldset data-last><legend><b>3</b>${t.qGroups}</legend>
+      <fieldset data-first><legend><b>1</b>${t.qGroups}</legend>
         <p class="q-hint">${t.groupsHint}</p>
         <div class="groups">${(site.quiz_groups || []).map((g) => `<div class="grp" data-group="${g.slug}">
           <label class="grp-main"><input type="checkbox" name="group" value="${g.slug}"><span>${qLabel(g, lang)}</span></label>
@@ -764,10 +843,16 @@ ${content}
         </div>`).join("")}</div>
         <label class="oshi-in"><span>${t.oshiLabel}</span><input type="search" name="oshi" placeholder="${t.oshiPh}" autocomplete="off"></label>
       </fieldset>
+      <fieldset data-auto data-optional><legend><b>2</b>${t.qGender}<small class="q-opt">${esc(t.u.optional)}</small></legend>
+        <div class="opts opts-lg">${t.genders.map(([v, l]) => opt("gender", "radio", v, l)).join("")}</div>
+      </fieldset>
+      <fieldset data-auto data-optional><legend><b>3</b>${t.qAge}<small class="q-opt">${esc(t.u.optional)}</small></legend>
+        <div class="opts opts-lg opts-age">${t.ages.map(([v, l]) => opt("age", "radio", v, l)).join("")}</div>
+      </fieldset>
       </div>
       <div class="quiz-nav">
         <button class="btn btn-ghost" type="button" id="quiz-back" hidden>${t.back}</button>
-        <button class="btn btn-gold" type="button" id="quiz-next" hidden>${t.next}</button>
+        <button class="btn" type="button" id="quiz-next" hidden data-next="${esc(t.next)}" data-skip="${esc(t.u.skipQ)}">${t.next}</button>
         <button class="btn btn-gold" type="submit" id="quiz-submit">${t.quizBtn}</button>
       </div>
     </form>
@@ -781,11 +866,6 @@ ${content}
     <div class="grid" id="results-grid"></div>
     <p class="more-wrap"><button type="button" class="btn" id="results-more" hidden>${t.showMore}</button></p>
   </section>
-
-  ${WEEK.items.length ? `<section class="section section-tight" id="thisweek">
-    <div class="section-head"><h2>${lang !== "ja" ? t.x.weekH : "今週発売のガチャ"}</h2><a class="more" href="${c.H}week.html">${lang !== "ja" ? t.x.weekMore(WEEK.range, WEEK.items.length) : `${WEEK.range}・全${WEEK.items.length}件`}</a></div>
-    <div class="grid row-scroll">${WEEK.items.slice(0, 12).map((it) => card(it, c)).join("")}<a class="card see-all" href="${c.H}week.html"><span class="see-all-in"><b>${lang !== "ja" ? t.x.seeAll : "全部見る"}</b><span>→</span></span></a></div>
-  </section>` : ""}
 
   <section class="section" id="new">
     <div class="section-head"><h2>${t.newTitle}</h2><span><a class="more" href="${c.H}week.html">${lang !== "ja" ? t.x.thisWeek : "今週発売"}</a>　<a class="more" href="${c.H}calendar.html">${t.toCalendar}</a></span></div>
@@ -822,6 +902,22 @@ ${content}
     <div class="section-head"><h2>${t.genreTitle}</h2></div>
     <div class="genres">${GENRES.filter((g) => inGenre(g.slug).length).map((g) => `<a href="${c.H}genre/${g.slug}.html"><span class="ja">${phr(genreLabel(g, lang))}</span><span class="n">${t.series(inGenre(g.slug).length)}</span></a>`).join("")}</div>
   </section>
+  ${(() => {
+    // 下の方のリンク集：月別カレンダー（今月・来月・先月）・メーカー・都道府県のお店
+    const calM = (it) => { const s = weekStartOf(it); return s ? s.toISOString().slice(0, 7) : it.release; };
+    const months = new Set(items.map(calM));
+    const ymOf = (k) => new Date(Date.UTC(nowJST.getUTCFullYear(), nowJST.getUTCMonth() + k, 1)).toISOString().slice(0, 7);
+    const mLinks = [[0, t.u.thisM], [1, t.u.nextM], [-1, t.u.prevM]].map(([k, lab]) => [ymOf(k), lab]).filter(([m]) => months.has(m))
+      .map(([m, lab]) => `<a href="${c.H}calendar/${m}.html"><b>${esc(lab)}</b>${esc(t.month(m))}</a>`).join("");
+    const mk = new Map(); for (const it of items) mk.set(it.maker, (mk.get(it.maker) || 0) + 1);
+    const mkLinks = [...mk.entries()].sort((a, b) => b[1] - a[1]).slice(0, 8)
+      .map(([m, n]) => `<a href="${c.H}maker/${makerSlug(m)}.html">${esc(makerOf(items.find((x) => x.maker === m), lang))}<small>${n}</small></a>`).join("");
+    return `<section class="section section-tight home-links" id="home-links">
+    ${mLinks ? `<h2 class="hl-h">${esc(t.u.monthsH)}</h2><div class="hl-row">${mLinks}</div>` : ""}
+    <h2 class="hl-h">${esc(t.u.makersH)}</h2><div class="hl-row">${mkLinks}</div>
+    ${lang === "ja" && t.u.prefsLink ? `<p class="hl-pref"><a href="${c.R}map.html#prefs">${esc(t.u.prefsLink)} →</a></p>` : ""}
+  </section>`;
+  })()}
 </div>
 <script type="application/json" id="items-data">${JSON.stringify({ ...embed, _items: undefined }).replace(/</g, "\\u003c")}</script>`;
     write(`data/quiz-${lang}.json`, JSON.stringify(embed._items));
@@ -846,6 +942,9 @@ ${content}
     const tags = tagsOf(it, lang);
     const aff = affiliate(it);
     const hasStock = (stockByItem.get(it.id) || []).length > 0;
+    // 公式の取扱店データがまだない商品は、バンダイ公式「ガシャポンどこ？」を一番のボタンに
+    const whereOfficial = !hasStock && !(OFFICIAL_BY_ITEM.get(it.id) || []).length && it.maker === "バンダイ" && /^https:\/\/gashapon\.jp\//.test(it.store_search_url || "");
+    const L0 = shopLinks(it);
     const related = (() => {
       const seed = hashStr(it.id), chs = charasOf(it);
       const sameChara = items.filter((x) => x !== it && chs.some((ch) => ch.list.includes(x))).sort(byNewest);
@@ -868,7 +967,7 @@ ${content}
     <div>
       <h1>${esc(name)}</h1>
       ${lang !== "ja" && it.name_en ? `<p class="name-ja" lang="ja">${esc(it.name)}</p>` : ""}
-      <div class="price"><small>${lang === "ja" ? t.perPlay : ""}</small><b>¥${it.price}</b><span>${lang !== "ja" ? t.perPlay : ""}${it.lineup ? `${lang !== "ja" ? " · " : ""}${t.lineup(it.lineup)}` : ""}</span></div>
+      <div class="price"><small>${lang === "ja" ? t.perPlay : ""}</small><b>¥${it.price}</b><span>${lang !== "ja" ? t.perPlay : ""}${it.lineup ? `${lang !== "ja" ? " · " : ""}${t.lineup(it.lineup)}` : ""}</span>${relPill(it)}</div>
       <dl class="spec">
         <dt>${t.maker}</dt><dd><a href="${c.H}maker/${makerSlug(it.maker)}.html">${esc(maker)}</a></dd>
         <dt>${t.release}</dt><dd><a href="${c.H}calendar/${ws ? ws.toISOString().slice(0, 7) : it.release}.html">${t.month(it.release)}</a>${lang === "ja" && it.release_note ? (ws ? `<a class="rel-note" href="${c.H}calendar/${ws.toISOString().slice(0, 7)}.html#w${wi.key}">${esc(it.release_note)}</a>` : `<span class="rel-note">${esc(it.release_note)}</span>`) : ""}</dd>
@@ -878,8 +977,10 @@ ${content}
       </dl>
       ${description ? `<p class="desc">${esc(description)}</p>` : ""}
       <div class="item-actions">
-        <a class="btn btn-gold" href="#stock">${t.findStores}</a>
+        ${whereOfficial ? `<a class="btn btn-gold" href="${esc(it.store_search_url)}" target="_blank" rel="noopener">${esc(t.u.whereBtn)}</a>
+        <a class="btn btn-sub" href="#stock">${esc(t.u.findLater)}</a>` : `<a class="btn btn-gold" href="#stock">${t.findStores}</a>`}
         ${it.official_url ? `<a class="btn" href="${esc(it.official_url)}" target="_blank" rel="noopener">${t.official}</a>` : ""}
+        <button type="button" class="fav-item" data-fav="${it.id}" aria-pressed="false"><i aria-hidden="true">★</i><span>${esc(t.u.save)}</span></button>
         <button type="button" class="heart" data-vote="${c.R}api/vote/${it.id}" data-id="${it.id}" aria-label="${t.heartAria}" title="${t.heartNote}"><i aria-hidden="true">♥</i><span>${t.heart}</span><b>${heartsOf(it)}</b></button>
       </div>
       ${lang !== "ja" ? (() => { const O = overseas(it); const L = shopLinks(it); const XLG = lang !== "en"; const b = [
@@ -891,6 +992,30 @@ ${content}
       ]; return `<div class="shop-links"><span class="sl-pr">PR</span>${b.map(([k, u, l]) => `<a class="sl ${k}" href="${esc(u)}" target="_blank" rel="sponsored noopener">${l}</a>`).join("")}</div>${L.jan ? `<p class="jan">JAN: <span>${L.jan}</span></p>` : ""}`; })() : (() => { const L = shopLinks(it); return `<div class="shop-links"><span class="sl-pr">PR</span><a class="sl sl-rak" href="${esc(L.rakuten)}" target="_blank" rel="sponsored noopener">楽天市場</a><a class="sl sl-amz" href="${esc(L.amazon)}" target="_blank" rel="sponsored noopener">Amazon</a><a class="sl sl-yah" href="${esc(L.yahoo)}" target="_blank" rel="sponsored noopener">Yahoo!ショッピング</a><a class="sl sl-mer" href="${esc(L.mercari)}" target="_blank" rel="${L.mercariAf ? "sponsored noopener" : "noopener"}">${esc(L.mercariLabel)}</a></div>${L.jan ? `<p class="jan">JANコード：<span>${L.jan}</span></p>` : ""}`; })()}
     </div>
   </article>
+  <section class="section section-tight buy-sec">
+    <aside class="buy" id="buy" aria-label="${t.buyAria}">
+      <div>
+        <h3>${t.buyTitle}<span class="pr">PR</span></h3>
+        <p>${t.buyLead}</p>
+      </div>
+      <div class="btns">
+        ${lang !== "ja" && overseas(it).amazon ? `<a class="btn btn-gold" href="${esc(overseas(it).amazon)}" target="_blank" rel="sponsored noopener">Search on Amazon</a>` : `<a class="btn btn-gold" href="${esc(aff.amazon)}" target="_blank" rel="sponsored noopener">${t.amazon}</a>`}
+        ${lang !== "ja" && overseas(it).ebay ? `<a class="btn" href="${esc(overseas(it).ebay)}" target="_blank" rel="sponsored noopener">Search on eBay</a>` : ""}
+        <a class="btn" href="${esc(aff.rakuten)}" target="_blank" rel="sponsored noopener">${t.rakuten}</a>
+      </div>
+    </aside>
+    <aside class="buy flea" aria-label="${t.fleaTitle}">
+      <div>
+        <h3>${t.fleaTitle}</h3>
+        <p>${t.fleaLead}</p>
+      </div>
+      <div class="btns">
+        ${lang !== "ja" && overseas(it).buyee ? `<a class="btn btn-gold" href="${esc(overseas(it).buyee)}" target="_blank" rel="sponsored noopener">Buy from Mercari Japan via Buyee</a>` : ""}
+        ${[["mercari", `https://jp.mercari.com/search?keyword=${encodeURIComponent(it.name)}`], ["yahoo", `https://auctions.yahoo.co.jp/search/search?p=${encodeURIComponent(it.name)}`], ["rakuma", `https://fril.jp/s?query=${encodeURIComponent(it.name)}`]]
+          .map(([k, u]) => `<a class="btn" href="${esc(u)}" target="_blank" rel="noopener">${t[k]}</a>`).join("")}
+      </div>
+    </aside>
+  </section>
   ${(it.lineup_names || []).length ? `<section class="section lineup-sec">
     <div class="section-head"><h2>${t.lineupTitle(it.lineup || it.lineup_names.length)}</h2></div>
     <ol class="lineup">${it.lineup_names.map((n) => `<li lang="ja">${esc(n)}</li>`).join("")}</ol>
@@ -955,29 +1080,6 @@ ${content}
       </div>
       <script type="application/json" id="arr-i18n">${JSON.stringify({ shops: t.arrShops(0).replace("0", "{n}"), times: t.arrTimes(0).replace("0", "{n}"), avg: t.arrAvg(0).replace("0", "{n}"), noavg: t.arrNoAvg, on: t.arrStockOn, off: t.arrStockOff, none: t.arrNone })}</script>
     </div>
-
-    <aside class="buy" id="buy" aria-label="${t.buyAria}">
-      <div>
-        <h3>${t.buyTitle}<span class="pr">PR</span></h3>
-        <p>${t.buyLead}</p>
-      </div>
-      <div class="btns">
-        ${lang !== "ja" && overseas(it).amazon ? `<a class="btn btn-gold" href="${esc(overseas(it).amazon)}" target="_blank" rel="sponsored noopener">Search on Amazon</a>` : `<a class="btn btn-gold" href="${esc(aff.amazon)}" target="_blank" rel="sponsored noopener">${t.amazon}</a>`}
-        ${lang !== "ja" && overseas(it).ebay ? `<a class="btn" href="${esc(overseas(it).ebay)}" target="_blank" rel="sponsored noopener">Search on eBay</a>` : ""}
-        <a class="btn" href="${esc(aff.rakuten)}" target="_blank" rel="sponsored noopener">${t.rakuten}</a>
-      </div>
-    </aside>
-    <aside class="buy flea" aria-label="${t.fleaTitle}">
-      <div>
-        <h3>${t.fleaTitle}</h3>
-        <p>${t.fleaLead}</p>
-      </div>
-      <div class="btns">
-        ${lang !== "ja" && overseas(it).buyee ? `<a class="btn btn-gold" href="${esc(overseas(it).buyee)}" target="_blank" rel="sponsored noopener">Buy from Mercari Japan via Buyee</a>` : ""}
-        ${[["mercari", `https://jp.mercari.com/search?keyword=${encodeURIComponent(it.name)}`], ["yahoo", `https://auctions.yahoo.co.jp/search/search?p=${encodeURIComponent(it.name)}`], ["rakuma", `https://fril.jp/s?query=${encodeURIComponent(it.name)}`]]
-          .map(([k, u]) => `<a class="btn" href="${esc(u)}" target="_blank" rel="noopener">${t[k]}</a>`).join("")}
-      </div>
-    </aside>
   </section>
 
   ${charasOf(it).length ? `<section class="section section-tight"><div class="section-head"><h2>${lang === "ja" ? "このキャラクター・作品のガチャ" : t.x.moreSeries}</h2></div><div class="chara-list">${charasOf(it).map((ch) => `<a class="chara-chip" href="${c.H}chara/${ch.slug}.html">${esc(lang === "ja" ? `${ch.label}のガチャ一覧` : t.x.charaChip(charaLabel(ch, lang)))}<small>${ch.list.length}</small></a>`).join("")}</div></section>` : ""}
@@ -985,7 +1087,12 @@ ${content}
     <div class="section-head"><h2>${lang === "ja" ? "関連するガチャ" : t.related}</h2><a class="more" href="${c.H}genre/${g.slug}.html">${t.seeAll(gl)}</a></div>
     <div class="grid">${related.map((x) => card(x, c)).join("")}</div>
   </section>` : ""}
-</div>`;
+</div>
+<nav class="item-bar" aria-label="${esc(name)}">
+  <button type="button" class="ib-fav" data-fav="${it.id}" aria-pressed="false"><i aria-hidden="true">★</i><span>${esc(t.u.save)}</span></button>
+  <a class="ib-stock" href="${whereOfficial ? esc(it.store_search_url) : "#stock"}"${whereOfficial ? ' target="_blank" rel="noopener"' : ""}>${esc(t.u.stockShort)}</a>
+  ${lang === "ja" ? `<a class="ib-mer" href="${esc(L0.mercari)}" target="_blank" rel="${L0.mercariAf ? "sponsored noopener" : "noopener"}">${esc(t.u.mercari)}${L0.mercariAf ? "<small>PR</small>" : ""}</a>` : ""}
+</nav>`;
 
     const product = {
       "@context": "https://schema.org", "@type": "Product", name, description: description || desc, sku: it.id,
@@ -1060,11 +1167,17 @@ ${content}
     list: NEXT_WEEK.items, current: "calendar",
   });
   // 新着ガチャ（トップの「全部見る」のリンク先）
-  listPage("new.html", {
-    title: lang !== "ja" ? t.x.newPageTitle : "新着ガチャガチャ一覧（最新の新作情報）",
-    lead: lang !== "ja" ? t.x.newPageLead : "バンダイ・タカラトミーアーツなどの新作ガチャガチャを、サイトに載った新しい順に並べています。発売月・価格・全何種かもひと目でわかります。",
-    list: [...items].sort(byNewest).slice(0, 120), current: "new",
-  });
+  {
+    // 載った日が新しい順 → 同じ日なら発売が先の新作から（まとめて取り込んだ日に古い商品が上に来ないように）
+    const byAddedRelease = (a, b) => (b.added > a.added ? 1 : b.added < a.added ? -1 : b.release > a.release ? 1 : b.release < a.release ? -1 : b.popularity - a.popularity);
+    const monStr = mondayOf(nowJST).toISOString().slice(0, 10);
+    const nToday = items.filter((it) => it.added === today).length, nWeek = items.filter((it) => it.added >= monStr && it.added <= today).length;
+    listPage("new.html", {
+      title: lang !== "ja" ? t.x.newPageTitle : "新着ガチャガチャ一覧（最新の新作情報）",
+      lead: `${t.u.addedLine(nToday, nWeek)}。${lang !== "ja" ? t.x.newPageLead : "バンダイ・タカラトミーアーツなどの新作ガチャガチャを、サイトに載った新しい順に並べています。発売月・価格・全何種かもひと目でわかります。"}`.replace(/^(.+?)。(?=[A-Za-z가-힣])/, "$1. "),
+      list: [...items].sort(byAddedRelease).slice(0, 120), current: "new",
+    });
+  }
   for (const g of TYPES) {
     const list = inType(g.slug).sort(byNewest);
     if (list.length) listPage(`type/${g.slug}.html`, { title: t.typePage(genreLabel(g, lang)), lead: t.typeLead(genreLabel(g, lang), list.length), list, current: "genre" });
@@ -1247,7 +1360,24 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
   write(`data/search-${lang}.json`, JSON.stringify(items.map((it) => ({
     id: it.id, n: nameOf(it, lang), a: lang !== "ja" ? it.name : it.name_en, m: makerOf(it, lang), img: thumbOf(it.image), p: it.price, l: it.lineup, r: t.month(it.release), g: genreLabel(genreOf(it.genre), lang),
     k: [...(it.tags || []), ...(it.tags_en || []), ...(it.lineup_names || [])].join(" "),
+    // w：発売週の月曜日、ym：発売月（ブラウザで「今週発売・発売中」などを出すのに使う）
+    w: (() => { const s = weekStartOf(it); return s ? s.toISOString().slice(0, 10) : ""; })(), ym: it.release,
   }))));
+  // 検索の候補の先頭に出す「キャラクター・作品の一覧ページ」
+  write(`data/chara-${lang}.json`, JSON.stringify(CHARAS.map((ch) => ({ s: ch.slug, l: charaLabel(ch, lang), j: ch.label, e: ch.en, n: ch.list.length, m: ch.match }))));
+
+  /* ---------- マイリスト（★で保存したガチャ。ブラウザの中だけに保存。検索には出さない） ---------- */
+  {
+    const rel = "mylist.html", c = ctx(rel);
+    const body = `<div class="wrap">
+  <nav class="breadcrumb" aria-label="breadcrumb"><a href="${c.H}index.html">${t.home}</a><span>/</span><span>${esc(t.u.mylist)}</span></nav>
+  <header class="page-head"><h1>★ ${esc(t.u.mylistTitle)}</h1><p class="lead">${esc(t.u.mylistLead)}</p></header>
+  <div id="mylist" class="mylist" data-index="${c.R}data/search-${lang}.json" data-home="${c.H}" data-root="${c.R}" data-l="${esc(JSON.stringify({ now: t.u.mlNow, soon: t.u.mlSoon, out: t.u.mlOut }))}">
+    <p class="empty ml-empty" hidden>${esc(t.u.mlEmpty)}<br><a class="btn" href="${c.H}week.html" style="margin-top:14px">${esc(t.u.mlBrowse)} →</a></p>
+  </div>
+</div>`;
+    layout({ rel, title: t.u.mylistTitle, description: t.u.mylistLead, body, noindex: true });
+  }
 
   /* ---------- みんなのガチャマップ（日本語だけ） ---------- */
   if (lang === "ja") {
@@ -1315,7 +1445,7 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
     </div>
     <p class="fine">地図：国土地理院の地図と、拡大したときは OpenStreetMap を使っています。お店の情報はバンダイ公式「ガシャポンどこ？」の取扱店と、みんなの報告をもとにしています。<a href="${c.R}rules.html">投稿のきまり</a></p>
   </section>
-  <section class="section"><div class="section-head"><h2>都道府県から探す</h2></div>
+  <section class="section" id="prefs"><div class="section-head"><h2>都道府県から探す</h2></div>
     <div class="archive-list">${prefs.map((p) => `<a href="${c.R}shops/${prefSlug(p)}.html">${p}（${SHOPS.filter((x) => x.pref === p).length}）</a>`).join("")}</div>
   </section>
 </div>`;
@@ -1490,7 +1620,7 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
       ["アクセス解析について", "サイトの改善のため、Cloudflareのアクセス解析を使うことがあります。個人を特定できる情報は集めていません。"],
       ["みんなの報告・コメントについて", "ガチャマップへの在庫報告・評価・コメントは、名前を出さずに表示します。いたずら防止のため、端末を見分けるための読めない符号を記録しますが、IPアドレスそのものは保存しません。"],
       ["位置情報について", "「現在地から探す」などで使う現在地は、近いお店を並べる計算だけに使い、どこにも送信しません。"],
-      ["お気に入り（推し）について", "お気に入りに登録したガチャは、お使いのブラウザの中だけに保存されます。"],
+      ["マイリスト（★保存）・ハートについて", "★で保存したガチャ（マイリスト）と、ハートを押した記録は、お使いのブラウザの中（ローカルストレージ）だけに保存され、当サイトのサーバーには送信されません。ブラウザのデータを消すと、保存した内容も消えます。ハートの数（人気ランキング）だけは、名前などを含まない形で集計しています。"],
       ["免責事項", "掲載している発売日・価格・取扱店・在庫などの情報は、公式情報とみんなの報告をもとにしていますが、正確さを保証するものではありません。最新の情報は各メーカーの公式サイトやお店でご確認ください。"],
       ["改定", "この方針は、必要に応じて変更することがあります。"],
     ];
@@ -1510,7 +1640,7 @@ write("404.html", `<!doctype html><html lang="ja"><head><meta charset="utf-8"><m
 const lm = (d) => (d ? `<lastmod>${String(d).slice(0, 10)}</lastmod>` : "");
 const urlEntry = ([lang, rel, alts, , lastmod]) => alts.length < 2 ? `  <url><loc>${esc(canonical(lang, rel))}</loc>${lm(lastmod)}</url>` : `  <url><loc>${esc(canonical(lang, rel))}</loc>${lm(lastmod)}
 ${alts.flatMap((l) => [LANG_META[l].hreflang, ...(LANG_META[l].extra || [])].map((code) => `    <xhtml:link rel="alternate" hreflang="${code}" href="${esc(canonical(l, rel))}"/>`)).join("\n")}
-    <xhtml:link rel="alternate" hreflang="x-default" href="${esc(canonical(alts.includes("en") ? "en" : "ja", rel))}"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="${esc(canonical(xDefault(rel, alts), rel))}"/>
   </url>`;
 // サイトマップは種類ごとに分けて、sitemap.xml はその目次にする（Search Console で種類ごとの登録状況が見える）
 {
