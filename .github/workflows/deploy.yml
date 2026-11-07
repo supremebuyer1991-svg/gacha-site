@@ -13,7 +13,8 @@ on:
         type: boolean
         default: false
   schedule:
-    - cron: "0 0,6,15 * * *" # 日本時間 9時・15時・0時（在庫の更新と「NEW」表示の更新。公式サイトへの負担を考えて1日3回まで）
+    - cron: "0 15 * * *"   # 日本時間 0時：新作・写真の取り込み（1日1回）＋公開
+    - cron: "0 0,6 * * *"  # 日本時間 9時・15時：取り込みなしで作り直して公開（在庫・NEW表示・お店の情報の更新）
 
 # ふだんの公開（push）どうしは新しいほうだけ残す。取り込みをする定時・手動の公開は、push で取り消されないよう別のグループにする
 concurrency:
@@ -36,6 +37,9 @@ jobs:
       # 取り込みは時間がかかるので、決まった時間（と手動実行）のときだけ。デザインの修正などはすぐ公開する
       - name: 画像・店舗・在庫を取り込む
         if: github.event_name != 'push'
+        env:
+          # 9時・15時は新作と写真の取り込みをしない（GitHub Actions の無料枠を節約するため。新作の確認は0時の1日1回で十分）
+          LIGHT_RUN: ${{ github.event.schedule == '0 0,6 * * *' && '1' || '' }}
         run: |
           npm install --no-save --no-package-lock sharp@0.33.5
           node src/fetch-assets.js

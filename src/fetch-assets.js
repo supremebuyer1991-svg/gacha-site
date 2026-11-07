@@ -297,6 +297,15 @@ async function makeThumbs() {
 
 (async () => {
   fs.mkdirSync(path.join(ROOT, "images"), { recursive: true });
+  if (process.env.LIGHT_RUN === "1") {
+    // 軽い更新（日本時間9時・15時）：新作・写真の取り込みはしない（0時に1日1回）。位置計算とサムネだけ
+    items = read("items.json");
+    const geos = await geocodeStores();
+    await makeThumbs();
+    try { await makeWeekOg(); } catch (e) { console.log(`⚠ 今週発売の共有画像を作れませんでした（${e.message}）`); }
+    console.log(`軽い更新：新作・写真の取り込みはなし（0時に実行）。住所からの位置計算 ${geos}件`);
+    return;
+  }
   await require("./import-schedule.js")();
   try { await require("./import-takara.js")(); } catch (e) { console.log(`⚠ タカラトミーアーツの取り込みに失敗しました（${e.message}）`); }
   try { await require("./import-others.js")(); } catch (e) { console.log(`⚠ ほかのメーカーの取り込みに失敗しました（${e.message}）`); }
