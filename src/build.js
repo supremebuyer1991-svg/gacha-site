@@ -2225,7 +2225,14 @@ write("data/shops.json", JSON.stringify(SHOPS.map((x) => [x.id, x.name, x.pref, 
       break;
     }
     const wk = WEEK.items.filter((it) => it.image && it.name_en).map((it, i) => [it, i]).sort((a, b) => favRank(a[0]) - favRank(b[0]) || a[1] - b[1]).map((x) => x[0]);
-    return { daily, week: { range: WEEK.range, count: WEEK.items.length, url: `${SITE_URL}/en/week`, items: wk.slice(0, 4).map(packEn) } };
+    // 朝7時：今日の1つ（人気の系統から、daily と重ならないもの）。昼：旅行者向けの「駅の近くのガチャ屋さん」
+    const usedEn = new Set((daily.items || []).map((x) => x.id));
+    const pk = items.filter((it) => ok(it) && isFav(it) && !usedEn.has(it.id)).sort((a, b) => (b.release > a.release ? 1 : b.release < a.release ? -1 : a.id < b.id ? -1 : 1));
+    const pick = pk.length ? packEn(pk[(dn * 7) % pk.length]) : null;
+    const sts = STATIONS.filter((st) => st.shops && st.shops.length >= 2);
+    const st = sts.length ? sts[dn % sts.length] : null;
+    const spot = st ? { name: st.en, slug: st.slug, count: st.shops.length, url: `${SITE_URL}/en/station/${st.slug}`, nearest: st.shops[0] && Math.max(1, Math.round(st.shops[0].d / 80)), items: wk.slice(0, 4).map(packEn) } : null;
+    return { daily, pick, spot, week: { range: WEEK.range, count: WEEK.items.length, url: `${SITE_URL}/en/week`, items: wk.slice(0, 4).map(packEn) } };
   })(), fav_ids: favIds, site: SITE_URL }));
 }
 write("_headers", `/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n/assets/*\n  Cache-Control: public, max-age=31536000, immutable\n/images/*\n  Cache-Control: public, max-age=604800\n  Access-Control-Allow-Origin: *\n/data/*\n  Cache-Control: public, max-age=300\n  Access-Control-Allow-Origin: *\n/sw.js\n  Cache-Control: no-cache\n`);
