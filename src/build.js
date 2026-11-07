@@ -1224,7 +1224,7 @@ ${content}
     write(`data/quiz-${lang}.json`, JSON.stringify(embed._items));
 
     layout({
-      rel: "index.html", title: site.name, current: "new", lastmod: maxAdded(items),
+      rel: "index.html", title: site.name, lastmod: maxAdded(items),
       // 説明文：日本語は今週・今月の数と最新の名前を足して、ひと目で中身がわかるように（ほかの言語は site.json の長い説明のまま）
       description: lang === "ja" ? `${t.description}今週発売${WEEK.items.length}件・今月の新作${releasingNow}件。${newest.slice(0, 2).map((it) => `「${it.name}」`).join("")}など最新の情報を毎日更新。` : t.description, body,
       jsonld: [{ "@context": "https://schema.org", "@type": "WebSite", name: site.name, alternateName: ["ガチャプラネット", "GACHA PLANET"], url: canonical(lang, "index.html"), description: t.description, inLanguage: LANG_META[lang].hreflang,
