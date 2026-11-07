@@ -9,6 +9,7 @@ module.exports = {
     u: {
       push: { on: "發售時通知我", off: "停止通知", lead: "在你用★收藏的扭蛋發售那一週的週一早上（日本時間）傳送通知。不需註冊。", onNow: "通知已開啟：★收藏的扭蛋發售的那一週會通知你。", done: "已開啟通知。", offDone: "已停止通知。", denied: "通知已被封鎖。請在瀏覽器設定中允許本網站的通知。", error: "操作失敗，請稍後再試。", ios: "在 iPhone/iPad 上，需要先加入主畫面才能接收通知：點 Safari 的分享按鈕（□↑）→「加入主畫面」，再從新圖示開啟並點此按鈕。", busy: "設定中…" },
       followTxt: "每週在 X 上發布新品與到貨速報", followCta: (a) => `追蹤 @${a}`,
+      snsTxt: "每週在 Threads・Instagram 上發布新品與到貨速報", snsCta: (a) => `追蹤 @${a}`,
       homeH1: (ym) => `日本扭蛋新品・發售日一覽（${ym.y}年${ym.m}月）`,
       addedLine: (d, w) => `今日新增 ${d} 件・本週新增 ${w} 件`,
       save: "收藏", saved: "已收藏", saveAria: "加入我的清單", unsaveAria: "從我的清單移除",
@@ -73,9 +74,10 @@ module.exports = {
       idxLead: (n) => `根據萬代官方店鋪資料，整理了日本${n}個主要車站和機場附近的扭蛋店。選好車站，就能看到走路就到的扭蛋店喔。`,
       regions: { kanto: "東京周邊", kansai: "大阪・京都・神戶", chubu: "名古屋", kyushu: "福岡・沖繩", north: "北海道・東北", chugoku: "廣島", airport: "機場" },
       h1: (name) => `${name}附近的扭蛋店`,
-      title: (name, n) => `${name}附近扭蛋（轉蛋）店${n}家`,
+      title: (name, n) => `${name}附近扭蛋（轉蛋）店${n}家｜日本扭蛋地圖`,
       desc: (name, n, km, near) => `${name}周邊${km}公里內共有${n}家萬代官方扭蛋店，最近的是「${near}」。附步行時間、地址與Google地圖連結。`,
       lead: (name, n, km, near, w) => `${name}周邊${km}公里內，共有${n}家萬代官方合作的扭蛋店。離車站最近的是「${near}」，步行約${w}分鐘。`,
+      leadTop: (name, n, km, top, k, w, near, wn) => `${name}周邊${km}公里內，共有${n}家萬代官方合作的扭蛋店。販售扭蛋最多的是「${top}」（官方販售${k}種，步行約${w}分鐘）；離車站最近的是「${near}」（步行約${wn}分鐘）。`,
       shopsH: "附近的扭蛋店", walk: (m, d) => `步行約${m}分鐘（${d}）`, titles: (n) => `官方販售${n}種`,
       gmaps: "用Google地圖開啟", mapGo: "在地圖上查看",
       weekH: "附近店家本週發售的扭蛋", weekAllH: "本週發售的扭蛋",
@@ -133,6 +135,10 @@ module.exports = {
       ["扭蛋可以免稅嗎？", "扭蛋機是投幣式販賣機，通常不適用免稅喔。請把它當作含稅的價格來享受吧。"],
       ["可以投新台幣或港幣硬幣嗎？", "請勿誤投！新台幣5元、港幣5毫等硬幣和100日圓硬幣大小相近，誤投可能會卡住機台或拿不回來。請只使用日圓硬幣。"],
       ["沖繩、福岡也有大型扭蛋店嗎？", "有的。不只東京和大阪，沖繩、福岡等地的購物中心和車站周邊也有扭蛋店。可以用本站的地圖從目前位置搜尋看看吧。"],
+      // 答案裡的 [文字](station/〇〇.html) 會變成連結（只在該車站頁面存在時）
+      ["預算大概要抓多少？", "大部分機台一轉300～500日圓，轉10次大約4000日圓。帶千圓紙鈔就可以，扭蛋店通常都有兌幣機可以換成百圓硬幣。"],
+      ["哪些地方的扭蛋店最多？", "東京：[秋葉原](station/akihabara.html)（扭蛋店最集中，有好幾家多層樓的大店）、太陽城一帶的[池袋](station/ikebukuro.html)、[澀谷](station/shibuya.html)。大阪：[難波](station/namba.html)和[心齋橋](station/shinsaibashi.html)。京都：四條・河原町商圈和[京都站](station/kyoto.html)周邊。各車站頁面列出了附近的店家和步行時間。"],
+      ["人在台灣・香港，要怎麼買日本扭蛋？", "日本的網購平台大多不寄海外，可以利用Buyee等代購服務，購買日本網店或二手App（如Mercari）上的商品。每款扭蛋頁面上都有對應的按鈕。代購手續費和國際運費會另外計算。"],
       ["發現網站內容有誤怎麼辦？", "請透過「關於本站」頁面上的聯絡方式告訴我們，我們會盡快修正。"],
     ],
     aboutTitle: "關於本站・聯絡我們", aboutH1: "關於本站", aboutDesc: `關於${site.name}、聯絡方式、廣告與免責聲明。`,
@@ -463,6 +469,22 @@ module.exports = {
     series: (d) => d.prev && d.next ? `同系列的上一款是「${d.prev}」，下一款是「${d.next}」。` : d.prev ? `同系列的上一款是「${d.prev}」。` : d.next ? `同系列的下一款「${d.next}」${d.nextUp ? "也已預定發售" : "也已發售"}。` : "",
     shops: (d) => `根據萬代（BANDAI）官方的店鋪資訊，日本共有${d.shops}家店鋪販售這款扭蛋。`,
     prefs: false, dash: "",
+  },
+  // 發售月曆（build.js 裡 T.en.cal 的翻譯）：週編號・標記・月份頁面的標題與說明
+  cal: {
+    week: (w) => `${w.m}月第${w.no}週`, weekNo: (no) => `第${no}週`, wShort: (no) => `第${no}週`, monthShort: (mo) => `${mo}月`,
+    now: "本週", out: "已發售", releases: "發售", series: (n) => `${n}個系列`, count: (n) => `${n}`,
+    tba: "未定", tbaDate: "發售週尚未公布", tbaNote: "發售週尚未公布的商品", tbaSub: "週",
+    showAll: (n) => `顯示全部${n}款`, showLess: "收起",
+    jumpAria: "跳到該週", jumpBack: "回到選擇週", jumpBtn: "選擇週",
+    monthsAria: "依月份查看的頁面", byMonth: "依月份查看", calendar: "月曆",
+    span: (a, b) => `${a}～${b}`,
+    title: (span) => `日本扭蛋發售月曆（${span}）｜新品依週一覽`,
+    desc: (span, wn, range, mn) => `日本扭蛋新品依發售週排列的月曆（${span}）。本週（${range}）發售${wn}個系列，本月共${mn}個系列，附價格、款式數與廠商。`,
+    monthH1: (y, mo, n, future) => `${y}年${mo}月發售的日本扭蛋新品一覽（${n}個系列）`,
+    monthTitle: (y, mo, n, future) => `${y}年${mo}月發售的日本扭蛋新品一覽（${n}個系列）｜發售日・價格`,
+    weeksTxt: (no, k) => `第${no}週${k}款`, weeksSep: "、",
+    monthDesc: (y, mo, n, future, weeksTxt, top) => `${y}年${mo}月在日本${future ? "將發售" : "已發售"}的扭蛋共${n}個系列，依發售週排列${weeksTxt ? `（${weeksTxt}）` : ""}。包括${top.join("、")}等。`,
   },
   // 週別頁面・列表頁（src/hubs.js）
   hub: {

@@ -12,6 +12,7 @@ module.exports = {
       title: (name, n) => `${name}附近扭蛋店${n}家 - 日本扭蛋地图`,
       desc: (name, n, km, near) => `${name}周边${km}公里内共有${n}家万代官方扭蛋店，最近的是「${near}」。附步行时间、地址和Google地图链接。`,
       lead: (name, n, km, near, w) => `${name}周边${km}公里内，共有${n}家万代官方合作的扭蛋店。离车站最近的是「${near}」，步行约${w}分钟。`,
+      leadTop: (name, n, km, top, k, w, near, wn) => `${name}周边${km}公里内，共有${n}家万代官方合作的扭蛋店。在售扭蛋最多的是「${top}」（官方在售${k}款，步行约${w}分钟）；离车站最近的是「${near}」（步行约${wn}分钟）。`,
       shopsH: "附近的扭蛋店", walk: (m, d) => `步行约${m}分钟（${d}）`, titles: (n) => `官方在售${n}款`,
       gmaps: "在Google地图中打开", mapGo: "在地图上查看",
       weekH: "附近店铺本周发售的扭蛋", weekAllH: "本周发售的扭蛋",
@@ -34,6 +35,7 @@ module.exports = {
     u: {
       push: { on: "发售时通知我", off: "停止通知", lead: "在你用★收藏的扭蛋发售那一周的周一早上（日本时间）发送通知。无需注册。", onNow: "通知已开启：★收藏的扭蛋发售的那一周会通知你。", done: "已开启通知。", offDone: "已停止通知。", denied: "通知已被阻止。请在浏览器设置中允许本网站的通知。", error: "操作失败，请稍后再试。", ios: "在 iPhone/iPad 上，需要先添加到主屏幕才能接收通知：点 Safari 的分享按钮（□↑）→“添加到主屏幕”，再从新图标打开并点此按钮。", busy: "设置中…" },
       followTxt: "每周在 X 上发布新品和到货速报", followCta: (a) => `关注 @${a}`,
+      snsTxt: "每周在 Threads・Instagram 上发布新品和到货速报", snsCta: (a) => `关注 @${a}`,
       homeH1: (ym) => `日本扭蛋新品・发售日一览（${ym.y}年${ym.m}月）`,
       addedLine: (d, w) => `今日新增 ${d} 件・本周新增 ${w} 件`,
       save: "收藏", saved: "已收藏", saveAria: "加入我的清单", unsaveAria: "从我的清单移除",
@@ -130,6 +132,9 @@ module.exports = {
       ["到处都卖完了怎么办？", "店铺通常会在发售几天后补货。你也可以通过每款扭蛋页面上的按钮，在日本亚马逊或乐天找整套，或在日本的二手 App 上找单品。"],
       ["想在国内买怎么办？", "本站的购买按钮链接的是日本的网店和二手平台。如果需要寄到中国，可以考虑使用 Buyee 等代购服务。运费、关税和是否可以代购，请以各代购服务的说明为准。"],
       ["回国前，胶囊壳怎么处理？", "空胶囊壳可以放进扭蛋机旁边的回收箱。想减轻行李的话，在店里拆开后只带走玩具就好啦。"],
+      // 回答里的 [文字](station/〇〇.html) 会变成链接（只在该车站页面存在时）
+      ["预算大概要多少？", "大多数扭蛋机每次 300～500 日元，扭 10 次大约 4000 日元。带上 1000 日元纸币就行，扭蛋店里一般都有兑币机可以换成 100 日元硬币。"],
+      ["哪些地方的扭蛋店最多？", "东京：[秋叶原](station/akihabara.html)（扭蛋店最集中，有好几家多层的大店）、阳光城一带的[池袋](station/ikebukuro.html)、[涩谷](station/shibuya.html)。大阪：[难波](station/namba.html)和[心斋桥](station/shinsaibashi.html)。京都：四条・河原町商圈和[京都站](station/kyoto.html)周边。各车站页面列出了附近的店铺和步行时间。"],
       ["我的位置信息会被发送到别处吗？", "不会。你的位置只在你自己的手机上用于按距离排序店铺，绝不会被保存，也不会发送给我们或任何人。"],
       ["我发现网站上有错误。", "请通过「关于我们」页面上的联系方式告诉我们，我们会尽快修正。"],
     ],
@@ -186,6 +191,22 @@ module.exports = {
     series: (d) => d.prev && d.next ? `同系列的上一款是「${d.prev}」，下一款是「${d.next}」。` : d.prev ? `同系列的上一款是「${d.prev}」。` : d.next ? `同系列的下一款「${d.next}」${d.nextUp ? "也已预定发售" : "也已发售"}。` : "",
     shops: (d) => `根据万代（BANDAI）官方的店铺信息，日本共有${d.shops}家店铺销售这款扭蛋。`,
     prefs: false, dash: "",
+  },
+  // 发售日历（build.js 里 T.en.cal 的翻译）：周编号・标记・月份页面的标题和描述
+  cal: {
+    week: (w) => `${w.m}月第${w.no}周`, weekNo: (no) => `第${no}周`, wShort: (no) => `第${no}周`, monthShort: (mo) => `${mo}月`,
+    now: "本周", out: "现已发售", releases: "发售", series: (n) => `${n}个系列`, count: (n) => `${n}`,
+    tba: "待定", tbaDate: "发售周尚未公布", tbaNote: "发售周尚未公布的商品", tbaSub: "周",
+    showAll: (n) => `查看全部${n}款`, showLess: "收起",
+    jumpAria: "跳转到周", jumpBack: "回到选择周", jumpBtn: "选择周",
+    monthsAria: "按月查看的页面", byMonth: "按月查看", calendar: "日历",
+    span: (a, b) => `${a}～${b}`,
+    title: (span) => `日本扭蛋发售日历（${span}）- 新品按周一览`,
+    desc: (span, wn, range, mn) => `日本扭蛋新品按发售周排列的日历（${span}）。本周（${range}）发售${wn}个系列，本月共${mn}个系列，附价格、款式数和厂商。`,
+    monthH1: (y, mo, n, future) => `${y}年${mo}月发售的日本扭蛋新品一览（${n}个系列）`,
+    monthTitle: (y, mo, n, future) => `${y}年${mo}月发售的日本扭蛋新品一览（${n}个系列）- 发售日・价格`,
+    weeksTxt: (no, k) => `第${no}周${k}款`, weeksSep: "、",
+    monthDesc: (y, mo, n, future, weeksTxt, top) => `${y}年${mo}月在日本${future ? "将发售" : "已发售"}的扭蛋共${n}个系列，按发售周排列${weeksTxt ? `（${weeksTxt}）` : ""}。包括${top.join("、")}等。`,
   },
   // 周别页面・列表页（src/hubs.js）
   hub: {

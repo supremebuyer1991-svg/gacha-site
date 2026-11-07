@@ -41,8 +41,9 @@ const badge = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${BADG
   // Pinterest の自動ピン（RSS）：新しく載った順に100件。Pinterest ビジネスの「RSSフィードから自動公開」に https://gachapla.com/pinterest.xml を登録して使う
   const esc = (t) => String(t == null ? "" : t).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const SITE = "https://gachapla.com";
-  const feed = items.filter((it) => fs.existsSync(path.join(OUT, `${it.id}.jpg`)))
-    .sort((a, b) => (b.added || "").localeCompare(a.added || "") || (b.release || "").localeCompare(a.release || "")).slice(0, 100);
+  const pinnable = items.filter((it) => fs.existsSync(path.join(OUT, `${it.id}.jpg`)))
+    .sort((a, b) => (b.added || "").localeCompare(a.added || "") || (b.release || "").localeCompare(a.release || ""));
+  const feed = pinnable.slice(0, 100);
   const rel = (it) => it.release_note || (it.release ? `${it.release.slice(0, 4)}年${+it.release.slice(5, 7)}月発売` : "");
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/"><channel>
@@ -52,4 +53,16 @@ ${feed.map((it) => { const u = `${SITE}/images/social/${it.id}.jpg`; const d = `
 `;
   fs.writeFileSync(path.join(ROOT, "dist", "pinterest.xml"), xml);
   console.log(`Pinterest 用の RSS：${feed.length}件`);
+  // 英語版（https://gachapla.com/pinterest-en.xml）：英語名のある商品だけ。リンクは /en/item/、説明は英語
+  const MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const relEn = (it) => (it.release ? `${MON[+it.release.slice(5, 7) - 1]} ${it.release.slice(0, 4)}` : "");
+  const feedEn = pinnable.filter((it) => it.name_en).slice(0, 100);
+  const xmlEn = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/"><channel>
+<title>GACHA PLANET | New gachapon (Japanese capsule toys)</title><link>${SITE}/en/</link><description>New Japanese capsule toys (gachapon): release dates, prices and lineups</description><language>en</language>
+${feedEn.map((it) => { const u = `${SITE}/images/social/${it.id}.jpg`; const d = [`¥${it.price} per play`, it.lineup ? `${it.lineup} designs` : "", relEn(it), "Japanese capsule toy (gachapon)"].filter(Boolean).join(" · ") + ". Release date, price and shops in Japan on GACHA PLANET."; return `<item><title>${esc(`${it.name_en} (gachapon)`)}</title><link>${SITE}/en/item/${it.id}</link><guid isPermaLink="false">gachapla-en-${esc(it.id)}</guid><pubDate>${new Date((it.added || "2026-11-01") + "T09:00:00+09:00").toUTCString()}</pubDate><description>${esc(d)}</description><enclosure url="${u}" type="image/jpeg" length="0"/><media:content url="${u}" medium="image" type="image/jpeg"/></item>`; }).join("\n")}
+</channel></rss>
+`;
+  fs.writeFileSync(path.join(ROOT, "dist", "pinterest-en.xml"), xmlEn);
+  console.log(`Pinterest 用の RSS（英語）：${feedEn.length}件`);
 })();
