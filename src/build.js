@@ -2230,9 +2230,20 @@ write("data/shops.json", JSON.stringify(SHOPS.map((x) => [x.id, x.name, x.pref, 
     const pk = items.filter((it) => ok(it) && isFav(it) && !usedEn.has(it.id)).sort((a, b) => (b.release > a.release ? 1 : b.release < a.release ? -1 : a.id < b.id ? -1 : 1));
     const pick = pk.length ? packEn(pk[(dn * 7) % pk.length]) : null;
     const sts = STATIONS.filter((st) => st.shops && st.shops.length >= 2);
-    const st = sts.length ? sts[dn % sts.length] : null;
+    // 曜日ごとの駅のグループ（月：東京の中心／火：大阪／水：京都・名古屋／木：空港／金：地方／土：渋谷・新宿／日：原宿・中野など）。週ごとに同じグループ内で入れかえ
+    const DOW_ST = [["harajuku", "nakano", "ueno", "asakusa", "kichijoji"], ["akihabara", "ikebukuro", "tokyo", "ueno"], ["umeda", "namba", "shinsaibashi", "tennoji"], ["kyoto", "nagoya", "sakae", "sannomiya"], ["narita-airport", "haneda-airport", "kansai-airport", "new-chitose-airport"], ["hakata", "tenjin", "sapporo", "sendai", "hiroshima", "naha"], ["shibuya", "shinjuku", "harajuku", "yokohama"]];
+    const dow = new Date(day).getUTCDay(), wkn = Math.floor(dn / 7);
+    const grp = DOW_ST[dow].map((g) => sts.find((x) => x.slug === g)).filter(Boolean);
+    const st = grp.length ? grp[wkn % grp.length] : sts.length ? sts[dn % sts.length] : null;
     const spot = st ? { name: st.en, slug: st.slug, count: st.shops.length, url: `${SITE_URL}/en/station/${st.slug}`, nearest: st.shops[0] && Math.max(1, Math.round(st.shops[0].d / 80)), items: wk.slice(0, 4).map(packEn) } : null;
-    return { daily, pick, spot, week: { range: WEEK.range, count: WEEK.items.length, url: `${SITE_URL}/en/week`, items: wk.slice(0, 4).map(packEn) } };
+    // 23時「どれを回す？」：人気の系統から4つ（daily・pick と重ならない）
+    const used2 = new Set([...usedEn, pick && pick.id].filter(Boolean));
+    const po = items.filter((it) => ok(it) && !used2.has(it.id) && it.release >= thisMonth && isFav(it)).sort((a, b) => (a.id < b.id ? -1 : 1));
+    const pst = po.length ? (dn * 4) % po.length : 0;
+    const pickone = po.length >= 4 ? [...po.slice(pst), ...po.slice(0, pst)].slice(0, 4).map(packEn) : null;
+    // 土曜の統計（今月）
+    const sm = (() => { const ms = items.filter((it) => it.release === thisMonth && it.price); if (ms.length < 30) return null; const avg = Math.round(ms.reduce((a, b) => a + b.price, 0) / ms.length); return { month: `${MONTH_EN[+thisMonth.slice(5) - 1]} ${thisMonth.slice(0, 4)}`, count: ms.length, avg, pct500: Math.round((ms.filter((x) => x.price >= 500).length / ms.length) * 100), url: `${SITE_URL}/en/stats` }; })();
+    return { dow, daily, pick, spot, pickone, stats: sm, week: { range: WEEK.range, count: WEEK.items.length, url: `${SITE_URL}/en/week`, items: wk.slice(0, 4).map(packEn) } };
   })(), fav_ids: favIds, site: SITE_URL }));
 }
 write("_headers", `/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n/assets/*\n  Cache-Control: public, max-age=31536000, immutable\n/images/*\n  Cache-Control: public, max-age=604800\n  Access-Control-Allow-Origin: *\n/data/*\n  Cache-Control: public, max-age=300\n  Access-Control-Allow-Origin: *\n/sw.js\n  Cache-Control: no-cache\n`);
