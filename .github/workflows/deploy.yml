@@ -15,9 +15,10 @@ on:
   schedule:
     - cron: "0 0,6,15 * * *" # 日本時間 9時・15時・0時（在庫の更新と「NEW」表示の更新。公式サイトへの負担を考えて1日3回まで）
 
+# ふだんの公開（push）どうしは新しいほうだけ残す。取り込みをする定時・手動の公開は、push で取り消されないよう別のグループにする
 concurrency:
-  group: deploy
-  cancel-in-progress: true
+  group: deploy-${{ github.event_name == 'push' && 'push' || 'full' }}
+  cancel-in-progress: ${{ github.event_name == 'push' }}
 
 jobs:
   deploy:
