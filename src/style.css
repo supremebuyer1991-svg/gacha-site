@@ -308,7 +308,7 @@ main { padding-block: 0 96px; }
 .buy p { margin: 6px 0 0; font-size: 13px; color: var(--muted); }
 .buy .btns { display: flex; gap: 10px; flex-wrap: wrap; }
 .buy.is-emph { border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold) inset; }
-.pr { font-size: 10px; letter-spacing: .1em; color: var(--muted); border: 1px solid var(--line); padding: 0 6px; margin-left: 8px; vertical-align: middle; font-family: var(--font-body); font-weight: 400; }
+.pr { font-size: 11.5px; letter-spacing: .1em; color: var(--muted); border: 1px solid var(--line); padding: 0 6px; margin-left: 8px; vertical-align: middle; font-family: var(--font-body); font-weight: 400; }
 
 /* ---------- prose pages ---------- */
 .page-head { padding-top: 56px; }
@@ -995,7 +995,7 @@ body { font-variant-numeric: tabular-nums lining-nums; }
 
 /* 商品ページ：通販・フリマのリンクとJANコード */
 .shop-links { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 12px; }
-.sl-pr { font: 800 10px/1 var(--font-latin); color: var(--muted); border: 1px solid var(--line-strong); border-radius: 4px; padding: 3px 5px; }
+.sl-pr { font: 800 11.5px/1 var(--font-latin); color: var(--muted); border: 1px solid var(--line-strong); border-radius: 4px; padding: 3px 5px; }
 .sl { display: inline-flex; align-items: center; padding: 7px 12px; border-radius: 999px; font-size: 12.5px; font-weight: 700; text-decoration: none; border: 1.5px solid; background: #fff; }
 .sl-rak { color: #bf0000; border-color: #f0b3b3; }
 .sl-amz { color: #232f3e; border-color: #ffd28a; }
@@ -1036,6 +1036,13 @@ body { font-variant-numeric: tabular-nums lining-nums; }
 .where-shops span { color: var(--text-2); font-size: 12px; white-space: nowrap; }
 .comp-cost { margin-top: 14px; padding: 10px 14px; border-radius: 12px; background: var(--bg-2, #f6f4ff); }
 .comp-cost small { display: block; color: var(--text-2); font-size: 11.5px; }
+.comp-cost small a { margin-left: 8px; color: var(--gold-soft); font-weight: 700; border-bottom: 1px solid var(--line-strong); }
+/* 商品ページ：この商品の抽選販売・整理券 */
+.lot-item li { flex-wrap: wrap; }
+.lot-item span { white-space: normal; }
+.lot-item .lot-item-store { color: var(--text); font-weight: 700; font-size: 14px; }
+.lot-item .lot-item-store small { margin-left: 6px; color: var(--muted); font-weight: 400; font-size: 12px; }
+.buy-note { margin-top: 12px; }
 .item-qa { margin: 8px 0 0; }
 .item-qa > div { padding: 10px 0; border-top: 1px solid var(--line, #e6e6ee); }
 .item-qa dt { font-weight: 800; }

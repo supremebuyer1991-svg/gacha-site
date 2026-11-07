@@ -169,7 +169,7 @@ const build = (P, E) => {
   <nav class="breadcrumb" aria-label="breadcrumb"><a href="${c.H}index.html">${t.home}</a><span>/</span><a href="${c.H}calendar.html">${t.calH1}</a><span>/</span><a href="${c.H}calendar/${ym}.html">${esc(monthLabel(ym))}</a><span>/</span><span>${esc(lab)}</span></nav>
   <header class="page-head"><h1>${esc(h1)}</h1><p class="hub-sub">${ja ? `${n}シリーズ` : h.weekSub(n)}${badge}</p><p class="lead">${esc(lead)}</p></header>
   ${pager}
-  <section class="section" style="padding-top:28px"><div class="grid">${list.map((it) => card(it, c)).join("")}</div></section>
+  <section class="section" style="padding-top:28px"><div class="grid">${list.map((it, i) => card(it, c, i)).join("")}</div></section>
   ${pager}
 </div>`;
     layout({ rel, title, description: desc, body, current: "calendar", lastmod: maxAdded(list),
@@ -199,11 +199,13 @@ const build = (P, E) => {
       const body = `<div class="wrap">
   <nav class="breadcrumb" aria-label="breadcrumb"><a href="${c.H}index.html">${t.home}</a><span>/</span><a href="${c.H}collection.html">${ja ? "シリーズ一覧" : h.colIdxH1}</a><span>/</span><span>${esc(L(l))}</span></nav>
   <header class="page-head"><h1>${esc(ja ? `${l.label} 歴代シリーズ` : h.colH1(l.en))}</h1><p class="hub-sub">${ja ? `全${n}作・最新は${t.month(newest.release)}` : h.colSub(n, t.month(newest.release))}</p><p class="lead">${esc(lead)}</p></header>
-  ${upcoming.length ? `<section class="section section-tight"><div class="section-head"><h2>${ja ? "次回作（発売予定）" : h.upcomingH}</h2></div><div class="grid">${[...upcoming].reverse().slice(0, 6).map((it) => card(it, c)).join("")}</div></section>` : ""}
-  ${latest ? `<section class="section section-tight"><div class="section-head"><h2>${ja ? "最新作" : h.latest}</h2></div><div class="grid">${card(latest, c)}</div></section>` : ""}
+  ${upcoming.length ? `<section class="section section-tight"><div class="section-head"><h2>${ja ? "次回作（発売予定）" : h.upcomingH}</h2></div><div class="grid">${[...upcoming].reverse().slice(0, 6).map((it, i) => card(it, c, i)).join("")}</div></section>` : ""}
+  ${latest ? `<section class="section section-tight"><div class="section-head"><h2>${ja ? "最新作" : h.latest}</h2></div><div class="grid">${card(latest, c, Math.min(upcoming.length, 6))}</div></section>` : ""}
   <section class="section section-tight"><div class="section-head"><h2>${ja ? `歴代の${l.label}（新しい順）` : h.allH(l.en)}</h2></div>${table(l, desc, c, latest)}</section>
 </div>`;
-      layout({ rel, title, description: lead, body, current: "genre", alts, only: alts, lastmod: maxAdded(l.list), noindex: !ja && l.list.filter((it) => hasName(it, lang)).length < MIN_LINE,
+      // 英語版は英語名が3作未満だと noindex。そのときは日本語版からも hreflang を出さない（noindex のページを hreflang の先にしない）
+      const enOk = l.list.filter((it) => hasName(it, "en")).length >= MIN_LINE;
+      layout({ rel, title, description: lead, body, current: "genre", alts: enOk ? alts : ["ja"], only: alts, lastmod: maxAdded(l.list), noindex: !ja && !enOk,
         jsonld: [crumbs([[t.home, "index.html"], [ja ? "シリーズ一覧" : h.colIdxH1, "collection.html"], [L(l)]]), itemList(desc)] });
     }
     {

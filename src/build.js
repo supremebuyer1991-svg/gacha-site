@@ -57,6 +57,10 @@ const jstParts = (iso) => {
   return { y: d.getUTCFullYear(), m: d.getUTCMonth() + 1, d: d.getUTCDate(), hh: String(d.getUTCHours()).padStart(2, "0"), mm: String(d.getUTCMinutes()).padStart(2, "0") };
 };
 
+// 一覧ページの説明文の後半（今月の新作の数・最新の2つの名前）。list は新しい順に並んだ商品
+const leadTail = (list = []) => { const m = list.filter((it) => it.release === thisMonth).length, top = list.slice(0, 2).map((it) => `「${it.name}」`).join(""); return `${m ? `今月の新作${m}件。` : ""}${top ? `最新は${top}など。` : ""}発売日・値段・全何種か・在庫店をまとめています。`; };
+const leadTailEn = (list = []) => { const m = list.filter((it) => it.release === thisMonth).length, top = list.slice(0, 2).map((it) => `"${it.name_en || it.name}"`).join(", "); return `${m ? ` ${m} out this month.` : ""}${top ? ` Latest: ${top}.` : ""} Release dates, prices, number of designs and the shops in Japan that have them.`; };
+
 /* ---------- 画面の言葉（日本語・英語） ---------- */
 const T = {
   ja: {
@@ -66,7 +70,7 @@ const T = {
     navShort: { calendar: "カレンダー", map: "マップ", toprated: "高評価店", faq: "Q&A" },
     nav: { map: "ガチャマップ", katsu: "ガチャ活", week: "今週発売", lottery: "抽選情報", toprated: "評価の高いお店", new: "新着", ranking: "人気", calendar: "発売カレンダー", genre: "種類", faq: "よくある質問" },
     navAria: "メインメニュー", footAria: "サイト情報", about: "運営者情報・お問い合わせ",
-    disclosure: "当サイトはAmazonアソシエイト・楽天アフィリエイトなどの広告プログラムに参加しています。掲載商品の画像・名称の権利は各メーカーに帰属します。",
+    disclosure: "Amazonのアソシエイトとして、当サイトは適格販売により収入を得ています。また、楽天アフィリエイトなどの広告プログラムにも参加しています。掲載商品の画像・名称の権利は各メーカーに帰属します。",
     month: (ym) => { const [y, m] = ym.split("-"); return `${y}年${Number(m)}月`; },
     datetime: (iso) => { if (!iso) return ""; const p = jstParts(iso); return `${p.y}年${p.m}月${p.d}日 ${p.hh}:${p.mm}`; },
     lineup: (n) => `全${n}種`, perPlay: "1回", series: (n) => `${n} シリーズ`,
@@ -86,7 +90,7 @@ const T = {
     groupsHint: "詳しく選ばない場合は、その系統のすべてが対象になります。詳しい項目を選ぶと、さらに細かい項目が出てきます。",
     budgets: [["any", "こだわらない"], ["300", "300円まで"], ["500", "400〜500円"], ["premium", "600円以上"]],
     quizBtn: "診断する", results: "診断結果",
-    newTitle: "新着ガチャ", toCalendar: "発売カレンダーを見る", rankTitle: "人気ランキング", genreTitle: "ジャンルから探す", typeTitle: "種類から探す", typePage: (g, ym = YM_NOW) => `${g}のガチャガチャ新作・発売日一覧${ym ? `【${ym}】` : ""}`, typeLead: (g, n) => `${g}のガチャ${n}シリーズを新しい順に掲載しています。`,
+    newTitle: "新着ガチャ", toCalendar: "発売カレンダーを見る", rankTitle: "人気ランキング", genreTitle: "ジャンルから探す", typeTitle: "種類から探す", typePage: (g, ym = YM_NOW) => `${g}のガチャガチャ新作・発売日一覧${ym ? `【${ym}】` : ""}`, typeLead: (g, n, list) => `${g}のガチャ${n}シリーズを新しい順に掲載しています。${leadTail(list)}`,
     maker: "メーカー", release: "発売月", genre: "ジャンル", tags: "タグ",
     findStores: "近くの在庫店を探す", official: "公式サイトで見る",
     storesTitle: "近くの在庫店", geoBtn: "現在地から探す", or: "または", prefAria: "都道府県で絞り込む", loading: "読み込み中…",
@@ -96,6 +100,9 @@ const T = {
     buyTitle: "店舗で売り切れ？ネットで全種コンプ！", buyLead: "回しても揃わない、近くに置いていない。そんなときは通販のコンプリートセットを。",
     buyAria: "ネット通販", amazon: "Amazonで探す", rakuten: "楽天市場で探す",
     fleaTitle: "単品で欲しいならフリマ・オークション", fleaLead: "「あのキャラだけ欲しい」「1つだけ安く」ならこちら。", mercari: "メルカリで探す", yahoo: "ヤフオクで探す", rakuma: "ラクマで探す",
+    // 発売の状態で変える通販の見出し（発売前・発売から2か月以上）と、海外向けの代理購入の案内
+    buyTitleUp: "発売前でも通販で予約できることがあります", buyLeadUp: "発売日より前に、通販でコンプリートセットの予約を受け付けていることがあります。", fleaTitleOld: "コンプセットは売り切れがち。単品はフリマで", fleaLeadOld: "発売から時間がたったガチャは、通販のコンプセットが売り切れていることも。欲しいものが決まっているなら、フリマで単品を探すのが早いです。",
+    compCompare: "通販のコンプセットと比べる",
     lineupTitle: (n) => `ラインナップ（全${n}種）`, lineupNote: "メーカー公式の商品情報をもとにしています。", ageMin: (n) => `${n}才以上`, ageLabel: "対象年齢",
     heart: "推し", heartAria: "ハートで応援（人気ランキングに反映）", heartNote: "ハートを押すと人気ランキングに反映されます（1日1回）",
     arrTitle: "入荷情報", arrLoading: "入荷情報を読み込んでいます…", arrNone: "まだ入荷を確認できていません。設置店に入り次第ここに出ます。",
@@ -106,10 +113,17 @@ const T = {
     feedTitle: "入荷速報", feedNew: "新入荷", feedBack: "在庫復活", feedNote: (n, s) => `${s}店で在庫あり${n ? `・補充${n}回` : ""}`,
     oshiLabel: "推しの名前・キャラ名（あれば）", oshiPh: "例：タママ、ちいかわ、ルフィ",
     related: "同じジャンルのガチャ", seeAll: (g) => `${g}をすべて見る`,
-    itemTitle: (n) => `${n}${/ガチャ|ガシャ/.test(n) ? "" : "（ガチャ）"}｜発売日・値段・どこで売ってる？`,
+    // <title> だけ：先頭の【…】は外して、意味のあるもの（再販・限定・箱売）は短い補足にする。長い商品名は短い後ろ書きにする（H1 は商品名のまま）
+    itemTitle: (n) => {
+      const m = n.match(/^【([^】]*)】\s*/), pre = m ? m[1] : "", base = (m ? n.slice(m[0].length) : n).trim();
+      const sfx = /オフィシャルショップ限定/.test(pre) ? (/再販/.test(pre) ? "オフィシャルショップ限定再販" : "オフィシャルショップ限定") : /再販/.test(pre) ? "再販" : /箱売/.test(pre) ? "箱売" : "";
+      const short = base.length > 24;
+      const paren = [sfx, short || /ガチャ|ガシャ/.test(base) ? "" : "ガチャ"].filter(Boolean).join("・");
+      return `${base}${paren ? `（${paren}）` : ""}${short ? "｜ガチャ 発売日・在庫店" : "｜発売日・値段・どこで売ってる？"}`;
+    },
     itemDesc: (it, n, mk, mo) => `${n}（${mk}）は${mo}発売${it.price ? `、1回${it.price}円` : ""}${it.lineup ? `・全${it.lineup}種` : ""}のガチャガチャ。${it.description ? it.description + " " : ""}近くの在庫店や通販での入手方法もまとめています。`,
-    genrePage: (g, ym = YM_NOW) => `${g}のガチャガチャ新作・発売日一覧${ym ? `【${ym}】` : ""}`, genreLead: (g, n) => `${g}ジャンルの新作・発売予定ガチャ${n}シリーズを新しい順に掲載しています。`,
-    makerPage: (m, ym = YM_NOW) => `${m}のガチャガチャ新作・発売日一覧${ym ? `【${ym}】` : ""}`, makerLead: (m, n) => `${m}のガチャ${n}シリーズを新しい順に掲載しています。`,
+    genrePage: (g, ym = YM_NOW) => `${g}のガチャガチャ新作・発売日一覧${ym ? `【${ym}】` : ""}`, genreLead: (g, n, list) => `${g}ジャンルの新作・発売予定ガチャ${n}シリーズを新しい順に掲載しています。${leadTail(list)}`,
+    makerPage: (m, ym = YM_NOW) => `${m}のガチャガチャ新作・発売日一覧${ym ? `【${ym}】` : ""}`, makerLead: (m, n, list) => `${m}のガチャ${n}シリーズを新しい順に掲載しています。${leadTail(list)}`,
     empty: "まだ掲載している商品はありません。",
     calTitle: "ガチャガチャ発売カレンダー", calH1: "発売カレンダー", calLead: "公式に発表されている先の月まで、発売週ごとに並べています。「第◯週」はその週から順次発売という意味で、お店や地域によって前後します。",
     calDesc: "新作ガチャガチャの発売予定を月ごとに一覧できるカレンダー。価格・種類数・メーカーもまとめて確認できます。",
@@ -176,6 +190,9 @@ const T = {
     buyTitle: "Sold out? Buy the full set online", buyLead: "Couldn't find it in shops? Japanese online stores often sell the complete set. If you are staying in Japan, you can usually have it delivered to a Japanese address — many hotels will hold a parcel for guests (ask your hotel first).",
     buyAria: "Buy online", amazon: "Search on Amazon Japan", rakuten: "Search on Rakuten",
     fleaTitle: "Want just one design? Try resale apps", fleaLead: "People in Japan often resell single pieces they got twice. Japanese resale apps and auction sites are a good place to look.", mercari: "Search on Mercari", yahoo: "Search on Yahoo! Auctions", rakuma: "Search on Rakuma",
+    buyTitleUp: "Not out yet? Pre-orders are sometimes available online", buyLeadUp: "Japanese online stores sometimes take pre-orders for the complete set before the release date.", fleaTitleOld: "Full sets sell out over time. Try resale apps for single pieces", fleaLeadOld: "For older gacha, the complete set is often sold out online. If you know which design you want, Japanese resale apps are the quickest place to look.",
+    fleaProxy: "Japanese resale apps (Mercari, Yahoo! Auctions, Rakuma) need a Japanese address, so from abroad use a proxy-buying service such as Buyee or ZenMarket, or the shop buttons above.",
+    compCompare: "Compare with full sets online",
     lineupTitle: (n) => `Lineup (${n} designs)`, lineupNote: "From the maker's official information. Names are shown in Japanese, as they appear on the machine.", ageMin: (n) => `Ages ${n}+`, ageLabel: "Ages",
     heart: "Like", heartAria: "Send a like (counts toward the popularity ranking)", heartNote: "Likes count toward the popularity ranking (once a day)",
     arrTitle: "When did shops get it?", arrLoading: "Loading arrival data…", arrNone: "No shop has it yet. Shops will appear here as soon as it arrives.",
@@ -259,7 +276,7 @@ const T = {
     },
     itemDesc: (it, n, mk, mo) => `${n} by ${mk}: released ${mo}${it.price ? `, ¥${it.price} per play` : ""}${it.lineup ? `, ${it.lineup} designs` : ""}. ${it.description_en ? it.description_en + " " : ""}See which shops in Japan have it, or buy the full set online.`,
     genrePage: (g) => `${g} capsule toys in Japan – new releases`, genreLead: (g, n) => `${n} new and upcoming ${g.toLowerCase()} gacha in Japan, newest first. Tap one to see the price, release week and shops that have it.`,
-    makerPage: (m) => `${m} capsule toys – new releases in Japan`, makerLead: (m, n) => `${n} gacha series by ${m}, newest first.`,
+    makerPage: (m) => `${m} capsule toys – new releases in Japan`, makerLead: (m, n, list) => `${n} gacha series by ${m}, newest first.${leadTailEn(list)}`,
     empty: "No items listed yet.",
     calTitle: "Japan gacha release calendar", calH1: "Gacha release calendar", calLead: "Every announced capsule toy in Japan, sorted by release week. Visiting soon? Check what comes out during your trip. Shops can get them a few days earlier or later.",
     calDesc: "Monthly calendar of new Japanese capsule toy (gacha) releases with prices, number of designs and makers.",
@@ -468,6 +485,7 @@ const makerSlug = (name) => MAKER_SLUG[name] || hashSlug(name);
 // NEW：サイトに載って3日以内で、発売月が過ぎていないもの（まとめて取り込んだ古い商品にNEWを付けない）
 const isNew = (it) => daysBetween(it.added, today) <= 3 && it.release >= thisMonth;
 const byNewest = (a, b) => (b.added > a.added ? 1 : b.added < a.added ? -1 : b.popularity - a.popularity);
+const maxAdded = (list) => list.reduce((m, it) => (it.added > m ? it.added : m), ""); // 一覧の中でいちばん新しい追加日（サイトマップの lastmod）
 const heartsOf = (it) => Number(votes[it.id]) || 0;
 const byPopular = (a, b) => heartsOf(b) - heartsOf(a) || b.popularity - a.popularity;
 
@@ -492,8 +510,10 @@ const affSearch = (q) => {
   const rakuten = site.rakuten_affiliate_id ? `https://hb.afl.rakuten.co.jp/hgc/${site.rakuten_affiliate_id}/?pc=${encodeURIComponent(rs)}&m=${encodeURIComponent(rs)}` : rs;
   return { amazon, rakuten };
 };
+// 通販の検索の言葉：【…】を外した商品名＋「ガチャ」＋（発売前なら「予約」、種類数がわかれば「全◯種」、なければ「コンプ」）。JANで探すと楽天はほとんど出ないので使わない
+const affQuery = (it) => { const name = it.name.replace(/【[^】]*】/g, "").normalize("NFKC").replace(/\s+/g, " ").trim(); const n = Number(it.lineup) || 0; return `${name} ガチャ ${HUB.isUpcoming(it) ? "予約" : n ? `全${n}種` : "コンプ"}`; };
 const affiliate = (it) => {
-  const q = `${it.name.replace(/【サンプル】/g, "")} ガチャ コンプ`;
+  const q = affQuery(it);
   const amazon = `https://www.amazon.co.jp/s?k=${encodeURIComponent(q)}${site.amazon_tag ? `&tag=${encodeURIComponent(site.amazon_tag)}` : ""}`;
   const rakutenSearch = `https://search.rakuten.co.jp/search/mall/${encodeURIComponent(q)}/`;
   const rakuten = site.rakuten_affiliate_id
@@ -530,10 +550,10 @@ const MERCARI_ITEM_IDS = new Set((readJSON("mercari-item-ids.json", { ids: [] })
 const mercariQ = (it) => `${it.name.replace(/【[^】]*】/g, "").trim()} ガチャ`;
 const mercariItemUrl = (it) => MERCARI_ITEM_IDS.has(it.id) ? "https://jp.mercari.com/search?afid=1350793153&" + new URLSearchParams({ keyword: mercariQ(it), status: "on_sale" }).toString() : "";
 const mercariAf = (it) => { const tx = [it.name, (it.lineup_names || []).join(" ")].join(" "); const hit = MERCARI_AF.find(([k]) => (KW_ALIAS[k] || new RegExp(k)).test(tx)); return hit ? { kw: hit[0], url: hit[1] } : null; };
-// 通販・フリマで探すリンク（JANがあればJANで、なければ商品名で）
+// 通販・フリマで探すリンク（通販は affQuery の言葉で。JAN は表示用）
 const shopLinks = (it) => {
   const jan = janOf(it), name = it.name.replace(/【[^】]*】/g, "").trim();
-  const q = jan || `${name} ガチャ`;
+  const q = affQuery(it);
   const a = affSearch(q);
   const ys = `https://shopping.yahoo.co.jp/search?p=${encodeURIComponent(q)}`;
   const yahoo = site.yahoo_vc_sid && site.yahoo_vc_pid ? `https://ck.jp.ap.valuecommerce.com/servlet/referral?sid=${site.yahoo_vc_sid}&pid=${site.yahoo_vc_pid}&vc_url=${encodeURIComponent(ys)}` : ys;
@@ -682,6 +702,40 @@ const MAKER_WHERE = {
 };
 const SHOP_RATINGS = shopsLive.ratings || {};
 const LOTTERY = (readJSON("lottery.json", { entries: [] }) || { entries: [] }).entries || [];
+// 抽選（受付中・これから）と商品の対応。抽選ページと商品ページの両方で使うので、ここで1回だけ計算する
+const LOT_LIVE = LOTTERY.filter((x) => x.end >= nowJST.toISOString().slice(0, 16)).sort((a, b) => (a.end > b.end ? 1 : -1));
+const LOT_KIND = { item: "商品の抽選", open: "オープン・入場", event: "イベント" };
+// 抽選の商品名 → 商品ページ（記号・空白をのぞいて同じ名前、なければ2文字ずつの重なりがとても大きいもの）
+const lotNorm = (s) => String(s || "").normalize("NFKC").replace(/【[^】]*】/g, "").replace(/[\s・\-~～〜!！?？()（）「」『』.,、。:：/＆&]/g, "").toLowerCase();
+const lotBigr = (s) => { const m = new Map(); for (let i = 0; i < s.length - 1; i++) { const b = s.slice(i, i + 2); m.set(b, (m.get(b) || 0) + 1); } return m; };
+const lotDice = (a, b) => { if (a.length < 2 || b.length < 2) return 0; const A = lotBigr(a), B = lotBigr(b); let k = 0; for (const [g, n] of A) k += Math.min(n, B.get(g) || 0); return (2 * k) / (a.length + b.length - 2); };
+const LOT_NORM_ITEMS = items.map((it) => [lotNorm(it.name), it]);
+const lotMatchItem = (title) => {
+  const q = lotNorm(title);
+  if (q.length < 4) return null;
+  const ex = LOT_NORM_ITEMS.filter(([n]) => n === q).map(([, it]) => it);
+  if (ex.length) return ex.find((it) => !hubs.isReissue(it)) || ex[0];
+  let best = null, bs = 0;
+  for (const [n, it] of LOT_NORM_ITEMS) { const d = lotDice(q, n); if (d > bs) { bs = d; best = it; } }
+  return bs >= 0.8 ? best : null;
+};
+// 同じ商品名の抽選を1つにまとめる（締め切りが近い順）。「A / B」のように2商品の抽選は両方の商品に結びつける
+const LOT_GROUPS = [];
+for (const x of LOT_LIVE) { let g = LOT_GROUPS.find((y) => y.title === x.title); if (!g) LOT_GROUPS.push((g = { title: x.title, list: [] })); g.list.push(x); }
+for (const g of LOT_GROUPS) { g.parts = g.title.split(/\s+\/\s+/).map((p) => ({ p, it: lotMatchItem(p) })); g.it = (g.parts.find((x) => x.it) || {}).it; }
+const LOT_BY_ITEM = new Map(); // 商品id → 受付中の抽選
+for (const g of LOT_GROUPS) for (const it of new Set(g.parts.map((x) => x.it).filter(Boolean))) LOT_BY_ITEM.set(it.id, [...(LOT_BY_ITEM.get(it.id) || []), ...g.list]);
+for (const l of LOT_BY_ITEM.values()) l.sort((a, b) => (a.end > b.end ? 1 : -1));
+const lotTz = (d) => (/T\d\d:\d\d$/.test(d) ? `${d}:00+09:00` : d);
+// 構造化データ：抽選（Event）。url は応募ページ、なければ載せているページ
+const lotEventLd = (x, pageUrl, img) => ({
+  "@context": "https://schema.org", "@type": "Event", name: `${x.title}｜${LOT_KIND[x.kind] || "抽選"}（${x.store}）`,
+  startDate: lotTz(x.start), endDate: lotTz(x.end), eventStatus: "https://schema.org/EventScheduled", eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+  location: { "@type": "Place", name: x.store, address: { "@type": "PostalAddress", ...(x.pref ? { addressRegion: x.pref } : {}), addressCountry: "JP" } },
+  organizer: { "@type": "Organization", name: x.store }, url: x.url || pageUrl,
+  description: `応募方法：${x.method || "お店でご確認ください"}${x.note ? `。${x.note}` : ""}`,
+  ...(img ? { image: [img] } : {}),
+});
 const starsHtml = (r) => r && r.n ? `<span class="stars-v" style="--v:${r.avg}" aria-label="☆${r.avg}"></span><b class="stars-n">${Number(r.avg).toFixed(1)}</b><small>（${r.n}）</small>` : "";
 const PREF_ORDER = Object.keys(PREF_EN);
 const KIND_LABEL = { gacha: "ガチャ専門店", game: "ゲームセンター", mall: "ショッピングモール・スーパー", station: "駅・空港・サービスエリア", shop: "そのほかのお店" };
@@ -855,10 +909,11 @@ for (const lang of LANGS) {
   };
   const imgURL = (it, R) => (!it.image ? "" : /^https?:/.test(it.image) ? it.image : R + it.image);
 
-  const thumb = (it, R, { eager = false, badge = true } = {}) => {
+  // eager：商品ページの大きい画像（元の画像・最優先）。load："high"＝一覧の1枚目（先に読む）、"eager"＝一覧の最初の数枚（遅延読み込みしない）
+  const thumb = (it, R, { eager = false, badge = true, load = "" } = {}) => {
     const src = eager ? imgURL(it, R) : imgURL({ image: thumbOf(it.image) }, R);
     const img = src
-      ? `<img src="${esc(src)}" alt="${esc(nameOf(it, lang))}" width="400" height="400" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`
+      ? `<img src="${esc(src)}" alt="${esc(nameOf(it, lang))}" width="400" height="400" ${eager ? 'fetchpriority="high"' : load === "high" ? 'loading="eager" fetchpriority="high"' : load === "eager" ? 'loading="eager"' : 'loading="lazy"'} decoding="async">`
       : `<div class="capsule" aria-hidden="true"><i></i><span>NO IMAGE</span></div>`;
     return `<div class="thumb">${img}${badge && isNew(it) ? '<span class="badge-new">NEW</span>' : ""}</div>`;
   };
@@ -888,8 +943,9 @@ for (const lang of LANGS) {
   const X_SVG = `<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>`;
   const followCard = () => xAcc ? `<a class="x-follow" href="https://x.com/${esc(xAcc)}" target="_blank" rel="noopener"><span class="xf-ic">${X_SVG}</span><span class="xf-t">${esc(t.u.followTxt)}</span><span class="xf-go">${esc(t.u.followCta(xAcc))} →</span></a>` : "";
   const FOLLOW_AFTER = new Set(["week.html", "next-week.html", "new.html", "lottery.html"]);
-  const card = (it, c) => `<a class="card" href="${c.H}item/${it.id}.html">
-  ${thumb(it, c.R)}
+  // i：一覧の中の順番を渡すと、最初の4枚は遅延読み込みしない（1枚目は先に読む）。渡さなければ全部遅延読み込み
+  const card = (it, c, i = -1) => `<a class="card" href="${c.H}item/${it.id}.html">
+  ${thumb(it, c.R, { load: i === 0 ? "high" : i > 0 && i < 4 ? "eager" : "" })}
   <div class="card-meta">${esc(genreLabel(genreOf(it.genre), lang))}</div>
   <div class="card-name">${esc(nameOf(it, lang))}</div>
   <div class="card-foot"><span><b>¥${it.price}</b>${it.lineup ? ` / ${t.lineup(it.lineup)}` : ""}</span>${relLabel(it)}</div>
@@ -910,7 +966,7 @@ for (const lang of LANGS) {
 ${fragment ? '<meta name="claude:viewport-fit-sides" content="cover">' : ""}
 <meta name="site-lang" content="${lang}">${I18N[lang] && I18N[lang].appM ? `\n<script>window.__M=${JSON.stringify(I18N[lang].appM).replace(/</g, "\\u003c")};</script>` : ""}
 ${site.ga4_id ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${esc(site.ga4_id)}"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","${esc(site.ga4_id)}");</script>
-` : ""}${site.vc_linkswitch_pid ? `<script>var vc_pid = "${esc(site.vc_linkswitch_pid)}";</script><script src="//aml.valuecommerce.com/vcdal.js" async></script>` : ""}
+` : ""}${lang === "en" && site.vc_linkswitch_pid ? `<script>var vc_pid = "${esc(site.vc_linkswitch_pid)}";</script><script src="//aml.valuecommerce.com/vcdal.js" async></script>` : ""}
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${esc(canonical(lang, rel))}">
 ${noindex ? `<meta name="robots" content="noindex, follow">\n` : /name="robots"/.test(extraHead) ? "" : `<meta name="robots" content="max-image-preview:large">\n`}${noindex || noAlt || ALT.length < 2 ? "" : ALT.flatMap((l) => [LANG_META[l].hreflang, ...(LANG_META[l].extra || [])].map((code) => `<link rel="alternate" hreflang="${code}" href="${esc(canonical(l, rel))}">`)).join("\n") + `\n<link rel="alternate" hreflang="x-default" href="${esc(canonical(xDefault(rel, ALT), rel))}">`}
@@ -1010,7 +1066,7 @@ ${content}
     </div>
   ${WEEK.items.length ? `<section class="section section-tight" id="thisweek">
     <div class="section-head"><h2>${lang !== "ja" ? t.x.weekH : "今週発売のガチャ"}</h2><a class="more" href="${c.H}week.html">${lang !== "ja" ? t.x.weekMore(WEEK.range, WEEK.items.length) : `${WEEK.range}・全${WEEK.items.length}件`}</a></div>
-    <div class="grid row-scroll">${WEEK.items.slice(0, 12).map((it) => card(it, c)).join("")}<a class="card see-all" href="${c.H}week.html"><span class="see-all-in"><b>${lang !== "ja" ? t.x.seeAll : "全部見る"}</b><span>→</span></span></a></div>
+    <div class="grid row-scroll">${WEEK.items.slice(0, 12).map((it, i) => card(it, c, i)).join("")}<a class="card see-all" href="${c.H}week.html"><span class="see-all-in"><b>${lang !== "ja" ? t.x.seeAll : "全部見る"}</b><span>→</span></span></a></div>
   </section>` : ""}
     ${followCard()}
     <a class="katsu-banner" href="${c.R}gachakatsu.html">
@@ -1127,7 +1183,9 @@ ${content}
     write(`data/quiz-${lang}.json`, JSON.stringify(embed._items));
 
     layout({
-      rel: "index.html", title: site.name, description: t.description, body, current: "new",
+      rel: "index.html", title: site.name, current: "new", lastmod: maxAdded(items),
+      // 説明文：日本語は今週・今月の数と最新の名前を足して、ひと目で中身がわかるように（ほかの言語は site.json の長い説明のまま）
+      description: lang === "ja" ? `${t.description}今週発売${WEEK.items.length}件・今月の新作${releasingNow}件。${newest.slice(0, 2).map((it) => `「${it.name}」`).join("")}など最新の情報を毎日更新。` : t.description, body,
       jsonld: [{ "@context": "https://schema.org", "@type": "WebSite", name: site.name, alternateName: ["ガチャプラネット", "GACHA PLANET"], url: canonical(lang, "index.html"), description: t.description, inLanguage: LANG_META[lang].hreflang,
         potentialAction: { "@type": "SearchAction", target: { "@type": "EntryPoint", urlTemplate: canonical(lang, "search.html") + "?q={search_term_string}" }, "query-input": "required name=search_term_string" } },
         { "@context": "https://schema.org", "@type": "Organization", name: site.name, alternateName: "ガチャプラネット", url: SITE_URL + "/", logo: `${SITE_URL}/images/og/site.png` }],
@@ -1149,6 +1207,10 @@ ${content}
     // 公式の取扱店データがまだない商品は、バンダイ公式「ガシャポンどこ？」を一番のボタンに
     const whereOfficial = !hasStock && !(OFFICIAL_BY_ITEM.get(it.id) || []).length && it.maker === "バンダイ" && /^https:\/\/gashapon\.jp\//.test(it.store_search_url || "");
     const L0 = shopLinks(it);
+    // 発売の状態（発売前／発売から60日より前）で、通販の見出しと並び順を変える。lots：この商品の受付中の抽選（日本語ページだけ）
+    const isUp = HUB.isUpcoming(it);
+    const isOld = !isUp && daysBetween(weekStartOf(it) ? weekStartOf(it).toISOString().slice(0, 10) : `${it.release}-01`, today) > 60;
+    const lots = lang === "ja" ? LOT_BY_ITEM.get(it.id) || [] : [];
     const related = (() => {
       const seed = hashStr(it.id), chs = charasOf(it);
       const sameChara = items.filter((x) => x !== it && chs.some((ch) => ch.list.includes(x))).sort(byNewest);
@@ -1162,6 +1224,7 @@ ${content}
     const ln = (it.lineup_names || []).slice(0, 3);
     let desc = t.itemDesc(it, name, maker, mo);
     if (ln.length && lang === "ja") desc = desc.replace("のガチャガチャ。", `のガチャガチャ。ラインナップは${ln.join("、")}${it.lineup > ln.length ? "など" : ""}。`);
+    if (lots.length) desc = `抽選受付中${lots.length}店。${desc}`;
     // 「このガチャについて」：データにあることだけで2〜4文。言い回しは商品idのハッシュで変える
     const aboutHtml = (() => {
       const A = t.ab, seed = hashStr(it.id), v = (k) => (seed >>> k) & 0xff;
@@ -1229,34 +1292,42 @@ ${content}
         ...(!XLG && O.ebay ? [["sl-ebay", O.ebay, "eBay"]] : []),
         ...(O.buyee ? [["sl-buyee", O.buyee, "Buyee (Mercari Japan)"]] : []),
         ["sl-rak", L.rakuten, "Rakuten Japan"],
-      ]; return `<div class="shop-links"><span class="sl-pr">PR</span>${b.map(([k, u, l]) => `<a class="sl ${k}" href="${esc(u)}" target="_blank" rel="sponsored noopener">${l}</a>`).join("")}</div>${L.jan ? `<p class="jan">JAN: <span>${L.jan}</span></p>` : ""}`; })() : (() => { const L = shopLinks(it); return `<div class="shop-links"><span class="sl-pr">PR</span><a class="sl sl-rak" href="${esc(L.rakuten)}" target="_blank" rel="sponsored noopener">楽天市場</a><a class="sl sl-amz" href="${esc(L.amazon)}" target="_blank" rel="sponsored noopener">Amazon</a><a class="sl sl-yah" href="${esc(L.yahoo)}" target="_blank" rel="sponsored noopener">Yahoo!ショッピング</a><a class="sl sl-mer" href="${esc(L.mercari)}" target="_blank" rel="${L.mercariAf ? "sponsored noopener" : "noopener"}">${esc(L.mercariLabel)}</a></div>${L.jan ? `<p class="jan">JANコード：<span>${L.jan}</span></p>` : ""}`; })()}
+      ]; return `<div class="shop-links"><span class="sl-pr">PR</span>${b.map(([k, u, l]) => `<a class="sl ${k}" href="${esc(u)}" target="_blank" rel="sponsored nofollow noopener">${l}</a>`).join("")}</div>${L.jan ? `<p class="jan">JAN: <span>${L.jan}</span></p>` : ""}`; })() : (() => { const L = shopLinks(it); return `<div class="shop-links"><span class="sl-pr">PR</span><a class="sl sl-rak" href="${esc(L.rakuten)}" target="_blank" rel="sponsored nofollow noopener">楽天市場</a><a class="sl sl-amz" href="${esc(L.amazon)}" target="_blank" rel="sponsored nofollow noopener">Amazon</a><a class="sl sl-yah" href="${esc(L.yahoo)}" target="_blank" rel="sponsored nofollow noopener">Yahoo!ショッピング</a><a class="sl sl-mer" href="${esc(L.mercari)}" target="_blank" rel="${L.mercariAf ? "sponsored nofollow noopener" : "noopener"}">${esc(L.mercariLabel)}</a></div>${L.jan ? `<p class="jan">JANコード：<span>${L.jan}</span></p>` : ""}`; })()}
     </div>
   </article>
   ${aboutHtml}
-  <section class="section section-tight buy-sec">
-    <aside class="buy" id="buy" aria-label="${t.buyAria}">
+  ${(() => {
+    // 通販（Amazon・楽天）とフリマの2つの案内。発売前は「予約」の見出し、発売から60日より前はフリマを先に（コンプセットが売り切れがちなため）
+    // 日本語以外：メルカリ・ヤフオク・ラクマは日本の住所がないと使えないので、Buyee のリンクがないときは出さず、代理購入の案内を1文だけ
+    const O = overseas(it);
+    const shopAside = `<aside class="buy" id="buy" aria-label="${t.buyAria}">
       <div>
-        <h3>${t.buyTitle}<span class="pr">PR</span></h3>
-        <p>${t.buyLead}</p>
+        <h3>${isUp && t.buyTitleUp ? t.buyTitleUp : t.buyTitle}<span class="pr">${lang === "ja" ? "PR・広告" : "PR"}</span></h3>
+        <p>${isUp && t.buyLeadUp ? t.buyLeadUp : t.buyLead}</p>
       </div>
       <div class="btns">
-        ${lang === "en" && overseas(it).amazon ? `<a class="btn btn-gold" href="${esc(overseas(it).amazon)}" target="_blank" rel="sponsored noopener">Search on Amazon</a><a class="btn" href="${esc(aff.amazon + "&language=en_US")}" target="_blank" rel="sponsored noopener">Amazon Japan (in Japan)</a>` : `<a class="btn btn-gold" href="${esc(aff.amazon + (lang === "zh-cn" ? "&language=zh_CN" : ""))}" target="_blank" rel="sponsored noopener">${t.amazon}</a>`}
-        ${lang !== "ja" && overseas(it).ebay ? `<a class="btn" href="${esc(overseas(it).ebay)}" target="_blank" rel="sponsored noopener">Search on eBay</a>` : ""}
-        <a class="btn" href="${esc(aff.rakuten)}" target="_blank" rel="sponsored noopener">${t.rakuten}</a>
+        ${lang === "en" && O.amazon ? `<a class="btn btn-gold" href="${esc(O.amazon)}" target="_blank" rel="sponsored nofollow noopener">Search on Amazon</a><a class="btn" href="${esc(aff.amazon + "&language=en_US")}" target="_blank" rel="sponsored nofollow noopener">Amazon Japan (in Japan)</a>` : `<a class="btn btn-gold" href="${esc(aff.amazon + (lang === "zh-cn" ? "&language=zh_CN" : ""))}" target="_blank" rel="sponsored nofollow noopener">${t.amazon}</a>`}
+        ${lang !== "ja" && O.ebay ? `<a class="btn" href="${esc(O.ebay)}" target="_blank" rel="sponsored nofollow noopener">Search on eBay</a>` : ""}
+        <a class="btn" href="${esc(aff.rakuten)}" target="_blank" rel="sponsored nofollow noopener">${t.rakuten}</a>
       </div>
-    </aside>
-    <aside class="buy flea" aria-label="${t.fleaTitle}">
+    </aside>`;
+    // メルカリ：公式ツールで作ったリンクがある商品だけ、そのURLをそのまま使う（PR表示つき）。なければふつうの検索ページ
+    const merc = lang === "ja" && L0.mercariAf ? `<a class="btn" href="${esc(L0.mercari)}" target="_blank" rel="sponsored nofollow noopener">${t.mercari}<span class="pr">PR</span></a>` : `<a class="btn" href="https://jp.mercari.com/search?keyword=${encodeURIComponent(it.name)}" target="_blank" rel="noopener">${t.mercari}</a>`;
+    const fleaAside = lang !== "ja" && !O.buyee ? (t.fleaProxy ? `<p class="fine buy-note">${esc(t.fleaProxy)}</p>` : "") : `<aside class="buy flea" aria-label="${t.fleaTitle}">
       <div>
-        <h3>${t.fleaTitle}</h3>
-        <p>${t.fleaLead}</p>
+        <h3>${isOld && t.fleaTitleOld ? t.fleaTitleOld : t.fleaTitle}</h3>
+        <p>${isOld && t.fleaLeadOld ? t.fleaLeadOld : t.fleaLead}</p>
       </div>
       <div class="btns">
-        ${lang !== "ja" && overseas(it).buyee ? `<a class="btn btn-gold" href="${esc(overseas(it).buyee)}" target="_blank" rel="sponsored noopener">Buy from Mercari Japan via Buyee</a>` : ""}
-        ${[["mercari", `https://jp.mercari.com/search?keyword=${encodeURIComponent(it.name)}`], ["yahoo", `https://auctions.yahoo.co.jp/search/search?p=${encodeURIComponent(it.name)}`], ["rakuma", `https://fril.jp/s?query=${encodeURIComponent(it.name)}`]]
+        ${lang !== "ja" && O.buyee ? `<a class="btn btn-gold" href="${esc(O.buyee)}" target="_blank" rel="sponsored nofollow noopener">Buy from Mercari Japan via Buyee</a>` : ""}
+        ${merc}${[["yahoo", `https://auctions.yahoo.co.jp/search/search?p=${encodeURIComponent(it.name)}`], ["rakuma", `https://fril.jp/s?query=${encodeURIComponent(it.name)}`]]
           .map(([k, u]) => `<a class="btn" href="${esc(u)}" target="_blank" rel="noopener">${t[k]}</a>`).join("")}
       </div>
-    </aside>
-  </section>
+    </aside>`;
+    return `<section class="section section-tight buy-sec">
+    ${isOld && fleaAside.startsWith("<aside") ? fleaAside + "\n    " + shopAside : shopAside + "\n    " + fleaAside}
+  </section>`;
+  })()}
   ${hubs.seriesNav(HUB, it, { lang, c, t, nameOf, esc })}
   ${(it.lineup_names || []).length ? `<section class="section lineup-sec">
     <div class="section-head"><h2>${t.lineupTitle(it.lineup || it.lineup_names.length)}</h2></div>
@@ -1289,9 +1360,21 @@ ${content}
       <h2 style="font-size:22px">${esc(it.name)}はどこで売ってる？</h2>
       <p>${esc(whereTxt)}</p>
       ${shs.length ? `<ul class="where-shops">${rotate(shs, 10, hashStr(it.id)).map((x) => `<li><a href="${c.R}shop/${x.id}.html">${esc(x.name)}</a><span>${esc(x.pref || "")}</span></li>`).join("")}</ul>` : ""}
-      ${draws ? `<p class="comp-cost">全${n}種そろえる目安：<b>平均 約${draws}回・約${(draws * it.price).toLocaleString("ja-JP")}円</b><small>（どれも同じ確率で出る場合の計算）</small></p>` : ""}
+      ${draws ? `<p class="comp-cost">全${n}種そろえる目安：<b>平均 約${draws}回・約${(draws * it.price).toLocaleString("ja-JP")}円</b><small>（どれも同じ確率で出る場合の計算）<a href="${esc(aff.rakuten)}" target="_blank" rel="sponsored nofollow noopener">${esc(t.compCompare)} →</a><span class="pr">PR</span></small></p>` : ""}
       <h3 class="arr-h">よくある質問</h3>
       <dl class="item-qa">${qa.map(([q, a]) => `<div><dt>${esc(q)}</dt><dd>${esc(a)}</dd></div>`).join("")}</dl>
+    </div>
+  </section>`;
+  })() : ""}
+  ${lots.length ? (() => {
+    // この商品の抽選販売・整理券（受付中のものだけ。締切が近い順）
+    const end = (d) => { const m = String(d).match(/^\d{4}-(\d\d)-(\d\d)T(\d\d):(\d\d)/); return m ? `${+m[1]}/${+m[2]} ${m[3]}:${m[4]}` : d; };
+    return `<section class="section section-tight lot-sec">
+    <div class="panel">
+      <h2 style="font-size:22px">${esc(it.name)}の抽選販売・整理券（受付中${lots.length}店）</h2>
+      <p class="fine" style="margin-top:4px">店頭で抽選販売・整理券の受付をしているお店です。応募の前に、お店の公式X・公式サイトで最新の情報をご確認ください。</p>
+      <ul class="where-shops lot-item">${lots.map((x) => `<li><span class="lot-item-store">${x.url ? `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.store)}</a>` : esc(x.store)}${x.pref ? `<small>${esc(x.pref)}</small>` : ""}</span><span>締切 ${esc(end(x.end))}・${esc(x.method || "お店でご確認ください")}</span></li>`).join("")}</ul>
+      <p class="fine"><a href="${c.R}lottery.html">ほかのガチャの抽選情報も見る →</a></p>
     </div>
   </section>`;
   })() : ""}
@@ -1333,14 +1416,14 @@ ${content}
 <nav class="item-bar" aria-label="${esc(name)}">
   <button type="button" class="ib-fav" data-fav="${it.id}" aria-pressed="false"><i aria-hidden="true">★</i><span>${esc(t.u.save)}</span></button>
   <a class="ib-stock" href="${whereOfficial ? esc(it.store_search_url) : "#stock"}"${whereOfficial ? ' target="_blank" rel="noopener"' : ""}>${esc(t.u.stockShort)}</a>
-  ${lang === "ja" ? `<a class="ib-mer" href="${esc(L0.mercari)}" target="_blank" rel="${L0.mercariAf ? "sponsored noopener" : "noopener"}">${esc(t.u.mercari)}${L0.mercariAf ? "<small>PR</small>" : ""}</a>` : ""}
+  ${lang === "ja" ? `<a class="ib-mer" href="${esc(L0.mercari)}" target="_blank" rel="${L0.mercariAf ? "sponsored nofollow noopener" : "noopener"}">${esc(t.u.mercari)}${L0.mercariAf ? "<small>PR</small>" : ""}</a>` : ""}
 </nav>`;
 
     const product = {
       "@context": "https://schema.org", "@type": "Product", name, description: description || desc, sku: it.id,
       brand: { "@type": "Brand", name: maker }, category: gl, releaseDate: ws ? ws.toISOString().slice(0, 10) : `${it.release}-01`,
       ...(janOf(it) ? { gtin13: janOf(it) } : {}),
-      ...(it.price ? { offers: { "@type": "Offer", price: it.price, priceCurrency: "JPY", url: canonical(lang, rel), availability: "https://schema.org/InStoreOnly" } } : {}),
+      ...(it.price ? { offers: { "@type": "Offer", price: it.price, priceCurrency: "JPY", url: canonical(lang, rel), availability: isUp ? "https://schema.org/PreSale" : "https://schema.org/InStoreOnly" } } : {}),
     };
     if (absImg(it)) product.image = [absImg(it)];
     const crumbs = {
@@ -1350,7 +1433,7 @@ ${content}
         { "@type": "ListItem", position: 3, name },
       ],
     };
-    layout({ rel, title: t.itemTitle(name), description: desc, body, jsonld: [product, crumbs], ogImage: absImg(it), ogType: "product",
+    layout({ rel, title: t.itemTitle(name), description: desc, body, jsonld: [product, crumbs, ...lots.map((x) => lotEventLd(x, canonical(lang, rel), absImg(it)))], ogImage: absImg(it), ogType: "product",
       noindex: !hasName(it, lang), alts: LANGS.filter((l) => hasName(it, l)), lastmod: it.updated || it.added || "" });
   }
 
@@ -1369,7 +1452,7 @@ ${content}
       const body = `<div class="wrap">
   <nav class="breadcrumb" aria-label="breadcrumb"><a href="${c.H}index.html">${t.home}</a><span>/</span>${k === 1 ? `<span>${esc(h1 || title)}</span>` : `<a href="${c.H}${rel}">${esc(h1 || title)}</a><span>/</span><span>${k}</span>`}</nav>
   <header class="page-head"><h1>${esc(h1 || title)}</h1>${sub ? `<p class="hub-sub">${esc(sub)}</p>` : ""}${k === 1 ? `<p class="lead">${esc(lead)}</p>` : ""}${extra}</header>
-  <section class="section" style="padding-top:40px">${list.length ? `<div class="grid">${part.map((it) => card(it, c)).join("")}</div>${left > 0 ? `<p class="more-wrap"><a class="btn btn-gold list-more" href="${c.H}${relOf(k + 1)}">${lang === "ja" ? `もっと見る（残り${left}件）` : t.hub.more(left)}</a></p>` : ""}${pages}` : `<p class="empty">${t.empty}</p>`}</section>
+  <section class="section" style="padding-top:40px">${list.length ? `<div class="grid">${part.map((it, i) => card(it, c, i)).join("")}</div>${left > 0 ? `<p class="more-wrap"><a class="btn btn-gold list-more" href="${c.H}${relOf(k + 1)}">${lang === "ja" ? `もっと見る（残り${left}件）` : t.hub.more(left)}</a></p>` : ""}${pages}` : `<p class="empty">${t.empty}</p>`}</section>
 </div>`;
       const jsonld = [
         { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
@@ -1410,7 +1493,7 @@ ${content}
   <header class="page-head"><h1>${esc(title)}</h1><p class="lead">${esc(lead)}</p></header>
   <section class="section" style="padding-top:32px"><div class="chara-list">${CHARAS.map((ch) => `<a class="chara-chip" href="${c.H}chara/${ch.slug}.html">${esc(charaLabel(ch, lang))}<small>${ch.list.length}</small></a>`).join("")}</div></section>
 </div>`;
-    layout({ rel, title, description: lead, body, current: "genre", jsonld: [] });
+    layout({ rel, title, description: lead, body, current: "genre", jsonld: [], lastmod: maxAdded(CHARAS.flatMap((ch) => ch.list)) });
   }
   // 今週・来週のページから、その週の固定ページ（/calendar/2026-11/w2）へ
   const permaLink = (W) => {
@@ -1421,13 +1504,13 @@ ${content}
   // 今週発売のガチャ（X の「今週発売」投稿のリンク先）
   listPage("week.html", {
     title: lang !== "ja" ? t.x.weekTitle(WEEK.range, WEEK.items.length) : `今週発売のガチャガチャ新作（${WEEK.range}）${WEEK.items.length}シリーズ`,
-    lead: lang !== "ja" ? t.x.weekLead(WEEK.items.length) : `${WEEK.label}（${WEEK.range}）に発売されるガチャ${WEEK.items.length}シリーズを、人気の順に並べています。発売日は地域や店舗によって前後します。`,
+    lead: lang !== "ja" ? t.x.weekLead(WEEK.items.length) : `${WEEK.label}（${WEEK.range}）に発売されるガチャ${WEEK.items.length}シリーズを、人気の順に並べています。${WEEK.items.length ? `${WEEK.items.slice(0, 2).map((it) => `「${it.name}」`).join("")}など。` : ""}発売日は地域や店舗によって前後します。`,
     list: WEEK.items, current: "calendar", extra: permaLink(WEEK),
     ogImage: fs.existsSync(path.join(ROOT, "images", "og", "week.jpg")) ? `${SITE_URL}/images/og/week.jpg?v=${today}` : "",
   });
   listPage("next-week.html", {
     title: lang !== "ja" ? t.x.nextTitle(NEXT_WEEK.range, NEXT_WEEK.items.length) : `来週発売のガチャガチャ新作（${NEXT_WEEK.range}）${NEXT_WEEK.items.length}シリーズ`,
-    lead: lang !== "ja" ? t.x.nextLead(NEXT_WEEK.items.length) : `${NEXT_WEEK.label}（${NEXT_WEEK.range}）に発売予定のガチャ${NEXT_WEEK.items.length}シリーズです。発売日は地域や店舗によって前後します。`,
+    lead: lang !== "ja" ? t.x.nextLead(NEXT_WEEK.items.length) : `${NEXT_WEEK.label}（${NEXT_WEEK.range}）に発売予定のガチャ${NEXT_WEEK.items.length}シリーズです。${NEXT_WEEK.items.length ? `${NEXT_WEEK.items.slice(0, 2).map((it) => `「${it.name}」`).join("")}など、` : ""}値段・全何種か・在庫店の情報もまとめています。発売日は地域や店舗によって前後します。`,
     list: NEXT_WEEK.items, current: "calendar", extra: permaLink(NEXT_WEEK),
   });
   // 新着ガチャ（トップの「全部見る」のリンク先）
@@ -1445,17 +1528,17 @@ ${content}
   }
   for (const g of TYPES) {
     const list = inType(g.slug).sort(byNewest);
-    if (list.length) listPage(`type/${g.slug}.html`, { title: t.typePage(genreLabel(g, lang), (freshYM(list) || {}).ja), lead: t.typeLead(genreLabel(g, lang), list.length), list, current: "genre", ...hubHead(genreLabel(g, lang), list) });
+    if (list.length) listPage(`type/${g.slug}.html`, { title: t.typePage(genreLabel(g, lang), (freshYM(list) || {}).ja), lead: t.typeLead(genreLabel(g, lang), list.length, list), list, current: "genre", ...hubHead(genreLabel(g, lang), list) });
   }
   for (const g of GENRES) {
     const list = inGenre(g.slug).sort(byNewest);
     if (!list.length) continue;
-    listPage(`genre/${g.slug}.html`, { title: t.genrePage(genreLabel(g, lang), (freshYM(list) || {}).ja), lead: t.genreLead(genreLabel(g, lang), list.length), list, current: "genre", ...hubHead(genreLabel(g, lang), list) });
+    listPage(`genre/${g.slug}.html`, { title: t.genrePage(genreLabel(g, lang), (freshYM(list) || {}).ja), lead: t.genreLead(genreLabel(g, lang), list.length, list), list, current: "genre", ...hubHead(genreLabel(g, lang), list) });
   }
   for (const maker of [...new Set(items.map((it) => it.maker))]) {
     const list = items.filter((it) => it.maker === maker).sort(byNewest);
     const label = makerOf(list[0], lang);
-    listPage(`maker/${makerSlug(maker)}.html`, { title: t.makerPage(label, (freshYM(list) || {}).ja), lead: t.makerLead(label, list.length), list, ...hubHead(label, list) });
+    listPage(`maker/${makerSlug(maker)}.html`, { title: t.makerPage(label, (freshYM(list) || {}).ja), lead: t.makerLead(label, list.length, list), list, ...hubHead(label, list) });
   }
 
   /* ---------- 発売カレンダー（今月〜わかる範囲の先の月、週ごと）と、過去の月ごとのページ ---------- */
@@ -1560,7 +1643,7 @@ ${content}
   <div class="cal">${recent.map((m) => monthBlock(m, c)).join("")}</div>
   ${archiveNav(c, "")}
 </div>`;
-      layout({ rel: "calendar.html", title, description: desc, body, current: "calendar", jsonld: [crumbLd("calendar.html", ""), itemListLd("calendar.html", upcoming)] });
+      layout({ rel: "calendar.html", title, description: desc, body, current: "calendar", lastmod: maxAdded(upcoming), jsonld: [crumbLd("calendar.html", ""), itemListLd("calendar.html", upcoming)] });
     }
     for (const m of allMonths) {
       const rel = `calendar/${m}.html`;
@@ -1592,7 +1675,7 @@ ${content}
   ${pager}
   ${archiveNav(c, m)}
 </div>`;
-      layout({ rel, title, description: desc, body, current: "calendar", jsonld: [crumbLd(rel, monthLabel(m)), itemListLd(rel, groups.flatMap((g) => g.list))] });
+      layout({ rel, title, description: desc, body, current: "calendar", lastmod: maxAdded(groups.flatMap((g) => g.list)), jsonld: [crumbLd(rel, monthLabel(m)), itemListLd(rel, groups.flatMap((g) => g.list))] });
     }
     void past;
   }
@@ -1619,7 +1702,7 @@ ${content}
   <header class="page-head"><h1 id="sr-title">${t.searchTitle}</h1><p class="lead" id="sr-note"></p></header>
   <section class="section" style="padding-top:32px"><div class="grid" id="sr-grid"></div></section>
 </div>`;
-    layout({ rel: "search.html", title: t.searchTitle, description: t.searchTitle, body, extraHead: `<meta name="robots" content="noindex, follow">` });
+    layout({ rel: "search.html", title: t.searchTitle, description: t.searchTitle, body, noindex: true }); // noindex のページは hreflang も出さない
   }
   // 新着のRSS（Naverなどは新しいページをRSSで見つけるのが得意）
   {
@@ -1750,7 +1833,7 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
       const prefs = PREF_ORDER.filter((p) => SHOPS.some((x) => x.pref === p));
       const body = `<div class="wrap">
   <nav class="breadcrumb" aria-label="breadcrumb"><a href="${c.H}index.html">${t.home}</a><span>/</span><span>${katsu ? "ガチャ活" : "みんなのガチャマップ"}</span></nav>
-  <header class="page-head"><h1>${katsu ? "ガチャ活｜近くのガチャを効率よく回ろう" : "みんなのガチャマップ"}</h1><p class="lead">${katsu ? "ガチャ活は、ガチャのあるお店を巡ってお目当てのガチャを探すこと。今いる場所から近いお店を、回りやすい順番でご案内します。" : "全国のガチャのあるお店を地図で探せます。お店の在庫や台数は、みんなの報告で更新されます。地図にないお店は「ガチャのある場所をピン」から、だれでも足せます。"}</p></header>
+  <header class="page-head"><h1>${katsu ? "ガチャ活｜近くのガチャを効率よく回ろう" : "みんなのガチャマップ｜ガチャガチャの設置場所をさがす"}</h1><p class="lead">${katsu ? "ガチャ活は、ガチャのあるお店を巡ってお目当てのガチャを探すこと。今いる場所から近いお店を、回りやすい順番でご案内します。" : "全国のガチャのあるお店を地図で探せます。お店の在庫や台数は、みんなの報告で更新されます。地図にないお店は「ガチャのある場所をピン」から、だれでも足せます。"}</p></header>
   <section class="map-wrap${katsu ? " is-katsu" : ""}">
     <div class="map-tools">
       <button class="btn btn-gold" type="button" id="map-geo">現在地のまわり</button>
@@ -1801,7 +1884,7 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
       </div>
       <div class="katsu-goods">
         <h3>ガチャ活の持ちもの<span class="pr">PR</span></h3>
-        <div class="kg-list">${[["🪙", "100円玉がすぐ出せるコインケース", "コインケース 100円玉 収納"], ["👜", "カプセルがまとまる巾着・エコバッグ", "エコバッグ コンパクト 折りたたみ"], ["🔋", "地図とナビの電池切れ対策に", "モバイルバッテリー 軽量 薄型"], ["🖼️", "集めたガチャを飾るコレクションケース", "コレクションケース フィギュア ミニ"]].map(([ic, label, q]) => { const a = affSearch(q); return `<div class="kg"><span class="kg-ic" aria-hidden="true">${ic}</span><span class="kg-l">${label}</span><span class="kg-b"><a href="${esc(a.amazon)}" target="_blank" rel="sponsored noopener">Amazon</a><a href="${esc(a.rakuten)}" target="_blank" rel="sponsored noopener">楽天</a></span></div>`; }).join("")}</div>
+        <div class="kg-list">${[["🪙", "100円玉がすぐ出せるコインケース", "コインケース 100円玉 収納"], ["👜", "カプセルがまとまる巾着・エコバッグ", "エコバッグ コンパクト 折りたたみ"], ["🔋", "地図とナビの電池切れ対策に", "モバイルバッテリー 軽量 薄型"], ["🖼️", "集めたガチャを飾るコレクションケース", "コレクションケース フィギュア ミニ"]].map(([ic, label, q]) => { const a = affSearch(q); return `<div class="kg"><span class="kg-ic" aria-hidden="true">${ic}</span><span class="kg-l">${label}</span><span class="kg-b"><a href="${esc(a.amazon)}" target="_blank" rel="sponsored nofollow noopener">Amazon</a><a href="${esc(a.rakuten)}" target="_blank" rel="sponsored nofollow noopener">楽天</a></span></div>`; }).join("")}</div>
       </div>
     </div>
     <p class="fine">地図：国土地理院の地図と、拡大したときは OpenStreetMap を使っています。お店の情報はバンダイ公式「ガシャポンどこ？」の取扱店と、みんなの報告をもとにしています。<a href="${c.R}rules.html">投稿のきまり</a></p>
@@ -1816,7 +1899,7 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
     <div class="chara-list">${CHAINS.map((ch) => `<a class="chara-chip" href="${c.H}chain/${ch.slug}.html">${esc(ch.label)}<small>${ch.shops.length}</small></a>`).join("")}</div>
   </section>
 </div>`;
-      layout({ rel, title: katsu ? "ガチャ活ルート｜近くのガチャのあるお店を効率よく回る" : "みんなのガチャマップ｜全国のガチャのあるお店", description: katsu ? "ガチャ活（ガチャ巡り）のルートを自動で作成。今いる場所から近いガチャのあるお店を、回りやすい順番でご案内。探したいガチャの取扱店だけで作ることもできます。" : `全国${SHOPS.length}店のガチャのあるお店を地図で探せます。在庫や台数はみんなの報告で更新。地図にないお店も追加できます。`, body, current: katsu ? "katsu" : "map", jaOnly: true, extraHead: LEAF });
+      layout({ rel, title: katsu ? "ガチャ活ルート｜近くのガチャのあるお店を効率よく回る" : "みんなのガチャマップ｜全国のガチャガチャ設置場所・設置店を地図で探す", description: katsu ? "ガチャ活（ガチャ巡り）のルートを自動で作成。今いる場所から近いガチャのあるお店を、回りやすい順番でご案内。探したいガチャの取扱店だけで作ることもできます。" : `全国${SHOPS.length}店のガチャガチャ設置場所（設置店）を地図で探せます。在庫や台数はみんなの報告で更新。地図にないお店も追加できます。`, body, current: katsu ? "katsu" : "map", jaOnly: true, extraHead: LEAF });
     }
     // 都道府県ごとのお店一覧
     for (const p of PREF_ORDER) {
@@ -1905,29 +1988,11 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
     // 抽選情報
     {
       const rel = "lottery.html", c = ctx(rel);
-      const nowIso = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 16);
-      const live = LOTTERY.filter((x) => x.end >= nowIso).sort((a, b) => (a.end > b.end ? 1 : -1));
-      const KIND = { item: "商品の抽選", open: "オープン・入場", event: "イベント" };
+      const live = LOT_LIVE, KIND = LOT_KIND, groups = LOT_GROUPS; // 言語のループの前で計算したもの（商品ページと共通）
       const fmt = (d) => { const m = d.match(/^(\d{4})-(\d\d)-(\d\d)T(\d\d):(\d\d)/); if (!m) return d; const w = "日月火水木金土"[new Date(`${m[1]}-${m[2]}-${m[3]}T00:00:00+09:00`).getUTCDay()]; return `${+m[2]}/${+m[3]}(${w}) ${m[4]}:${m[5]}`; };
       const prefs = [...new Set(live.map((x) => x.pref).filter(Boolean))].sort((a, b) => PREF_ORDER.indexOf(a) - PREF_ORDER.indexOf(b));
-      // 抽選の商品名 → 商品ページ（記号・空白をのぞいて同じ名前、なければ2文字ずつの重なりがとても大きいもの）
-      const normN = (s) => String(s || "").normalize("NFKC").replace(/【[^】]*】/g, "").replace(/[\s・\-~～〜!！?？()（）「」『』.,、。:：/＆&]/g, "").toLowerCase();
-      const bigr = (s) => { const m = new Map(); for (let i = 0; i < s.length - 1; i++) { const b = s.slice(i, i + 2); m.set(b, (m.get(b) || 0) + 1); } return m; };
-      const dice = (a, b) => { if (a.length < 2 || b.length < 2) return 0; const A = bigr(a), B = bigr(b); let k = 0; for (const [g, n] of A) k += Math.min(n, B.get(g) || 0); return (2 * k) / (a.length + b.length - 2); };
-      const NORM_ITEMS = items.map((it) => [normN(it.name), it]);
-      const matchItem = (title) => {
-        const q = normN(title);
-        if (q.length < 4) return null;
-        const ex = NORM_ITEMS.filter(([n]) => n === q).map(([, it]) => it);
-        if (ex.length) return ex.find((it) => !hubs.isReissue(it)) || ex[0];
-        let best = null, bs = 0;
-        for (const [n, it] of NORM_ITEMS) { const d = dice(q, n); if (d > bs) { bs = d; best = it; } }
-        return bs >= 0.8 ? best : null;
-      };
-      // 同じ商品名の抽選を1枚のカードに（カードは締め切りがいちばん近いものから、中のお店も締め切り順）
-      const groups = [];
-      for (const x of live) { let g = groups.find((y) => y.title === x.title); if (!g) groups.push((g = { title: x.title, list: [] })); g.list.push(x); }
-      for (const g of groups) { g.parts = g.title.split(/\s+\/\s+/).map((p) => ({ p, it: matchItem(p) })); g.it = (g.parts.find((x) => x.it) || {}).it; }
+      // タイトル・説明文に、抽選の多い商品の名前を2つ入れる
+      const topLot = [...LOT_BY_ITEM.entries()].sort((a, b) => b[1].length - a[1].length).slice(0, 2).map(([id]) => itemById.get(id)).filter(Boolean).map((it) => it.name);
       const titleHtml = (g) => g.parts.map(({ p, it }) => (it ? `<a href="${c.H}item/${it.id}.html">${esc(p)}</a>` : esc(p))).join(" / ");
       const lotRow = (x) => `<li class="lot" data-pref="${esc(x.pref || "")}" data-start="${esc(x.start)}" data-end="${esc(x.end)}">
         <div class="lot-top"><span class="lot-state"></span><span class="lot-kind">${KIND[x.kind] || "抽選"}</span>${x.pref ? `<span class="lot-pref">📍${esc(x.pref)}</span>` : ""}</div>
@@ -1949,16 +2014,10 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
     <p class="lot-caution">抽選の内容は変わることがあります。応募の前に、必ずお店の公式X・公式サイトで最新の情報をご確認ください。</p>
   </section>
 </div>`;
-      const tz = (d) => (/T\d\d:\d\d$/.test(d) ? `${d}:00+09:00` : d);
-      const events = live.map((x) => ({
-        "@context": "https://schema.org", "@type": "Event", name: `${x.title}｜${KIND[x.kind] || "抽選"}（${x.store}）`,
-        startDate: tz(x.start), endDate: tz(x.end), eventStatus: "https://schema.org/EventScheduled", eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-        location: { "@type": "Place", name: x.store, address: { "@type": "PostalAddress", ...(x.pref ? { addressRegion: x.pref } : {}), addressCountry: "JP" } },
-        organizer: { "@type": "Organization", name: x.store }, url: x.url || canonical(lang, rel),
-        description: `応募方法：${x.method || "お店でご確認ください"}${x.note ? `。${x.note}` : ""}`,
-        ...(() => { const g = groups.find((y) => y.title === x.title); return g && g.it && absImg(g.it) ? { image: [absImg(g.it)] } : {}; })(),
-      }));
-      layout({ rel, title: "ガチャの抽選情報（受付中・これから）", description: "人気ガチャの抽選販売、お店のオープン日の入場整理券など、受付中・これから始まるガチャの抽選情報まとめ。", body, current: "lottery", jaOnly: true, jsonld: events });
+      const events = live.map((x) => lotEventLd(x, canonical(lang, rel), (() => { const g = groups.find((y) => y.title === x.title); return g && g.it ? absImg(g.it) : ""; })()));
+      layout({ rel, title: topLot.length ? `ガチャの抽選情報｜${topLot.join("・")}ほか受付中` : "ガチャの抽選情報（受付中・これから）",
+        description: `人気ガチャの抽選販売、お店のオープン日の入場整理券など、受付中・これから始まるガチャの抽選情報まとめ。${live.length ? `いま受付中は${live.length}件${topLot.length ? `（${topLot.map((n) => `「${n}」`).join("")}など）` : ""}。` : ""}締切が近い順に、お店・受付期間・応募方法をまとめています。`,
+        body, current: "lottery", jaOnly: true, jsonld: events });
     }
     // お店ごとのページ
     for (const sh of SHOPS) {
@@ -1977,7 +2036,7 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
       <p class="eyebrow">${sh.src === "user" ? `みんなが追加した場所${KIND_LABEL[sh.kind] ? `・${KIND_LABEL[sh.kind]}` : ""}` : "ガシャポン公式の取扱店"}</p>
       <h1>${esc(sh.name)}${/ガチャガチャ/.test(sh.name) ? "のガチャ情報" : "のガチャガチャ"}</h1>
       <p class="shop-sub" style="margin:6px 0 0;font-weight:700;color:var(--text-2)">${esc([`${ap.pref}${ap.city}`, chn ? `${chn.label}の店舗` : "", sh.src === "user" ? "" : "ガシャポン公式の取扱店"].filter(Boolean).join("・"))}${sto ? `・${esc(sto.st.ja)}から徒歩約${walkMin(sto.d)}分` : ""}</p>
-      <p class="lead">${esc(sh.address || sh.pref || "")}</p>
+      <p class="lead">設置場所：${esc(sh.address || sh.pref || "")}</p>
       <div class="item-actions"><a class="btn" href="${esc(gmap)}" target="_blank" rel="noopener">Googleマップで開く</a><a class="btn" href="${c.R}map.html#${sh.id}">ガチャマップで見る</a>${sto ? `<a class="btn" href="${c.H}station/${sto.st.slug}.html">${esc(sto.st.ja)}周辺のお店</a>` : ""}${chn ? `<a class="btn" href="${c.H}chain/${chn.slug}.html">${esc(chn.label)}の店舗一覧</a>` : ""}</div>
     </header>
     <div class="shop-grid">
@@ -2048,7 +2107,9 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
 <script type="application/json" id="shop-items">${JSON.stringify(off.map((it) => [it.id, it.name])).replace(/</g, "\\u003c")}</script>`;
       const city = ((sh.address || "").replace(/^\s*(東京都|北海道|(?:京都|大阪)府|.{2,3}県)/, "").match(/^.+?[市区町村]/) || [""])[0];
       const thinShop = !off.length && !(rp && rp.n) && !SHOP_RATINGS[sh.id];
-      layout({ rel, title: `${sh.name}｜${city || sh.pref || ""}のガチャガチャ設置店${off.length ? `・取扱${off.length}種` : ""}`, noindex: thinShop, lastmod: rp && rp.last ? rp.last : "", description: `${sh.pref && !(sh.address || "").startsWith(sh.pref) ? sh.pref : ""}${sh.address ? sh.address.replace(/\s+/g, " ") : sh.pref || ""}にある${sh.name}のガチャガチャ情報。${off.length ? `取扱中のガチャ${off.length}種（${off.slice(0, 2).map((x) => x.name).join("、")}など）や、` : ""}みんなの在庫報告・台数・評価を確認できます。`, body, current: "map", jaOnly: true, extraHead: LEAF,
+      // lastmod：みんなの報告の最新日と、公式の取扱（stock.json）の更新日のうち新しいほう。どちらもなければ付けない
+      const shopLm = [rp && rp.last, off.length && stockFile.updated_at].filter(Boolean).sort().pop() || "";
+      layout({ rel, title: `${sh.name}｜${city || sh.pref || ""}のガチャガチャ設置場所・取扱ガチャ${off.length ? `${off.length}種` : ""}`, noindex: thinShop, lastmod: shopLm, description: `${sh.pref && !(sh.address || "").startsWith(sh.pref) ? sh.pref : ""}${sh.address ? sh.address.replace(/\s+/g, " ") : sh.pref || ""}にある${sh.name}のガチャガチャ設置場所・取扱ガチャの情報。${off.length ? `取扱中のガチャ${off.length}種（${off.slice(0, 2).map((x) => x.name).join("、")}など）や、` : ""}みんなの在庫報告・台数・評価を確認できます。`, body, current: "map", jaOnly: true, extraHead: LEAF,
         jsonld: [{ "@context": "https://schema.org", ...storeLd(sh) }] });
     }
     // 投稿のきまり
