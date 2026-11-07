@@ -40,13 +40,12 @@ jobs:
         env:
           # 9時・15時は新作と写真の取り込みをしない（GitHub Actions の無料枠を節約するため。新作の確認は0時の1日1回で十分）
           LIGHT_RUN: ${{ github.event.schedule == '0 0,6 * * *' && '1' || '' }}
-        run: |
-          npm install --no-save --no-package-lock sharp@0.33.5
-          node src/fetch-assets.js
-        env:
           STOCK_IN_GITHUB: "0"
           FORCE_BACKFILL: ${{ github.event.inputs.backfill == 'true' && '1' || '0' }}
           SITE_URL: https://gachapla.com
+        run: |
+          npm install --no-save --no-package-lock sharp@0.33.5
+          node src/fetch-assets.js
 
       - name: 取り込んだものを保存
         if: github.event_name != 'push'
