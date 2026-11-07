@@ -1224,6 +1224,8 @@ ${content}
       ${lang !== "ja" ? (() => { const O = overseas(it); const L = shopLinks(it); const XLG = lang !== "en"; const b = [
         // 中国語・韓国語：Amazon OneLink の対象外なので日本のAmazon（簡体字は中国語表示で開く）。eBay は出さない
         XLG ? ["sl-amz", L.amazon + (lang === "zh-cn" ? "&language=zh_CN" : ""), "Amazon Japan"] : ["sl-amz", O.amazon || L.amazon, O.amazon ? "Amazon" : "Amazon Japan"],
+        // 英語：日本に来ている旅行者は日本のAmazonでも買える（ホテル・コンビニ受け取り）
+        ...(!XLG && O.amazon ? [["sl-amz", L.amazon + "&language=en_US", "Amazon Japan"]] : []),
         ...(!XLG && O.ebay ? [["sl-ebay", O.ebay, "eBay"]] : []),
         ...(O.buyee ? [["sl-buyee", O.buyee, "Buyee (Mercari Japan)"]] : []),
         ["sl-rak", L.rakuten, "Rakuten Japan"],
@@ -1238,7 +1240,7 @@ ${content}
         <p>${t.buyLead}</p>
       </div>
       <div class="btns">
-        ${lang !== "ja" && overseas(it).amazon ? `<a class="btn btn-gold" href="${esc(overseas(it).amazon)}" target="_blank" rel="sponsored noopener">Search on Amazon</a>` : `<a class="btn btn-gold" href="${esc(aff.amazon)}" target="_blank" rel="sponsored noopener">${t.amazon}</a>`}
+        ${lang === "en" && overseas(it).amazon ? `<a class="btn btn-gold" href="${esc(overseas(it).amazon)}" target="_blank" rel="sponsored noopener">Search on Amazon</a><a class="btn" href="${esc(aff.amazon + "&language=en_US")}" target="_blank" rel="sponsored noopener">Amazon Japan (in Japan)</a>` : `<a class="btn btn-gold" href="${esc(aff.amazon + (lang === "zh-cn" ? "&language=zh_CN" : ""))}" target="_blank" rel="sponsored noopener">${t.amazon}</a>`}
         ${lang !== "ja" && overseas(it).ebay ? `<a class="btn" href="${esc(overseas(it).ebay)}" target="_blank" rel="sponsored noopener">Search on eBay</a>` : ""}
         <a class="btn" href="${esc(aff.rakuten)}" target="_blank" rel="sponsored noopener">${t.rakuten}</a>
       </div>
