@@ -51,7 +51,15 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           mkdir -p lineup-src
           git add images lineup-src data/items.json data/stores.json data/stock.json data/backfill.json data/import-skip.json
-          git diff --cached --quiet || (git commit -m "画像・店舗・在庫を自動取り込み" && git push)
+          if ! git diff --cached --quiet; then
+            git commit -m "画像・店舗・在庫を自動取り込み"
+            # 取り込み中にほかの自動作業が push していることがあるので、取り込み直してから送る（最大3回）
+            for i in 1 2 3; do
+              git push && break
+              git pull --rebase -X theirs origin main || { git rebase --abort; exit 1; }
+              sleep 3
+            done
+          fi
 
       - name: ハートの数・ガチャマップのお店を読み込む
         continue-on-error: true
