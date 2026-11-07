@@ -4740,7 +4740,7 @@
     "maker_en": "Bandai",
     "price": 500,
     "release": "2026-11",
-    "release_note": "",
+    "release_note": "11月第2週より順次",
     "genre": "anime",
     "moods": [],
     "tags": [],
@@ -36115,7 +36115,8 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y905940",
@@ -36160,7 +36161,8 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y905988",
@@ -36206,7 +36208,8 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y907340",
@@ -36246,7 +36249,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y908668",
@@ -36294,7 +36298,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y098505",
@@ -36338,7 +36343,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y900648",
@@ -36417,7 +36423,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y901508",
@@ -36467,7 +36474,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y902062",
@@ -36512,7 +36520,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y902529",
@@ -36554,7 +36563,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y903182",
@@ -36601,7 +36611,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y903410",
@@ -36641,7 +36652,8 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y903472",
@@ -36684,7 +36696,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y903885",
@@ -36727,7 +36740,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y904196",
@@ -36775,7 +36789,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y904400",
@@ -36819,7 +36834,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y904820",
@@ -36866,7 +36882,8 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y905452",
@@ -36908,7 +36925,8 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y905803",
@@ -36956,7 +36974,8 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y909115",
@@ -36999,7 +37018,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y093340",
@@ -37041,7 +37061,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y098284",
@@ -37090,7 +37111,8 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y099755",
@@ -37138,7 +37160,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y900723",
@@ -37182,7 +37205,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y901225",
@@ -37262,7 +37286,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y902116",
@@ -37306,7 +37331,8 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y902963",
@@ -37353,7 +37379,8 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y902970",
@@ -37399,7 +37426,8 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y903083",
@@ -37444,7 +37472,8 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y903151",
@@ -37489,7 +37518,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y903328",
@@ -37609,7 +37639,8 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y904790",
@@ -37656,7 +37687,8 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y905230",
@@ -37703,7 +37735,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y905551",
@@ -37793,7 +37826,8 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": true,
+    "jan_checked": true
   },
   {
     "id": "tarts-y908989",
@@ -45129,6 +45163,1690 @@
     "q_genders": [
       "female",
       "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "toyscabin-20260803-1467",
+    "name": "幸柴",
+    "name_en": "",
+    "maker": "トイズキャビン",
+    "maker_en": "Toys Cabin",
+    "price": 400,
+    "release": "2026-11",
+    "release_note": "11月",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": null,
+    "jan": "4589415443924",
+    "image": "",
+    "official_url": "https://toyscabin.com/product/20260803_1467.php",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "toyscabin-20260803-1466",
+    "name": "ゼンマイでうごく!トコトコ仕事猫",
+    "name_en": "",
+    "maker": "トイズキャビン",
+    "maker_en": "Toys Cabin",
+    "price": 400,
+    "release": "2026-11",
+    "release_note": "11月",
+    "genre": "animal",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": null,
+    "jan": "4589415443788",
+    "image": "",
+    "official_url": "https://toyscabin.com/product/20260803_1466.php",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:animal"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "toyscabin-20260803-1465",
+    "name": "1/64 サニートラックコレクション3",
+    "name_en": "",
+    "maker": "トイズキャビン",
+    "maker_en": "Toys Cabin",
+    "price": 500,
+    "release": "2026-11",
+    "release_note": "11月",
+    "genre": "miniature",
+    "moods": [
+      "real"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": null,
+    "jan": "4589415443887",
+    "image": "",
+    "official_url": "https://toyscabin.com/product/20260803_1465.php",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "real:miniature",
+      "real:vehicle"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "toyscabin-20260803-1464",
+    "name": "カプセルカンヅメカVol.3トリカンメカ",
+    "name_en": "",
+    "maker": "トイズキャビン",
+    "maker_en": "Toys Cabin",
+    "price": 500,
+    "release": "2026-11",
+    "release_note": "11月",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": null,
+    "jan": "4589415443870",
+    "image": "",
+    "official_url": "https://toyscabin.com/product/20260803_1464.php",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "cool:robot"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "toyscabin-20260803-1463",
+    "name": "めっちゃカメレオン わっかチャーム",
+    "name_en": "",
+    "maker": "トイズキャビン",
+    "maker_en": "Toys Cabin",
+    "price": 300,
+    "release": "2026-11",
+    "release_note": "11月",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": null,
+    "jan": "4589415443856",
+    "image": "",
+    "official_url": "https://toyscabin.com/product/20260803_1463.php",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "type:charm"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "toyscabin-20260728-1461",
+    "name": "春秋戦国大戦キングダム ミニチュア軍旗コレクション",
+    "name_en": "",
+    "maker": "トイズキャビン",
+    "maker_en": "Toys Cabin",
+    "price": 400,
+    "release": "2026-11",
+    "release_note": "11月",
+    "genre": "miniature",
+    "moods": [
+      "real"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": null,
+    "jan": "4589415443764",
+    "image": "",
+    "official_url": "https://toyscabin.com/product/20260728_1461.php",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "cool:shonen",
+      "cool:weaponry",
+      "real:miniature"
+    ],
+    "q_ages": [
+      "30",
+      "40",
+      "50"
+    ],
+    "q_genders": [
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "toyscabin-20260706-1455",
+    "name": "「青春ブタ野郎」シリーズアクリルフォトキーチェーン",
+    "name_en": "",
+    "maker": "トイズキャビン",
+    "maker_en": "Toys Cabin",
+    "price": 400,
+    "release": "2026-10",
+    "release_note": "10月",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": null,
+    "jan": "4589415443672",
+    "image": "",
+    "official_url": "https://toyscabin.com/product/20260706_1455.php",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:charm"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "toyscabin-20260701-1453",
+    "name": "【再販】パトライト回転灯コレクション",
+    "name_en": "",
+    "maker": "トイズキャビン",
+    "maker_en": "Toys Cabin",
+    "price": 500,
+    "release": "2026-10",
+    "release_note": "10月",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": null,
+    "jan": "4589415442095",
+    "image": "",
+    "official_url": "https://toyscabin.com/product/20260701_1453.php",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:useful",
+      "type:sound"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "toyscabin-20260701-1452",
+    "name": "BlueBell たぬき日和マスコットキーホルダー",
+    "name_en": "",
+    "maker": "トイズキャビン",
+    "maker_en": "Toys Cabin",
+    "price": 400,
+    "release": "2026-10",
+    "release_note": "10月",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": null,
+    "jan": "4589415443726",
+    "image": "",
+    "official_url": "https://toyscabin.com/product/20260701_1452.php",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "type:plush",
+      "type:charm"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "toyscabin-20260701-1451",
+    "name": "業務スーパーのしゃかしゃかわっかチャーム",
+    "name_en": "",
+    "maker": "トイズキャビン",
+    "maker_en": "Toys Cabin",
+    "price": 300,
+    "release": "2026-10",
+    "release_note": "10月",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": null,
+    "jan": "4589415443665",
+    "image": "",
+    "official_url": "https://toyscabin.com/product/20260701_1451.php",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "type:charm"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "toyscabin-20260701-1450",
+    "name": "1/64 HONDA CB400SF/Rebel 250 フィギュアキーホルダー",
+    "name_en": "",
+    "maker": "トイズキャビン",
+    "maker_en": "Toys Cabin",
+    "price": 500,
+    "release": "2026-10",
+    "release_note": "10月",
+    "genre": "miniature",
+    "moods": [
+      "real",
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": null,
+    "jan": "4589415443702",
+    "image": "",
+    "official_url": "https://toyscabin.com/product/20260701_1450.php",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:figure",
+      "type:charm",
+      "real:miniature"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "toyscabin-20260609-1436",
+    "name": "ねこぱんつ",
+    "name_en": "",
+    "maker": "トイズキャビン",
+    "maker_en": "Toys Cabin",
+    "price": 400,
+    "release": "2026-09",
+    "release_note": "9月",
+    "genre": "animal",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": null,
+    "jan": "4589415443627",
+    "image": "",
+    "official_url": "https://toyscabin.com/product/20260609_1436.php",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:animal"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "toyscabin-20260609-1442",
+    "name": "【再販】SUBARUスポーツカーエンブレムメタルキーホルダー",
+    "name_en": "",
+    "maker": "トイズキャビン",
+    "maker_en": "Toys Cabin",
+    "price": 500,
+    "release": "2026-09",
+    "release_note": "9月",
+    "genre": "anime",
+    "moods": [
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": null,
+    "jan": "4589415443139",
+    "image": "",
+    "official_url": "https://toyscabin.com/product/20260609_1442.php",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:charm"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "toyscabin-20260609-1441",
+    "name": "盗掘王 遺物メタルキーホルダーコレクション",
+    "name_en": "",
+    "maker": "トイズキャビン",
+    "maker_en": "Toys Cabin",
+    "price": 400,
+    "release": "2026-09",
+    "release_note": "9月",
+    "genre": "anime",
+    "moods": [
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": null,
+    "jan": "4589415443603",
+    "image": "",
+    "official_url": "https://toyscabin.com/product/20260609_1441.php",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:charm"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "toyscabin-20260609-1440",
+    "name": "USAGI MAKER産 オオカミ&ウサギたちぬいぐるみ",
+    "name_en": "",
+    "maker": "トイズキャビン",
+    "maker_en": "Toys Cabin",
+    "price": 400,
+    "release": "2026-09",
+    "release_note": "9月",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": null,
+    "jan": "4589415443634",
+    "image": "",
+    "official_url": "https://toyscabin.com/product/20260609_1440.php",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "type:plush"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "toyscabin-20260609-1439",
+    "name": "1/64 Honda CIVIC TYPE R (FL5) MUGEN Ver",
+    "name_en": "",
+    "maker": "トイズキャビン",
+    "maker_en": "Toys Cabin",
+    "price": 500,
+    "release": "2026-09",
+    "release_note": "9月",
+    "genre": "miniature",
+    "moods": [
+      "real"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": null,
+    "jan": "4589415443610",
+    "image": "",
+    "official_url": "https://toyscabin.com/product/20260609_1439.php",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "real:miniature"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "toyscabin-20260609-1438",
+    "name": "Fate/stay night 1/12 英霊武装録 Vol.1",
+    "name_en": "",
+    "maker": "トイズキャビン",
+    "maker_en": "Toys Cabin",
+    "price": 500,
+    "release": "2026-09",
+    "release_note": "9月",
+    "genre": "miniature",
+    "moods": [
+      "real"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": null,
+    "jan": "4589415443641",
+    "image": "",
+    "official_url": "https://toyscabin.com/product/20260609_1438.php",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "real:miniature"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "toyscabin-20260609-1437",
+    "name": "サウンドステージ ツナボーイとゆかいな仲間たち",
+    "name_en": "",
+    "maker": "トイズキャビン",
+    "maker_en": "Toys Cabin",
+    "price": 500,
+    "release": "2026-09",
+    "release_note": "9月",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": null,
+    "jan": "4589415443429",
+    "image": "",
+    "official_url": "https://toyscabin.com/product/20260609_1437.php",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:sound",
+      "hobby:music"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "toyscabin-20260609-1435",
+    "name": "仕事猫ハコキーチェーン",
+    "name_en": "",
+    "maker": "トイズキャビン",
+    "maker_en": "Toys Cabin",
+    "price": 400,
+    "release": "2026-09",
+    "release_note": "9月",
+    "genre": "animal",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": null,
+    "jan": "4589415443658",
+    "image": "",
+    "official_url": "https://toyscabin.com/product/20260609_1435.php",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:animal",
+      "type:charm"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "toyscabin-20260501-1423",
+    "name": "刀剣乱舞ONLINE 対大侵寇防人作戦サーバーアクリルチャーム",
+    "name_en": "",
+    "maker": "トイズキャビン",
+    "maker_en": "Toys Cabin",
+    "price": 400,
+    "release": "2026-08",
+    "release_note": "8月",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": null,
+    "jan": "4589415443542",
+    "image": "",
+    "official_url": "https://toyscabin.com/product/20260501_1423.php",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "cool:weaponry",
+      "oshi:game",
+      "type:charm"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bushicap-10158",
+    "name": "平成ファンシー ミニデニムペンケース",
+    "name_en": "",
+    "maker": "ブシロードクリエイティブ",
+    "maker_en": "Bushiroad Creative",
+    "price": 500,
+    "release": "2026-12",
+    "release_note": "12月下旬",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "jan": "4570194440266",
+    "image": "",
+    "official_url": "https://capsule.bushiroad-creative.com/product/10158/",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:stationery",
+      "type:useful"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bushicap-10156",
+    "name": "TVアニメ「薫る花は凛と咲く」 ゆめぬい",
+    "name_en": "",
+    "maker": "ブシロードクリエイティブ",
+    "maker_en": "Bushiroad Creative",
+    "price": 500,
+    "release": "2027-01",
+    "release_note": "1月下旬",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "jan": "4570194455444",
+    "image": "",
+    "official_url": "https://capsule.bushiroad-creative.com/product/10156/",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "type:plush"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bushicap-10144",
+    "name": "ブルーロック みあげてすたぁマスコットvol.1",
+    "name_en": "",
+    "maker": "ブシロードクリエイティブ",
+    "maker_en": "Bushiroad Creative",
+    "price": 500,
+    "release": "2026-12",
+    "release_note": "12月下旬",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "jan": "4570194462930",
+    "image": "",
+    "official_url": "https://capsule.bushiroad-creative.com/product/10144/",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "cool:shonen",
+      "type:plush"
+    ],
+    "q_ages": [
+      "10"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bushicap-10136",
+    "name": "TVアニメ「薫る花は凛と咲く」 カプセルラバーキーホルダー",
+    "name_en": "",
+    "maker": "ブシロードクリエイティブ",
+    "maker_en": "Bushiroad Creative",
+    "price": 300,
+    "release": "2026-12",
+    "release_note": "12月下旬",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "jan": "4570194455451",
+    "image": "",
+    "official_url": "https://capsule.bushiroad-creative.com/product/10136/",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:charm"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bushicap-10153",
+    "name": "『楽園追放 心のレゾナンス』 カプセル缶バッジ",
+    "name_en": "",
+    "maker": "ブシロードクリエイティブ",
+    "maker_en": "Bushiroad Creative",
+    "price": 300,
+    "release": "2026-11",
+    "release_note": "11月下旬",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "jan": "4570194492814",
+    "image": "",
+    "official_url": "https://capsule.bushiroad-creative.com/product/10153/",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bushicap-10150",
+    "name": "ハイキュー!! みあげてすたぁマスコット 青葉城西高校・白鳥沢学園高校",
+    "name_en": "",
+    "maker": "ブシロードクリエイティブ",
+    "maker_en": "Bushiroad Creative",
+    "price": 500,
+    "release": "2026-11",
+    "release_note": "11月下旬",
+    "genre": "animal",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "jan": "4570194464705",
+    "image": "",
+    "official_url": "https://capsule.bushiroad-creative.com/product/10150/",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "cool:shonen",
+      "cool:weaponry",
+      "type:plush"
+    ],
+    "q_ages": [
+      "10",
+      "20"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bushicap-10129",
+    "name": "アニメ「グロウアップショウ ～ひまわりのサーカス団～」 カプセルラバーキーホルダー",
+    "name_en": "",
+    "maker": "ブシロードクリエイティブ",
+    "maker_en": "Bushiroad Creative",
+    "price": 300,
+    "release": "2026-11",
+    "release_note": "11月下旬",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "jan": "4570194485427",
+    "image": "",
+    "official_url": "https://capsule.bushiroad-creative.com/product/10129/",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:charm"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bushicap-10123",
+    "name": "いーすとけん。 パンのかご入りフィギュア",
+    "name_en": "",
+    "maker": "ブシロードクリエイティブ",
+    "maker_en": "Bushiroad Creative",
+    "price": 400,
+    "release": "2026-11",
+    "release_note": "11月下旬",
+    "genre": "anime",
+    "moods": [
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "jan": "4570194440297",
+    "image": "",
+    "official_url": "https://capsule.bushiroad-creative.com/product/10123/",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:character",
+      "type:figure",
+      "real:food"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bushicap-10122",
+    "name": "MyGO!!!!! 額縁アートコレクション",
+    "name_en": "",
+    "maker": "ブシロードクリエイティブ",
+    "maker_en": "Bushiroad Creative",
+    "price": 400,
+    "release": "2026-11",
+    "release_note": "11月下旬",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "jan": "4570194489821",
+    "image": "",
+    "official_url": "https://capsule.bushiroad-creative.com/product/10122/",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "oshi:idol",
+      "oshi:trend",
+      "hobby:music"
+    ],
+    "q_ages": [
+      "20"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bushicap-10121",
+    "name": "NEEDY GIRL OVERDOSE コレクションフィギュアRICH",
+    "name_en": "",
+    "maker": "ブシロードクリエイティブ",
+    "maker_en": "Bushiroad Creative",
+    "price": 500,
+    "release": "2026-11",
+    "release_note": "11月下旬",
+    "genre": "anime",
+    "moods": [
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "jan": "4570194468642",
+    "image": "",
+    "official_url": "https://capsule.bushiroad-creative.com/product/10121/",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:figure"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bushicap-10109",
+    "name": "デュラハンボーイDulla コレクションフィギュア",
+    "name_en": "",
+    "maker": "ブシロードクリエイティブ",
+    "maker_en": "Bushiroad Creative",
+    "price": 500,
+    "release": "2026-11",
+    "release_note": "11月下旬",
+    "genre": "anime",
+    "moods": [
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "jan": "4570194491855",
+    "image": "",
+    "official_url": "https://capsule.bushiroad-creative.com/product/10109/",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:figure"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bushicap-10092",
+    "name": "アニメ「ぼっち・ざ・ろっく！」 ぼっちちゃんがいっぱいフィギュアvol.3",
+    "name_en": "",
+    "maker": "ブシロードクリエイティブ",
+    "maker_en": "Bushiroad Creative",
+    "price": 500,
+    "release": "2026-11",
+    "release_note": "11月下旬",
+    "genre": "anime",
+    "moods": [
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "jan": "4570194455642",
+    "image": "",
+    "official_url": "https://capsule.bushiroad-creative.com/product/10092/",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "oshi:idol",
+      "oshi:trend",
+      "type:figure",
+      "hobby:music"
+    ],
+    "q_ages": [
+      "20"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bushicap-10249",
+    "name": "ラブライブ！シリーズ オフィシャルカードゲーム ミニアクリルスタンドマーカー",
+    "name_en": "",
+    "maker": "ブシロードクリエイティブ",
+    "maker_en": "Bushiroad Creative",
+    "price": 500,
+    "release": "2026-11",
+    "release_note": "11月",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 13,
+    "jan": "4580871338014",
+    "image": "",
+    "official_url": "https://capsule.bushiroad-creative.com/product/10249/",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "oshi:idol",
+      "hobby:music"
+    ],
+    "q_ages": [
+      "20"
+    ],
+    "q_genders": [
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bushicap-10186",
+    "name": "ねこぉひ～2 コレクションフィギュア",
+    "name_en": "",
+    "maker": "ブシロードクリエイティブ",
+    "maker_en": "Bushiroad Creative",
+    "price": 400,
+    "release": "2026-10",
+    "release_note": "10月下旬",
+    "genre": "animal",
+    "moods": [
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "jan": "4570194440594",
+    "image": "",
+    "official_url": "https://capsule.bushiroad-creative.com/product/10186/",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:animal",
+      "type:figure"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bushicap-10185",
+    "name": "BanG Dream! Ave Mujica ゆめぬい",
+    "name_en": "",
+    "maker": "ブシロードクリエイティブ",
+    "maker_en": "Bushiroad Creative",
+    "price": 500,
+    "release": "2027-01",
+    "release_note": "1月下旬",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "jan": "4570194503862",
+    "image": "",
+    "official_url": "https://capsule.bushiroad-creative.com/product/10185/",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "oshi:idol",
+      "type:plush"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bushicap-10184",
+    "name": "BanG Dream! It’s MyGO!!!!! ゆめぬい",
+    "name_en": "",
+    "maker": "ブシロードクリエイティブ",
+    "maker_en": "Bushiroad Creative",
+    "price": 500,
+    "release": "2027-01",
+    "release_note": "1月下旬",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "jan": "4570194503855",
+    "image": "",
+    "official_url": "https://capsule.bushiroad-creative.com/product/10184/",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "oshi:idol",
+      "oshi:trend",
+      "type:plush",
+      "hobby:music"
+    ],
+    "q_ages": [
+      "20"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bushicap-10149",
+    "name": "Ave Mujica 額縁アートコレクション",
+    "name_en": "",
+    "maker": "ブシロードクリエイティブ",
+    "maker_en": "Bushiroad Creative",
+    "price": 400,
+    "release": "2026-10",
+    "release_note": "10月下旬",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "jan": "4570194489838",
+    "image": "",
+    "official_url": "https://capsule.bushiroad-creative.com/product/10149/",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bushicap-10094",
+    "name": "おすわりちゃんズ BOOK",
+    "name_en": "",
+    "maker": "ブシロードクリエイティブ",
+    "maker_en": "Bushiroad Creative",
+    "price": 400,
+    "release": "2026-10",
+    "release_note": "10月下旬",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "jan": "4570194488435",
+    "image": "",
+    "official_url": "https://capsule.bushiroad-creative.com/product/10094/",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bushicap-10091",
+    "name": "がんばれゴエモン タイトルロゴ大集合！カプセルラバーキーホルダーArt",
+    "name_en": "",
+    "maker": "ブシロードクリエイティブ",
+    "maker_en": "Bushiroad Creative",
+    "price": 400,
+    "release": "2026-10",
+    "release_note": "10月下旬",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 13,
+    "jan": "4570194485434",
+    "image": "",
+    "official_url": "https://capsule.bushiroad-creative.com/product/10091/",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:charm"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bushicap-10089",
+    "name": "魔法少女リリカルなのは EXCEEDS Gun Blaze Vengeance カプセルラバーキーホルダー",
+    "name_en": "",
+    "maker": "ブシロードクリエイティブ",
+    "maker_en": "Bushiroad Creative",
+    "price": 300,
+    "release": "2026-10",
+    "release_note": "10月下旬",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "jan": "4570194448576",
+    "image": "",
+    "official_url": "https://capsule.bushiroad-creative.com/product/10089/",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:charm"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "kenele-gc0591c",
+    "name": "ノラネコぐんだん ミニチュアフィギュア 第4弾 コンプリートBOX",
+    "name_en": "",
+    "maker": "ケンエレファント",
+    "maker_en": "Kenelephant",
+    "price": 500,
+    "release": "2027-03",
+    "release_note": "3月",
+    "genre": "miniature",
+    "moods": [
+      "real",
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "image": "",
+    "official_url": "https://kenelestore.jp/products/gc0591c",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:figure",
+      "real:miniature"
+    ],
+    "q_ages": [
+      "30",
+      "40",
+      "50"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "kenele-gc0684c",
+    "name": "にしこはりこ SHONBEN BOYS ミニチュアコレクション",
+    "name_en": "",
+    "maker": "ケンエレファント",
+    "maker_en": "Kenelephant",
+    "price": 500,
+    "release": "2027-03",
+    "release_note": "3月",
+    "genre": "miniature",
+    "moods": [
+      "real"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "image": "",
+    "official_url": "https://kenelestore.jp/products/gc0684c",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "real:miniature"
+    ],
+    "q_ages": [
+      "30",
+      "40",
+      "50"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "kenele-gc0720z",
+    "name": "快獣ブースカ カラフルフロッキー コレクション コンプリートBOX",
+    "name_en": "",
+    "maker": "ケンエレファント",
+    "maker_en": "Kenelephant",
+    "price": 500,
+    "release": "2027-03",
+    "release_note": "3月",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "image": "",
+    "official_url": "https://kenelestore.jp/products/gc0720z",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:plush"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "kenele-gc0787z",
+    "name": "mojojojo まんまる おかおポーチ Pastel Ver.",
+    "name_en": "",
+    "maker": "ケンエレファント",
+    "maker_en": "Kenelephant",
+    "price": 500,
+    "release": "2026-10",
+    "release_note": "10月",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "image": "",
+    "official_url": "https://kenelestore.jp/products/gc0787z",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-07",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "type:useful",
+      "retro:heisei"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
     ],
     "tags_auto": true
   }
