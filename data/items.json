@@ -3877,7 +3877,16 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "見習いタップ",
+      "クルールポロン",
+      "スウィートポロン",
+      "パララタップ",
+      "ピュアリンハナちゃんコンパクト",
+      "魔法玉（ピンク）",
+      "魔法玉（オレンジ）"
+    ]
   },
   {
     "id": "bandai-4582769979248",
@@ -3954,7 +3963,10 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "にゃんこ"
+    ]
   },
   {
     "id": "bandai-4582769995729",
@@ -6633,7 +6645,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "サメA",
+      "サメB",
+      "ジンベイザメ",
+      "ペンギン",
+      "メンダコ",
+      "イカ"
+    ]
   },
   {
     "id": "bandai-4582769708473",
@@ -6669,7 +6689,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ズキっち",
+      "デビルまめっち",
+      "ポチっち",
+      "まるっち",
+      "おやじっち"
+    ]
   },
   {
     "id": "bandai-4570118181848",
@@ -6706,7 +6733,16 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "キュアアンサー",
+      "キュアエクレール",
+      "キュアアルカナ",
+      "帆羽くれあ",
+      "キュアミスティック",
+      "シュシュタン",
+      "森亜るるか"
+    ]
   },
   {
     "id": "bandai-4570118184832",
@@ -6744,7 +6780,10 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ギズモ"
+    ]
   },
   {
     "id": "bandai-4582769935893",
@@ -6780,7 +6819,14 @@
     "q_genders": [
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ニューパルサー",
+      "押忍！番長",
+      "ミリオンゴッド",
+      "獣王",
+      "ブラックジャック777"
+    ]
   },
   {
     "id": "bandai-4582769995682",
@@ -6817,7 +6863,11 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "天の川コズミックコーデ",
+      "マーブルキャンディコーデ"
+    ]
   },
   {
     "id": "bandai-4582770053883",
@@ -6967,7 +7017,18 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "SPライセンス",
+      "マスターライセンス",
+      "レンジャーキー（ゴーカイレッド）",
+      "レンジャーキー（ゴーカイシルバー）",
+      "ショドウフォン",
+      "ガブティラ獣電池",
+      "プテラゴードン獣電池",
+      "アバタロウギア（ドンモモタロウ）",
+      "脳人ブレス（ソノイ）"
+    ]
   },
   {
     "id": "bandai-4582769995828",
@@ -7005,7 +7066,8 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": []
   },
   {
     "id": "bandai-2026100900000",
@@ -7041,7 +7103,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "自販機マルチポーチ",
+      "ガシャポンフレンズアクリルカラビナ",
+      "フレークシール（まちぼうけ）",
+      "フレークシール（VIRUSWEETS）",
+      "フレークシール（ガシャポンフレンズ）"
+    ]
   },
   {
     "id": "bandai-4570118184191",
@@ -7077,7 +7146,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "How It's Done",
+      "Soda Pop",
+      "Free",
+      "Takedown",
+      "Your Idol",
+      "GOLDEN"
+    ]
   },
   {
     "id": "bandai-4570118184276",
@@ -7113,7 +7190,12 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "PuppyM",
+      "Wolf Chan",
+      "Leebit"
+    ]
   },
   {
     "id": "bandai-4570118186768",
@@ -7194,7 +7276,12 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "コジコジ",
+      "やかんくん",
+      "カツブー"
+    ]
   },
   {
     "id": "bandai-4570118201928",
@@ -7230,7 +7317,13 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ブロッサム",
+      "バブルス",
+      "バターカップ",
+      "モジョ・ジョジョ"
+    ]
   },
   {
     "id": "bandai-4570118202222",
@@ -7265,7 +7358,15 @@
     "q_genders": [
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "だるまいずごっど",
+      "ありさか",
+      "Selly",
+      "じゃすぱー",
+      "らっきーくん",
+      "Mondo"
+    ]
   },
   {
     "id": "bandai-4570118206442",
@@ -7305,7 +7406,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "モーニングコーヒー",
+      "LOVEマシーン",
+      "ハッピーサマーウェディング",
+      "恋愛レボリューション21",
+      "ザ☆ピース！"
+    ]
   },
   {
     "id": "bandai-4582769927409",
@@ -7344,7 +7452,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "コーヒーゼリー昔のパッケージ",
+      "クリーム＆プリン",
+      "クリーム＆コーヒーゼリー",
+      "なめらかプリン",
+      "そのまま味わうコーヒーゼリー"
+    ]
   },
   {
     "id": "bandai-4582769995118",
@@ -7384,7 +7499,15 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "しんちゃん",
+      "ひまわり",
+      "シロ",
+      "ボーちゃん",
+      "ネネちゃんうさぎ",
+      "ぶりぶりざえもん"
+    ]
   },
   {
     "id": "bandai-4582769995316",
@@ -7423,7 +7546,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ぜんまいざむらい",
+      "ずきんちゃん",
+      "ぼたんちゃん",
+      "豆丸",
+      "大福の神"
+    ]
   },
   {
     "id": "bandai-4582769995545",
@@ -7458,7 +7588,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "竹中雄大",
+      "山田海斗",
+      "沖聡次郎",
+      "圭吾",
+      "ねぎ"
+    ]
   },
   {
     "id": "bandai-4582770026528",
@@ -7495,7 +7632,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "オムライス（お文具）",
+      "たまごやき（プリンさん）",
+      "めだまやきハンバーグ（ゼリーさん）",
+      "おはぎ（猫さん／子猫さん）",
+      "ダークマター（名も無き者）"
+    ]
   },
   {
     "id": "bandai-4582770027020",
@@ -7534,7 +7678,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ハローキティ",
+      "マイメロディ",
+      "はぴだんぶい",
+      "ポムポムプリン",
+      "シナモロール"
+    ]
   },
   {
     "id": "bandai-4582770027150",
@@ -7871,7 +8022,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "バーティー・ボッツの百味ビーンズ",
+      "金のスニッチ",
+      "ハリー・ポッターの杖／守護霊（パトローナス）",
+      "食べられる闇の印",
+      "メラメラメガネ"
+    ]
   },
   {
     "id": "bandai-4570118184313",
@@ -7909,7 +8067,18 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "NAVELY",
+      "JEONGVELY",
+      "MOVELY",
+      "SAVELY",
+      "JIVELY",
+      "MIVELY",
+      "DAVELY",
+      "CHAENGVELY",
+      "TZUVELY"
+    ]
   },
   {
     "id": "bandai-4570118219367",
@@ -7947,7 +8116,21 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ノーマル",
+      "ナメてる",
+      "バツ",
+      "リラックス",
+      "マル",
+      "真顔",
+      "怒り",
+      "緑色（蓄光ver.）",
+      "テンパっている",
+      "サングラス",
+      "中途半端な顔",
+      "泣いている"
+    ]
   },
   {
     "id": "bandai-4582769935329",
@@ -7986,7 +8169,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ノンタン",
+      "うさぎさん",
+      "くまさん",
+      "ぶたさん",
+      "たぬきさん",
+      "タータン"
+    ]
   },
   {
     "id": "bandai-4570118186249",
@@ -8067,7 +8258,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "バーティー・ボッツ百味ビーンズ",
+      "カエルチョコレート",
+      "フィフィ・フィズビー",
+      "爆発ボンボン",
+      "歯が折れる強いミント菓子"
+    ]
   },
   {
     "id": "bandai-4570118182029",
@@ -8105,7 +8303,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "アンパンマン",
+      "ばいきんまん",
+      "ドキンちゃん",
+      "おむすびまん",
+      "めいけんチーズ"
+    ]
   },
   {
     "id": "bandai-4570118183958",
@@ -8142,7 +8347,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "しろねこさん",
+      "えきちょうさん",
+      "くりーむさん",
+      "おっどさん",
+      "ずきんさん"
+    ]
   },
   {
     "id": "bandai-4570118184757",
@@ -8177,7 +8389,14 @@
     "q_genders": [
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "Superman",
+      "Batman",
+      "Supergirl",
+      "The Joker",
+      "Robin"
+    ]
   },
   {
     "id": "bandai-4570118186324",
@@ -8212,7 +8431,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "SHOTARO",
+      "EUNSEOK",
+      "SUNGCHAN",
+      "WONBIN",
+      "SOHEE",
+      "ANTON"
+    ]
   },
   {
     "id": "bandai-4582769738982",
@@ -8249,7 +8476,13 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "蝶ネクタイ型変声機（毛利小五郎ver.）",
+      "蝶ネクタイ型変声機（鈴木園子ver.）",
+      "腕時計型麻酔銃",
+      "探偵バッジ（ピンバッジ）"
+    ]
   },
   {
     "id": "bandai-4582769823084",
@@ -8284,7 +8517,8 @@
     "q_genders": [
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": []
   },
   {
     "id": "bandai-4582770026757",
@@ -8323,7 +8557,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ドラえもん",
+      "ころばし屋",
+      "アンキパン",
+      "どこでもドア",
+      "ミチビキエンゼル"
+    ]
   },
   {
     "id": "bandai-4582770026924",
@@ -8360,7 +8601,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "プー",
+      "ピグレット",
+      "ティガー",
+      "イーヨー",
+      "ルー"
+    ]
   },
   {
     "id": "bandai-4582770027549",
@@ -8809,7 +9057,20 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "RURU",
+      "チュララ",
+      "ぽぽ",
+      "まめちぃ",
+      "ちまた",
+      "ピーハイ",
+      "レイン",
+      "ヤヌカミ",
+      "Bira",
+      "もこ",
+      "マイクン"
+    ]
   },
   {
     "id": "bandai-4582769867071",
@@ -8845,7 +9106,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "あんみつ",
+      "たい焼きつぶあん",
+      "かしわ餅",
+      "抹茶あんみつ",
+      "たい焼きカスタード",
+      "さくら餅"
+    ]
   },
   {
     "id": "bandai-4582769822339",
@@ -8883,7 +9152,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "クロウカードブック",
+      "封印の杖",
+      "星の杖",
+      "夢の杖",
+      "クリアカード-フライト-",
+      "ケロちゃん"
+    ]
   },
   {
     "id": "bandai-4582769889400",
@@ -8920,7 +9197,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "マイメロディ",
+      "クロミ",
+      "ポチャッコ",
+      "シナモロール",
+      "ハンギョドン"
+    ]
   },
   {
     "id": "bandai-4582769842597",
@@ -8955,7 +9239,8 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": []
   },
   {
     "id": "bandai-4582769889431",
@@ -8993,7 +9278,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "サボさん",
+      "コッシー",
+      "オフロスキー",
+      "ホネーキンさん",
+      "オスワルおうじ"
+    ]
   },
   {
     "id": "bandai-4582769840708",
@@ -9028,7 +9320,8 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": []
   },
   {
     "id": "bandai-4582769979422",
@@ -9066,7 +9359,21 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "坂田銀時",
+      "長谷川泰三",
+      "志村新八",
+      "神楽",
+      "桂小太郎",
+      "エリザベス",
+      "近藤勲",
+      "土方十四郎",
+      "沖田総悟",
+      "山崎退",
+      "高杉晋助",
+      "神威"
+    ]
   },
   {
     "id": "bandai-4570117984075",
@@ -9148,7 +9455,12 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "グルーミー",
+      "汎用うさぎ",
+      "クマキカイ"
+    ]
   },
   {
     "id": "bandai-4570118183972",
@@ -9276,7 +9588,13 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "おまじない香水びん",
+      "王女の証",
+      "エンゼルキャッチ",
+      "クレヨンペン"
+    ]
   },
   {
     "id": "bandai-4582769867255",
@@ -9311,7 +9629,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "かえちゃんふぃぎゅあみどり",
+      "かえちゃんふぃぎゅあぴんく",
+      "かえちゃんふぃぎゅああか",
+      "かえちゃんふぃぎゅああお",
+      "かえちゃんふぃぎゅあちゃいろ"
+    ]
   },
   {
     "id": "bandai-4582770033625",
@@ -9488,7 +9813,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "キュアアンサー",
+      "キュアミスティック",
+      "キュアエクレール",
+      "キュアアルカナ",
+      "キュアアルカナ・シャドウ"
+    ]
   },
   {
     "id": "bandai-4570118184870",
@@ -9573,7 +9905,13 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "獅堂光",
+      "龍咲海",
+      "鳳凰寺風",
+      "モコナ"
+    ]
   },
   {
     "id": "bandai-4582769979286",
@@ -9611,7 +9949,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "miffy",
+      "boris",
+      "dan",
+      "ghost",
+      "miffy crown"
+    ]
   },
   {
     "id": "bandai-4582769979484",
@@ -9649,7 +9994,16 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "大喜",
+      "千夏",
+      "雛",
+      "針生",
+      "遊佐",
+      "菖蒲",
+      "夢佳"
+    ]
   },
   {
     "id": "bandai-4582769979804",
@@ -9688,7 +10042,13 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "初音ミク",
+      "鏡音リン",
+      "鏡音レン",
+      "KAITO"
+    ]
   },
   {
     "id": "bandai-4582769995279",
@@ -9723,7 +10083,10 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "miffy"
+    ]
   },
   {
     "id": "bandai-4582770026948",
@@ -9762,7 +10125,13 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ディズニー マリー",
+      "フィガロ",
+      "ルシファー",
+      "モチ"
+    ]
   },
   {
     "id": "bandai-4582770026955",
@@ -9802,7 +10171,11 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ニック・ワイルド",
+      "ジュディ・ホップス"
+    ]
   },
   {
     "id": "bandai-4582770026993",
@@ -9839,7 +10212,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ハローキティ",
+      "マイメロディ",
+      "マイスウィートピアノ",
+      "チャーミーキティ",
+      "マロンクリーム"
+    ]
   },
   {
     "id": "bandai-4582770027006",
@@ -9879,7 +10259,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "マイスウィートピアノ",
+      "ウィッシュミーメル",
+      "しろうさ",
+      "くろうさ",
+      "こぎみゅん"
+    ]
   },
   {
     "id": "bandai-4582770053814",
@@ -12382,7 +12769,8 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": []
   },
   {
     "id": "bandai-4582769817021",
@@ -12740,7 +13128,8 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": []
   },
   {
     "id": "bandai-4582769722660",
@@ -12872,7 +13261,12 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ブロッサム",
+      "バブルス",
+      "バターカップ"
+    ]
   },
   {
     "id": "bandai-4582769928567",
@@ -29787,7 +30181,7 @@
   {
     "id": "tarts-y909160",
     "name": "アニメ『呪術廻戦』5周年 でふぉラバ! キールホルダー",
-    "name_en": "",
+    "name_en": "Jujutsu Kaisen 5th Anniversary Defo Rubber! Keychain",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 300,
@@ -29817,22 +30211,24 @@
     "auto": true,
     "q_subs": [
       "cool:shonen",
-      "cool:dark"
+      "oshi:trend",
+      "type:charm"
     ],
     "q_ages": [
-      "10"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y910838",
     "name": "カプセルプラレール きかんしゃトーマス ふしぎないわのボルダー編",
-    "name_en": "",
+    "name_en": "Capsule Plarail Thomas & Friends Boulder the Mysterious Rock",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 300,
@@ -29867,24 +30263,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "real:vehicle"
+      "oshi:kids",
+      "real:vehicle",
+      "type:figure"
     ],
     "q_ages": [
-      "20",
       "30",
       "40"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y911422",
     "name": "夏目友人帳 ニャンコ先生まったりコレクション",
-    "name_en": "",
+    "name_en": "Natsume's Book of Friends Nyanko-sensei Relaxing Collection",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 300,
@@ -29910,23 +30306,25 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "kawaii:character",
+      "kawaii:animal",
+      "type:figure"
+    ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y098826",
     "name": "ひつじのショーン ゆらゆらつながるマスコット",
-    "name_en": "",
+    "name_en": "Shaun the Sheep Swaying Linking Mascot",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 300,
@@ -29950,25 +30348,23 @@
     "q_subs": [
       "kawaii:character",
       "kawaii:animal",
-      "kawaii:mascot",
-      "type:plush"
+      "type:plush",
+      "type:charm"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y903892",
     "name": "肩ズンFig. サンリオキャラクターズ 縁側のんびり",
-    "name_en": "",
+    "name_en": "Katazun Fig. Sanrio Characters Relaxing on the Veranda",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 400,
@@ -29996,24 +30392,22 @@
     "auto": true,
     "q_subs": [
       "kawaii:sanrio",
-      "type:figure",
-      "funny:machibouke"
+      "type:figure"
     ],
     "q_ages": [
       "10",
-      "20",
-      "30"
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y904233",
     "name": "サンリオキャラクターズ Yummy!スイーツマスコット チルサイダー",
-    "name_en": "",
+    "name_en": "Sanrio Characters Yummy! Sweets Mascot Chill Cider",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 400,
@@ -30042,24 +30436,24 @@
     "auto": true,
     "q_subs": [
       "kawaii:sanrio",
-      "kawaii:mascot",
-      "type:plush"
+      "real:food",
+      "type:plush",
+      "type:charm"
     ],
     "q_ages": [
       "10",
-      "20",
-      "30"
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y904448",
     "name": "ナイトメア・ビフォア・クリスマス ファッションリング",
-    "name_en": "",
+    "name_en": "The Nightmare Before Christmas Fashion Ring",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 300,
@@ -30089,27 +30483,24 @@
     "auto": true,
     "q_subs": [
       "kawaii:disney",
-      "kawaii:accessory",
-      "cool:western",
       "cool:dark",
       "type:fashion",
       "hobby:movie"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y904837",
     "name": "モアナと伝説の海 ゆらゆらつながるマスコット",
-    "name_en": "",
+    "name_en": "Moana Swaying Linking Mascot",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 400,
@@ -30137,25 +30528,25 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
-      "type:plush"
+      "kawaii:disney",
+      "hobby:movie",
+      "type:plush",
+      "type:charm"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y905568",
     "name": "ポケモン 30周年 メタルチャームマスコット ～アローラ、ガラル、パルデア～",
-    "name_en": "",
+    "name_en": "Pokémon 30th Anniversary Metal Charm Mascot -Alola, Galar, Paldea-",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 300,
@@ -30179,25 +30570,24 @@
     "auto": true,
     "q_subs": [
       "kawaii:pokemon",
-      "kawaii:mascot",
-      "kawaii:accessory",
-      "type:plush",
       "type:charm"
     ],
     "q_ages": [
       "10",
-      "20"
+      "20",
+      "30"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y905964",
     "name": "ベイマックス ぷくちゃーむ",
-    "name_en": "",
+    "name_en": "Baymax Puku Charm",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 400,
@@ -30222,23 +30612,26 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "kawaii:disney",
+      "hobby:movie",
+      "type:charm"
+    ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
     "id": "tarts-y907005",
     "name": "HAHAHA!Fig. ズートピア2",
-    "name_en": "",
+    "name_en": "HAHAHA! Fig. Zootopia 2",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 400,
@@ -30265,19 +30658,19 @@
     "auto": true,
     "q_subs": [
       "kawaii:disney",
-      "type:figure",
-      "hobby:movie"
+      "kawaii:animal",
+      "hobby:movie",
+      "type:figure"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true,
+    "tags_auto": false,
     "jan_checked": true
   },
   {
@@ -41540,7 +41933,7 @@
   {
     "id": "kitan-aitu-mingei",
     "name": "パンクドランカーズ あいつ民芸",
-    "name_en": "",
+    "name_en": "Punk Drunkers Aitsu Folk Craft",
     "maker": "キタンクラブ",
     "maker_en": "Kitan Club",
     "price": 500,
@@ -41560,7 +41953,10 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "real:food"
+      "kawaii:character",
+      "hobby:japan",
+      "funny:neta",
+      "type:figure"
     ],
     "q_ages": [
       "20",
@@ -41571,7 +41967,7 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "qualia-2052",
@@ -42341,7 +42737,7 @@
   {
     "id": "toyscabin-20261006-1503",
     "name": "【再販】踏切コレクション2",
-    "name_en": "",
+    "name_en": "[Reissue] Railroad Crossing Collection 2",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 500,
@@ -42361,22 +42757,25 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "real:miniature",
+      "real:vehicle",
+      "funny:neta"
+    ],
     "q_ages": [
       "20",
       "30",
       "40"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20261006-1502",
     "name": "業務スーパー ファブリックコレクション",
-    "name_en": "",
+    "name_en": "Gyomu Super Fabric Collection",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 400,
@@ -42396,22 +42795,25 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "hobby:brand",
+      "real:food",
+      "type:useful"
+    ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20261006-1501",
     "name": "刀剣乱舞ONLINE 刀帳フレームチャーム",
-    "name_en": "",
+    "name_en": "Touken Ranbu Online Token Register Frame Charm",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 300,
@@ -42434,25 +42836,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
-      "cool:weaponry",
       "oshi:game",
+      "cool:weaponry",
       "type:charm"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20261006-1500",
     "name": "TAKO ROBOT(タコロボ)",
-    "name_en": "",
+    "name_en": "TAKO ROBOT",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 500,
@@ -42475,22 +42875,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "cool:robot"
+      "type:figure",
+      "cool:robot",
+      "funny:neta"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
+      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20261006-1499",
     "name": "1/144サカバン戦車2",
-    "name_en": "",
+    "name_en": "1/144 Sakaban Tank 2",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 400,
@@ -42513,23 +42915,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "real:miniature"
+      "real:creature",
+      "real:vehicle",
+      "funny:neta",
+      "type:figure"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20261006-1498",
     "name": "LightBoy",
-    "name_en": "",
+    "name_en": "LightBoy",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 500,
@@ -42549,22 +42952,24 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "type:sound",
+      "funny:neta"
+    ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20261006-1497",
     "name": "仕事猫わっかチャーム",
-    "name_en": "",
+    "name_en": "Shigoto Neko Ring Charm",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 400,
@@ -42587,8 +42992,8 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "funny:neta",
       "kawaii:animal",
-      "kawaii:accessory",
       "type:charm"
     ],
     "q_ages": [
@@ -42597,14 +43002,15 @@
       "40"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20261006-1496",
     "name": "1/64 TOYOTA GR86",
-    "name_en": "",
+    "name_en": "1/64 TOYOTA GR86",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 500,
@@ -42627,7 +43033,8 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "real:miniature"
+      "real:miniature",
+      "real:vehicle"
     ],
     "q_ages": [
       "20",
@@ -42635,15 +43042,14 @@
       "40"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20260904-1488",
     "name": "YAMAHA バイクラバーキーホルダー レジェンド編",
-    "name_en": "",
+    "name_en": "YAMAHA Bike Rubber Keychain Legend Edition",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 400,
@@ -42664,23 +43070,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "real:vehicle",
+      "hobby:brand",
       "type:charm"
     ],
     "q_ages": [
-      "20",
       "30",
-      "40"
+      "40",
+      "50"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20260904-1487",
     "name": "ブラッククローバー アクリルキーチェーン",
-    "name_en": "",
+    "name_en": "Black Clover Acrylic Keychain",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 300,
@@ -42701,23 +43108,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "cool:shonen",
       "type:charm"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20260904-1486",
     "name": "魔王魂 サウンドボタンコレクション",
-    "name_en": "",
+    "name_en": "Maoudamashii Sound Button Collection",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 500,
@@ -42739,23 +43146,23 @@
     "auto": true,
     "q_subs": [
       "type:sound",
-      "hobby:music"
+      "hobby:music",
+      "funny:neta"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20260904-1485",
     "name": "ドラネッツ Vol2.5 海竜型アクアフィン+(プラス)",
-    "name_en": "",
+    "name_en": "Doranetz Vol.2.5 Sea Dragon Aquafin+",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 500,
@@ -42775,22 +43182,25 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "type:figure",
+      "cool:robot",
+      "real:creature"
+    ],
     "q_ages": [
+      "10",
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20260904-1484",
     "name": "電車の発車ベル スイッチコレクション5",
-    "name_en": "",
+    "name_en": "Train Departure Bell Switch Collection 5",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 500,
@@ -42811,20 +43221,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "real:vehicle"
+      "real:vehicle",
+      "type:sound"
     ],
     "q_ages": [
+      "30",
+      "40",
       "50"
     ],
     "q_genders": [
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20260904-1483",
     "name": "TOYOTOMI Rainbow ミニチュアストーブコレクション",
-    "name_en": "",
+    "name_en": "TOYOTOMI Rainbow Miniature Stove Collection",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 500,
@@ -42847,7 +43260,9 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "real:miniature"
+      "real:miniature",
+      "retro:showa",
+      "hobby:brand"
     ],
     "q_ages": [
       "30",
@@ -42858,12 +43273,12 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20260904-1482",
     "name": "仕事猫コインケース2",
-    "name_en": "",
+    "name_en": "Shigoto Neko Coin Case 2",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 400,
@@ -42884,6 +43299,7 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "funny:neta",
       "kawaii:animal",
       "type:useful"
     ],
@@ -42896,12 +43312,12 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20260904-1481",
     "name": "ラーメン赤猫 わっかチャーム",
-    "name_en": "",
+    "name_en": "Ramen Akaneko Ring Charm",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 400,
@@ -42924,24 +43340,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:trend",
       "kawaii:animal",
-      "kawaii:accessory",
       "type:charm"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20260904-1480",
     "name": "RAYSホイール メタルキーチェーン",
-    "name_en": "",
+    "name_en": "RAYS Wheel Metal Keychain",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 500,
@@ -42964,23 +43379,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "real:vehicle",
+      "hobby:brand",
       "type:charm"
     ],
     "q_ages": [
-      "20",
       "30",
       "40"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20260804-1470",
     "name": "探偵はもう、死んでいる。SEASON2 アクリルキーチェーン",
-    "name_en": "",
+    "name_en": "The Detective Is Already Dead Season 2 Acrylic Keychain",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 300,
@@ -43001,23 +43416,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:trend",
       "type:charm"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20260804-1469",
     "name": "やさしいおおかみ ウルフくん もこもこ刺繍ポーチ",
-    "name_en": "",
+    "name_en": "Yasashii Ookami Wolf-kun Fluffy Embroidered Pouch",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 400,
@@ -43038,23 +43452,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
+      "kawaii:animal",
       "type:useful"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20260803-1468",
     "name": "初音ミク GTプロジェクト ボンネットメタルキーホルダー",
-    "name_en": "",
+    "name_en": "Hatsune Miku GT Project Bonnet Metal Keychain",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 500,
@@ -43077,25 +43490,25 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "oshi:idol",
+      "oshi:vtuber",
+      "real:vehicle",
       "type:charm",
       "hobby:music"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10165",
     "name": "ジョジョの奇妙な冒険 ダイヤモンドは砕けない コレクションフィギュアRICH",
-    "name_en": "",
+    "name_en": "JoJo's Bizarre Adventure: Diamond Is Unbreakable Collection Figure RICH",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 500,
@@ -43127,14 +43540,15 @@
       "40"
     ],
     "q_genders": [
+      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10051",
     "name": "TVアニメ「その着せ替え人形は恋をする」Season 2 海夢がいっぱい みあげてすたぁマスコット",
-    "name_en": "",
+    "name_en": "My Dress-Up Darling Season 2 Lots of Marin Miagete Star Mascot",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 500,
@@ -43157,19 +43571,17 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
+      "oshi:trend",
       "type:plush"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10041",
@@ -43249,7 +43661,7 @@
   {
     "id": "bushicap-10270",
     "name": "勝利の女神：NIKKE カプセルラバーストラップ vol.4",
-    "name_en": "",
+    "name_en": "GODDESS OF VICTORY: NIKKE Capsule Rubber Strap Vol.4",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 400,
@@ -43270,20 +43682,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "oshi:game"
+      "oshi:game",
+      "type:charm"
     ],
     "q_ages": [
-      "20"
+      "20",
+      "30"
     ],
     "q_genders": [
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10267",
     "name": "TVアニメ「薫る花は凛と咲く」薫子がいっぱい カプセルラバーキーホルダー",
-    "name_en": "",
+    "name_en": "The Fragrant Flower Blooms with Dignity: Lots of Kaoruko Capsule Rubber Keychain",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 300,
@@ -43304,23 +43718,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:trend",
       "type:charm"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10258",
     "name": "『銀河特急 ミルキー☆サブウェイ』 みあげてすたぁ マスコット vol.1",
-    "name_en": "",
+    "name_en": "Milky☆Subway: The Galactic Limited Express Miagete Star Mascot Vol.1",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 500,
@@ -43343,24 +43757,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:trend",
       "kawaii:mascot",
       "type:plush"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10269",
     "name": "勝利の女神：NIKKE カプセルラバーストラップ vol.3",
-    "name_en": "",
+    "name_en": "GODDESS OF VICTORY: NIKKE Capsule Rubber Strap Vol.3",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 400,
@@ -43381,20 +43795,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "oshi:game"
+      "oshi:game",
+      "type:charm"
     ],
     "q_ages": [
-      "20"
+      "20",
+      "30"
     ],
     "q_genders": [
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10264",
     "name": "ダンガンロンパ１・２ Reload カプセルラバーキーホルダー vol.2",
-    "name_en": "",
+    "name_en": "Danganronpa 1・2 Reload Capsule Rubber Keychain Vol.2",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 300,
@@ -43415,23 +43831,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:game",
       "type:charm"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10256",
     "name": "NEEDY GIRL OVERDOSE 超てんちゃんとあめちゃんがいっぱい カプセルラバーキーホルダー",
-    "name_en": "",
+    "name_en": "NEEDY GIRL OVERDOSE Lots of OMGkawaiiAngel & Ame-chan Capsule Rubber Keychain",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 300,
@@ -43452,23 +43868,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:game",
       "type:charm"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10254",
     "name": "学園アイドルマスター むぎゅみにコレクションフィギュア vol.1",
-    "name_en": "",
+    "name_en": "Gakuen iDOLM@STER Mugyumini Collection Figure Vol.1",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 500,
@@ -43492,21 +43908,22 @@
     "auto": true,
     "q_subs": [
       "oshi:idol",
+      "oshi:game",
       "type:figure"
     ],
     "q_ages": [
-      "10",
-      "20"
+      "20",
+      "30"
     ],
     "q_genders": [
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10234",
     "name": "TVアニメ『マリッジトキシン』 ゆめぬい",
-    "name_en": "",
+    "name_en": "Marriagetoxin Yume Nui",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 500,
@@ -43527,24 +43944,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
+      "oshi:trend",
       "type:plush"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10221",
     "name": "SILENT HILL 2 コレクションフィギュアRICH",
-    "name_en": "",
+    "name_en": "SILENT HILL 2 Collection Figure RICH",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 500,
@@ -43567,6 +43982,8 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:game",
+      "cool:dark",
       "type:figure"
     ],
     "q_ages": [
@@ -43575,15 +43992,14 @@
       "40"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10175",
     "name": "ダンガンロンパ１・２ Reload カプセルラバーキーホルダー vol.1",
-    "name_en": "",
+    "name_en": "Danganronpa 1・2 Reload Capsule Rubber Keychain Vol.1",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 300,
@@ -43604,23 +44020,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:game",
       "type:charm"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10145",
     "name": "ブルーロック みあげてすたぁマスコットvol.2",
-    "name_en": "",
+    "name_en": "Blue Lock Miagete Star Mascot Vol.2",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 500,
@@ -43643,23 +44059,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
       "cool:shonen",
-      "type:plush"
+      "oshi:trend",
+      "type:plush",
+      "hobby:sports"
     ],
     "q_ages": [
-      "10"
+      "10",
+      "20"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10212",
     "name": "新種の生き物？クリオネにゃんこ フィギュアマーカー",
-    "name_en": "",
+    "name_en": "A New Species? Clione Nyanko Figure Marker",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 400,
@@ -43683,24 +44100,23 @@
     "auto": true,
     "q_subs": [
       "kawaii:animal",
-      "type:figure",
-      "real:creature"
+      "real:creature",
+      "type:figure"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10191",
     "name": "ICCHI フィギュアキーホルダー",
-    "name_en": "",
+    "name_en": "ICCHI Figure Keychain",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 400,
@@ -43723,24 +44139,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
       "type:figure",
-      "type:charm"
+      "type:charm",
+      "hobby:art"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10177",
     "name": "イナズマイレブン 英雄たちのヴィクトリーロード つながるぷちアクリルスタンド",
-    "name_en": "",
+    "name_en": "Inazuma Eleven: Victory Road Linking Petit Acrylic Stand",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 300,
@@ -43760,22 +44176,25 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "oshi:game",
+      "hobby:sports",
+      "type:stationery"
+    ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10166",
     "name": "ハイキュー!! みあげてすたぁマスコット 音駒高校",
-    "name_en": "",
+    "name_en": "Haikyu!! Miagete Star Mascot Nekoma High",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 500,
@@ -43798,24 +44217,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
       "cool:shonen",
+      "hobby:sports",
       "type:plush"
     ],
     "q_ages": [
       "10",
-      "20"
+      "20",
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10160",
     "name": "アニメ「ぼっち・ざ・ろっく！」 ゆめぬい",
-    "name_en": "",
+    "name_en": "Bocchi the Rock! Yume Nui",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 500,
@@ -43836,25 +44255,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
-      "oshi:idol",
       "oshi:trend",
-      "type:plush",
-      "hobby:music"
+      "hobby:music",
+      "type:plush"
     ],
     "q_ages": [
+      "10",
       "20"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "sota-form-series-cat-void",
     "name": "FORM Series Cat Void",
-    "name_en": "",
+    "name_en": "FORM Series Cat Void",
     "maker": "SO-TA",
     "maker_en": "SO-TA",
     "price": 500,
@@ -43873,22 +44291,25 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "kawaii:animal",
+      "type:figure",
+      "hobby:art"
+    ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "sota-lioncoffee-onepoint",
     "name": "ライオンコーヒー ワンポイントチャーム",
-    "name_en": "",
+    "name_en": "Lion Coffee One Point Charm",
     "maker": "SO-TA",
     "maker_en": "SO-TA",
     "price": 400,
@@ -43910,23 +44331,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
+      "hobby:brand",
+      "real:food",
       "type:charm"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "sota-fma-metal",
     "name": "鋼の錬金術師 FULLMETAL ALCHEMIST メタルチャームコレクション",
-    "name_en": "",
+    "name_en": "Fullmetal Alchemist Metal Charm Collection",
     "maker": "SO-TA",
     "maker_en": "SO-TA",
     "price": 500,
@@ -43949,7 +44370,6 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
       "cool:shonen",
       "type:charm"
     ],
@@ -43959,14 +44379,15 @@
       "40"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "sota-hamutarou-facepouch2",
     "name": "とっとこハム太郎 ふわふわフェイスポーチ2",
-    "name_en": "",
+    "name_en": "Hamtaro Fluffy Face Pouch 2",
     "maker": "SO-TA",
     "maker_en": "SO-TA",
     "price": 400,
@@ -43988,24 +44409,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
-      "kawaii:accessory",
-      "type:plush",
-      "type:useful",
-      "retro:heisei"
+      "kawaii:character",
+      "kawaii:animal",
+      "retro:heisei",
+      "type:useful"
     ],
     "q_ages": [
+      "20",
       "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "sota-hanamusic",
     "name": "ハナムシックつのぜみシリーズ さし美",
-    "name_en": "",
+    "name_en": "Hanamushikku Tsunozemi Series Sashimi",
     "maker": "SO-TA",
     "maker_en": "SO-TA",
     "price": 400,
@@ -44024,22 +44445,25 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "real:creature",
+      "hobby:art",
+      "type:figure"
+    ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "sota-eyebat-beast-oneup3",
     "name": "単眼コウモリ アイビー EYEBAT BEAST Oneup.限定版 ver.3",
-    "name_en": "",
+    "name_en": "Tangan Koumori Ivy EYEBAT BEAST Oneup. Limited Ver.3",
     "maker": "SO-TA",
     "maker_en": "SO-TA",
     "price": 500,
@@ -44058,22 +44482,26 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "kawaii:character",
+      "cool:dark",
+      "type:figure",
+      "hobby:art"
+    ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "sota-eyebat-beast3",
     "name": "単眼コウモリ アイビー EYEBAT BEAST 第3弾",
-    "name_en": "",
+    "name_en": "Tangan Koumori Ivy EYEBAT BEAST Vol.3",
     "maker": "SO-TA",
     "maker_en": "SO-TA",
     "price": 400,
@@ -44092,22 +44520,26 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "kawaii:character",
+      "cool:dark",
+      "type:figure",
+      "hobby:art"
+    ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "sota-sobikun",
     "name": "まゆげくまソビくん",
-    "name_en": "",
+    "name_en": "Mayuge Kuma Sobi-kun",
     "maker": "SO-TA",
     "maker_en": "SO-TA",
     "price": 400,
@@ -44127,18 +44559,18 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:animal"
+      "kawaii:character",
+      "kawaii:animal",
+      "hobby:art"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "sota-arawi-keiichi2",
@@ -44502,7 +44934,7 @@
   {
     "id": "kenele-gc0857z",
     "name": "うに ミニチュアコレクション",
-    "name_en": "",
+    "name_en": "Uni Miniature Collection",
     "maker": "ケンエレファント",
     "maker_en": "Kenelephant",
     "price": 500,
@@ -44524,23 +44956,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "real:miniature"
+      "real:miniature",
+      "hobby:art"
     ],
     "q_ages": [
-      "30",
-      "40",
-      "50"
+      "20",
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "kenele-gc0856z",
     "name": "MONKEY CRAB TINY REX フィギュアコレクション",
-    "name_en": "",
+    "name_en": "MONKEY CRAB TINY REX Figure Collection",
     "maker": "ケンエレファント",
     "maker_en": "Kenelephant",
     "price": 500,
@@ -44563,23 +44995,23 @@
     "auto": true,
     "q_subs": [
       "type:figure",
-      "real:miniature"
+      "real:dino",
+      "hobby:art"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "kenele-gc0858c",
     "name": "mojojojo Todd Friends pouch Vol.2",
-    "name_en": "",
+    "name_en": "mojojojo Todd Friends Pouch Vol.2",
     "maker": "ケンエレファント",
     "maker_en": "Kenelephant",
     "price": 500,
@@ -44599,23 +45031,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "retro:heisei"
+      "kawaii:character",
+      "type:useful",
+      "hobby:art"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "kenele-gc0848z",
     "name": "そねぽん グッズコレクション",
-    "name_en": "",
+    "name_en": "Sonepon Goods Collection",
     "maker": "ケンエレファント",
     "maker_en": "Kenelephant",
     "price": 400,
@@ -44634,22 +45066,23 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "kawaii:character",
+      "hobby:art"
+    ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "kenele-gc0841z",
     "name": "boiboi プラネット ネンネ フィギュアマスコット",
-    "name_en": "",
+    "name_en": "boiboi Planet Nenne Figure Mascot",
     "maker": "ケンエレファント",
     "maker_en": "Kenelephant",
     "price": 500,
@@ -44672,25 +45105,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
       "type:figure",
-      "type:plush"
+      "kawaii:mascot",
+      "hobby:art"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "kenele-gc0853z",
     "name": "おいろっぷ フィギュアストラップ",
-    "name_en": "",
+    "name_en": "Oirop Figure Strap",
     "maker": "ケンエレファント",
     "maker_en": "Kenelephant",
     "price": 500,
@@ -44712,23 +45143,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "type:figure"
+      "type:figure",
+      "type:charm",
+      "kawaii:character",
+      "hobby:art"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "kenele-gc0842",
     "name": "Victor グッズコレクション",
-    "name_en": "",
+    "name_en": "Victor Goods Collection",
     "maker": "ケンエレファント",
     "maker_en": "Kenelephant",
     "price": 400,
@@ -44747,22 +45179,24 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "hobby:art",
+      "kawaii:character"
+    ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "kenele-gc0852z",
     "name": "PEPOTARO フィギュアコレクション",
-    "name_en": "",
+    "name_en": "PEPOTARO Figure Collection",
     "maker": "ケンエレファント",
     "maker_en": "Kenelephant",
     "price": 500,
@@ -44785,23 +45219,22 @@
     "auto": true,
     "q_subs": [
       "type:figure",
-      "real:miniature"
+      "hobby:art"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "kenele-gc0849c",
     "name": "デハラユキノリ JIZO- マスコットチャーム",
-    "name_en": "",
+    "name_en": "Yukinori Dehara JIZO- Mascot Charm",
     "maker": "ケンエレファント",
     "maker_en": "Kenelephant",
     "price": 500,
@@ -44823,10 +45256,10 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
-      "kawaii:accessory",
-      "type:plush",
-      "type:charm"
+      "type:charm",
+      "hobby:art",
+      "hobby:japan",
+      "funny:neta"
     ],
     "q_ages": [
       "20",
@@ -44834,14 +45267,15 @@
       "40"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "kenele-gc0851z",
     "name": "中島ミドリ タイニーストレンジガールズ フィギュリーン",
-    "name_en": "",
+    "name_en": "Midori Nakajima Tiny Strange Girls Figurine",
     "maker": "ケンエレファント",
     "maker_en": "Kenelephant",
     "price": 500,
@@ -44860,22 +45294,24 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "type:figure",
+      "hobby:art"
+    ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "kenele-gc0850",
     "name": "クインテット グッズコレクション",
-    "name_en": "",
+    "name_en": "Quintet Goods Collection",
     "maker": "ケンエレファント",
     "maker_en": "Kenelephant",
     "price": 500,
@@ -44894,22 +45330,24 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "hobby:art",
+      "kawaii:character"
+    ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "kenele-gc0859z",
     "name": "ヒラツカニツト フィギュアマスコット",
-    "name_en": "",
+    "name_en": "Hiratsuka Nitsuto Figure Mascot",
     "maker": "ケンエレファント",
     "maker_en": "Kenelephant",
     "price": 500,
@@ -44932,25 +45370,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
       "type:figure",
-      "type:plush"
+      "kawaii:mascot",
+      "hobby:art"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "kenele-gc0844z",
     "name": "福田利之 どうぶつたちのとなり",
-    "name_en": "",
+    "name_en": "Toshiyuki Fukuda Next to the Animals",
     "maker": "ケンエレファント",
     "maker_en": "Kenelephant",
     "price": 500,
@@ -44969,22 +45406,24 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "hobby:art",
+      "kawaii:animal"
+    ],
     "q_ages": [
       "20",
       "30",
       "40"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "kenele-gc0845",
     "name": "タイムトラベルシリーズ 手塚治虫キャラクターズ コインケース",
-    "name_en": "",
+    "name_en": "Time Travel Series Osamu Tezuka Characters Coin Case",
     "maker": "ケンエレファント",
     "maker_en": "Kenelephant",
     "price": 400,
@@ -45004,23 +45443,25 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "hobby:books",
+      "retro:showa",
       "type:useful"
     ],
     "q_ages": [
-      "20",
       "30",
-      "40"
+      "40",
+      "50"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "kenele-gc0854z",
     "name": "野球少年 フィギュアマスコット",
-    "name_en": "",
+    "name_en": "Baseball Boy Figure Mascot",
     "maker": "ケンエレファント",
     "maker_en": "Kenelephant",
     "price": 500,
@@ -45043,9 +45484,7 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
       "type:figure",
-      "type:plush",
       "hobby:sports"
     ],
     "q_ages": [
@@ -45054,15 +45493,14 @@
       "40"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "kenele-gc0846z",
     "name": "ぽっこし グッズコレクション 第2弾",
-    "name_en": "",
+    "name_en": "Pokkoshi Goods Collection Vol.2",
     "maker": "ケンエレファント",
     "maker_en": "Kenelephant",
     "price": 400,
@@ -45081,22 +45519,23 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "kawaii:character",
+      "hobby:art"
+    ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "kenele-gc0678z",
     "name": "おぱんつ君 フィギュアコレクション",
-    "name_en": "",
+    "name_en": "Opantsu-kun Figure Collection",
     "maker": "ケンエレファント",
     "maker_en": "Kenelephant",
     "price": 500,
@@ -45119,23 +45558,23 @@
     "auto": true,
     "q_subs": [
       "type:figure",
-      "real:miniature"
+      "funny:neta",
+      "hobby:art"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "kenele-gc0319z",
     "name": "umao Figure Collection",
-    "name_en": "",
+    "name_en": "umao Figure Collection",
     "maker": "ケンエレファント",
     "maker_en": "Kenelephant",
     "price": 500,
@@ -45154,22 +45593,24 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "type:figure",
+      "kawaii:character",
+      "hobby:art"
+    ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20260803-1467",
     "name": "幸柴",
-    "name_en": "",
+    "name_en": "Sachi Shiba",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 400,
@@ -45189,22 +45630,25 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "kawaii:animal",
+      "type:figure",
+      "hobby:japan"
+    ],
     "q_ages": [
       "20",
       "30",
       "40"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20260803-1466",
     "name": "ゼンマイでうごく!トコトコ仕事猫",
-    "name_en": "",
+    "name_en": "Wind-up Walking Shigoto Neko",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 400,
@@ -45225,7 +45669,9 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:animal"
+      "funny:neta",
+      "kawaii:animal",
+      "type:figure"
     ],
     "q_ages": [
       "20",
@@ -45236,12 +45682,12 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20260803-1465",
     "name": "1/64 サニートラックコレクション3",
-    "name_en": "",
+    "name_en": "1/64 Sunny Truck Collection 3",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 500,
@@ -45268,20 +45714,19 @@
       "real:vehicle"
     ],
     "q_ages": [
-      "20",
       "30",
-      "40"
+      "40",
+      "50"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20260803-1464",
     "name": "カプセルカンヅメカVol.3トリカンメカ",
-    "name_en": "",
+    "name_en": "Capsule Kanzumeka Vol.3 Torikan Mecha",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 500,
@@ -45302,22 +45747,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "cool:robot"
+      "cool:robot",
+      "real:creature",
+      "type:figure"
     ],
     "q_ages": [
+      "10",
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20260803-1463",
     "name": "めっちゃカメレオン わっかチャーム",
-    "name_en": "",
+    "name_en": "Meccha Chameleon Ring Charm",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 300,
@@ -45340,23 +45787,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
+      "kawaii:animal",
+      "real:creature",
       "type:charm"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20260728-1461",
     "name": "春秋戦国大戦キングダム ミニチュア軍旗コレクション",
-    "name_en": "",
+    "name_en": "Kingdom Sengoku Taisen Miniature Battle Flag Collection",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 400,
@@ -45381,22 +45829,23 @@
     "q_subs": [
       "cool:shonen",
       "cool:weaponry",
+      "oshi:game",
       "real:miniature"
     ],
     "q_ages": [
+      "20",
       "30",
-      "40",
-      "50"
+      "40"
     ],
     "q_genders": [
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20260706-1455",
     "name": "「青春ブタ野郎」シリーズアクリルフォトキーチェーン",
-    "name_en": "",
+    "name_en": "Rascal Does Not Dream Series Acrylic Photo Keychain",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 400,
@@ -45417,23 +45866,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:trend",
       "type:charm"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20260701-1453",
     "name": "【再販】パトライト回転灯コレクション",
-    "name_en": "",
+    "name_en": "[Reissue] PATLITE Rotating Beacon Collection",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 500,
@@ -45454,8 +45902,9 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "type:useful",
-      "type:sound"
+      "real:miniature",
+      "type:sound",
+      "funny:neta"
     ],
     "q_ages": [
       "20",
@@ -45463,15 +45912,14 @@
       "40"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20260701-1452",
     "name": "BlueBell たぬき日和マスコットキーホルダー",
-    "name_en": "",
+    "name_en": "BlueBell Tanuki Biyori Mascot Keychain",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 400,
@@ -45494,25 +45942,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:animal",
       "kawaii:mascot",
-      "type:plush",
       "type:charm"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20260701-1451",
     "name": "業務スーパーのしゃかしゃかわっかチャーム",
-    "name_en": "",
+    "name_en": "Gyomu Super Shaka Shaka Ring Charm",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 300,
@@ -45535,23 +45981,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
+      "hobby:brand",
+      "real:food",
       "type:charm"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20260701-1450",
     "name": "1/64 HONDA CB400SF/Rebel 250 フィギュアキーホルダー",
-    "name_en": "",
+    "name_en": "1/64 HONDA CB400SF/Rebel 250 Figure Keychain",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 500,
@@ -45575,20 +46022,20 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "type:figure",
-      "type:charm",
-      "real:miniature"
+      "real:vehicle",
+      "real:miniature",
+      "hobby:brand",
+      "type:charm"
     ],
     "q_ages": [
-      "20",
       "30",
-      "40"
+      "40",
+      "50"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20260609-1436",
@@ -45942,7 +46389,7 @@
   {
     "id": "bushicap-10158",
     "name": "平成ファンシー ミニデニムペンケース",
-    "name_en": "",
+    "name_en": "Heisei Fancy Mini Denim Pen Case",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 500,
@@ -45963,24 +46410,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "retro:heisei",
       "type:stationery",
       "type:useful"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10156",
     "name": "TVアニメ「薫る花は凛と咲く」 ゆめぬい",
-    "name_en": "",
+    "name_en": "The Fragrant Flower Blooms with Dignity Yume Nui",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 500,
@@ -46001,24 +46447,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
+      "oshi:trend",
       "type:plush"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10144",
     "name": "ブルーロック みあげてすたぁマスコットvol.1",
-    "name_en": "",
+    "name_en": "Blue Lock Miagete Star Mascot Vol.1",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 500,
@@ -46041,23 +46486,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
       "cool:shonen",
-      "type:plush"
+      "oshi:trend",
+      "type:plush",
+      "hobby:sports"
     ],
     "q_ages": [
-      "10"
+      "10",
+      "20"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10136",
     "name": "TVアニメ「薫る花は凛と咲く」 カプセルラバーキーホルダー",
-    "name_en": "",
+    "name_en": "The Fragrant Flower Blooms with Dignity Capsule Rubber Keychain",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 300,
@@ -46078,23 +46524,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:trend",
       "type:charm"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10153",
     "name": "『楽園追放 心のレゾナンス』 カプセル缶バッジ",
-    "name_en": "",
+    "name_en": "Expelled from Paradise: Resonance from the Heart Capsule Can Badge",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 300,
@@ -46115,7 +46561,9 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory"
+      "oshi:trend",
+      "hobby:movie",
+      "type:stationery"
     ],
     "q_ages": [
       "20",
@@ -46123,15 +46571,14 @@
       "40"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10150",
     "name": "ハイキュー!! みあげてすたぁマスコット 青葉城西高校・白鳥沢学園高校",
-    "name_en": "",
+    "name_en": "Haikyu!! Miagete Star Mascot Aoba Johsai High & Shiratorizawa Academy",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 500,
@@ -46154,25 +46601,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
       "cool:shonen",
-      "cool:weaponry",
+      "hobby:sports",
       "type:plush"
     ],
     "q_ages": [
       "10",
-      "20"
+      "20",
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10129",
     "name": "アニメ「グロウアップショウ ～ひまわりのサーカス団～」 カプセルラバーキーホルダー",
-    "name_en": "",
+    "name_en": "Grow-up Show: Himawari no Circus-dan Capsule Rubber Keychain",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 300,
@@ -46193,23 +46639,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:trend",
       "type:charm"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10123",
     "name": "いーすとけん。 パンのかご入りフィギュア",
-    "name_en": "",
+    "name_en": "Eastken. Figure in Bread Basket",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 400,
@@ -46232,25 +46678,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:character",
-      "type:figure",
-      "real:food"
+      "oshi:vtuber",
+      "real:food",
+      "type:figure"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10122",
     "name": "MyGO!!!!! 額縁アートコレクション",
-    "name_en": "",
+    "name_en": "MyGO!!!!! Framed Art Collection",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 400,
@@ -46272,22 +46717,23 @@
     "auto": true,
     "q_subs": [
       "oshi:idol",
-      "oshi:trend",
-      "hobby:music"
+      "hobby:music",
+      "hobby:art"
     ],
     "q_ages": [
+      "10",
       "20"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10121",
     "name": "NEEDY GIRL OVERDOSE コレクションフィギュアRICH",
-    "name_en": "",
+    "name_en": "NEEDY GIRL OVERDOSE Collection Figure RICH",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 500,
@@ -46310,23 +46756,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:game",
       "type:figure"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10109",
     "name": "デュラハンボーイDulla コレクションフィギュア",
-    "name_en": "",
+    "name_en": "Dullahan Boy Dulla Collection Figure",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 500,
@@ -46349,23 +46795,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "type:figure"
+      "kawaii:character",
+      "type:figure",
+      "hobby:art"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10092",
     "name": "アニメ「ぼっち・ざ・ろっく！」 ぼっちちゃんがいっぱいフィギュアvol.3",
-    "name_en": "",
+    "name_en": "Bocchi the Rock! Lots of Bocchi-chan Figure Vol.3",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 500,
@@ -46388,24 +46834,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "oshi:idol",
       "oshi:trend",
-      "type:figure",
-      "hobby:music"
+      "hobby:music",
+      "type:figure"
     ],
     "q_ages": [
+      "10",
       "20"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10249",
     "name": "ラブライブ！シリーズ オフィシャルカードゲーム ミニアクリルスタンドマーカー",
-    "name_en": "",
+    "name_en": "Love Live! Series Official Card Game Mini Acrylic Stand Marker",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 500,
@@ -46427,20 +46873,22 @@
     "auto": true,
     "q_subs": [
       "oshi:idol",
-      "hobby:music"
+      "oshi:game",
+      "type:stationery"
     ],
     "q_ages": [
+      "10",
       "20"
     ],
     "q_genders": [
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10186",
     "name": "ねこぉひ～2 コレクションフィギュア",
-    "name_en": "",
+    "name_en": "Nekoohii 2 Collection Figure",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 400,
@@ -46468,19 +46916,17 @@
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10185",
     "name": "BanG Dream! Ave Mujica ゆめぬい",
-    "name_en": "",
+    "name_en": "BanG Dream! Ave Mujica Yume Nui",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 500,
@@ -46501,25 +46947,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
       "oshi:idol",
+      "hobby:music",
       "type:plush"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10184",
     "name": "BanG Dream! It’s MyGO!!!!! ゆめぬい",
-    "name_en": "",
+    "name_en": "BanG Dream! It's MyGO!!!!! Yume Nui",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 500,
@@ -46540,25 +46985,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
       "oshi:idol",
-      "oshi:trend",
-      "type:plush",
-      "hobby:music"
+      "hobby:music",
+      "type:plush"
     ],
     "q_ages": [
+      "10",
       "20"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10149",
     "name": "Ave Mujica 額縁アートコレクション",
-    "name_en": "",
+    "name_en": "Ave Mujica Framed Art Collection",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 400,
@@ -46578,22 +47022,25 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "oshi:idol",
+      "hobby:music",
+      "hobby:art"
+    ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10094",
     "name": "おすわりちゃんズ BOOK",
-    "name_en": "",
+    "name_en": "Osuwari-chans BOOK",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 400,
@@ -46613,22 +47060,24 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "kawaii:character",
+      "kawaii:animal",
+      "type:stationery"
+    ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10091",
     "name": "がんばれゴエモン タイトルロゴ大集合！カプセルラバーキーホルダーArt",
-    "name_en": "",
+    "name_en": "Ganbare Goemon Title Logo Collection! Capsule Rubber Keychain Art",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 400,
@@ -46649,23 +47098,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:game",
+      "retro:heisei",
       "type:charm"
     ],
     "q_ages": [
-      "20",
       "30",
       "40"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10089",
     "name": "魔法少女リリカルなのは EXCEEDS Gun Blaze Vengeance カプセルラバーキーホルダー",
-    "name_en": "",
+    "name_en": "Magical Girl Lyrical Nanoha EXCEEDS Gun Blaze Vengeance Capsule Rubber Keychain",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 300,
@@ -46686,23 +47135,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:girls",
       "type:charm"
     ],
     "q_ages": [
-      "20",
       "30",
       "40"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "kenele-gc0591c",
     "name": "ノラネコぐんだん ミニチュアフィギュア 第4弾 コンプリートBOX",
-    "name_en": "",
+    "name_en": "Nora Neko Gundan Miniature Figure Vol.4 Complete Box",
     "maker": "ケンエレファント",
     "maker_en": "Kenelephant",
     "price": 500,
@@ -46726,23 +47174,24 @@
     "auto": true,
     "q_subs": [
       "type:figure",
-      "real:miniature"
+      "kawaii:animal",
+      "hobby:books"
     ],
     "q_ages": [
+      "20",
       "30",
-      "40",
-      "50"
+      "40"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "kenele-gc0684c",
     "name": "にしこはりこ SHONBEN BOYS ミニチュアコレクション",
-    "name_en": "",
+    "name_en": "Nishiko Hariko SHONBEN BOYS Miniature Collection",
     "maker": "ケンエレファント",
     "maker_en": "Kenelephant",
     "price": 500,
@@ -46764,23 +47213,26 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "real:miniature"
+      "type:figure",
+      "funny:neta",
+      "hobby:art",
+      "hobby:japan"
     ],
     "q_ages": [
+      "20",
       "30",
-      "40",
-      "50"
+      "40"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "kenele-gc0720z",
     "name": "快獣ブースカ カラフルフロッキー コレクション コンプリートBOX",
-    "name_en": "",
+    "name_en": "Kaiju Booska Colorful Flocked Collection Complete Box",
     "maker": "ケンエレファント",
     "maker_en": "Kenelephant",
     "price": 500,
@@ -46800,23 +47252,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "type:plush"
+      "cool:hero",
+      "retro:showa",
+      "type:figure"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "40",
+      "50"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "kenele-gc0787z",
     "name": "mojojojo まんまる おかおポーチ Pastel Ver.",
-    "name_en": "",
+    "name_en": "mojojojo Round Face Pouch Pastel Ver.",
     "maker": "ケンエレファント",
     "maker_en": "Kenelephant",
     "price": 500,
@@ -46836,19 +47289,18 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
+      "kawaii:character",
       "type:useful",
-      "retro:heisei"
+      "hobby:art"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20260501-1422",
@@ -47345,7 +47797,7 @@
   {
     "id": "bushicap-10086",
     "name": "平成ファンシー フィギュアキーホルダー",
-    "name_en": "",
+    "name_en": "Heisei Fancy Figure Keychain",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 400,
@@ -47368,24 +47820,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "retro:heisei",
+      "kawaii:character",
       "type:figure",
       "type:charm"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10085",
     "name": "ジョジョの奇妙な冒険 スターダストクルセイダース コレクションフィギュアRICH",
-    "name_en": "",
+    "name_en": "JoJo's Bizarre Adventure: Stardust Crusaders Collection Figure RICH",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 500,
@@ -47417,14 +47869,15 @@
       "40"
     ],
     "q_genders": [
+      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10083",
     "name": "New PANTY ＆ STOCKING with GARTERBELT コレクションフィギュアRICH",
-    "name_en": "",
+    "name_en": "New PANTY & STOCKING with GARTERBELT Collection Figure RICH",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 500,
@@ -47447,23 +47900,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:trend",
       "type:figure"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10073",
     "name": "夢限大みゅーたいぷ ゆめぬい",
-    "name_en": "",
+    "name_en": "Mugendai Mewtype Yume Nui",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 500,
@@ -47484,24 +47936,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
+      "oshi:idol",
+      "hobby:music",
       "type:plush"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10063",
     "name": "ハイキュー!! みあげてすたぁマスコット 烏野高校 vol.2",
-    "name_en": "",
+    "name_en": "Haikyu!! Miagete Star Mascot Karasuno High Vol.2",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 500,
@@ -47524,24 +47976,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
       "cool:shonen",
+      "hobby:sports",
       "type:plush"
     ],
     "q_ages": [
       "10",
-      "20"
+      "20",
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10052",
     "name": "メゾピアノ ぷちぬいぐるみキーホルダー",
-    "name_en": "",
+    "name_en": "mezzo piano Petit Plush Keychain",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 500,
@@ -47564,23 +48016,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
+      "retro:heisei",
+      "kawaii:character",
       "type:plush",
-      "type:charm",
-      "retro:heisei"
+      "type:charm"
     ],
     "q_ages": [
+      "20",
       "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-9997",
     "name": "ワンパンマン カプセルラバーキーホルダー",
-    "name_en": "",
+    "name_en": "One-Punch Man Capsule Rubber Keychain",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 300,
@@ -47601,24 +48054,22 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "type:charm",
-      "real:food"
+      "cool:shonen",
+      "type:charm"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10246",
     "name": "KAZU GAMES 木製3wayチャーム",
-    "name_en": "",
+    "name_en": "KAZU GAMES Wooden 3-way Charm",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 400,
@@ -47641,23 +48092,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
+      "oshi:vtuber",
+      "oshi:game",
       "type:charm"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10179",
     "name": "カードファイト!! ヴァンガード Divinez ミニアクリルスタンドマーカー カードイラストver.",
-    "name_en": "",
+    "name_en": "Cardfight!! Vanguard Divinez Mini Acrylic Stand Marker Card Illustration Ver.",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 550,
@@ -47677,17 +48129,19 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "oshi:game",
+      "type:stationery"
+    ],
     "q_ages": [
+      "10",
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10127",
