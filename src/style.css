@@ -268,6 +268,12 @@ main { padding-block: 0 96px; }
 /* ---------- item page ---------- */
 .item { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; padding-top: 32px; }
 @media (max-width: 820px) { .item { grid-template-columns: minmax(0, 1fr); gap: 28px; } }
+/* スマホ：写真を小さめにして、名前と値段がすぐ見えるように */
+@media (max-width: 820px) {
+  .item { gap: 16px; padding-top: 16px; }
+  .item > div:first-child .thumb { max-width: 240px; margin: 0 auto; }
+  .item > div:first-child .thumb:has(.capsule) { max-width: 160px; }
+}
 .item h1 { font-size: clamp(24px, 3.4vw, 34px); margin-top: 6px; }
 .price { margin-top: 20px; display: flex; align-items: baseline; gap: 10px; }
 .price small { font-size: 13px; color: var(--muted); }
@@ -296,7 +302,7 @@ main { padding-block: 0 96px; }
 .stores .s-addr { font-size: 12px; color: var(--muted); grid-column: 1; }
 .stores .s-right { grid-row: 1 / span 2; grid-column: 2; text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
 .stores .s-dist { font: 600 20px/1 var(--font-latin); color: var(--gold); font-variant-numeric: tabular-nums; }
-.pill { font-size: 11px; padding: 2px 10px; border-radius: 999px; border: 1px solid currentColor; white-space: nowrap; }
+.pill { font-size: 12px; padding: 2px 10px; border-radius: 999px; border: 1px solid currentColor; white-space: nowrap; }
 .pill.in_stock { color: var(--ok); }
 .pill.few { color: var(--warn); }
 .pill.out_of_stock { color: var(--off); }
@@ -743,8 +749,11 @@ label.opt:focus-within { outline: none; }
   .site-header .nav a { font-size: 13.5px; }
 }
 @media (max-width: 960px) {
-  .site-header .nav { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
-  .site-header .nav a { text-align: center; font-size: 11.5px; letter-spacing: 0; padding: 6px 2px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); white-space: normal; line-height: 1.25; display: flex; align-items: center; justify-content: center; min-height: 38px; }
+  /* スマホ：メニューは横にスクロールする1行に（右端をうすくして、続きがあるとわかるように） */
+  .site-header .wrap { padding-block: 10px 8px; gap: 8px 12px; }
+  .site-header .nav { display: flex; overflow-x: auto; gap: 6px; scrollbar-width: none; -webkit-overflow-scrolling: touch; scroll-snap-type: x proximity; padding: 2px 24px 2px 0; -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent); }
+  .site-header .nav::-webkit-scrollbar { display: none; }
+  .site-header .nav a { flex: 0 0 auto; scroll-snap-align: start; text-align: center; font-size: 12px; letter-spacing: 0; padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); white-space: nowrap; line-height: 1.25; display: flex; align-items: center; justify-content: center; min-height: 36px; }
   .site-header .nav a[aria-current="page"] { border-color: var(--gold); }
 }
 
@@ -811,7 +820,7 @@ label.opt:focus-within { outline: none; }
 .row-scroll > .card { flex: 0 0 150px; scroll-snap-align: start; gap: 6px; }
 @media (min-width: 901px) { .row-scroll > .card { flex-basis: calc((100% - 60px) / 6); } }
 .row-scroll .card-name { font-size: 12.5px; line-height: 1.45; }
-.row-scroll .card-meta, .row-scroll .card-foot { font-size: 11px; }
+.row-scroll .card-meta, .row-scroll .card-foot { font-size: 12px; }
 .row-scroll .card:hover { transform: none; }
 
 /* 発売カレンダー（週ごと） */
@@ -819,7 +828,7 @@ label.opt:focus-within { outline: none; }
 .wg-row { display: grid; grid-template-columns: 58px repeat(6, minmax(0, 1fr)); gap: 6px; align-items: stretch; }
 .wg-row > * { display: grid; justify-items: center; align-content: center; gap: 2px; min-width: 0; padding: 8px 2px; border-radius: 12px; text-decoration: none; color: var(--text); line-height: 1.1; text-align: center; }
 .wg-row b { font-size: 14px; white-space: nowrap; }
-.wg-row small { font-size: 10.5px; color: var(--muted); font-family: var(--font-latin), sans-serif; white-space: nowrap; }
+.wg-row small { font-size: 11px; color: var(--muted); font-family: var(--font-latin), sans-serif; white-space: nowrap; }
 .wg-row i { font-style: normal; font-size: 11px; font-weight: 700; color: var(--pink, #ff7eb6); }
 .wg-row a { background: var(--bg); border: 1.5px solid var(--line); }
 .wg-row a:hover { border-color: var(--pink, #ff7eb6); }
@@ -842,7 +851,7 @@ label.opt:focus-within { outline: none; }
   .wg-row { grid-template-columns: 40px repeat(6, minmax(0, 1fr)); gap: 4px; }
   .wg-row > * { padding: 7px 1px; border-radius: 10px; }
   .wg-row b { font-size: 12px; }
-  .wg-row small { font-size: 9px; }
+  .wg-row small { font-size: 11px; }
   .wg-row i { font-size: 10px; }
   .wg-row .wg-month b { font-size: 14px; }
 }
@@ -901,7 +910,7 @@ label.opt:focus-within { outline: none; }
 /* カレンダーの小さいカード：週の見出しに「今週」があるので、カードの「今週発売」などは出さない。値段・種類数は1行に */
 .cal-card .card-foot > .rel-st { display: none; }
 .cal-card .card-foot > span:first-child { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.cal-wlink { font-size: 12px; font-weight: 700; color: var(--accent, #ff5c8a); text-decoration: none; white-space: nowrap; }
+.cal-wlink { display: inline-flex; align-items: center; min-height: 32px; font-size: 12px; font-weight: 700; color: var(--accent, #ff5c8a); text-decoration: none; white-space: nowrap; }
 .cal-wlink:hover { text-decoration: underline; }
 
 /* ---------- 一覧ページ（週ごと・シリーズ・再販・値段：src/hubs.js） ---------- */
@@ -988,10 +997,10 @@ body { font-variant-numeric: tabular-nums lining-nums; }
 .logo-b3 { flex-direction: row; align-items: center; gap: 8px; text-decoration: none; }
 .logo-pl { width: 40px; height: 40px; flex: none; }
 .logo-txt { display: flex; flex-direction: column; line-height: 1.05; }
-.logo-small { font: 700 10.5px/1 var(--font-logo); letter-spacing: .32em; color: #a855f7; margin-bottom: 3px; }
+.logo-small { font: 700 12px/1 var(--font-logo); letter-spacing: .32em; color: #a855f7; margin-bottom: 3px; }
 .logo-main { font: 900 25px/1.1 "Zen Maru Gothic", sans-serif; letter-spacing: .04em; background: linear-gradient(90deg, #ff4f7b, #a855f7 55%, #3aa0ff); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 2px 0 rgba(168, 85, 247, .25)); }
 .logo-main-en { font: 700 24px/1.1 var(--font-logo); letter-spacing: .03em; }
-@media (max-width: 600px) { .logo-pl { width: 32px; height: 32px; } .logo-main { font-size: 21px; } .logo-small { font-size: 9px; letter-spacing: .26em; } }
+@media (max-width: 600px) { .logo-pl { width: 32px; height: 32px; } .logo-main { font-size: 21px; } .logo-small { font-size: 12px; letter-spacing: .2em; } }
 
 /* 商品ページ：通販・フリマのリンクとJANコード */
 .shop-links { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 12px; }
@@ -1044,8 +1053,11 @@ body { font-variant-numeric: tabular-nums lining-nums; }
 .item-qa dd::before { content: "A. "; font-weight: 800; color: var(--text); }
 
 /* カードの発売状態 */
-.rel-st { font-style: normal; font-size: 11.5px; font-weight: 800; color: var(--text-2); }
+.rel-st { font-style: normal; font-size: 12px; font-weight: 800; color: var(--text-2); white-space: nowrap; }
 em.rel-st { padding: 2px 8px; border-radius: 999px; }
+/* 英語などで「This week」「/ 5 designs」が2行に折れないように */
+.card-foot { align-items: center; }
+.card-foot span, .card-meta span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .rel-now { background: #ff5c8a; color: #fff !important; }
 .rel-soon { background: #e8f3ff; color: #1f6fd1 !important; }
 .sl-ebay { border-color: #e53238; color: #0064d2; }
@@ -1227,3 +1239,39 @@ p.hero-lead { font-size: clamp(15px, 1.7vw, 20px); font-weight: 700; color: var(
 .st-tops li b { margin-left: 8px; font: 700 13px var(--font-latin); color: var(--muted); }
 .st-two { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; }
 @media (max-width: 640px) { .st-two { grid-template-columns: 1fr; } .st-kpis { gap: 6px; } .st-kpis > div { padding: 10px; } }
+
+/* ---------- スマホの見やすさ：押しやすい大きさ・折り返し・在庫リストの続き ---------- */
+.grp-more { padding: 8px 0; min-height: 32px; }
+.k-check { min-height: 32px; display: flex; align-items: center; gap: 8px; }
+.k-check input { width: 20px; height: 20px; }
+.cal-card .card-fav { width: 26px; height: 26px; font-size: 14px; top: 4px; right: 4px; }
+/* 週のボタン：日付の決まった週がまだない月は、1マスにまとめる */
+.wg-row > * { overflow: hidden; }
+.wg-row .wg-span { grid-column: 2 / -1; justify-items: start; padding-inline: 12px; }
+.wg-row .wg-span b { font-size: 13px; white-space: normal; text-align: left; }
+/* 商品ページ：在庫店リストの「残り◯店を見る」と、近くにないときの案内 */
+.stock-more { display: block; width: 100%; margin: 10px 0 0; }
+.stock-alt { margin: 12px 0 0; font-size: 13px; line-height: 1.7; color: var(--text-2); }
+.stock-alt a { font-weight: 700; color: var(--gold-soft); border-bottom: 1px solid var(--line-strong); }
+.stock-alt .sl-pr { margin-left: 6px; vertical-align: middle; }
+/* 検索結果：作品の一覧ページ・見つからないときの行き先 */
+.sr-chara { margin: 0 0 16px; }
+.sr-chara .sp-chara { display: inline-block; }
+.sr-none { margin: 0; }
+.sr-none p { margin: 0 0 10px; font-weight: 700; color: var(--text-2); }
+/* お店のページ：Googleマップを一番のボタンに、ほかは小さなチップで1行に */
+.shop-actions { gap: 8px; align-items: center; }
+.shop-actions .sort { text-decoration: none; display: inline-flex; align-items: center; min-height: 32px; }
+/* トップ：Xのフォロー・ガチャ活・診断は、新着と人気ランキングのあとに */
+.home-extra { display: flex; flex-direction: column; gap: 18px; }
+@media (max-width: 900px) { .home-extra { gap: 14px; } }
+/* お店のページ：取扱中のガチャは地図のすぐ下に。スマホでは8件だけ出して「すべて見る」 */
+@media (max-width: 640px) {
+  .shop-off:not(.open) .grid > .card:nth-child(n+9) { display: none; }
+  .shop-off .cal-more-wrap { display: block; margin: 14px 0 0; text-align: center; }
+}
+/* 英語などのロゴの上の一言：12pxにしてもロゴ幅におさめる（長ければ…で切る） */
+@media (max-width: 600px) { .logo-txt:has(.logo-main-en) .logo-small { letter-spacing: .02em; max-width: 0; min-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } }
+/* 320px幅：ロゴと言語メニューを1段におさめる */
+@media (max-width: 360px) { .logo-main { font-size: 18px; } .logo-b3 { gap: 6px; } .lang-menu summary { padding: 0 10px; font-size: 12px; } }
+@media (max-width: 360px) { .wg-row > * { padding-inline: 0; } .wg-row b { font-size: 11px; } .wg-row small { font-size: 10px; letter-spacing: -.03em; } }

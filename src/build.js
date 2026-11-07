@@ -304,7 +304,7 @@ T.ja.u = {
   relOut: "発売中", relSoon: (m) => `${m}月発売予定`,
   monthsH: "月別の発売カレンダー", thisM: "今月", nextM: "来月", prevM: "先月",
   makersH: "メーカーから探す", prefsLink: "都道府県からガチャガチャ設置店を探す",
-  optional: "答えなくてもOK", skipQ: "スキップ",
+  optional: "答えなくてもOK", skipQ: "スキップ", priceTba: "価格未定",
   charaHit: "{l}のガチャ一覧（{n}）→",
   push: { on: "発売日にお知らせを受け取る", off: "お知らせをやめる", lead: "★で保存したガチャが発売される週の月曜の朝に、通知でお知らせします（会員登録はいりません）。", onNow: "お知らせ受け取り中：★のガチャが発売される週にお知らせします。", done: "お知らせをオンにしました。", offDone: "お知らせをやめました。", denied: "通知がブロックされています。ブラウザの設定で、このサイトの通知を許可してください。", error: "うまくいきませんでした。時間をおいてもう一度お試しください。", ios: "iPhone・iPadでは、ホーム画面に追加すると通知を受け取れます。Safariの共有ボタン（□↑）→「ホーム画面に追加」→ 追加したアイコンから開いて、このボタンを押してください。", busy: "設定中…" },
 };
@@ -319,7 +319,7 @@ T.en.u = {
   relOut: "Out now", relSoon: (m) => `Coming ${MONTH_EN[m - 1]}`,
   monthsH: "Release calendar by month", thisM: "This month", nextM: "Next month", prevM: "Last month",
   makersH: "Browse by maker", prefsLink: "",
-  optional: "Optional", skipQ: "Skip",
+  optional: "Optional", skipQ: "Skip", priceTba: "Price TBA",
   charaHit: "{l} gacha ({n}) →",
   push: { on: "Notify me on release", off: "Stop notifications", lead: "Get a notification on Monday morning (Japan time) of the week your ★ saved gacha are released. No account needed.", onNow: "Notifications on: we'll tell you the week your ★ gacha are released.", done: "Notifications are on.", offDone: "Notifications are off.", denied: "Notifications are blocked. Please allow them for this site in your browser settings.", error: "Something went wrong. Please try again later.", ios: "On iPhone/iPad, notifications work after adding this site to your Home Screen: tap Share (□↑) → “Add to Home Screen”, open it from the new icon, then tap this button.", busy: "Setting up…" },
 };
@@ -888,11 +888,13 @@ for (const lang of LANGS) {
   const X_SVG = `<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>`;
   const followCard = () => xAcc ? `<a class="x-follow" href="https://x.com/${esc(xAcc)}" target="_blank" rel="noopener"><span class="xf-ic">${X_SVG}</span><span class="xf-t">${esc(t.u.followTxt)}</span><span class="xf-go">${esc(t.u.followCta(xAcc))} →</span></a>` : "";
   const FOLLOW_AFTER = new Set(["week.html", "next-week.html", "new.html", "lottery.html"]);
+  // 値段が0（未定）の商品は「¥0」ではなく「価格未定」
+  const priceTxt = (p) => (Number(p) > 0 ? `¥${p}` : esc(t.u.priceTba || T.en.u.priceTba));
   const card = (it, c) => `<a class="card" href="${c.H}item/${it.id}.html">
   ${thumb(it, c.R)}
   <div class="card-meta">${esc(genreLabel(genreOf(it.genre), lang))}</div>
   <div class="card-name">${esc(nameOf(it, lang))}</div>
-  <div class="card-foot"><span><b>¥${it.price}</b>${it.lineup ? ` / ${t.lineup(it.lineup)}` : ""}</span>${relLabel(it)}</div>
+  <div class="card-foot"><span><b>${priceTxt(it.price)}</b>${it.lineup ? ` / ${t.lineup(it.lineup)}` : ""}</span>${relLabel(it)}</div>
 </a>`;
 
   const layout = ({ rel, title, description, body, jsonld = [], ogImage = "", ogType = "website", current = "", jaOnly = false, extraHead = "", noindex = false, noAlt = false, lastmod = "", alts = null, only = null }) => {
@@ -1012,6 +1014,29 @@ ${content}
     <div class="section-head"><h2>${lang !== "ja" ? t.x.weekH : "今週発売のガチャ"}</h2><a class="more" href="${c.H}week.html">${lang !== "ja" ? t.x.weekMore(WEEK.range, WEEK.items.length) : `${WEEK.range}・全${WEEK.items.length}件`}</a></div>
     <div class="grid row-scroll">${WEEK.items.slice(0, 12).map((it) => card(it, c)).join("")}<a class="card see-all" href="${c.H}week.html"><span class="see-all-in"><b>${lang !== "ja" ? t.x.seeAll : "全部見る"}</b><span>→</span></span></a></div>
   </section>` : ""}
+  </section>
+
+  <section class="section" id="new">
+    <div class="section-head"><h2>${t.newTitle}</h2><span><a class="more" href="${c.H}week.html">${lang !== "ja" ? t.x.thisWeek : "今週発売"}</a>　<a class="more" href="${c.H}calendar.html">${t.toCalendar}</a></span></div>
+    <div class="grid row-scroll">${newest.map((it) => card(it, c)).join("")}<a class="card see-all" href="${c.H}new.html"><span class="see-all-in"><b>${lang !== "ja" ? t.x.seeAll : "全部見る"}</b><span>→</span></span></a></div>
+  </section>
+
+  <section class="section section-tight" id="feed" data-api="${c.R}api/feed" hidden>
+    <div class="section-head"><h2>${t.feedTitle}</h2></div>
+    <div class="grid row-scroll" id="feed-grid"></div>
+    <script type="application/json" id="feed-i18n">${JSON.stringify({ isNew: t.feedNew, back: t.feedBack, note: t.feedNote(9, 8).replace("8", "{s}").replace("9", "{n}"), note0: t.feedNote(0, 8).replace("8", "{s}") })}</script>
+  </section>
+
+  <section class="section" id="ranking">
+    <div class="section-head"><h2>${t.rankTitle}</h2></div>
+    <ol class="rank">${ranking.map((it, i) => `<li${i >= 5 ? ' class="rank-more" hidden' : ""}><a href="${c.H}item/${it.id}.html">
+      <span class="rank-no">${i + 1}</span>${thumb(it, c.R, { badge: false })}
+      <span style="min-width:0"><span class="card-name">${esc(nameOf(it, lang))}</span><span class="card-foot"><span><b>${priceTxt(it.price)}</b></span><span>${heartsOf(it) ? `<em class="hearts">♥ ${heartsOf(it)}</em>` : t.month(it.release)}</span></span></span>
+    </a></li>`).join("")}</ol>
+    ${ranking.length > 5 ? `<p class="more-wrap"><button type="button" class="btn" id="rank-more">${t.showMore}</button></p>` : ""}
+  </section>
+
+  <div class="section section-tight home-extra">
     ${followCard()}
     <a class="katsu-banner" href="${c.R}gachakatsu.html">
       <span class="kb-art" aria-hidden="true"><i class="kb-dot a">1</i><i class="kb-dot b">2</i><i class="kb-dot c">3</i><svg viewBox="0 0 120 60"><path d="M10 50 C 35 10, 60 55, 85 18 S 112 30, 112 30" fill="none" stroke="#3aa0ff" stroke-width="3" stroke-dasharray="6 6"/></svg></span>
@@ -1055,7 +1080,7 @@ ${content}
         <button class="btn btn-gold" type="submit" id="quiz-submit">${t.quizBtn}</button>
       </div>
     </form>
-  </section>
+  </div>
 
   <section class="section" id="results" hidden aria-live="polite">
     <div class="section-head"><h2>${t.results}</h2>
@@ -1064,26 +1089,6 @@ ${content}
     <p class="results-note" id="results-note"></p>
     <div class="grid" id="results-grid"></div>
     <p class="more-wrap"><button type="button" class="btn" id="results-more" hidden>${t.showMore}</button></p>
-  </section>
-
-  <section class="section" id="new">
-    <div class="section-head"><h2>${t.newTitle}</h2><span><a class="more" href="${c.H}week.html">${lang !== "ja" ? t.x.thisWeek : "今週発売"}</a>　<a class="more" href="${c.H}calendar.html">${t.toCalendar}</a></span></div>
-    <div class="grid row-scroll">${newest.map((it) => card(it, c)).join("")}<a class="card see-all" href="${c.H}new.html"><span class="see-all-in"><b>${lang !== "ja" ? t.x.seeAll : "全部見る"}</b><span>→</span></span></a></div>
-  </section>
-
-  <section class="section section-tight" id="feed" data-api="${c.R}api/feed" hidden>
-    <div class="section-head"><h2>${t.feedTitle}</h2></div>
-    <div class="grid row-scroll" id="feed-grid"></div>
-    <script type="application/json" id="feed-i18n">${JSON.stringify({ isNew: t.feedNew, back: t.feedBack, note: t.feedNote(9, 8).replace("8", "{s}").replace("9", "{n}"), note0: t.feedNote(0, 8).replace("8", "{s}") })}</script>
-  </section>
-
-  <section class="section" id="ranking">
-    <div class="section-head"><h2>${t.rankTitle}</h2></div>
-    <ol class="rank">${ranking.map((it, i) => `<li${i >= 5 ? ' class="rank-more" hidden' : ""}><a href="${c.H}item/${it.id}.html">
-      <span class="rank-no">${i + 1}</span>${thumb(it, c.R, { badge: false })}
-      <span style="min-width:0"><span class="card-name">${esc(nameOf(it, lang))}</span><span class="card-foot"><span><b>¥${it.price}</b></span><span>${heartsOf(it) ? `<em class="hearts">♥ ${heartsOf(it)}</em>` : t.month(it.release)}</span></span></span>
-    </a></li>`).join("")}</ol>
-    ${ranking.length > 5 ? `<p class="more-wrap"><button type="button" class="btn" id="rank-more">${t.showMore}</button></p>` : ""}
   </section>
 
   ${(() => { const pick = ["akihabara", "ikebukuro", "shinjuku", "shibuya", "harajuku", "umeda", "namba", "hakata", "sapporo"].map((s) => STATIONS.find((x) => x.slug === s)).filter(Boolean); return pick.length ? `<section class="section section-tight" id="stations">
@@ -1204,7 +1209,7 @@ ${content}
     <div>
       <h1>${esc(name)}</h1>
       ${lang !== "ja" && it.name_en ? `<p class="name-ja" lang="ja">${esc(it.name)}</p>` : ""}
-      <div class="price"><small>${lang === "ja" ? t.perPlay : ""}</small><b>¥${it.price}</b><span>${lang !== "ja" ? t.perPlay : ""}${it.lineup ? `${lang !== "ja" ? " · " : ""}${t.lineup(it.lineup)}` : ""}</span>${relPill(it)}</div>
+      <div class="price"><small>${lang === "ja" && it.price > 0 ? t.perPlay : ""}</small><b>${priceTxt(it.price)}</b><span>${lang !== "ja" && it.price > 0 ? t.perPlay : ""}${it.lineup ? `${lang !== "ja" && it.price > 0 ? " · " : ""}${t.lineup(it.lineup)}` : ""}</span>${relPill(it)}</div>
       <dl class="spec">
         <dt>${t.maker}</dt><dd><a href="${c.H}maker/${makerSlug(it.maker)}.html">${esc(maker)}</a></dd>
         <dt>${t.release}</dt><dd><a href="${c.H}calendar/${ws ? ws.toISOString().slice(0, 7) : it.release}.html">${t.month(it.release)}</a>${lang === "ja" && it.release_note ? (ws ? `<a class="rel-note" href="${c.H}calendar/${ws.toISOString().slice(0, 7)}.html#w${wi.key}">${esc(it.release_note)}</a>` : `<span class="rel-note">${esc(it.release_note)}</span>`) : ""}</dd>
@@ -1218,7 +1223,7 @@ ${content}
         <a class="btn btn-sub" href="#stock">${esc(t.u.findLater)}</a>` : `<a class="btn btn-gold" href="#stock">${t.findStores}</a>`}
         ${it.official_url ? `<a class="btn" href="${esc(it.official_url)}" target="_blank" rel="noopener">${t.official}</a>` : ""}
         <button type="button" class="fav-item" data-fav="${it.id}" aria-pressed="false"><i aria-hidden="true">★</i><span>${esc(t.u.save)}</span></button>
-        ${pushBox(t, "item", it.id)}
+        ${HUB.isUpcoming(it) ? pushBox(t, "item", it.id) : ""}
         <button type="button" class="heart" data-vote="${c.R}api/vote/${it.id}" data-id="${it.id}" aria-label="${t.heartAria}" title="${t.heartNote}"><i aria-hidden="true">♥</i><span>${t.heart}</span><b>${heartsOf(it)}</b></button>
       </div>
       ${lang !== "ja" ? (() => { const O = overseas(it); const L = shopLinks(it); const XLG = lang !== "en"; const b = [
@@ -1288,7 +1293,7 @@ ${content}
     <div class="panel">
       <h2 style="font-size:22px">${esc(it.name)}はどこで売ってる？</h2>
       <p>${esc(whereTxt)}</p>
-      ${shs.length ? `<ul class="where-shops">${rotate(shs, 10, hashStr(it.id)).map((x) => `<li><a href="${c.R}shop/${x.id}.html">${esc(x.name)}</a><span>${esc(x.pref || "")}</span></li>`).join("")}</ul>` : ""}
+      ${shs.length ? `<ul class="where-shops">${(prefTop.length ? prefTop.slice(0, 3).flatMap(([p]) => shs.filter((x) => x.pref === p)) : shs).slice(0, 10).map((x) => `<li><a href="${c.R}shop/${x.id}.html">${esc(x.name)}</a><span>${esc(x.pref || "")}</span></li>`).join("")}</ul>` : ""}
       ${draws ? `<p class="comp-cost">全${n}種そろえる目安：<b>平均 約${draws}回・約${(draws * it.price).toLocaleString("ja-JP")}円</b><small>（どれも同じ確率で出る場合の計算）</small></p>` : ""}
       <h3 class="arr-h">よくある質問</h3>
       <dl class="item-qa">${qa.map(([q, a]) => `<div><dt>${esc(q)}</dt><dd>${esc(a)}</dd></div>`).join("")}</dl>
@@ -1296,7 +1301,7 @@ ${content}
   </section>`;
   })() : ""}
 
-  <section class="section" id="stock" data-api="${c.R}api/stock/${it.id}" data-src="${c.R}data/stock/${it.id}.json" style="scroll-margin-top:24px">
+  <section class="section" id="stock" data-api="${c.R}api/stock/${it.id}" data-src="${c.R}data/stock/${it.id}.json" data-rak="${esc(L0.rakuten)}"${L0.mercari ? ` data-mer="${esc(L0.mercari)}"` : ""} style="scroll-margin-top:24px">
     <div class="panel">
       <h2 style="font-size:22px">${t.storesTitle}</h2>
       <div class="stock-tools">
@@ -1526,6 +1531,8 @@ ${content}
           const cls = [w.key === WEEK.key ? "on" : "", w.key < WEEK.key ? "past" : ""].filter(Boolean).join(" ");
           return g ? `<a href="#w${w.key}"${cls ? ` class="${cls}"` : ""}>${lab}<i>${g.list.length}${en ? "" : "件"}</i></a>` : `<span class="off">${lab}<i>-</i></span>`;
         });
+        // 日付の決まった週がまだない月（先の月）は、空のマスを並べずに1マスにまとめる
+        if (!byKey.size) { rows.push(`<div class="wg-row${m === thisMonth ? " now" : ""}"><a class="wg-month" href="#m${m}"><b>${en ? MONTH_EN[mo - 1] : `${mo}月`}</b><small>${weeksOf(m).list.length}${en ? "" : "件"}</small></a>${tbd ? `<a href="#w${m}-tbd" class="tbd wg-span"><b>${en ? `${MONTH_EN[mo - 1]} · ${tbd.list.length} series (week TBA)` : `${mo}月 ${tbd.list.length}件（週未定）`}</b></a>` : `<span class="off tbd wg-span"><b>${en ? "No releases listed yet" : "まだ登録がありません"}</b></span>`}</div>`); continue; }
         if (mondays.length < 5) cells.push(`<span class="blank"></span>`);
         cells.push(tbd ? `<a href="#w${m}-tbd" class="tbd"><b>${en ? "TBA" : "未定"}</b><small>${en ? "week" : "週未定"}</small><i>${tbd.list.length}${en ? "" : "件"}</i></a>` : `<span class="off tbd"><b>${en ? "TBA" : "未定"}</b><small>&nbsp;</small><i>-</i></span>`);
         rows.push(`<div class="wg-row${m === thisMonth ? " now" : ""}"><a class="wg-month" href="#m${m}"><b>${en ? MONTH_EN[mo - 1] : `${mo}月`}</b><small>${weeksOf(m).list.length}${en ? "" : "件"}</small></a>${cells.join("")}</div>`);
@@ -1615,9 +1622,14 @@ ${content}
 
   /* ---------- 検索結果ページ ---------- */
   {
+    const c = ctx("search.html");
     const body = `<div class="wrap">
   <header class="page-head"><h1 id="sr-title">${t.searchTitle}</h1><p class="lead" id="sr-note"></p></header>
-  <section class="section" style="padding-top:32px"><div class="grid" id="sr-grid"></div></section>
+  <section class="section" style="padding-top:32px"><p class="sr-chara" id="sr-chara" hidden></p><div class="grid" id="sr-grid" data-links="${esc(JSON.stringify([
+    [`${c.H}week.html`, lang !== "ja" ? t.x.weekH : "今週発売のガチャ"], [`${c.H}index.html#ranking`, t.rankTitle],
+    ...(lang === "ja" || lang === "en" ? [[`${c.H}collection.html`, lang === "ja" ? "シリーズ一覧" : t.hub.colIdxH1]] : []),
+    ...CHARAS.slice(0, 6).map((ch) => [`${c.H}chara/${ch.slug}.html`, charaLabel(ch, lang)]),
+  ]))}"></div></section>
 </div>`;
     layout({ rel: "search.html", title: t.searchTitle, description: t.searchTitle, body, extraHead: `<meta name="robots" content="noindex, follow">` });
   }
@@ -1978,7 +1990,7 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
       <h1>${esc(sh.name)}${/ガチャガチャ/.test(sh.name) ? "のガチャ情報" : "のガチャガチャ"}</h1>
       <p class="shop-sub" style="margin:6px 0 0;font-weight:700;color:var(--text-2)">${esc([`${ap.pref}${ap.city}`, chn ? `${chn.label}の店舗` : "", sh.src === "user" ? "" : "ガシャポン公式の取扱店"].filter(Boolean).join("・"))}${sto ? `・${esc(sto.st.ja)}から徒歩約${walkMin(sto.d)}分` : ""}</p>
       <p class="lead">${esc(sh.address || sh.pref || "")}</p>
-      <div class="item-actions"><a class="btn" href="${esc(gmap)}" target="_blank" rel="noopener">Googleマップで開く</a><a class="btn" href="${c.R}map.html#${sh.id}">ガチャマップで見る</a>${sto ? `<a class="btn" href="${c.H}station/${sto.st.slug}.html">${esc(sto.st.ja)}周辺のお店</a>` : ""}${chn ? `<a class="btn" href="${c.H}chain/${chn.slug}.html">${esc(chn.label)}の店舗一覧</a>` : ""}</div>
+      <div class="item-actions shop-actions"><a class="btn btn-gold" href="${esc(gmap)}" target="_blank" rel="noopener">Googleマップで開く</a><a class="sort" href="${c.R}map.html#${sh.id}">ガチャマップで見る</a>${sto ? `<a class="sort" href="${c.H}station/${sto.st.slug}.html">${esc(sto.st.ja)}周辺のお店</a>` : ""}${chn ? `<a class="sort" href="${c.H}chain/${chn.slug}.html">${esc(chn.label)}の店舗一覧</a>` : ""}</div>
     </header>
     <div class="shop-grid">
       <div class="shop-mapbox"><div id="shop-map" class="map map-sm"></div>
@@ -1995,6 +2007,10 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
     </div>
     <p class="shop-warn" id="shop-warn" hidden></p>
     <script>(function(){var Z=/^(0種|0件|—|)$/,f=document.getElementById("st-first");["st-off","st-rep","st-mac"].forEach(function(id){var d=document.getElementById(id);if(!d||!window.MutationObserver)return;new MutationObserver(function(){var on=!Z.test(d.textContent.trim());d.parentNode.hidden=!on;if(on&&f)f.hidden=true;}).observe(d,{childList:true,characterData:true,subtree:true});});})();</script>
+
+    ${off.length ? `<section class="section section-tight shop-off"><div class="section-head"><h2>取扱中のガチャ（公式）</h2></div>
+      <p class="fine" style="margin-top:-16px;margin-bottom:20px">バンダイ公式「ガシャポンどこ？」で、このお店の取扱があるガチャです（通信機能のあるマシンのみ）。</p>
+      <div class="grid">${off.slice(0, 40).map((it) => card(it, c)).join("")}</div>${off.length > 8 ? `<p class="cal-more-wrap"><button type="button" class="btn cal-more-btn" data-open="すべて見る（${Math.min(off.length, 40)}種）" data-close="閉じる">すべて見る（${Math.min(off.length, 40)}種）</button></p>` : ""}</section>` : ""}
 
     <section class="section panel" id="report-box">
       <h2 style="font-size:20px">在庫を報告する</h2>
@@ -2033,10 +2049,6 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
       <div class="section-head"><h2>みんなの在庫報告</h2></div>
       <ul class="rep-list" id="rep-list"><li class="fine">読み込み中…</li></ul>
     </section>
-
-    ${off.length ? `<section class="section"><div class="section-head"><h2>取扱中のガチャ（公式）</h2></div>
-      <p class="fine" style="margin-top:-16px;margin-bottom:20px">バンダイ公式「ガシャポンどこ？」で、このお店の取扱があるガチャです（通信機能のあるマシンのみ）。</p>
-      <div class="grid">${off.slice(0, 40).map((it) => card(it, c)).join("")}</div></section>` : ""}
 
     ${nearby.length ? `<section class="section section-tight"><div class="section-head"><h2>近くのガチャガチャ設置店</h2>${sh.pref ? `<a class="more" href="${c.R}shops/${prefSlug(sh.pref)}.html">${esc(sh.pref)}のお店をすべて見る</a>` : ""}</div>
       <div class="shop-list">${nearby.map((x) => `<a class="shop-row" href="${c.R}shop/${x.sh.id}.html"><b>${esc(x.sh.name)}</b><span>${esc(x.sh.address || x.sh.pref || "")}</span><em>ここから${fmtDist(x.d)}${x.d <= 3000 ? `（徒歩約${walkMin(x.d)}分）` : ""}${(SHOP_OFFICIAL[x.sh.id] || []).length ? `・取扱中 ${(SHOP_OFFICIAL[x.sh.id] || []).length}種` : ""}</em></a>`).join("")}</div>
