@@ -473,6 +473,7 @@ module.exports = {
   },
   // 發售月曆（build.js 裡 T.en.cal 的翻譯）：週編號・標記・月份頁面的標題與說明
   cal: {
+    noneYet: "尚無登錄",
     week: (w) => `${w.m}月第${w.no}週`, weekNo: (no) => `第${no}週`, wShort: (no) => `第${no}週`, monthShort: (mo) => `${mo}月`,
     now: "本週", out: "已發售", releases: "發售", series: (n) => `${n}個系列`, count: (n) => `${n}`,
     tba: "未定", tbaDate: "發售週尚未公布", tbaNote: "發售週尚未公布的商品", tbaSub: "週",

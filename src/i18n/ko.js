@@ -207,6 +207,7 @@ module.exports = {
   },
   // 발매 캘린더 (build.js 의 T.en.cal 번역). 주 번호·배지·월별 페이지 제목과 설명
   cal: {
+    noneYet: "아직 등록된 상품이 없어요",
     week: (w) => `${w.m}월 ${w.no}주차`, weekNo: (no) => `${no}주차`, wShort: (no) => `${no}주차`, monthShort: (mo) => `${mo}월`,
     now: "이번 주", out: "발매 중", releases: " 발매", series: (n) => `${n}개 시리즈`, count: (n) => `${n}`,
     tba: "미정", tbaDate: "발매 주 미발표", tbaNote: "발매 주가 아직 발표되지 않은 상품", tbaSub: "주",

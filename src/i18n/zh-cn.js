@@ -195,6 +195,7 @@ module.exports = {
   },
   // 发售日历（build.js 里 T.en.cal 的翻译）：周编号・标记・月份页面的标题和描述
   cal: {
+    noneYet: "尚无登记",
     week: (w) => `${w.m}月第${w.no}周`, weekNo: (no) => `第${no}周`, wShort: (no) => `第${no}周`, monthShort: (mo) => `${mo}月`,
     now: "本周", out: "现已发售", releases: "发售", series: (n) => `${n}个系列`, count: (n) => `${n}`,
     tba: "待定", tbaDate: "发售周尚未公布", tbaNote: "发售周尚未公布的商品", tbaSub: "周",
