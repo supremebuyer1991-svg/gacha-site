@@ -1129,7 +1129,7 @@
             [].forEach.call(document.querySelectorAll("#k-list .k-rev"), function (el) { drawRev(el, sm[el.getAttribute("data-sid")] || {}); });
           });
           var wantRaw = $("k-item").value.trim();
-          if (wantRaw) { var fw = aff(wantRaw + " ガチャ コンプ"); $("k-sum").innerHTML = esc($("k-sum").textContent) + '<span class="k-aff k-aff-big">「' + esc(wantRaw) + '」が見つからなかったら通販でも：<a href="' + esc(fw.a) + '" target="_blank" rel="sponsored noopener">Amazonで探す</a><a href="' + esc(fw.r) + '" target="_blank" rel="sponsored noopener">楽天で探す</a><i class="pr">PR</i></span>'; }
+          if (wantRaw) { var fw = aff(wantRaw + " ガチャ コンプ"); $("k-sum").innerHTML = esc($("k-sum").textContent) + '<span class="k-aff k-aff-big">「' + esc(wantRaw) + '」が見つからなかったら通販でも：<a href="' + esc(fw.a) + '" target="_blank" rel="sponsored nofollow noopener">Amazonで探す</a><a href="' + esc(fw.r) + '" target="_blank" rel="sponsored nofollow noopener">楽天で探す</a><i class="pr">PR</i></span>'; }
           var nEx = Object.keys(excluded).length;
           $("k-ex").innerHTML = nEx ? "外したお店：" + nEx + '店　<button type="button" class="k-pop" id="k-ex-reset">外したお店を元に戻す</button>' : "";
           $("k-result").hidden = false;
@@ -1165,7 +1165,7 @@
             var it = qi[id];
             var f = aff(it.jn + " ガチャ コンプ");
             return '<li><a href="' + root + "item/" + esc(id) + '">' + (it.image ? '<img src="' + root + esc(it.image) + '" alt="" loading="lazy" width="40" height="40">' : "") + "<span>" + esc(it.name) + "</span><em>¥" + it.price + "</em></a>" +
-              '<span class="k-aff">売り切れなら通販で：<a href="' + esc(f.a) + '" target="_blank" rel="sponsored noopener">Amazon</a><a href="' + esc(f.r) + '" target="_blank" rel="sponsored noopener">楽天</a><i class="pr">PR</i></span></li>';
+              '<span class="k-aff">売り切れなら通販で：<a href="' + esc(f.a) + '" target="_blank" rel="sponsored nofollow noopener">Amazon</a><a href="' + esc(f.r) + '" target="_blank" rel="sponsored nofollow noopener">楽天</a><i class="pr">PR</i></span></li>';
           }).join("") + "</ol>" + (ids.length > 10 ? '<p class="fine">ほか' + (ids.length - 10) + '種。<a href="' + root + "shop/" + esc(sid) + '">お店のページで全部見る→</a></p>' : "") + '<p class="fine">バンダイ公式「ガシャポンどこ？」で取扱のあるガチャです（通信機能のあるマシンのみ）。</p>'
             : '<p class="fine">公式の取扱情報がまだないお店です。<a href="' + root + "shop/" + esc(sid) + '">お店のページ</a>で、みんなの在庫報告を見られます。</p>';
           box.setAttribute("data-done", "1");
