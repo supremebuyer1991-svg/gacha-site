@@ -30,7 +30,10 @@
     empty: "No shops with stock information for this selection yet.",
     nearOk: "Sorted by distance from you (sold-out shops last).",
     nearNg: function (km) { return "No shop within " + km + " km has it in stock. Try buying online below."; },
-    count: function (n) { return n + " shops have it in stock. Tap \u201cUse my location\u201d to sort by distance."; }
+    count: function (n) { return n + " shops have it in stock (choose a prefecture to narrow down)."; },
+    moreShops: function (n) { return "Show " + n + " more shops"; },
+    priceTba: "Price TBA",
+    searchTry: "Try these instead"
   } : {
     none: "条件に合うガチャが見つかりませんでした。系統を増やすか、詳しい項目を外してみてください。",
     found: function (n) { return n + "件が見つかりました。"; },
@@ -50,7 +53,10 @@
     empty: "この条件で在庫情報のある店舗はまだありません。",
     nearOk: "現在地から近い順に表示しています（売り切れの店は最後）。",
     nearNg: function (km) { return "現在地から" + km + "km以内に在庫のある店舗が見つかりませんでした。ネット通販もご検討ください。"; },
-    count: function (n) { return n + "店舗に在庫があります。「現在地から探す」で近い順に並べ替えられます。"; }
+    count: function (n) { return n + "店舗に在庫があります（都道府県を選ぶと絞れます）"; },
+    moreShops: function (n) { return "残り" + n + "店を見る"; },
+    priceTba: "価格未定",
+    searchTry: "こちらから探せます"
   };
   // ブラウザの言語が中国語・韓国語なのに別の言語のページを見ているとき、その言語のページを1回だけ案内する（自動では移動しない）
   (function () {
@@ -164,7 +170,7 @@
       sPop.innerHTML = chRow + (hits.length
         ? hits.slice(0, 8).map(function (x) {
             var st = relOf(x);
-            return '<a class="sp-item" href="' + home + "item/" + esc(x.id) + '">' + thumbHTML(x) + '<span class="sp-name">' + esc(x.n) + '</span><span class="sp-price">¥' + x.p + (st.t ? '<small class="sp-rel sp-' + st.k + '">' + esc(st.t) + "</small>" : "") + "</span></a>";
+            return '<a class="sp-item" href="' + home + "item/" + esc(x.id) + '">' + thumbHTML(x) + '<span class="sp-name">' + esc(x.n) + '</span><span class="sp-price">' + (x.p > 0 ? "¥" + x.p : esc(M.priceTba)) + (st.t ? '<small class="sp-rel sp-' + st.k + '">' + esc(st.t) + "</small>" : "") + "</span></a>";
           }).join("") + (hits.length > 8 ? '<button class="sp-all" type="submit">' + esc(M.searchAll(hits.length)) + "</button>" : "")
         : '<p class="sp-none">' + esc(M.searchNone) + "</p>");
       sPop.hidden = false;
@@ -180,13 +186,29 @@
     if (srGrid) {
       var q = new URLSearchParams(location.search).get("q") || "";
       sInput.value = q;
-      load().then(function () {
+      var srChara = document.getElementById("sr-chara");
+      Promise.all([load(), loadChara()]).then(function () {
         var hits = find(q);
         document.getElementById("sr-title").textContent = q ? "「" + q + "」" : document.getElementById("sr-title").textContent;
         document.getElementById("sr-note").textContent = q ? (hits.length ? hits.length + M.searchCount : M.searchNone) : "";
+        // ことばが作品名に当たったら、その作品の一覧ページをいちばん上に
+        var ch = q ? charaFor(q) : null;
+        if (srChara && ch) {
+          srChara.innerHTML = '<a class="sp-chara" href="' + home + "chara/" + esc(ch.s) + '">' + esc(String(sForm.getAttribute("data-chara-tpl") || "").replace("{l}", ch.l).replace("{n}", ch.n)) + "</a>";
+          srChara.hidden = false;
+        }
         srGrid.innerHTML = hits.map(function (x) {
           return cardHTML({ id: x.id, name: x.n, price: x.p, lineup: x.l, image: x.img, genre_label: x.g, release_label: x.r }, { home: home, root: root }, null);
         }).join("");
+        // 見つからないとき：今週発売・人気・シリーズ・人気の作品へのリンク（build.js が data-links に入れている）
+        if (!hits.length) {
+          var links = []; try { links = JSON.parse(srGrid.getAttribute("data-links") || "[]"); } catch (e) {}
+          if (links.length) {
+            var alt = document.createElement("div"); alt.className = "sr-none";
+            alt.innerHTML = "<p>" + esc(M.searchTry) + '</p><div class="chara-list">' + links.map(function (l) { return '<a class="chara-chip" href="' + esc(l[0]) + '">' + esc(l[1]) + "</a>"; }).join("") + "</div>";
+            srGrid.parentNode.insertBefore(alt, srGrid.nextSibling);
+          }
+        }
       });
     }
   }
@@ -413,7 +435,7 @@
       '<div class="thumb">' + img + "</div>" +
       '<div class="card-meta"><span>' + esc(it.genre_label) + "</span>" + (pct != null ? '<span class="match">' + M.match + " " + pct + "%</span>" : "") + "</div>" +
       '<div class="card-name">' + esc(it.name) + "</div>" +
-      '<div class="card-foot"><span><b>¥' + it.price + "</b>" + (it.lineup ? " / " + M.lineup(it.lineup) : "") + "</span><span>" + esc(it.release_label) + "</span></div></a>";
+      '<div class="card-foot"><span><b>' + (it.price > 0 ? "¥" + it.price : esc(M.priceTba)) + "</b>" + (it.lineup ? " / " + M.lineup(it.lineup) : "") + "</span><span>" + esc(it.release_label) + "</span></div></a>";
   }
 
   /* ================= 近い順の在庫店（商品ページ） ================= */
@@ -429,6 +451,11 @@
     var LABEL = M.label;
     var RANK = { in_stock: 0, few: 1, out_of_stock: 2 };
     var FAR_KM = 30;
+    var PREF_KEY = "gp-pref"; // 前に選んだ都道府県をおぼえておく
+    var PAGE0 = 20, PAGE = 40, shownN = PAGE0;
+    var moreEl = document.createElement("p"); moreEl.className = "more-wrap"; moreEl.hidden = true; listEl.parentNode.insertBefore(moreEl, listEl.nextSibling);
+    var altEl = document.createElement("p"); altEl.className = "stock-alt"; altEl.hidden = true; moreEl.parentNode.insertBefore(altEl, moreEl.nextSibling);
+    moreEl.addEventListener("click", function (e) { if (e.target.closest(".stock-more")) { shownN += PAGE; render(); } });
 
     // まずCloudflareの在庫データベース（最新）を読み、だめならサイトに置いた在庫ファイルを読む
     var getJSON = function (u) { return fetch(u).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (d) { if (!d) throw new Error("empty"); return d; }); };
@@ -446,13 +473,18 @@
         prefSel.innerHTML = '<option value="">' + M.allPrefs + "</option>" + prefs.map(function (p) {
           return '<option value="' + esc(p) + '">' + esc(prefName[p]) + "</option>";
         }).join("");
+        try { var sp = localStorage.getItem(PREF_KEY); if (sp && prefs.indexOf(sp) !== -1) prefSel.value = sp; } catch (e) {}
         render();
       })
       .catch(function () {
         statusEl.textContent = M.loadErr;
       });
 
-    prefSel.addEventListener("change", render);
+    prefSel.addEventListener("change", function () {
+      shownN = PAGE0;
+      try { if (prefSel.value) localStorage.setItem(PREF_KEY, prefSel.value); else localStorage.removeItem(PREF_KEY); } catch (e) {}
+      render();
+    });
 
     geoBtn.addEventListener("click", function () {
       if (!navigator.geolocation) {
@@ -463,6 +495,7 @@
       navigator.geolocation.getCurrentPosition(function (pos) {
         here = { lat: pos.coords.latitude, lng: pos.coords.longitude };
         prefSel.value = "";
+        shownN = PAGE0;
         render();
       }, function () {
         statusEl.textContent = M.geoErr;
@@ -482,13 +515,16 @@
       var rows = stores.filter(function (s) { return !pref || s.prefecture === pref; }).map(function (s) {
         return { s: s, d: here ? km(here, s) : null };
       });
+      // 現在地がわからないときは、在庫のある店が多い都道府県から
+      var prefN = {};
+      stores.forEach(function (s) { if (s.status !== "out_of_stock") prefN[s.prefecture] = (prefN[s.prefecture] || 0) + 1; });
       rows.sort(function (a, b) {
         var ao = a.s.status === "out_of_stock", bo = b.s.status === "out_of_stock";
         if (ao !== bo) return ao ? 1 : -1;
         if (here) return a.d - b.d;
-        return RANK[a.s.status] - RANK[b.s.status] || a.s.prefecture.localeCompare(b.s.prefecture, "ja");
+        return RANK[a.s.status] - RANK[b.s.status] || (prefN[b.s.prefecture] || 0) - (prefN[a.s.prefecture] || 0) || a.s.prefecture.localeCompare(b.s.prefecture, "ja");
       });
-      var shown = rows.slice(0, 20);
+      var shown = rows.slice(0, shownN);
       listEl.innerHTML = shown.map(function (r) {
         var s = r.s;
         var nm = (EN && s.name_en) || s.name;
@@ -500,9 +536,17 @@
           '<span class="pill ' + s.status + '">' + LABEL[s.status] + "</span></span></li>";
       }).join("");
 
+      var rest = rows.length - shown.length;
+      moreEl.hidden = rest <= 0;
+      moreEl.innerHTML = rest > 0 ? '<button type="button" class="btn stock-more">' + esc(M.moreShops(rest)) + "</button>" : "";
+
       var avail = rows.filter(function (r) { return r.s.status !== "out_of_stock"; });
       var nearOk = here ? avail.some(function (r) { return r.d <= FAR_KM; }) : avail.length > 0;
       buyBox.classList.toggle("is-emph", !nearOk);
+      // 近くに在庫がないとき（日本語だけ）：楽天・メルカリへの案内。リンクは build.js が商品ページに入れたものをそのまま使う
+      var rak = stock.getAttribute("data-rak"), mer = stock.getAttribute("data-mer");
+      altEl.hidden = !(!EN && !nearOk && rak);
+      altEl.innerHTML = altEl.hidden ? "" : '近くに在庫がないときは <a href="' + esc(rak) + '" target="_blank" rel="sponsored nofollow noopener">楽天でコンプセット</a>' + (mer ? '・<a href="' + esc(mer) + '" target="_blank" rel="sponsored nofollow noopener">メルカリで単品</a>' : "") + ' <span class="sl-pr">PR</span>';
 
       if (!rows.length) {
         statusEl.textContent = M.empty;
@@ -793,7 +837,7 @@
   /* ================= 発売カレンダー：「この週をもっと見る」 ================= */
   [].forEach.call(document.querySelectorAll(".cal-more-btn"), function (b) {
     b.addEventListener("click", function () {
-      var w = b.closest(".cal-week"); var open = w.classList.toggle("open");
+      var w = b.closest(".cal-week, .shop-off"); var open = w.classList.toggle("open");
       b.textContent = b.getAttribute(open ? "data-close" : "data-open");
       if (!open) w.scrollIntoView({ block: "start" });
     });
