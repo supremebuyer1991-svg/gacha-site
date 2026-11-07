@@ -2153,7 +2153,8 @@ if (fs.existsSync(path.join(ROOT, "brand", "logo-lab.html"))) write("logo-lab.ht
 if (site.indexnow_key) fs.writeFileSync(path.join(OUT, site.indexnow_key + ".txt"), site.indexnow_key);
 write("robots.txt", `User-agent: *\nAllow: /\nDisallow: /api/\nDisallow: /x-img\nDisallow: /logo-lab\nSitemap: ${SITE_URL}/sitemap.xml\n`);
 // Cloudflare の窓口（functions/）を動かすのは、ページと /api/ だけ（画像などでは動かさず、無料の回数を節約する）
-write("_routes.json", JSON.stringify({ version: 1, include: ["/", "/api/*", "/item/*", "/shop/*", "/map*", "/gachakatsu*", "/shops/*", "/rules*", "/genre/*", "/type/*", "/maker/*", "/calendar*", "/search*", "/week*", "/new*", "/faq*", "/about*", "/en", "/en/", "/en/item/*", "/en/genre/*", "/en/type/*", "/en/maker/*", "/en/calendar*", "/en/search*", "/en/week*", "/en/new*", "/en/faq*", "/en/about*", "/index.html", "/en/index.html", "/chara*", "/series/*", "/lottery*", "/toprated*", "/next-week*", "/privacy*", "/en/chara*", "/en/series/*", "/en/next-week*", "/station*", "/chain*", "/en/station*", "/collection*", "/saihan*", "/stats*", "/price/*", "/en/collection*", "/en/saihan*", "/en/stats*", "/zh-cn", "/zh-cn/*", "/zh-tw", "/zh-tw/*", "/ko", "/ko/*"], exclude: ["/assets/*", "/images/*", "/data/*", "/sw.js"] }));
+// ふつうのページは Functions を通さない（無料枠：1日10万回を節約）。古い住所の転送と /api だけ通す
+write("_routes.json", JSON.stringify({ version: 1, include: ["/api/*", "/", "/maker/m*", "/en/maker/m*", "/series/*", "/en/series/*", "/chara/sanrio-characters-all*", "/en/chara/sanrio-characters-all*"], exclude: ["/assets/*", "/images/*", "/data/*", "/sw.js"] }));
 // ガチャ活：お店ごとの取扱ガチャ（ガチャの番号の一覧）。探したいガチャで絞るときだけ読む
 {
   const ids = [...new Set(Object.values(SHOP_OFFICIAL).flat())].filter((id) => itemById.has(id));
