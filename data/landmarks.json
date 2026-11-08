@@ -189,7 +189,7 @@
     },
     {
       "id": "gashapon-official-canal-city-hakata", "store_id": "g-s90000107", "station": "hakata",
-      "name_ja": "ガシャポンバンダイオフィシャルショップ キャナルシティ博多店", "name_en": "Gashapon Bandai Official Shop Canal City Hakata", "name_ko": "가샤폰 반다이 공식 숍 커낼시티 하카타점", "name_zh_cn": "万代扭蛋官方店 博多运河城店", "name_zh_tw": "萬代扭蛋官方店 博多運河城店",
+      "name_ja": "ガシャポンバンダイオフィシャルショップ キャナルシティ博多店", "name_en": "Gashapon Bandai Official Shop Canal City Hakata", "name_ko": "가샤폰 반다이 공식 숍 캐널시티 하카타점", "name_zh_cn": "万代扭蛋官方店 博多运河城店", "name_zh_tw": "萬代扭蛋官方店 博多運河城店",
       "lat": 33.588723351144445, "lng": 130.41074162664762,
       "floor_en": "B1F, South Bldg. (OPA), Canal City Hakata", "hours": "10:00–21:00", "machines": 300, "cashless": null,
       "notes_en": "With the adjoining Gashapon Department Store there are over 2,000 machines in total.",
