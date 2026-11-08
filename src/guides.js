@@ -1074,4 +1074,4 @@ const homeSection = (lang, c, esc) => { const list = SLUGS.map((slug, i) => ({ s
     <div class="chara-list">${list.map((x) => `<a class="chara-chip" href="${c.H}guide/${x.slug}.html">${esc(x.short)}</a>`).join("")}<a class="chara-chip chara-more" href="${c.H}guide/index.html">${esc(UI[lang].all)}</a></div>
   </section>` : ""); };
 
-module.exports = { GUIDE_LANGS, NAV, SLUGS, build, homeSection };
+module.exports = { GUIDE_LANGS, NAV, SLUGS, SHORT, build, homeSection };

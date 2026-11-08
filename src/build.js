@@ -788,6 +788,15 @@ const hubs = require("./hubs");
 const HUB = hubs.prepare({ items, weekStartOf, weekInfo, mondayOf, nowJST, thisMonth, hashSlug });
 const stats = require("./stats"); // 統計ページ /stats（日本語・英語）
 const guides = require("./guides"); // 海外の旅行者向けガイド /{en,ko,zh-tw,zh-cn}/guide/（src/guides.js）
+// 外国語の商品ページ「日本のどこで買える？」から、初心者向けガイド（遊び方・両替機・免税）へのリンク文
+const GUIDE_HOWTO = { en: "New to gachapon? How to play: coins, change machines & tax-free", ko: "가챠가 처음이라면: 동전·환전기·면세 안내", "zh-tw": "第一次玩扭蛋？硬幣、換鈔機與免稅說明", "zh-cn": "第一次玩扭蛋？硬币、换钞机与免税说明" };
+// 外国語の駅ページから、その街の旅行ガイドへ（駅slug → ガイドslug）。該当がない駅はリンクなし
+const GUIDE_OF_STATION = (st) => st.slug === "ikebukuro" ? "gashapon-department-store-ikebukuro"
+  : /-airport$/.test(st.slug) && st.slug !== "new-chitose-airport" ? "airport-gachapon"
+  : st.pref === "東京都" && st.region === "kanto" ? "tokyo-gachapon-shops"
+  : st.pref === "大阪府" ? "osaka-gachapon-shops"
+  : st.pref === "福岡県" ? "fukuoka-gachapon" : null;
+const GUIDE_LINK_LABEL = { en: "Travel guide", ko: "여행 가이드", "zh-tw": "旅遊攻略", "zh-cn": "旅游攻略" };
 const STATS = stats.compute({ items, weekStartOf, isReissue: hubs.isReissue, CHARAS, thisMonth });
 // 一覧ページのタイトルの【◯年◯月】：その一覧の中でいちばん新しい更新（追加日・発売月）の月。先月より古ければ付けない
 const PREV_MONTH = new Date(Date.UTC(nowJST.getUTCFullYear(), nowJST.getUTCMonth() - 1, 1)).toISOString().slice(0, 7);
@@ -1417,7 +1426,7 @@ ${content}
     // 同じ週に発売のガチャ（自分は除く。人気順に最大6件。日本語以外はその言葉の名前があるものだけ）
     const sameWeekList = wi && HUB.weeks.get(wi.key) ? HUB.weeks.get(wi.key).list.filter((x) => x !== it && hasName(x, lang)).sort(byPopular).slice(0, 6) : [];
     const relatedShown = related.filter((x) => !sameWeekList.includes(x));
-    let whereLd = null; // 日本語以外の「日本のどこで買える？」のFAQ（下の where-sec で作る）
+    let whereLd = null; // 「どこで売ってる？／日本のどこで買える？」のFAQPage（全言語。下の where-sec で作る）
     const mo =wi ? (lang !== "ja" ? t.x.weekOf(t.month(it.release), wi.range.split("〜")[0]) : `${wi.m}月第${wi.no}週（${wi.range.split("〜")[0]}〜）`) : t.month(it.release);
     const ln = (it.lineup_names || []).slice(0, 3);
     let desc = t.itemDesc(it, name, maker, mo);
@@ -1559,6 +1568,7 @@ ${content}
       [`どこで売ってる？`, whereTxt],
       ...(draws ? [[`全種類そろえるには何回くらい？`, `どれも同じ確率で出るとすると、全${n}種そろうまでに平均で約${draws}回${Number(it.price) > 0 ? `（約${(draws * it.price).toLocaleString("ja-JP")}円）` : ""}かかる計算です。欲しいものが決まっているなら、フリマアプリなどで単品を探すのも手です。`]] : []),
     ];
+    whereLd = { "@context": "https://schema.org", "@type": "FAQPage", inLanguage: "ja", mainEntity: qa.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) };
     return `<section class="section where-sec">
     <div class="panel">
       <h2 style="font-size:22px">${esc(it.name)}はどこで売ってる？</h2>
@@ -1598,6 +1608,7 @@ ${content}
       ${rows.length ? `<ul class="where-shops">${rows.map(row).join("")}</ul>` : ""}
       <h3 class="arr-h">${esc(W.qaH)}</h3>
       <dl class="item-qa">${qa.map(([q, a]) => `<div><dt>${esc(q)}</dt><dd>${esc(a)}</dd></div>`).join("")}</dl>
+      ${GUIDE_HOWTO[lang] ? `<p class="fine" style="margin-top:10px"><a href="${c.H}guide/how-to-play-gachapon.html">${esc(GUIDE_HOWTO[lang])} →</a></p>` : ""}
     </div>
   </section>`;
   })()}
@@ -2287,6 +2298,7 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
     <div class="map-add-btns"><a class="btn btn-gold" href="${c.R}gachakatsu.html">${esc(S.routeGo)}</a></div>
     <h3 class="arr-h">${esc(S.tipsH)}</h3>
     <ul class="prose" style="margin:8px 0 0;padding-left:1.2em">${S.tips.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>
+    ${(() => { const g = GUIDE_OF_STATION(st); const i = g ? guides.SLUGS.indexOf(g) : -1; return i >= 0 && guides.SHORT[lang] ? `<p class="fine" style="margin-top:10px">${esc(GUIDE_LINK_LABEL[lang] || "Guide")}: <a href="${c.H}guide/${g}.html">${esc(guides.SHORT[lang][i])} →</a></p>` : ""; })()}
   </div></section>`}
   ${others.length ? `<section class="section section-tight"><div class="section-head"><h2>${ja ? "同じエリアのほかの駅" : esc(S.otherH)}</h2></div>
     <div class="chara-list">${others.map((x) => `<a class="chara-chip" href="${c.H}station/${x.slug}.html">${esc(stName(x))}<small>${x.count}</small></a>`).join("")}<a class="chara-chip chara-more" href="${c.H}station.html">${ja ? "駅をすべて見る →" : esc(S.allStations)}</a></div></section>` : ""}
