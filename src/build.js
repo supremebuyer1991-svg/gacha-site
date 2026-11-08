@@ -51,6 +51,7 @@ const nowJST = new Date(Date.now() + 9 * 3600e3);
 const today = nowJST.toISOString().slice(0, 10);
 const thisMonth = today.slice(0, 7);
 const MONTH_EN = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const MONTH_FULL = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const daysBetween = (a, b) => Math.round((new Date(b) - new Date(a)) / 864e5);
 const jstParts = (iso) => {
   const d = new Date(new Date(iso).getTime() + 9 * 3600e3);
@@ -199,7 +200,7 @@ const T = {
     groupsHint: "If you don't narrow it down, everything in that group counts. Pick a detail to see even finer options.",
     budgets: [["any", "Any"], ["300", "Up to ¥300"], ["500", "¥400–500"], ["premium", "¥600+"]],
     quizBtn: "Show my matches", results: "Your matches",
-    newTitle: "New in Japan", toCalendar: "Release calendar", rankTitle: "Most popular right now", genreTitle: "Browse by genre", typeTitle: "Browse by type", typePage: (g) => `${g} capsule toys in Japan – new releases`, typeLead: (g, n) => `${n} ${g.toLowerCase()} gacha series sold in Japan, newest first. Tap one to see the price, release week and shops that have it.`,
+    newTitle: "New in Japan", toCalendar: "Release calendar", rankTitle: "Most popular right now", genreTitle: "Browse by genre", typeTitle: "Browse by type", typePage: (g) => `${g} gachapon (capsule toys) in Japan – new releases`, typeLead: (g, n) => `${n} ${g.toLowerCase()} gacha series sold in Japan, newest first. Tap one to see the price, release week and shops that have it.`,
     maker: "Maker", release: "Release", genre: "Genre", tags: "Tags",
     findStores: "Where can I buy it?", official: "Maker's page (Japanese)",
     storesTitle: "Shops in Japan that have it", geoBtn: "Show shops near me", or: "or", prefAria: "Filter by prefecture", loading: "Loading…",
@@ -235,16 +236,16 @@ const T = {
       relNow: "This week", relFrom: (m, d) => `From ${m}/${d}`, relOut: "Out now",
       popSeries: "Popular series", allChara: "All characters →", moreSeries: "More from this series", charaChip: (L) => `${L} gacha`,
       listMore: (max, n, href) => `Showing the latest ${max} of ${n}. Older ones are in the <a href="${href}">release calendar</a>.`,
-      charaTitle: (L, ym) => `${L} gacha (capsule toys) in Japan – new releases & where to buy`,
+      charaTitle: (L, ym) => `${L} gachapon (capsule toys) in Japan – new releases & where to buy`,
       charaLead: (L, n) => `${n} ${L} capsule toy series, newest first, with release dates, prices and where to buy.`,
-      charaIdxTitle: "Gacha by character & series",
+      charaIdxTitle: "Gachapon by character & series",
       charaIdxLead: (n) => `Looking for a favorite character? Browse capsule toys sold in Japan by character or series – ${n} lists.`,
       // range は「11/2〜11/8」の形で来る（英語は enRange で「Nov 2–8」に）。names は人気の上位（中国語・韓国語の訳では使わなくてよい）
-      weekTitle: (range, n) => `New gacha releasing this week (${enRange(range)}) – ${n} series`,
+      weekTitle: (range, n) => `New gachapon releasing this week (${enRange(range)}) – ${n} series`,
       weekLead: (n, range, names = []) => `${n} capsule toy series releasing in Japan this week${range ? ` (${enRange(range)})` : ""}, most popular first.${names.length ? ` Including ${names.join(", ")}.` : ""}`,
-      nextTitle: (range, n) => `Gacha releasing next week (${enRange(range)}) – ${n} series`,
+      nextTitle: (range, n) => `Gachapon releasing next week (${enRange(range)}) – ${n} series`,
       nextLead: (n, range, names = []) => `${n} capsule toy series releasing in Japan next week${range ? ` (${enRange(range)})` : ""}.${names.length ? ` Including ${names.join(", ")}.` : ""}`,
-      newPageTitle: "Latest gacha (capsule toys) added",
+      newPageTitle: "Latest gachapon (capsule toys) added",
       newPageLead: "The latest Japanese capsule toys added to the site, newest first, with release month, price and number of designs.",
     },
     // 駅のまわりのガチャのお店（/station/）。中国語・韓国語は src/i18n/<lang>.js の stn
@@ -282,7 +283,7 @@ const T = {
     hub: {
       sep: ", ", count: (k) => ` (${k})`,
       weekLabel: (m, no) => `${MONTH_EN[m - 1]} week ${no}`, weekShort: (no) => `Week ${no}`,
-      weekTitle: (lab, range, n) => `Gacha releasing ${lab} (${enRange(range)}): ${n} new series – dates & prices`,
+      weekTitle: (lab, range, n) => `Gachapon releasing ${lab} (${enRange(range)}): ${n} new series – dates & prices`,
       weekH1: (lab, range) => `${lab} (${enRange(range)}) gacha releases`, weekSub: (n) => `${n} series`,
       weekLead: (lab, range, n) => `${n} capsule toy series releasing in Japan in ${lab} (${enRange(range)}), most popular first. Shops may get them a few days earlier or later.`,
       including: (names) => `Including ${names.join(", ")}.`, weekNavAria: "Previous and next week", toMonth: (label) => `All of ${label}`,
@@ -324,9 +325,9 @@ const T = {
       saihanTitle: (month) => `Gacha reissues in Japan (${month}) – re-released capsule toys`, saihanH1: "Gacha reissues",
       saihanLead: (n) => `${n} capsule toys coming back as reissues or re-releases, by month. Where we know it, we link to the original release.`,
     },
-    itemDesc: (it, n, mk, mo) => `${n} by ${mk}: released ${mo}${it.price ? `, ¥${it.price} per play` : ""}${it.lineup ? `, ${it.lineup} designs` : ""}. ${it.description_en ? it.description_en + " " : ""}See which shops in Japan have it, or buy the full set online.`,
-    genrePage: (g) => `${g} capsule toys in Japan – new releases`, genreLead: (g, n) => `${n} new and upcoming ${g.toLowerCase()} gacha in Japan, newest first. Tap one to see the price, release week and shops that have it.`,
-    makerPage: (m) => `${m} capsule toys – new releases in Japan`, makerLead: (m, n, list) => `${n} gacha series by ${m}, newest first.${leadTailEn(list)}`,
+    itemDesc: (it, n, mk, mo) => `${n} by ${mk}: released ${mo}${it.price ? `, ¥${it.price} per play` : ""}${it.lineup ? `, ${it.lineup} designs` : ""}. ${it.description_en ? it.description_en + " " : ""}Find shops in Japan that have it in stock, or buy the full set online.`,
+    genrePage: (g) => `${g} gachapon (capsule toys) in Japan – new releases`, genreLead: (g, n) => `${n} new and upcoming ${g.toLowerCase()} gacha in Japan, newest first. Tap one to see the price, release week and shops that have it.`,
+    makerPage: (m) => `${m} gachapon – new capsule toy releases in Japan`, makerLead: (m, n, list) => `${n} gacha series by ${m}, newest first.${leadTailEn(list)}`,
     empty: "No items listed yet.",
     calTitle: "Japan gacha release calendar", calH1: "Gacha release calendar", calLead: "Every announced capsule toy in Japan, sorted by release week. Visiting soon? Check what comes out during your trip. Shops can get them a few days earlier or later.",
     calDesc: "Monthly calendar of new Japanese capsule toy (gacha) releases with prices, number of designs and makers.",
@@ -343,8 +344,12 @@ const T = {
       span: (a, b) => `${a} – ${b}`,
       title: (span) => `Gachapon release calendar ${span}: new capsule toys by week`,
       desc: (span, wn, range, mn) => `New Japanese capsule toys (gachapon) by release week, ${span}. ${wn} series this week (${range}) and ${mn} this month, with prices, number of designs and makers.`,
-      monthH1: (y, mo, n, future) => `${future ? "New gacha releasing in" : "Gacha released in"} ${MONTH_EN[mo - 1]} ${y} (${n} series)`,
-      monthTitle: (y, mo, n, future) => `${future ? "New gachapon releasing in" : "Gachapon released in"} ${MONTH_EN[mo - 1]} ${y} (${n} series) – release dates & prices`,
+      // 月のページ＝その月のまとめ記事（タイトル・見出し・はじめの説明・人気トップ10）
+      monthH1: (y, mo, n, future) => `New Japanese gachapon in ${MONTH_FULL[mo - 1]} ${y}: ${n} releases`,
+      monthTitle: (y, mo, n, future) => `New Japanese Gachapon in ${MONTH_FULL[mo - 1]} ${y}: ${n} capsule toy releases`,
+      // d：label（月）n future tops（キャラのリンクHTML・エスケープ済み）min max（値段）pct（500円以上の割合）re（再販の数）
+      roundIntro: (d) => `${MONTH_FULL[d.mo - 1]} ${d.y} ${d.future ? "brings" : "brought"} ${d.n} new gachapon (capsule toy) releases in Japan.${d.tops ? ` The most common characters and series: ${d.tops}.` : ""}${d.max ? ` Prices ${d.min === d.max ? `are ¥${d.min} per play` : `range from ¥${d.min} to ¥${d.max} per play`}, and ${d.pct}% cost ¥500 or more.` : ""} ${d.re ? `${d.re} of them ${d.re === 1 ? "is a reissue" : "are reissues"} of earlier series.` : "No reissues — every series is new."}`,
+      top10H: (label, now, y, mo) => (now ? "Top 10 this month" : `Top 10 of ${MONTH_FULL[mo - 1]} ${y}`),
       weeksTxt: (no, k) => `week ${no}: ${k}`, weeksSep: ", ",
       monthDesc: (y, mo, n, future, weeksTxt, top) => `${n} capsule toy series ${future ? "releasing" : "released"} in ${MONTH_EN[mo - 1]} ${y}, grouped by release week${weeksTxt ? ` (${weeksTxt})` : ""}. Including ${top.join(", ")}.`,
     },
@@ -2039,9 +2044,19 @@ ${content}
     const tops = hubs.monthTops(groups.flatMap((g) => g.list), { CHARAS });
     const tx = tops.map(([ch, k]) => `<a href="${c.H}chara/${ch.slug}.html">${esc(charaLabel(ch, lang))}</a>（${k}）`);
     if (!tops.length && lang === "ja") return "";
-    return lang === "ja" ? `<p class="lead month-intro">この月に多いキャラクター・作品：${tx.join("・")}</p>`
-      : ((s) => (s ? `<p class="lead month-intro">${s}</p>` : ""))(t.hub.monthIntro(esc(t.month(m)), n, future, tops.map(([ch, k]) => `<a href="${c.H}chara/${ch.slug}.html">${esc(charaLabel(ch, lang))}</a>${t.hub.count(k)}`).join(t.hub.sep)));
+    if (lang === "ja") return `<p class="lead month-intro">この月に多いキャラクター・作品：${tx.join("・")}</p>`;
+    // 日本語以外：その月のまとめ（多いキャラクター上位3つ・値段の幅・500円以上の割合・再販の数）
+    const all = groups.flatMap((g) => g.list), ps = all.map((it) => Number(it.price)).filter((p) => p > 0);
+    return `<p class="lead month-intro">${C.roundIntro({ label: esc(t.month(m)), y: Number(y), mo: Number(mo), n, future,
+      tops: tops.slice(0, 3).map(([ch, k]) => `<a href="${c.H}chara/${ch.slug}.html">${esc(charaLabel(ch, lang))}</a>${t.hub.count(k)}`).join(t.hub.sep),
+      min: ps.length ? Math.min(...ps) : 0, max: ps.length ? Math.max(...ps) : 0, pct: ps.length ? Math.round((ps.filter((p) => p >= 500).length / ps.length) * 100) : 0,
+      re: all.filter(hubs.isReissue).length })}</p>`;
   })()}${hubs.weekIndex(HUB, m, { lang, c, t, WEEK })}</header>
+  ${en ? (() => {
+    // 日本語以外：人気トップ10（その言葉の名前がある商品だけ。人気の順はほかの一覧と同じ）
+    const top = groups.flatMap((g) => g.list).filter((it) => hasName(it, lang)).sort(byPopular).slice(0, 10);
+    return top.length ? `<section class="section section-tight month-top10"><div class="section-head"><h2>${esc(C.top10H(t.month(m), m === thisMonth, Number(y), Number(mo)))}</h2></div><div class="grid">${top.map((it, i) => card(it, c, i)).join("")}</div></section>` : "";
+  })() : ""}
   <div class="cal">${monthBlock(m, c)}</div>
   ${pager}
   ${archiveNav(c, m)}
@@ -2090,14 +2105,17 @@ ${content}
   {
     const feed = [...items].filter((it) => hasName(it, lang)).sort(byNewest).slice(0, 50);
     const self = `${SITE_URL}/${lang === "ja" ? "" : lang + "/"}rss.xml`;
+    // 商品の写真（Bluesky などの自動投稿で使う）。JPEG の SNS 用画像は build のあとに作るので、ここは元の写真（webp）。Pinterest 用は src/social-img.js の pinterest-<lang>.xml
+    const IMG_TYPE = { webp: "image/webp", jpg: "image/jpeg", jpeg: "image/jpeg", png: "image/png" };
+    const rssImg = (it) => { const u = absImg(it), ty = IMG_TYPE[(u.match(/\.(\w+)(?:\?|$)/) || [])[1]]; return u && ty ? `<enclosure url="${esc(u)}" type="${ty}" length="0"/><media:content url="${esc(u)}" medium="image" type="${ty}"/>` : ""; };
     write(`${langDir(lang)}rss.xml`, `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/"><channel>
 <title>${esc(lang === "ja" ? "ガチャプラネット 新着ガチャ" : `${site.name} – ${t.newTitle}`)}</title>
 <link>${esc(canonical(lang, "new.html"))}</link>
 <description>${esc(t.description)}</description>
 <language>${LANG_META[lang].html.toLowerCase()}</language>
 <atom:link href="${esc(self)}" rel="self" type="application/rss+xml"/>
-${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(canonical(lang, `item/${it.id}.html`))}</link><guid>${esc(canonical(lang, `item/${it.id}.html`))}</guid><pubDate>${new Date(`${it.added || today}T09:00:00+09:00`).toUTCString()}</pubDate><description>${esc(`${makerOf(it, lang)} · ¥${it.price}${it.lineup ? " · " + t.lineup(it.lineup) : ""} · ${t.month(it.release)}`)}</description></item>`).join("\n")}
+${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(canonical(lang, `item/${it.id}.html`))}</link><guid>${esc(canonical(lang, `item/${it.id}.html`))}</guid><pubDate>${new Date(`${it.added || today}T09:00:00+09:00`).toUTCString()}</pubDate><description>${esc(`${makerOf(it, lang)} · ¥${it.price}${it.lineup ? " · " + t.lineup(it.lineup) : ""} · ${t.month(it.release)}`)}</description>${rssImg(it)}</item>`).join("\n")}
 </channel></rss>
 `);
   }

@@ -2,6 +2,7 @@
 // SNS（Threads・Instagram・Pinterest）用の画像を作る：dist/images/social/商品id.jpg（1200×1200、JPEG。写真を大きく、右下にサイト名を小さく）
 // Threads と Instagram は JPEG/PNG しか受け付けないので、商品の webp 写真から作る。
 // 対象は 先月以降に発売の商品（最大400件）。sharp が必要（デプロイのときに入れる）。
+// 画像を作ったあと、Pinterest・Bluesky の自動投稿用 RSS も書く：pinterest.xml（日本語）・pinterest-en.xml・pinterest-ko.xml・pinterest-zh-tw.xml・pinterest-zh-cn.xml
 "use strict";
 const fs = require("fs"), path = require("path");
 let sharp; try { sharp = require("sharp"); } catch (e) { console.log("sharp がないので SNS 用の画像は作りません"); process.exit(0); }
@@ -65,4 +66,28 @@ ${feedEn.map((it) => { const u = `${SITE}/images/social/${it.id}.jpg`; const d =
 `;
   fs.writeFileSync(path.join(ROOT, "dist", "pinterest-en.xml"), xmlEn);
   console.log(`Pinterest 用の RSS（英語）：${feedEn.length}件`);
+  // 韓国語・中国語（https://gachapla.com/pinterest-ko.xml など）：その言葉の名前（names.<lang>）がある商品だけ。リンクは /<lang>/item/
+  const XL = {
+    ko: { language: "ko", chTitle: "GACHA PLANET | 일본 신작 가챠(캡슐토이)", chDesc: "일본 가챠(가샤폰·캡슐토이) 신작의 발매일·가격·라인업",
+      title: (n) => `${n} 가챠`, rel: (it) => (it.release ? `${it.release.slice(0, 4)}년 ${+it.release.slice(5, 7)}월 발매` : ""),
+      desc: (it, r) => [`1회 ${it.price}엔`, it.lineup ? `전 ${it.lineup}종` : "", r, "일본 가챠(캡슐토이)"].filter(Boolean).join(" · ") + ". 발매일·가격·재고가 있는 일본 매장은 GACHA PLANET에서." },
+    "zh-tw": { language: "zh-TW", chTitle: "GACHA PLANET｜日本扭蛋新品", chDesc: "日本扭蛋（轉蛋）新品的發售日・價格・陣容",
+      title: (n) => `${n}（扭蛋）`, rel: (it) => (it.release ? `${it.release.slice(0, 4)}年${+it.release.slice(5, 7)}月發售` : ""),
+      desc: (it, r) => [`一轉${it.price}日圓`, it.lineup ? `全${it.lineup}種` : "", r, "日本扭蛋"].filter(Boolean).join("・") + "。發售日・價格・日本有庫存的扭蛋店，請看 GACHA PLANET。" },
+    "zh-cn": { language: "zh-CN", chTitle: "GACHA PLANET｜日本扭蛋新品", chDesc: "日本扭蛋新品的发售日・价格・阵容",
+      title: (n) => `${n}（扭蛋）`, rel: (it) => (it.release ? `${it.release.slice(0, 4)}年${+it.release.slice(5, 7)}月发售` : ""),
+      desc: (it, r) => [`每次${it.price}日元`, it.lineup ? `全${it.lineup}款` : "", r, "日本扭蛋"].filter(Boolean).join("・") + "。发售日・价格・日本有库存的扭蛋店，请看 GACHA PLANET。" },
+  };
+  for (const [lang, L] of Object.entries(XL)) {
+    let NM = {}; try { NM = JSON.parse(fs.readFileSync(path.join(ROOT, "data", "i18n", `names-${lang}.json`), "utf8")) || {}; } catch (e) {}
+    const feedL = pinnable.filter((it) => NM[it.id]).slice(0, 100).map((it) => ({ ...it, names: { [lang]: NM[it.id] } }));
+    const xmlL = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/"><channel>
+<title>${esc(L.chTitle)}</title><link>${SITE}/${lang}/</link><description>${esc(L.chDesc)}</description><language>${L.language}</language>
+${feedL.map((it) => { const u = `${SITE}/images/social/${it.id}.jpg`; return `<item><title>${esc(L.title(it.names[lang]))}</title><link>${SITE}/${lang}/item/${it.id}</link><guid isPermaLink="false">gachapla-${lang}-${esc(it.id)}</guid><pubDate>${new Date((it.added || "2026-11-01") + "T09:00:00+09:00").toUTCString()}</pubDate><description>${esc(L.desc(it, L.rel(it)))}</description><enclosure url="${u}" type="image/jpeg" length="0"/><media:content url="${u}" medium="image" type="image/jpeg"/></item>`; }).join("\n")}
+</channel></rss>
+`;
+    fs.writeFileSync(path.join(ROOT, "dist", `pinterest-${lang}.xml`), xmlL);
+    console.log(`Pinterest 用の RSS（${lang}）：${feedL.length}件`);
+  }
 })();

@@ -249,8 +249,11 @@ module.exports = {
     span: (a, b) => `${a}~${b}`,
     title: (span) => `일본 가챠(캡슐토이) 발매 캘린더 ${span} | 주별 신작`,
     desc: (span, wn, range, mn) => `일본 가챠(캡슐토이) 신작을 발매 주별로 정리한 캘린더예요 (${span}). 이번 주(${range})는 ${wn}개 시리즈, 이번 달은 ${mn}개 시리즈가 발매돼요. 가격·종류 수·제조사도 함께 확인하세요.`,
-    monthH1: (y, mo, n, future) => `${y}년 ${mo}월 발매 일본 가챠 신작 (${n}개 시리즈)`,
-    monthTitle: (y, mo, n, future) => `${y}년 ${mo}월 발매 일본 가챠 신작 ${n}개 시리즈 | 발매일·가격`,
+    // 월별 페이지 = 그달의 정리 기사 (제목·H1·도입문·인기 TOP 10)
+    monthH1: (y, mo, n, future) => `${y}년 ${mo}월 일본 신작 가챠 ${n}종`,
+    monthTitle: (y, mo, n, future) => `${y}년 ${mo}월 일본 신작 가챠 ${n}종 발매 일정`,
+    roundIntro: (d) => `${d.label}에 일본에서 ${d.future ? "발매되는" : "발매된"} 신작 가챠(캡슐토이)는 ${d.n}종이에요.${d.tops ? ` 많이 나오는 작품은 ${d.tops}이에요.` : ""}${d.max ? ` 가격은 ${d.min === d.max ? `모두 1회 ${d.min}엔` : `1회 ${d.min}~${d.max}엔`}이고, 500엔 이상이 ${d.pct}%예요.` : ""} ${d.re ? `그중 ${d.re}종은 예전 시리즈의 재판매(복각)예요.` : "재판매 없이 모두 새 시리즈예요."}`,
+    top10H: (label, now) => (now ? "이달의 인기 가챠 TOP 10" : `${label} 인기 가챠 TOP 10`),
     weeksTxt: (no, k) => `${no}주차 ${k}개`, weeksSep: ", ",
     monthDesc: (y, mo, n, future, weeksTxt, top) => `${y}년 ${mo}월에 일본에서 발매${future ? "되는" : "된"} 가챠 ${n}개 시리즈를 발매 주별로 정리했어요${weeksTxt ? ` (${weeksTxt})` : ""}. ${top.join(", ")} 등.`,
   },
