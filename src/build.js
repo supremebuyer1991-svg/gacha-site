@@ -157,8 +157,8 @@ const T = {
     htmlLang: "en", ogLocale: "en_US", switchLabel: "日本語", switchAria: "日本語版",
     tagline: site.tagline_en, description: site.description_en,
     sampleBar: "Showing sample data. All items, stores and stock levels are fictional.",
-    navShort: { map: "Map", katsu: "Route", toprated: "Top shops", lottery: "Lottery", ranking: "Popular" },
-    nav: { map: "Gacha map", katsu: "Gacha route", week: "This week", lottery: "Lotteries", toprated: "Top shops", new: "New", ranking: "Popular", calendar: "Calendar", genre: "Types", faq: "FAQ" },
+    navShort: { map: "Map", katsu: "Route", toprated: "Top shops", lottery: "Lottery", ranking: "Popular", station: "Shops" },
+    nav: { map: "Gacha map", station: "Gacha shops", katsu: "Gacha route", week: "This week", lottery: "Lotteries", toprated: "Top shops", new: "New", ranking: "Popular", calendar: "Calendar", genre: "Types", faq: "FAQ" },
     navAria: "Main menu", footAria: "Site information", about: "About & contact",
     disclosure: "As an Amazon Associate and Rakuten affiliate, we earn from qualifying purchases. Product images and names belong to their respective makers.",
     month: (ym) => { const [y, m] = ym.split("-"); return `${MONTH_EN[Number(m) - 1]} ${y}`; },
@@ -232,10 +232,14 @@ const T = {
       idxLead: (n) => `Capsule toy (gacha) shops near ${n} major stations and airports in Japan, from Bandai's official shop list. Pick a station to see the shops within walking distance.`,
       regions: { kanto: "Tokyo area", kansai: "Osaka, Kyoto & Kobe", chubu: "Nagoya", kyushu: "Fukuoka & Okinawa", north: "Hokkaido & Tohoku", chugoku: "Hiroshima", airport: "Airports" },
       h1: (name) => `Gacha shops near ${name}`,
-      title: (name, n, region) => `Gachapon shops near ${name} (${n}) – ${region ? `${region} ` : ""}capsule toy map`,
+      title: (name) => `Gachapon (gashapon) shops near ${name}`,
       desc: (name, n, km, near) => `${n} official Bandai gacha (capsule toy) shops within ${km} km of ${name}. The closest is ${near}. Walking times, addresses and Google Maps links.`,
       lead: (name, n, km, near, w) => `There are ${n} official Bandai gacha (capsule toy) shops within ${km} km of ${name}. The closest is “${near}”, about ${w} min on foot.`,
       // いちばん近いお店の取扱が少ないとき：取扱がいちばん多いお店を先に
+      // 外国語：取扱がいちばん多いお店を先に（チェーン名で。チェーンでないお店は名前を出さない）
+      descBest: (name, n, km, label, k) => `${n} official Bandai gacha (capsule toy) shops within ${km} km of ${name}. ${label ? `The best-stocked is ${label}` : "The best-stocked shop has"} with ${k} official series. Walking times, addresses and Google Maps links.`,
+      leadBest: (name, n, km, label, k, w) => `There are ${n} official Bandai gacha (capsule toy) shops within ${km} km of ${name}, listed by selection size. ${label ? `The best-stocked is ${label}` : "The best-stocked shop has"} with ${k} official series, about ${w} min on foot.`,
+      flagship: "Biggest selection", heroBtn: "Find gacha shops by station",
       leadTop: (name, n, km, top, k, w, near, wn) => `There are ${n} official Bandai gacha (capsule toy) shops within ${km} km of ${name}. The best-stocked is “${top}” with ${k} official series, about ${w} min on foot; the closest is “${near}” (${wn} min).`,
       shopsH: "Gacha shops nearby", walk: (m, d) => `${m} min walk (${d})`, titles: (n) => `${n} official series`,
       gmaps: "Open in Google Maps", mapGo: "See on the map",
@@ -890,6 +894,9 @@ fs.mkdirSync(path.join(OUT, "images", "og"), { recursive: true });
 if (fs.existsSync(path.join(ROOT, "brand", "header.png"))) fs.copyFileSync(path.join(ROOT, "brand", "header.png"), path.join(OUT, "images", "og", "site.png"));
 // SNSの共有画像（1200×630。Xのカードは横長すぎる画像だと出ないため）
 if (fs.existsSync(path.join(ROOT, "brand", "og-site.jpg"))) fs.copyFileSync(path.join(ROOT, "brand", "og-site.jpg"), path.join(OUT, "images", "og", "site.jpg"));
+// 英語版のSNS画像（キャッチコピーを英語にしたもの）
+const OG_SITE_EN = fs.existsSync(path.join(ROOT, "brand", "og-site-en.jpg"));
+if (OG_SITE_EN) fs.copyFileSync(path.join(ROOT, "brand", "og-site-en.jpg"), path.join(OUT, "images", "og", "site-en.jpg"));
 
 // 在庫を確認する商品の一覧（Cloudflareの在庫確認ワーカーが読む）：先月以降に発売のバンダイ商品
 {
@@ -997,7 +1004,9 @@ for (const lang of LANGS) {
     const ld = jsonld.map((o) => `<script type="application/ld+json">${JSON.stringify(o).replace(/</g, "\\u003c")}</script>`).join("\n");
     // 「@」は日本語だけのページ（サイト直下）。外国語では抽選・高評価店は出さず、マップ・ガチャ活には「(JP)」を付ける
     const NAV = [["new.html", "new"], ["week.html", "week"], ["index.html#ranking", "ranking"], ["calendar.html", "calendar"], ["@lottery.html", "lottery"], ["@map.html", "map"], ["@gachakatsu.html", "katsu"], ["@toprated.html", "toprated"], ["index.html#types", "genre"], ["faq.html", "faq"]]
-      .filter(([, k]) => lang === "ja" || !["lottery", "toprated"].includes(k));
+      .filter(([, k]) => lang === "ja" || !["lottery", "toprated", "katsu"].includes(k))
+      // 外国語：日本語だけのマップの代わりに、駅からさがすお店の一覧へ
+      .map((e) => (lang !== "ja" && e[1] === "map" ? ["station.html", "station"] : e));
     const JP_TAG = { en: " (JP)", "zh-cn": "（日文）", "zh-tw": "（日文）", ko: " (일본어)" };
     const navLabel = (h, s) => s + (h[0] === "@" && lang !== "ja" ? JP_TAG[lang] || " (JP)" : "");
     const head = `<title>${esc(fullTitle)}</title>
@@ -1019,7 +1028,7 @@ ${site.naver_verification ? `<meta name="naver-site-verification" content="${esc
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:type" content="${ogType}">
 <meta property="og:url" content="${esc(canonical(lang, rel))}">
-<meta property="og:image" content="${esc(ogImage || `${SITE_URL}/images/og/site.jpg`)}">
+<meta property="og:image" content="${esc(ogImage || `${SITE_URL}/images/og/${lang === "en" && OG_SITE_EN ? "site-en" : "site"}.jpg`)}">
 <meta name="twitter:card" content="summary_large_image">
 ${xAcc ? `<meta name="twitter:site" content="@${esc(xAcc)}">` : ""}
 <meta name="theme-color" content="#f6f8ff">
@@ -1088,6 +1097,19 @@ ${content}
     const opt = (name, type, value, label, checked) =>
       `<label class="opt"><input type="${type}" name="${name}" value="${value}"${checked ? " checked" : ""}><span>${label}</span></label>`;
 
+    // 駅からさがす・人気シリーズ（外国語は「今週発売」のすぐ下に、日本語は下の方）
+    const homeStnSeries = `  ${(() => { const pick = ["akihabara", "ikebukuro", "shinjuku", "shibuya", "harajuku", "umeda", "namba", "hakata", "sapporo"].map((s) => STATIONS.find((x) => x.slug === s)).filter(Boolean); return pick.length ? `<section class="section section-tight" id="stations">
+    <div class="section-head"><h2>${lang === "ja" ? "駅からガチャのお店をさがす" : t.stn.homeH}</h2></div>
+    <div class="chara-list">${pick.map((x) => `<a class="chara-chip" href="${c.H}station/${x.slug}.html">${esc((x[lang] || x.en).replace(/[（(].*?[）)]/g, "").trim().replace(/(駅| Station|站|역)$/, ""))}<small>${x.shops.length}</small></a>`).join("")}<a class="chara-chip chara-more" href="${c.H}station.html">${lang === "ja" ? "駅をすべて見る →" : t.stn.allStations}</a></div>
+  </section>` : ""; })()}
+
+  <section class="section section-tight" id="series">
+    <div class="section-head"><h2>${lang === "ja" ? "人気シリーズ" : t.x.popSeries}</h2></div>
+    <div class="series-tiles">${SERIES.map((sr) => { const n = seriesItems(sr).length; return n ? `<a class="st st-${sr.slug}" href="${c.H}chara/${sr.slug}.html"><span class="st-e" aria-hidden="true">${sr.emoji}</span><span class="st-l">${lang === "ja" ? sr.label : (I18N_CHARA[lang] && I18N_CHARA[lang][sr.en]) || sr.en}</span><span class="st-n">${t.series(n)}</span></a>` : ""; }).join("")}</div>
+    <div class="chara-list chara-list-top">${CHARAS.slice(0, 15).map((ch) => `<a class="chara-chip" href="${c.H}chara/${ch.slug}.html">${esc(charaLabel(ch, lang))}<small>${ch.list.length}</small></a>`).join("")}<a class="chara-chip chara-more" href="${c.H}chara.html">${lang === "ja" ? "キャラクター・作品をすべて見る →" : t.x.allChara}</a></div>
+  </section>
+
+`;
     const body = `
 <div class="wrap">
   <section class="hero">
@@ -1095,6 +1117,7 @@ ${content}
       <div class="hero-text">
         <h1 class="hero-h1">${esc(t.u.homeH1(YM_NOW_EN)).replace(/\s*([【（(][^【（(]*)$/, ' <span class="h1-ym">$1</span>')}</h1>
         <p class="hero-lead">${t.heroLead}</p>
+        ${lang !== "ja" ? `<div class="item-actions"><a class="btn btn-gold" href="${c.H}station.html">${esc(t.stn.heroBtn)} →</a><a class="btn" href="${c.H}week.html">${t.x.weekH} →</a></div>` : ""}
         <div class="hero-planet" aria-hidden="true"><i class="ring"></i><i class="orb"></i><i class="ring ring-front"></i><i class="moon"></i></div>
         <p class="hero-sub">${t.heroSub}</p>
         <dl class="hero-stats">
@@ -1107,6 +1130,7 @@ ${content}
     <div class="grid row-scroll">${WEEK.items.slice(0, 12).map((it, i) => card(it, c, i)).join("")}<a class="card see-all" href="${c.H}week.html"><span class="see-all-in"><b>${lang !== "ja" ? t.x.seeAll : "全部見る"}</b><span>→</span></span></a></div>
   </section>` : ""}
   </section>
+  ${lang !== "ja" ? homeStnSeries : ""}
 
   <section class="section" id="new">
     <div class="section-head"><h2>${t.newTitle}</h2><span><a class="more" href="${c.H}week.html">${lang !== "ja" ? t.x.thisWeek : "今週発売"}</a>　<a class="more" href="${c.H}calendar.html">${t.toCalendar}</a></span></div>
@@ -1183,17 +1207,7 @@ ${content}
     <p class="more-wrap"><button type="button" class="btn" id="results-more" hidden>${t.showMore}</button></p>
   </section>
 
-  ${(() => { const pick = ["akihabara", "ikebukuro", "shinjuku", "shibuya", "harajuku", "umeda", "namba", "hakata", "sapporo"].map((s) => STATIONS.find((x) => x.slug === s)).filter(Boolean); return pick.length ? `<section class="section section-tight" id="stations">
-    <div class="section-head"><h2>${lang === "ja" ? "駅からガチャのお店をさがす" : t.stn.homeH}</h2></div>
-    <div class="chara-list">${pick.map((x) => `<a class="chara-chip" href="${c.H}station/${x.slug}.html">${esc((x[lang] || x.en).replace(/[（(].*?[）)]/g, "").trim().replace(/(駅| Station|站|역)$/, ""))}<small>${x.shops.length}</small></a>`).join("")}<a class="chara-chip chara-more" href="${c.H}station.html">${lang === "ja" ? "駅をすべて見る →" : t.stn.allStations}</a></div>
-  </section>` : ""; })()}
-
-  <section class="section section-tight" id="series">
-    <div class="section-head"><h2>${lang === "ja" ? "人気シリーズ" : t.x.popSeries}</h2></div>
-    <div class="series-tiles">${SERIES.map((sr) => { const n = seriesItems(sr).length; return n ? `<a class="st st-${sr.slug}" href="${c.H}chara/${sr.slug}.html"><span class="st-e" aria-hidden="true">${sr.emoji}</span><span class="st-l">${lang === "ja" ? sr.label : (I18N_CHARA[lang] && I18N_CHARA[lang][sr.en]) || sr.en}</span><span class="st-n">${t.series(n)}</span></a>` : ""; }).join("")}</div>
-    <div class="chara-list chara-list-top">${CHARAS.slice(0, 15).map((ch) => `<a class="chara-chip" href="${c.H}chara/${ch.slug}.html">${esc(charaLabel(ch, lang))}<small>${ch.list.length}</small></a>`).join("")}<a class="chara-chip chara-more" href="${c.H}chara.html">${lang === "ja" ? "キャラクター・作品をすべて見る →" : t.x.allChara}</a></div>
-  </section>
-
+  ${lang === "ja" ? homeStnSeries : ""}
   <section class="section" id="types">
     <div class="section-head"><h2>${t.typeTitle}</h2></div>
     <div class="genres types">${TYPES.filter((g) => inType(g.slug).length).map((g) => `<a href="${c.H}type/${g.slug}.html"><span class="ja">${phr(genreLabel(g, lang))}</span><span class="n">${t.series(inType(g.slug).length)}</span></a>`).join("")}</div>
@@ -1855,11 +1869,16 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
     const ja = lang === "ja", S = t.stn;
     const stName = (st) => st[lang] || st.en;
     const jl = ja ? "" : ' lang="ja"';
+    const chainLabelOr = (x) => { const ch = CHAIN_BY_SHOP.get(x.sh.id); return ch ? chainLabel(ch, lang) : x.sh.name; };
     const regionOf = (r) => (ja ? STATION_REGION_JA[r] : S.regions[r]) || r;
     const stCrumb = ja ? "駅からさがす" : S.crumb;
     for (const st of STATIONS) {
       const rel = `station/${st.slug}.html`, c = ctx(rel);
       const name = stName(st), n = st.shops.length, near = st.shops[0];
+      // 外国語：取扱（公式のシリーズ数）が多い順、同じなら近い順（日本語は近い順のまま）
+      const kOf = (x) => (SHOP_OFFICIAL[x.sh.id] || []).length;
+      const list = ja ? st.shops : [...st.shops].sort((a, b) => kOf(b) - kOf(a) || a.d - b.d);
+      const best = list[0], bestCh = ja ? null : CHAIN_BY_SHOP.get(best.sh.id), bestLabel = bestCh ? chainLabel(bestCh, lang) : null;
       const chainCount = new Map();
       for (const x of st.shops) { const ch = CHAIN_BY_SHOP.get(x.sh.id); if (ch && !ch.store) chainCount.set(ch, (chainCount.get(ch) || 0) + 1); }
       const chains = [...chainCount.entries()].sort((a, b) => b[1] - a[1]).map(([ch]) => ch);
@@ -1869,11 +1888,13 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
       const title = ja ? `${name}周辺のガチャガチャ設置場所・設置店${n}店${chains.length ? `｜${chains.slice(0, 2).map(chainName).join("・")}` : ""}【${YM_NOW}】` : S.title(name, n, regionOf(st.region));
       const lead = ja
         ? `${name}の周り${st.km}km以内に、バンダイ公式の取扱があるガチャガチャの設置場所（設置店）が${n}店あります。${top ? `取扱中のガチャがいちばん多いのは「${top.sh.name}」（${top.k}種・徒歩約${walkMin(top.d)}分）。いちばん近いのは「${near.sh.name}」（徒歩約${walkMin(near.d)}分・${fmtDist(near.d)}）。` : `いちばん近いのは「${near.sh.name}」（徒歩約${walkMin(near.d)}分・${fmtDist(near.d)}）。`}${chains.length ? `${chains.slice(0, 3).map(chainName).join("・")}${chains.length > 3 ? "など" : ""}のお店があります。` : ""}${!top && most && most.k ? `取扱中のガチャがいちばん多いのは「${most.sh.name}」（${most.k}種）です。` : ""}`
-        : top ? S.leadTop(name, n, st.km, top.sh.name, top.k, walkMin(top.d), near.sh.name, walkMin(near.d)) : S.lead(name, n, st.km, near.sh.name, walkMin(near.d));
-      const desc = ja ? `${name}の周り${st.km}km以内にあるガチャガチャの設置場所（設置店）${n}店を近い順に。いちばん近いのは「${near.sh.name}」（徒歩約${walkMin(near.d)}分）。住所・徒歩の目安・取扱中のガチャの数・Googleマップへのリンクつき。` : S.desc(name, n, st.km, near.sh.name);
+        : kOf(best) ? S.leadBest(name, n, st.km, bestLabel, kOf(best), walkMin(best.d)) : S.lead(name, n, st.km, bestLabel || chainLabelOr(near), walkMin(near.d));
+      const desc = ja ? `${name}の周り${st.km}km以内にあるガチャガチャの設置場所（設置店）${n}店を近い順に。いちばん近いのは「${near.sh.name}」（徒歩約${walkMin(near.d)}分）。住所・徒歩の目安・取扱中のガチャの数・Googleマップへのリンクつき。` : kOf(best) ? S.descBest(name, n, st.km, bestLabel, kOf(best)) : S.desc(name, n, st.km, chainLabelOr(near));
       const row = (x) => {
         const sh = x.sh, k = (SHOP_OFFICIAL[sh.id] || []).length, chn = ja ? null : CHAIN_BY_SHOP.get(sh.id);
-        return `<div class="shop-row"><b><a href="${c.R}shop/${sh.id}.html"${jl}>${esc(sh.name)}</a>${chn ? ` <small>${esc(chainLabel(chn, lang))}</small>` : ""}</b><span${jl}>${esc(sh.address || sh.pref || "")}</span><em>${ja ? `徒歩約${walkMin(x.d)}分（${fmtDist(x.d)}）` : esc(S.walk(walkMin(x.d), fmtDist(x.d)))}${k ? `・${ja ? `取扱中 ${k}種` : esc(S.titles(k))}` : ""}</em><span><a href="${esc(gmapUrl(sh))}" target="_blank" rel="noopener">${ja ? "Googleマップで開く" : S.gmaps}</a></span></div>`;
+        // 外国語：チェーンのお店はチェーン名を太字で、日本語の店名は小さく。取扱30種以上は「最大規模」バッジ
+        const flag = !ja && k >= 30 ? ` <mark class="ct-tag">${esc(S.flagship)}</mark>` : "";
+        return `<div class="shop-row"><b>${chn ? `<a href="${c.R}shop/${sh.id}.html">${esc(chainLabel(chn, lang))}</a>${flag} <small lang="ja">${esc(sh.name)}</small>` : `<a href="${c.R}shop/${sh.id}.html"${jl}>${esc(sh.name)}</a>${flag}`}</b><span${jl}>${esc(sh.address || sh.pref || "")}</span><em>${ja ? `徒歩約${walkMin(x.d)}分（${fmtDist(x.d)}）` : esc(S.walk(walkMin(x.d), fmtDist(x.d)))}${k ? `・${ja ? `取扱中 ${k}種` : esc(S.titles(k))}` : ""}</em><span><a href="${esc(gmapUrl(sh))}" target="_blank" rel="noopener">${ja ? "Googleマップで開く" : S.gmaps}</a></span></div>`;
       };
       const ids = new Set(st.shops.flatMap((x) => SHOP_OFFICIAL[x.sh.id] || []));
       const local = WEEK.items.filter((it) => ids.has(it.id));
@@ -1886,7 +1907,7 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
   </header>
   <section class="section" id="shops" style="padding-top:32px">
     <div class="section-head"><h2>${ja ? `${esc(name)}から近い順（${n}店）` : `${esc(S.shopsH)} (${n})`}</h2></div>
-    <div class="shop-list">${st.shops.map(row).join("")}</div>
+    <div class="shop-list">${list.map(row).join("")}</div>
     <p class="fine" style="margin-top:12px">${ja ? "お店の情報はバンダイ公式「ガシャポンどこ？」の取扱店をもとにしています。距離はまっすぐ測った目安で、徒歩は分速80mで計算しています。営業時間はお店でご確認ください。" : esc(S.note)}</p>
   </section>
   ${wk.length ? `<section class="section section-tight">
@@ -1913,9 +1934,9 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
           { "@type": "ListItem", position: 2, name: stCrumb, item: canonical(lang, "station.html") },
           { "@type": "ListItem", position: 3, name } ] },
         { "@context": "https://schema.org", "@type": "ItemList", name: ja ? `${name}周辺のガチャガチャ設置店` : S.h1(name), numberOfItems: n,
-          itemListElement: st.shops.slice(0, 30).map((x, i) => ({ "@type": "ListItem", position: i + 1, item: storeLd(x.sh) })) },
+          itemListElement: list.slice(0, 30).map((x, i) => ({ "@type": "ListItem", position: i + 1, item: storeLd(x.sh) })) },
       ];
-      layout({ rel, title, description: desc, body, jsonld, current: "map" });
+      layout({ rel, title, description: desc, body, jsonld, current: ja ? "map" : "station" });
     }
     {
       const rel = "station.html", c = ctx(rel);
@@ -1928,7 +1949,7 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
     <div class="chara-list">${STATIONS.filter((x) => x.region === r).map((x) => `<a class="chara-chip" href="${c.H}station/${x.slug}.html">${esc(stName(x))}<small>${ja ? `${x.shops.length}店` : esc(S.nShops(x.shops.length))}</small></a>`).join("")}</div></section>`).join("")}
   ${ja ? `<section class="section section-tight"><div class="section-head"><h2>チェーンからさがす</h2></div><div class="chara-list">${CHAINS.map((ch) => `<a class="chara-chip" href="${c.H}chain/${ch.slug}.html">${esc(ch.label)}<small>${ch.shops.length}店</small></a>`).join("")}</div></section>` : ""}
 </div>`;
-      layout({ rel, title, description: lead, body, current: "map", jsonld: [{ "@context": "https://schema.org", "@type": "ItemList", numberOfItems: STATIONS.length,
+      layout({ rel, title, description: lead, body, current: ja ? "map" : "station", jsonld: [{ "@context": "https://schema.org", "@type": "ItemList", numberOfItems: STATIONS.length,
         itemListElement: STATIONS.map((x, i) => ({ "@type": "ListItem", position: i + 1, url: canonical(lang, `station/${x.slug}.html`), name: ja ? `${stName(x)}周辺のガチャガチャ設置店` : S.h1(stName(x)) })) }] });
     }
   }
