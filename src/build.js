@@ -364,6 +364,21 @@ T.en.u = {
   charaHit: "{l} gacha ({n}) →",
   push: { on: "Notify me on release", off: "Stop notifications", lead: "Get a notification on Monday morning (Japan time) of the week your ★ saved gacha are released. No account needed.", onNow: "Notifications on: we'll tell you the week your ★ gacha are released.", done: "Notifications are on.", offDone: "Notifications are off.", denied: "Notifications are blocked. Please allow them for this site in your browser settings.", error: "Something went wrong. Please try again later.", ios: "On iPhone/iPad, notifications work after adding this site to your Home Screen: tap Share (□↑) → “Add to Home Screen”, open it from the new icon, then tap this button.", busy: "Setting up…" },
 };
+// 日本語以外の商品ページ「日本のどこで買える？」（{st} は駅ページへのリンクに置きかえる）
+T.en.where = {
+  h: (name) => `Where to buy ${name} in Japan`,
+  lead: (n) => `Bandai's official shop list shows ${n} shops in Japan carrying this gacha. Here are some near major stations:`,
+  none: "Sold at capsule toy shops and gacha corners in shopping malls across Japan. Stock differs by shop, so check the live list below.",
+  walkFrom: (m) => `${m} min walk from {st}`,
+  qaH: "FAQ",
+  qPrice: (name) => `How much is ${name}?`, aPrice: (p) => `¥${p} per play.`,
+  qCount: "How many designs are there?", aCount: (n) => `${n} designs in total.`,
+  qRelease: "When is the release date?", aRelease: (mo, up) => (up ? `Scheduled for ${mo}. Dates can vary by region and shop.` : `Released in ${mo}. Dates can vary by region and shop.`),
+  qWhere: "Where can I buy it in Japan?",
+  aWhere: (n, sts) => `Bandai's official list shows ${n} shops in Japan carrying it${sts ? `, including near ${sts}` : ""}. Stock changes quickly, so check before you go.`,
+  aWhereNone: "At capsule toy shops and gacha corners in shopping malls across Japan. Stock differs by shop.",
+  sep: ", ",
+};
 
 /* ---------- 商品ページの「このガチャについて」（データだけから作る短い文章。v はページごとの言い回しの番号） ----------
  * d: name maker price n（全◯種）/ ch（キャラクターのリンクHTML）k（そのキャラのシリーズ数）/ ln（ラインナップ名）more
@@ -429,6 +444,7 @@ for (const l of XL) {
   T[l].ab = { ...T.en.ab, ...(m.ab || {}) };
   T[l].cal = { ...T.en.cal, ...(m.cal || {}) }; // 発売カレンダーの文言（足りないものは英語）
   T[l].stn = { ...T.en.stn, ...(T[l].stn || {}) };
+  T[l].where = { ...T.en.where, ...(T[l].where || {}) };
 }
 T.ja.hub = T.en.hub; // 日本語は src/hubs.js の中に直接書いている（英語のものは使わない）
 // 診断の選択肢（英語名をキーに、中国語・韓国語は i18n の quiz → chara の順で探す）
@@ -1261,7 +1277,8 @@ ${content}
     })();
     // 説明文：発売週とラインナップ名も入れて、ページごとに中身の違う説明にする
     const ws = weekStartOf(it), wi = ws ? weekInfo(ws) : null;
-    const mo = wi ? (lang !== "ja" ? t.x.weekOf(t.month(it.release), wi.range.split("〜")[0]) : `${wi.m}月第${wi.no}週（${wi.range.split("〜")[0]}〜）`) : t.month(it.release);
+    let whereLd = null; // 日本語以外の「日本のどこで買える？」のFAQ（下の where-sec で作る）
+    const mo =wi ? (lang !== "ja" ? t.x.weekOf(t.month(it.release), wi.range.split("〜")[0]) : `${wi.m}月第${wi.no}週（${wi.range.split("〜")[0]}〜）`) : t.month(it.release);
     const ln = (it.lineup_names || []).slice(0, 3);
     let desc = t.itemDesc(it, name, maker, mo);
     if (ln.length && lang === "ja") desc = desc.replace("のガチャガチャ。", `のガチャガチャ。ラインナップは${ln.join("、")}${it.lineup > ln.length ? "など" : ""}。`);
@@ -1327,7 +1344,7 @@ ${content}
       </div>
       ${lang !== "ja" ? (() => { const O = overseas(it); const L = shopLinks(it); const XLG = lang !== "en"; const b = [
         // 中国語・韓国語：Amazon OneLink の対象外なので日本のAmazon（簡体字は中国語表示で開く）。eBay は出さない
-        XLG ? ["sl-amz", L.amazon + (lang === "zh-cn" ? "&language=zh_CN" : ""), "Amazon Japan"] : ["sl-amz", O.amazon || L.amazon, O.amazon ? "Amazon" : "Amazon Japan"],
+        XLG ? ["sl-amz", L.amazon + ({ "zh-cn": "&language=zh_CN", "zh-tw": "&language=zh_TW", ko: "&language=ko_KR" }[lang] || ""), "Amazon Japan"] : ["sl-amz", O.amazon || L.amazon, O.amazon ? "Amazon" : "Amazon Japan"],
         // 英語：日本に来ている旅行者は日本のAmazonでも買える（ホテル・コンビニ受け取り）
         ...(!XLG && O.amazon ? [["sl-amz", L.amazon + "&language=en_US", "Amazon Japan"]] : []),
         ...(!XLG && O.ebay ? [["sl-ebay", O.ebay, "eBay"]] : []),
@@ -1347,7 +1364,7 @@ ${content}
         <p>${isUp && t.buyLeadUp ? t.buyLeadUp : t.buyLead}</p>
       </div>
       <div class="btns">
-        ${lang === "en" && O.amazon ? `<a class="btn btn-gold" href="${esc(O.amazon)}" target="_blank" rel="sponsored nofollow noopener">Search on Amazon</a><a class="btn" href="${esc(aff.amazon + "&language=en_US")}" target="_blank" rel="sponsored nofollow noopener">Amazon Japan (in Japan)</a>` : `<a class="btn btn-gold" href="${esc(aff.amazon + (lang === "zh-cn" ? "&language=zh_CN" : ""))}" target="_blank" rel="sponsored nofollow noopener">${t.amazon}</a>`}
+        ${lang === "en" && O.amazon ? `<a class="btn btn-gold" href="${esc(O.amazon)}" target="_blank" rel="sponsored nofollow noopener">Search on Amazon</a><a class="btn" href="${esc(aff.amazon + "&language=en_US")}" target="_blank" rel="sponsored nofollow noopener">Amazon Japan (in Japan)</a>` : `<a class="btn btn-gold" href="${esc(aff.amazon + ({ "zh-cn": "&language=zh_CN", "zh-tw": "&language=zh_TW", ko: "&language=ko_KR" }[lang] || ""))}" target="_blank" rel="sponsored nofollow noopener">${t.amazon}</a>`}
         ${lang !== "ja" && O.ebay ? `<a class="btn" href="${esc(O.ebay)}" target="_blank" rel="sponsored nofollow noopener">Search on eBay</a>` : ""}
         <a class="btn" href="${esc(aff.rakuten)}" target="_blank" rel="sponsored nofollow noopener">${t.rakuten}</a>
       </div>
@@ -1406,7 +1423,38 @@ ${content}
       <dl class="item-qa">${qa.map(([q, a]) => `<div><dt>${esc(q)}</dt><dd>${esc(a)}</dd></div>`).join("")}</dl>
     </div>
   </section>`;
-  })() : ""}
+  })() : (() => {
+    // 日本語以外：駅ページに載っている公式取扱店を、駅の並び順（人気順）→ 近い順で最大8店（1駅2店まで）。クローラーにも見える静的HTML
+    const W = t.where, n = Number(it.lineup) || (it.lineup_names || []).length;
+    const shs = (OFFICIAL_BY_ITEM.get(it.id) || []).map((id) => SHOP_BY_ID.get(id)).filter(Boolean);
+    const cand = shs.map((sh) => ({ sh, so: STATION_OF_SHOP.get(sh.id) })).filter((x) => x.so)
+      .sort((a, b) => (a.so.d > 1500) - (b.so.d > 1500) || STATIONS.indexOf(a.so.st) - STATIONS.indexOf(b.so.st) || a.so.d - b.so.d); // 徒歩圏（1.5km以内）を先に
+    const perSt = new Map(), rows = [];
+    for (const x of cand) { const k = perSt.get(x.so.st) || 0; if (k >= 2) continue; perSt.set(x.so.st, k + 1); rows.push(x); if (rows.length >= 8) break; }
+    const stOf = (st) => st[lang] || st.en;
+    const stNames = [...new Set(rows.map((x) => stOf(x.so.st)))].slice(0, 3).join(W.sep);
+    const qa = [
+      ...(it.price ? [[W.qPrice(name), W.aPrice(it.price)]] : []),
+      ...(n ? [[W.qCount, W.aCount(n)]] : []),
+      [W.qRelease, W.aRelease(mo, isUp)],
+      [W.qWhere, shs.length ? W.aWhere(shs.length, stNames) : W.aWhereNone],
+    ];
+    whereLd = { "@context": "https://schema.org", "@type": "FAQPage", inLanguage: LANG_META[lang].hreflang, mainEntity: qa.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) };
+    const row = ({ sh, so }) => {
+      const chn = CHAIN_BY_SHOP.get(sh.id);
+      const [pre, post] = W.walkFrom(walkMin(so.d)).split("{st}").map(esc);
+      return `<li><a href="${c.R}shop/${sh.id}.html"${chn ? "" : ' lang="ja"'}>${esc(chn ? chainLabel(chn, lang) : sh.name)}</a><span style="white-space:normal;text-align:right">${pre}<a href="${c.H}station/${so.st.slug}.html">${esc(stOf(so.st))}</a>${post || ""} · <a href="${esc(gmapUrl(sh))}" target="_blank" rel="noopener">${esc(t.stn.gmaps)}</a></span></li>`;
+    };
+    return `<section class="section where-sec">
+    <div class="panel">
+      <h2 style="font-size:22px">${esc(W.h(name))}</h2>
+      <p>${esc(shs.length ? W.lead(shs.length) : W.none)}</p>
+      ${rows.length ? `<ul class="where-shops">${rows.map(row).join("")}</ul>` : ""}
+      <h3 class="arr-h">${esc(W.qaH)}</h3>
+      <dl class="item-qa">${qa.map(([q, a]) => `<div><dt>${esc(q)}</dt><dd>${esc(a)}</dd></div>`).join("")}</dl>
+    </div>
+  </section>`;
+  })()}
   ${lots.length ? (() => {
     // この商品の抽選販売・整理券（受付中のものだけ。締切が近い順）
     const end = (d) => { const m = String(d).match(/^\d{4}-(\d\d)-(\d\d)T(\d\d):(\d\d)/); return m ? `${+m[1]}/${+m[2]} ${m[3]}:${m[4]}` : d; };
@@ -1474,7 +1522,7 @@ ${content}
         { "@type": "ListItem", position: 3, name },
       ],
     };
-    layout({ rel, title: t.itemTitle(name), description: desc, body, jsonld: [product, crumbs, ...lots.map((x) => lotEventLd(x, canonical(lang, rel), absImg(it)))], ogImage: absImg(it), ogType: "product",
+    layout({ rel, title: t.itemTitle(name), description: desc, body, jsonld: [product, crumbs, ...(whereLd ? [whereLd] : []), ...lots.map((x) => lotEventLd(x, canonical(lang, rel), absImg(it)))], ogImage: absImg(it), ogType: "product",
       noindex: !hasName(it, lang), alts: LANGS.filter((l) => hasName(it, l)), lastmod: it.updated || it.added || "" });
   }
 
