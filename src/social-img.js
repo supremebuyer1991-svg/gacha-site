@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// SNS（Threads・Instagram・Pinterest）用の画像を作る：dist/images/social/商品id.jpg（1080×1080、JPEG。写真を大きく、右下にサイト名を小さく）
+// SNS（Threads・Instagram・Pinterest）用の画像を作る：dist/images/social/商品id.jpg（1200×1200、JPEG。写真を大きく、右下にサイト名を小さく）
 // Threads と Instagram は JPEG/PNG しか受け付けないので、商品の webp 写真から作る。
 // 対象は 先月以降に発売の商品（最大400件）。sharp が必要（デプロイのときに入れる）。
 "use strict";
@@ -8,14 +8,14 @@ let sharp; try { sharp = require("sharp"); } catch (e) { console.log("sharp が�
 const ROOT = path.join(__dirname, ".."), OUT = path.join(ROOT, "dist", "images", "social");
 const items = JSON.parse(fs.readFileSync(path.join(ROOT, "data", "items.json"), "utf8"));
 const now = new Date(Date.now() + 9 * 3600e3), from = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - 1, 1)).toISOString().slice(0, 7);
-const W = 1080, H = 1080, PAD = 12;
-// 商品写真を画面いっぱいに。サイト名とURLは右下に小さく（ユーザーの希望）
-const BADGE_W = 380, BADGE_H = 50;
+const W = 1200, H = 1200, PAD = 13;
+// 商品写真を画面いっぱいに。サイト名とURLは右下に小さく（ユーザーの希望）。大きさは 1080 のときの 1200/1080 倍
+const BADGE_W = 422, BADGE_H = 56, BADGE_M = 18;
 const badge = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${BADGE_W}" height="${BADGE_H}">
-<rect width="${BADGE_W}" height="${BADGE_H}" rx="25" fill="#ffffff" fill-opacity="0.88"/>
-<text x="20" y="33" font-family="DejaVu Sans, Arial, sans-serif" font-weight="700" font-size="21" fill="#ff4f7b">GACHA</text>
-<text x="112" y="33" font-family="DejaVu Sans, Arial, sans-serif" font-weight="700" font-size="21" fill="#3aa0ff">PLANET</text>
-<text x="222" y="33" font-family="DejaVu Sans, Arial, sans-serif" font-weight="700" font-size="18" fill="#6b7194">gachapla.com</text>
+<rect width="${BADGE_W}" height="${BADGE_H}" rx="28" fill="#ffffff" fill-opacity="0.88"/>
+<text x="22" y="37" font-family="DejaVu Sans, Arial, sans-serif" font-weight="700" font-size="23" fill="#ff4f7b">GACHA</text>
+<text x="124" y="37" font-family="DejaVu Sans, Arial, sans-serif" font-weight="700" font-size="23" fill="#3aa0ff">PLANET</text>
+<text x="247" y="37" font-family="DejaVu Sans, Arial, sans-serif" font-weight="700" font-size="20" fill="#6b7194">gachapla.com</text>
 </svg>`);
 (async () => {
   fs.mkdirSync(OUT, { recursive: true });
@@ -33,7 +33,7 @@ const badge = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${BADG
       const photo = await sharp(path.join(ROOT, "images", `${it.id}.webp`)).flatten({ background: "#ffffff" }).trim({ background: "#ffffff", threshold: 12 })
         .resize(W - PAD * 2, H - PAD * 2, { fit: "contain", background: "#ffffff" }).toBuffer();
       await sharp({ create: { width: W, height: H, channels: 3, background: "#ffffff" } })
-        .composite([{ input: photo, left: PAD, top: PAD }, { input: badge, left: W - BADGE_W - 16, top: H - BADGE_H - 16 }]).jpeg({ quality: 82 }).toFile(out);
+        .composite([{ input: photo, left: PAD, top: PAD }, { input: badge, left: W - BADGE_W - BADGE_M, top: H - BADGE_H - BADGE_M }]).jpeg({ quality: 82 }).toFile(out);
       n++;
     } catch (e) { console.log(`⚠ ${it.id}: ${e.message}`); }
   }

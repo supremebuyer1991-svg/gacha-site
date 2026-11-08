@@ -140,10 +140,40 @@ const prepare = (E) => {
 const ymOf = (w) => `${w.y}-${String(w.m).padStart(2, "0")}`;
 const weekRel = (w) => `calendar/${ymOf(w)}/w${w.no}.html`;
 
+/* ---------- 一覧ページの「最終更新」と CollectionPage（週・月のページで使う） ---------- */
+// 商品がサイトに載った日（added）から：いちばん古い日＝公開日、いちばん新しい日＝更新日、その日に載った件数＝新着
+const addedSpan = (list) => {
+  const ds = list.map((it) => it.added).filter(Boolean).sort();
+  const last = ds[ds.length - 1] || "";
+  return { first: ds[0] || "", last, fresh: ds.filter((d) => d === last).length };
+};
+const MON_EN = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const UPD = {
+  ja: (y, m, d, k) => `最終更新：${y}年${m}月${d}日（新着${k}件）`,
+  en: (y, m, d, k) => `Last updated: ${MON_EN[m - 1]} ${d}, ${y} (${k} new)`,
+  "zh-cn": (y, m, d, k) => `最后更新：${y}年${m}月${d}日（新增${k}件）`,
+  "zh-tw": (y, m, d, k) => `最後更新：${y}年${m}月${d}日（新增${k}件）`,
+  ko: (y, m, d, k) => `최종 업데이트: ${y}년 ${m}월 ${d}일 (신규 ${k}건)`,
+};
+const updatedLine = (list, lang) => {
+  const { last, fresh } = addedSpan(list);
+  if (!last) return "";
+  const [y, m, d] = last.split("-").map(Number);
+  return `<p class="hub-updated"><time datetime="${last}">${(UPD[lang] || UPD.en)(y, m, d, fresh)}</time></p>`;
+};
+const collectionLd = ({ name, url, list, inLanguage, siteUrl }) => {
+  const { first, last } = addedSpan(list);
+  return { "@context": "https://schema.org", "@type": "CollectionPage", name, url, inLanguage,
+    ...(first ? { datePublished: first } : {}), ...(last ? { dateModified: last } : {}),
+    publisher: { "@type": "Organization", name: "ガチャプラネット", alternateName: "GACHA PLANET", url: `${siteUrl}/` } };
+};
+
 /* ---------- 言語ごとのページ ---------- */
 const build = (P, E) => {
-  const { lang, t, layout, card, ctx, esc, canonical, nameOf, hasName, CHARAS, charaLabel, WEEK, NEXT_WEEK, byPopular, byNewest, thisMonth, MONTH_EN, thumbOf, listPage, items } = E;
+  const { lang, t, layout, card, ctx, esc, canonical, nameOf, hasName, CHARAS, charaLabel, WEEK, NEXT_WEEK, byPopular, byNewest, thisMonth, MONTH_EN, thumbOf, listPage, items, genreLabel, genreOf, makerSlug, SITE_URL } = E;
   const ja = lang === "ja", h = t.hub;
+  // 商品 → いちばん先に当てはまるキャラクター・作品（めじるしは「型」なので除く）
+  const charaOf = (it) => CHARAS.find((ch) => ch.slug !== "mejirushi" && ch.list.includes(it));
   const maxAdded = (list) => list.reduce((m, it) => (it.added > m ? it.added : m), "");
   const crumbs = (arr) => ({ "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: arr.map(([name, rel], i) => ({ "@type": "ListItem", position: i + 1, name, ...(rel ? { item: canonical(lang, rel) } : {}) })) });
   const itemList = (list) => ({ "@context": "https://schema.org", "@type": "ItemList", numberOfItems: list.length, itemListElement: list.slice(0, 30).map((it, i) => ({ "@type": "ListItem", position: i + 1, url: canonical(lang, `item/${it.id}.html`), name: nameOf(it, lang) })) });
@@ -165,15 +195,43 @@ const build = (P, E) => {
     const desc = ja ? `${lead.split("。")[0]}。${top.join("、")}など。` : `${lead} ${h.including(top)}`;
     const prev = WL[i - 1], next = WL[i + 1];
     const pager = `<nav class="month-pager" aria-label="${ja ? "前後の週" : h.weekNavAria}">${prev ? `<a href="${c.H}${weekRel(prev.w)}">${ja ? `← ${weekLabel(prev.w)}` : `← ${weekLabel(prev.w)}`}</a>` : "<span></span>"}<a href="${c.H}calendar/${ym}.html">${ja ? `${monthLabel(ym)}の一覧` : h.toMonth(monthLabel(ym))}</a>${next ? `<a href="${c.H}${weekRel(next.w)}">${weekLabel(next.w)} →</a>` : "<span></span>"}</nav>`;
+    const sec = (inner, extra = "") => `<section class="section section-tight"${extra}>${inner}</section>`;
+    const secH = (txt) => `<div class="section-head"><h2>${txt}</h2></div>`;
+    // 日本語：注目5選（ひとことつき）→ 全部 → メーカー別 → 再販
+    const jaBlocks = !ja ? "" : (() => {
+      const picks = list.slice(0, Math.min(5, n));
+      const pickHtml = picks.map((it, i) => {
+        const ch = charaOf(it);
+        const subj = ch ? charaLabel(ch, lang) : genreLabel(genreOf(it.genre), lang);
+        const spec = [Number(it.price) > 0 ? `1回${it.price}円` : "", it.lineup ? `全${it.lineup}種` : ""].filter(Boolean).join("・");
+        const cap = [subj ? `${subj}のガチャ` : "", spec, it.maker || ""].filter(Boolean).join("。");
+        // 5枚とも遅延読み込みしない（1枚目は先に読む）
+        const cd = card(it, c, i).replace('loading="lazy"', 'loading="eager"');
+        return `<div class="wk-pick">${cd}<p class="wk-cap" style="margin:6px 2px 0;font-size:.85em;line-height:1.5;color:var(--muted)">${esc(cap)}</p></div>`;
+      }).join("");
+      const makers = new Map();
+      for (const it of list) { if (!makers.has(it.maker)) makers.set(it.maker, []); makers.get(it.maker).push(it); }
+      const mk = [...makers].sort((a, b) => b[1].length - a[1].length);
+      const mkNav = `<p class="hub-links">${mk.map(([m, l], i) => `<a href="#mk${i + 1}">${esc(m)}<small>${l.length}件</small></a>`).join("")}</p>`;
+      const mkList = mk.map(([m, l], i) => `<div id="mk${i + 1}" style="margin-top:18px"><h3 style="font-size:1.05em;margin:0 0 6px">${esc(m)}（${l.length}件）<a class="more" style="font-size:.8em;margin-left:8px" href="${c.H}maker/${makerSlug(m)}.html">${esc(m)}のガチャ一覧 →</a></h3><ul style="margin:0;padding-left:1.2em;line-height:1.8">${l.map((it) => `<li><a href="${c.H}item/${it.id}.html">${esc(nameOf(it, lang))}</a>（${Number(it.price) > 0 ? `${it.price}円` : "価格未定"}）</li>`).join("")}</ul></div>`).join("");
+      const re = list.filter((it) => P.isReissue(it));
+      return [
+        sec(`${secH(w.key === WEEK.key ? "今週の注目5選" : "この週の注目5選")}<div class="grid">${pickHtml}</div>`, ' style="padding-top:28px"'),
+        sec(`${secH(`この週に発売のガチャ（${n}件）`)}<div class="grid">${list.map((it) => card(it, c)).join("")}</div>`),
+        sec(`${secH("メーカー別")}${mkNav}${mkList}`),
+        re.length ? sec(`${secH("この週の再販")}<div class="grid">${re.map((it) => card(it, c)).join("")}</div><p class="hub-links"><a href="${c.H}saihan.html">再販・復刻の一覧 →</a></p>`) : "",
+      ].join("\n  ");
+    })();
     const body = `<div class="wrap">
   <nav class="breadcrumb" aria-label="breadcrumb"><a href="${c.H}index.html">${t.home}</a><span>/</span><a href="${c.H}calendar.html">${t.calH1}</a><span>/</span><a href="${c.H}calendar/${ym}.html">${esc(monthLabel(ym))}</a><span>/</span><span>${esc(lab)}</span></nav>
-  <header class="page-head"><h1>${esc(h1)}</h1><p class="hub-sub">${ja ? `${n}シリーズ` : h.weekSub(n)}${badge}</p><p class="lead">${esc(lead)}</p></header>
+  <header class="page-head"><h1>${esc(h1)}</h1><p class="hub-sub">${ja ? `${n}シリーズ` : h.weekSub(n)}${badge}</p><p class="lead">${esc(lead)}</p>${updatedLine(list, lang)}</header>
   ${pager}
-  <section class="section" style="padding-top:28px"><div class="grid">${list.map((it, i) => card(it, c, i)).join("")}</div></section>
+  ${ja ? jaBlocks : `<section class="section" style="padding-top:28px"><div class="grid">${list.map((it, i) => card(it, c, i)).join("")}</div></section>`}
   ${pager}
 </div>`;
     layout({ rel, title, description: desc, body, current: "calendar", lastmod: maxAdded(list),
-      jsonld: [crumbs([[t.home, "index.html"], [t.calH1, "calendar.html"], [monthLabel(ym), `calendar/${ym}.html`], [lab]]), itemList(list)] });
+      jsonld: [crumbs([[t.home, "index.html"], [t.calH1, "calendar.html"], [monthLabel(ym), `calendar/${ym}.html`], [lab]]), itemList(list),
+        collectionLd({ name: h1, url: canonical(lang, rel), list, inLanguage: t.htmlLang, siteUrl: SITE_URL })] });
   });
 
   /* ===== シリーズ（日本語・英語） ===== */
@@ -294,4 +352,4 @@ const weekIndex = (P, ym, { lang, c, t, WEEK }) => {
 // 月のページ：その月に多いキャラクター・作品（上位5つ）
 const monthTops = (list, { CHARAS }) => CHARAS.filter((ch) => ch.slug !== "mejirushi").map((ch) => [ch, list.filter((it) => ch.list.includes(it)).length]).filter(([, n]) => n >= 2).sort((a, b) => b[1] - a[1]).slice(0, 5);
 
-module.exports = { prepare, build, seriesNav, weekIndex, weekRel, monthTops, PRICES, isReissue };
+module.exports = { prepare, build, seriesNav, weekIndex, weekRel, monthTops, PRICES, isReissue, updatedLine, collectionLd };

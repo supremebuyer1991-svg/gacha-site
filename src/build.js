@@ -974,10 +974,11 @@ const QUIZ_V = crypto.createHash("md5").update(JSON.stringify(rawItems) + JSON.s
 const CSS_V = ver("style.css");
 const JS_V = ver("app.js");
 
-const FONTS = "https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&family=Zen+Maru+Gothic:wght@500;700;900&display=swap";
+// 本文は端末の日本語フォント。Googleのフォントは見出し用の太さだけ読む（Zen Maru Gothic 700・Nunito 700・Fredoka 600）
+const FONTS = "https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@700&family=Nunito:wght@700&family=Fredoka:wght@600&display=swap";
 // 言語ごとのフォント（繁体字は丸ゴシックの「粉圓 Huninn」、韓国語は丸くてかわいい「Jua」を見出しに。中国本土向けはGoogleのフォントを使わない）
-const FONTS_OF = (lang) => lang === "zh-tw" ? "https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&family=Huninn&display=swap"
-  : lang === "ko" ? "https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&family=Jua&display=swap" : FONTS;
+const FONTS_OF = (lang) => lang === "zh-tw" ? "https://fonts.googleapis.com/css2?family=Nunito:wght@700&family=Fredoka:wght@600&family=Huninn&display=swap"
+  : lang === "ko" ? "https://fonts.googleapis.com/css2?family=Nunito:wght@700&family=Fredoka:wght@600&family=Jua&display=swap" : FONTS;
 
 /* ================= 言語ごとにページを作る ================= */
 for (const lang of LANGS) {
@@ -1063,8 +1064,7 @@ for (const lang of LANGS) {
     const head = `<title>${esc(fullTitle)}</title>
 ${fragment ? '<meta name="claude:viewport-fit-sides" content="cover">' : ""}
 <meta name="site-lang" content="${lang}">${I18N[lang] && I18N[lang].appM ? `\n<script>window.__M=${JSON.stringify(I18N[lang].appM).replace(/</g, "\\u003c")};</script>` : ""}
-${site.ga4_id ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${esc(site.ga4_id)}"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","${esc(site.ga4_id)}");</script>
-` : ""}${lang === "en" && site.vc_linkswitch_pid ? `<script>var vc_pid = "${esc(site.vc_linkswitch_pid)}";</script><script src="//aml.valuecommerce.com/vcdal.js" async></script>` : ""}
+${lang === "en" && site.vc_linkswitch_pid ? `<script>var vc_pid = "${esc(site.vc_linkswitch_pid)}";</script><script src="//aml.valuecommerce.com/vcdal.js" async></script>` : ""}
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${esc(canonical(lang, rel))}">
 ${noindex ? `<meta name="robots" content="noindex, follow">\n` : /name="robots"/.test(extraHead) ? "" : `<meta name="robots" content="max-image-preview:large">\n`}${noindex || noAlt || ALT.length < 2 ? "" : ALT.flatMap((l) => [LANG_META[l].hreflang, ...(LANG_META[l].extra || [])].map((code) => `<link rel="alternate" hreflang="${code}" href="${esc(canonical(l, rel))}">`)).join("\n") + `\n<link rel="alternate" hreflang="x-default" href="${esc(canonical(xDefault(rel, ALT), rel))}">`}
@@ -1109,11 +1109,12 @@ ${ld}`;
 <footer class="site-footer"><div class="wrap">
   ${SNS ? `<a class="foot-x" href="${SNS.threads}" target="_blank" rel="noopener">${AT_SVG}<span>${esc(t.u.snsTxt)} → <b>Threads @${SNS.acc}</b></span></a><a class="foot-x" href="${SNS.insta}" target="_blank" rel="noopener">${AT_SVG}<span><b>Instagram @${SNS.acc}</b></span></a>` : xAcc ? `<a class="foot-x" href="https://x.com/${esc(xAcc)}" target="_blank" rel="noopener">${X_SVG}<span>${esc(t.u.followTxt)} → <b>${esc(t.u.followCta(xAcc))}</b></span></a>` : ""}
   <div>© ${nowJST.getUTCFullYear()} ${esc(site.name)}</div>
-  <nav aria-label="${t.footAria}"><a href="${c.H}faq.html">${t.nav.faq}</a><a href="${c.H}about.html">${t.about}</a>${lang === "ja" ? `<a href="${c.H}privacy.html">プライバシーポリシー</a>` : ""}<a href="${c.H}calendar.html">${t.nav.calendar}</a><a href="${c.H}station.html">${lang === "ja" ? "駅からさがす" : t.stn.footer}</a>${lang === "ja" ? `<a href="${c.H}collection.html">シリーズ一覧</a><a href="${c.H}saihan.html">再販・復刻</a><a href="${c.H}stats.html">新作の統計</a>` : lang === "en" ? `<a href="${c.H}collection.html">${t.hub.seriesFoot}</a><a href="${c.H}saihan.html">${t.hub.reissueFoot}</a><a href="${c.H}stats.html">Stats</a>` : ""}</nav>
+  <nav aria-label="${t.footAria}"><a href="${c.H}faq.html">${t.nav.faq}</a><a href="${c.H}about.html">${t.about}</a>${lang === "ja" ? `<a href="${c.H}privacy.html">プライバシーポリシー</a>` : ""}<a href="${c.H}calendar.html">${t.nav.calendar}</a><a href="${c.H}station.html">${lang === "ja" ? "駅からさがす" : t.stn.footer}</a>${lang === "ja" ? `<a href="${c.H}collection.html">シリーズ一覧</a><a href="${c.H}saihan.html">再販・復刻</a><a href="${c.H}stats.html">新作の統計</a><a href="${c.H}ranking.html">人気ランキング</a><a href="${c.H}limited.html">オフィシャルショップ限定</a>` : lang === "en" ? `<a href="${c.H}collection.html">${t.hub.seriesFoot}</a><a href="${c.H}saihan.html">${t.hub.reissueFoot}</a><a href="${c.H}stats.html">Stats</a>` : ""}</nav>
   <nav class="foot-langs" aria-label="Language">${LANGS.map((l) => `<a href="${toLang(l)}" hreflang="${LANG_META[l].hreflang}" lang="${LANG_META[l].html}">${LANG_META[l].label}</a>`).join("")}</nav>
   <p class="disclosure">${t.disclosure}</p>
 </div></footer>
-<script src="${c.R}assets/app.js?v=${JS_V}" defer></script>`;
+<script src="${c.R}assets/app.js?v=${JS_V}" defer></script>${site.ga4_id ? `
+<script async src="https://www.googletagmanager.com/gtag/js?id=${esc(site.ga4_id)}"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","${esc(site.ga4_id)}");</script>` : ""}`;
     const html = fragment ? `${head}\n${content}` : `<!doctype html>
 <html lang="${t.htmlLang}">
 <head>
@@ -1914,7 +1915,7 @@ ${content}
       const pager = `<nav class="month-pager">${prev ? `<a href="${c.H}calendar/${prev}.html">← ${monthLabel(prev)}</a>` : "<span></span>"}<a href="${c.H}calendar.html">${en ? C.calendar : "カレンダーへ"}</a>${next ? `<a href="${c.H}calendar/${next}.html">${monthLabel(next)} →</a>` : "<span></span>"}</nav>`;
       const body = `<div class="wrap">
   <nav class="breadcrumb" aria-label="breadcrumb"><a href="${c.H}index.html">${t.home}</a><span>/</span><a href="${c.H}calendar.html">${t.calH1}</a><span>/</span><span>${esc(monthLabel(m))}</span></nav>
-  <header class="page-head"><h1>${esc(en ? h1 : `${y}年${Number(mo)}月発売のガチャ`)}</h1>${en ? "" : `<p class="hub-sub">${n}シリーズ${m === thisMonth ? `<span class="wk-now">${t.thisMonth}</span>` : ""}</p>`}<p class="lead">${esc(desc)}</p>${(() => {
+  <header class="page-head"><h1>${esc(en ? h1 : `${y}年${Number(mo)}月発売のガチャ`)}</h1>${en ? "" : `<p class="hub-sub">${n}シリーズ${m === thisMonth ? `<span class="wk-now">${t.thisMonth}</span>` : ""}</p>`}<p class="lead">${esc(desc)}</p>${hubs.updatedLine(groups.flatMap((g) => g.list), lang)}${(() => {
     // その月に多いキャラクター・作品（上位5つ）
     const tops = hubs.monthTops(groups.flatMap((g) => g.list), { CHARAS });
     const tx = tops.map(([ch, k]) => `<a href="${c.H}chara/${ch.slug}.html">${esc(charaLabel(ch, lang))}</a>（${k}）`);
@@ -1926,12 +1927,13 @@ ${content}
   ${pager}
   ${archiveNav(c, m)}
 </div>`;
-      layout({ rel, title, description: desc, body, current: "calendar", lastmod: maxAdded(groups.flatMap((g) => g.list)), jsonld: [crumbLd(rel, monthLabel(m)), itemListLd(rel, groups.flatMap((g) => g.list))] });
+      layout({ rel, title, description: desc, body, current: "calendar", lastmod: maxAdded(groups.flatMap((g) => g.list)), jsonld: [crumbLd(rel, monthLabel(m)), itemListLd(rel, groups.flatMap((g) => g.list)),
+        hubs.collectionLd({ name: en ? h1 : `${y}年${Number(mo)}月発売のガチャ`, url: canonical(lang, rel), list: groups.flatMap((g) => g.list), inLanguage: t.htmlLang, siteUrl: SITE_URL })] });
     }
     void past;
   }
   // 週ごとの固定ページ・シリーズ・再販・値段の一覧
-  hubs.build(HUB, { lang, t, layout, card, ctx, esc, canonical, nameOf, hasName, CHARAS, charaLabel, WEEK, NEXT_WEEK, byPopular, byNewest, thisMonth, MONTH_EN, thumbOf, listPage, items, weekStartOf, weekInfo });
+  hubs.build(HUB, { lang, t, layout, card, ctx, esc, canonical, nameOf, hasName, CHARAS, charaLabel, WEEK, NEXT_WEEK, byPopular, byNewest, thisMonth, MONTH_EN, thumbOf, listPage, items, weekStartOf, weekInfo, genreLabel, genreOf, makerSlug, SITE_URL });
   if (lang === "ja" || lang === "en") {
     const MK = new Map(items.map((it) => [it.maker, it]));
     stats.build(STATS, { lang, layout, ctx, esc, canonical, t, today, MONTH_EN, charaLabel, makerOf: (name) => (MK.has(name) ? makerOf(MK.get(name), lang) : name), write, SITE_URL, site });
