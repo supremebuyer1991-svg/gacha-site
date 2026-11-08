@@ -1292,3 +1292,10 @@ p.hero-lead { font-size: clamp(15px, 1.7vw, 20px); font-weight: 700; color: var(
 .rv-strip > .card { flex-basis: 120px; }
 @media (min-width: 901px) { .rv-strip > .card { flex-basis: calc((100% - 84px) / 8); } }
 .rv-strip .card-foot > span + span { display: none; }
+/* 駅のページ：有名なガチャ専門店のカードと地図（地図は高さを先に取ってレイアウトのずれを防ぐ） */
+.lm-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 10px; }
+.lm-card { display: flex; flex-direction: column; gap: 3px; background: var(--surface); border-radius: 14px; padding: 14px 16px; box-shadow: 0 2px 0 var(--line); border-left: 4px solid var(--gold); }
+.lm-card b { font-size: 16px; } .lm-card small { font-size: 12px; color: var(--muted); } .lm-card span { font-size: 12px; color: var(--muted); }
+.lm-card em { font-style: normal; font-size: 13px; font-weight: 700; color: var(--gold-text); } .lm-card .lm-note { color: var(--text); }
+.stn-map { height: 260px; border-radius: 14px; background: var(--surface-2); overflow: hidden; z-index: 0; }
+.stn-faq dt { font-weight: 700; margin-top: 12px; } .stn-faq dd { margin: 4px 0 0; color: var(--muted); }

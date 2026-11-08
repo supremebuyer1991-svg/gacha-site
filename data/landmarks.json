@@ -1,0 +1,207 @@
+{
+  "_note": "旅行者がよく検索する有名なガチャ専門店（駅のページの先頭に出す）。公式サイトか大手メディアで確かめた内容だけを書き、わからない項目は null。今も営業しているか確かめられないお店は verify: true にして表示しない。machines は出典の数字（「約」付き）。checked は確かめた日。",
+  "checked": "2026-11-08",
+  "landmarks": [
+    {
+      "id": "gashapon-dept-ikebukuro", "store_id": "g-s90000226", "station": "ikebukuro",
+      "name_ja": "ガシャポンのデパート 池袋総本店", "name_en": "Gashapon Department Store Ikebukuro Main Store", "name_ko": "가샤폰 백화점 이케부쿠로 본점", "name_zh_cn": "扭蛋百货 池袋总店", "name_zh_tw": "扭蛋百貨 池袋總店",
+      "lat": 35.7288558, "lng": 139.7200778,
+      "floor_en": "3F, World Import Mart Bldg., Sunshine City", "hours": "10:00–21:00", "machines": 3220, "cashless": null,
+      "notes_en": "One of the largest gacha shops in the world. Hours follow Bandai Namco Cross Store Tokyo. About 3 min from Higashi-Ikebukuro Station (Yurakucho Line).",
+      "sources": ["https://bandainamco-am.co.jp/others/capsule-toy-store/store/ikebukuro/", "https://www.fun-japan.jp/jp/articles/13963"]
+    },
+    {
+      "id": "gachagacha-no-mori-ikebukuro", "store_id": "g-s90001003", "station": "ikebukuro",
+      "name_ja": "ガチャガチャの森 池袋サンシャインシティアルタ店", "name_en": "Gachagacha no Mori Ikebukuro Sunshine City Alta", "name_ko": "가챠가챠의 숲 이케부쿠로 선샤인시티 알타점", "name_zh_cn": "扭蛋森林 池袋太阳城ALTA店", "name_zh_tw": "扭蛋森林 池袋太陽城ALTA店",
+      "lat": 35.729228001124, "lng": 139.720133325373,
+      "floor_en": "1F, Sunshine City Alta", "hours": "11:00–20:00", "machines": 1240, "cashless": null,
+      "notes_en": null,
+      "sources": ["https://www.fun-japan.jp/jp/articles/13963"]
+    },
+    {
+      "id": "gashacoco-ikebukuro", "store_id": "g-s90001320", "station": "ikebukuro",
+      "name_ja": "gashacoco 池袋", "name_en": "gashacoco Ikebukuro", "name_ko": "가샤코코 이케부쿠로", "name_zh_cn": "gashacoco 池袋", "name_zh_tw": "gashacoco 池袋",
+      "lat": 35.73155804408475, "lng": 139.71277476468146,
+      "floor_en": "1F & B1F, Ikebukuro Kikumura Bldg.", "hours": "11:00–22:00", "machines": 1500, "cashless": null,
+      "notes_en": "Change machines on each floor. Credit cards not accepted.",
+      "sources": ["https://www.gltjp.com/ja/directory/item/17519/", "https://www.gltjp.com/zh-hant/article/item/21121/"]
+    },
+    {
+      "id": "gashapon-dept-akihabara", "store_id": "g-s90000847", "station": "akihabara",
+      "name_ja": "ガシャポンのデパート 秋葉原店", "name_en": "Gashapon Department Store Akihabara (namco Akihabara)", "name_ko": "가샤폰 백화점 아키하바라점", "name_zh_cn": "扭蛋百货 秋叶原店", "name_zh_tw": "扭蛋百貨 秋葉原店",
+      "lat": 35.6980094, "lng": 139.7724164,
+      "floor_en": "4F, namco Akihabara", "hours": "10:00–23:00", "machines": 500, "cashless": null,
+      "notes_en": "Shares the floor with the Gashapon Bandai Official Shop Akihabara.",
+      "sources": ["https://www.fun-japan.jp/jp/articles/13963"]
+    },
+    {
+      "id": "yodobashi-akiba", "store_id": null, "station": "akihabara",
+      "name_ja": "ヨドバシAkiba ガチャガチャコーナー", "name_en": "Yodobashi Akiba gacha corners", "name_ko": "요도바시 아키바 가챠 코너", "name_zh_cn": "友都八喜Akiba 扭蛋区", "name_zh_tw": "友都八喜Akiba 扭蛋區",
+      "lat": 35.6989, "lng": 139.7747,
+      "floor_en": "6F (hobby & toy corners) and 1F", "hours": null, "machines": null, "cashless": null,
+      "notes_en": "Gacha corners inside the Yodobashi Camera electronics store, right by the Showa-dori exit.",
+      "sources": ["https://www.yodobashi.com/store/100088/"]
+    },
+    {
+      "id": "akihabara-gachapon-kaikan", "store_id": null, "station": "akihabara", "verify": true,
+      "name_ja": "秋葉原ガチャポン会館", "name_en": "Akihabara Gachapon Kaikan", "name_ko": "아키하바라 가챠폰 회관", "name_zh_cn": "秋叶原扭蛋会馆", "name_zh_tw": "秋葉原扭蛋會館",
+      "lat": null, "lng": null,
+      "floor_en": "1F, MN Bldg. (Soto-Kanda 3-15-5)", "hours": null, "machines": 500, "cashless": null,
+      "notes_en": "Listings (Jan 2026) give ~500 machines; not in Bandai's official shop list and hours differ between sources, so not shown until confirmed.",
+      "sources": ["https://www.walkerplus.com/spot/ar0313s564740/data.html", "https://livejapan.com/ja/in-tokyo/in-pref-tokyo/in-akihabara/spot-lj0000697/"]
+    },
+    {
+      "id": "kaiyodo-hobby-lobby-akihabara", "store_id": null, "station": "akihabara", "verify": true,
+      "name_ja": "海洋堂ホビーロビー東京", "name_en": "Kaiyodo Hobby Lobby Tokyo", "name_ko": null, "name_zh_cn": null, "name_zh_tw": null,
+      "lat": null, "lng": null,
+      "floor_en": null, "hours": null, "machines": null, "cashless": null,
+      "notes_en": "Could not confirm current location, hours or capsule machines from an official source.",
+      "sources": []
+    },
+    {
+      "id": "c-pla-shibuya-center-gai", "store_id": "g-s90000823", "station": "shibuya",
+      "name_ja": "#C-pla 渋谷センター街店", "name_en": "#C-pla Shibuya Center-gai", "name_ko": "#C-pla 시부야 센터가이점", "name_zh_cn": "#C-pla 涩谷中心街店", "name_zh_tw": "#C-pla 澀谷中心街店",
+      "lat": 35.6600981, "lng": 139.7000122,
+      "floor_en": "B1F–2F, Shibuya Heiwa Bldg.", "hours": "10:00–23:00 (B1F & 2F until 22:30)", "machines": 2238, "cashless": null,
+      "notes_en": "Has a change machine.",
+      "sources": ["https://www.fun-japan.jp/jp/articles/13963"]
+    },
+    {
+      "id": "dream-capsule-magnet-shibuya109", "store_id": null, "station": "shibuya",
+      "name_ja": "ドリームカプセル MAGNET by SHIBUYA109", "name_en": "Dream Capsule MAGNET by SHIBUYA109", "name_ko": "드림캡슐 MAGNET by SHIBUYA109", "name_zh_cn": "Dream Capsule MAGNET by SHIBUYA109", "name_zh_tw": "Dream Capsule MAGNET by SHIBUYA109",
+      "lat": 35.6598, "lng": 139.7009,
+      "floor_en": "5F, MAGNET by SHIBUYA109", "hours": "10:00–21:00", "machines": null, "cashless": false,
+      "notes_en": "About 800 kinds of capsule toys, at Shibuya Scramble Crossing.",
+      "sources": ["https://www.tokyu.co.jp/area/shibuya/article/arti-01KSHG80C37HCP057C3M0PEQ44/"]
+    },
+    {
+      "id": "c-pla-plus-harajuku-takeshita", "store_id": "g-s90000730", "station": "harajuku",
+      "name_ja": "#C-pla＋ 原宿竹下通り店", "name_en": "#C-pla+ Harajuku Takeshita-dori", "name_ko": "#C-pla+ 하라주쿠 다케시타도리점", "name_zh_cn": "#C-pla+ 原宿竹下通店", "name_zh_tw": "#C-pla+ 原宿竹下通店",
+      "lat": 35.6711771, "lng": 139.7040807,
+      "floor_en": "1F–2F", "hours": "9:30–21:00", "machines": 1002, "cashless": null,
+      "notes_en": null,
+      "sources": ["https://www.fun-japan.jp/jp/articles/13963"]
+    },
+    {
+      "id": "gachagacha-no-mori-shinjuku-subnade", "store_id": "g-s90001044", "station": "shinjuku",
+      "name_ja": "ガチャガチャの森 新宿サブナード店", "name_en": "Gachagacha no Mori Shinjuku Subnade", "name_ko": "가챠가챠의 숲 신주쿠 서브나드점", "name_zh_cn": "扭蛋森林 新宿Subnade店", "name_zh_tw": "扭蛋森林 新宿Subnade店",
+      "lat": 35.6936082994623, "lng": 139.700567062315,
+      "floor_en": "Shinjuku Subnade underground mall", "hours": "10:30–21:00", "machines": 1050, "cashless": null,
+      "notes_en": "Underground shopping street between Shinjuku Station East Exit and Kabukicho.",
+      "sources": ["https://www.fun-japan.jp/jp/articles/13963"]
+    },
+    {
+      "id": "gashapon-official-tokyo-station", "store_id": "g-s90000001", "station": "tokyo",
+      "name_ja": "ガシャポンバンダイオフィシャルショップ＠TOKYO STATION", "name_en": "Gashapon Bandai Official Shop @TOKYO STATION", "name_ko": "가샤폰 반다이 공식 숍 @TOKYO STATION", "name_zh_cn": "万代扭蛋官方店 @TOKYO STATION", "name_zh_tw": "萬代扭蛋官方店 @TOKYO STATION",
+      "lat": 35.6822889, "lng": 139.7684903,
+      "floor_en": "B1F, Tokyo Character Street (Tokyo Station First Avenue)", "hours": "10:00–20:30", "machines": 144, "cashless": null,
+      "notes_en": "Inside Tokyo Station's Yaesu side shopping street, outside the ticket gates.",
+      "sources": ["https://gamebiz.jp/news/402182"]
+    },
+    {
+      "id": "gashapon-dept-asakusa-hanayashiki", "store_id": "g-s90000569", "station": "asakusa",
+      "name_ja": "ガシャポンのデパート 浅草花やしき店", "name_en": "Gashapon Department Store Asakusa Hanayashiki", "name_ko": "가샤폰 백화점 아사쿠사 하나야시키점", "name_zh_cn": "扭蛋百货 浅草花屋敷店", "name_zh_tw": "扭蛋百貨 淺草花屋敷店",
+      "lat": 35.715402037827126, "lng": 139.7939186458448,
+      "floor_en": "Outside Asakusa Hanayashiki (free-entry area)", "hours": "10:00–18:00 (varies by season and weather)", "machines": 420, "cashless": null,
+      "notes_en": "No park ticket needed.",
+      "sources": ["https://bandainamco-am.co.jp/others/capsule-toy-store/store/hanayashiki/", "https://bandainamco-am.co.jp/others/capsule-toy-store/news/information/hanayashiki_open_20210916_1.html"]
+    },
+    {
+      "id": "c-pla-aqua-city-odaiba", "store_id": "g-s90000099", "station": "odaiba",
+      "name_ja": "#C-pla アクアシティお台場店", "name_en": "#C-pla Aqua City Odaiba", "name_ko": "#C-pla 아쿠아시티 오다이바점", "name_zh_cn": "#C-pla AQUA CITY台场店", "name_zh_tw": "#C-pla AQUA CITY台場店",
+      "lat": 35.6279477, "lng": 139.7738343,
+      "floor_en": "3F, Aqua City Odaiba", "hours": "11:00–20:00 (weekends & holidays until 21:00)", "machines": 766, "cashless": null,
+      "notes_en": null,
+      "sources": ["https://www.fun-japan.jp/jp/articles/13963"]
+    },
+    {
+      "id": "dream-capsule-ueno-marui", "store_id": "g-s90000935", "station": "ueno",
+      "name_ja": "ドリームカプセル 上野マルイ店", "name_en": "Dream Capsule Ueno Marui", "name_ko": "드림캡슐 우에노 마루이점", "name_zh_cn": "Dream Capsule 上野丸井店", "name_zh_tw": "Dream Capsule 上野丸井店",
+      "lat": 35.7107648, "lng": 139.7758313,
+      "floor_en": "2F, Ueno Marui", "hours": "11:00–20:00", "machines": 613, "cashless": null,
+      "notes_en": null,
+      "sources": ["https://www.fun-japan.jp/jp/articles/13963"]
+    },
+    {
+      "id": "c-pla-ginza-marronnier-gate", "store_id": "g-s90001210", "station": "ginza",
+      "name_ja": "#C-pla premium マロニエゲート銀座1店", "name_en": "#C-pla premium Marronnier Gate Ginza 1", "name_ko": "#C-pla premium 마로니에 게이트 긴자1점", "name_zh_cn": "#C-pla premium 银座Marronnier Gate 1店", "name_zh_tw": "#C-pla premium 銀座Marronnier Gate 1店",
+      "lat": 35.67447701057294, "lng": 139.76548919993184,
+      "floor_en": "14F, Marronnier Gate Ginza 1", "hours": "11:00–21:00", "machines": 1000, "cashless": null,
+      "notes_en": null,
+      "sources": ["https://www.fun-japan.jp/jp/articles/13963"]
+    },
+    {
+      "id": "haneda-t3-gacha-world", "store_id": null, "station": "haneda-airport", "in_terminal": true,
+      "name_ja": "ガチャワールド（羽田空港第3ターミナル）", "name_en": "GACHA WORLD (Haneda Airport Terminal 3)", "name_ko": "GACHA WORLD (하네다공항 제3터미널)", "name_zh_cn": "GACHA WORLD（羽田机场第3航站楼）", "name_zh_tw": "GACHA WORLD（羽田機場第3航廈）",
+      "lat": 35.5443, "lng": 139.7686,
+      "floor_en": "Terminal 3, 5F, TOKYO POPTOWN (before security)", "hours": "10:00–21:00", "machines": 500, "cashless": null,
+      "notes_en": "Landside, so you can visit before check-in or after arrival.",
+      "sources": ["https://tokyo-haneda.com/shop_and_dine/detail/tenant_100082.html"]
+    },
+    {
+      "id": "narita-airport-gacha", "store_id": "g-s90001662", "station": "narita-airport", "verify": true, "in_terminal": true,
+      "name_ja": "成田空港 ガチャコーナー（第1・第2ターミナル）", "name_en": "Narita Airport gacha areas (T1/T2)", "name_ko": null, "name_zh_cn": null, "name_zh_tw": null,
+      "lat": null, "lng": null,
+      "floor_en": null, "hours": null, "machines": null, "cashless": null,
+      "notes_en": "Only older (2016–17) reports found; current terminal gacha areas not confirmed. The JR station gashapon corner is in Bandai's official list.",
+      "sources": ["https://yamatogokoro.jp/inboundnews/6319/"]
+    },
+    {
+      "id": "kix-gacha-matsuri", "store_id": null, "station": "kansai-airport", "in_terminal": true,
+      "name_ja": "GACHA MATSURI（関西空港第1ターミナル）", "name_en": "GACHA MATSURI (Kansai Airport Terminal 1)", "name_ko": "GACHA MATSURI (간사이공항 제1터미널)", "name_zh_cn": "GACHA MATSURI（关西机场第1航站楼）", "name_zh_tw": "GACHA MATSURI（關西機場第1航廈）",
+      "lat": 34.4347, "lng": 135.244,
+      "floor_en": "Terminal 1, 4F (before security)", "hours": "6:30–22:30", "machines": null, "cashless": null,
+      "notes_en": "More than 150 kinds of capsule toys.",
+      "sources": ["https://www.kansai-airport.or.jp/shop/s168"]
+    },
+    {
+      "id": "gachagacha-no-mori-umeda-chayamachi", "store_id": "g-s90001187", "station": "umeda",
+      "name_ja": "ガチャガチャの森 梅田茶屋町店", "name_en": "Gachagacha no Mori Umeda Chayamachi", "name_ko": "가챠가챠의 숲 우메다 차야마치점", "name_zh_cn": "扭蛋森林 梅田茶屋町店", "name_zh_tw": "扭蛋森林 梅田茶屋町店",
+      "lat": 34.70795800906488, "lng": 135.49941875928477,
+      "floor_en": "1F–2F", "hours": "11:00–21:00 (Fri & Sat until 22:00)", "machines": 2400, "cashless": null,
+      "notes_en": null,
+      "sources": ["https://www.fun-japan.jp/jp/articles/14169"]
+    },
+    {
+      "id": "gashapon-dept-namba-parks", "store_id": "g-s90000213", "station": "namba",
+      "name_ja": "ガシャポンのデパート なんばパークス店", "name_en": "Gashapon Department Store Namba Parks", "name_ko": "가샤폰 백화점 난바 파크스점", "name_zh_cn": "扭蛋百货 难波公园店", "name_zh_tw": "扭蛋百貨 難波公園店",
+      "lat": 34.6616083, "lng": 135.5019349,
+      "floor_en": "6F, Namba Parks", "hours": null, "machines": null, "cashless": null,
+      "notes_en": "Closing: last day of business is January 11, 2027 (Bandai official shop list).",
+      "closing": "2027-01-11",
+      "sources": ["https://gashapon.jp/shop/shop.php?shop_code=S90000213"]
+    },
+    {
+      "id": "c-pla-plus-shinsaibashi", "store_id": "g-s90000797", "station": "shinsaibashi",
+      "name_ja": "#C-pla＋ 大阪心斎橋筋店", "name_en": "#C-pla+ Osaka Shinsaibashi-suji", "name_ko": "#C-pla+ 오사카 신사이바시스지점", "name_zh_cn": "#C-pla+ 大阪心斋桥筋店", "name_zh_tw": "#C-pla+ 大阪心齋橋筋店",
+      "lat": 34.6708305, "lng": 135.5010638,
+      "floor_en": "1F–2F (Shinsaibashi-suji shopping street)", "hours": "10:00–23:00", "machines": 1200, "cashless": null,
+      "notes_en": null,
+      "sources": ["https://www.fun-japan.jp/jp/articles/14169"]
+    },
+    {
+      "id": "c-pla-abeno-qs-mall", "store_id": "g-s90000132", "station": "tennoji",
+      "name_ja": "#C-pla あべのキューズモール店", "name_en": "#C-pla Abeno Q's Mall", "name_ko": "#C-pla 아베노 큐즈몰점", "name_zh_cn": "#C-pla 阿倍野Q's MALL店", "name_zh_tw": "#C-pla 阿倍野Q's MALL店",
+      "lat": 34.6450456, "lng": 135.5117274,
+      "floor_en": "3F, Abeno Q's Mall", "hours": "10:00–21:00", "machines": 1370, "cashless": null,
+      "notes_en": null,
+      "sources": ["https://www.fun-japan.jp/jp/articles/14169"]
+    },
+    {
+      "id": "gashapon-official-canal-city-hakata", "store_id": "g-s90000107", "station": "hakata",
+      "name_ja": "ガシャポンバンダイオフィシャルショップ キャナルシティ博多店", "name_en": "Gashapon Bandai Official Shop Canal City Hakata", "name_ko": "가샤폰 반다이 공식 숍 커낼시티 하카타점", "name_zh_cn": "万代扭蛋官方店 博多运河城店", "name_zh_tw": "萬代扭蛋官方店 博多運河城店",
+      "lat": 33.588723351144445, "lng": 130.41074162664762,
+      "floor_en": "B1F, South Bldg. (OPA), Canal City Hakata", "hours": "10:00–21:00", "machines": 300, "cashless": null,
+      "notes_en": "With the adjoining Gashapon Department Store there are over 2,000 machines in total.",
+      "sources": ["https://www.fun-japan.jp/jp/articles/14324"]
+    },
+    {
+      "id": "gashapon-dept-sapporo-tokyu", "store_id": "g-s90001194", "station": "sapporo",
+      "name_ja": "ガシャポンのデパート さっぽろ東急百貨店", "name_en": "Gashapon Department Store Sapporo Tokyu", "name_ko": "가샤폰 백화점 삿포로 도큐백화점", "name_zh_cn": "扭蛋百货 札幌东急百货店", "name_zh_tw": "扭蛋百貨 札幌東急百貨店",
+      "lat": 43.06637466643145, "lng": 141.35287142597565,
+      "floor_en": "9F, Tokyu Department Store Sapporo", "hours": null, "machines": null, "cashless": null,
+      "notes_en": "Next to Sapporo Station; a Gashapon Bandai Official Shop is on the same floor.",
+      "sources": ["https://gashapon.jp/shop/shop.php?shop_code=S90001194"]
+    }
+  ]
+}
