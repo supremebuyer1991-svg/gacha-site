@@ -1299,3 +1299,22 @@ p.hero-lead { font-size: clamp(15px, 1.7vw, 20px); font-weight: 700; color: var(
 .lm-card em { font-style: normal; font-size: 13px; font-weight: 700; color: var(--gold-text); } .lm-card .lm-note { color: var(--text); }
 .stn-map { height: 260px; border-radius: 14px; background: var(--surface-2); overflow: hidden; z-index: 0; }
 .stn-faq dt { font-weight: 700; margin-top: 12px; } .stn-faq dd { margin: 4px 0 0; color: var(--muted); }
+/* 旅行者向けガイド（/en/guide/ など）：先に答えの箱・表・本文・ガイドの一覧 */
+.guide-quick { background: var(--surface); border-radius: 14px; padding: 16px 18px; box-shadow: 0 2px 0 var(--line); border-left: 4px solid var(--gold); max-width: 46em; }
+.guide-quick b { display: block; font-size: 13px; color: var(--gold-text); margin-bottom: 4px; }
+.guide-body { max-width: 52em; }
+.guide-body > * + * { margin-top: 12px; }
+.guide-body p, .guide-body li { color: var(--text-2); }
+.guide-body ul, .guide-body ol { padding-left: 1.3em; }
+.guide-body li + li { margin-top: 6px; }
+.guide-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.guide-table { border-collapse: collapse; font-size: 14px; min-width: 100%; }
+.guide-table th, .guide-table td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.guide-table th { font-size: 12px; color: var(--muted); white-space: nowrap; }
+.guide-table td:first-child { white-space: nowrap; }
+.guide-facts { display: grid; grid-template-columns: max-content 1fr; gap: 6px 14px; }
+.guide-facts dt { font-weight: 700; } .guide-facts dd { margin: 0; color: var(--text-2); }
+.guide-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 12px; }
+.guide-item { display: flex; flex-direction: column; gap: 6px; background: var(--surface); border-radius: 14px; padding: 16px 18px; box-shadow: 0 2px 0 var(--line); border-left: 4px solid var(--gold); }
+.guide-item b { font-size: 16px; } .guide-item span { font-size: 13px; color: var(--muted); } .guide-item em { font-style: normal; font-size: 13px; font-weight: 700; color: var(--gold-text); }
+.guide h1, .guide h2, .guide-item b { word-break: keep-all; overflow-wrap: anywhere; } /* 韓国語の見出しを単語の途中で折り返さない */

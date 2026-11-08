@@ -598,7 +598,7 @@ const pushBox = (t, kind, favId = "") => {
 };
 const up = (n) => "../".repeat(n);
 const langDir = (lang) => (lang === "ja" ? "" : `${lang}/`);
-const canonical = (lang, p) => SITE_URL + "/" + langDir(lang) + p.replace(/^index\.html$/, "").replace(/\.html$/, "");
+const canonical = (lang, p) => SITE_URL + "/" + langDir(lang) + p.replace(/(^|\/)index\.html$/, "$1").replace(/\.html$/, ""); // guide/index.html → guide/
 // hreflang の x-default：英語版があれば英語（言語の合わない海外の人向け）、なければその言語のページ
 const xDefault = (rel, alts) => (alts.includes("en") ? "en" : alts[0]);
 const absImg = (it) => (!it.image ? "" : /^https?:/.test(it.image) ? it.image : SITE_URL + "/" + it.image);
@@ -787,6 +787,7 @@ const NEXT_WEEK = (() => {
 const hubs = require("./hubs");
 const HUB = hubs.prepare({ items, weekStartOf, weekInfo, mondayOf, nowJST, thisMonth, hashSlug });
 const stats = require("./stats"); // 統計ページ /stats（日本語・英語）
+const guides = require("./guides"); // 海外の旅行者向けガイド /{en,ko,zh-tw,zh-cn}/guide/（src/guides.js）
 const STATS = stats.compute({ items, weekStartOf, isReissue: hubs.isReissue, CHARAS, thisMonth });
 // 一覧ページのタイトルの【◯年◯月】：その一覧の中でいちばん新しい更新（追加日・発売月）の月。先月より古ければ付けない
 const PREV_MONTH = new Date(Date.UTC(nowJST.getUTCFullYear(), nowJST.getUTCMonth() - 1, 1)).toISOString().slice(0, 7);
@@ -1187,7 +1188,7 @@ ${ld}`;
 <footer class="site-footer"><div class="wrap">
   ${SNS ? `<a class="foot-x" href="${SNS.threads}" target="_blank" rel="noopener">${AT_SVG}<span>${esc(t.u.snsTxt)} → <b>Threads @${SNS.acc}</b></span></a><a class="foot-x" href="${SNS.insta}" target="_blank" rel="noopener">${AT_SVG}<span><b>Instagram @${SNS.acc}</b></span></a>` : xAcc ? `<a class="foot-x" href="https://x.com/${esc(xAcc)}" target="_blank" rel="noopener">${X_SVG}<span>${esc(t.u.followTxt)} → <b>${esc(t.u.followCta(xAcc))}</b></span></a>` : ""}
   <div>© ${nowJST.getUTCFullYear()} ${esc(site.name)}</div>
-  <nav aria-label="${t.footAria}"><a href="${c.H}faq.html">${t.nav.faq}</a><a href="${c.H}about.html">${t.about}</a>${lang === "ja" ? `<a href="${c.H}privacy.html">プライバシーポリシー</a>` : ""}<a href="${c.H}calendar.html">${t.nav.calendar}</a><a href="${c.H}station.html">${lang === "ja" ? "駅からさがす" : t.stn.footer}</a>${lang === "ja" ? `<a href="${c.H}collection.html">シリーズ一覧</a><a href="${c.H}saihan.html">再販・復刻</a><a href="${c.H}stats.html">新作の統計</a><a href="${c.H}ranking.html">人気ランキング</a><a href="${c.H}limited.html">オフィシャルショップ限定</a>` : lang === "en" ? `<a href="${c.H}collection.html">${t.hub.seriesFoot}</a><a href="${c.H}saihan.html">${t.hub.reissueFoot}</a><a href="${c.H}stats.html">Stats</a>` : ""}</nav>
+  <nav aria-label="${t.footAria}"><a href="${c.H}faq.html">${t.nav.faq}</a><a href="${c.H}about.html">${t.about}</a>${lang === "ja" ? `<a href="${c.H}privacy.html">プライバシーポリシー</a>` : ""}<a href="${c.H}calendar.html">${t.nav.calendar}</a><a href="${c.H}station.html">${lang === "ja" ? "駅からさがす" : t.stn.footer}</a>${guides.NAV[lang] ? `<a href="${c.H}guide/index.html">${guides.NAV[lang]}</a>` : ""}${lang === "ja" ? `<a href="${c.H}collection.html">シリーズ一覧</a><a href="${c.H}saihan.html">再販・復刻</a><a href="${c.H}stats.html">新作の統計</a><a href="${c.H}ranking.html">人気ランキング</a><a href="${c.H}limited.html">オフィシャルショップ限定</a>` : lang === "en" ? `<a href="${c.H}collection.html">${t.hub.seriesFoot}</a><a href="${c.H}saihan.html">${t.hub.reissueFoot}</a><a href="${c.H}stats.html">Stats</a>` : ""}</nav>
   <nav class="foot-langs" aria-label="Language">${LANGS.map((l) => `<a href="${toLang(l)}" hreflang="${LANG_META[l].hreflang}" lang="${LANG_META[l].html}">${LANG_META[l].label}</a>`).join("")}</nav>
   <p class="disclosure">${t.disclosure}</p>
 </div></footer>
@@ -1232,6 +1233,7 @@ ${content}
     <div class="section-head"><h2>${lang === "ja" ? "駅からガチャのお店をさがす" : t.stn.homeH}</h2></div>
     <div class="chara-list">${pick.map((x) => `<a class="chara-chip" href="${c.H}station/${x.slug}.html">${esc((x[lang] || x.en).replace(/[（(].*?[）)]/g, "").trim().replace(/(駅| Station|站|역)$/, ""))}<small>${x.count}</small></a>`).join("")}<a class="chara-chip chara-more" href="${c.H}station.html">${lang === "ja" ? "駅をすべて見る →" : t.stn.allStations}</a></div>
   </section>` : ""; })()}
+  ${lang !== "ja" ? guides.homeSection(lang, c, esc) : ""}
 
   <section class="section section-tight" id="series">
     <div class="section-head"><h2>${lang === "ja" ? "人気シリーズ" : t.x.popSeries}</h2></div>
@@ -2180,6 +2182,24 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
     const LM_KEY = { en: "name_en", ko: "name_ko", "zh-cn": "name_zh_cn", "zh-tw": "name_zh_tw" };
     const lmName = (lm) => (ja ? lm.name_ja : lm[LM_KEY[lang]] || lm.name_en || lm.name_ja);
     const YEAR = nowJST.getUTCFullYear();
+    const walkTxt = (x) => (x.lm && x.lm.in_terminal ? (ja ? "ターミナル内" : S.inTerminal) : ja ? `徒歩約${walkMin(x.d)}分（${fmtDist(x.d)}）` : S.walk(walkMin(x.d), fmtDist(x.d)));
+    const gm = (x) => `<a href="${esc(gmapUrl(x.lm || x.sh))}" target="_blank" rel="noopener">${ja ? "Googleマップで開く" : S.gmaps}</a>`;
+    // 有名なガチャ専門店（カード）。x は { lm, sh, d }（d は駅からの距離）。c はそのページの ctx（旅行ガイドでも使う）
+    const lmCardAt = (c) => (x) => {
+      const lm = x.lm, nm = lmName(lm), link = x.sh ? `${c.R}shop/${x.sh.id}.html` : "";
+      const meta = [walkTxt(x), lm.machines ? (ja ? `約${lm.machines.toLocaleString("en-US")}台` : S.machines(lm.machines)) : "", lm.hours ? (ja ? `営業 ${lm.hours.replace(/\(.*?\)/g, "").trim()}` : S.hours(lm.hours)) : ""].filter(Boolean);
+      const pay = lm.cashless === true ? (ja ? "キャッシュレス対応" : S.cashY) : lm.cashless === false ? (ja ? "現金（100円玉）のみ" : S.cashN) : "";
+      const closing = lm.closing ? (ja ? `${lm.closing.replace(/^(\d+)-0?(\d+)-0?(\d+)$/, "$1年$2月$3日")}で閉店予定` : S.closing(lm.closing)) : "";
+      const where = ja ? (x.sh ? x.sh.address : "") : lm.floor_en || "";
+      return `<div class="lm-card"><b>${link ? `<a href="${link}">${esc(nm)}</a>` : esc(nm)}</b>${!ja && nm !== lm.name_ja ? `<small lang="ja">${esc(lm.name_ja)}</small>` : ""}${where ? `<span${ja ? "" : ' lang="en"'}>${esc(where)}</span>` : ""}<em>${esc(meta.join(ja ? "・" : " · "))}</em>${pay || closing ? `<span class="lm-note">${esc([closing, pay].filter(Boolean).join(ja ? "・" : " · "))}</span>` : ""}${lang === "en" && lm.notes_en && !lm.closing ? `<span class="lm-note">${esc(lm.notes_en)}</span>` : ""}<span>${gm(x)}</span></div>`;
+    };
+    // ほかの設置店（1行）。x は { sh, d }
+    const rowAt = (c, { noWalk = false } = {}) => (x) => { // noWalk：徒歩の目安を出さない（空港の中のお店など）
+      const sh = x.sh, k = (SHOP_OFFICIAL[sh.id] || []).length, chn = ja ? null : CHAIN_BY_SHOP.get(sh.id);
+      // 外国語：チェーンのお店はチェーン名を太字で、日本語の店名は小さく。取扱30種以上は「最大規模」バッジ
+      const flag = !ja && k >= 30 ? ` <mark class="ct-tag">${esc(S.flagship)}</mark>` : "";
+      return `<div class="shop-row"><b>${chn ? `<a href="${c.R}shop/${sh.id}.html">${esc(chainLabel(chn, lang))}</a>${flag} <small lang="ja">${esc(sh.name)}</small>` : `<a href="${c.R}shop/${sh.id}.html"${jl}>${esc(sh.name)}</a>${flag}`}</b><span${jl}>${esc(sh.address || sh.pref || "")}</span><em>${noWalk ? "" : ja ? `徒歩約${walkMin(x.d)}分（${fmtDist(x.d)}）` : esc(S.walk(walkMin(x.d), fmtDist(x.d)))}${k ? `${noWalk ? "" : "・"}${ja ? `取扱中 ${k}種` : esc(S.titles(k))}` : ""}</em><span>${gm(x)}</span></div>`;
+    };
     for (const st of STATIONS) {
       const rel = `station/${st.slug}.html`, c = ctx(rel);
       const lms = st.lms, rest = st.rest;
@@ -2197,7 +2217,6 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
       const top = near && most && most.k >= 5 && most.sh !== near.sh && (SHOP_OFFICIAL[near.sh.id] || []).length < 5 ? most : null;
       // 有名店：台数がいちばん多いお店（lms は台数の多い順）
       const big = lms[0] || null, bigName = big ? lmName(big.lm) : "";
-      const walkTxt = (x) => (x.lm && x.lm.in_terminal ? (ja ? "ターミナル内" : S.inTerminal) : ja ? `徒歩約${walkMin(x.d)}分（${fmtDist(x.d)}）` : S.walk(walkMin(x.d), fmtDist(x.d)));
       const lmLead = big ? (ja ? `いちばん大きいのは「${bigName}」${big.lm.machines ? `（約${big.lm.machines.toLocaleString("en-US")}台）` : ""}です。` : S.lmLead(bigName, big.lm.machines, big.lm.in_terminal ? null : walkMin(big.d))) : "";
       const title = ja ? `${name}周辺のガチャガチャ設置場所・設置店${n}店${chains.length ? `｜${chains.slice(0, 2).map(chainName).join("・")}` : ""}【${YM_NOW}】` : S.titleN(name, n, YEAR);
       const leadShops = !near ? "" : ja
@@ -2207,22 +2226,7 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
       const desc = ja
         ? `${name}の周りにあるガチャガチャの設置場所（設置店）${n}店。${big ? `有名なガチャ専門店「${bigName}」をはじめ、` : ""}${near ? `いちばん近いのは「${near.sh.name}」（徒歩約${walkMin(near.d)}分）。` : ""}住所・徒歩の目安・営業時間・取扱中のガチャの数・地図つき。`
         : S.descN(name, n, bigName || bestLabel || (near ? chainLabelOr(near) : ""));
-      const gm = (x) => `<a href="${esc(gmapUrl(x.lm || x.sh))}" target="_blank" rel="noopener">${ja ? "Googleマップで開く" : S.gmaps}</a>`;
-      // 有名なガチャ専門店（カード）
-      const lmCard = (x) => {
-        const lm = x.lm, nm = lmName(lm), link = x.sh ? `${c.R}shop/${x.sh.id}.html` : "";
-        const meta = [walkTxt(x), lm.machines ? (ja ? `約${lm.machines.toLocaleString("en-US")}台` : S.machines(lm.machines)) : "", lm.hours ? (ja ? `営業 ${lm.hours.replace(/\(.*?\)/g, "").trim()}` : S.hours(lm.hours)) : ""].filter(Boolean);
-        const pay = lm.cashless === true ? (ja ? "キャッシュレス対応" : S.cashY) : lm.cashless === false ? (ja ? "現金（100円玉）のみ" : S.cashN) : "";
-        const closing = lm.closing ? (ja ? `${lm.closing.replace(/^(\d+)-0?(\d+)-0?(\d+)$/, "$1年$2月$3日")}で閉店予定` : S.closing(lm.closing)) : "";
-        const where = ja ? (x.sh ? x.sh.address : "") : lm.floor_en || "";
-        return `<div class="lm-card"><b>${link ? `<a href="${link}">${esc(nm)}</a>` : esc(nm)}</b>${!ja && nm !== lm.name_ja ? `<small lang="ja">${esc(lm.name_ja)}</small>` : ""}${where ? `<span${ja ? "" : ' lang="en"'}>${esc(where)}</span>` : ""}<em>${esc(meta.join(ja ? "・" : " · "))}</em>${pay || closing ? `<span class="lm-note">${esc([closing, pay].filter(Boolean).join(ja ? "・" : " · "))}</span>` : ""}${lang === "en" && lm.notes_en && !lm.closing ? `<span class="lm-note">${esc(lm.notes_en)}</span>` : ""}<span>${gm(x)}</span></div>`;
-      };
-      const row = (x) => {
-        const sh = x.sh, k = (SHOP_OFFICIAL[sh.id] || []).length, chn = ja ? null : CHAIN_BY_SHOP.get(sh.id);
-        // 外国語：チェーンのお店はチェーン名を太字で、日本語の店名は小さく。取扱30種以上は「最大規模」バッジ
-        const flag = !ja && k >= 30 ? ` <mark class="ct-tag">${esc(S.flagship)}</mark>` : "";
-        return `<div class="shop-row"><b>${chn ? `<a href="${c.R}shop/${sh.id}.html">${esc(chainLabel(chn, lang))}</a>${flag} <small lang="ja">${esc(sh.name)}</small>` : `<a href="${c.R}shop/${sh.id}.html"${jl}>${esc(sh.name)}</a>${flag}`}</b><span${jl}>${esc(sh.address || sh.pref || "")}</span><em>${ja ? `徒歩約${walkMin(x.d)}分（${fmtDist(x.d)}）` : esc(S.walk(walkMin(x.d), fmtDist(x.d)))}${k ? `・${ja ? `取扱中 ${k}種` : esc(S.titles(k))}` : ""}</em><span>${gm(x)}</span></div>`;
-      };
+      const lmCard = lmCardAt(c), row = rowAt(c);
       // 地図（Leaflet。地図が画面に近づいたときに読み込む）。有名店は金色、ほかは青
       const pins = [...lms.map((x) => ({ a: x.lm.lat, o: x.lm.lng, t: lmName(x.lm), u: x.sh ? `${c.R}shop/${x.sh.id}.html` : "", m: 1 })),
         ...list.slice(0, 40).map((x) => ({ a: x.sh.lat, o: x.sh.lng, t: !ja && CHAIN_BY_SHOP.get(x.sh.id) ? chainLabel(CHAIN_BY_SHOP.get(x.sh.id), lang) : x.sh.name, u: `${c.R}shop/${x.sh.id}.html`, m: 0 }))]
@@ -2313,6 +2317,9 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
       layout({ rel, title, description: lead, body, current: ja ? "map" : "station", jsonld: [{ "@context": "https://schema.org", "@type": "ItemList", numberOfItems: STATIONS.length,
         itemListElement: STATIONS.map((x, i) => ({ "@type": "ListItem", position: i + 1, url: canonical(lang, `station/${x.slug}.html`), name: ja ? `${stName(x)}周辺のガチャガチャ設置店` : S.h1(stName(x)) })) }] });
     }
+    // 海外の旅行者向けガイド（有名店のカード lmCardAt・お店の行 rowAt を使う）
+    if (!ja) guides.build({ lang, t, layout, ctx, card, lmCardAt, rowAt, esc, canonical, LANG_META, STATIONS, items, WEEK, SHOP_OFFICIAL, OFFICIAL_BY_ITEM, distM, walkMin, fmtDist, compDraws, today, nowJST,
+      LANDMARKS_CHECKED, SITE_URL, site, nameOf, lmName, OG_IMAGE: `${SITE_URL}/images/og/${OG_SITE_LANGS.has(lang) ? `site-${lang}` : "site"}.jpg` });
   }
 
   /* ---------- みんなのガチャマップ（日本語だけ） ---------- */
