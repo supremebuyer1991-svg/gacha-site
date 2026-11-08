@@ -130,14 +130,14 @@ const T = {
     },
     itemDesc: (it, n, mk, mo) => `${n}（${mk}）は${mo}発売${it.price ? `、1回${it.price}円` : ""}${it.lineup ? `・全${it.lineup}種` : ""}のガチャガチャ。${it.description ? it.description + " " : ""}近くの在庫店や通販での入手方法もまとめています。`,
     genrePage: (g, ym = YM_NOW) => `${g}のガチャガチャ新作・発売日一覧${ym ? `【${ym}】` : ""}`, genreLead: (g, n, list) => `${g}ジャンルの新作・発売予定ガチャ${n}シリーズを新しい順に掲載しています。${leadTail(list)}`,
-    makerPage: (m, ym = YM_NOW) => `${m}のガチャガチャ新作・発売日一覧${ym ? `【${ym}】` : ""}`, makerLead: (m, n, list) => `${m}のガチャ${n}シリーズを新しい順に掲載しています。${leadTail(list)}`,
+    makerPage: (m, ym = YM_NOW) => `${m}の${m === "バンダイ" ? "ガシャポン" : "ガチャガチャ"}新作・発売日一覧${ym ? `【${ym}】` : ""}`, makerLead: (m, n, list) => `${m}のガチャ${n}シリーズを新しい順に掲載しています。${leadTail(list)}`,
     empty: "まだ掲載している商品はありません。",
     calTitle: "ガチャガチャ発売カレンダー", calH1: "発売カレンダー", calLead: "公式に発表されている先の月まで、発売週ごとに並べています。「第◯週」はその週から順次発売という意味で、お店や地域によって前後します。",
     calDesc: "新作ガチャガチャの発売予定を月ごとに一覧できるカレンダー。価格・種類数・メーカーもまとめて確認できます。",
     calPast: "過去の発売", calMonthTitle: (y, m) => `${y}年${m}月発売のガチャガチャ`,
     thisMonth: "今月", calMonth: (y, m, n) => `${y}年${m}月<br>${n}シリーズ`,
-    faqTitle: "よくある質問", faqLead: "在庫情報の見方や、通販での購入についてまとめました。",
-    faqDesc: "在庫情報の精度、位置情報の扱い、通販での購入方法など、よくある質問への回答です。",
+    faqTitle: "よくある質問", faqPageTitle: "ガチャガチャのよくある質問｜回し方・両替・再販・コンプセットの買い方", faqLead: "ガチャガチャの回し方・両替・再販の調べ方、在庫情報の見方や通販での購入についてまとめました。",
+    faqDesc: "ガチャガチャは何円玉で回せる？両替はどこで？電子マネーは使える？再販はいつ？コンプリートセットはどこで買う？など、ガチャガチャのよくある質問への回答です。",
     faqs: [
       ["在庫情報はどのくらい正確ですか？", "各店舗の情報を定期的に集めて表示しています。更新の間に売り切れたり補充されたりすることがあるため、表示と実際が異なる場合があります。商品ページに「○時時点の情報」と表示しているので目安にしてください。"],
       ["現在地を使うと、位置情報はどこかに送られますか？", "送られません。現在地はお使いの端末の中で店舗までの距離を計算するためだけに使い、当サイトのサーバーを含めどこにも保存・送信しません。"],
@@ -146,15 +146,25 @@ const T = {
       ["「11月第2週発売」は何日から売られますか？", "当サイトでは、その月の最初の月曜日から始まる週を「第1週」として数えています（例：2026年11月の第1週は11/2〜11/8、第2週は11/9〜11/15）。メーカーの「第◯週」は、その週から順次お店に並ぶという意味で、決まった発売日はありません。早いお店で週の初め、遅いお店では翌週になることもあります。"],
       ["先の月の新作はいつごろわかりますか？", "バンダイ・タカラトミーアーツは、おおむね1〜2か月前に発売予定を公式サイトで発表します。当サイトは1日3回公式の発表を確かめ、3か月先まで発売カレンダーに自動で追加しています。"],
       ["ガチャ診断はどうやって決まっていますか？", "選んだジャンル・テイスト・予算と、各商品に付けたタグを照らし合わせて、相性の高い順に表示しています。タグはAIで付けたものを含みます。"],
+      ["ガチャガチャは何円玉で回せる？両替はどこで？", "多くのマシンは100円玉専用で、300円なら100円玉3枚を入れて回します。500円玉が使えるマシンや、お札の両替機を置いているガチャコーナーもありますが、お店によって違います。両替機がないときは、同じ施設のお店で買い物をしてお釣りを100円玉でもらうなど、あらかじめ100円玉を用意しておくと安心です。"],
+      ["電子マネー・PayPayは使える？", "ふつうのマシンは硬貨だけのものがほとんどです。ガシャポンバンダイオフィシャルショップなど一部のお店には、交通系ICなどの電子マネーやコード決済に対応したマシンや両替機がありますが、使える支払い方法はお店ごとに違います。使いたい場合は、お店の案内やマシンの表示を確かめてください。"],
+      ["スマホで回せる『ガシャポンオンライン』とは？", "バンダイが運営する、スマホやパソコンからガシャポンを回せる公式サービスです。オンラインで回した商品は後日まとめて自宅に届きます。取り扱うシリーズ・1回の値段・送料などはサービスの公式サイトで確認してください。"],
+      ["再販はいつ来る？どう調べる？", "再販（再生産・復刻）は、人気のシリーズがメーカーの発売予定にあらためて載ることで決まり、時期は決まっていません。当サイトでは、メーカーの発表に出た再販・復刻のガチャを[再販・復刻のガチャ一覧](saihan.html)にまとめています。気になるシリーズは、商品ページで前回の発売時期もあわせて確認できます。"],
+      ["コンプリートセットはどこで買うのが安い？（Amazon・楽天・メルカリの違い）", "Amazon・楽天市場はショップが新品のコンプリートセットを販売していることが多く、発売前に予約できる場合もあります。メルカリなどのフリマは個人どうしの売り買いで、単品だけ買えたり安く見つかったりする一方、値段や状態は出品ごとにさまざまです。値段は時期や在庫で変わるので、送料込みの合計で比べるのがおすすめです。"],
+      ["全種そろえるには平均何回回す？", "どの種類も同じ確率で出るとすると、全n種そろえるのに平均でおよそ n×(1＋1/2＋1/3＋…＋1/n) 回かかります（「コレクター問題」と呼ばれる考え方）。たとえば全5種なら約11回、全6種なら約15回です。実際は種類ごとに出る確率が違うこともあるので、確実にそろえたいならコンプリートセットを買う方法もあります。"],
+      ["オフィシャルショップ限定とは？", "バンダイ直営のガシャポン専門店「ガシャポンバンダイオフィシャルショップ」でしか回せないシリーズのことです。人気シリーズの限定再販もあり、ふつうのガシャポン設置店には置かれません。当サイトでは[オフィシャルショップ限定ガチャの一覧](limited.html)にまとめています。"],
       ["掲載内容の誤りを見つけたら？", "運営者情報ページのお問い合わせ先からお知らせください。確認のうえ修正します。"],
     ],
     aboutTitle: "運営者情報・お問い合わせ", aboutH1: "運営者情報", aboutDesc: `${site.name}の運営者情報、お問い合わせ先、広告・免責事項について。`,
     contactForm: "お問い合わせフォーム", contactX: (x) => `X（旧Twitter）の <b>@${x}</b> までDMでご連絡ください。`, contactNone: "お問い合わせ窓口は準備中です。",
     aboutSections: (s) => [
       ["このサイトについて", `${s.name}は、ガチャガチャ好きのためのカプセルトイ情報サイトです。新作の発売日・価格・ラインナップと、近くの在庫店をひとつの場所で確かめられることを目指しています。`],
-      ["運営者", s.operator],
+      ["データの集め方", "新作の発売日・価格・ラインナップは、メーカー公式サイト（バンダイ・タカラトミーアーツなど）で発表された情報を毎日自動で取得しています。取扱店はバンダイのガシャポン公式の店舗検索（ガシャポンどこ？）をもとにしており、ガチャマップの在庫報告は利用者の皆さんからの投稿です。"],
+      ["更新頻度", "新作・発売予定・取扱店の情報は毎日更新しています。人気ランキングも毎日集計し直しています。"],
+      ["編集方針", "メーカーの紹介文などの文章は転載せず、発売日・価格・種類数などの事実をもとに当サイトで書いています。ジャンル・テイストのタグ付けには、AIを補助的に使っています。誤りを見つけた場合は確認のうえ修正します。"],
+      ["運営", `${s.operator}が運営しています。2026年10月開設。最新情報はX（旧Twitter）[@gachapla](https://x.com/gachapla)で発信しています。`],
       ["お問い合わせ", null],
-      ["広告について", "Amazonのアソシエイトとして、当サイトは適格販売により収入を得ています。また、楽天アフィリエイトなどの広告プログラムに参加しています。商品ページの「PR」表示があるボタンは広告リンクです。"],
+      ["広告について", "Amazonのアソシエイトとして、当サイトは適格販売により収入を得ています。また、楽天アフィリエイト、バリューコマース（Yahoo!ショッピング）、メルカリアンバサダーなどのアフィリエイトプログラムに参加しています。商品ページの「PR」表示があるボタンは広告リンクです。広告の有無や報酬は、一覧やランキングの並び順には影響しません。"],
       ["免責事項", "掲載している発売日・価格・在庫などの情報は、正確さに努めていますが内容を保証するものではありません。最新の情報は各メーカー・各店舗でご確認ください。当サイトの情報を利用して生じた損害について、運営者は責任を負いかねます。"],
       ["著作権について", "掲載商品の画像・名称・キャラクターの権利は、各メーカーおよび権利者に帰属します。掲載に問題がある場合はお問い合わせください。速やかに対応します。"],
       ["位置情報の扱い", "「現在地から探す」で取得した位置情報は、お使いの端末の中で店舗までの距離を計算するためだけに使い、保存・送信はしません。"],
@@ -1291,10 +1301,10 @@ ${content}
     layout({
       rel: "index.html", title: site.name, lastmod: maxAdded(items),
       // 説明文：日本語は今週・今月の数と最新の名前を足して、ひと目で中身がわかるように（ほかの言語は site.json の長い説明のまま）
-      description: lang === "ja" ? `${t.description}今週発売${WEEK.items.length}件・今月の新作${releasingNow}件。${newest.slice(0, 2).map((it) => `「${it.name}」`).join("")}など最新の情報を毎日更新。` : t.description, body,
+      description: lang === "ja" ? `${t.description.replace(/^新作ガチャガチャ/, "新作ガチャガチャ・ガシャポン")}今週発売${WEEK.items.length}件・今月の新作${releasingNow}件。${newest.slice(0, 2).map((it) => `「${it.name}」`).join("")}など最新の情報を毎日更新。` : t.description, body,
       jsonld: [{ "@context": "https://schema.org", "@type": "WebSite", name: site.name, alternateName: ["ガチャプラネット", "GACHA PLANET"], url: canonical(lang, "index.html"), description: t.description, inLanguage: LANG_META[lang].hreflang,
         potentialAction: { "@type": "SearchAction", target: { "@type": "EntryPoint", urlTemplate: canonical(lang, "search.html") + "?q={search_term_string}" }, "query-input": "required name=search_term_string" } },
-        { "@context": "https://schema.org", "@type": "Organization", name: site.name, alternateName: "ガチャプラネット", url: SITE_URL + "/", logo: `${SITE_URL}/images/og/site.png` }],
+        { "@context": "https://schema.org", "@type": "Organization", name: site.name, alternateName: "ガチャプラネット", url: SITE_URL + "/", logo: `${SITE_URL}/images/og/site.png`, sameAs: ["https://x.com/gachapla"], foundingDate: "2026-10" }],
     });
   }
 
@@ -1780,6 +1790,51 @@ ${content}
     const label = makerOf(list[0], lang);
     listPage(`maker/${makerSlug(maker)}.html`, { title: t.makerPage(label, (freshYM(list) || {}).ja), lead: t.makerLead(label, list.length, list, [...list].sort(byPopular).slice(0, 3).map((it) => nameOf(it, lang))), list, ...hubHead(label, list) }); // 4つ目＝人気の上位3つの名前（中国語・韓国語の説明文で使う）
   }
+  // 人気ランキング（日本語だけ）：トップの「人気ランキング」と同じ並び（ハートの数→注目度）。総合TOP50・発売前の注目TOP20・今週発売の人気順
+  if (lang === "ja") {
+    const rel = "ranking.html", c = ctx(rel);
+    const top = [...items].sort(byPopular).slice(0, 50);
+    const upTop = items.filter((it) => HUB.isUpcoming(it)).sort(byPopular).slice(0, 20);
+    const weekTop = WEEK.items.slice(0, 30); // WEEK.items は人気順にそろえてある
+    const rankOl = (list) => `<ol class="rank">${list.map((it, i) => `<li><a href="${c.H}item/${it.id}.html">
+      <span class="rank-no">${i + 1}</span>${thumb(it, c.R, { badge: false, load: i === 0 ? "high" : i < 4 ? "eager" : "" })}
+      <span style="min-width:0"><span class="card-name">${esc(it.name)}</span><span class="card-foot"><span><b>${priceTxt(it.price)}</b></span><span>${heartsOf(it) ? `<em class="hearts">♥ ${heartsOf(it)}</em>` : t.month(it.release)}</span></span></span>
+    </a></li>`).join("")}</ol>`;
+    const sec = (id, h, note, list) => `<section class="section" id="${id}"><div class="section-head"><h2>${h}</h2></div>${note ? `<p class="lead" style="margin-top:0">${note}</p>` : ""}${list.length ? rankOl(list) : `<p class="empty">${t.empty}</p>`}</section>`;
+    const title = `ガチャガチャ人気ランキング【${YM_NOW}】今いちばん人気の新作TOP50`;
+    const h1 = "ガチャガチャ人気ランキング";
+    const lead = "ハート（推し）の数と注目度から、今人気のガチャを順位で並べています。毎日更新。";
+    const body = `<div class="wrap">
+  <nav class="breadcrumb" aria-label="breadcrumb"><a href="${c.H}index.html">${t.home}</a><span>/</span><span>${h1}</span></nav>
+  <header class="page-head"><h1>${h1}</h1><p class="lead">${lead}</p><p class="hub-links"><a href="#total">総合TOP50</a><a href="#upcoming">発売前で注目</a><a href="#week">今週発売の人気順</a><a href="${c.H}week.html">今週発売のガチャ一覧 →</a></p></header>
+  ${sec("total", "総合TOP50", "", top)}
+  ${sec("upcoming", "発売前で注目のガチャ TOP20", "まだ発売前で、ハートや注目が集まっているガチャです。", upTop)}
+  ${sec("week", `今週発売の人気順（${esc(WEEK.range)}）`, `${esc(WEEK.label)}に発売されるガチャを人気の順に並べています。`, weekTop)}
+</div>`;
+    const description = `${lead}1位は「${top[0] ? top[0].name : ""}」。${top.slice(1, 3).map((it) => `「${it.name}」`).join("")}など、総合TOP50・発売前の注目・今週発売の人気順を掲載。`;
+    layout({ rel, title, description, body, current: "ranking", jaOnly: true, lastmod: today, jsonld: [
+      { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
+        { "@type": "ListItem", position: 1, name: t.home, item: canonical(lang, "index.html") },
+        { "@type": "ListItem", position: 2, name: h1 } ] },
+      { "@context": "https://schema.org", "@type": "ItemList", name: "ガチャガチャ人気ランキング 総合TOP50", itemListOrder: "https://schema.org/ItemListOrderDescending", numberOfItems: top.length,
+        itemListElement: top.map((it, i) => ({ "@type": "ListItem", position: i + 1, url: canonical(lang, `item/${it.id}.html`), name: it.name })) },
+    ] });
+  }
+  // オフィシャルショップ限定のガチャ（日本語だけ）：商品名に「オフィシャルショップ限定」（限定再販も含む）が入るもの、発売が新しい順
+  if (lang === "ja") {
+    const LIMITED_RX = /(ガシャポン(バンダイ)?)?オフィシャルショップ限定/;
+    const list = items.filter((it) => LIMITED_RX.test(it.name)).sort((a, b) => (b.release > a.release ? 1 : b.release < a.release ? -1 : byNewest(a, b)));
+    const chain = CHAINS.find((ch) => ch.slug === "gashapon-official-shop" && ch.shops.length);
+    const H = ctx("limited.html").H;
+    listPage("limited.html", {
+      title: "ガシャポンバンダイオフィシャルショップ限定ガチャ一覧（限定・限定再販）",
+      h1: "ガシャポンバンダイオフィシャルショップ限定ガチャ一覧",
+      sub: list.length ? `${list.length}シリーズ・新しい順` : "",
+      lead: "「ガシャポンバンダイオフィシャルショップ限定」は、バンダイ直営のガシャポン専門店（ガシャポンバンダイオフィシャルショップ）でしか回せないシリーズです。人気シリーズの限定再販も多く、ふつうのガシャポン設置店やショッピングモールのガチャコーナーには置かれません。オフィシャルショップは主に大きな駅の近くや商業施設の中にあります。",
+      list, current: "genre", jaOnly: true,
+      extra: `<p class="hub-links">${chain ? `<a href="${H}chain/${chain.slug}.html">ガシャポンバンダイオフィシャルショップの店舗一覧（全国${chain.shops.length}店）→</a>` : ""}<a href="${H}saihan.html">再販・復刻のガチャ →</a></p>`,
+    });
+  }
 
   /* ---------- 発売カレンダー（今月〜わかる範囲の先の月、週ごと）と、過去の月ごとのページ ---------- */
   {
@@ -1949,7 +2004,7 @@ ${content}
   <div class="faq">${t.faqs.map(([q, a]) => `<details><summary>${esc(q)}</summary><div class="a">${faqHtml(a)}</div></details>`).join("")}</div>
 </div>`;
     const jsonld = [{ "@context": "https://schema.org", "@type": "FAQPage", inLanguage: LANG_META[lang].hreflang, mainEntity: t.faqs.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: faqText(a) } })) }];
-    layout({ rel: "faq.html", title: t.faqTitle, description: t.faqDesc, body, jsonld, current: "faq" });
+    layout({ rel: "faq.html", title: t.faqPageTitle || t.faqTitle, description: t.faqDesc, body, jsonld, current: "faq" });
   }
 
   /* ---------- 検索結果ページ ---------- */
@@ -2465,7 +2520,7 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
       : x ? `<p>${t.contactX(esc(x))}</p>` : `<p>${t.contactNone}</p>`;
     const body = `<div class="wrap">
   <header class="page-head"><h1>${t.aboutH1}</h1></header>
-  <div class="prose">${t.aboutSections(site).map(([h, p]) => `<h2>${h}</h2>${p === null ? contact : `<p>${esc(p)}</p>`}`).join("\n")}
+  <div class="prose">${t.aboutSections(site).map(([h, p]) => `<h2>${h}</h2>${p === null ? contact : `<p>${esc(p).replace(/\[([^\]]+)\]\((https:\/\/[^)\s]+)\)/g, (m, txt, href) => `<a href="${href}" target="_blank" rel="noopener">${txt}</a>`)}</p>`}`).join("\n")}
   ${lang === "ja" ? `<h2>データと統計</h2><p>当サイトのデータから、新作の数・平均価格・500円以上の割合などを毎月まとめています。<a href="${c.H}stats.html">ガチャガチャ新作の統計を見る →</a></p>` : lang === "en" ? `<h2>Data & stats</h2><p>Every month we sum up our data: new series, average price, the share of ¥500+ gacha and more. <a href="${c.H}stats.html">See the gacha release stats →</a></p>` : ""}</div>
 </div>`;
     layout({ rel: "about.html", title: t.aboutTitle, description: t.aboutDesc, body });
