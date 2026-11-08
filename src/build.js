@@ -1146,7 +1146,7 @@ for (const lang of LANGS) {
     const NAV = [["new.html", "new"], ["week.html", "week"], ["index.html#ranking", "ranking"], ["calendar.html", "calendar"], ["@lottery.html", "lottery"], ["@map.html", "map"], ["@gachakatsu.html", "katsu"], ["@toprated.html", "toprated"], ["index.html#types", "genre"], ["faq.html", "faq"]]
       .filter(([, k]) => lang === "ja" || !["lottery", "toprated", "katsu"].includes(k))
       // 外国語：日本語だけのマップの代わりに、駅からさがすお店の一覧へ
-      .map((e) => (lang !== "ja" && e[1] === "map" ? ["station.html", "station"] : e));
+      .map((e) => (lang !== "ja" && e[1] === "map" ? ["station.html", "station"] : lang === "ja" && e[1] === "ranking" ? ["ranking.html", "ranking"] : e));
     const JP_TAG = { en: " (JP)", "zh-cn": "（日文）", "zh-tw": "（日文）", ko: " (일본어)" };
     const navLabel = (h, s) => s + (h[0] === "@" && lang !== "ja" ? JP_TAG[lang] || " (JP)" : "");
     const head = `<title>${esc(fullTitle)}</title>
