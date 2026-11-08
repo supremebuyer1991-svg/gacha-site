@@ -1177,7 +1177,7 @@ ${content}
       </div>
     </div>
   ${WEEK.items.length ? `<section class="section section-tight" id="thisweek">
-    <div class="section-head"><h2>${lang !== "ja" ? t.x.weekH : "今週発売のガチャ"}</h2><a class="more" href="${c.H}week.html">${lang !== "ja" ? t.x.weekMore(WEEK.range, WEEK.items.length) : `${WEEK.range}・全${WEEK.items.length}件`}</a></div>
+    <div class="section-head"><h2>${lang !== "ja" ? t.x.weekH : "今週発売のガチャ"}</h2><a class="more" href="${c.H}week.html">${lang !== "ja" ? t.x.weekMore(lang === "en" ? enRange(WEEK.range) : WEEK.range.replace("〜", "–"), WEEK.items.length) : `${WEEK.range}・全${WEEK.items.length}件`}</a></div>
     <div class="grid row-scroll">${WEEK.items.slice(0, 12).map((it, i) => card(it, c, i)).join("")}<a class="card see-all" href="${c.H}week.html"><span class="see-all-in"><b>${lang !== "ja" ? t.x.seeAll : "全部見る"}</b><span>→</span></span></a></div>
   </section>` : ""}
   </section>
@@ -1261,7 +1261,7 @@ ${content}
   ${lang === "ja" ? homeStnSeries : ""}
   <section class="section" id="types">
     <div class="section-head"><h2>${t.typeTitle}</h2></div>
-    <div class="genres types">${TYPES.filter((g) => inType(g.slug).length).map((g) => `<a href="${c.H}type/${g.slug}.html"><span class="ja">${phr(genreLabel(g, lang))}</span><span class="n">${t.series(inType(g.slug).length)}</span></a>`).join("")}</div>
+    <div class="genres types">${TYPES.filter((g) => inType(g.slug).length).map((g) => `<a href="${c.H}type/${g.slug}.html"><span class="ja">${phr(typeLabel(g, lang))}</span><span class="n">${t.series(inType(g.slug).length)}</span></a>`).join("")}</div>
   </section>
 
   <section class="section" id="genres">
@@ -1738,7 +1738,7 @@ ${content}
   const permaLink = (W) => {
     if (!W.items.length) return "";
     const w = weekInfo(new Date(`${W.key}T00:00:00Z`)), H = ctx("week.html").H;
-    return `<p class="hub-links"><a class="btn hub-perma" href="${H}${hubs.weekRel(w)}">${lang === "ja" ? `${w.m}月第${w.no}週（${w.range}）のページを見る →` : esc(t.hub.perma(t.hub.weekLabel(w.m, w.no), w.range))}</a></p>`;
+    return `<p class="hub-links"><a class="btn hub-perma" href="${H}${hubs.weekRel(w)}">${lang === "ja" ? `${w.m}月第${w.no}週（${w.range}）のページを見る →` : esc(t.hub.perma(t.hub.weekLabel(w.m, w.no), lang === "en" ? enRange(w.range) : w.range.replace("〜", "–")))}</a></p>`;
   };
   // 今週発売のガチャ（X の「今週発売」投稿のリンク先）
   listPage("week.html", {
