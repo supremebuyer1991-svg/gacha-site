@@ -553,8 +553,8 @@ const pushBox = (t, kind, favId = "") => {
 const up = (n) => "../".repeat(n);
 const langDir = (lang) => (lang === "ja" ? "" : `${lang}/`);
 const canonical = (lang, p) => SITE_URL + "/" + langDir(lang) + p.replace(/^index\.html$/, "").replace(/\.html$/, "");
-// hreflang の x-default：トップは英語、ほかのページ（商品・一覧）は日本語の元ページ
-const xDefault = (rel, alts) => (rel === "index.html" && alts.includes("en") ? "en" : alts.includes("ja") ? "ja" : alts.includes("en") ? "en" : alts[0]);
+// hreflang の x-default：英語版があれば英語（言語の合わない海外の人向け）、なければその言語のページ
+const xDefault = (rel, alts) => (alts.includes("en") ? "en" : alts[0]);
 const absImg = (it) => (!it.image ? "" : /^https?:/.test(it.image) ? it.image : SITE_URL + "/" + it.image);
 const hashSlug = (name) => { let h = 0; for (const c of name) h = (h * 31 + c.codePointAt(0)) >>> 0; return "m" + h.toString(36); };
 const MAKER_SLUG = { "バンダイ": "bandai", "タカラトミーアーツ": "takara-tomy-arts", "キタンクラブ": "kitan-club", "クオリア": "qualia", "ブシロード": "bushiroad", "エポック社": "epoch", "ケンエレファント": "kenelephant", "SO-TA": "so-ta", "ブシロードクリエイティブ": "bushiroad-creative", "トイズキャビン": "toys-cabin", "スタンド・ストーンズ": "stand-stones", "エール": "yell" };
@@ -1126,7 +1126,7 @@ ${content}
 </body>
 </html>`;
     write(langDir(lang) + rel, html);
-    pages.push([lang, rel, noAlt ? [lang] : ALT, noindex, lastmod]);
+    pages.push([lang, rel, noAlt ? [lang] : ALT, noindex, lastmod, ogType === "product" ? ogImage : ""]);
   };
 
   /* ---------- トップページ ---------- */
@@ -2495,9 +2495,30 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
 write("404.html", `<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>ページが見つかりません / Page not found｜${esc(site.name)}</title><link rel="stylesheet" href="/assets/style.css?v=${CSS_V}"></head>
 <body><main><div class="wrap"><header class="page-head"><h1>ページが見つかりません</h1><p class="lead">販売終了などで掲載を終えた可能性があります。<br><span lang="en">This page could not be found. It may have been removed.</span></p>
 <p style="margin-top:24px;display:flex;gap:10px;flex-wrap:wrap"><a class="btn btn-gold" href="/">トップへ戻る</a><a class="btn" href="/en/" lang="en">English home</a></p></header></div></main></body></html>`);
+// 言語ごとの 404（Cloudflare Pages はいちばん近いフォルダの 404.html を出すので、/en/… などの迷子にはその言語で案内する）
+{
+  const NF = {
+    en: { title: "Page not found", lead: "This page could not be found. The item may have been removed after it went out of sale.", home: "Back to home", station: "Find shops by station", search: "Search gachapon" },
+    "zh-cn": { title: "找不到页面", lead: "找不到该页面。商品可能已停售并被移除。", home: "返回首页", station: "按车站找店", search: "搜索扭蛋" },
+    "zh-tw": { title: "找不到頁面", lead: "找不到這個頁面。商品可能已停售並被移除。", home: "回到首頁", station: "依車站找店", search: "搜尋扭蛋" },
+    ko: { title: "페이지를 찾을 수 없습니다", lead: "페이지를 찾을 수 없습니다. 판매가 종료되어 삭제되었을 수 있습니다.", home: "홈으로", station: "역에서 가게 찾기", search: "가챠 검색" },
+  };
+  for (const [l, m] of Object.entries(NF)) {
+    const base = `/${langDir(l)}`;
+    write(`${langDir(l)}404.html`, `<!doctype html><html lang="${LANG_META[l].html}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>${esc(m.title)} | ${esc(site.name)}</title><link rel="stylesheet" href="/assets/style.css?v=${CSS_V}"></head>
+<body><main><div class="wrap"><header class="page-head"><h1>${esc(m.title)}</h1><p class="lead">${esc(m.lead)}</p>
+<p style="margin-top:24px;display:flex;gap:10px;flex-wrap:wrap"><a class="btn btn-gold" href="${base}">${esc(m.home)}</a><a class="btn" href="${base}station">${esc(m.station)}</a><a class="btn" href="${base}search">${esc(m.search)}</a><a class="btn" href="/" lang="ja">日本語</a></p></header></div></main></body></html>`);
+  }
+}
 
 const lm = (d) => (d ? `<lastmod>${String(d).slice(0, 10)}</lastmod>` : "");
-const urlEntry = ([lang, rel, alts, , lastmod]) => alts.length < 2 ? `  <url><loc>${esc(canonical(lang, rel))}</loc>${lm(lastmod)}</url>` : `  <url><loc>${esc(canonical(lang, rel))}</loc>${lm(lastmod)}
+// 商品ページは画像サイトマップ（<image:image>）も付ける：画像検索に商品写真を載せてもらう
+const imgEntry = (lang, rel, img) => {
+  if (!img) return "";
+  const it = itemById.get(rel.replace(/^item\//, "").replace(/\.html$/, ""));
+  return `<image:image><image:loc>${esc(img)}</image:loc>${it ? `<image:title>${esc(nameOf(it, lang))}</image:title>` : ""}</image:image>`;
+};
+const urlEntry = ([lang, rel, alts, , lastmod, img]) => alts.length < 2 ? `  <url><loc>${esc(canonical(lang, rel))}</loc>${lm(lastmod)}${imgEntry(lang, rel, img)}</url>` : `  <url><loc>${esc(canonical(lang, rel))}</loc>${lm(lastmod)}${imgEntry(lang, rel, img)}
 ${alts.flatMap((l) => [LANG_META[l].hreflang, ...(LANG_META[l].extra || [])].map((code) => `    <xhtml:link rel="alternate" hreflang="${code}" href="${esc(canonical(l, rel))}"/>`)).join("\n")}
     <xhtml:link rel="alternate" hreflang="x-default" href="${esc(canonical(xDefault(rel, alts), rel))}"/>
   </url>`;
@@ -2513,7 +2534,7 @@ ${alts.flatMap((l) => [LANG_META[l].hreflang, ...(LANG_META[l].extra || [])].map
   const maxLm = (list) => list.reduce((m, p) => (p[4] && p[4] > m ? p[4] : m), "");
   for (const [g, list] of Object.entries(groups)) {
     write(`sitemap-${g}.xml`, `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml"${list.some((p) => p[5]) ? ' xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"' : ""}>
 ${list.map(urlEntry).join("\n")}
 </urlset>
 `);
@@ -2529,6 +2550,8 @@ write("_redirects", [
   ...SERIES.map((sr) => `/series/${sr.slug} /chara/${sr.slug} 301\n/series/${sr.slug}.html /chara/${sr.slug} 301\n/en/series/${sr.slug} /en/chara/${sr.slug} 301\n/en/series/${sr.slug}.html /en/chara/${sr.slug} 301`),
   ...Object.keys(MAKER_SLUG).flatMap((m) => [`/maker/${hashSlug(m)} /maker/${MAKER_SLUG[m]} 301`, `/en/maker/${hashSlug(m)} /en/maker/${MAKER_SLUG[m]} 301`]),
   "/chara/sanrio-characters-all /chara/sanrio 301", "/en/chara/sanrio-characters-all /en/chara/sanrio 301",
+  // ミニチュアは「種類」から「ジャンル」へ移した
+  ...LANGS.flatMap((l) => [`/${langDir(l)}type/miniature /${langDir(l)}genre/miniature 301`, `/${langDir(l)}type/miniature.html /${langDir(l)}genre/miniature 301`]),
 ].join("\n") + "\n");
 write("data/mercari-item-ids.json", JSON.stringify({ ids: [...MERCARI_ITEM_IDS] }));
 // 発売週のお知らせ（Web Push）：ワーカーが月曜の朝に読む「今週・来週発売のガチャ」（ビルドが日曜でも月曜でも合うように2週分）
