@@ -110,6 +110,7 @@ module.exports = {
       aWhereNone: "在日本各地的扭蛋專賣店和購物中心的扭蛋區販售。每家店的庫存不同。",
       sep: "、",
     },
+    sameWeek: { h: "同週發售的扭蛋", notify: "🔔 發售提醒", rakUp: "樂天預購", rak: "樂天" },
     x: {
       idxTitle: "日本扭蛋（轉蛋）新品發售日一覽｜扭蛋店地圖・到貨速報｜GACHA PLANET",
       kbTitle: "NEW｜扭蛋之旅路線規劃",

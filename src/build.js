@@ -110,6 +110,8 @@ const T = {
     // 発売の状態で変える通販の見出し（発売前・発売から2か月以上）と、海外向けの代理購入の案内
     buyTitleUp: "発売前でも通販で予約できることがあります", buyLeadUp: "発売日より前に、通販でコンプリートセットの予約を受け付けていることがあります。", fleaTitleOld: "コンプセットは売り切れがち。単品はフリマで", fleaLeadOld: "発売から時間がたったガチャは、通販のコンプセットが売り切れていることも。欲しいものが決まっているなら、フリマで単品を探すのが早いです。",
     compCompare: "通販のコンプセットと比べる",
+    // 商品ページ：同じ週に発売のガチャの見出し、価格の下の通販チップの見出し、下のバー（発売前・発売から時間がたったもの）の文言
+    sameWeek: { h: "同じ週に発売のガチャ", chips: "通販で探す・全種セット", notify: "🔔発売日に通知", rakUp: "楽天で予約を探す", rak: "楽天", comp: (n, d, y) => `全${n}種そろえる目安：<b>約${d}回${y ? `・約${y}円` : ""}</b>` },
     lineupTitle: (n) => `ラインナップ（全${n}種）`, lineupNote: "メーカー公式の商品情報をもとにしています。", ageMin: (n) => `${n}才以上`, ageLabel: "対象年齢",
     heart: "推し", heartAria: "ハートで応援（人気ランキングに反映）", heartNote: "ハートを押すと人気ランキングに反映されます（1日1回）",
     arrTitle: "入荷情報", arrLoading: "入荷情報を読み込んでいます…", arrNone: "まだ入荷を確認できていません。設置店に入り次第ここに出ます。",
@@ -414,6 +416,8 @@ T.en.where = {
   aWhereNone: "At capsule toy shops and gacha corners in shopping malls across Japan. Stock differs by shop.",
   sep: ", ",
 };
+// 日本語以外の商品ページ：同じ週に発売のガチャの見出しと、下のバー（発売前）の文言。chips は空（通販チップの見出しは出さない）
+T.en.sameWeek = { h: "Releasing the same week", chips: "", notify: "🔔 Notify me", rakUp: "Pre-order (Rakuten)", rak: "Rakuten" };
 
 /* ---------- 商品ページの「このガチャについて」（データだけから作る短い文章。v はページごとの言い回しの番号） ----------
  * d: name maker price n（全◯種）/ ch（キャラクターのリンクHTML）k（そのキャラのシリーズ数）/ ln（ラインナップ名）more
@@ -480,6 +484,7 @@ for (const l of XL) {
   T[l].cal = { ...T.en.cal, ...(m.cal || {}) }; // 発売カレンダーの文言（足りないものは英語）
   T[l].stn = { ...T.en.stn, ...(T[l].stn || {}) };
   T[l].where = { ...T.en.where, ...(T[l].where || {}) };
+  T[l].sameWeek = { ...T.en.sameWeek, ...(T[l].sameWeek || {}) };
 }
 T.ja.hub = T.en.hub; // 日本語は src/hubs.js の中に直接書いている（英語のものは使わない）
 // 診断の選択肢（英語名をキーに、中国語・韓国語は i18n の quiz → chara の順で探す）
@@ -592,10 +597,14 @@ const affSearch = (q) => {
   return { amazon, rakuten };
 };
 // 通販の検索の言葉：【…】を外した商品名＋「ガチャ」＋（発売前なら「予約」、種類数がわかれば「全◯種」、なければ「コンプ」）。JANで探すと楽天はほとんど出ないので使わない
-const affQuery = (it) => { const name = it.name.replace(/【[^】]*】/g, "").normalize("NFKC").replace(/\s+/g, " ").trim(); const n = Number(it.lineup) || 0; return `${name} ガチャ ${HUB.isUpcoming(it) ? "予約" : n ? `全${n}種` : "コンプ"}`; };
+const affName = (it) => it.name.replace(/【[^】]*】/g, "").normalize("NFKC").replace(/\s+/g, " ").trim();
+const affQuery = (it) => { const name = affName(it); const n = Number(it.lineup) || 0; return `${name} ガチャ ${HUB.isUpcoming(it) ? "予約" : n ? `全${n}種` : "コンプ"}`; };
+// Amazon の検索の言葉：種類数がわかれば「全◯種セット」（Amazon はセット商品の名前にこう書かれていることが多い）。わからなければ affQuery と同じ
+const amzQuery = (it) => { const n = Number(it.lineup) || 0; return n ? `${affName(it)} ガチャ 全${n}種セット` : affQuery(it); };
+const amzUrl = (q) => `https://www.amazon.co.jp/s?k=${encodeURIComponent(q)}${site.amazon_tag ? `&tag=${encodeURIComponent(site.amazon_tag)}` : ""}`;
 const affiliate = (it) => {
   const q = affQuery(it);
-  const amazon = `https://www.amazon.co.jp/s?k=${encodeURIComponent(q)}${site.amazon_tag ? `&tag=${encodeURIComponent(site.amazon_tag)}` : ""}`;
+  const amazon = amzUrl(amzQuery(it));
   const rakutenSearch = `https://search.rakuten.co.jp/search/mall/${encodeURIComponent(q)}/`;
   const rakuten = site.rakuten_affiliate_id
     ? `https://hb.afl.rakuten.co.jp/hgc/${site.rakuten_affiliate_id}/?pc=${encodeURIComponent(rakutenSearch)}&m=${encodeURIComponent(rakutenSearch)}`
@@ -635,7 +644,7 @@ const mercariAf = (it) => { const tx = [it.name, (it.lineup_names || []).join(" 
 const shopLinks = (it) => {
   const jan = janOf(it), name = it.name.replace(/【[^】]*】/g, "").trim();
   const q = affQuery(it);
-  const a = affSearch(q);
+  const a = { ...affSearch(q), amazon: amzUrl(amzQuery(it)) };
   const ys = `https://shopping.yahoo.co.jp/search?p=${encodeURIComponent(q)}`;
   const yahoo = site.yahoo_vc_sid && site.yahoo_vc_pid ? `https://ck.jp.ap.valuecommerce.com/servlet/referral?sid=${site.yahoo_vc_sid}&pid=${site.yahoo_vc_pid}&vc_url=${encodeURIComponent(ys)}` : ys;
   const mi = mercariItemUrl(it), maf = mi ? null : mercariAf(it);
@@ -1317,6 +1326,13 @@ ${content}
     const isUp = HUB.isUpcoming(it);
     const isOld = !isUp && daysBetween(weekStartOf(it) ? weekStartOf(it).toISOString().slice(0, 10) : `${it.release}-01`, today) > 60;
     const lots = lang === "ja" ? LOT_BY_ITEM.get(it.id) || [] : [];
+    // 発売の状態：up＝発売前（まだお店に置かれない）、old＝発売から時間がたった（上の isOld）、out＝発売中。一番のボタンと下のバーを変える
+    const state = isUp ? "up" : isOld ? "old" : "out";
+    const SW = t.sameWeek || T.en.sameWeek;
+    // 全種そろえる目安（回数と金額。値段が0＝未定のときは回数だけ）
+    const compN = Number(it.lineup) || (it.lineup_names || []).length;
+    const compD = compN >= 2 && compN <= 40 ? compDraws(compN) : 0;
+    const compYen = compD && Number(it.price) > 0 ? (compD * it.price).toLocaleString("ja-JP") : "";
     const related = (() => {
       const seed = hashStr(it.id), chs = charasOf(it);
       const sameChara = items.filter((x) => x !== it && chs.some((ch) => ch.list.includes(x))).sort(byNewest);
@@ -1326,6 +1342,9 @@ ${content}
     })();
     // 説明文：発売週とラインナップ名も入れて、ページごとに中身の違う説明にする
     const ws = weekStartOf(it), wi = ws ? weekInfo(ws) : null;
+    // 同じ週に発売のガチャ（自分は除く。人気順に最大6件。日本語以外はその言葉の名前があるものだけ）
+    const sameWeekList = wi && HUB.weeks.get(wi.key) ? HUB.weeks.get(wi.key).list.filter((x) => x !== it && hasName(x, lang)).sort(byPopular).slice(0, 6) : [];
+    const relatedShown = related.filter((x) => !sameWeekList.includes(x));
     let whereLd = null; // 日本語以外の「日本のどこで買える？」のFAQ（下の where-sec で作る）
     const mo =wi ? (lang !== "ja" ? t.x.weekOf(t.month(it.release), wi.range.split("〜")[0]) : `${wi.m}月第${wi.no}週（${wi.range.split("〜")[0]}〜）`) : t.month(it.release);
     const ln = (it.lineup_names || []).slice(0, 3);
@@ -1366,6 +1385,17 @@ ${content}
       return `<section class="section section-tight about-item"><h2>${esc(A.h)}</h2><p>${out.join(lang === "en" || lang === "ko" ? " " : "")}</p></section>`;
     })();
 
+    // 通販・フリマのチップ（スマホで最初の画面に入るよう、価格のすぐ下に置く。JANコードは元の場所＝ボタンの下）
+    const chipsHtml = lang !== "ja" ? (() => { const O = overseas(it); const L = shopLinks(it); const XLG = lang !== "en"; const b = [
+        // 中国語・韓国語：Amazon OneLink の対象外なので日本のAmazon（簡体字は中国語表示で開く）。eBay は出さない
+        XLG ? ["sl-amz", L.amazon + ({ "zh-cn": "&language=zh_CN", "zh-tw": "&language=zh_TW", ko: "&language=ko_KR" }[lang] || ""), "Amazon Japan"] : ["sl-amz", O.amazon || L.amazon, O.amazon ? "Amazon" : "Amazon Japan"],
+        // 英語：日本に来ている旅行者は日本のAmazonでも買える（ホテル・コンビニ受け取り）
+        ...(!XLG && O.amazon ? [["sl-amz", L.amazon + "&language=en_US", "Amazon Japan"]] : []),
+        ...(!XLG && O.ebay ? [["sl-ebay", O.ebay, "eBay"]] : []),
+        ...(O.buyee ? [["sl-buyee", O.buyee, "Buyee (Mercari Japan)"]] : []),
+        ["sl-rak", L.rakuten, "Rakuten Japan"],
+      ]; return `<div class="shop-links"><span class="sl-pr">PR</span>${b.map(([k, u, l]) => `<a class="sl ${k}" href="${esc(u)}" target="_blank" rel="sponsored nofollow noopener">${l}</a>`).join("")}</div>`; })() : (() => { const L = shopLinks(it); return `<div class="shop-links">${SW.chips ? `<span style="font-size:12.5px;font-weight:700;color:var(--text-2)">${esc(SW.chips)}</span>` : ""}<span class="sl-pr">PR</span><a class="sl sl-rak" href="${esc(L.rakuten)}" target="_blank" rel="sponsored nofollow noopener">楽天市場</a><a class="sl sl-amz" href="${esc(L.amazon)}" target="_blank" rel="sponsored nofollow noopener">Amazon</a><a class="sl sl-yah" href="${esc(L.yahoo)}" target="_blank" rel="sponsored nofollow noopener">Yahoo!ショッピング</a><a class="sl sl-mer" href="${esc(L.mercari)}" target="_blank" rel="${L.mercariAf ? "sponsored nofollow noopener" : "noopener"}">${esc(L.mercariLabel)}</a></div>`; })();
+    const janHtml = L0.jan ? (lang !== "ja" ? `<p class="jan">JAN: <span>${L0.jan}</span></p>` : `<p class="jan">JANコード：<span>${L0.jan}</span></p>`) : "";
     const body = `
 <div class="wrap">
   <nav class="breadcrumb" aria-label="breadcrumb"><a href="${c.H}index.html">${t.home}</a><span>/</span><a href="${c.H}genre/${g.slug}.html">${gl}</a><span>/</span><span>${esc(name)}</span></nav>
@@ -1375,31 +1405,25 @@ ${content}
       <h1>${esc(name)}</h1>
       ${lang !== "ja" && it.name_en ? `<p class="name-ja" lang="ja">${esc(it.name)}</p>` : ""}
       <div class="price"><small>${lang === "ja" && it.price > 0 ? t.perPlay : ""}</small><b>${priceTxt(it.price)}</b><span>${lang !== "ja" && it.price > 0 ? t.perPlay : ""}${it.lineup ? `${lang !== "ja" && it.price > 0 ? " · " : ""}${t.lineup(it.lineup)}` : ""}</span>${relPill(it)}</div>
+      ${chipsHtml}
       <dl class="spec">
         <dt>${t.maker}</dt><dd><a href="${c.H}maker/${makerSlug(it.maker)}.html">${esc(maker)}</a></dd>
-        <dt>${t.release}</dt><dd><a href="${c.H}calendar/${ws ? ws.toISOString().slice(0, 7) : it.release}.html">${t.month(it.release)}</a>${lang === "ja" && it.release_note ? (ws ? `<a class="rel-note" href="${c.H}calendar/${ws.toISOString().slice(0, 7)}.html#w${wi.key}">${esc(it.release_note)}</a>` : `<span class="rel-note">${esc(it.release_note)}</span>`) : ""}</dd>
+        <dt>${t.release}</dt><dd><a href="${c.H}calendar/${ws ? ws.toISOString().slice(0, 7) : it.release}.html">${t.month(it.release)}</a>${lang === "ja" && it.release_note ? (ws ? `<a class="rel-note" href="${c.H}${hubs.weekRel(wi)}">${esc(it.release_note)}</a>` : `<span class="rel-note">${esc(it.release_note)}</span>`) : ""}</dd>
         ${it.age_min ? `<dt>${t.ageLabel}</dt><dd>${t.ageMin(it.age_min)}</dd>` : ""}
         <dt>${t.genre}</dt><dd><a href="${c.H}genre/${g.slug}.html">${gl}</a></dd>
         ${tags.length ? `<dt>${t.tags}</dt><dd><div class="tags">${tags.map((x) => `<span class="chip chip-ai">${esc(x)}</span>`).join("")}</div></dd>` : ""}
       </dl>
       ${description ? `<p class="desc">${esc(description)}</p>` : ""}
-      <div class="item-actions">
-        ${whereOfficial ? `<a class="btn btn-gold" href="${esc(it.store_search_url)}" target="_blank" rel="noopener">${esc(t.u.whereBtn)}</a>
+      <div class="item-actions"${state === "up" ? ' id="notify" style="scroll-margin-top:24px"' : ""}>
+        ${state === "up" ? `<button type="button" class="btn btn-gold" data-fav="${it.id}" aria-pressed="false"><i aria-hidden="true" style="font-style:normal">★</i><span>${esc(t.u.save)}</span></button>` /* 発売前：まだお店に置かれないので、一番のボタンは★保存（下の「発売日にお知らせ」を押しても★に入る） */
+        : whereOfficial ? `<a class="btn btn-gold" href="${esc(it.store_search_url)}" target="_blank" rel="noopener">${esc(t.u.whereBtn)}</a>
         <a class="btn btn-sub" href="#stock">${esc(t.u.findLater)}</a>` : `<a class="btn btn-gold" href="#stock">${t.findStores}</a>`}
+        ${state === "up" ? pushBox(t, "item", it.id) : ""}
         ${it.official_url ? `<a class="btn" href="${esc(it.official_url)}" target="_blank" rel="noopener">${t.official}</a>` : ""}
-        <button type="button" class="fav-item" data-fav="${it.id}" aria-pressed="false"><i aria-hidden="true">★</i><span>${esc(t.u.save)}</span></button>
-        ${HUB.isUpcoming(it) ? pushBox(t, "item", it.id) : ""}
+        ${state === "up" ? "" : `<button type="button" class="fav-item" data-fav="${it.id}" aria-pressed="false"><i aria-hidden="true">★</i><span>${esc(t.u.save)}</span></button>`}
         <button type="button" class="heart" data-vote="${c.R}api/vote/${it.id}" data-id="${it.id}" aria-label="${t.heartAria}" title="${t.heartNote}"><i aria-hidden="true">♥</i><span>${t.heart}</span><b>${heartsOf(it)}</b></button>
       </div>
-      ${lang !== "ja" ? (() => { const O = overseas(it); const L = shopLinks(it); const XLG = lang !== "en"; const b = [
-        // 中国語・韓国語：Amazon OneLink の対象外なので日本のAmazon（簡体字は中国語表示で開く）。eBay は出さない
-        XLG ? ["sl-amz", L.amazon + ({ "zh-cn": "&language=zh_CN", "zh-tw": "&language=zh_TW", ko: "&language=ko_KR" }[lang] || ""), "Amazon Japan"] : ["sl-amz", O.amazon || L.amazon, O.amazon ? "Amazon" : "Amazon Japan"],
-        // 英語：日本に来ている旅行者は日本のAmazonでも買える（ホテル・コンビニ受け取り）
-        ...(!XLG && O.amazon ? [["sl-amz", L.amazon + "&language=en_US", "Amazon Japan"]] : []),
-        ...(!XLG && O.ebay ? [["sl-ebay", O.ebay, "eBay"]] : []),
-        ...(O.buyee ? [["sl-buyee", O.buyee, "Buyee (Mercari Japan)"]] : []),
-        ["sl-rak", L.rakuten, "Rakuten Japan"],
-      ]; return `<div class="shop-links"><span class="sl-pr">PR</span>${b.map(([k, u, l]) => `<a class="sl ${k}" href="${esc(u)}" target="_blank" rel="sponsored nofollow noopener">${l}</a>`).join("")}</div>${L.jan ? `<p class="jan">JAN: <span>${L.jan}</span></p>` : ""}`; })() : (() => { const L = shopLinks(it); return `<div class="shop-links"><span class="sl-pr">PR</span><a class="sl sl-rak" href="${esc(L.rakuten)}" target="_blank" rel="sponsored nofollow noopener">楽天市場</a><a class="sl sl-amz" href="${esc(L.amazon)}" target="_blank" rel="sponsored nofollow noopener">Amazon</a><a class="sl sl-yah" href="${esc(L.yahoo)}" target="_blank" rel="sponsored nofollow noopener">Yahoo!ショッピング</a><a class="sl sl-mer" href="${esc(L.mercari)}" target="_blank" rel="${L.mercariAf ? "sponsored nofollow noopener" : "noopener"}">${esc(L.mercariLabel)}</a></div>${L.jan ? `<p class="jan">JANコード：<span>${L.jan}</span></p>` : ""}`; })()}
+      ${janHtml}
     </div>
   </article>
   ${aboutHtml}
@@ -1409,7 +1433,8 @@ ${content}
     const O = overseas(it);
     const shopAside = `<aside class="buy" id="buy" aria-label="${t.buyAria}">
       <div>
-        <h3>${isUp && t.buyTitleUp ? t.buyTitleUp : t.buyTitle}<span class="pr">${lang === "ja" ? "PR・広告" : "PR"}</span></h3>
+        ${lang === "ja" && state !== "up" && compD ? `<p class="comp-cost" style="margin:0 0 10px">${SW.comp(compN, compD, compYen)}</p>` : ""}
+        <h2 style="font-size:20px">${isUp && t.buyTitleUp ? t.buyTitleUp : t.buyTitle}<span class="pr">${lang === "ja" ? "PR・広告" : "PR"}</span></h2>
         <p>${isUp && t.buyLeadUp ? t.buyLeadUp : t.buyLead}</p>
       </div>
       <div class="btns">
@@ -1422,7 +1447,7 @@ ${content}
     const merc = lang === "ja" && L0.mercariAf ? `<a class="btn" href="${esc(L0.mercari)}" target="_blank" rel="sponsored nofollow noopener">${t.mercari}<span class="pr">PR</span></a>` : `<a class="btn" href="https://jp.mercari.com/search?keyword=${encodeURIComponent(it.name)}" target="_blank" rel="noopener">${t.mercari}</a>`;
     const fleaAside = lang !== "ja" && !O.buyee ? (t.fleaProxy ? `<p class="fine buy-note">${esc(t.fleaProxy)}</p>` : "") : `<aside class="buy flea" aria-label="${t.fleaTitle}">
       <div>
-        <h3>${isOld && t.fleaTitleOld ? t.fleaTitleOld : t.fleaTitle}</h3>
+        <h2 style="font-size:20px">${isOld && t.fleaTitleOld ? t.fleaTitleOld : t.fleaTitle}</h2>
         <p>${isOld && t.fleaLeadOld ? t.fleaLeadOld : t.fleaLead}</p>
       </div>
       <div class="btns">
@@ -1456,18 +1481,18 @@ ${content}
       ? `バンダイ公式の取扱店情報では、全国${shs.length}店で取扱があります（${prefTop.slice(0, 5).map(([p, k]) => `${p}${k}店`).join("・")}${prefTop.length > 5 ? "など" : ""}）。`
       : `${MAKER_WHERE[it.maker] || "全国のカプセルトイ専門店やショッピングモールのガチャコーナー"}で販売されます。取扱店はお店ごとに違うので、下の在庫店リストやみんなの報告も参考にしてください。`;
     const qa = [
-      [`${it.name}は1回いくら？`, `1回${it.price}円です。`],
+      ...(Number(it.price) > 0 ? [[`${it.name}は1回いくら？`, `1回${it.price}円です。`]] : []), // 値段が0＝未定のときは出さない（priceTxt と同じ条件）
       ...(n ? [[`全部で何種類？`, `全${n}種${(it.lineup_names || []).length ? `（${it.lineup_names.slice(0, 4).join("、")}${it.lineup_names.length > 4 ? "など" : ""}）` : ""}です。`]] : []),
       [`発売日はいつ？`, `${whenTxt}の発売です。地域やお店によって並ぶ日が前後します。`],
       [`どこで売ってる？`, whereTxt],
-      ...(draws ? [[`全種類そろえるには何回くらい？`, `どれも同じ確率で出るとすると、全${n}種そろうまでに平均で約${draws}回（約${(draws * it.price).toLocaleString("ja-JP")}円）かかる計算です。欲しいものが決まっているなら、フリマアプリなどで単品を探すのも手です。`]] : []),
+      ...(draws ? [[`全種類そろえるには何回くらい？`, `どれも同じ確率で出るとすると、全${n}種そろうまでに平均で約${draws}回${Number(it.price) > 0 ? `（約${(draws * it.price).toLocaleString("ja-JP")}円）` : ""}かかる計算です。欲しいものが決まっているなら、フリマアプリなどで単品を探すのも手です。`]] : []),
     ];
     return `<section class="section where-sec">
     <div class="panel">
       <h2 style="font-size:22px">${esc(it.name)}はどこで売ってる？</h2>
       <p>${esc(whereTxt)}</p>
       ${shs.length ? `<ul class="where-shops">${(prefTop.length ? prefTop.slice(0, 3).flatMap(([p]) => shs.filter((x) => x.pref === p)) : shs).slice(0, 10).map((x) => `<li><a href="${c.R}shop/${x.id}.html">${esc(x.name)}</a><span>${esc(x.pref || "")}</span></li>`).join("")}</ul>` : ""}
-      ${draws ? `<p class="comp-cost">全${n}種そろえる目安：<b>平均 約${draws}回・約${(draws * it.price).toLocaleString("ja-JP")}円</b><small>（どれも同じ確率で出る場合の計算）<a href="${esc(aff.rakuten)}" target="_blank" rel="sponsored nofollow noopener">${esc(t.compCompare)} →</a><span class="pr">PR</span></small></p>` : ""}
+      ${draws ? `<p class="comp-cost">全${n}種そろえる目安：<b>平均 約${draws}回${Number(it.price) > 0 ? `・約${(draws * it.price).toLocaleString("ja-JP")}円` : ""}</b><small>（どれも同じ確率で出る場合の計算）<a href="${esc(aff.rakuten)}" target="_blank" rel="sponsored nofollow noopener">${esc(t.compCompare)} →</a><span class="pr">PR</span></small></p>` : ""}
       <h3 class="arr-h">よくある質問</h3>
       <dl class="item-qa">${qa.map(([q, a]) => `<div><dt>${esc(q)}</dt><dd>${esc(a)}</dd></div>`).join("")}</dl>
     </div>
@@ -1546,15 +1571,27 @@ ${content}
   </section>
 
   ${charasOf(it).length ? `<section class="section section-tight"><div class="section-head"><h2>${lang === "ja" ? "このキャラクター・作品のガチャ" : t.x.moreSeries}</h2></div><div class="chara-list">${charasOf(it).map((ch) => `<a class="chara-chip" href="${c.H}chara/${ch.slug}.html">${esc(lang === "ja" ? `${ch.label}のガチャ一覧` : t.x.charaChip(charaLabel(ch, lang)))}<small>${ch.list.length}</small></a>`).join("")}</div></section>` : ""}
-  ${related.length ? `<section class="section">
+  ${sameWeekList.length ? `<section class="section">
+    <div class="section-head"><h2>${esc(SW.h)}</h2><a class="more" href="${c.H}${hubs.weekRel(wi)}">${lang === "ja" ? `${wi.m}月第${wi.no}週（${wi.range}）をすべて見る` : esc(t.hub.weekPage)}</a></div>
+    <div class="grid">${sameWeekList.map((x) => card(x, c)).join("")}</div>
+  </section>` : ""}
+  ${relatedShown.length ? `<section class="section">
     <div class="section-head"><h2>${lang === "ja" ? "関連するガチャ" : t.related}</h2><a class="more" href="${c.H}genre/${g.slug}.html">${t.seeAll(gl)}</a></div>
-    <div class="grid">${related.map((x) => card(x, c)).join("")}</div>
+    <div class="grid">${relatedShown.map((x) => card(x, c)).join("")}</div>
   </section>` : ""}
 </div>
 <nav class="item-bar" aria-label="${esc(name)}">
   <button type="button" class="ib-fav" data-fav="${it.id}" aria-pressed="false"><i aria-hidden="true">★</i><span>${esc(t.u.save)}</span></button>
-  <a class="ib-stock" href="${whereOfficial ? esc(it.store_search_url) : "#stock"}"${whereOfficial ? ' target="_blank" rel="noopener"' : ""}>${esc(t.u.stockShort)}</a>
-  ${lang === "ja" ? `<a class="ib-mer" href="${esc(L0.mercari)}" target="_blank" rel="${L0.mercariAf ? "sponsored nofollow noopener" : "noopener"}">${esc(t.u.mercari)}${L0.mercariAf ? "<small>PR</small>" : ""}</a>` : ""}
+  ${state === "up"
+    // 発売前：まだお店に置かれないので「在庫店」は出さず、発売日のお知らせ（上の★・通知のボタン）と楽天の予約
+    ? `<a class="ib-stock" href="#notify">${esc(SW.notify)}</a>
+  <a class="ib-mer" href="${esc(L0.rakuten)}" target="_blank" rel="sponsored nofollow noopener">${esc(SW.rakUp)}<small>PR</small></a>`
+    : state === "old" && lang === "ja"
+    // 発売から時間がたった：お店では売り切れがち。メルカリ（公式ツールのリンクがある商品だけ）と楽天
+    ? `${L0.mercariAf ? `<a class="ib-mer" href="${esc(L0.mercari)}" target="_blank" rel="sponsored nofollow noopener">${esc(t.u.mercari)}<small>PR</small></a>` : `<a class="ib-stock" href="${whereOfficial ? esc(it.store_search_url) : "#stock"}"${whereOfficial ? ' target="_blank" rel="noopener"' : ""}>${esc(t.u.stockShort)}</a>`}
+  <a class="ib-mer" href="${esc(L0.rakuten)}" target="_blank" rel="sponsored nofollow noopener">${esc(SW.rak)}<small>PR</small></a>`
+    : `<a class="ib-stock" href="${whereOfficial ? esc(it.store_search_url) : "#stock"}"${whereOfficial ? ' target="_blank" rel="noopener"' : ""}>${esc(t.u.stockShort)}</a>
+  ${lang === "ja" ? `<a class="ib-mer" href="${esc(L0.mercari)}" target="_blank" rel="${L0.mercariAf ? "sponsored nofollow noopener" : "noopener"}">${esc(t.u.mercari)}${L0.mercariAf ? "<small>PR</small>" : ""}</a>` : ""}`}
 </nav>`;
 
     const product = {
