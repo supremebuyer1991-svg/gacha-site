@@ -115,7 +115,7 @@ module.exports = {
     itemDesc: (it, n, mk, mo) => `${n}（${mk}）${mo}發售${it.price ? `，一轉${it.price}日圓` : ""}${it.lineup ? `，全${it.lineup}種` : ""}。看看日本哪些店家有賣，或上網購買全套。`,
     genrePage: (g) => `${g} 扭蛋新品・發售日一覽`,
     genreLead: (g, n) => `日本「${g}」類的新品及即將發售扭蛋共 ${n} 款，由新到舊排列。點進去就能看到價格、發售週和有賣的店家。`,
-    makerPage: (m) => `${m} 扭蛋新品・日本發售日一覽`, makerLead: (m, n) => `${m} 的扭蛋共 ${n} 個系列，由新到舊排列。`,
+    makerPage: (m) => `${m} 扭蛋新品・日本發售日一覽`, makerLead: (m, n, list, top = []) => { const pick = top.map((x) => (x.length > 18 ? `${x.slice(0, 17)}…` : x)); const ns = pick.slice(0, pick.slice(0, 3).join("").length > 45 ? 2 : 3); return `${m} 在日本發售的扭蛋共 ${n} 個系列，由新到舊排列。${ns.length ? `人氣系列有${ns.map((x) => `「${x}」`).join("")}等。` : ""}可查看發售日、價格、款式數和有貨店家。`; },
     empty: "目前還沒有收錄商品。",
     calTitle: "日本扭蛋發售月曆", calH1: "扭蛋發售月曆", calLead: "日本已公布的所有扭蛋，依發售週排列。快要來日本了嗎？看看旅行期間有哪些新品吧。店家到貨可能會提早或延後幾天。",
     calDesc: "日本扭蛋（轉蛋）新品的每月發售月曆，價格、款式數與廠商一次看。",
@@ -200,6 +200,11 @@ module.exports = {
     figure: "公仔",
     goods: "雜貨・實用品",
     sound: "會發光・有聲音",
+  },
+  // 種類（/type/）的名稱。和類別同一個 slug（accessory 等）時也用不同的名稱
+  types: {
+    charm: "吊飾・鑰匙圈", accessory: "飾品・美妝", mascot: "吊飾・絨毛玩偶", figure: "公仔",
+    miniature: "迷你小物", goods: "雜貨・實用品", sound: "會發光・有聲音",
   },
   makers: { "バンダイ": "萬代（BANDAI）", "タカラトミーアーツ": "TAKARA TOMY A.R.T.S", "キタンクラブ": "奇譚俱樂部", "クオリア": "Qualia", "ブシロード": "武士道（Bushiroad）" },
   chara: {
@@ -502,6 +507,27 @@ module.exports = {
     hubH1: (L) => `${L} 扭蛋`, hubSub: (n, month, future) => `共 ${n} 個系列・最新：${month}${future ? "（預計發售）" : ""}`,
     more: (n) => `查看更多（還有 ${n} 款）`, pageTitle: (title, k) => `${title}（第 ${k} 頁）`, pagesAria: "頁碼",
     prevItem: "上一彈", nextItem: "下一彈", seqH: (L) => `${L} 的上一彈・下一彈`, seqH0: "同系列的上一彈・下一彈",
+    // 角色・作品頁面的發售狀況・常見問題（build.js 的 T.en.hub cx〜 的翻譯）
+    cxRel: (lab, range) => `${lab}（${range}）`,
+    cxSpec: (p, n) => `每次 ${p} 日圓${n ? `・共 ${n} 款` : ""}`,
+    cxPrice: (a, b, mode) => (a === b ? `全部每次 ${a} 日圓` : `每次 ${a}～${b} 日圓（${mode} 日圓的系列最多）`),
+    cxPriceShort: (a, b) => (a === b ? `每次 ${a} 日圓` : `每次 ${a}～${b} 日圓`),
+    cxStatusH: (L) => `${L} 扭蛋發售狀況`,
+    cxStatus: (out, up, re, price) => `已發售 ${out} 個系列・預計發售 ${up} 個系列${re ? `（含再販・復刻 ${re} 個）` : ""}。價格為${price}。`,
+    cxLatestLine: (a, rel, spec) => `最新作：${a}（${rel}・${spec}）`, cxNextLine: (a, rel, spec) => `下一款新品：${a}（${rel} 預計發售・${spec}）`,
+    cxColH: "依系列查看全部作品", cxFaqH: (L) => `${L} 扭蛋常見問題`,
+    cxQNext: (L) => `${L} 的下一款扭蛋新品什麼時候發售？`,
+    cxANext: (name, rel, spec, more) => `「${name}」預計於${rel}發售（${spec}）。${more ? `另外還有 ${more} 個系列已確定發售。` : ""}`,
+    cxANone: (name, rel) => `目前還沒有公布新的發售計畫。最新作是「${name}」（${rel}發售）。新品公布後會第一時間加到這一頁。`,
+    cxQLatest: (L) => `${L} 最新的扭蛋是哪一款？`,
+    cxALatest: (out, name, rel, spec, L, n, re) => `${out ? "已發售中最新的是" : "最新作是"}「${name}」（${rel}發售・${spec}）。${L} 扭蛋到目前為止共推出了 ${n} 個系列${re ? `（含再販・復刻 ${re} 個）` : ""}。`,
+    cxQPrice: (L) => `${L} 扭蛋多少錢？`,
+    cxAPrice: (price) => `${price}。各系列的價格和款式數量可以在各系列的頁面查看。`,
+    cxQWhere: (L) => `在日本哪裡可以買到 ${L} 扭蛋？`,
+    cxAWhere: (L, n, sts) => `根據萬代官方的店家資訊，日本全國共有 ${n} 家店販售 ${L} 扭蛋。${sts ? `附近店家系列最多的車站：${sts}。` : ""}可以在各系列的頁面查看有貨的店家。`,
+    cxAWhereNone: (L) => `${L} 扭蛋在日本各地的扭蛋專賣店和購物中心的扭蛋區販售。每家店的商品不同，請在各系列頁面的店家列表或車站周邊扭蛋店頁面查找。`,
+    cxStn: (name, k) => `${name}（${k} 個系列）`, cxStnSep: "、",
+    cxDesc: (L, n, latest, month, price, next, nextRel, range) => `日本 ${L} 扭蛋共 ${n} 個系列的發售日・價格・哪裡買。最新作「${latest}」（${month}・${price} 日圓）${next ? `，下一款「${next}」預計${nextRel}發售` : ""}。${range}。`,
   },
   // 診断の選択肢（系統・詳細・キャラ）
   quiz: {
