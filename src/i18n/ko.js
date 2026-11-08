@@ -135,7 +135,7 @@ module.exports = {
     itemDesc: (it, n, mk, mo) => `${n}(${mk}): ${mo} 발매${it.price ? `, 1회 ${it.price}엔` : ""}${it.lineup ? `, 전 ${it.lineup}종` : ""}의 가챠예요. 일본에서 재고가 있는 매장을 확인하거나 온라인에서 풀세트를 구매할 수 있어요.`,
     genrePage: (g) => `${g} 가챠 신작·발매일 모음`,
     genreLead: (g, n) => `일본의 ${g} 가챠 신작·발매 예정 ${n}개 시리즈를 최신순으로 모았어요. 누르면 가격, 발매 주, 재고가 있는 매장을 볼 수 있어요.`,
-    makerPage: (m) => `${m} 가챠 신작·발매일 모음`, makerLead: (m, n) => `${m}의 가챠 ${n}개 시리즈를 최신순으로 모았어요.`,
+    makerPage: (m) => `${m} 가챠 신작·발매일 모음`, makerLead: (m, n, list, top = []) => { const pick = top.map((x) => (x.length > 18 ? `${x.slice(0, 17)}…` : x)); const ns = pick.slice(0, pick.slice(0, 3).join("").length > 45 ? 2 : 3); return `${m}의 일본 가챠 ${n}개 시리즈를 최신순으로 모았어요.${ns.length ? ` 인기 시리즈: ${ns.map((x) => `'${x}'`).join(", ")}.` : ""} 발매일·가격·종류 수·재고 매장을 확인하세요.`; },
     empty: "아직 등록된 상품이 없어요.",
     calTitle: "일본 가챠 발매 캘린더", calH1: "가챠 발매 캘린더",
     calLead: "발표된 일본 캡슐토이를 발매 주별로 정리했어요. 곧 일본에 가시나요? 여행 기간에 나오는 가챠를 확인해 보세요. 매장에 따라 며칠 빠르거나 늦게 들어올 수 있어요.",
@@ -206,6 +206,11 @@ module.exports = {
     retro: "쇼와·헤이세이 레트로", funny: "개그·병맛", culture: "아트·컬처", other: "기타",
     charm: "참·키링", mascot: "마스코트·봉제인형", figure: "피규어", goods: "잡화·생활용품", sound: "빛·소리 나는 장난감",
   },
+  // 종류(/type/) 이름. 장르와 같은 슬러그(accessory 등)도 다른 이름으로
+  types: {
+    charm: "참·키링", accessory: "액세서리·뷰티", mascot: "마스코트·봉제인형", figure: "피규어",
+    miniature: "미니어처 굿즈", goods: "잡화·생활용품", sound: "빛·소리 나는 장난감",
+  },
   // 상품 페이지 '이 가챠에 대해' (데이터에 있는 사실만 사용. build.js 의 T.en.ab 번역)
   ab: {
     h: "이 가챠에 대해",
@@ -253,6 +258,27 @@ module.exports = {
     hubH1: (L) => `${L} 가챠`, hubSub: (n, month, future) => `${n}개 시리즈 · 최신: ${month}${future ? " (발매 예정)" : ""}`,
     more: (n) => `더보기 (${n}개 더)`, pageTitle: (title, k) => `${title} (${k}페이지)`, pagesAria: "페이지",
     prevItem: "이전 작품", nextItem: "다음 작품", seqH: (L) => `${L} 이전·다음 작품`, seqH0: "같은 시리즈 이전·다음 작품",
+    // 캐릭터·작품 페이지의 발매 현황·자주 묻는 질문 (build.js 의 T.en.hub cx〜 번역)
+    cxRel: (lab, range) => `${lab}(${range.replace("〜", "~")})`,
+    cxSpec: (p, n) => `1회 ${p}엔${n ? `, 전 ${n}종` : ""}`,
+    cxPrice: (a, b, mode) => (a === b ? `모두 1회 ${a}엔` : `1회 ${a}~${b}엔(${mode}엔 시리즈가 가장 많음)`),
+    cxPriceShort: (a, b) => (a === b ? `1회 ${a}엔` : `1회 ${a}~${b}엔`),
+    cxStatusH: (L) => `${L} 가챠 발매 현황`,
+    cxStatus: (out, up, re, price) => `발매 중 ${out}개 시리즈, 발매 예정 ${up}개 시리즈${re ? ` (재판매·복각 ${re}개 포함)` : ""}. 가격: ${price}.`,
+    cxLatestLine: (a, rel, spec) => `최신작: ${a} (${rel} · ${spec})`, cxNextLine: (a, rel, spec) => `다음 신작: ${a} (${rel} 발매 예정 · ${spec})`,
+    cxColH: "시리즈별 전체 목록", cxFaqH: (L) => `${L} 가챠 자주 묻는 질문`,
+    cxQNext: (L) => `${L}의 다음 가챠 신작은 언제 나와요?`,
+    cxANext: (name, rel, spec, more) => `'${name}'이(가) ${rel}에 발매될 예정이에요 (${spec}).${more ? ` 그 밖에 ${more}개 시리즈의 발매가 정해져 있어요.` : ""}`,
+    cxANone: (name, rel) => `아직 발표된 발매 예정은 없어요. 최신작은 '${name}'(${rel} 발매)이에요. 신작이 발표되면 바로 이 페이지에 추가할게요.`,
+    cxQLatest: (L) => `${L}의 최신 가챠는 뭐예요?`,
+    cxALatest: (out, name, rel, spec, L, n, re) => `${out ? "발매 중인 것 중 가장 새로운 것은" : "최신작은"} '${name}'(${rel} 발매 · ${spec})이에요. ${L} 가챠는 지금까지 ${n}개 시리즈${re ? ` (재판매·복각 ${re}개 포함)` : ""}가 나왔어요.`,
+    cxQPrice: (L) => `${L} 가챠는 얼마예요?`,
+    cxAPrice: (price) => `${price}. 시리즈별 가격과 종류 수는 각 시리즈 페이지에서 확인할 수 있어요.`,
+    cxQWhere: (L) => `${L} 가챠는 일본 어디서 팔아요?`,
+    cxAWhere: (L, n, sts) => `반다이 공식 매장 정보에 따르면 ${L} 가챠는 일본 전국 ${n}개 매장에서 판매하고 있어요.${sts ? ` 근처 매장에 시리즈가 많은 역: ${sts}.` : ""} 각 시리즈 페이지에서 재고가 있는 매장을 확인할 수 있어요.`,
+    cxAWhereNone: (L) => `${L} 가챠는 일본 전국의 캡슐토이 전문점과 쇼핑몰 가챠 코너에서 판매돼요. 매장마다 취급 상품이 다르니 각 시리즈 페이지의 매장 목록이나 역 주변 가챠샵 페이지에서 찾아보세요.`,
+    cxStn: (name, k) => `${name} (${k}개 시리즈)`, cxStnSep: ", ",
+    cxDesc: (L, n, latest, month, price, next, nextRel, range) => `일본 ${L} 가챠 ${n}개 시리즈의 발매일·가격·파는 곳. 최신작 '${latest}'(${month} · ${price}엔)${next ? `, 다음은 '${next}'이(가) ${nextRel} 발매 예정` : ""}. ${range}.`,
   },
   quiz: {
     "Accessories & beauty": "액세서리·뷰티", "Animals": "동물", "Anime & idols": "애니·아이돌", "Anime for girls": "여아용 애니",
