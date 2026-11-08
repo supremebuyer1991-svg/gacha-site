@@ -967,6 +967,18 @@ for (const it of items) {
   }));
 }
 
+// トップの入荷速報用の軽い商品一覧（先月以降に発売・発売予定だけ。カードに出す項目だけ）。診断用の quiz-<lang>.json と同じ中身の一部
+{
+  const from = new Date(Date.UTC(nowJST.getUTCFullYear(), nowJST.getUTCMonth() - 1, 1)).toISOString().slice(0, 7);
+  const recent = items.filter((it) => (it.release || "") >= from);
+  for (const lang of LANGS) {
+    write(`data/recent-${lang}.json`, JSON.stringify(recent.map((it) => ({
+      id: it.id, name: nameOf(it, lang), price: it.price, lineup: it.lineup, image: thumbOf(it.image),
+      genre_label: genreLabel(genreOf(it.genre), lang), release_label: T[lang].month(it.release),
+    }))));
+  }
+}
+
 // デザイン・動きのファイルが変わったら、ブラウザに古いものが残らないよう番号を付ける
 const crypto = require("crypto");
 const ver = (f) => crypto.createHash("md5").update(fs.readFileSync(path.join(__dirname, f))).digest("hex").slice(0, 8);
