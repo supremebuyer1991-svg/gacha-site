@@ -4,6 +4,7 @@
   { "slug": "shinjuku", "region": "kanto", "pref": "東京都", "lat": 35.6896, "lng": 139.7006, "ja": "新宿駅", "en": "Shinjuku Station", "zh-cn": "新宿站", "zh-tw": "新宿站", "ko": "신주쿠역" },
   { "slug": "shibuya", "region": "kanto", "pref": "東京都", "lat": 35.6580, "lng": 139.7016, "ja": "渋谷駅", "en": "Shibuya Station", "zh-cn": "涩谷站", "zh-tw": "澀谷站", "ko": "시부야역" },
   { "slug": "tokyo", "region": "kanto", "pref": "東京都", "lat": 35.6812, "lng": 139.7671, "ja": "東京駅", "en": "Tokyo Station", "zh-cn": "东京站", "zh-tw": "東京站", "ko": "도쿄역" },
+  { "slug": "ginza", "region": "kanto", "pref": "東京都", "lat": 35.6717, "lng": 139.7640, "ja": "銀座駅", "en": "Ginza Station", "zh-cn": "银座站", "zh-tw": "銀座站", "ko": "긴자역" },
   { "slug": "ueno", "region": "kanto", "pref": "東京都", "lat": 35.7138, "lng": 139.7773, "ja": "上野駅", "en": "Ueno Station", "zh-cn": "上野站", "zh-tw": "上野站", "ko": "우에노역" },
   { "slug": "harajuku", "region": "kanto", "pref": "東京都", "lat": 35.6702, "lng": 139.7027, "ja": "原宿駅", "en": "Harajuku Station", "zh-cn": "原宿站", "zh-tw": "原宿站", "ko": "하라주쿠역" },
   { "slug": "nakano", "region": "kanto", "pref": "東京都", "lat": 35.7056, "lng": 139.6658, "ja": "中野駅", "en": "Nakano Station", "zh-cn": "中野站", "zh-tw": "中野站", "ko": "나카노역" },
