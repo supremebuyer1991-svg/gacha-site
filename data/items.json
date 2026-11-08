@@ -12700,7 +12700,7 @@
     "maker_en": "Bandai",
     "price": 500,
     "release": "2026-11",
-    "release_note": "11月第2週より順次",
+    "release_note": "7月第3週より順次",
     "genre": "anime",
     "moods": [],
     "tags": [],
@@ -13464,7 +13464,7 @@
     "maker_en": "Bandai",
     "price": 600,
     "release": "2026-11",
-    "release_note": "11月第4週より順次",
+    "release_note": "7月第3週より順次",
     "genre": "anime",
     "moods": [],
     "tags": [],
@@ -48549,6 +48549,3096 @@
       "20",
       "30",
       "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769860232",
+    "name": "【ジャンボカードダス/フラットガシャポン】San-X オールスターズ ジャンボシールダス2",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 200,
+    "release": "2026-07",
+    "release_note": "7月第1週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 12,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769860232000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769860232",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:stationery"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118197009",
+    "name": "おぱんちゅうさぎ＆んぽちゃむ まちぼうけ",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "7月第1週より順次",
+    "genre": "animal",
+    "moods": [
+      "funny"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118197009000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118197009",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:character",
+      "kawaii:animal",
+      "type:figure",
+      "funny:machibouke",
+      "funny:neta"
+    ],
+    "q_ages": [
+      "10",
+      "20"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118202505",
+    "name": "プリキュアオールスターズ 変身めじるしアクセサリー",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月第1週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118202505000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118202505",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "oshi:girls",
+      "type:mejirushi",
+      "type:fashion"
+    ],
+    "q_ages": [
+      "10"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769972409",
+    "name": "“ディズニーキャラクター” くっつきマスコット",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-07",
+    "release_note": "7月第1週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769972409000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769972409",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:disney",
+      "kawaii:mascot",
+      "type:plush"
+    ],
+    "q_ages": [
+      "20",
+      "30"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770027013",
+    "name": "豆ガシャ本 サンリオキャラクターズ×朝日文庫 Ichigo Keywords２",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-07",
+    "release_note": "7月第1週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 8,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770027013000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770027013",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:sanrio",
+      "hobby:books"
+    ],
+    "q_ages": [
+      "10",
+      "20",
+      "30"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770076707",
+    "name": "アイドリッシュセブン カプセル缶バッジコレクション＋♪vol.7",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月第1週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 16,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770076707000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770076707",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "oshi:idol"
+    ],
+    "q_ages": [
+      "20"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118105790",
+    "name": "ポケットモンスター 組立可動！コライドン・ミライドン",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 800,
+    "release": "2026-07",
+    "release_note": "7月第2週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 2,
+    "age_min": 6,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118105790000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118105790",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:pokemon"
+    ],
+    "q_ages": [
+      "10",
+      "20",
+      "30"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118143273",
+    "name": "ミズノ 野球グローブコレクション",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "7月第2週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118143273000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118143273",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "funny:neta",
+      "hobby:sports"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769916113",
+    "name": "忍たま乱太郎 まちぼうけ 六年生の段",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "7月第2週より順次",
+    "genre": "anime",
+    "moods": [
+      "funny"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769916113000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769916113",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "oshi:kids",
+      "type:figure",
+      "funny:machibouke"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769916373",
+    "name": "日清カップヌードル めじるしアクセサリー",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月第2週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769916373000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769916373",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "type:mejirushi",
+      "type:fashion"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769866999",
+    "name": "BANANA FISH まちぼうけ",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-07",
+    "release_note": "7月第2週より順次",
+    "genre": "anime",
+    "moods": [
+      "funny"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769866999000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769866999",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:figure",
+      "funny:machibouke"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769898099",
+    "name": "ズートピア2 ならぶんです。",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "7月第2週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769898099000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769898099",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:disney",
+      "type:figure",
+      "hobby:movie"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769892035",
+    "name": "チロルチョコ めじるしアクセサリー",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月第2週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769892035000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769892035",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "type:mejirushi",
+      "type:fashion",
+      "real:food",
+      "retro:showa",
+      "hobby:brand"
+    ],
+    "q_ages": [
+      "50"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769898051",
+    "name": "“ディズニーキャラクター” Twinkle ゴム",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月第2週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 8,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769898051000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769898051",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:disney",
+      "type:fashion"
+    ],
+    "q_ages": [
+      "20",
+      "30"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118184290",
+    "name": "SKZOO ベーカリーチャーム",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "7月第2週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 8,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118184290000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118184290",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "oshi:idol",
+      "type:charm",
+      "real:food"
+    ],
+    "q_ages": [
+      "10",
+      "20"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118184573",
+    "name": "シュガーバニーズ ふわふわめじるしアクセサリー",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月第2週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 8,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118184573000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118184573",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:sanrio",
+      "kawaii:mascot",
+      "kawaii:accessory",
+      "type:plush",
+      "type:mejirushi",
+      "type:fashion"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118184795",
+    "name": "LOONEY TUNES ミニチュアパッケージチャーム",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "7月第2週より順次",
+    "genre": "miniature",
+    "moods": [
+      "kawaii",
+      "real"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118184795000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118184795",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "type:charm",
+      "type:minipkg",
+      "real:miniature"
+    ],
+    "q_ages": [
+      "30",
+      "40",
+      "50"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769927256",
+    "name": "PEZ めじるしアクセサリー",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月第2週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769927256000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769927256",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "type:mejirushi",
+      "type:fashion"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769979026",
+    "name": "ぷよぷよ #ハッシュタグつける",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月第2週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 10,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769979026000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769979026",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769979460",
+    "name": "ジョジョの奇妙な冒険 ラバーマスコットコレクション05",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月第2週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 14,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769979460000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769979460",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "cool:shonen",
+      "type:plush"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769981821",
+    "name": "転生したらスライムだった件 のっかるんです♪フィギュア",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-07",
+    "release_note": "7月第2週より順次",
+    "genre": "anime",
+    "moods": [
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769981821000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769981821",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "oshi:trend",
+      "type:figure",
+      "funny:machibouke"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770026603",
+    "name": "カムンとアント ぬいぐるみクリップ",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "7月第2週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770026603000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770026603",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "kawaii:accessory",
+      "type:plush",
+      "type:fashion"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770070262",
+    "name": "パワーパフ ガールズ アクリルスライドミラーコレクション",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月第2週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770070262000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770070262",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "type:fashion",
+      "type:useful",
+      "retro:heisei"
+    ],
+    "q_ages": [
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770071511",
+    "name": "涼を感じるゆらゆらチャーム",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月第2週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770071511000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770071511",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "type:charm"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118206589",
+    "name": "怒ったおおきいわんぴーすわんちゃあぁぁん",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "7月第2週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118206589000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118206589",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "funny:neta"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118234605",
+    "name": "【フラットガシャポン】RIZIN クリアファイルコレクション",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "7月第2週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 10,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118234605000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118234605",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:stationery"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769792724",
+    "name": "【フラットガシャポン】IVE FROM STARSHIP ENTERTAINMENT WITH AMUSE ステッカーコレクション",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月第2週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769792724000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769792724",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:stationery"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769855658",
+    "name": "【フラットガシャポン】ジョジョの奇妙な冒険 ネイルシール",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月第2週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769855658000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769855658",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "cool:shonen",
+      "type:stationery",
+      "type:fashion"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769935848",
+    "name": "NPB ユニフォームフレームマグネット～パシフィック・リーグ～",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-07",
+    "release_note": "7月第2週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769935848000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769935848",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "hobby:sports"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769978975",
+    "name": "みいつけた！ まちぼうけ",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月第2週より順次",
+    "genre": "anime",
+    "moods": [
+      "funny"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "age_min": 3,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769978975000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769978975",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "oshi:kids",
+      "type:figure",
+      "funny:machibouke"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769995491",
+    "name": "封神演義 COMICS CHARM COLLECTION 02",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "7月第2週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 11,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769995491000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769995491",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "hobby:books"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770054736",
+    "name": "サンリオキャラクターズ ぷっくりクリアバッグ",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "7月第2週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770054736000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770054736",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:sanrio",
+      "kawaii:accessory",
+      "type:useful"
+    ],
+    "q_ages": [
+      "10",
+      "20",
+      "30"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770070989",
+    "name": "【フラットガシャポン】クレヨンしんちゃん マウスシートコレクション『映画クレヨンしんちゃん ヘンダーランドの大冒険』",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-07",
+    "release_note": "7月第2週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 8,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770070989000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770070989",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "oshi:kids",
+      "type:useful",
+      "hobby:movie"
+    ],
+    "q_ages": [
+      "10"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4549660377375",
+    "name": "カプキャラ クレヨンしんちゃん4",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "age_min": 6,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4549660377375000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4549660377375",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "oshi:kids"
+    ],
+    "q_ages": [
+      "10"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769746017",
+    "name": "サンリオキャラクターズ～なりきりメンダコ～ めじるしアクセサリー",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769746017000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769746017",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:sanrio",
+      "kawaii:accessory",
+      "type:mejirushi",
+      "type:fashion"
+    ],
+    "q_ages": [
+      "10",
+      "20",
+      "30"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769836459",
+    "name": "黒子のバスケ めじるしアクセサリー",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 7,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769836459000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769836459",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "cool:shonen",
+      "type:mejirushi",
+      "type:fashion",
+      "hobby:sports"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769897665",
+    "name": "ONE PIECE まちぼうけ",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [
+      "funny"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769897665000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769897665",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "cool:shonen",
+      "type:figure",
+      "funny:machibouke"
+    ],
+    "q_ages": [
+      "30"
+    ],
+    "q_genders": [
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769832567",
+    "name": "ニャッキ！ めじるしアクセサリー",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769832567000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769832567",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "type:mejirushi",
+      "type:fashion"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769889486",
+    "name": "ノンタン めじるしアクセサリー2",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769889486000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769889486",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "oshi:kids",
+      "type:mejirushi",
+      "type:fashion",
+      "retro:showa"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769917349",
+    "name": "MINECRAFT（マインクラフト） フィギュアあそーと ～エンダードラゴン戦～",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769917349000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769917349",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "oshi:game",
+      "type:figure"
+    ],
+    "q_ages": [
+      "10",
+      "30"
+    ],
+    "q_genders": [
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769916359",
+    "name": "DEATH NOTE めじるしアクセサリー",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769916359000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769916359",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "type:mejirushi",
+      "type:fashion"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769837333",
+    "name": "クレヨンしんちゃん まちぼうけ7 『映画クレヨンしんちゃん 嵐を呼ぶ 栄光のヤキニクロード』",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [
+      "funny"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769837333000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769837333",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "oshi:kids",
+      "type:figure",
+      "funny:machibouke",
+      "hobby:movie"
+    ],
+    "q_ages": [
+      "10"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769866401",
+    "name": "ポケットステーション どこでもいっしょミニチュアチャーム",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "miniature",
+    "moods": [
+      "kawaii",
+      "real"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 9,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769866401000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769866401",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "type:charm",
+      "type:minipkg",
+      "real:miniature"
+    ],
+    "q_ages": [
+      "30",
+      "40",
+      "50"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769742699",
+    "name": "ペコちゃん お菓子のめじるしアクセサリー2026",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769742699000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769742699",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "type:mejirushi",
+      "type:fashion"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769865978",
+    "name": "EVA POCKET めじるしアクセサリー",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769865978000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769865978",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "type:mejirushi",
+      "type:fashion"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118184078",
+    "name": "ホロライブ すわらせ隊 アクリルスタンド カラーライズ3",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 7,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118184078000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118184078",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "oshi:vtuber",
+      "hobby:music"
+    ],
+    "q_ages": [
+      "10",
+      "20"
+    ],
+    "q_genders": [
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118184672",
+    "name": "それいけ！アンパンマン ぴかぴかブレスNEW",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 3,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118184672000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118184672",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "oshi:kids",
+      "real:food"
+    ],
+    "q_ages": [
+      "10"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118185358",
+    "name": "ポケットモンスター ポケモンラバーマスコット30",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 8,
+    "age_min": 6,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118185358000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118185358",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:pokemon",
+      "kawaii:mascot",
+      "type:plush"
+    ],
+    "q_ages": [
+      "10",
+      "20",
+      "30"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118186584",
+    "name": "TOY STORY Funny Time！",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118186584000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118186584",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118197658",
+    "name": "それいけ！アンパンマン ピコピコマスコットNEW３",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 200,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 3,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118197658000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118197658",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "oshi:kids",
+      "type:plush",
+      "real:food"
+    ],
+    "q_ages": [
+      "10"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118198150",
+    "name": "とっとこハム太郎 シャカシャカアクリルチャーム",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118198150000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118198150",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "kawaii:yumekawa",
+      "type:charm",
+      "retro:heisei"
+    ],
+    "q_ages": [
+      "30"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118202048",
+    "name": "ヤバイTシャツ屋さん まちぼうけ",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [
+      "funny"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118202048000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118202048",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:figure",
+      "funny:machibouke"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118202345",
+    "name": "【フラットガシャポン】ドズル社 ミニおりたたみコンテナ",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118202345000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118202345",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:useful"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118203748",
+    "name": "“ディズニーキャラクター” Capsule Bottle Charm",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118203748000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118203748",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:disney"
+    ],
+    "q_ages": [
+      "20",
+      "30"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118205629",
+    "name": "サンリオキャラクターズ きらきらアソートコレクション",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 8,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118205629000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118205629",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:sanrio"
+    ],
+    "q_ages": [
+      "10",
+      "20",
+      "30"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118206541",
+    "name": "なりきりシマエナガ お寿司",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118206541000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118206541",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118235169",
+    "name": "まちぼうけ ベルセルク 黄金時代篇",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [
+      "funny"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118235169000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118235169",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:figure",
+      "funny:machibouke"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4570118252456",
+    "name": "MLB™ Capsuleトルソー Players Edition",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4570118252456000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4570118252456",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "real:miniature"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769811630",
+    "name": "TOY STORY サウンドロップ",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769811630000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769811630",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:sound",
+      "hobby:music"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769828867",
+    "name": "初音ミク みんなでプールフィギュア",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769828867000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769828867",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "oshi:idol",
+      "type:figure",
+      "hobby:music"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769832680",
+    "name": "BLEACH めじるしアクセサリー3～千年血戦篇～",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769832680000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769832680",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "cool:shonen",
+      "type:mejirushi",
+      "type:fashion"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769841842",
+    "name": "mofusand ライトマスコット",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769841842000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769841842",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:character",
+      "kawaii:animal",
+      "kawaii:mascot",
+      "type:plush",
+      "type:useful",
+      "type:sound"
+    ],
+    "q_ages": [
+      "10",
+      "20"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769847264",
+    "name": "ズーキーパー めじるしアクセサリー",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769847264000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769847264",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "type:mejirushi",
+      "type:fashion"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769927980",
+    "name": "刃牙 すわらせ隊ッッ!!",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769927980000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769927980",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769934827",
+    "name": "capsule flockies 中嶋製作所のぬいぐるみ",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769934827000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769934827",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "type:plush"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769936067",
+    "name": "花ざかりの君たちへ ふらっとめじるしアクセサリー",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 9,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769936067000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769936067",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "type:mejirushi",
+      "type:fashion"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769979132",
+    "name": "クレヨンしんちゃん だがしんちゃんミニチュアチャーム",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "miniature",
+    "moods": [
+      "kawaii",
+      "real"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769979132000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769979132",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "oshi:kids",
+      "type:charm",
+      "type:minipkg",
+      "real:miniature"
+    ],
+    "q_ages": [
+      "10",
+      "30",
+      "40",
+      "50"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769979163",
+    "name": "たまごっち みんなでバカンスフィギュア",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769979163000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769979163",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:figure",
+      "retro:heisei"
+    ],
+    "q_ages": [
+      "30"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769995101",
+    "name": "Esther Bunny（エスターバニー） プールバッグ風ミニポーチ",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769995101000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769995101",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "type:useful"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769995705",
+    "name": "ミニチュア阪神甲子園球場【2026年夏】",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "miniature",
+    "moods": [
+      "real"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769995705000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769995705",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "real:miniature"
+    ],
+    "q_ages": [
+      "30",
+      "40",
+      "50"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769995781",
+    "name": "ハイキュー!! めじるしアクセサリー アニマルver.2",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "animal",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769995781000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769995781",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "cool:shonen",
+      "type:mejirushi",
+      "type:fashion"
+    ],
+    "q_ages": [
+      "10",
+      "20"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769995842",
+    "name": "いきもの大図鑑 かぶとむし11",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769995842000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769995842",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "real:creature"
+    ],
+    "q_ages": [
+      "40",
+      "50"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770021684",
+    "name": "ハイパーヨーヨーカプセルスフィア",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 800,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "age_min": 8,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770021684000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770021684",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770026733",
+    "name": "ポケットモンスター カプセルウォータードーム",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "age_min": 6,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770026733000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770026733",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:pokemon"
+    ],
+    "q_ages": [
+      "10",
+      "20",
+      "30"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770026771",
+    "name": "青鬼 まちぼうけ～ずっとひろしを待っている～",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [
+      "funny"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770026771000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770026771",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:figure",
+      "funny:machibouke"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770027501",
+    "name": "【フラットガシャポン】ドラゴンボール クリアラバーコースター2",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 7,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770027501000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770027501",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "cool:shonen",
+      "type:useful"
+    ],
+    "q_ages": [
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770028027",
+    "name": "いきもの大図鑑アドバンス 水生昆虫02 ゲンゴロウ",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 1500,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770028027000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770028027",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "real:creature"
+    ],
+    "q_ages": [
+      "40",
+      "50"
+    ],
+    "q_genders": [
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770056129",
+    "name": "怒ったわんちゃあぁぁん2",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770056129000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770056129",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "funny:neta"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770076745",
+    "name": "おジャ魔女どれみにょん シャカシャカアクリルチャーム",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "7月第3週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770076745000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770076745",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "kawaii:yumekawa",
+      "oshi:girls",
+      "type:charm",
+      "retro:heisei"
+    ],
+    "q_ages": [
+      "30"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582769701184",
+    "name": "【ジャンボカードダス/フラットガシャポン】たまごっち ジャンボシールダス",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-07",
+    "release_note": "7月第4週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 8,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582769701184000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582769701184",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:stationery",
+      "retro:heisei"
+    ],
+    "q_ages": [
+      "30"
     ],
     "q_genders": [
       "female",
