@@ -428,6 +428,15 @@ T.en.where = {
 };
 // 日本語以外の商品ページ：同じ週に発売のガチャの見出しと、下のバー（発売前）の文言。chips は空（通販チップの見出しは出さない）
 T.en.sameWeek = { h: "Releasing the same week", chips: "", notify: "🔔 Notify me", rakUp: "Pre-order (Rakuten)", rak: "Rakuten" };
+// 日本語以外の週ごとのページ（src/hubs.js）：注目5選・全部・メーカー別・再販と、旅行者向けのひとこと。intro は [リンクの前, リンクの文字, リンクの後]
+T.en.wk = {
+  top5Now: "This week's top 5", top5: "Top 5 picks of the week",
+  capSubj: (s) => `${s} gacha`, price: (p) => `¥${p} per play`, sep: " · ",
+  allH: (n) => `All releases of the week (${n})`, makersH: "By maker", count: (n) => `${n}`,
+  makerH: (m, n) => `${m} (${n})`, makerMore: (m) => `All ${m} gacha →`, priceIn: (p) => ` – ${p}`,
+  reH: "Reissues of the week", reMore: "All reissues →",
+  intro: (range, n) => [`Japanese gachapon (capsule toys) releasing in Japan the week of ${range}: ${n} new series. New machines roll out to shops from release day and popular series sell out within days — find shops near your station in our `, "station guide", "."],
+};
 
 /* ---------- 商品ページの「このガチャについて」（データだけから作る短い文章。v はページごとの言い回しの番号） ----------
  * d: name maker price n（全◯種）/ ch（キャラクターのリンクHTML）k（そのキャラのシリーズ数）/ ln（ラインナップ名）more
@@ -495,6 +504,7 @@ for (const l of XL) {
   T[l].stn = { ...T.en.stn, ...(T[l].stn || {}) };
   T[l].where = { ...T.en.where, ...(T[l].where || {}) };
   T[l].sameWeek = { ...T.en.sameWeek, ...(T[l].sameWeek || {}) };
+  T[l].wk = { ...T.en.wk, ...(T[l].wk || {}) };
 }
 T.ja.hub = T.en.hub; // 日本語は src/hubs.js の中に直接書いている（英語のものは使わない）
 // 診断の選択肢（英語名をキーに、中国語・韓国語は i18n の quiz → chara の順で探す）
@@ -964,9 +974,14 @@ fs.mkdirSync(path.join(OUT, "images", "og"), { recursive: true });
 if (fs.existsSync(path.join(ROOT, "brand", "header.png"))) fs.copyFileSync(path.join(ROOT, "brand", "header.png"), path.join(OUT, "images", "og", "site.png"));
 // SNSの共有画像（1200×630。Xのカードは横長すぎる画像だと出ないため）
 if (fs.existsSync(path.join(ROOT, "brand", "og-site.jpg"))) fs.copyFileSync(path.join(ROOT, "brand", "og-site.jpg"), path.join(OUT, "images", "og", "site.jpg"));
-// 英語版のSNS画像（キャッチコピーを英語にしたもの）
-const OG_SITE_EN = fs.existsSync(path.join(ROOT, "brand", "og-site-en.jpg"));
-if (OG_SITE_EN) fs.copyFileSync(path.join(ROOT, "brand", "og-site-en.jpg"), path.join(OUT, "images", "og", "site-en.jpg"));
+// 外国語版のSNS画像（キャッチコピーをその言語にしたもの。brand/og-site-{lang}.jpg があれば使う）
+const OG_SITE_LANGS = new Set();
+for (const l of ["en", "ko", "zh-cn", "zh-tw"]) {
+  const src = path.join(ROOT, "brand", `og-site-${l}.jpg`);
+  if (!fs.existsSync(src)) continue;
+  fs.copyFileSync(src, path.join(OUT, "images", "og", `site-${l}.jpg`));
+  OG_SITE_LANGS.add(l);
+}
 
 // 在庫を確認する商品の一覧（Cloudflareの在庫確認ワーカーが読む）：先月以降に発売のバンダイ商品
 {
@@ -1110,7 +1125,7 @@ ${site.naver_verification ? `<meta name="naver-site-verification" content="${esc
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:type" content="${ogType}">
 <meta property="og:url" content="${esc(canonical(lang, rel))}">
-<meta property="og:image" content="${esc(ogImage || `${SITE_URL}/images/og/${lang === "en" && OG_SITE_EN ? "site-en" : "site"}.jpg`)}">
+<meta property="og:image" content="${esc(ogImage || `${SITE_URL}/images/og/${OG_SITE_LANGS.has(lang) ? `site-${lang}` : "site"}.jpg`)}">
 <meta name="twitter:card" content="summary_large_image">
 ${xAcc ? `<meta name="twitter:site" content="@${esc(xAcc)}">` : ""}
 <meta name="theme-color" content="#f6f8ff">
@@ -2037,7 +2052,7 @@ ${content}
     void past;
   }
   // 週ごとの固定ページ・シリーズ・再販・値段の一覧
-  hubs.build(HUB, { lang, t, layout, card, ctx, esc, canonical, nameOf, hasName, CHARAS, charaLabel, WEEK, NEXT_WEEK, byPopular, byNewest, thisMonth, MONTH_EN, thumbOf, listPage, items, weekStartOf, weekInfo, genreLabel, genreOf, makerSlug, SITE_URL });
+  hubs.build(HUB, { lang, t, layout, card, ctx, esc, canonical, nameOf, hasName, CHARAS, charaLabel, WEEK, NEXT_WEEK, byPopular, byNewest, thisMonth, MONTH_EN, thumbOf, listPage, items, weekStartOf, weekInfo, genreLabel, genreOf, makerSlug, makerOf, enRange, SITE_URL });
   if (lang === "ja" || lang === "en") {
     const MK = new Map(items.map((it) => [it.maker, it]));
     stats.build(STATS, { lang, layout, ctx, esc, canonical, t, today, MONTH_EN, charaLabel, makerOf: (name) => (MK.has(name) ? makerOf(MK.get(name), lang) : name), write, SITE_URL, site });

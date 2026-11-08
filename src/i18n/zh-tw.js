@@ -111,6 +111,15 @@ module.exports = {
       sep: "、",
     },
     sameWeek: { h: "同週發售的扭蛋", notify: "🔔 發售提醒", rakUp: "樂天預購", rak: "樂天" },
+    // 每週頁面（src/hubs.js）
+    wk: {
+      top5Now: "本週精選5款", top5: "該週精選5款",
+      capSubj: (s) => `${s}扭蛋`, price: (p) => `一轉${p}日圓`, sep: "，",
+      allH: (n) => `該週發售的扭蛋（${n}款）`, makersH: "依廠商", count: (n) => `${n}款`,
+      makerH: (m, n) => `${m}・${n}款`, makerMore: (m) => `${m}的所有扭蛋 →`, priceIn: (p) => `（${p}）`,
+      reH: "該週的再販・復刻",
+      intro: (range, n) => [`${range}這一週在日本發售的扭蛋（轉蛋）新品共${n}個系列。新機台從發售日起陸續進店，熱門系列往往幾天內就會賣完——可以在`, "依車站找扭蛋店", "裡查看你附近車站的店家。"],
+    },
     x: {
       idxTitle: "日本扭蛋（轉蛋）新品發售日一覽｜扭蛋店地圖・到貨速報｜GACHA PLANET",
       kbTitle: "NEW｜扭蛋之旅路線規劃",
