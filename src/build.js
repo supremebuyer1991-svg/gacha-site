@@ -846,6 +846,14 @@ const LOTTERY = (readJSON("lottery.json", { entries: [] }) || { entries: [] }).e
 // 抽選（受付中・これから）と商品の対応。抽選ページと商品ページの両方で使うので、ここで1回だけ計算する
 const LOT_LIVE = LOTTERY.filter((x) => x.end >= nowJST.toISOString().slice(0, 16)).sort((a, b) => (a.end > b.end ? 1 : -1));
 const LOT_KIND = { item: "商品の抽選", open: "オープン・入場", event: "イベント" };
+// 締切が過ぎた抽選（lottery-archive.json ＋ lottery.json のうち締切が過ぎたもの）。チェーンのページの「過去の抽選」に使う
+const LOT_PAST = (() => {
+  const nowIso = nowJST.toISOString().slice(0, 16), seen = new Set(), out = [];
+  for (const x of [...((readJSON("lottery-archive.json", { entries: [] }) || {}).entries || []), ...LOTTERY.filter((y) => y.end < nowIso)]) {
+    const k = `${x.store}|${x.title}|${x.end}`; if (seen.has(k)) continue; seen.add(k); out.push(x);
+  }
+  return out.sort((a, b) => (a.end < b.end ? 1 : a.end > b.end ? -1 : 0));
+})();
 // 抽選の商品名 → 商品ページ（記号・空白をのぞいて同じ名前、なければ2文字ずつの重なりがとても大きいもの）
 const lotNorm = (s) => String(s || "").normalize("NFKC").replace(/【[^】]*】/g, "").replace(/[\s・\-~～〜!！?？()（）「」『』.,、。:：/＆&]/g, "").toLowerCase();
 const lotBigr = (s) => { const m = new Map(); for (let i = 0; i < s.length - 1; i++) { const b = s.slice(i, i + 2); m.set(b, (m.get(b) || 0) + 1); } return m; };
@@ -908,7 +916,7 @@ const CHAIN_DEFS = [
   { slug: "gashapon-department-store", label: "ガシャポンのデパート", re: /ガシャポンのデパート/, i: { en: "Gashapon Department Store", "zh-cn": "扭蛋百货", "zh-tw": "扭蛋百貨", ko: "가샤폰 백화점" } },
   { slug: "gachagacha-no-mori", label: "ガチャガチャの森", re: /ガチャガチャの森/, i: { en: "Gachagacha no Mori", "zh-cn": "扭蛋森林（ガチャガチャの森）", "zh-tw": "扭蛋森林（ガチャガチャの森）", ko: "가챠가챠의 숲" } },
   { slug: "c-pla", label: "#C-pla", re: /[#♯]\s*C-pla/i, i: { en: "#C-pla" } },
-  { slug: "gashacoco", label: "ガシャココ", re: /ガシャココ/, i: { en: "Gashacoco", ko: "가샤코코" } },
+  { slug: "gashacoco", label: "ガシャココ", re: /ガシャココ|gashacoco/i, i: { en: "Gashacoco", ko: "가샤코코" } },
   { slug: "festaland", label: "ふぇすたらんど", re: /ふぇすたらんど/, i: { en: "Festaland", ko: "페스타랜드" } },
   { slug: "dream-capsule", label: "ドリームカプセル", re: /ドリームカプセル/, i: { en: "Dream Capsule", ko: "드림캡슐" } },
   { slug: "capsule-park", label: "カプセルパーク", re: /カプセルパーク/, i: { en: "Capsule Park", ko: "캡슐파크" } },
@@ -2509,6 +2517,16 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
         const what = ch.store ? `${ch.label}のガチャガチャ設置店` : ch.label;
         const title = `${ch.store ? `${ch.label}のガチャガチャ設置店一覧` : `${ch.label} 店舗一覧`}（全国${n}店）｜都道府県別・取扱中のガチャ`;
         const lead = `${what}は、バンダイ公式の取扱店情報で全国${n}店（${topPrefs.map(([p, v]) => `${p}${v.length}店`).join("・")}${prefs.length > 3 ? "など" : ""}）。都道府県ごとに一覧にしています。${hot.length ? `いま取扱が多いのは「${hot[0][0].name}」（${hot[0][1]}店）です。` : ""}`;
+        // このチェーンの抽選（受付中と、締切が過ぎたもの）
+        const chOf = (x) => ch.re.test(String(x.store || "").normalize("NFKC"));
+        const lotLive = LOT_LIVE.filter(chOf), lotPast = LOT_PAST.filter(chOf);
+        const md = (d) => { const m = String(d).match(/^\d{4}-(\d\d)-(\d\d)/); return m ? `${+m[1]}/${+m[2]}` : d; };
+        const lotTitle = (x) => x.kind === "item" ? x.title.split(/\s+\/\s+/).map((p) => { const it = lotMatchItem(p); return it ? `<a href="${c.H}item/${it.id}.html">${esc(p)}</a>` : esc(p); }).join(" / ") : esc(x.title);
+        const lotLi = (x, past) => `<li><span class="lot-item-store">${lotTitle(x)}<small>${esc(x.store)}${x.pref ? `（${esc(x.pref)}）` : ""}</small></span><span>${past ? `受付 ${md(x.start)}〜${md(x.end)}・${esc(x.method || "")}` : `締切 ${md(x.end)}・${esc(x.method || "お店でご確認ください")}`}${(() => { const nt = past ? String(x.note || "").replace(/。?くわしくはお店の公式Xで。?/, "").replace(/受付開始は[^。]*。?/, "") : x.note; return nt ? `<small style="display:block">${esc(nt)}</small>` : ""; })()}${!past && x.url ? `<small style="display:block"><a href="${esc(x.url)}" target="_blank" rel="noopener">応募ページ →</a></small>` : ""}</span></li>`;
+        const lotSec = lotLive.length || lotPast.length ? `<section class="section section-tight lot-sec" id="lottery"><div class="section-head"><h2>${esc(chainName(ch))}の抽選販売・整理券</h2><a class="more" href="${c.R}lottery.html">抽選情報をすべて見る</a></div>
+    ${lotLive.length ? `<h3 class="arr-h">いま受付中（${lotLive.length}件）</h3><ul class="where-shops lot-item">${lotLive.map((x) => lotLi(x, false)).join("")}</ul>` : ""}
+    ${lotPast.length ? `<h3 class="arr-h">過去の抽選販売（新しい順・${lotPast.length}件${lotPast.length > 60 ? "のうち60件" : ""}）</h3><p class="fine" style="margin-top:-4px;margin-bottom:10px">受付が終わった抽選の記録です。どんな商品が抽選になりやすいか、受付がいつごろ始まるかの目安にどうぞ。</p><ul class="where-shops lot-item">${lotPast.slice(0, 60).map((x) => lotLi(x, true)).join("")}</ul>` : ""}
+  </section>` : "";
         const body = `<div class="wrap">
   <nav class="breadcrumb" aria-label="breadcrumb"><a href="${c.H}index.html">${t.home}</a><span>/</span><a href="${c.H}chain.html">チェーンからさがす</a><span>/</span><span>${esc(ch.label)}</span></nav>
   <header class="page-head"><h1>${esc(ch.store ? `${ch.label}のガチャガチャ設置店` : `${ch.label}の店舗一覧`)}（全国${n}店）</h1><p class="lead">${esc(lead)}</p></header>
@@ -2516,6 +2534,7 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
   ${hot.length ? `<section class="section section-tight"><div class="section-head"><h2>${esc(ch.label)}で取扱が多いガチャ（公式）</h2></div>
     <p class="fine" style="margin-top:-12px;margin-bottom:16px">${hot.slice(0, 3).map(([it, k]) => `${esc(it.name)}（${k}店）`).join("、")}など。バンダイ公式「ガシャポンどこ？」の取扱店の数です。</p>
     <div class="grid row-scroll">${hot.map(([it]) => card(it, c)).join("")}</div></section>` : ""}
+  ${lotSec}
   ${prefs.map(([p, v]) => `<section class="section section-tight" id="${prefSlug(p)}"><div class="section-head"><h2>${p}の${esc(what)}（${v.length}店）</h2><a class="more" href="${c.R}shops/${prefSlug(p)}.html">${p}のお店をすべて見る</a></div>
     <ul class="where-shops">${v.map((sh) => `<li><a href="${c.R}shop/${sh.id}.html">${esc(sh.name)}</a><span>${esc(addrParts(sh.address, p).city || "")}${(SHOP_OFFICIAL[sh.id] || []).length ? `・${(SHOP_OFFICIAL[sh.id] || []).length}種` : ""}</span></li>`).join("")}</ul></section>`).join("\n  ")}
   <p class="fine" style="margin-top:32px">お店の情報は、バンダイ公式「ガシャポンどこ？」の取扱店をもとに、店名からチェーンを判定しています。実際と違うことがあります。</p>
