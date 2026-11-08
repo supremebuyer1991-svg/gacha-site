@@ -104,6 +104,7 @@
 
   /* ================= 検索（全ページのヘッダー） ================= */
   var sForm = document.querySelector("form.search");
+  var loadSearchIndex = null; // 検索用の商品一覧を読む（「最近見たガチャ」でも使う）
   if (sForm) {
     var sInput = sForm.querySelector("input");
     var sPop = sForm.querySelector(".search-pop");
@@ -122,6 +123,7 @@
       });
       return sLoading;
     };
+    loadSearchIndex = load;
     var find = function (q) {
       var words = String(q).split(/\s+/).map(norm).filter(Boolean);
       if (!words.length) return [];
@@ -457,10 +459,10 @@
     var altEl = document.createElement("p"); altEl.className = "stock-alt"; altEl.hidden = true; moreEl.parentNode.insertBefore(altEl, moreEl.nextSibling);
     moreEl.addEventListener("click", function (e) { if (e.target.closest(".stock-more")) { shownN += PAGE; render(); } });
 
-    // まずCloudflareの在庫データベース（最新）を読み、だめならサイトに置いた在庫ファイルを読む
+    // まずサイトに置いた在庫ファイルを読み、ないとき（404など）だけCloudflareの在庫データベースに聞く（Functionsの呼び出しを減らす）
     var getJSON = function (u) { return fetch(u).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (d) { if (!d) throw new Error("empty"); return d; }); };
-    getJSON(stock.getAttribute("data-api"))
-      .catch(function () { return getJSON(stock.getAttribute("data-src")); })
+    getJSON(stock.getAttribute("data-src"))
+      .catch(function () { return getJSON(stock.getAttribute("data-api")); })
       .then(function (d) {
         stores = d.stores || [];
         var up = document.getElementById("stock-updated");
@@ -857,9 +859,17 @@
     var FI = JSON.parse(document.getElementById("feed-i18n").textContent);
     var D = DATA;
     var byId = {};
+    // カードに出す商品は、まず軽い recent-<lang>.json（先月以降の発売分）から。足りないときだけ診断用の大きい一覧を読む
+    var recentSrc = String(D.src || "").replace(/\/quiz-([^\/?]+)\.json/, "/recent-$1.json");
     fetch(feed.getAttribute("data-api")).then(function (r) { return r.ok ? r.json() : []; }).then(function (rows) {
       if (!rows || !rows.length) return null;
-      return loadItems().then(function () { D.items.forEach(function (it) { byId[it.id] = it; }); return rows; });
+      var want = rows.slice(0, 20).map(function (r) { return r.item_id; });
+      var full = function () { return loadItems().then(function () { D.items.forEach(function (it) { byId[it.id] = it; }); return rows; }); };
+      if (recentSrc === D.src) return full();
+      return fetch(recentSrc).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (list) {
+        list.forEach(function (it) { byId[it.id] = it; });
+        return want.every(function (id) { return byId[id]; }) ? rows : full();
+      }, full);
     }).then(function (rows) {
       if (!rows) return;
       var list = (rows || []).filter(function (r) { return byId[r.item_id]; }).slice(0, 20);
@@ -1457,4 +1467,78 @@
       });
     });
   }
+
+  /* ================= 通販リンク・お店さがしのクリック計測（GA4。gtag があるときだけ） ================= */
+  var shopOfHost = function (host) {
+    host = String(host || "").toLowerCase();
+    if (/(^|\.)amazon\.|(^|\.)amzn\./.test(host)) return "amazon";
+    if (/rakuten/.test(host)) return "rakuten";
+    if (/valuecommerce|yahoo/.test(host)) return "yahoo";
+    if (/mercari/.test(host)) return "mercari";
+    if (/ebay/.test(host)) return "ebay";
+    if (/buyee/.test(host)) return "buyee";
+    return "";
+  };
+  document.addEventListener("click", function (e) {
+    if (typeof window.gtag !== "function") return;
+    var a = e.target && e.target.closest && e.target.closest("a[href]");
+    if (!a) return;
+    try {
+      var u = new URL(a.href, location.href), path = location.pathname;
+      if (/(^|\.)gashapon\.jp$/i.test(u.hostname)) {
+        window.gtag("event", "find_shop", { link: /^\/shop/.test(u.pathname) ? "shop" : "official", item_path: path, transport_type: "beacon" });
+        return;
+      }
+      var shop = shopOfHost(u.hostname);
+      var sponsored = /(^|\s)sponsored(\s|$)/i.test(a.getAttribute("rel") || "");
+      if (!shop && !sponsored) return;
+      var place = a.closest(".shop-links") ? "chip" : a.closest(".item-bar") ? "bar" : a.closest(".comp-cost") ? "comp" : "aside";
+      window.gtag("event", "aff_click", { shop: shop || u.hostname, place: place, item_path: path, transport_type: "beacon" });
+    } catch (er) {}
+  }, true);
+
+  /* ================= 最近見たガチャ（このブラウザの中だけ。商品ページで記録し、トップと商品ページの下に出す） ================= */
+  (function () {
+    var KEY = "gp-recent", MAX = 12;
+    var mm = /\/item\/([a-z0-9-]+?)(?:\.html)?\/?$/i.exec(location.pathname);
+    var cur = mm ? mm[1] : null;
+    var ids = [];
+    try { var a = JSON.parse(localStorage.getItem(KEY) || "[]"); if (Array.isArray(a)) ids = a.filter(function (x) { return typeof x === "string"; }); } catch (e) {}
+    if (cur) {
+      ids = [cur].concat(ids.filter(function (x) { return x !== cur; })).slice(0, MAX);
+      try { localStorage.setItem(KEY, JSON.stringify(ids)); } catch (e) {}
+    }
+    var others = ids.filter(function (x) { return x !== cur; });
+    var homeNew = !cur && document.getElementById("items-data") ? document.getElementById("new") : null;
+    var main = document.querySelector("main");
+    if (others.length < 2 || !loadSearchIndex || !sForm || !(cur ? main : homeNew)) return;
+    var hl = (document.documentElement.getAttribute("lang") || "ja").toLowerCase();
+    var title = /^ko/.test(hl) ? "최근 본 가챠" : /^zh-(tw|hk|mo|hant)/.test(hl) ? "最近瀏覽" : /^zh/.test(hl) ? "最近浏览" : /^ja/.test(hl) ? "最近見たガチャ" : "Recently viewed";
+    var draw = function () {
+      loadSearchIndex().then(function (idx) {
+        var by = {}; idx.forEach(function (x) { by[x.id] = x; });
+        var list = others.map(function (id) { return by[id]; }).filter(Boolean);
+        if (list.length < 2) return;
+        // 入れる場所が画面の下より上（見えている・通りすぎた）ときは出さない（表示中の中身がずれないように）
+        var bar = cur ? main.querySelector(".item-bar") : null;
+        var ref = cur ? (bar || null) : homeNew.nextSibling;
+        var at = cur ? (bar ? bar.getBoundingClientRect().top : main.getBoundingClientRect().bottom) : homeNew.getBoundingClientRect().bottom;
+        if (cur && bar && getComputedStyle(bar).position === "fixed") at = main.getBoundingClientRect().bottom;
+        if (at < window.innerHeight) return;
+        var d = { home: sForm.getAttribute("data-home"), root: sForm.getAttribute("data-root") };
+        // section ではなく div（:nth-of-type で決まる見出しの丸の色をずらさないため）
+        var box = document.createElement("div");
+        box.className = "section section-tight rv";
+        box.setAttribute("role", "region"); box.setAttribute("aria-label", title);
+        box.innerHTML = '<div class="section-head"><h2>' + esc(title) + '</h2></div><div class="grid row-scroll rv-strip">' + list.map(function (x) {
+          return cardHTML({ id: x.id, name: x.n, price: x.p, lineup: x.l, image: x.img, genre_label: x.g, release_label: relOf(x).t || x.r }, d, null);
+        }).join("") + "</div>";
+        if (cur) { var w = document.createElement("div"); w.className = "wrap"; w.appendChild(box); main.insertBefore(w, ref); }
+        else homeNew.parentNode.insertBefore(box, ref);
+        decorate();
+      }).catch(function () {});
+    };
+    var later = function () { (window.requestIdleCallback || function (f) { setTimeout(f, 300); })(draw, { timeout: 3000 }); };
+    if (document.readyState === "complete") later(); else window.addEventListener("load", later);
+  })();
 })();
