@@ -1,0 +1,11 @@
+{
+  "appId": "com.gachapla.katsu",
+  "appName": "ガチャ活",
+  "webDir": "www",
+  "server": {
+    "url": "https://gachapla.com/gachakatsu.html?src=app",
+    "allowNavigation": ["gachapla.com", "*.gachapla.com"]
+  },
+  "android": { "backgroundColor": "#ff7aa0" },
+  "ios": { "backgroundColor": "#ff7aa0", "contentInset": "always" }
+}

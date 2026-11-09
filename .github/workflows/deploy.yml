@@ -6,6 +6,8 @@ on:
     branches: [main]
     paths-ignore:
       - "data/social-state.json"
+      - "app/**"
+      - ".github/workflows/app-android.yml"
   workflow_dispatch:
     inputs:
       backfill:
