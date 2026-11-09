@@ -7,6 +7,7 @@
 const fs = require("fs"), path = require("path");
 let sharp; try { sharp = require("sharp"); } catch (e) { console.log("sharp がないので SNS 用の画像は作りません"); process.exit(0); }
 const ROOT = path.join(__dirname, ".."), OUT = path.join(ROOT, "dist", "images", "social");
+const esc0 = (t) => String(t == null ? "" : t).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const items = JSON.parse(fs.readFileSync(path.join(ROOT, "data", "items.json"), "utf8"));
 const now = new Date(Date.now() + 9 * 3600e3), from = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - 1, 1)).toISOString().slice(0, 7);
 const W = 1200, H = 1200, PAD = 13;
@@ -39,6 +40,65 @@ const badge = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${BADG
     } catch (e) { console.log(`⚠ ${it.id}: ${e.message}`); }
   }
   console.log(`SNS用の画像：${n}件`);
+  // ===== 今週の新作の縦長ピン（1000×1500）：商品写真を大きく2×2。見出しの文字は brand/pin-head-<言語>.png（CJKフォントがCIにないので画像で用意） =====
+  const PW = 1000, PH = 1500, GAP = 16, TOP = 236, BOT = 96, SIDE = 24;
+  const CW = Math.floor((PW - SIDE * 2 - GAP) / 2), CH = Math.floor((PH - TOP - BOT - GAP) / 2);
+  const stars = Array.from({ length: 60 }, (_, i) => { const x = (i * 197) % PW, y = (i * 389) % PH, r = (i % 3) + 1; return `<circle cx="${x}" cy="${y}" r="${r}" fill="#ffffff" fill-opacity="${0.25 + (i % 4) * 0.15}"/>`; }).join("");
+  const bgSvg = (range) => Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${PW}" height="${PH}">
+<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b1f5e"/><stop offset="1" stop-color="#0d1033"/></linearGradient></defs>
+<rect width="${PW}" height="${PH}" fill="url(#g)"/>${stars}
+<circle cx="90" cy="70" r="34" fill="#ff4f7b"/><ellipse cx="90" cy="70" rx="58" ry="14" fill="none" stroke="#ffc93c" stroke-width="6"/>
+<circle cx="915" cy="82" r="28" fill="#3aa0ff"/><ellipse cx="915" cy="82" rx="48" ry="11" fill="none" stroke="#ff4f7b" stroke-width="5"/>
+<rect x="${PW / 2 - 170}" y="176" width="340" height="50" rx="25" fill="#ffc93c"/>
+<text x="${PW / 2}" y="211" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif" font-weight="700" font-size="30" fill="#1b1f5e">${range}</text>
+<text x="${PW / 2 - 8}" y="${PH - 40}" text-anchor="end" font-family="DejaVu Sans, Arial, sans-serif" font-weight="700" font-size="34" fill="#ff4f7b">GACHA</text>
+<text x="${PW / 2 + 8}" y="${PH - 40}" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" font-weight="700" font-size="34" fill="#3aa0ff">PLANET</text>
+<text x="${PW / 2}" y="${PH - 10}" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif" font-weight="700" font-size="22" fill="#c9d0ea">gachapla.com</text>
+</svg>`);
+  const RING = ["#ff4f7b", "#3aa0ff", "#ffc93c", "#a855f7"];
+  const weekPin = async (lang, ids, range, key) => {
+    const head = path.join(ROOT, "brand", `pin-head-${lang}.png`);
+    const pics = ids.filter((id) => fs.existsSync(path.join(ROOT, "images", `${id}.webp`))).slice(0, 4);
+    if (pics.length < 4 || !fs.existsSync(head)) return null;
+    const layers = [{ input: head, left: 0, top: 6 }];
+    for (let i = 0; i < 4; i++) {
+      const x = SIDE + (i % 2) * (CW + GAP), y = TOP + Math.floor(i / 2) * (CH + GAP);
+      const tile = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${CW}" height="${CH}"><rect x="3" y="3" width="${CW - 6}" height="${CH - 6}" rx="26" fill="#ffffff" stroke="${RING[i]}" stroke-width="6"/></svg>`);
+      const ph = await sharp(path.join(ROOT, "images", `${pics[i]}.webp`)).flatten({ background: "#ffffff" }).trim({ background: "#ffffff", threshold: 12 })
+        .resize(CW - 28, CH - 28, { fit: "contain", background: "#ffffff" }).toBuffer();
+      layers.push({ input: tile, left: x, top: y }, { input: ph, left: x + 14, top: y + 14 });
+    }
+    const file = `week-${lang}-${key}.jpg`;
+    await sharp(bgSvg(range)).composite(layers).jpeg({ quality: 84 }).toFile(path.join(OUT, file));
+    return file;
+  };
+  const WEEK = {};
+  try {
+    const x = JSON.parse(fs.readFileSync(path.join(ROOT, "dist", "data", "x.json"), "utf8"));
+    if (x.week && (x.week.items || []).length >= 4) {
+      const key = String(x.week.from || "").replace(/\//g, "-");
+      const MONS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      const [fm, fd] = String(x.week.from).split("/").map(Number), [tm, td] = String(x.week.to).split("/").map(Number);
+      const rJa = `${x.week.from} - ${x.week.to}`, rEn = fm === tm ? `${MONS[fm - 1]} ${fd} - ${td}` : `${MONS[fm - 1]} ${fd} - ${MONS[tm - 1]} ${td}`;
+      const jaIds = x.week.items.map((i) => i.id), enIds = ((x.en && x.en.week && x.en.week.items) || []).map((i) => i.id);
+      for (const lang of ["ja", "en", "ko", "zh-tw", "zh-cn"]) {
+        const ids = lang === "en" && enIds.length >= 4 ? enIds : jaIds;
+        const f = await weekPin(lang, ids, lang === "en" ? rEn : rJa, key);
+        if (f) WEEK[lang] = { file: f, key, count: x.week.count, from: x.week.from, to: x.week.to };
+      }
+      console.log(`今週の縦長ピン：${Object.keys(WEEK).length}言語`);
+    }
+  } catch (e) { console.log(`⚠ 今週の縦長ピン: ${e.message}`); }
+  const WT = {
+    ja: (w) => [`今週発売の新作ガチャ（${w.from}〜${w.to}）`, `今週は${w.count}シリーズが登場。発売日・値段・近くの取扱店はガチャプラネットで。`, "/week"],
+    en: (w) => ["New Japanese gachapon releasing this week", `${w.count} new capsule toy series in Japan this week. Prices, designs and shops in Japan on GACHA PLANET.`, "/en/week"],
+    ko: (w) => [`이번 주 일본 신작 가챠 (${w.from}~${w.to})`, `이번 주 일본에서 ${w.count}종의 신작 가챠가 발매됩니다. 가격·라인업·재고 매장은 GACHA PLANET에서.`, "/ko/week"],
+    "zh-tw": (w) => [`本週日本新款扭蛋（${w.from}〜${w.to}）`, `本週日本有${w.count}款新扭蛋發售。價格・款式・有庫存的扭蛋店請看 GACHA PLANET。`, "/zh-tw/week"],
+    "zh-cn": (w) => [`本周日本新款扭蛋（${w.from}〜${w.to}）`, `本周日本有${w.count}款新扭蛋发售。价格・款式・有库存的扭蛋店请看 GACHA PLANET。`, "/zh-cn/week"],
+  };
+  const weekItem = (lang) => { const w = WEEK[lang]; if (!w) return ""; const [t, d, link] = WT[lang](w); const u = `https://gachapla.com/images/social/${w.file}`;
+    return `<item><title>${esc0(t)}</title><link>https://gachapla.com${link}</link><guid isPermaLink="false">gachapla-week-${lang}-${w.key}</guid><pubDate>${new Date().toUTCString()}</pubDate><description>${esc0(d)}</description><enclosure url="${u}" type="image/jpeg" length="0"/><media:content url="${u}" medium="image" type="image/jpeg"/></item>\n`; };
+
   // Pinterest の自動ピン（RSS）：新しく載った順に100件。Pinterest ビジネスの「RSSフィードから自動公開」に https://gachapla.com/pinterest.xml を登録して使う
   const esc = (t) => String(t == null ? "" : t).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const SITE = "https://gachapla.com";
@@ -49,7 +109,7 @@ const badge = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${BADG
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/"><channel>
 <title>ガチャプラネット｜新作ガチャガチャ</title><link>${SITE}/</link><description>新作ガチャガチャの発売日・値段・ラインナップ</description><language>ja</language>
-${feed.map((it) => { const u = `${SITE}/images/social/${it.id}.jpg`; const d = `${it.name}｜1回${it.price}円・全${it.lineup}種｜${rel(it)}${(it.lineup_names || []).length ? `｜${it.lineup_names.slice(0, 5).join("・")}` : ""}。発売日・近くの取扱店はガチャプラネットで。`; return `<item><title>${esc(it.name.replace(/【[^】]*】/g, "").trim() + "（ガチャ）")}</title><link>${SITE}/item/${it.id}</link><guid isPermaLink="false">gachapla-${esc(it.id)}</guid><pubDate>${new Date((it.added || "2026-11-01") + "T09:00:00+09:00").toUTCString()}</pubDate><description>${esc(d)}</description><enclosure url="${u}" type="image/jpeg" length="0"/><media:content url="${u}" medium="image" type="image/jpeg"/></item>`; }).join("\n")}
+${weekItem("ja")}${feed.map((it) => { const u = `${SITE}/images/social/${it.id}.jpg`; const d = `${it.name}｜1回${it.price}円・全${it.lineup}種｜${rel(it)}${(it.lineup_names || []).length ? `｜${it.lineup_names.slice(0, 5).join("・")}` : ""}。発売日・近くの取扱店はガチャプラネットで。`; return `<item><title>${esc(it.name.replace(/【[^】]*】/g, "").trim() + "（ガチャ）")}</title><link>${SITE}/item/${it.id}</link><guid isPermaLink="false">gachapla-${esc(it.id)}</guid><pubDate>${new Date((it.added || "2026-11-01") + "T09:00:00+09:00").toUTCString()}</pubDate><description>${esc(d)}</description><enclosure url="${u}" type="image/jpeg" length="0"/><media:content url="${u}" medium="image" type="image/jpeg"/></item>`; }).join("\n")}
 </channel></rss>
 `;
   fs.writeFileSync(path.join(ROOT, "dist", "pinterest.xml"), xml);
@@ -61,7 +121,7 @@ ${feed.map((it) => { const u = `${SITE}/images/social/${it.id}.jpg`; const d = `
   const xmlEn = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/"><channel>
 <title>GACHA PLANET | New gachapon (Japanese capsule toys)</title><link>${SITE}/en/</link><description>New Japanese capsule toys (gachapon): release dates, prices and lineups</description><language>en</language>
-${feedEn.map((it) => { const u = `${SITE}/images/social/${it.id}.jpg`; const d = [`¥${it.price} per play`, it.lineup ? `${it.lineup} designs` : "", relEn(it), "Japanese capsule toy (gachapon)"].filter(Boolean).join(" · ") + ". Release date, price and shops in Japan on GACHA PLANET."; return `<item><title>${esc(`${it.name_en} (gachapon)`)}</title><link>${SITE}/en/item/${it.id}</link><guid isPermaLink="false">gachapla-en-${esc(it.id)}</guid><pubDate>${new Date((it.added || "2026-11-01") + "T09:00:00+09:00").toUTCString()}</pubDate><description>${esc(d)}</description><enclosure url="${u}" type="image/jpeg" length="0"/><media:content url="${u}" medium="image" type="image/jpeg"/></item>`; }).join("\n")}
+${weekItem("en")}${feedEn.map((it) => { const u = `${SITE}/images/social/${it.id}.jpg`; const d = [`¥${it.price} per play`, it.lineup ? `${it.lineup} designs` : "", relEn(it), "Japanese capsule toy (gachapon)"].filter(Boolean).join(" · ") + ". Release date, price and shops in Japan on GACHA PLANET."; return `<item><title>${esc(`${it.name_en} (gachapon)`)}</title><link>${SITE}/en/item/${it.id}</link><guid isPermaLink="false">gachapla-en-${esc(it.id)}</guid><pubDate>${new Date((it.added || "2026-11-01") + "T09:00:00+09:00").toUTCString()}</pubDate><description>${esc(d)}</description><enclosure url="${u}" type="image/jpeg" length="0"/><media:content url="${u}" medium="image" type="image/jpeg"/></item>`; }).join("\n")}
 </channel></rss>
 `;
   fs.writeFileSync(path.join(ROOT, "dist", "pinterest-en.xml"), xmlEn);
@@ -84,7 +144,7 @@ ${feedEn.map((it) => { const u = `${SITE}/images/social/${it.id}.jpg`; const d =
     const xmlL = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/"><channel>
 <title>${esc(L.chTitle)}</title><link>${SITE}/${lang}/</link><description>${esc(L.chDesc)}</description><language>${L.language}</language>
-${feedL.map((it) => { const u = `${SITE}/images/social/${it.id}.jpg`; return `<item><title>${esc(L.title(it.names[lang]))}</title><link>${SITE}/${lang}/item/${it.id}</link><guid isPermaLink="false">gachapla-${lang}-${esc(it.id)}</guid><pubDate>${new Date((it.added || "2026-11-01") + "T09:00:00+09:00").toUTCString()}</pubDate><description>${esc(L.desc(it, L.rel(it)))}</description><enclosure url="${u}" type="image/jpeg" length="0"/><media:content url="${u}" medium="image" type="image/jpeg"/></item>`; }).join("\n")}
+${weekItem(lang)}${feedL.map((it) => { const u = `${SITE}/images/social/${it.id}.jpg`; return `<item><title>${esc(L.title(it.names[lang]))}</title><link>${SITE}/${lang}/item/${it.id}</link><guid isPermaLink="false">gachapla-${lang}-${esc(it.id)}</guid><pubDate>${new Date((it.added || "2026-11-01") + "T09:00:00+09:00").toUTCString()}</pubDate><description>${esc(L.desc(it, L.rel(it)))}</description><enclosure url="${u}" type="image/jpeg" length="0"/><media:content url="${u}" medium="image" type="image/jpeg"/></item>`; }).join("\n")}
 </channel></rss>
 `;
     fs.writeFileSync(path.join(ROOT, "dist", `pinterest-${lang}.xml`), xmlL);
