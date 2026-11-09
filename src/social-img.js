@@ -41,32 +41,32 @@ const badge = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${BADG
   }
   console.log(`SNS用の画像：${n}件`);
   // ===== 今週の新作の縦長ピン（1000×1500）：商品写真を大きく2×2。見出しの文字は brand/pin-head-<言語>.png（CJKフォントがCIにないので画像で用意） =====
-  const PW = 1000, PH = 1500, GAP = 16, TOP = 236, BOT = 96, SIDE = 24;
-  const CW = Math.floor((PW - SIDE * 2 - GAP) / 2), CH = Math.floor((PH - TOP - BOT - GAP) / 2);
+  const PW = 1000, PH = 1500, GAP = 8, TOP = 122, BOT = 48, SIDE = 8, ROWS = 3, NPIC = 6;
+  // 写真を画面の8割以上に（ユーザーの希望）：2列×3段、ほぼ正方形のマスにすき間少なく
+  const CW = Math.floor((PW - SIDE * 2 - GAP) / 2), CH = Math.floor((PH - TOP - BOT - GAP * (ROWS - 1)) / ROWS);
   const stars = Array.from({ length: 60 }, (_, i) => { const x = (i * 197) % PW, y = (i * 389) % PH, r = (i % 3) + 1; return `<circle cx="${x}" cy="${y}" r="${r}" fill="#ffffff" fill-opacity="${0.25 + (i % 4) * 0.15}"/>`; }).join("");
   const bgSvg = (range) => Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${PW}" height="${PH}">
 <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b1f5e"/><stop offset="1" stop-color="#0d1033"/></linearGradient></defs>
 <rect width="${PW}" height="${PH}" fill="url(#g)"/>${stars}
-<circle cx="90" cy="70" r="34" fill="#ff4f7b"/><ellipse cx="90" cy="70" rx="58" ry="14" fill="none" stroke="#ffc93c" stroke-width="6"/>
-<circle cx="915" cy="82" r="28" fill="#3aa0ff"/><ellipse cx="915" cy="82" rx="48" ry="11" fill="none" stroke="#ff4f7b" stroke-width="5"/>
-<rect x="${PW / 2 - 170}" y="176" width="340" height="50" rx="25" fill="#ffc93c"/>
-<text x="${PW / 2}" y="211" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif" font-weight="700" font-size="30" fill="#1b1f5e">${range}</text>
-<text x="${PW / 2 - 8}" y="${PH - 40}" text-anchor="end" font-family="DejaVu Sans, Arial, sans-serif" font-weight="700" font-size="34" fill="#ff4f7b">GACHA</text>
-<text x="${PW / 2 + 8}" y="${PH - 40}" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" font-weight="700" font-size="34" fill="#3aa0ff">PLANET</text>
-<text x="${PW / 2}" y="${PH - 10}" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif" font-weight="700" font-size="22" fill="#c9d0ea">gachapla.com</text>
+<rect x="${PW - 262}" y="70" width="246" height="42" rx="21" fill="#ffc93c"/>
+<text x="${PW - 139}" y="99" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif" font-weight="700" font-size="25" fill="#1b1f5e">${range}</text>
+<text x="${PW / 2 - 150}" y="${PH - 14}" text-anchor="end" font-family="DejaVu Sans, Arial, sans-serif" font-weight="700" font-size="28" fill="#ff4f7b">GACHA</text>
+<text x="${PW / 2 - 138}" y="${PH - 14}" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" font-weight="700" font-size="28" fill="#3aa0ff">PLANET</text>
+<text x="${PW / 2 + 60}" y="${PH - 14}" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" font-weight="700" font-size="24" fill="#c9d0ea">gachapla.com</text>
 </svg>`);
   const RING = ["#ff4f7b", "#3aa0ff", "#ffc93c", "#a855f7"];
   const weekPin = async (lang, ids, range, key) => {
     const head = path.join(ROOT, "brand", `pin-head-${lang}.png`);
-    const pics = ids.filter((id) => fs.existsSync(path.join(ROOT, "images", `${id}.webp`))).slice(0, 4);
-    if (pics.length < 4 || !fs.existsSync(head)) return null;
-    const layers = [{ input: head, left: 0, top: 6 }];
-    for (let i = 0; i < 4; i++) {
+    const pics = ids.filter((id) => fs.existsSync(path.join(ROOT, "images", `${id}.webp`))).slice(0, NPIC);
+    if (pics.length < NPIC || !fs.existsSync(head)) return null;
+    const hd = await sharp(head).resize({ height: 104 }).toBuffer();
+    const layers = [{ input: hd, left: 8, top: 10 }];
+    for (let i = 0; i < NPIC; i++) {
       const x = SIDE + (i % 2) * (CW + GAP), y = TOP + Math.floor(i / 2) * (CH + GAP);
-      const tile = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${CW}" height="${CH}"><rect x="3" y="3" width="${CW - 6}" height="${CH - 6}" rx="26" fill="#ffffff" stroke="${RING[i]}" stroke-width="6"/></svg>`);
+      const tile = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${CW}" height="${CH}"><rect x="2" y="2" width="${CW - 4}" height="${CH - 4}" rx="18" fill="#ffffff" stroke="${RING[i % 4]}" stroke-width="4"/></svg>`);
       const ph = await sharp(path.join(ROOT, "images", `${pics[i]}.webp`)).flatten({ background: "#ffffff" }).trim({ background: "#ffffff", threshold: 12 })
-        .resize(CW - 28, CH - 28, { fit: "contain", background: "#ffffff" }).toBuffer();
-      layers.push({ input: tile, left: x, top: y }, { input: ph, left: x + 14, top: y + 14 });
+        .resize(CW - 12, CH - 12, { fit: "contain", background: "#ffffff" }).toBuffer();
+      layers.push({ input: tile, left: x, top: y }, { input: ph, left: x + 6, top: y + 6 });
     }
     const file = `week-${lang}-${key}.jpg`;
     await sharp(bgSvg(range)).composite(layers).jpeg({ quality: 84 }).toFile(path.join(OUT, file));
@@ -75,14 +75,14 @@ const badge = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${BADG
   const WEEK = {};
   try {
     const x = JSON.parse(fs.readFileSync(path.join(ROOT, "dist", "data", "x.json"), "utf8"));
-    if (x.week && (x.week.items || []).length >= 4) {
+    if (x.week && (x.week.items || []).length >= 6) {
       const key = String(x.week.from || "").replace(/\//g, "-");
       const MONS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
       const [fm, fd] = String(x.week.from).split("/").map(Number), [tm, td] = String(x.week.to).split("/").map(Number);
       const rJa = `${x.week.from} - ${x.week.to}`, rEn = fm === tm ? `${MONS[fm - 1]} ${fd} - ${td}` : `${MONS[fm - 1]} ${fd} - ${MONS[tm - 1]} ${td}`;
       const jaIds = x.week.items.map((i) => i.id), enIds = ((x.en && x.en.week && x.en.week.items) || []).map((i) => i.id);
       for (const lang of ["ja", "en", "ko", "zh-tw", "zh-cn"]) {
-        const ids = lang === "en" && enIds.length >= 4 ? enIds : jaIds;
+        const ids = lang === "en" && enIds.length >= 6 ? enIds : jaIds;
         const f = await weekPin(lang, ids, lang === "en" ? rEn : rJa, key);
         if (f) WEEK[lang] = { file: f, key, count: x.week.count, from: x.week.from, to: x.week.to };
       }
