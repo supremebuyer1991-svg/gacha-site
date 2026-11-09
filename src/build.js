@@ -100,7 +100,7 @@ const T = {
     quizBtn: "診断する", results: "診断結果",
     newTitle: "新着ガチャ", toCalendar: "発売カレンダーを見る", rankTitle: "人気ランキング", genreTitle: "ジャンルから探す", typeTitle: "種類から探す", typePage: (g, ym = YM_NOW) => `${g}のガチャガチャ新作・発売日一覧${ym ? `【${ym}】` : ""}`, typeLead: (g, n, list) => `${g}のガチャ${n}シリーズを新しい順に掲載しています。${leadTail(list)}`,
     maker: "メーカー", release: "発売月", genre: "ジャンル", tags: "タグ",
-    findStores: "近くの在庫店を探す", official: "公式サイトで見る",
+    findStores: "近くの在庫のある店舗を探す", official: "公式サイトで見る",
     storesTitle: "近くの在庫店", geoBtn: "現在地から探す", or: "または", prefAria: "都道府県で絞り込む", loading: "読み込み中…",
     stockLoading: "在庫情報を読み込んでいます…", stockNone: "この商品の在庫情報はまだありません。",
     stockFine: "取扱店の情報はバンダイ公式「ガシャポンどこ？」をもとにしています（通信機能のあるマシンを置いている店舗のみ）。実際の在庫と異なる場合があります。営業時間はご来店前に各店舗でご確認ください。現在地は距離の計算だけに使い、どこにも送信しません。",
@@ -1505,8 +1505,7 @@ ${content}
       ${description ? `<p class="desc">${esc(description)}</p>` : ""}
       <div class="item-actions"${state === "up" ? ' id="notify" style="scroll-margin-top:24px"' : ""}>
         ${state === "up" ? `<button type="button" class="btn btn-gold" data-fav="${it.id}" aria-pressed="false"><i aria-hidden="true" style="font-style:normal">★</i><span>${esc(t.u.save)}</span></button>` /* 発売前：まだお店に置かれないので、一番のボタンは★保存（下の「発売日にお知らせ」を押しても★に入る） */
-        : whereOfficial ? `<a class="btn btn-gold" href="${esc(it.store_search_url)}" target="_blank" rel="noopener">${esc(t.u.whereBtn)}</a>
-        <a class="btn btn-sub" href="#stock">${esc(t.u.findLater)}</a>` : `<a class="btn btn-gold" href="#stock">${t.findStores}</a>`}
+        : `<a class="btn btn-gold" href="#stock">${t.findStores}</a>`}
         ${state === "up" ? pushBox(t, "item", it.id) : ""}
         ${it.official_url ? `<a class="btn" href="${esc(it.official_url)}" target="_blank" rel="noopener">${t.official}</a>` : ""}
         ${state === "up" ? "" : `<button type="button" class="fav-item" data-fav="${it.id}" aria-pressed="false"><i aria-hidden="true">★</i><span>${esc(t.u.save)}</span></button>`}
@@ -1679,9 +1678,9 @@ ${content}
   <a class="ib-mer" href="${esc(L0.rakuten)}" target="_blank" rel="sponsored nofollow noopener">${esc(SW.rakUp)}<small>PR</small></a>`
     : state === "old" && lang === "ja"
     // 発売から時間がたった：お店では売り切れがち。メルカリ（公式ツールのリンクがある商品だけ）と楽天
-    ? `${L0.mercariAf ? `<a class="ib-mer" href="${esc(L0.mercari)}" target="_blank" rel="sponsored nofollow noopener">${esc(t.u.mercari)}<small>PR</small></a>` : `<a class="ib-stock" href="${whereOfficial ? esc(it.store_search_url) : "#stock"}"${whereOfficial ? ' target="_blank" rel="noopener"' : ""}>${esc(t.u.stockShort)}</a>`}
+    ? `${L0.mercariAf ? `<a class="ib-mer" href="${esc(L0.mercari)}" target="_blank" rel="sponsored nofollow noopener">${esc(t.u.mercari)}<small>PR</small></a>` : `<a class="ib-stock" href="#stock">${esc(t.u.stockShort)}</a>`}
   <a class="ib-mer" href="${esc(L0.rakuten)}" target="_blank" rel="sponsored nofollow noopener">${esc(SW.rak)}<small>PR</small></a>`
-    : `<a class="ib-stock" href="${whereOfficial ? esc(it.store_search_url) : "#stock"}"${whereOfficial ? ' target="_blank" rel="noopener"' : ""}>${esc(t.u.stockShort)}</a>
+    : `<a class="ib-stock" href="#stock">${esc(t.u.stockShort)}</a>
   ${lang === "ja" ? `<a class="ib-mer" href="${esc(L0.mercari)}" target="_blank" rel="${L0.mercariAf ? "sponsored nofollow noopener" : "noopener"}">${esc(t.u.mercari)}${L0.mercariAf ? "<small>PR</small>" : ""}</a>` : ""}`}
 </nav>`;
 
