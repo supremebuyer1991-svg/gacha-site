@@ -1787,7 +1787,7 @@ ${content}
       const pages = pageN > 1 ? `<nav class="list-pages" aria-label="${lang === "ja" ? "ページ" : t.hub.pagesAria}">${Array.from({ length: pageN }, (_, j) => j + 1).map((j) => j === k ? `<span class="cur">${j}</span>` : `<a href="${c.H}${relOf(j)}">${j}</a>`).join("")}</nav>` : "";
       const body = `<div class="wrap">
   <nav class="breadcrumb" aria-label="breadcrumb"><a href="${c.H}index.html">${t.home}</a><span>/</span>${k === 1 ? `<span>${esc(h1 || title)}</span>` : `<a href="${c.H}${rel}">${esc(h1 || title)}</a><span>/</span><span>${k}</span>`}</nav>
-  <header class="page-head"><h1>${esc(h1 || title)}</h1>${sub ? `<p class="hub-sub">${esc(sub)}</p>` : ""}${k === 1 ? `<p class="lead${afterList ? " lead-clamp" : ""}">${esc(lead)}</p>` : ""}${extra}</header>
+  <header class="page-head"><h1>${esc(h1 || title)}</h1>${sub ? `<p class="hub-sub">${esc(sub)}</p>` : ""}${k === 1 ? `<p class="lead${afterList ? " lead-clamp" : ""}">${esc(lead)}</p>${afterList ? (() => { const M = { ja: ["続きを読む", "閉じる"], en: ["Read more", "Show less"], ko: ["더 보기", "접기"], "zh-tw": ["展開全文", "收起"], "zh-cn": ["展开全文", "收起"] }[lang] || ["Read more", "Show less"]; return `<button type="button" class="lead-more" data-less="${M[1]}">${M[0]}</button>`; })() : ""}` : ""}${extra}</header>
   ${k === 1 ? after : ""}
   <section class="section" style="padding-top:40px">${list.length ? `<div class="grid">${part.map((it, i) => card(it, c, i)).join("")}</div>${left > 0 ? `<p class="more-wrap"><a class="btn btn-gold list-more" href="${c.H}${relOf(k + 1)}">${lang === "ja" ? `もっと見る（残り${left}件）` : t.hub.more(left)}</a></p>` : ""}${pages}` : `<p class="empty">${t.empty}</p>`}</section>
   ${k === 1 ? afterList : ""}

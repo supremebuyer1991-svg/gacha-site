@@ -1352,3 +1352,9 @@ p.hero-lead { font-size: clamp(15px, 1.7vw, 20px); font-weight: 700; color: var(
   .tk-panel .btn { padding: 8px 12px; font-size: 13px; white-space: nowrap; }
   .page-head + .section { padding-top: 20px !important; }
 }
+.lead-more { display: none; }
+@media (max-width: 700px) {
+  .lead-more { display: inline-flex; align-items: center; gap: 4px; margin-top: 4px; padding: 4px 0; border: 0; background: none; color: var(--accent, #ff5c8a); font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; }
+  .lead-more::after { content: "▼"; font-size: 10px; }
+  .lead-clamp.open + .lead-more::after { content: "▲"; }
+}

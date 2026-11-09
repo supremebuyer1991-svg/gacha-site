@@ -1576,4 +1576,10 @@
   })();
 })();
 // 長い説明文（スマホでは2行だけ表示）は、押すと全部表示
-document.querySelectorAll(".lead-clamp").forEach(function (el) { el.addEventListener("click", function () { el.classList.toggle("open"); }); });
+document.querySelectorAll(".lead-clamp").forEach(function (el) {
+  var b = el.nextElementSibling && el.nextElementSibling.classList.contains("lead-more") ? el.nextElementSibling : null;
+  var more = b ? b.textContent : "";
+  function tog() { var o = el.classList.toggle("open"); if (b) b.textContent = o ? b.getAttribute("data-less") : more; }
+  el.addEventListener("click", tog);
+  if (b) b.addEventListener("click", tog);
+});
