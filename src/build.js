@@ -792,6 +792,26 @@ const NEXT_WEEK = (() => {
 const hubs = require("./hubs");
 const HUB = hubs.prepare({ items, weekStartOf, weekInfo, mondayOf, nowJST, thisMonth, hashSlug });
 const stats = require("./stats"); // 統計ページ /stats（日本語・英語）
+// KKday（バリューコマース経由）：外国人旅行者向けの「旅の準備」リンク（eSIM・交通・入場券・アニメ体験）。駅ページとガイドに出す
+const KK_LANG = { en: "en", ko: "ko", "zh-tw": "zh-tw", "zh-cn": "zh-cn" };
+const KK_T = {
+  en: { h: "Travel essentials for Japan", note: "Booking through these links supports this site (PR).", items: [["wifi-sim-cards", "📶 Japan eSIM & pocket Wi-Fi"], ["transport", "🚄 Train passes & airport transfers"], ["attraction-tickets", "🎟️ Attraction tickets"], ["anime", "🎌 Anime & character experiences"]] },
+  ko: { h: "일본 여행 준비", note: "아래 링크로 예약하면 이 사이트 운영에 도움이 됩니다 (PR).", items: [["wifi-sim-cards", "📶 일본 eSIM·포켓 와이파이"], ["transport", "🚄 교통 패스·공항 이동"], ["attraction-tickets", "🎟️ 관광지 입장권"], ["anime", "🎌 애니메이션·캐릭터 체험"]] },
+  "zh-tw": { h: "日本旅遊必備", note: "透過以下連結預訂，可支持本站營運（PR）。", items: [["wifi-sim-cards", "📶 日本 eSIM・WiFi 分享器"], ["transport", "🚄 交通周遊券・機場接送"], ["attraction-tickets", "🎟️ 景點門票"], ["anime", "🎌 動漫・角色體驗"]] },
+  "zh-cn": { h: "日本旅行必备", note: "通过以下链接预订，可支持本站运营（PR）。", items: [["wifi-sim-cards", "📶 日本 eSIM・随身 WiFi"], ["transport", "🚄 交通周游券・机场接送"], ["attraction-tickets", "🎟️ 景点门票"], ["anime", "🎌 动漫・角色体验"]] },
+};
+const kkUrl = (lang, key) => {
+  const L = KK_LANG[lang]; if (!L) return "";
+  const dest = key === "anime" ? `https://www.kkday.com/${L}/product/productlist/Japan?keyword=Japan&filter_themes=scene_anime` : `https://www.kkday.com/${L}/category/jp-japan/${key}/list`;
+  return `https://ck.jp.ap.valuecommerce.com/servlet/referral?sid=${encodeURIComponent(site.yahoo_vc_sid || "3787021")}&pid=${encodeURIComponent(site.kkday_vc_pid)}&vc_url=${encodeURIComponent(dest)}`;
+};
+const travelBlock = (lang, keys) => {
+  const T = KK_T[lang]; if (!T || !site.kkday_vc_pid) return "";
+  const list = T.items.filter(([k]) => !keys || keys.includes(k));
+  return `<section class="section section-tight"><div class="panel"><h2 style="font-size:20px">${T.h} <span class="sl-pr">PR</span></h2>
+    <div class="shop-links" style="margin-top:10px">${list.map(([k, l]) => `<a class="sl" href="${kkUrl(lang, k)}" target="_blank" rel="sponsored nofollow noopener">${l}<small style="margin-left:6px;opacity:.7">KKday</small></a>`).join("")}</div>
+    <p class="fine" style="margin-top:8px">${T.note}</p></div></section>`;
+};
 const guides = require("./guides"); // 海外の旅行者向けガイド /{en,ko,zh-tw,zh-cn}/guide/（src/guides.js）
 // 外国語の商品ページ「日本のどこで買える？」から、初心者向けガイド（遊び方・両替機・免税）へのリンク文
 const GUIDE_HOWTO = { en: "New to gachapon? How to play: coins, change machines & tax-free", ko: "가챠가 처음이라면: 동전·환전기·면세 안내", "zh-tw": "第一次玩扭蛋？硬幣、換鈔機與免稅說明", "zh-cn": "第一次玩扭蛋？硬币、换钞机与免税说明" };
@@ -2315,6 +2335,7 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
     <ul class="prose" style="margin:8px 0 0;padding-left:1.2em">${S.tips.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>
     ${(() => { const g = GUIDE_OF_STATION(st); const i = g ? guides.SLUGS.indexOf(g) : -1; return i >= 0 && guides.SHORT[lang] ? `<p class="fine" style="margin-top:10px">${esc(GUIDE_LINK_LABEL[lang] || "Guide")}: <a href="${c.H}guide/${g}.html">${esc(guides.SHORT[lang][i])} →</a></p>` : ""; })()}
   </div></section>`}
+  ${ja ? "" : travelBlock(lang, /airport/.test(st.slug) ? ["wifi-sim-cards", "transport"] : null)}
   ${others.length ? `<section class="section section-tight"><div class="section-head"><h2>${ja ? "同じエリアのほかの駅" : esc(S.otherH)}</h2></div>
     <div class="chara-list">${others.map((x) => `<a class="chara-chip" href="${c.H}station/${x.slug}.html">${esc(stName(x))}<small>${x.count}</small></a>`).join("")}<a class="chara-chip chara-more" href="${c.H}station.html">${ja ? "駅をすべて見る →" : esc(S.allStations)}</a></div></section>` : ""}
 </div>`;
@@ -2345,7 +2366,7 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
         itemListElement: STATIONS.map((x, i) => ({ "@type": "ListItem", position: i + 1, url: canonical(lang, `station/${x.slug}.html`), name: ja ? `${stName(x)}周辺のガチャガチャ設置店` : S.h1(stName(x)) })) }] });
     }
     // 海外の旅行者向けガイド（有名店のカード lmCardAt・お店の行 rowAt を使う）
-    if (!ja) guides.build({ lang, t, layout, ctx, card, lmCardAt, rowAt, esc, canonical, LANG_META, STATIONS, items, WEEK, SHOP_OFFICIAL, OFFICIAL_BY_ITEM, distM, walkMin, fmtDist, compDraws, today, nowJST,
+    if (!ja) guides.build({ lang, travelBlock, t, layout, ctx, card, lmCardAt, rowAt, esc, canonical, LANG_META, STATIONS, items, WEEK, SHOP_OFFICIAL, OFFICIAL_BY_ITEM, distM, walkMin, fmtDist, compDraws, today, nowJST,
       LANDMARKS_CHECKED, SITE_URL, site, nameOf, lmName, OG_IMAGE: `${SITE_URL}/images/og/${OG_SITE_LANGS.has(lang) ? `site-${lang}` : "site"}.jpg` });
   }
 

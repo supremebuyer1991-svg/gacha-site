@@ -1039,6 +1039,7 @@ const build = (E) => {
   <header class="page-head"><h1>${esc(g.h1)}</h1><p class="lead">${esc(g.intro)}</p><p class="fine">${esc(U.updated(today))}</p></header>
   ${g.quick ? `<section class="section section-tight"><div class="guide-quick"><b>${esc(U.quick)}</b><p>${esc(g.quick)}</p></div></section>` : ""}
   ${g.sections.map(([hd, html]) => `<section class="section section-tight"><div class="section-head"><h2>${esc(hd)}</h2></div><div class="guide-body">${html}</div></section>`).join("\n  ")}
+  ${E.travelBlock ? E.travelBlock(lang, slug === "airport-gachapon" ? ["wifi-sim-cards", "transport"] : null) : ""}
   <section class="section section-tight" id="faq"><div class="section-head"><h2>${esc(U.faqH)}</h2></div>
     <dl class="prose stn-faq">${g.faq.map(([q, a]) => `<dt>${esc(q)}</dt><dd>${esc(a)}</dd>`).join("")}</dl></section>
   <section class="section section-tight"><div class="section-head"><h2>${esc(U.more)}</h2></div>

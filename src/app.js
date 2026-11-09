@@ -1522,7 +1522,7 @@
         window.gtag("event", "find_shop", { link: /^\/shop/.test(u.pathname) ? "shop" : "official", item_path: path, transport_type: "beacon" });
         return;
       }
-      var shop = shopOfHost(u.hostname);
+      var shop = /kkday/.test(u.href) ? "kkday" : shopOfHost(u.hostname);
       var sponsored = /(^|\s)sponsored(\s|$)/i.test(a.getAttribute("rel") || "");
       if (!shop && !sponsored) return;
       var place = a.closest(".shop-links") ? "chip" : a.closest(".item-bar") ? "bar" : a.closest(".comp-cost") ? "comp" : "aside";
