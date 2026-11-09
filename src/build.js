@@ -1693,7 +1693,7 @@ ${content}
 
     const product = {
       "@context": "https://schema.org", "@type": "Product", name, description: description || desc, sku: it.id,
-      brand: { "@type": "Brand", name: maker }, category: gl, releaseDate: ws ? ws.toISOString().slice(0, 10) : `${it.release}-01`,
+      brand: { "@type": "Brand", name: maker }, releaseDate: ws ? ws.toISOString().slice(0, 10) : `${it.release}-01`,
       ...(janOf(it) ? { gtin13: janOf(it) } : {}),
       ...(it.price ? { offers: { "@type": "Offer", price: it.price, priceCurrency: "JPY", url: canonical(lang, rel), availability: isUp ? "https://schema.org/PreSale" : "https://schema.org/InStoreOnly" } } : {}),
     };
@@ -1705,7 +1705,7 @@ ${content}
         { "@type": "ListItem", position: 3, name },
       ],
     };
-    layout({ rel, title: t.itemTitle(name), description: desc, body, jsonld: [product, crumbs, ...(whereLd ? [whereLd] : []), ...lots.map((x) => lotEventLd(x, canonical(lang, rel), absImg(it)))], ogImage: absImg(it), ogType: "product",
+    layout({ rel, title: t.itemTitle(name), description: desc, body, jsonld: [...(product.image ? [product] : []) /* 写真のない商品は Product を出さない（Google で「image がない」と無効になるため） */, crumbs, ...(whereLd ? [whereLd] : []), ...lots.map((x) => lotEventLd(x, canonical(lang, rel), absImg(it)))], ogImage: absImg(it), ogType: "product",
       noindex: !hasName(it, lang), alts: LANGS.filter((l) => hasName(it, l)), lastmod: it.updated || it.added || "" });
   }
 
