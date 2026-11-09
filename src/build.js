@@ -1079,8 +1079,8 @@ if (fs.existsSync(path.join(ROOT, "brand", "favicon.svg"))) fs.copyFileSync(path
 fs.writeFileSync(path.join(OUT, "manifest.webmanifest"), JSON.stringify({
   name: "ガチャプラネット", short_name: "ガチャプラネット", description: site.description, lang: "ja",
   start_url: "/?src=pwa", scope: "/", display: "standalone", background_color: "#f6f8ff", theme_color: "#f6f8ff",
-  icons: [192, 512].map((n) => ({ src: `/images/icons/icon-${n}.png`, sizes: `${n}x${n}`, type: "image/png", purpose: "any" }))
-    .concat([{ src: "/images/icons/icon-maskable-512.png", sizes: "512x512", type: "image/png", purpose: "maskable" }]),
+  icons: [192, 512].map((n) => ({ src: `/images/icons/icon-${n}.png?v=2`, sizes: `${n}x${n}`, type: "image/png", purpose: "any" }))
+    .concat([{ src: "/images/icons/icon-maskable-512.png?v=2", sizes: "512x512", type: "image/png", purpose: "maskable" }]),
 }, null, 1));
 if (fs.existsSync(path.join(ROOT, "images"))) fs.cpSync(path.join(ROOT, "images"), path.join(OUT, "images"), { recursive: true });
 fs.mkdirSync(path.join(OUT, "images", "og"), { recursive: true });
@@ -1244,7 +1244,7 @@ ${xAcc ? `<meta name="twitter:site" content="@${esc(xAcc)}">` : ""}
 <meta name="theme-color" content="#f6f8ff">
 <link rel="icon" href="${c.R}favicon.svg" type="image/svg+xml">
 <link rel="icon" href="${c.R}images/icons/icon-32.png" sizes="32x32" type="image/png">
-<link rel="apple-touch-icon" href="${c.R}images/icons/apple-touch-icon.png">
+<link rel="apple-touch-icon" href="${c.R}images/icons/apple-touch-icon.png?v=2">
 <link rel="manifest" href="${c.R}manifest.webmanifest">
 ${lang === "zh-cn" ? "" : `<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
