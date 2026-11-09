@@ -1328,3 +1328,13 @@ p.hero-lead { font-size: clamp(15px, 1.7vw, 20px); font-weight: 700; color: var(
 .card-heart.is-on b { color: #fff; }
 .card-heart.pop i { animation: heart-pop .5s ease; }
 @media (prefers-reduced-motion: reduce) { .card-heart.pop i { animation: none; } }
+/* トップの人気シリーズ（今週発売の上）：スマホでは縦に長くならないよう、キャラは横にスクロール */
+@media (max-width: 700px) {
+  #series .st { padding: 10px 12px; display: grid; grid-template-columns: auto 1fr; column-gap: 10px; row-gap: 0; align-items: center; }
+  #series .st-e { font-size: 26px; grid-row: span 2; }
+  #series .st-l { font-size: 15px; line-height: 1.3; }
+  #series .st-n { font-size: 12px; }
+  #series .chara-list-top { flex-wrap: nowrap; overflow-x: auto; margin: 12px -16px 0; padding: 0 16px 4px; scrollbar-width: none; }
+  #series .chara-list-top::-webkit-scrollbar { display: none; }
+  #series .chara-list-top .chara-chip { flex: none; white-space: nowrap; }
+}

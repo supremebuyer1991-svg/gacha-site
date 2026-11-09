@@ -1309,17 +1309,18 @@ ${content}
       `<label class="opt"><input type="${type}" name="${name}" value="${value}"${checked ? " checked" : ""}><span>${label}</span></label>`;
 
     // 駅からさがす・人気シリーズ（外国語は「今週発売」のすぐ下に、日本語は下の方）
+    const homeSeries = `  <section class="section section-tight" id="series">
+    <div class="section-head"><h2>${lang === "ja" ? "人気シリーズ" : t.x.popSeries}</h2></div>
+    <div class="series-tiles">${SERIES.map((sr) => { const n = seriesItems(sr).length; return n ? `<a class="st st-${sr.slug}" href="${c.H}chara/${sr.slug}.html"><span class="st-e" aria-hidden="true">${sr.emoji}</span><span class="st-l">${lang === "ja" ? sr.label : (I18N_CHARA[lang] && I18N_CHARA[lang][sr.en]) || sr.en}</span><span class="st-n">${t.series(n)}</span></a>` : ""; }).join("")}</div>
+    <div class="chara-list chara-list-top">${CHARAS.slice(0, 15).map((ch) => `<a class="chara-chip" href="${c.H}chara/${ch.slug}.html">${esc(charaLabel(ch, lang))}<small>${ch.list.length}</small></a>`).join("")}<a class="chara-chip chara-more" href="${c.H}chara.html">${lang === "ja" ? "キャラクター・作品をすべて見る →" : t.x.allChara}</a></div>
+  </section>
+`;
     const homeStnSeries = `  ${(() => { const pick = ["akihabara", "ikebukuro", "shinjuku", "shibuya", "harajuku", "umeda", "namba", "hakata", "sapporo"].map((s) => STATIONS.find((x) => x.slug === s)).filter(Boolean); return pick.length ? `<section class="section section-tight" id="stations">
     <div class="section-head"><h2>${lang === "ja" ? "駅からガチャのお店をさがす" : t.stn.homeH}</h2></div>
     <div class="chara-list">${pick.map((x) => `<a class="chara-chip" href="${c.H}station/${x.slug}.html">${esc((x[lang] || x.en).replace(/[（(].*?[）)]/g, "").trim().replace(/(駅| Station|站|역)$/, ""))}<small>${x.count}</small></a>`).join("")}<a class="chara-chip chara-more" href="${c.H}station.html">${lang === "ja" ? "駅をすべて見る →" : t.stn.allStations}</a></div>
   </section>` : ""; })()}
   ${lang !== "ja" ? guides.homeSection(lang, c, esc) : ""}
 
-  <section class="section section-tight" id="series">
-    <div class="section-head"><h2>${lang === "ja" ? "人気シリーズ" : t.x.popSeries}</h2></div>
-    <div class="series-tiles">${SERIES.map((sr) => { const n = seriesItems(sr).length; return n ? `<a class="st st-${sr.slug}" href="${c.H}chara/${sr.slug}.html"><span class="st-e" aria-hidden="true">${sr.emoji}</span><span class="st-l">${lang === "ja" ? sr.label : (I18N_CHARA[lang] && I18N_CHARA[lang][sr.en]) || sr.en}</span><span class="st-n">${t.series(n)}</span></a>` : ""; }).join("")}</div>
-    <div class="chara-list chara-list-top">${CHARAS.slice(0, 15).map((ch) => `<a class="chara-chip" href="${c.H}chara/${ch.slug}.html">${esc(charaLabel(ch, lang))}<small>${ch.list.length}</small></a>`).join("")}<a class="chara-chip chara-more" href="${c.H}chara.html">${lang === "ja" ? "キャラクター・作品をすべて見る →" : t.x.allChara}</a></div>
-  </section>
 
 `;
     const body = `
@@ -1337,6 +1338,7 @@ ${content}
         </dl>
       </div>
     </div>
+  ${homeSeries}
   ${WEEK.items.length ? `<section class="section section-tight" id="thisweek">
     <div class="section-head"><h2>${lang !== "ja" ? t.x.weekH : "今週発売のガチャ"}</h2><a class="more" href="${c.H}week.html">${lang !== "ja" ? t.x.weekMore(lang === "en" ? enRange(WEEK.range) : WEEK.range.replace("〜", "–"), WEEK.items.length) : `${WEEK.range}・全${WEEK.items.length}件`}</a></div>
     <div class="grid row-scroll">${WEEK.items.slice(0, 12).map((it, i) => card(it, c, i)).join("")}<a class="card see-all" href="${c.H}week.html"><span class="see-all-in"><b>${lang !== "ja" ? t.x.seeAll : "全部見る"}</b><span>→</span></span></a></div>
