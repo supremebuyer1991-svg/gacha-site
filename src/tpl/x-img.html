@@ -20,13 +20,19 @@
   var big = function (x) { return x && x.img ? "/" + x.img.replace("thumb/", "") : ""; };
   var c = document.createElement("canvas"); c.width = W; c.height = H; var g = c.getContext("2d");
   var rr = function (x, y, w, h, r) { g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r); g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath(); };
-  var bg = function () { var gr = g.createLinearGradient(0, 0, W, H); gr.addColorStop(0, "#fff1f6"); gr.addColorStop(1, "#eef6ff"); g.fillStyle = gr; g.fillRect(0, 0, W, H); };
+  // 背景：夜空の宇宙（Pinterest の縦長ピンとそろえる）
+  var bg = function () {
+    var gr = g.createLinearGradient(0, 0, 0, H); gr.addColorStop(0, "#1b1f5e"); gr.addColorStop(1, "#0d1033"); g.fillStyle = gr; g.fillRect(0, 0, W, H);
+    for (var i = 0; i < 70; i++) { g.globalAlpha = 0.25 + (i % 4) * 0.15; g.fillStyle = "#fff"; g.beginPath(); g.arc((i * 197) % W, (i * 389) % H, (i % 3) + 1, 0, 7); g.fill(); }
+    g.globalAlpha = 1;
+  };
+  var RING = ["#ff4f7b", "#3aa0ff", "#ffc93c", "#a855f7"];
   var fit = function (im, x, y, w, h, pad) { if (!im) return; pad = pad || 0; var s = Math.min((w - pad * 2) / im.width, (h - pad * 2) / im.height); var iw = im.width * s, ih = im.height * s; g.drawImage(im, x + (w - iw) / 2, y + (h - ih) / 2, iw, ih); };
   var brand = function (y) {
     g.textBaseline = "middle"; g.textAlign = "right";
     g.font = "700 30px " + FL; var t2 = "PLANET", w2 = g.measureText(t2).width;
     g.fillStyle = "#3aa0ff"; g.fillText(t2, W - 40, y); g.fillStyle = "#ff4f7b"; g.fillText("GACHA ", W - 40 - w2, y);
-    g.font = "700 18px " + F; g.fillStyle = "#6b7194"; g.fillText(EN ? "gachapla.com/en" : "gachapla.com", W - 40, y + 30); g.textAlign = "left";
+    g.font = "700 18px " + F; g.fillStyle = "#c9d0ea"; g.fillText(EN ? "gachapla.com/en" : "gachapla.com", W - 40, y + 30); g.textAlign = "left";
   };
   var wrap = function (text, x, y, maxW, lh, maxLines) {
     var lines = [], cur = "";
@@ -65,7 +71,7 @@
     bg(); badge((q.get("icon") || "⚡") + " " + title, side, 26, q.get("color") || "#ff4f7b"); brand(48);
     for (var i = 0; i < ids.length; i++) {
       var x = by[ids[i]], cx = side + (i % cols) * (gw + gap), cy = top + Math.floor(i / cols) * (gh + gap);
-      rr(cx, cy, gw, gh, 20); g.fillStyle = "#fff"; g.fill();
+      rr(cx, cy, gw, gh, 20); g.fillStyle = "#fff"; g.fill(); g.lineWidth = 6; g.strokeStyle = RING[i % 4]; g.stroke();
       var im2 = await load(big(x)); g.save(); rr(cx, cy, gw, gw, 20); g.clip(); fit(im2, cx, cy, gw, gw, 4); g.restore();
       g.fillStyle = "#1f2440"; g.font = "700 " + (cols >= 3 ? 20 : 24) + "px " + F; g.textBaseline = "middle"; wrap(x ? x.n : "", cx + 16, cy + gw + 23, gw - 32, 26, 1);
     }
@@ -85,11 +91,11 @@
     var PH = im3 ? Math.round(Math.min(1100, Math.max(560, (W - 60) * im3.height / im3.width + 12))) : 700;
     W = 1200; H = 96 + PH + 175; c.width = W; c.height = H;
     bg();
-    rr(24, 96, W - 48, PH, 26); g.fillStyle = "#fff"; g.fill(); g.save(); rr(24, 96, W - 48, PH, 26); g.clip(); fit(im3, 24, 96, W - 48, PH, 6); g.restore();
+    rr(24, 96, W - 48, PH, 26); g.fillStyle = "#fff"; g.fill(); g.lineWidth = 6; g.strokeStyle = "#ff4f7b"; g.stroke(); g.save(); rr(24, 96, W - 48, PH, 26); g.clip(); fit(im3, 24, 96, W - 48, PH, 6); g.restore();
     badge(q.get("label") || (EN ? "New in Japan" : "注目の新作"), 24, 26, "#3aa0ff"); brand(48);
-    g.fillStyle = "#1f2440"; g.font = "900 40px " + F; g.textBaseline = "middle";
+    g.fillStyle = "#ffffff"; g.font = "900 40px " + F; g.textBaseline = "middle";
     var ln = wrap(x2.n || "", 36, 96 + PH + 48, W - 72, 48, 2);
-    g.font = "700 30px " + F; g.fillStyle = "#ff4f7b";
+    g.font = "700 30px " + F; g.fillStyle = "#ffc93c";
     g.fillText(EN ? (x2.p ? "¥" + x2.p + " per play" : "") + (x2.l ? "  ·  " + x2.l + " designs" : "") + (x2.r ? "  ·  " + x2.r : "") : (x2.p ? "1回" + x2.p + "円" : "") + (x2.l ? "　全" + x2.l + "種" : "") + (x2.r ? "　" + x2.r : ""), 36, 96 + PH + 48 + ln * 48 + 6);
     name = (q.get("id") || "pick") + ".jpg";
   }

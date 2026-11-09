@@ -104,6 +104,43 @@ const badge = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${BADG
       console.log(`今週の縦長ピン：${Object.keys(WEEK).length}言語`);
     }
   } catch (e) { console.log(`⚠ 今週の縦長ピン: ${e.message}`); }
+  // ===== Threads・Instagram の夜の投稿の1枚目（表紙）：テーマ名＋写真2×2（1080×1080）。タイトルは日本語なので Noto Sans CJK が必要（デプロイで入れる） =====
+  try {
+    const x = JSON.parse(fs.readFileSync(path.join(ROOT, "dist", "data", "x.json"), "utf8"));
+    const m = x.morning || {}, hasPic = (id) => fs.existsSync(path.join(OUT, `${id}.jpg`));
+    let cat = "", pool = [];
+    if (m.active) { pool = (m.items || []).filter((i) => hasPic(i.id)); if (pool.length >= 3) cat = m.category; }
+    if (!cat) { pool = ((x.week && x.week.items) || []).filter((i) => hasPic(i.id)); cat = "今週発売"; }
+    pool = pool.slice(0, 4);
+    if (pool.length >= 2) {
+      const S = 1080, top = 170, gap = 14, side = 20, bot = 70;
+      const cols = 2, rows = pool.length > 2 ? 2 : 1, cw = Math.floor((S - side * 2 - gap) / 2), ch = Math.floor((S - top - bot - gap * (rows - 1)) / rows);
+      const title = cat === "今週発売" ? "今週発売のガチャ" : `今日の${cat}ガチャ`;
+      const fsz = title.length > 12 ? 62 : 78;
+      const dt = `${+x.today.slice(5, 7)}/${+x.today.slice(8, 10)}`;
+      const svg = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${S}" height="${S}">
+<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b1f5e"/><stop offset="1" stop-color="#0d1033"/></linearGradient></defs>
+<rect width="${S}" height="${S}" fill="url(#g)"/>${Array.from({ length: 50 }, (_, i) => `<circle cx="${(i * 197) % S}" cy="${(i * 389) % S}" r="${(i % 3) + 1}" fill="#fff" fill-opacity="${0.25 + (i % 4) * 0.15}"/>`).join("")}
+<text x="${S / 2}" y="100" text-anchor="middle" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif" font-weight="900" font-size="${fsz}" fill="#ffffff" stroke="#ff4f7b" stroke-width="9" paint-order="stroke" stroke-linejoin="round">${esc0(title)}</text>
+<rect x="${S / 2 - 120}" y="118" width="240" height="40" rx="20" fill="#ffc93c"/>
+<text x="${S / 2}" y="147" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif" font-weight="700" font-size="24" fill="#1b1f5e">${dt}  ${pool.length} ITEMS</text>
+<text x="${S / 2 - 8}" y="${S - 24}" text-anchor="end" font-family="DejaVu Sans, Arial, sans-serif" font-weight="700" font-size="28" fill="#ff4f7b">GACHA</text>
+<text x="${S / 2 + 8}" y="${S - 24}" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" font-weight="700" font-size="28" fill="#3aa0ff">PLANET</text>
+</svg>`);
+      const layers = [];
+      for (let i = 0; i < pool.length; i++) {
+        const xx = side + (i % cols) * (cw + gap), yy = top + Math.floor(i / cols) * (ch + gap);
+        const w = rows === 1 ? cw : cw, h = ch;
+        const tile = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}"><rect x="3" y="3" width="${w - 6}" height="${h - 6}" rx="22" fill="#ffffff" stroke="${RING[i % 4]}" stroke-width="6"/></svg>`);
+        const ph = await sharp(path.join(ROOT, "images", `${pool[i].id}.webp`)).flatten({ background: "#ffffff" }).trim({ background: "#ffffff", threshold: 12 }).resize(w - 20, h - 20, { fit: "contain", background: "#ffffff" }).toBuffer();
+        layers.push({ input: tile, left: xx, top: yy }, { input: ph, left: xx + 10, top: yy + 10 });
+      }
+      const file = `cover-${x.today}.jpg`;
+      await sharp(svg).composite(layers).jpeg({ quality: 86 }).toFile(path.join(OUT, file));
+      fs.writeFileSync(path.join(ROOT, "dist", "data", "social-cover.json"), JSON.stringify({ date: x.today, cat, url: `https://gachapla.com/images/social/${file}`, ids: pool.map((i) => i.id) }));
+      console.log(`SNSの表紙：${title}（${pool.length}枚）`);
+    }
+  } catch (e) { console.log(`⚠ SNSの表紙: ${e.message}`); }
   const WT = {
     ja: (w) => [`今週発売の新作ガチャ（${w.from}〜${w.to}）`, `今週は${w.count}シリーズが登場。発売日・値段・近くの取扱店はガチャプラネットで。`, "/week"],
     en: (w) => ["New Japanese gachapon releasing this week", `${w.count} new capsule toy series in Japan this week. Prices, designs and shops in Japan on GACHA PLANET.`, "/en/week"],

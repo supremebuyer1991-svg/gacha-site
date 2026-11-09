@@ -83,6 +83,7 @@ jobs:
         continue-on-error: true
         run: |
           npm install --no-save --no-package-lock sharp@0.33.5 > /dev/null 2>&1 || true
+          (fc-list | grep -qi "Noto Sans CJK") || (sudo apt-get install -y -qq fonts-noto-cjk > /dev/null 2>&1 || true)
           node src/social-img.js
 
       - name: Cloudflare の在庫データベースを準備

@@ -55,7 +55,7 @@ const relText = (it) => it.release_note || (it.release ? `${+it.release.slice(5,
 // ---- Threads ----
 const TH = "https://graph.threads.net/v1.0";
 async function thPost(tok, text, ids) {
-  const urls = ids.map((id) => `${SITE}/images/social/${id}.jpg`);
+  const urls = ids.map((id) => (/^https?:/.test(id) ? id : `${SITE}/images/social/${id}.jpg`));
   if (DRY) { log("[DRY threads]", text, urls); return true; }
   const call = async (p, params) => { const r = await fetch(`${TH}/${p}`, { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: new URLSearchParams({ ...params, access_token: tok }) }).then((x) => x.json()); if (!r.id) throw new Error(JSON.stringify(r).slice(0, 300)); return r.id; };
   let cid;
@@ -74,7 +74,7 @@ async function thPost(tok, text, ids) {
 const IG = "https://graph.facebook.com/v21.0";
 let IG_ID = process.env.GACHA_IG_USER_ID || "17841473598073198"; // @gacha_pla
 async function igPost(tok, caption, ids) {
-  const urls = ids.map((id) => `${SITE}/images/social/${id}.jpg`);
+  const urls = ids.map((id) => (/^https?:/.test(id) ? id : `${SITE}/images/social/${id}.jpg`));
   if (DRY) { log("[DRY instagram]", caption, urls); return true; }
   const call = async (p, params) => { const r = await fetch(`${IG}/${p}`, { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: new URLSearchParams({ ...params, access_token: tok }) }).then((x) => x.json()); if (!r.id) throw new Error(JSON.stringify(r).slice(0, 300)); return r.id; };
   const wait = async (id) => { for (let i = 0; i < 20; i++) { const r = await fetch(`${IG}/${id}?fields=status_code&access_token=${encodeURIComponent(tok)}`).then((x) => x.json()); if (r.status_code === "FINISHED") return; if (r.status_code === "ERROR") throw new Error("画像の処理に失敗"); await sleep(3000); } };
@@ -116,7 +116,16 @@ async function igPost(tok, caption, ids) {
     const fromPool = async (name, pool) => { const done = recent(name); const out = []; for (const it of pool) { if (out.length >= 4) break; if (!it || done[it.id] || out.some((o) => o.id === it.id)) continue; if (await imgOk(it.id)) out.push(it); } return out; };
     // 朝のテーマ（サンリオ・ディズニーなど）で3つ以上そろえばそれ、だめなら今週発売
     let cat = "今週発売", q = `${SITE}/week`, themed = false;
+    // デプロイのときに作った表紙（テーマ名＋写真2×2）があれば、その4商品を使って1枚目に表紙を付ける
+    let cover = null;
+    try { cover = LOCAL ? JSON.parse(fs.readFileSync(path.join(ROOT, "dist", "data", "social-cover.json"), "utf8")) : await getJSON(`${SITE}/data/social-cover.json?${Date.now()}`); } catch (e) {}
+    if (!cover || cover.date !== today || !(cover.ids || []).length) cover = null;
     const pick = async (name) => {
+      if (cover) {
+        const byId = {}; for (const it of [...(m.items || []), ...((x.week && x.week.items) || [])]) byId[it.id] = it;
+        const L = []; for (const id of cover.ids) if (byId[id] && await imgOk(id)) L.push(byId[id]);
+        if (L.length >= 2) { cat = cover.cat; themed = cover.cat !== "今週発売"; q = themed ? `${SITE}/?q=${encodeURIComponent(cover.cat)}` : `${SITE}/week`; return L; }
+      }
       if (m.active) { const L = await fromPool(name, m.items || []); if (L.length >= 3) { cat = m.category; q = `${SITE}/?q=${encodeURIComponent(m.category)}`; themed = true; return L; } }
       cat = "今週発売"; q = `${SITE}/week`; themed = false; return fromPool(name, (x.week && x.week.items) || []);
     };
@@ -124,7 +133,7 @@ async function igPost(tok, caption, ids) {
       const L = await pick("threads");
       if (L.length >= 2) {
         const text = [`✨今日の${cat}ガチャ${L.length}選`, ``, ...L.map((it) => `・${short(cleanName(it.name), 34)}（${it.price}円）`), ``, `発売日・ラインナップ・近くの取扱店はこちら👇`, q, ``, `#ガチャガチャ`].join("\n");
-        try { const tok = await refresh("threads", thSecret, tokenOf("threads", thSecret), "https://graph.threads.net/refresh_access_token?grant_type=th_refresh_token&access_token="); await thPost(tok, short(text, 490), L.map((i) => i.id)); for (const it of L) recent("threads")[it.id] = today; changed = true; log("Threads：4選を投稿", cat); }
+        try { const tok = await refresh("threads", thSecret, tokenOf("threads", thSecret), "https://graph.threads.net/refresh_access_token?grant_type=th_refresh_token&access_token="); await thPost(tok, short(text, 490), [...(cover ? [cover.url] : []), ...L.map((i) => i.id)]); for (const it of L) recent("threads")[it.id] = today; changed = true; log("Threads：4選を投稿", cat); }
         catch (e) { log("⚠ Threads の投稿に失敗", e.message); }
       }
     }
@@ -133,7 +142,7 @@ async function igPost(tok, caption, ids) {
       if (L.length >= 2) {
         const tags = ["#ガチャガチャ", "#ガチャ", "#カプセルトイ", "#ガシャポン", "#新作ガチャ", "#ガチャ活", themed && m.tag ? m.tag : "#今週発売"];
         const cap = [`✨今日の${cat}ガチャ${L.length}選`, ``, ...L.map((it, i) => `${i + 1}. ${cleanName(it.name)}\n　1回${it.price}円・全${it.lineup}種｜${relText(it)}`), ``, `発売日・ラインナップ・近くの取扱店は、プロフィールのリンク（gachapla.com）から検索できます🪐`, `保存しておくと、ガチャ屋さんで見返せます📌`, ``, [...new Set(tags)].join(" ")].join("\n");
-        try { const tok = igSecret; await igPost(tok, cap.slice(0, 2100), L.map((i) => i.id)); for (const it of L) recent("instagram")[it.id] = today; changed = true; log("Instagram：4選を投稿", cat); }
+        try { const tok = igSecret; await igPost(tok, cap.slice(0, 2100), [...(cover ? [cover.url] : []), ...L.map((i) => i.id)]); for (const it of L) recent("instagram")[it.id] = today; changed = true; log("Instagram：4選を投稿", cat); }
         catch (e) { log("⚠ Instagram の投稿に失敗", e.message); }
       }
     }
