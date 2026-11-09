@@ -177,7 +177,7 @@ C.en["how-to-play-gachapon"] = (D, h) => {
   const mainTxt = P.main.map(([p]) => yen(p)).join(", ").replace(/, ([^,]*)$/, " or $1");
   const drawRow = D.DRAWS.map(([n, d]) => `<tr><td>${n}</td><td>${d}</td><td>${yen(d * P.mode)}</td></tr>`).join("");
   return {
-    title: "How to Play Gachapon in Japan: Coins, Change Machines, Cashless & Tax-Free",
+    title: "How to Play Gachapon in Japan: Coins, Cashless & Tax-Free",
     h1: "How to Play Gachapon in Japan: Coins, Change Machines, Cashless & Tax-Free",
     short: "How to play gachapon",
     desc: `How gachapon machines work in Japan: most cost ${yen(P.mainLo)}–${yen(P.mainHi)} (${P.mainPct}% of ${P.year} releases), ¥100 coins and change machines, cashless, why it isn't tax-free, and what to do if nothing comes out.`,
@@ -383,7 +383,7 @@ C.en["gashapon-department-store-ikebukuro"] = (D, h) => {
   const N = ikeNums(D), { m, mo, co } = N, fd = D.E.fmtDist, wm = D.E.walkMin;
   if (!m) return null;
   return {
-    title: "Gashapon Department Store Ikebukuro: Complete Guide (Hours, Access, Nearby Shops)",
+    title: "Gashapon Department Store Ikebukuro: Complete Guide",
     h1: "Gashapon Department Store Ikebukuro: complete guide",
     short: "Gashapon Department Store Ikebukuro",
     desc: `Gashapon Department Store Ikebukuro: ~${fmt(m.lm.machines)} machines in Sunshine City, open ${m.lm.hours}. Access from Ikebukuro Station, nearby shops and this week's new gacha.`,
@@ -762,7 +762,7 @@ C.en["airport-gachapon"] = (D, h) => {
   const A = airNums(D); if (!A.hn && !A.kx) return null;
   const both = [A.hn, A.kx].filter(Boolean), allBefore = both.every((x) => D.before(x.lm));
   return {
-    title: "Airport Gachapon in Japan: Haneda, Kansai & Narita (Spend Your Leftover Coins)",
+    title: "Gachapon at Haneda, Kansai & Narita Airports",
     h1: "Airport gachapon: Haneda, Kansai & Narita",
     short: "Airport gachapon",
     desc: `Gacha at Japan's airports: ${[A.hn && `Haneda's ${A.hn.lm.name_en.replace(/\s*\(.*\)$/, "")}${A.hn.lm.machines ? ` (~${fmt(A.hn.lm.machines)} machines)` : ""}`, A.kx && `Kansai's ${A.kx.lm.name_en.replace(/\s*\(.*\)$/, "")}`, A.nr.length && "Narita"].filter(Boolean).join(", ")} — hours, security and leftover ¥100 coins.`,

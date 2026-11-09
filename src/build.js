@@ -279,7 +279,7 @@ const T = {
       note: "Shop list from Bandai's official shop finder (Gashapon doko?). Distances are straight-line; walking time is estimated at 80 m per minute. Please check opening hours before you go.",
       homeH: "Find gacha shops by station", allStations: "All stations →",
       // 有名なガチャ専門店（data/landmarks.json）・地図・よくある質問
-      titleN: (name, n, y) => `${n} Gachapon Shop${n === 1 ? "" : "s"} near ${name} (${y}: map & walking times)`,
+      titleN: (name, n, y) => `${n} Gachapon Shop${n === 1 ? "" : "s"} near ${name} (${y} Map)`,
       descN: (name, n, lm) => `${n} gachapon (capsule toy) shops near ${name}${lm ? `, including ${lm}` : ""}. Walking times, opening hours, machine counts, a map and Google Maps links.`,
       lmH: "Must-visit gacha shops", lmLead: (lm, k, w) => `The biggest gacha shop here is ${lm}${k ? ` with about ${k.toLocaleString("en-US")} machines` : ""}${w ? `, about ${w} min on foot` : ""}.`,
       lmNote: (d) => `Machine counts and hours are from the shops' official sites or major travel media (checked ${d}). They can change, so check before you go.`,
@@ -1894,7 +1894,8 @@ ${content}
     const nToday = items.filter((it) => it.added === today).length, nWeek = items.filter((it) => it.added >= monStr && it.added <= today).length;
     listPage("new.html", {
       title: lang !== "ja" ? t.x.newPageTitle : "新着ガチャガチャ一覧（最新の新作情報）",
-      lead: `${t.u.addedLine(nToday, nWeek)}。${lang !== "ja" ? t.x.newPageLead : "バンダイ・タカラトミーアーツなどの新作ガチャガチャを、サイトに載った新しい順に並べています。発売月・価格・全何種かもひと目でわかります。"}`.replace(/^(.+?)。(?=[A-Za-z가-힣])/, "$1. "),
+      // 説明文は内容を先に。件数は今週1件以上あるときだけ後ろに付ける（「0件」で始まると検索結果の文として弱いため）
+      lead: `${lang !== "ja" ? t.x.newPageLead : "バンダイ・タカラトミーアーツなどの新作ガチャガチャを、サイトに載った新しい順に並べています。発売月・価格・全何種かもひと目でわかります。"}${nWeek ? `${lang === "ja" ? "" : " "}${t.u.addedLine(nToday, nWeek)}${lang === "ja" || lang.startsWith("zh") ? "。" : "."}` : ""}`,
       list: [...items].sort(byAddedRelease).slice(0, 120), current: "new",
       extra: lang === "ja" || lang === "en" ? `<p class="hub-links"><a href="${ctx("new.html").H}saihan.html">${lang === "ja" ? "再販・復刻のガチャ →" : t.hub.saihanH1 + " →"}</a><a href="${ctx("new.html").H}collection.html">${lang === "ja" ? "シリーズから探す →" : t.hub.colIdxH1 + " →"}</a></p>` : "",
     });

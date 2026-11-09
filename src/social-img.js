@@ -40,6 +40,21 @@ const badge = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${BADG
     } catch (e) { console.log(`⚠ ${it.id}: ${e.message}`); }
   }
   console.log(`SNS用の画像：${n}件`);
+  // 商品ページの共有画像（og:image）：webp は LINE などで出ないことがあるので、JPEG を作れた商品は差し替える
+  let ogn = 0;
+  for (const dir of ["", "en/", "ko/", "zh-cn/", "zh-tw/"]) {
+    const d = path.join(ROOT, "dist", dir, "item");
+    if (!fs.existsSync(d)) continue;
+    for (const f of fs.readdirSync(d)) {
+      if (!f.endsWith(".html")) continue;
+      const id = f.slice(0, -5);
+      if (!fs.existsSync(path.join(OUT, `${id}.jpg`))) continue;
+      const fp = path.join(d, f), h = fs.readFileSync(fp, "utf8");
+      const h2 = h.replace(new RegExp(`(<meta (?:property="og:image"|name="twitter:image") content="https://gachapla\\.com/images/)${id.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\.webp"`, "g"), `$1social/${id}.jpg"`);
+      if (h2 !== h) { fs.writeFileSync(fp, h2); ogn++; }
+    }
+  }
+  console.log(`共有画像を JPEG に差し替え：${ogn}ページ`);
   // ===== 今週の新作の縦長ピン（1000×1500）：商品写真を大きく2×2。見出しの文字は brand/pin-head-<言語>.png（CJKフォントがCIにないので画像で用意） =====
   const PW = 1000, PH = 1500, GAP = 16, TOP = 236, BOT = 96, SIDE = 24;
   const CW = Math.floor((PW - SIDE * 2 - GAP) / 2), CH = Math.floor((PH - TOP - BOT - GAP) / 2);
