@@ -4,6 +4,3 @@ node_modules/
 .DS_Store
 data/votes.json
 data/shops-live.json
-app/node_modules/
-app/android/
-app/ios/
