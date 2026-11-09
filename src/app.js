@@ -1575,3 +1575,5 @@
     if (document.readyState === "complete") later(); else window.addEventListener("load", later);
   })();
 })();
+// 長い説明文（スマホでは2行だけ表示）は、押すと全部表示
+document.querySelectorAll(".lead-clamp").forEach(function (el) { el.addEventListener("click", function () { el.classList.toggle("open"); }); });

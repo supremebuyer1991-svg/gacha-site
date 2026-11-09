@@ -851,7 +851,7 @@ const ticketBlock = (lang, slug) => {
   const kl = klUrl(lang, q), kk = lang === "ja" ? "" : kkSearch(lang, name);
   if (!kl && !kk) return "";
   const btn = (u, label, gold) => (u ? `<a class="btn${gold ? " btn-gold" : ""}" href="${u}" target="_blank" rel="sponsored nofollow noopener">${label}</a>` : "");
-  return `<div class="panel" style="margin:4px 0 18px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px"><div><b style="font-size:17px">🎟️ ${esc(T.h(name))}</b> <span class="sl-pr">PR</span><p class="fine" style="margin:4px 0 0">${esc(T.sub)}</p></div><div style="display:flex;gap:8px;flex-wrap:wrap">${btn(kl, lang === "ja" ? "Klookでチケットを見る" : "Klook", true)}${btn(kk, "KKday", !kl)}</div></div>`;
+  return `<div class="panel tk-panel" style="margin:4px 0 18px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px"><div><b style="font-size:17px">🎟️ ${esc(T.h(name))}</b> <span class="sl-pr">PR</span><p class="fine" style="margin:4px 0 0">${esc(T.sub)}</p></div><div style="display:flex;gap:8px;flex-wrap:wrap">${btn(kl, lang === "ja" ? "Klookでチケットを見る" : "Klook", true)}${btn(kk, "KKday", !kl)}</div></div>`;
 };
 const guides = require("./guides"); // 海外の旅行者向けガイド /{en,ko,zh-tw,zh-cn}/guide/（src/guides.js）
 // 外国語の商品ページ「日本のどこで買える？」から、初心者向けガイド（遊び方・両替機・免税）へのリンク文
@@ -1777,7 +1777,7 @@ ${content}
   const LIST_MAX = 150;
   // h1・sub：見出しを短く（タイトルは検索向けに長いまま）。extra：見出しの下に足すリンクなど
   // 150件をこえる一覧は 2ページ目以降（genre/anime/2 など）に分ける。2ページ目以降は noindex
-  const listPage = (rel, { title, lead, list, current = "", ogImage = "", h1 = "", sub = "", extra = "", jaOnly = false, after = "", description = "", jsonldExtra = [] }) => {
+  const listPage = (rel, { title, lead, list, current = "", ogImage = "", h1 = "", sub = "", extra = "", jaOnly = false, after = "", afterList = "", description = "", jsonldExtra = [] }) => {
     const pageN = Math.max(1, Math.ceil(list.length / LIST_MAX));
     const relOf = (k) => (k === 1 ? rel : rel.replace(/\.html$/, `/${k}.html`));
     for (let k = 1; k <= pageN; k++) {
@@ -1787,9 +1787,10 @@ ${content}
       const pages = pageN > 1 ? `<nav class="list-pages" aria-label="${lang === "ja" ? "ページ" : t.hub.pagesAria}">${Array.from({ length: pageN }, (_, j) => j + 1).map((j) => j === k ? `<span class="cur">${j}</span>` : `<a href="${c.H}${relOf(j)}">${j}</a>`).join("")}</nav>` : "";
       const body = `<div class="wrap">
   <nav class="breadcrumb" aria-label="breadcrumb"><a href="${c.H}index.html">${t.home}</a><span>/</span>${k === 1 ? `<span>${esc(h1 || title)}</span>` : `<a href="${c.H}${rel}">${esc(h1 || title)}</a><span>/</span><span>${k}</span>`}</nav>
-  <header class="page-head"><h1>${esc(h1 || title)}</h1>${sub ? `<p class="hub-sub">${esc(sub)}</p>` : ""}${k === 1 ? `<p class="lead">${esc(lead)}</p>` : ""}${extra}</header>
+  <header class="page-head"><h1>${esc(h1 || title)}</h1>${sub ? `<p class="hub-sub">${esc(sub)}</p>` : ""}${k === 1 ? `<p class="lead${afterList ? " lead-clamp" : ""}">${esc(lead)}</p>` : ""}${extra}</header>
   ${k === 1 ? after : ""}
   <section class="section" style="padding-top:40px">${list.length ? `<div class="grid">${part.map((it, i) => card(it, c, i)).join("")}</div>${left > 0 ? `<p class="more-wrap"><a class="btn btn-gold list-more" href="${c.H}${relOf(k + 1)}">${lang === "ja" ? `もっと見る（残り${left}件）` : t.hub.more(left)}</a></p>` : ""}${pages}` : `<p class="empty">${t.empty}</p>`}</section>
+  ${k === 1 ? afterList : ""}
 </div>`;
       const jsonld = [
         { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
@@ -1905,7 +1906,8 @@ ${content}
       desc = H.cxDesc(L, list.length, cut(nm(latest), 40), t.month(latest.release), latest.price, next ? cut(nm(next), 40) : "", next ? relShort(next) : "", H.cxPriceShort(pmin, pmax));
     }
     const ld = [{ "@context": "https://schema.org", "@type": "FAQPage", inLanguage: LANG_META[lang].hreflang, mainEntity: qa.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) }];
-    return { after: html, description: desc, jsonldExtra: ld };
+    // 発売状況・よくある質問は、商品の一覧の下に（スマホで写真までが遠くならないように）
+    return { afterList: html, description: desc, jsonldExtra: ld };
   };
   // キャラクター・作品ごとのページ
   for (const ch of CHARAS) {
