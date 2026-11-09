@@ -599,6 +599,7 @@
     var done = false;
     try { done = localStorage.getItem(key) === "1"; } catch (e) {}
     if (done) btn.classList.add("is-on");
+    try { var hm0 = Number(localStorage.getItem("gp-heart-n-" + btn.getAttribute("data-id"))) || 0, bb = btn.querySelector("b"); if (bb && hm0 > (Number(bb.textContent) || 0)) bb.textContent = String(hm0); } catch (e) {}
     btn.addEventListener("click", function () {
       if (btn.classList.contains("is-on") || btn.disabled) return;
       btn.disabled = true;
@@ -609,7 +610,7 @@
         if (d && typeof d.n === "number") b.textContent = String(d.n);
       }).catch(function () {}).then(function () {
         btn.disabled = false;
-        try { localStorage.setItem(key, "1"); } catch (e) {}
+        try { localStorage.setItem(key, "1"); localStorage.setItem("gp-heart-n-" + btn.getAttribute("data-id"), b.textContent); } catch (e) {}
       });
     });
   });
@@ -660,7 +661,9 @@
         var h = document.createElement("button"), hn = cd.getAttribute("data-h");
         h.type = "button"; h.className = "card-heart"; h.setAttribute("data-heart", m[1]);
         h.setAttribute("aria-label", HEART_L); h.title = HEART_L;
-        h.innerHTML = '<i aria-hidden="true">♥</i><b>' + (hn && hn !== "0" ? esc(hn) : "") + "</b>";
+        var hm = 0; try { hm = Number(localStorage.getItem("gp-heart-n-" + m[1])) || 0; } catch (e) {}
+        var hv = Math.max(Number(hn) || 0, hm);
+        h.innerHTML = '<i aria-hidden="true">♥</i><b>' + (hv ? String(hv) : "") + "</b>";
         try { if (localStorage.getItem("gp-heart-" + m[1] + "-" + heartDay()) === "1") h.classList.add("is-on"); } catch (e) {}
         th.appendChild(h);
       }
@@ -680,6 +683,8 @@
       if (d && typeof d.n === "number" && d.n > 0) b.textContent = String(d.n);
     }).catch(function () {}).then(function () {
       h.disabled = false;
+      try { localStorage.setItem("gp-heart-n-" + id, b.textContent); } catch (e5) {}
+      [].forEach.call(document.querySelectorAll('[data-heart="' + id + '"] b, .heart[data-id="' + id + '"] b'), function (x) { x.textContent = b.textContent; });
       try { localStorage.setItem(key, "1"); } catch (e3) {}
       if (window.gtag) try { gtag("event", "heart_click", { place: "card", item_id: id }); } catch (e4) {}
     });
