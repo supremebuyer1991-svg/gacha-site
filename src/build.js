@@ -1138,7 +1138,7 @@ for (const lang of LANGS) {
   // i：一覧の中の順番を渡すと、最初の4枚は遅延読み込みしない（1枚目は先に読む）。渡さなければ全部遅延読み込み
   // 値段が0（未定）の商品は「¥0」ではなく「価格未定」
   const priceTxt = (p) => (Number(p) > 0 ? `¥${p}` : esc(t.u.priceTba || T.en.u.priceTba));
-  const card = (it, c, i = -1) => `<a class="card" href="${c.H}item/${it.id}.html">
+  const card = (it, c, i = -1) => `<a class="card" href="${c.H}item/${it.id}.html" data-h="${heartsOf(it)}">
   ${thumb(it, c.R, { load: i === 0 ? "high" : i > 0 && i < 4 ? "eager" : "" })}
   <div class="card-meta">${esc(genreLabel(genreOf(it.genre), lang))}</div>
   <div class="card-name">${esc(nameOf(it, lang))}</div>

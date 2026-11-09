@@ -616,6 +616,8 @@
 
   /* ================= ★保存（マイリスト）：このブラウザの中だけに保存する ================= */
   var FAV_KEY = "gp-fav";
+  var heartDay = function () { return new Date().toISOString().slice(0, 10); };
+  var HEART_L = ({ ja: "推し（♥）を送る", en: "Send a heart", ko: "하트 보내기", "zh-cn": "送爱心", "zh-tw": "送愛心" })[(document.documentElement.getAttribute("lang") || "ja").replace(/^zh-Hans.*/i, "zh-cn").replace(/^zh-Hant.*/i, "zh-tw").replace(/^zh-CN$/i, "zh-cn").replace(/^zh-TW$/i, "zh-tw")] || "♥";
   var favGet = function () {
     try { var a = JSON.parse(localStorage.getItem(FAV_KEY) || "[]"); return Array.isArray(a) ? a.filter(function (x) { return typeof x === "string"; }) : []; } catch (e) { return []; }
   };
@@ -653,9 +655,35 @@
       b.type = "button"; b.className = "card-fav"; b.setAttribute("data-fav", m[1]);
       b.innerHTML = '<i aria-hidden="true">★</i>';
       th.appendChild(b);
+      // ♥（推し）：一覧のカードからも気軽に押せるように。1人1商品1日1回（サーバー側でも数える）
+      if (!th.querySelector(".card-heart")) {
+        var h = document.createElement("button"), hn = cd.getAttribute("data-h");
+        h.type = "button"; h.className = "card-heart"; h.setAttribute("data-heart", m[1]);
+        h.setAttribute("aria-label", HEART_L); h.title = HEART_L;
+        h.innerHTML = '<i aria-hidden="true">♥</i><b>' + (hn && hn !== "0" ? esc(hn) : "") + "</b>";
+        try { if (localStorage.getItem("gp-heart-" + m[1] + "-" + heartDay()) === "1") h.classList.add("is-on"); } catch (e) {}
+        th.appendChild(h);
+      }
     });
     paintFav();
   };
+  document.addEventListener("click", function (e) {
+    var h = e.target.closest && e.target.closest("[data-heart]");
+    if (!h) return;
+    e.preventDefault(); e.stopPropagation();
+    var id = h.getAttribute("data-heart"), key = "gp-heart-" + id + "-" + heartDay();
+    if (h.classList.contains("is-on") || h.disabled) return;
+    h.disabled = true; h.classList.add("is-on"); h.classList.remove("pop"); void h.offsetWidth; h.classList.add("pop");
+    var b = h.querySelector("b"); b.textContent = String((Number(b.textContent) || 0) + 1);
+    var rootEl = document.querySelector("[data-root]"), r0 = rootEl ? rootEl.getAttribute("data-root") : "/";
+    fetch(r0 + "api/vote/" + id, { method: "POST" }).then(function (r) { return r.json(); }).then(function (d) {
+      if (d && typeof d.n === "number" && d.n > 0) b.textContent = String(d.n);
+    }).catch(function () {}).then(function () {
+      h.disabled = false;
+      try { localStorage.setItem(key, "1"); } catch (e3) {}
+      if (window.gtag) try { gtag("event", "heart_click", { place: "card", item_id: id }); } catch (e4) {}
+    });
+  }, true);
   document.addEventListener("click", function (e) {
     var b = e.target.closest && e.target.closest("[data-fav]");
     if (!b) return;

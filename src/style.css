@@ -1318,3 +1318,13 @@ p.hero-lead { font-size: clamp(15px, 1.7vw, 20px); font-weight: 700; color: var(
 .guide-item { display: flex; flex-direction: column; gap: 6px; background: var(--surface); border-radius: 14px; padding: 16px 18px; box-shadow: 0 2px 0 var(--line); border-left: 4px solid var(--gold); }
 .guide-item b { font-size: 16px; } .guide-item span { font-size: 13px; color: var(--muted); } .guide-item em { font-style: normal; font-size: 13px; font-weight: 700; color: var(--gold-text); }
 .guide h1, .guide h2, .guide-item b { word-break: keep-all; overflow-wrap: anywhere; } /* 韓国語の見出しを単語の途中で折り返さない */
+
+/* カードの♥（推し）：写真の左下 */
+.card-heart { position: absolute; left: 6px; bottom: 6px; display: inline-flex; align-items: center; gap: 4px; min-width: 34px; height: 30px; padding: 0 10px; border: 0; border-radius: 999px; background: rgba(255,255,255,.94); box-shadow: 0 2px 6px rgba(29,33,64,.18); color: var(--gold-text); font: 700 13px var(--font-body); line-height: 1; cursor: pointer; }
+.card-heart i { font-style: normal; font-size: 15px; }
+.card-heart b { font-family: var(--font-latin); font-weight: 700; color: var(--text-2); font-variant-numeric: tabular-nums; }
+.card-heart b:empty { display: none; }
+.card-heart.is-on { background: var(--gold-btn); color: #fff; }
+.card-heart.is-on b { color: #fff; }
+.card-heart.pop i { animation: heart-pop .5s ease; }
+@media (prefers-reduced-motion: reduce) { .card-heart.pop i { animation: none; } }
