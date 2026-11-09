@@ -701,7 +701,9 @@ const shopLinks = (it) => {
 // 人気シリーズだけのページ（/series/〇〇.html）
 const SERIES = [
   { slug: "sanrio", label: "サンリオ", en: "Sanrio", emoji: "🎀", re: /サンリオ|ハローキティ|キティ|マイメロ|クロミ|シナモロール|ポムポムプリン|ポチャッコ|ハンギョドン|けろけろけろっぴ|キキ&ララ|キキララ|タキシードサム|ばつ丸|ぐでたま|Sanrio/i },
+  { slug: "chiikawa", label: "ちいかわ", en: "Chiikawa", emoji: "🐾", keep: true, re: /ちいかわ|Chiikawa/i },
   { slug: "disney", label: "ディズニー", en: "Disney", emoji: "🏰", re: /ディズニー|ミッキー|ミニー|ドナルド|くまのプーさん|スティッチ|ピクサー|トイ・ストーリー|ラプンツェル|アナと雪|プリンセス|ツイステ|Disney/i },
+  { slug: "nintendo", label: "任天堂", en: "Nintendo", emoji: "🎮", re: /任天堂|Nintendo|スーパーマリオ|マリオカート|ゼルダの伝説|カービィ|スプラトゥーン|ピクミン|どうぶつの森|ドンキーコング|ヨッシー|メトロイド|ファイアーエムブレム|スマブラ|大乱闘スマッシュ/i },
   { slug: "tamagotchi", label: "たまごっち", en: "Tamagotchi", emoji: "🥚", re: /たまごっち|Tamagotchi/i },
   { slug: "mejirushi", label: "めじるしアクセサリー", en: "Mejirushi Accessory", emoji: "🔖", re: /めじるし/ },
 ];
@@ -728,7 +730,8 @@ const CHARAS = (() => {
   }
   // 人気シリーズ（サンリオ・ディズニー・たまごっち・めじるし）も同じ形のページに（/series/ は /chara/ へ転送）
   for (const k of ["sanrio-characters-all", "tamagotchi"]) by.delete(k);
-  for (const sr of SERIES) by.set(sr.slug, { label: sr.label, en: sr.en, slug: sr.slug, list: seriesItems(sr), match: sr.re.source });
+  // keep: 作品名カタログのページがすでにある作品（ちいかわ）は、そちらの判定（「ハチワレ」の見分けなど）をそのまま使う
+  for (const sr of SERIES) if (!(sr.keep && by.has(sr.slug))) by.set(sr.slug, { label: sr.label, en: sr.en, slug: sr.slug, list: seriesItems(sr), match: sr.re.source });
   return [...by.values()].filter((x) => x.list.length >= 3).sort((a, b) => b.list.length - a.list.length);
 })();
 const charasOf = (it) => CHARAS.filter((ch) => ch.list.includes(it));
@@ -834,7 +837,7 @@ const TICKET_OF = (() => {
   const M = {};
   for (const s of ["sanrio", "hello-kitty", "my-melody", "kuromi", "cinnamoroll", "pompompurin", "pochacco", "little-twin-stars", "badtz-maru", "hangyodon", "keroppi", "tuxedosam"]) M[s] = P.puroland;
   for (const s of ["disney", "mickey-friends", "disney-princess", "pixar", "stitch", "winnie-the-pooh", "zootopia"]) M[s] = P.tdr;
-  M["harry-potter"] = P.wb; M["kirby"] = P.usj; M["animal-crossing"] = P.usj; M["doraemon"] = P.fujiko; M["moomin"] = P.moomin; M["peanuts-snoopy"] = P.snoopy; M["godzilla"] = P.nijigen; M["crayon-shin-chan"] = P.nijigen;
+  M["harry-potter"] = P.wb; M["kirby"] = P.usj; M["nintendo"] = P.usj; M["super-mario"] = P.usj; M["animal-crossing"] = P.usj; M["doraemon"] = P.fujiko; M["moomin"] = P.moomin; M["peanuts-snoopy"] = P.snoopy; M["godzilla"] = P.nijigen; M["crayon-shin-chan"] = P.nijigen;
   return M;
 })();
 const TK_T = { ja: { h: (p) => `${p}のチケット`, sub: "グッズを集めるなら、本場にも行ってみませんか？", note: "チケットはKlookで予約できます（PR）。", ja: true },
@@ -1311,7 +1314,7 @@ ${content}
     // 駅からさがす・人気シリーズ（外国語は「今週発売」のすぐ下に、日本語は下の方）
     const homeSeries = `  <section class="section section-tight" id="series">
     <div class="section-head"><h2>${lang === "ja" ? "人気シリーズ" : t.x.popSeries}</h2></div>
-    <div class="series-tiles">${SERIES.map((sr) => { const n = seriesItems(sr).length; return n ? `<a class="st st-${sr.slug}" href="${c.H}chara/${sr.slug}.html"><span class="st-e" aria-hidden="true">${sr.emoji}</span><span class="st-l">${lang === "ja" ? sr.label : (I18N_CHARA[lang] && I18N_CHARA[lang][sr.en]) || sr.en}</span><span class="st-n">${t.series(n)}</span></a>` : ""; }).join("")}</div>
+    <div class="series-tiles">${SERIES.map((sr) => { const ch = CHARAS.find((x) => x.slug === sr.slug); const n = ch ? ch.list.length : 0; return n ? `<a class="st st-${sr.slug}" href="${c.H}chara/${sr.slug}.html"><span class="st-e" aria-hidden="true">${sr.emoji}</span><span class="st-l">${lang === "ja" ? sr.label : (I18N_CHARA[lang] && I18N_CHARA[lang][sr.en]) || sr.en}</span><span class="st-n">${t.series(n)}</span></a>` : ""; }).join("")}</div>
     <div class="chara-list chara-list-top">${CHARAS.slice(0, 15).map((ch) => `<a class="chara-chip" href="${c.H}chara/${ch.slug}.html">${esc(charaLabel(ch, lang))}<small>${ch.list.length}</small></a>`).join("")}<a class="chara-chip chara-more" href="${c.H}chara.html">${lang === "ja" ? "キャラクター・作品をすべて見る →" : t.x.allChara}</a></div>
   </section>
 `;

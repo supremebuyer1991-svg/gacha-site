@@ -1022,7 +1022,7 @@ body { font-variant-numeric: tabular-nums lining-nums; }
 #ranking { padding-top: 28px; }
 
 /* トップ：人気シリーズのタイル */
-.series-tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.series-tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
 @media (max-width: 700px) { .series-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .st { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; padding: 16px; border-radius: 18px; text-decoration: none; color: var(--text); border: 1px solid var(--line); background: #fff; transition: transform .15s; }
 .st:hover { transform: translateY(-2px); }
@@ -1033,6 +1033,8 @@ body { font-variant-numeric: tabular-nums lining-nums; }
 .st-disney { background: linear-gradient(135deg, #eef4ff, #fff); }
 .st-tamagotchi { background: linear-gradient(135deg, #fff8e6, #fff); }
 .st-mejirushi { background: linear-gradient(135deg, #f2fbf4, #fff); }
+.st-chiikawa { background: linear-gradient(135deg, #fff3ec, #fff); }
+.st-nintendo { background: linear-gradient(135deg, #ffecec, #fff); }
 
 /* キャラクター・作品から探す */
 .chara-list { display: flex; flex-wrap: wrap; gap: 8px; }
