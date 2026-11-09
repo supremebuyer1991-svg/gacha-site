@@ -1022,7 +1022,7 @@ body { font-variant-numeric: tabular-nums lining-nums; }
 #ranking { padding-top: 28px; }
 
 /* トップ：人気シリーズのタイル */
-.series-tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.series-tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
 @media (max-width: 700px) { .series-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .st { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; padding: 16px; border-radius: 18px; text-decoration: none; color: var(--text); border: 1px solid var(--line); background: #fff; transition: transform .15s; }
 .st:hover { transform: translateY(-2px); }
@@ -1340,3 +1340,5 @@ p.hero-lead { font-size: clamp(15px, 1.7vw, 20px); font-weight: 700; color: var(
   #series .chara-list-top::-webkit-scrollbar { display: none; }
   #series .chara-list-top .chara-chip { flex: none; white-space: nowrap; }
 }
+
+.series-more { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }

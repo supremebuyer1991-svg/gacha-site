@@ -701,10 +701,10 @@ const shopLinks = (it) => {
 // 人気シリーズだけのページ（/series/〇〇.html）
 const SERIES = [
   { slug: "sanrio", label: "サンリオ", en: "Sanrio", emoji: "🎀", re: /サンリオ|ハローキティ|キティ|マイメロ|クロミ|シナモロール|ポムポムプリン|ポチャッコ|ハンギョドン|けろけろけろっぴ|キキ&ララ|キキララ|タキシードサム|ばつ丸|ぐでたま|Sanrio/i },
-  { slug: "chiikawa", label: "ちいかわ", en: "Chiikawa", emoji: "🐾", keep: true, re: /ちいかわ|Chiikawa/i },
+  { slug: "chiikawa", label: "ちいかわ", en: "Chiikawa", emoji: "🐾", keep: true, tile: false, re: /ちいかわ|Chiikawa/i },
   { slug: "disney", label: "ディズニー", en: "Disney", emoji: "🏰", re: /ディズニー|ミッキー|ミニー|ドナルド|くまのプーさん|スティッチ|ピクサー|トイ・ストーリー|ラプンツェル|アナと雪|プリンセス|ツイステ|Disney/i },
-  { slug: "nintendo", label: "任天堂", en: "Nintendo", emoji: "🎮", re: /任天堂|Nintendo|スーパーマリオ|マリオカート|ゼルダの伝説|カービィ|スプラトゥーン|ピクミン|どうぶつの森|ドンキーコング|ヨッシー|メトロイド|ファイアーエムブレム|スマブラ|大乱闘スマッシュ/i },
-  { slug: "tamagotchi", label: "たまごっち", en: "Tamagotchi", emoji: "🥚", re: /たまごっち|Tamagotchi/i },
+  { slug: "nintendo", label: "任天堂", en: "Nintendo", emoji: "🎮", i18n: { ko: "닌텐도", "zh-tw": "任天堂", "zh-cn": "任天堂" }, re: /任天堂|Nintendo|スーパーマリオ|マリオカート|ゼルダの伝説|カービィ|スプラトゥーン|ピクミン|どうぶつの森|ドンキーコング|ヨッシー|メトロイド|ファイアーエムブレム|スマブラ|大乱闘スマッシュ/i },
+  { slug: "tamagotchi", label: "たまごっち", en: "Tamagotchi", emoji: "🥚", tile: false, re: /たまごっち|Tamagotchi/i },
   { slug: "mejirushi", label: "めじるしアクセサリー", en: "Mejirushi Accessory", emoji: "🔖", re: /めじるし/ },
 ];
 const seriesItems = (sr) => items.filter((it) => sr.re.test([it.name, it.name_en, (it.lineup_names || []).join(" ")].join(" ")));
@@ -1314,8 +1314,9 @@ ${content}
     // 駅からさがす・人気シリーズ（外国語は「今週発売」のすぐ下に、日本語は下の方）
     const homeSeries = `  <section class="section section-tight" id="series">
     <div class="section-head"><h2>${lang === "ja" ? "人気シリーズ" : t.x.popSeries}</h2></div>
-    <div class="series-tiles">${SERIES.map((sr) => { const ch = CHARAS.find((x) => x.slug === sr.slug); const n = ch ? ch.list.length : 0; return n ? `<a class="st st-${sr.slug}" href="${c.H}chara/${sr.slug}.html"><span class="st-e" aria-hidden="true">${sr.emoji}</span><span class="st-l">${lang === "ja" ? sr.label : (I18N_CHARA[lang] && I18N_CHARA[lang][sr.en]) || sr.en}</span><span class="st-n">${t.series(n)}</span></a>` : ""; }).join("")}</div>
-    <div class="chara-list chara-list-top">${CHARAS.slice(0, 15).map((ch) => `<a class="chara-chip" href="${c.H}chara/${ch.slug}.html">${esc(charaLabel(ch, lang))}<small>${ch.list.length}</small></a>`).join("")}<a class="chara-chip chara-more" href="${c.H}chara.html">${lang === "ja" ? "キャラクター・作品をすべて見る →" : t.x.allChara}</a></div>
+    <div class="series-tiles">${SERIES.filter((sr) => sr.tile !== false).map((sr) => { const ch = CHARAS.find((x) => x.slug === sr.slug); const n = ch ? ch.list.length : 0; return n ? `<a class="st st-${sr.slug}" href="${c.H}chara/${sr.slug}.html"><span class="st-e" aria-hidden="true">${sr.emoji}</span><span class="st-l">${lang === "ja" ? sr.label : (I18N_CHARA[lang] && I18N_CHARA[lang][sr.en]) || (sr.i18n && sr.i18n[lang]) || sr.en}</span><span class="st-n">${t.series(n)}</span></a>` : ""; }).join("")}</div>
+    <div class="chara-list chara-list-top">${(() => { const tiles = new Set(SERIES.filter((sr) => sr.tile !== false).map((sr) => sr.slug)); const first = SERIES.filter((sr) => sr.tile === false).map((sr) => CHARAS.find((x) => x.slug === sr.slug)).filter(Boolean); return first.concat(CHARAS.filter((ch) => !tiles.has(ch.slug) && !first.includes(ch))).slice(0, 15); })().map((ch) => `<a class="chara-chip" href="${c.H}chara/${ch.slug}.html">${esc(charaLabel(ch, lang))}<small>${ch.list.length}</small></a>`).join("")}</div>
+    <div class="series-more"><a class="chara-chip chara-more" href="${c.H}chara.html">${lang === "ja" ? "キャラクター・作品をすべて見る →" : t.x.allChara}</a><a class="chara-chip chara-more" href="#genres">${t.genreTitle} ↓</a><a class="chara-chip chara-more" href="#types">${t.typeTitle} ↓</a></div>
   </section>
 `;
     const homeStnSeries = `  ${(() => { const pick = ["akihabara", "ikebukuro", "shinjuku", "shibuya", "harajuku", "umeda", "namba", "hakata", "sapporo"].map((s) => STATIONS.find((x) => x.slug === s)).filter(Boolean); return pick.length ? `<section class="section section-tight" id="stations">
