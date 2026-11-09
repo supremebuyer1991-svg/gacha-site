@@ -805,12 +805,50 @@ const kkUrl = (lang, key) => {
   const dest = key === "anime" ? `https://www.kkday.com/${L}/product/productlist/Japan?keyword=Japan&filter_themes=scene_anime` : `https://www.kkday.com/${L}/category/jp-japan/${key}/list`;
   return `https://ck.jp.ap.valuecommerce.com/servlet/referral?sid=${encodeURIComponent(site.yahoo_vc_sid || "3787021")}&pid=${encodeURIComponent(site.kkday_vc_pid)}&vc_url=${encodeURIComponent(dest)}`;
 };
+const KL_LOC = { ja: "ja", en: "en-US", ko: "ko", "zh-tw": "zh-TW", "zh-cn": "zh-CN" };
+const vcLink = (pid, dest) => `https://ck.jp.ap.valuecommerce.com/servlet/referral?sid=${encodeURIComponent(site.yahoo_vc_sid || "3787021")}&pid=${encodeURIComponent(pid)}&vc_url=${encodeURIComponent(dest)}`;
+const klUrl = (lang, q) => (site.klook_vc_pid && KL_LOC[lang] ? vcLink(site.klook_vc_pid, `https://www.klook.com/${KL_LOC[lang]}/search/result/?query=${encodeURIComponent(q)}`) : "");
+const kkSearch = (lang, q) => (site.kkday_vc_pid && KK_LANG[lang] ? vcLink(site.kkday_vc_pid, `https://www.kkday.com/${KK_LANG[lang]}/product/productlist?keyword=${encodeURIComponent(q)}`) : "");
+const KL_Q = { "wifi-sim-cards": "Japan eSIM", transport: "JR Pass", "attraction-tickets": "Tokyo attraction tickets", anime: "Japan anime" };
+// 旅の準備：1行ずつ「何が買えるか」＋ KKday と Klook の2つのボタン（比べて選べると押されやすい）
 const travelBlock = (lang, keys) => {
   const T = KK_T[lang]; if (!T || !site.kkday_vc_pid) return "";
   const list = T.items.filter(([k]) => !keys || keys.includes(k));
+  const btn = (u, name, gold) => (u ? `<a class="btn${gold ? " btn-gold" : ""}" style="min-height:40px;padding:0 16px;font-size:14px" href="${u}" target="_blank" rel="sponsored nofollow noopener">${name}</a>` : "");
   return `<section class="section section-tight"><div class="panel"><h2 style="font-size:20px">${T.h} <span class="sl-pr">PR</span></h2>
-    <div class="shop-links" style="margin-top:10px">${list.map(([k, l]) => `<a class="sl" href="${kkUrl(lang, k)}" target="_blank" rel="sponsored nofollow noopener">${l}<small style="margin-left:6px;opacity:.7">KKday</small></a>`).join("")}</div>
+    <ul style="list-style:none;margin:10px 0 0;padding:0">${list.map(([k, l]) => `<li style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;padding:10px 0;border-top:1px solid var(--line, #e6e8f2)"><b style="font-size:15px">${l}</b><span style="display:flex;gap:8px">${btn(kkUrl(lang, k), "KKday", true)}${btn(klUrl(lang, KL_Q[k]), "Klook", false)}</span></li>`).join("")}</ul>
     <p class="fine" style="margin-top:8px">${T.note}</p></div></section>`;
+};
+// キャラ・作品のテーマパーク・ミュージアムのチケット（キャラのページの上の方に。ファンがいちばん押しやすい）
+const TICKET_OF = (() => {
+  const P = {
+    puroland: { ja: "サンリオピューロランド", en: "Sanrio Puroland", ko: "산리오 퓨로랜드", "zh-tw": "三麗鷗彩虹樂園", "zh-cn": "三丽鸥彩虹乐园" },
+    tdr: { ja: "東京ディズニーリゾート", en: "Tokyo Disney Resort", ko: "도쿄 디즈니 리조트", "zh-tw": "東京迪士尼度假區", "zh-cn": "东京迪士尼度假区" },
+    wb: { ja: "ワーナー ブラザース スタジオツアー東京 ハリー・ポッター", en: "Warner Bros. Studio Tour Tokyo Harry Potter", ko: "워너 브라더스 스튜디오 투어 도쿄 해리 포터", "zh-tw": "東京華納兄弟哈利波特影城", "zh-cn": "东京华纳兄弟哈利波特影城" },
+    usj: { ja: "ユニバーサル・スタジオ・ジャパン", en: "Universal Studios Japan", ko: "유니버설 스튜디오 재팬", "zh-tw": "日本環球影城", "zh-cn": "日本环球影城" },
+    fujiko: { ja: "藤子・F・不二雄ミュージアム", en: "Fujiko F Fujio Museum", ko: "후지코 F 후지오 뮤지엄", "zh-tw": "藤子・F・不二雄博物館", "zh-cn": "藤子・F・不二雄博物馆" },
+    moomin: { ja: "ムーミンバレーパーク", en: "Moominvalley Park", ko: "무민 밸리 파크", "zh-tw": "嚕嚕米谷公園", "zh-cn": "姆明山谷公园" },
+    snoopy: { ja: "スヌーピーミュージアム", en: "Snoopy Museum Tokyo", ko: "스누피 뮤지엄 도쿄", "zh-tw": "史努比博物館", "zh-cn": "史努比博物馆" },
+    nijigen: { ja: "ニジゲンノモリ", en: "Nijigen no Mori Awaji", ko: "니지겐노모리", "zh-tw": "淡路島二次元之森", "zh-cn": "淡路岛二次元之森" },
+  };
+  const M = {};
+  for (const s of ["sanrio", "hello-kitty", "my-melody", "kuromi", "cinnamoroll", "pompompurin", "pochacco", "little-twin-stars", "badtz-maru", "hangyodon", "keroppi", "tuxedosam"]) M[s] = P.puroland;
+  for (const s of ["disney", "mickey-friends", "disney-princess", "pixar", "stitch", "winnie-the-pooh", "zootopia"]) M[s] = P.tdr;
+  M["harry-potter"] = P.wb; M["kirby"] = P.usj; M["animal-crossing"] = P.usj; M["doraemon"] = P.fujiko; M["moomin"] = P.moomin; M["peanuts-snoopy"] = P.snoopy; M["godzilla"] = P.nijigen; M["crayon-shin-chan"] = P.nijigen;
+  return M;
+})();
+const TK_T = { ja: { h: (p) => `${p}のチケット`, sub: "グッズを集めるなら、本場にも行ってみませんか？", note: "チケットはKlookで予約できます（PR）。", ja: true },
+  en: { h: (p) => `${p} tickets`, sub: "Love the capsule toys? Visit the real place in Japan.", note: "Book via these partners (PR)." },
+  ko: { h: (p) => `${p} 티켓`, sub: "가챠가 좋다면, 일본 현지에도 가 보세요.", note: "아래에서 예약할 수 있습니다 (PR)." },
+  "zh-tw": { h: (p) => `${p}門票`, sub: "喜歡扭蛋的話，也去日本當地走走吧。", note: "可透過以下網站預訂（PR）。" },
+  "zh-cn": { h: (p) => `${p}门票`, sub: "喜欢扭蛋的话，也去日本当地看看吧。", note: "可通过以下网站预订（PR）。" } };
+const ticketBlock = (lang, slug) => {
+  const P = TICKET_OF[slug], T = TK_T[lang]; if (!P || !T) return "";
+  const name = P[lang] || P.en, q = lang === "ja" ? `${P.ja} チケット` : name;
+  const kl = klUrl(lang, q), kk = lang === "ja" ? "" : kkSearch(lang, name);
+  if (!kl && !kk) return "";
+  const btn = (u, label, gold) => (u ? `<a class="btn${gold ? " btn-gold" : ""}" href="${u}" target="_blank" rel="sponsored nofollow noopener">${label}</a>` : "");
+  return `<div class="panel" style="margin:4px 0 18px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px"><div><b style="font-size:17px">🎟️ ${esc(T.h(name))}</b> <span class="sl-pr">PR</span><p class="fine" style="margin:4px 0 0">${esc(T.sub)}</p></div><div style="display:flex;gap:8px;flex-wrap:wrap">${btn(kl, lang === "ja" ? "Klookでチケットを見る" : "Klook", true)}${btn(kk, "KKday", !kl)}</div></div>`;
 };
 const guides = require("./guides"); // 海外の旅行者向けガイド /{en,ko,zh-tw,zh-cn}/guide/（src/guides.js）
 // 外国語の商品ページ「日本のどこで買える？」から、初心者向けガイド（遊び方・両替機・免税）へのリンク文
@@ -1874,7 +1912,7 @@ ${content}
       lead: lang === "ja"
         ? `${L}のガチャガチャ${list.length}シリーズを新しい順にまとめました。最新は「${top.name}」（${t.month(top.release)}・1回${top.price}円）。それぞれのページで発売日・値段・全何種か・どこで売っているか（在庫店）を確認できます。`
         : t.x.charaLead(L, list.length),
-      list, current: "genre", ...charaExtra(ch, L, list),
+      list, current: "genre", ...charaExtra(ch, L, list), extra: ticketBlock(lang, ch.slug),
     });
   }
   {
