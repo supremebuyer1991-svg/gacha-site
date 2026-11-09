@@ -663,7 +663,12 @@ const overseas = (it) => {
   const out = {};
   if (site.amazon_us_tag) out.amazon = `https://www.amazon.com/s?k=${encodeURIComponent(q)}&tag=${encodeURIComponent(site.amazon_us_tag)}`;
   if (site.ebay_campid) out.ebay = `https://www.ebay.com/sch/i.html?${new URLSearchParams({ _nkw: q, mkcid: "1", mkrid: "711-53200-19255-0", siteid: "0", campid: String(site.ebay_campid), customid: "gachapla", toolid: "10001", mkevt: "1" }).toString()}`;
-  if (site.buyee_link && site.buyee_link.includes("{url}")) out.buyee = site.buyee_link.replace("{url}", encodeURIComponent(`https://buyee.jp/mercari/search?keyword=${encodeURIComponent(it.name.replace(/【[^】]*】/g, "").trim())}`));
+  // Buyee：日本のメルカリ・ヤフオクを海外から買える代行。キーワードは日本語名（出品者は日本語で出すため）
+  if (site.buyee_link && site.buyee_link.includes("{url}")) {
+    const kw = it.name.replace(/【[^】]*】/g, "").trim();
+    out.buyee = site.buyee_link.replace("{url}", encodeURIComponent(`https://buyee.jp/mercari/search?keyword=${encodeURIComponent(kw)}`));
+    out.buyeeYa = site.buyee_link.replace("{url}", encodeURIComponent(`https://buyee.jp/item/search/query/${encodeURIComponent(kw)}`));
+  }
   return out;
 };
 
@@ -1481,7 +1486,7 @@ ${content}
         // 英語：日本に来ている旅行者は日本のAmazonでも買える（ホテル・コンビニ受け取り）
         ...(!XLG && O.amazon ? [["sl-amz", L.amazon + "&language=en_US", "Amazon Japan"]] : []),
         ...(!XLG && O.ebay ? [["sl-ebay", O.ebay, "eBay"]] : []),
-        ...(O.buyee ? [["sl-buyee", O.buyee, "Buyee (Mercari Japan)"]] : []),
+        ...(O.buyee && lang !== "zh-tw" ? [["sl-buyee", O.buyee, "Buyee (Mercari Japan)"]] : []),
         ["sl-rak", L.rakuten, "Rakuten Japan"],
       ]; return `<div class="shop-links"><span class="sl-pr">PR</span>${b.map(([k, u, l]) => `<a class="sl ${k}" href="${esc(u)}" target="_blank" rel="sponsored nofollow noopener">${l}</a>`).join("")}</div>`; })() : (() => { const L = shopLinks(it); return `<div class="shop-links">${SW.chips ? `<span style="font-size:12.5px;font-weight:700;color:var(--text-2)">${esc(SW.chips)}</span>` : ""}<span class="sl-pr">PR</span><a class="sl sl-rak" href="${esc(L.rakuten)}" target="_blank" rel="sponsored nofollow noopener">楽天市場</a><a class="sl sl-amz" href="${esc(L.amazon)}" target="_blank" rel="sponsored nofollow noopener">Amazon</a><a class="sl sl-yah" href="${esc(L.yahoo)}" target="_blank" rel="sponsored nofollow noopener">Yahoo!ショッピング</a><a class="sl sl-mer" href="${esc(L.mercari)}" target="_blank" rel="${L.mercariAf ? "sponsored nofollow noopener" : "noopener"}">${esc(L.mercariLabel)}</a></div>`; })();
     const janHtml = L0.jan ? (lang !== "ja" ? `<p class="jan">JAN: <span>${L0.jan}</span></p>` : `<p class="jan">JANコード：<span>${L0.jan}</span></p>`) : "";
@@ -1533,14 +1538,16 @@ ${content}
     </aside>`;
     // メルカリ：公式ツールで作ったリンクがある商品だけ、そのURLをそのまま使う（PR表示つき）。なければふつうの検索ページ
     const merc = lang === "ja" && L0.mercariAf ? `<a class="btn" href="${esc(L0.mercari)}" target="_blank" rel="sponsored nofollow noopener">${t.mercari}<span class="pr">PR</span></a>` : `<a class="btn" href="https://jp.mercari.com/search?keyword=${encodeURIComponent(it.name)}" target="_blank" rel="noopener">${t.mercari}</a>`;
-    const fleaAside = lang !== "ja" && !O.buyee ? (t.fleaProxy ? `<p class="fine buy-note">${esc(t.fleaProxy)}</p>` : "") : `<aside class="buy flea" aria-label="${t.fleaTitle}">
+    const BUY_ON = lang !== "ja" && O.buyee && lang !== "zh-tw"; /* Buyee は台湾・香港が報酬の対象外 */
+    const BUYEE_T = { en: ["Buy from Mercari Japan via Buyee", "Yahoo! Auctions Japan via Buyee"], ko: ["Buyee로 일본 메루카리에서 구매", "Buyee로 야후 옥션에서 구매"], "zh-cn": ["通过Buyee在日本Mercari购买", "通过Buyee在雅虎拍卖购买"] }[lang] || ["Buy from Mercari Japan via Buyee", "Yahoo! Auctions Japan via Buyee"];
+    const fleaAside = lang !== "ja" && !BUY_ON ? (t.fleaProxy ? `<p class="fine buy-note">${esc(t.fleaProxy)}</p>` : "") : `<aside class="buy flea" aria-label="${t.fleaTitle}">
       <div>
         <h2 style="font-size:20px">${isOld && t.fleaTitleOld ? t.fleaTitleOld : t.fleaTitle}</h2>
         <p>${isOld && t.fleaLeadOld ? t.fleaLeadOld : t.fleaLead}</p>
       </div>
       <div class="btns">
-        ${lang !== "ja" && O.buyee ? `<a class="btn btn-gold" href="${esc(O.buyee)}" target="_blank" rel="sponsored nofollow noopener">Buy from Mercari Japan via Buyee</a>` : ""}
-        ${merc}${[["yahoo", `https://auctions.yahoo.co.jp/search/search?p=${encodeURIComponent(it.name)}`], ["rakuma", `https://fril.jp/s?query=${encodeURIComponent(it.name)}`]]
+        ${BUY_ON ? `<a class="btn btn-gold" href="${esc(O.buyee)}" target="_blank" rel="sponsored nofollow noopener">${esc(BUYEE_T[0])}<span class="pr">PR</span></a><a class="btn" href="${esc(O.buyeeYa)}" target="_blank" rel="sponsored nofollow noopener">${esc(BUYEE_T[1])}<span class="pr">PR</span></a>` : ""}
+        ${BUY_ON ? "" : merc + [["yahoo", `https://auctions.yahoo.co.jp/search/search?p=${encodeURIComponent(it.name)}`], ["rakuma", `https://fril.jp/s?query=${encodeURIComponent(it.name)}`]]
           .map(([k, u]) => `<a class="btn" href="${esc(u)}" target="_blank" rel="noopener">${t[k]}</a>`).join("")}
       </div>
     </aside>`;

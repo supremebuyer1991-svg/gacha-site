@@ -1476,7 +1476,7 @@
     if (/valuecommerce|yahoo/.test(host)) return "yahoo";
     if (/mercari/.test(host)) return "mercari";
     if (/ebay/.test(host)) return "ebay";
-    if (/buyee/.test(host)) return "buyee";
+    if (/buyee|io20\.info/.test(host)) return "buyee";
     return "";
   };
   document.addEventListener("click", function (e) {
