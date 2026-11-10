@@ -90,41 +90,50 @@ function music(file, secs, beats) {
     const seen = new Set(), pool = [];
     const has = (id) => fs.existsSync(path.join(ROOT, "images", `${id}.webp`));
     // 何を紹介するか（ユーザーの指定 11/10）：
-    //   月の1日＝今月発売／15日＝来月発売／月曜＝今週発売（どれもサンリオ・ディズニー・ちいかわ・たまごっち・めじるしを中心に）
-    //   ほかの日＝めじるしアクセサリー8選（過去・今・これからの中から、毎日なるべくかぶらないように順番に）
+    //   1・2枚目と最後の1枚＝人気の系統（サンリオ・たまごっち・ディズニー・ちいかわ・人気のめじるしアクセサリー）、間の5枚＝いい感じのガチャ
+    //   商品の範囲：月の1日＝今月発売／15日＝来月発売／月曜＝今週発売／ほかの日＝過去〜これからの全部（毎日なるべくかぶらないように順番に）
     const items = JSON.parse(fs.readFileSync(path.join(ROOT, "data", "items.json"), "utf8"));
+    let votes = {}; try { votes = JSON.parse(fs.readFileSync(path.join(ROOT, "data", "votes.json"), "utf8")) || {}; } catch (e) {}
+    const score = (i) => (Number(votes[i.id]) || 0) * 10 + (i.popularity || 0);
     const ym = x.today.slice(0, 7), d0 = new Date(x.today + "T00:00:00Z"); d0.setUTCMonth(d0.getUTCMonth() + 1); const ym2 = d0.toISOString().slice(0, 7);
     const dom = +x.today.slice(8, 10), dow = new Date(x.today + "T00:00:00Z").getUTCDay();
     const weekIds = new Set(((x.week && x.week.items) || []).map((i) => i.id));
     const day = Math.floor(Date.parse(x.today + "T00:00:00Z") / 864e5);
-    const MODE = process.env.REEL_MODE || (dom === 1 ? "month" : dom === 15 ? "next" : dow === 1 ? "week" : "mejirushi");
-    const CATS = [/サンリオ|ハローキティ|マイメロ|クロミ|シナモロール|ポムポムプリン|ポチャッコ|けろけろけろっぴ|ハンギョドン|タキシードサム/, /ディズニー|Disney|ミッキー|ミニー|ピクサー|スティッチ|トイ・ストーリー|くまのプーさん/, /ちいかわ|ハチワレ/, /たまごっち/, /めじるしアクセサリー/];
+    const MODE = process.env.REEL_MODE || (dom === 1 ? "month" : dom === 15 ? "next" : dow === 1 ? "week" : "daily");
+    const range = items.filter((i) => has(i.id) && (MODE === "week" ? weekIds.has(i.id) : MODE === "month" ? i.release === ym : MODE === "next" ? i.release === ym2 : true));
+    const CATS = [
+      { w: "サンリオ", re: /サンリオ|ハローキティ|マイメロ|クロミ|シナモロール|ポムポムプリン|ポチャッコ|けろけろけろっぴ|ハンギョドン|タキシードサム/ },
+      { w: "たまごっち", re: /たまごっち/ },
+      { w: "ディズニー", re: /ディズニー|Disney|ミッキー|ミニー|ピクサー|スティッチ|トイ・ストーリー|TOY STORY|くまのプーさん/ },
+      { w: "ちいかわ", re: /ちいかわ|ハチワレ/ },
+      { w: "めじるしアクセサリー", re: /めじるしアクセサリー/ },
+    ];
+    const catOf = (i) => CATS.findIndex((c) => c.re.test(i.name));
     const add = (it) => { if (pool.length < 8 && it && it.id && !seen.has(it.id) && has(it.id)) { seen.add(it.id); pool.push(it); } };
-    // 5つの系統から順番に1つずつ（日ごとにずらす）→ 足りなければ残りの商品で
-    const fillFav = (cands) => {
-      const buckets = CATS.map((re, ci) => { const L = cands.filter((i) => CATS.findIndex((r) => r.test(i.name)) === ci); const r = L.length ? (day * 2 + ci) % L.length : 0; return [...L.slice(r), ...L.slice(0, r)]; });
-      for (let round = 0; pool.length < 8 && buckets.some((bk) => bk.length > round); round++) for (const bk of buckets) add(bk[round]);
-      for (const it of cands) add(it);
-    };
-    let title, sub, top, word = "", kw = [];
-    if (MODE === "mejirushi") {
-      // 名前から決まる順番（毎回同じ）に並べて、日ごとに8つずつ進める＝約3週間はかぶらない
-      const h = (s) => { let v = 2166136261; for (const c of s) v = Math.imul(v ^ c.codePointAt(0), 16777619) >>> 0; return v; };
-      const L = items.filter((i) => /めじるしアクセサリー/.test(i.name) && has(i.id)).sort((p, q) => h(p.id) - h(q.id));
-      const start = L.length ? (day * 8) % L.length : 0;
-      for (let k = 0; k < L.length && pool.length < 8; k++) add(L[(start + k) % L.length]);
-      title = "めじるしアクセサリーが可愛すぎる♡"; sub = `今日の${pool.length}選`; top = "めじるし";
-    } else {
-      const cands = (MODE === "week" ? items.filter((i) => weekIds.has(i.id)) : items.filter((i) => i.release === (MODE === "month" ? ym : ym2)))
-        .filter((i) => has(i.id)).sort((p, q) => String(q.added || "").localeCompare(String(p.added || "")) || p.id.localeCompare(q.id));
-      fillFav(cands);
-      title = MODE === "week" ? "今週発売のガチャが熱い🔥" : MODE === "month" ? "今月発売のガチャが熱い🔥" : "来月発売のガチャが熱い🔥";
-      sub = MODE === "week" && x.week ? `${x.week.from}〜${x.week.to}` : `${+(MODE === "month" ? ym : ym2).slice(5)}月発売`;
-      top = MODE === "week" ? "今週発売" : MODE === "month" ? "今月発売" : "来月発売";
-      // 最後のコーナー：かわいい系の商品は最後にまとめて（表紙で「ラストの〇〇が可愛すぎる♡」と予告）
-      const KAWAII = ["めじるしアクセサリー", "サンリオ", "ちいかわ", "たまごっち", "ディズニー"];
-      for (const w of KAWAII) { const m = pool.filter((i) => clean(i.name).includes(w) || (w === "サンリオ" && CATS[0].test(i.name)) || (w === "ディズニー" && CATS[1].test(i.name))); if (m.length && m.length < pool.length) { word = w; kw = m; break; } }
+    const h = (str) => { let v = 2166136261; for (const c of str) v = Math.imul(v ^ c.codePointAt(0), 16777619) >>> 0; return v; };
+    // 系統ごとの並び：人気順（めじるしは人気の上位から）。毎日ずらして使う
+    const lists = CATS.map((c, ci) => range.filter((i) => catOf(i) === ci).sort((p, q) => score(q) - score(p) || p.id.localeCompare(q.id)));
+    const pickCat = (ci, k) => { const L = lists[ci]; if (!L.length) return null; const n = MODE === "daily" ? Math.min(L.length, ci === 4 ? 40 : L.length) : L.length; return L[(Math.floor(day / 5) * 1 + k) % n]; };
+    const favPicks = [];
+    for (let k = 0, tries = 0; favPicks.length < 3 && tries < 15; tries++, k++) {
+      const ci = (day + k) % 5; const it = pickCat(ci, Math.floor(k / 5)); if (it && !favPicks.includes(it)) favPicks.push(it);
     }
+    // 間の5枚：人気の系統以外から、人気の高いほうの半分くらいを候補に、名前で決まる順番で日ごとに5つずつ進める（同じシリーズ名が続かないように）
+    let mid = range.filter((i) => catOf(i) < 0).sort((p, q) => score(q) - score(p));
+    if (MODE === "daily") mid = mid.slice(0, Math.max(60, Math.floor(mid.length / 2)));
+    mid.sort((p, q) => h(p.id) - h(q.id));
+    const midPicks = [], heads = new Set();
+    const st = mid.length ? (MODE === "daily" ? (day * 5) % mid.length : 0) : 0;
+    for (let k = 0; k < mid.length && midPicks.length < 5; k++) { const it = mid[(st + k) % mid.length]; const hd = clean(it.name).slice(0, 5); if (heads.has(hd)) continue; heads.add(hd); midPicks.push(it); }
+    for (const it of [favPicks[0], favPicks[1], ...midPicks, favPicks[2]]) add(it);
+    for (const it of [...lists.flat(), ...mid]) add(it); // 足りなければ埋める
+    const lastFav = favPicks[2] || null;
+    let title, sub, top, word = "", kw = [];
+    title = MODE === "week" ? "今週発売のガチャが熱い🔥" : MODE === "month" ? "今月発売のガチャが熱い🔥" : MODE === "next" ? "来月発売のガチャが熱い🔥" : "今日のおすすめガチャ🔥";
+    sub = MODE === "week" && x.week ? `${x.week.from}〜${x.week.to}` : MODE === "month" ? `${+ym.slice(5)}月発売` : MODE === "next" ? `${+ym2.slice(5)}月発売` : `${+x.today.slice(5, 7)}/${dom}`;
+    top = MODE === "week" ? "今週発売" : MODE === "month" ? "今月発売" : MODE === "next" ? "来月発売" : "おすすめ";
+    // 最後の1枚は表紙で「ラストの〇〇が可愛すぎる♡」と予告する
+    if (lastFav && pool[pool.length - 1] === lastFav) { word = CATS[catOf(lastFav)].w; kw = [lastFav]; }
     if (pool.length < 3) { console.log("リール：写真のある商品が足りないので作りません"); return; }
     fs.rmSync(TMP, { recursive: true, force: true }); fs.mkdirSync(TMP, { recursive: true }); fs.mkdirSync(OUT, { recursive: true });
     const frames = [];
