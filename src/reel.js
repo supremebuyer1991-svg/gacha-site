@@ -24,7 +24,7 @@ const LOGO = `<text x="${W / 2 - 8}" y="${H - 120}" text-anchor="end" font-famil
 
 async function cover(title, sub, ids, file, word) {
   // 中身は見せずに「なにが出る？」と思わせる表紙：モザイクの写真＋「？」
-  const fsz = title.length > 11 ? 84 : 100;
+  const fsz = Math.min(100, Math.floor(1000 / [...title].length));
   const svg = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">${BG}
 <text x="${W / 2}" y="300" text-anchor="middle" font-family="${FONT}" font-weight="900" font-size="${fsz}" fill="#fff" stroke="#ff4f7b" stroke-width="12" paint-order="stroke" stroke-linejoin="round">${esc(title)}</text>
 <rect x="${W / 2 - 230}" y="360" width="460" height="74" rx="37" fill="#ffc93c"/>
@@ -89,30 +89,45 @@ function music(file, secs, beats) {
     const x = JSON.parse(fs.readFileSync(path.join(ROOT, "dist", "data", "x.json"), "utf8"));
     const seen = new Set(), pool = [];
     const has = (id) => fs.existsSync(path.join(ROOT, "images", `${id}.webp`));
-    // 今週発売（人気の系統が先）→ 注目の新作 の順に、写真のある商品を8つ
-    // ユーザーの希望（11/10）：サンリオ・ディズニー・ちいかわ・たまごっち・めじるしアクセサリーを中心に。
-    // 今月・来月発売の商品から、その5つに当てはまるものを先に（毎日同じにならないよう日ごとにずらす）、足りなければ今週発売のほかの商品で埋める
-    const KEY = /サンリオ|ハローキティ|マイメロ|クロミ|シナモロール|ポムポムプリン|ポチャッコ|けろけろけろっぴ|ハンギョドン|タキシードサム|ディズニー|ミッキー|ミニー|ピクサー|スティッチ|トイ・ストーリー|くまのプーさん|ちいかわ|ハチワレ|たまごっち|めじるしアクセサリー/;
+    // 何を紹介するか（ユーザーの指定 11/10）：
+    //   月の1日＝今月発売／15日＝来月発売／月曜＝今週発売（どれもサンリオ・ディズニー・ちいかわ・たまごっち・めじるしを中心に）
+    //   ほかの日＝めじるしアクセサリー8選（過去・今・これからの中から、毎日なるべくかぶらないように順番に）
     const items = JSON.parse(fs.readFileSync(path.join(ROOT, "data", "items.json"), "utf8"));
     const ym = x.today.slice(0, 7), d0 = new Date(x.today + "T00:00:00Z"); d0.setUTCMonth(d0.getUTCMonth() + 1); const ym2 = d0.toISOString().slice(0, 7);
+    const dom = +x.today.slice(8, 10), dow = new Date(x.today + "T00:00:00Z").getUTCDay();
     const weekIds = new Set(((x.week && x.week.items) || []).map((i) => i.id));
     const day = Math.floor(Date.parse(x.today + "T00:00:00Z") / 864e5);
-    const fresh = items.filter((i) => (i.release === ym || i.release === ym2 || weekIds.has(i.id)) && has(i.id));
-    const fav = fresh.filter((i) => KEY.test(i.name)).sort((a, b) => (weekIds.has(b.id) - weekIds.has(a.id)) || String(b.added || "").localeCompare(String(a.added || "")) || a.id.localeCompare(b.id));
-    // 5つの系統から順番に1つずつ（今週発売のものを先に。ほかは日ごとにずらす）
+    const MODE = process.env.REEL_MODE || (dom === 1 ? "month" : dom === 15 ? "next" : dow === 1 ? "week" : "mejirushi");
     const CATS = [/サンリオ|ハローキティ|マイメロ|クロミ|シナモロール|ポムポムプリン|ポチャッコ|けろけろけろっぴ|ハンギョドン|タキシードサム/, /ディズニー|Disney|ミッキー|ミニー|ピクサー|スティッチ|トイ・ストーリー|くまのプーさん/, /ちいかわ|ハチワレ/, /たまごっち/, /めじるしアクセサリー/];
-    const buckets = CATS.map((re, ci) => { const L = fav.filter((i) => re.test(i.name) && CATS.findIndex((r) => r.test(i.name)) === ci); const wk = L.filter((i) => weekIds.has(i.id)), rest = L.filter((i) => !weekIds.has(i.id)); const r = rest.length ? (day * 2 + ci) % rest.length : 0; return [...wk, ...rest.slice(r), ...rest.slice(0, r)]; });
-    for (let round = 0; pool.length < 8 && buckets.some((b) => b.length > round); round++) for (const bk of buckets) { if (pool.length >= 8) break; const it = bk[round]; if (it && !seen.has(it.id)) { seen.add(it.id); pool.push(it); } }
-    for (const it of ((x.week && x.week.items) || [])) { if (pool.length >= 8) break; if (it && !seen.has(it.id) && has(it.id)) { seen.add(it.id); pool.push(it); } }
-    const allWeek = pool.length && pool.every((i) => weekIds.has(i.id));
-    let title = allWeek ? "今週発売のガチャが熱い🔥" : "新作ガチャが熱い🔥", sub = allWeek && x.week ? `${x.week.from}〜${x.week.to}` : `${+ym.slice(5)}月・${+ym2.slice(5)}月発売`, top = allWeek ? "今週発売" : "新作";
+    const add = (it) => { if (pool.length < 8 && it && it.id && !seen.has(it.id) && has(it.id)) { seen.add(it.id); pool.push(it); } };
+    // 5つの系統から順番に1つずつ（日ごとにずらす）→ 足りなければ残りの商品で
+    const fillFav = (cands) => {
+      const buckets = CATS.map((re, ci) => { const L = cands.filter((i) => CATS.findIndex((r) => r.test(i.name)) === ci); const r = L.length ? (day * 2 + ci) % L.length : 0; return [...L.slice(r), ...L.slice(0, r)]; });
+      for (let round = 0; pool.length < 8 && buckets.some((bk) => bk.length > round); round++) for (const bk of buckets) add(bk[round]);
+      for (const it of cands) add(it);
+    };
+    let title, sub, top, word = "", kw = [];
+    if (MODE === "mejirushi") {
+      // 名前から決まる順番（毎回同じ）に並べて、日ごとに8つずつ進める＝約3週間はかぶらない
+      const h = (s) => { let v = 2166136261; for (const c of s) v = Math.imul(v ^ c.codePointAt(0), 16777619) >>> 0; return v; };
+      const L = items.filter((i) => /めじるしアクセサリー/.test(i.name) && has(i.id)).sort((p, q) => h(p.id) - h(q.id));
+      const start = L.length ? (day * 8) % L.length : 0;
+      for (let k = 0; k < L.length && pool.length < 8; k++) add(L[(start + k) % L.length]);
+      title = "めじるしアクセサリーが可愛すぎる♡"; sub = `今日の${pool.length}選`; top = "めじるし";
+    } else {
+      const cands = (MODE === "week" ? items.filter((i) => weekIds.has(i.id)) : items.filter((i) => i.release === (MODE === "month" ? ym : ym2)))
+        .filter((i) => has(i.id)).sort((p, q) => String(q.added || "").localeCompare(String(p.added || "")) || p.id.localeCompare(q.id));
+      fillFav(cands);
+      title = MODE === "week" ? "今週発売のガチャが熱い🔥" : MODE === "month" ? "今月発売のガチャが熱い🔥" : "来月発売のガチャが熱い🔥";
+      sub = MODE === "week" && x.week ? `${x.week.from}〜${x.week.to}` : `${+(MODE === "month" ? ym : ym2).slice(5)}月発売`;
+      top = MODE === "week" ? "今週発売" : MODE === "month" ? "今月発売" : "来月発売";
+      // 最後のコーナー：かわいい系の商品は最後にまとめて（表紙で「ラストの〇〇が可愛すぎる♡」と予告）
+      const KAWAII = ["めじるしアクセサリー", "サンリオ", "ちいかわ", "たまごっち", "ディズニー"];
+      for (const w of KAWAII) { const m = pool.filter((i) => clean(i.name).includes(w) || (w === "サンリオ" && CATS[0].test(i.name)) || (w === "ディズニー" && CATS[1].test(i.name))); if (m.length && m.length < pool.length) { word = w; kw = m; break; } }
+    }
     if (pool.length < 3) { console.log("リール：写真のある商品が足りないので作りません"); return; }
     fs.rmSync(TMP, { recursive: true, force: true }); fs.mkdirSync(TMP, { recursive: true }); fs.mkdirSync(OUT, { recursive: true });
     const frames = [];
-    // 最後のコーナー：かわいい系（めじるしアクセサリー・サンリオ・ちいかわ…）の商品があれば、最後にまとめて「〇〇が可愛すぎる♡」→その商品を紹介
-    const KAWAII = ["めじるしアクセサリー", "サンリオ", "ちいかわ", "たまごっち", "ディズニー", "すみっコぐらし", "ポケモン", "リラックマ", "カピバラさん"];
-    let word = "", kw = [];
-    for (const w of KAWAII) { const m = pool.filter((i) => clean(i.name).includes(w) || (w === "サンリオ" && /ハローキティ|マイメロ|クロミ|シナモロール|ポムポムプリン/.test(i.name))); if (m.length) { word = w; kw = m; break; } }
     const main = pool.filter((i) => !kw.includes(i));
     await cover(title, sub, pool.map((i) => i.id), path.join(TMP, "f0.png"), word); frames.push([path.join(TMP, "f0.png"), 1.8]);
     for (let i = 0; i < main.length; i++) { const f = path.join(TMP, `f${i + 1}.png`); await card(main[i], i, pool.length, f, top); frames.push([f, 2.0]); }
