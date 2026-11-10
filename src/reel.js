@@ -28,8 +28,7 @@ async function cover(title, sub, ids, file) {
   const svg = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">${BG}
 <text x="${W / 2}" y="300" text-anchor="middle" font-family="${FONT}" font-weight="900" font-size="${fsz}" fill="#fff" stroke="#ff4f7b" stroke-width="12" paint-order="stroke" stroke-linejoin="round">${esc(title)}</text>
 <rect x="${W / 2 - 230}" y="360" width="460" height="74" rx="37" fill="#ffc93c"/>
-<text x="${W / 2}" y="412" text-anchor="middle" font-family="${FONT}" font-weight="900" font-size="40" fill="#1b1f5e">${esc(sub)}</text>
-<text x="${W / 2}" y="1560" text-anchor="middle" font-family="${FONT}" font-weight="900" font-size="64" fill="#ffc93c">中身は動画で👀</text>${LOGO}</svg>`);
+<text x="${W / 2}" y="412" text-anchor="middle" font-family="${FONT}" font-weight="900" font-size="40" fill="#1b1f5e">${esc(sub)}</text>${LOGO}</svg>`);
   const layers = [], S = 440, g = 30, x0 = (W - S * 2 - g) / 2, y0 = 520;
   for (let i = 0; i < Math.min(4, ids.length); i++) {
     const x = Math.round(x0 + (i % 2) * (S + g)), y = y0 + Math.floor(i / 2) * (S + g);
@@ -37,7 +36,7 @@ async function cover(title, sub, ids, file) {
     const tile = await sharp(await mosaic(ids[i], S - 16, S - 16)).composite([{ input: mask, blend: "dest-in" }]).png().toBuffer();
     layers.push({ input: Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${S}" height="${S}"><rect x="4" y="4" width="${S - 8}" height="${S - 8}" rx="34" fill="#fff" stroke="${RING[i]}" stroke-width="8"/></svg>`), left: x, top: y });
     layers.push({ input: tile, left: x + 8, top: y + 8 });
-    layers.push({ input: Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${S}" height="${S}"><circle cx="${S / 2}" cy="${S / 2}" r="92" fill="#1b1f5e" fill-opacity="0.82"/><text x="${S / 2}" y="${S / 2 + 52}" text-anchor="middle" font-family="${LAT}" font-weight="700" font-size="150" fill="#fff">?</text></svg>`), left: x, top: y });
+    layers.push({ input: Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${S}" height="${S}"><circle cx="${S / 2}" cy="${S / 2}" r="60" fill="#1b1f5e" fill-opacity="0.6"/><text x="${S / 2}" y="${S / 2 + 34}" text-anchor="middle" font-family="${LAT}" font-weight="700" font-size="96" fill="#fff">?</text></svg>`), left: x, top: y });
   }
   await sharp(svg).composite(layers).png().toFile(file);
 }
@@ -46,7 +45,7 @@ async function photo(id, w, h) {
 }
 // 表紙用：写真をモザイクにして中身を隠す
 async function mosaic(id, w, h) {
-  const small = await sharp(path.join(ROOT, "images", `${id}.webp`)).flatten({ background: "#ffffff" }).trim({ background: "#ffffff", threshold: 12 }).resize(10, 10, { fit: "cover" }).toBuffer();
+  const small = await sharp(path.join(ROOT, "images", `${id}.webp`)).flatten({ background: "#ffffff" }).trim({ background: "#ffffff", threshold: 12 }).resize(36, 36, { fit: "contain", background: "#ffffff" }).toBuffer();
   return sharp(small).resize(w, h, { kernel: "nearest" }).toBuffer();
 }
 async function card(it, i, n, file, top) {
