@@ -86,6 +86,12 @@ jobs:
           (fc-list | grep -qi "Noto Sans CJK") || (sudo apt-get install -y -qq fonts-noto-cjk > /dev/null 2>&1 || true)
           node src/social-img.js
 
+      - name: Instagram リールの動画を作る
+        continue-on-error: true
+        run: |
+          command -v ffmpeg > /dev/null || (sudo apt-get install -y -qq ffmpeg > /dev/null 2>&1 || true)
+          node src/reel.js
+
       - name: Cloudflare の在庫データベースを準備
         id: d1
         continue-on-error: true

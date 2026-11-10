@@ -3,6 +3,7 @@
 //   GitHub の Secret「GACHA_THREADS_TOKEN」「GACHA_IG_TOKEN」にアクセストークンを入れると動く（無ければその分は何もしない）
 //   MODE=morning … Threads：今日の注目ガチャ（1つ、写真1枚）
 //   MODE=evening … Threads：今日のテーマのガチャ4選（写真4枚）／Instagram：同じ4選のカルーセル
+//   MODE=reel    … Instagram：リール（デプロイで作った dist/images/social/reel-日付.mp4。src/reel.js）
 // ・トークンは約60日で切れるので、20日ごとに自動で延長し、延長したものは data/social-state.json に暗号化して保存する
 // ・同じ商品を続けて出さないよう、出した商品を state に記録する（14日間）
 "use strict";
@@ -90,6 +91,21 @@ async function igPost(tok, caption, ids) {
   return true;
 }
 
+// ---- Instagram リール（動画は gachapla.com に置いたものを Instagram が取りに来る）----
+async function igReel(tok, caption, videoUrl, coverUrl) {
+  if (DRY) { log("[DRY instagram reel]", caption, videoUrl, coverUrl); return true; }
+  const call = async (p, params) => { const r = await fetch(`${IG}/${p}`, { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: new URLSearchParams({ ...params, access_token: tok }) }).then((x) => x.json()); if (!r.id) throw new Error(JSON.stringify(r).slice(0, 300)); return r.id; };
+  const cid = await call(`${IG_ID}/media`, { media_type: "REELS", video_url: videoUrl, cover_url: coverUrl, caption, share_to_feed: "true" });
+  for (let i = 0; i < 60; i++) { // 動画の処理は数十秒〜数分かかる
+    const r = await fetch(`${IG}/${cid}?fields=status_code,status&access_token=${encodeURIComponent(tok)}`).then((x) => x.json());
+    if (r.status_code === "FINISHED") break;
+    if (r.status_code === "ERROR" || r.status_code === "EXPIRED") throw new Error("動画の処理に失敗 " + JSON.stringify(r).slice(0, 200));
+    await sleep(5000);
+  }
+  await call(`${IG_ID}/media_publish`, { creation_id: cid });
+  return true;
+}
+
 (async () => {
   const thSecret = (process.env.GACHA_THREADS_TOKEN || "").trim(), igSecret = (process.env.GACHA_IG_TOKEN || "").trim();
   if (!thSecret && !igSecret && !DRY) { log("トークンがないので何もしません"); return; }
@@ -109,6 +125,23 @@ async function igPost(tok, caption, ids) {
       try { const tok = await refresh("threads", thSecret, tokenOf("threads", thSecret), "https://graph.threads.net/refresh_access_token?grant_type=th_refresh_token&access_token="); await thPost(tok, short(text, 490), [it.id]); done[it.id] = today; changed = true; log("Threads：注目ガチャを投稿", it.name); }
       catch (e) { log("⚠ Threads の投稿に失敗", e.message); }
     } else log("Threads：出せる商品がありません");
+  }
+
+  if (MODE === "reel" && (igSecret || DRY)) {
+    const st = (state.instagram ||= {});
+    let rl = null;
+    try { rl = LOCAL ? JSON.parse(fs.readFileSync(path.join(ROOT, "dist", "data", "social-reel.json"), "utf8")) : await getJSON(`${SITE}/data/social-reel.json`); } catch (e) { log("⚠ リールのデータが読めません", e.message); }
+    if (!rl || rl.date !== today) log("今日のリールがまだありません");
+    else if (st.reel_date === today) log("今日のリールはもう投稿済み");
+    else {
+      const kw = new Set(rl.kawaii || []);
+      const main = rl.items.filter((i) => !kw.has(i.id)), kws = rl.items.filter((i) => kw.has(i.id));
+      const line = (it, i) => `${i + 1}. ${it.name}（${it.price}円・全${it.lineup}種）`;
+      const tags = ["#ガチャガチャ", "#ガチャ", "#カプセルトイ", "#ガシャポン", "#新作ガチャ", "#ガチャ活", "#今週発売", rl.word ? `#${rl.word.replace(/\s/g, "")}` : ""].filter(Boolean);
+      const cap = [`${rl.title}（${rl.sub}）`, ``, ...main.map(line), ...(kws.length ? [``, `ラストの${rl.word}が可愛すぎる♡`, ...kws.map((it, j) => line(it, main.length + j))] : []), ``, `どれを回したい？コメントで教えてね🪐`, `発売日・近くの在庫店は、プロフィールのリンク（gachapla.com）から検索できます`, ``, [...new Set(tags)].join(" ")].join("\n");
+      try { await igReel(igSecret, cap.slice(0, 2100), rl.url, rl.cover); st.reel_date = today; changed = true; log("Instagram：リールを投稿", rl.title); }
+      catch (e) { log("⚠ Instagram のリール投稿に失敗", e.message); }
+    }
   }
 
   if (MODE === "evening" || MODE === "instagram") {

@@ -1,15 +1,16 @@
 # Threads・Instagram（ガチャ用アカウント）への自動投稿
-# 朝 8:07（Threads：今日の注目ガチャ）と 夜 20:37（Threads と Instagram：今日のテーマのガチャ4選）
+# 朝 8:07（Threads：今日の注目ガチャ）、昼 12:37（Instagram リール）、夜 20:37（Threads と Instagram：今日のテーマのガチャ4選）
 name: SNSに投稿
 
 on:
   schedule:
     - cron: "7 23 * * *"   # 日本時間 8:07
     - cron: "37 11 * * *"  # 日本時間 20:37
+    - cron: "37 3 * * *"   # 日本時間 12:37（Instagram リール）
   workflow_dispatch:
     inputs:
       mode:
-        description: "morning・evening・instagram（Instagramだけ）"
+        description: "morning・evening・instagram（Instagramだけ）・reel（Instagramリール）"
         default: "evening"
 
 concurrency:
@@ -30,7 +31,7 @@ jobs:
         env:
           GACHA_THREADS_TOKEN: ${{ secrets.GACHA_THREADS_TOKEN }}
           GACHA_IG_TOKEN: ${{ secrets.GACHA_IG_TOKEN }}
-          MODE: ${{ github.event.inputs.mode || (github.event.schedule == '7 23 * * *' && 'morning' || 'evening') }}
+          MODE: ${{ github.event.inputs.mode || (github.event.schedule == '7 23 * * *' && 'morning' || (github.event.schedule == '37 3 * * *' && 'reel' || 'evening')) }}
         run: node src/social.js
       - name: 投稿した記録を保存
         run: |

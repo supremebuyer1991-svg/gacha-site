@@ -122,7 +122,7 @@ function music(file, secs, beats) {
     execFileSync("ffmpeg", args, { stdio: ["ignore", "ignore", "pipe"] });
     await sharp(frames[0][0]).jpeg({ quality: 86 }).toFile(path.join(OUT, file.replace(/\.mp4$/, ".jpg"))); // リールの表紙（グリッドに出る画像）
     fs.rmSync(TMP, { recursive: true, force: true });
-    fs.writeFileSync(path.join(ROOT, "dist", "data", "social-reel.json"), JSON.stringify({ date: x.today, title, sub, url: `https://gachapla.com/images/social/${file}`, cover: `https://gachapla.com/images/social/${file.replace(/\.mp4$/, ".jpg")}`, items: pool.map((i) => ({ id: i.id, name: clean(i.name), price: i.price, lineup: i.lineup })) }));
+    fs.writeFileSync(path.join(ROOT, "dist", "data", "social-reel.json"), JSON.stringify({ date: x.today, title, sub, word, kawaii: kw.map((i) => i.id), url: `https://gachapla.com/images/social/${file}`, cover: `https://gachapla.com/images/social/${file.replace(/\.mp4$/, ".jpg")}`, items: pool.map((i) => ({ id: i.id, name: clean(i.name), price: i.price, lineup: i.lineup })) }));
     console.log(`リール：${title}（${pool.length}商品・${total.toFixed(1)}秒）`);
   } catch (e) { console.log(`⚠ リール: ${e.message}`); fs.rmSync(TMP, { recursive: true, force: true }); }
 })();
