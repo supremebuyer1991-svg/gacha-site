@@ -2899,6 +2899,8 @@ write("sw.js", fs.readFileSync(path.join(__dirname, "sw.js"), "utf8"));
 write("x-img.html", fs.readFileSync(path.join(__dirname, "tpl", "x-img.html"), "utf8").replace("__FONTS__", FONTS));
 if (fs.existsSync(path.join(ROOT, "brand", "logo-lab.html"))) write("logo-lab.html", fs.readFileSync(path.join(ROOT, "brand", "logo-lab.html"), "utf8"));
 if (site.indexnow_key) fs.writeFileSync(path.join(OUT, site.indexnow_key + ".txt"), site.indexnow_key);
+// TikTok の開発者ページの「URLプロパティ」の確認ファイル（TikTok が写真を gachapla.com から取りに来るため）
+if (site.tiktok_verification) fs.writeFileSync(path.join(OUT, `tiktok${site.tiktok_verification}.txt`), `tiktok-developers-site-verification=${site.tiktok_verification}`);
 write("robots.txt", `User-agent: *\nAllow: /\nDisallow: /api/\nDisallow: /x-img\nDisallow: /logo-lab\nSitemap: ${SITE_URL}/sitemap.xml\n`);
 // Cloudflare の窓口（functions/）を動かすのは、ページと /api/ だけ（画像などでは動かさず、無料の回数を節約する）
 // ふつうのページは Functions を通さない（無料枠：1日10万回を節約）。古い住所の転送と /api だけ通す
