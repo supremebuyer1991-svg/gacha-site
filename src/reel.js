@@ -1,4 +1,4 @@
-// Instagram リール用の縦長動画（1080×1920・約14秒）を作る。サイトを作ったあと（deploy の SNS画像の手順のあと）に動く。
+// Instagram リール用の縦長動画（1080×1920・約17秒）を作る。サイトを作ったあと（deploy の SNS画像の手順のあと）に動く。
 // 中身：表紙 → 商品8つ（写真を大きく・名前・値段・全何種・発売）→ しめ。音はこのファイルで作るオリジナルのピコピコ音（著作権の心配なし）。
 // 出力：dist/images/social/reel-{日付}.mp4 と dist/data/social-reel.json（social.js が Instagram に投稿するときに読む）
 const fs = require("fs"), path = require("path"), { execFileSync } = require("child_process");
@@ -71,7 +71,7 @@ async function outro(file) {
 
 // オリジナルのBGM（矩形波のメロディ＋ベース＋カプセルの「ポン」）。WAV を書き出す
 function music(file, secs, beats) {
-  const sr = 44100, N = Math.round(sr * secs), buf = new Float32Array(N), bpm = 150, sb = 60 / bpm / 2; // 8分音符
+  const sr = 44100, N = Math.round(sr * secs), buf = new Float32Array(N), bpm = 138, sb = 60 / bpm / 2; // 8分音符
   const hz = (m) => 440 * Math.pow(2, (m - 69) / 12);
   const mel = [72, 76, 79, 76, 81, 79, 76, 72, 74, 77, 81, 77, 79, 76, 72, 0, 72, 76, 79, 84, 83, 79, 76, 74, 72, 74, 76, 79, 76, 74, 72, 0];
   const bass = [48, 48, 55, 55, 53, 53, 55, 55];
@@ -97,11 +97,11 @@ function music(file, secs, beats) {
     if (pool.length < 3) { console.log("リール：写真のある商品が足りないので作りません"); return; }
     fs.rmSync(TMP, { recursive: true, force: true }); fs.mkdirSync(TMP, { recursive: true }); fs.mkdirSync(OUT, { recursive: true });
     const frames = [];
-    await cover(title, sub, pool.map((i) => i.id), path.join(TMP, "f0.png")); frames.push([path.join(TMP, "f0.png"), 1.5]);
-    for (let i = 0; i < pool.length; i++) { const f = path.join(TMP, `f${i + 1}.png`); await card(pool[i], i, pool.length, f, top); frames.push([f, 1.55]); }
+    await cover(title, sub, pool.map((i) => i.id), path.join(TMP, "f0.png")); frames.push([path.join(TMP, "f0.png"), 1.8]);
+    for (let i = 0; i < pool.length; i++) { const f = path.join(TMP, `f${i + 1}.png`); await card(pool[i], i, pool.length, f, top); frames.push([f, 2.0]); }
     await outro(path.join(TMP, "fz.png")); frames.push([path.join(TMP, "fz.png"), 2.2]);
-    // 切り替え（0.22秒のスライド）でつなぐ
-    const T = 0.22, total = frames.reduce((s, [, d]) => s + d, 0) - T * (frames.length - 1);
+    // 切り替え（0.28秒のスライド）でつなぐ
+    const T = 0.28, total = frames.reduce((s, [, d]) => s + d, 0) - T * (frames.length - 1);
     const beats = []; let acc = 0; for (let i = 0; i < frames.length - 1; i++) { acc += frames[i][1] - T; beats.push(acc); }
     music(path.join(TMP, "bgm.wav"), total, beats);
     const args = ["-y"]; for (const [f, d] of frames) args.push("-loop", "1", "-t", String(d + 0.05), "-i", f);
