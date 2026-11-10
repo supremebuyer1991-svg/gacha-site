@@ -1,6 +1,6 @@
 // Instagram リール用の縦長動画（1080×1920・約17秒）を作る。サイトを作ったあと（deploy の SNS画像の手順のあと）に動く。
 // 中身：表紙 → 商品8つ（写真を大きく・名前・値段・全何種・発売）→ しめ。音はこのファイルで作るオリジナルのピコピコ音（著作権の心配なし）。
-// 出力：dist/images/social/reel-{日付}.mp4 と dist/data/social-reel.json（social.js が Instagram に投稿するときに読む）
+// 出力：dist/images/social/reel-{日付}.mp4（TikTok 用の音なし版 reel-{日付}-silent.mp4 も） と dist/data/social-reel.json（social.js が Instagram に投稿するときに読む）
 const fs = require("fs"), path = require("path"), { execFileSync } = require("child_process");
 let sharp; try { sharp = require("sharp"); } catch (e) { console.log("sharp がないのでリールは作りません"); process.exit(0); }
 const ROOT = path.join(__dirname, ".."), OUT = path.join(ROOT, "dist", "images", "social"), TMP = path.join(ROOT, ".reel-tmp");
@@ -120,6 +120,8 @@ function music(file, secs, beats) {
     const file = `reel-${x.today}.mp4`;
     args.push("-filter_complex", fc, "-map", `[${last}]`, "-map", `${frames.length}:a`, "-c:v", "libx264", "-preset", "veryfast", "-crf", "23", "-pix_fmt", "yuv420p", "-r", "30", "-c:a", "aac", "-b:a", "128k", "-shortest", "-movflags", "+faststart", path.join(OUT, file));
     execFileSync("ffmpeg", args, { stdio: ["ignore", "ignore", "pipe"] });
+    // TikTok 用の音なし版（アプリで流行りの曲をのせるため）
+    execFileSync("ffmpeg", ["-y", "-i", path.join(OUT, file), "-c:v", "copy", "-an", "-movflags", "+faststart", path.join(OUT, file.replace(/\.mp4$/, "-silent.mp4"))], { stdio: ["ignore", "ignore", "pipe"] });
     await sharp(frames[0][0]).jpeg({ quality: 86 }).toFile(path.join(OUT, file.replace(/\.mp4$/, ".jpg"))); // リールの表紙（グリッドに出る画像）
     fs.rmSync(TMP, { recursive: true, force: true });
     fs.writeFileSync(path.join(ROOT, "dist", "data", "social-reel.json"), JSON.stringify({ date: x.today, title, sub, word, kawaii: kw.map((i) => i.id), url: `https://gachapla.com/images/social/${file}`, cover: `https://gachapla.com/images/social/${file.replace(/\.mp4$/, ".jpg")}`, items: pool.map((i) => ({ id: i.id, name: clean(i.name), price: i.price, lineup: i.lineup })) }));
