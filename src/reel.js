@@ -51,16 +51,23 @@ async function mosaic(id, w, h) {
   return sharp(small).resize(w, h, { kernel: "nearest" }).toBuffer();
 }
 async function card(it, i, n, file, top) {
-  // TikTok の実際の画面で測った見える範囲（上の検索欄の下〜下の説明文の上）＝ y 360〜1550 くらいに収める。写真はできるだけ大きく
-  const lines = wrap(clean(it.name), 18).slice(0, 2), fs1 = 48, P = 920, px = (W - P) / 2, py = 385, y1 = py + P + 62;
+  // TikTok の実際の画面で測った見える範囲（上の検索欄の下〜下の説明文の上）＝ y 360〜1550 くらいに収める。
+  // 写真は白い余白を付けず、写真の形のまま最大 940×920 に合わせて大きく、まわりに色の枠だけ
+  const MAXW = 940, MAXH = 920, B = 10, top0 = 385;
+  const src = await sharp(path.join(ROOT, "images", `${it.id}.webp`)).flatten({ background: "#ffffff" }).trim({ background: "#ffffff", threshold: 12 }).toBuffer();
+  const m = await sharp(src).metadata(), k = Math.min(MAXW / m.width, MAXH / m.height);
+  const pw = Math.round(m.width * k), ph = Math.round(m.height * k), px = Math.round((W - pw) / 2), py = top0 + Math.round((MAXH - ph) / 2);
+  const R = 36, mask = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${pw}" height="${ph}"><rect width="${pw}" height="${ph}" rx="${R}" fill="#fff"/></svg>`);
+  const pic = await sharp(src).resize(pw, ph).composite([{ input: mask, blend: "dest-in" }]).png().toBuffer();
+  const lines = wrap(clean(it.name), 18).slice(0, 2), fs1 = 48, y1 = top0 + MAXH + 62;
   const svg = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">${BG}
-<rect x="${px}" y="${py}" width="${P}" height="${P}" rx="44" fill="#fff" stroke="${RING[i % 5]}" stroke-width="10"/>
-${lines.map((l, k) => `<text x="${W / 2}" y="${y1 + k * (fs1 + 10)}" text-anchor="middle" font-family="${FONT}" font-weight="900" font-size="${fs1}" fill="#fff">${esc(l)}</text>`).join("")}
+<rect x="${px - B}" y="${py - B}" width="${pw + B * 2}" height="${ph + B * 2}" rx="${R + B}" fill="${RING[i % 5]}"/>
+${lines.map((l, j) => `<text x="${W / 2}" y="${y1 + j * (fs1 + 10)}" text-anchor="middle" font-family="${FONT}" font-weight="900" font-size="${fs1}" fill="#fff">${esc(l)}</text>`).join("")}
 <rect x="${W / 2 - 290}" y="${y1 + lines.length * (fs1 + 10) - 14}" width="580" height="78" rx="39" fill="#ffc93c"/>
 <text x="${W / 2}" y="${y1 + lines.length * (fs1 + 10) + 39}" text-anchor="middle" font-family="${FONT}" font-weight="900" font-size="42" fill="#1b1f5e">1回${it.price}円・全${it.lineup || "?"}種</text>${LOGO}</svg>`);
   // 「おすすめ 1/8」の札は写真の枠の上の線にのせる
   const tag = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="300" height="56"><rect width="300" height="56" rx="28" fill="${RING[i % 5]}" stroke="#fff" stroke-width="4"/><text x="150" y="40" text-anchor="middle" font-family="${FONT}" font-weight="900" font-size="34" fill="#fff">${esc(top)} ${i + 1}/${n}</text></svg>`);
-  await sharp(svg).composite([{ input: await photo(it.id, P - 36, P - 36), left: px + 18, top: py + 18 }, { input: tag, left: W / 2 - 150, top: py - 28 }]).png().toFile(file);
+  await sharp(svg).composite([{ input: pic, left: px, top: py }, { input: tag, left: W / 2 - 150, top: py - B - 28 }]).png().toFile(file);
 }
 async function outro(file) {
   const svg = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">${BG}
