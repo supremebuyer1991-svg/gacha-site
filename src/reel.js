@@ -60,17 +60,6 @@ ${lines.map((l, k) => `<text x="${W / 2}" y="${y1 + k * (fs1 + 14)}" text-anchor
 <text x="${W / 2}" y="${y1 + lines.length * (fs1 + 14) + 180}" text-anchor="middle" font-family="${FONT}" font-weight="700" font-size="40" fill="#cfd6ff">${esc(relTxt(it))}</text>${LOGO}</svg>`);
   await sharp(svg).composite([{ input: await photo(it.id, W - 220, W - 220), left: 110, top: 290 }]).png().toFile(file);
 }
-// 最後のコーナーの見出し：「〇〇が可愛すぎる♡」（このあと、その〇〇の商品を紹介する）
-async function kawaiiTitle(word, n, file) {
-  const t1 = `${word}が`, t2 = "可愛すぎる♡";
-  const hearts = Array.from({ length: 14 }, (_, i) => `<text x="${(i * 173 + 60) % W}" y="${(i * 311 + 200) % H}" font-family="${FONT}" font-size="${40 + (i % 3) * 24}" fill="#ff8fb1" fill-opacity="${0.35 + (i % 3) * 0.2}">♡</text>`).join("");
-  const svg = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">${BG}${hearts}
-<text x="${W / 2}" y="860" text-anchor="middle" font-family="${FONT}" font-weight="900" font-size="${t1.length > 10 ? 80 : 96}" fill="#fff" stroke="#ff4f7b" stroke-width="12" paint-order="stroke" stroke-linejoin="round">${esc(t1)}</text>
-<text x="${W / 2}" y="1010" text-anchor="middle" font-family="${FONT}" font-weight="900" font-size="132" fill="#ff8fb1" stroke="#ffffff" stroke-width="12" paint-order="stroke" stroke-linejoin="round">${esc(t2)}</text>
-<rect x="${W / 2 - 170}" y="1080" width="340" height="70" rx="35" fill="#ffc93c"/>
-<text x="${W / 2}" y="1130" text-anchor="middle" font-family="${FONT}" font-weight="900" font-size="40" fill="#1b1f5e">今週は${n}つ</text>${LOGO}</svg>`);
-  await sharp(svg).png().toFile(file);
-}
 async function outro(file) {
   const svg = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">${BG}
 <text x="${W / 2}" y="760" text-anchor="middle" font-family="${FONT}" font-weight="900" font-size="88" fill="#fff" stroke="#ff4f7b" stroke-width="10" paint-order="stroke">どれを回したい？</text>
@@ -116,7 +105,6 @@ function music(file, secs, beats) {
     await cover(title, sub, pool.map((i) => i.id), path.join(TMP, "f0.png"), word); frames.push([path.join(TMP, "f0.png"), 1.8]);
     for (let i = 0; i < main.length; i++) { const f = path.join(TMP, `f${i + 1}.png`); await card(main[i], i, pool.length, f, top); frames.push([f, 2.0]); }
     if (kw.length) {
-      await kawaiiTitle(word, kw.length, path.join(TMP, "fk.png")); frames.push([path.join(TMP, "fk.png"), 1.8]);
       for (let j = 0; j < kw.length; j++) { const f = path.join(TMP, `fk${j}.png`); await card(kw[j], main.length + j, pool.length, f, top); frames.push([f, 2.0]); }
     }
     await outro(path.join(TMP, "fz.png")); frames.push([path.join(TMP, "fz.png"), 2.2]);
