@@ -26,10 +26,10 @@ async function cover(title, sub, ids, file, word) {
   // 中身は見せずに「なにが出る？」と思わせる表紙：モザイクの写真＋「？」
   const fsz = Math.min(100, Math.floor(1000 / [...title].length));
   const svg = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">${BG}
-<text x="${W / 2}" y="400" text-anchor="middle" font-family="${FONT}" font-weight="900" font-size="${fsz}" fill="#fff" stroke="#ff4f7b" stroke-width="12" paint-order="stroke" stroke-linejoin="round">${esc(title)}</text>
-<rect x="${W / 2 - 230}" y="445" width="460" height="70" rx="35" fill="#ffc93c"/>
-<text x="${W / 2}" y="494" text-anchor="middle" font-family="${FONT}" font-weight="900" font-size="40" fill="#1b1f5e">${esc(sub)}</text>${word ? `<text x="${W / 2}" y="600" text-anchor="middle" font-family="${FONT}" font-weight="900" font-size="${("ラストの" + word + "が").length > 13 ? 52 : 58}" fill="#fff">${esc("ラストの" + word + "が")}</text><text x="${W / 2}" y="695" text-anchor="middle" font-family="${FONT}" font-weight="900" font-size="84" fill="#ff8fb1" stroke="#ffffff" stroke-width="10" paint-order="stroke" stroke-linejoin="round">可愛すぎる♡</text>` : ""}${LOGO}</svg>`);
-  const layers = [], S = 320, g = 24, x0 = (W - S * 2 - g) / 2, y0 = word ? 745 : 600;
+<text x="${W / 2}" y="530" text-anchor="middle" font-family="${FONT}" font-weight="900" font-size="${fsz}" fill="#fff" stroke="#ff4f7b" stroke-width="12" paint-order="stroke" stroke-linejoin="round">${esc(title)}</text>
+<rect x="${W / 2 - 230}" y="575" width="460" height="70" rx="35" fill="#ffc93c"/>
+<text x="${W / 2}" y="624" text-anchor="middle" font-family="${FONT}" font-weight="900" font-size="40" fill="#1b1f5e">${esc(sub)}</text>${word ? `<text x="${W / 2}" y="730" text-anchor="middle" font-family="${FONT}" font-weight="900" font-size="${("ラストの" + word + "が").length > 13 ? 52 : 58}" fill="#fff">${esc("ラストの" + word + "が")}</text><text x="${W / 2}" y="825" text-anchor="middle" font-family="${FONT}" font-weight="900" font-size="84" fill="#ff8fb1" stroke="#ffffff" stroke-width="10" paint-order="stroke" stroke-linejoin="round">可愛すぎる♡</text>` : ""}${LOGO}</svg>`);
+  const layers = [], S = 320, g = 24, x0 = (W - S * 2 - g) / 2, y0 = word ? 870 : 730;
   for (let i = 0; i < Math.min(4, ids.length); i++) {
     const x = Math.round(x0 + (i % 2) * (S + g)), y = y0 + Math.floor(i / 2) * (S + g);
     const mask = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${S - 16}" height="${S - 16}"><rect width="${S - 16}" height="${S - 16}" rx="28" fill="#fff"/></svg>`);
@@ -49,11 +49,11 @@ async function mosaic(id, w, h) {
   return sharp(small).resize(w, h, { kernel: "nearest" }).toBuffer();
 }
 async function card(it, i, n, file, top) {
-  // TikTok・リールの画面の上（検索欄）と下（説明文）にかからないよう、y 300〜1400 くらいに収める
-  const lines = wrap(clean(it.name), 17).slice(0, 2), fs1 = 50, P = 780, px = (W - P) / 2, py = 380, y1 = py + P + 80;
+  // TikTok・リールの画面の上（検索欄）と下（説明文）にかからないよう、y 410〜1580 くらいに収める（TikTok は画像を少し拡大して上を切るので、実際の画面で検索欄にかからない位置）
+  const lines = wrap(clean(it.name), 17).slice(0, 2), fs1 = 50, P = 780, px = (W - P) / 2, py = 510, y1 = py + P + 80;
   const svg = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">${BG}
-<rect x="${W / 2 - 160}" y="295" width="320" height="64" rx="32" fill="${RING[i % 5]}"/>
-<text x="${W / 2}" y="340" text-anchor="middle" font-family="${FONT}" font-weight="900" font-size="38" fill="#fff">${esc(top)} ${i + 1}/${n}</text>
+<rect x="${W / 2 - 160}" y="425" width="320" height="64" rx="32" fill="${RING[i % 5]}"/>
+<text x="${W / 2}" y="470" text-anchor="middle" font-family="${FONT}" font-weight="900" font-size="38" fill="#fff">${esc(top)} ${i + 1}/${n}</text>
 <rect x="${px}" y="${py}" width="${P}" height="${P}" rx="48" fill="#fff" stroke="${RING[i % 5]}" stroke-width="12"/>
 ${lines.map((l, k) => `<text x="${W / 2}" y="${y1 + k * (fs1 + 12)}" text-anchor="middle" font-family="${FONT}" font-weight="900" font-size="${fs1}" fill="#fff">${esc(l)}</text>`).join("")}
 <rect x="${W / 2 - 300}" y="${y1 + lines.length * (fs1 + 12) - 10}" width="600" height="84" rx="42" fill="#ffc93c"/>
