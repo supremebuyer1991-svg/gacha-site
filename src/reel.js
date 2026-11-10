@@ -87,13 +87,25 @@ function music(file, secs, beats) {
 (async () => {
   try {
     const x = JSON.parse(fs.readFileSync(path.join(ROOT, "dist", "data", "x.json"), "utf8"));
-    const fav = new Set(x.fav_ids || []), seen = new Set(), pool = [];
+    const seen = new Set(), pool = [];
     const has = (id) => fs.existsSync(path.join(ROOT, "images", `${id}.webp`));
     // 今週発売（人気の系統が先）→ 注目の新作 の順に、写真のある商品を8つ
-    const week = ((x.week && x.week.items) || []).slice().sort((a, b) => fav.has(b.id) - fav.has(a.id));
-    let title = "今週発売のガチャが熱い🔥", sub = x.week ? `${x.week.from}〜${x.week.to}` : "", top = "今週発売";
-    for (const it of [...week, ...(x.picks || []), ...((x.new_info && x.new_info.items) || []), ...((x.morning && x.morning.items) || [])]) { if (pool.length >= 8) break; if (it && it.id && !seen.has(it.id) && has(it.id)) { seen.add(it.id); pool.push(it); } }
-    if (week.filter((i) => has(i.id)).length < 3) { title = "注目の新作ガチャが熱い🔥"; sub = `${+x.today.slice(5, 7)}/${+x.today.slice(8, 10)}`; top = "注目"; }
+    // ユーザーの希望（11/10）：サンリオ・ディズニー・ちいかわ・たまごっち・めじるしアクセサリーを中心に。
+    // 今月・来月発売の商品から、その5つに当てはまるものを先に（毎日同じにならないよう日ごとにずらす）、足りなければ今週発売のほかの商品で埋める
+    const KEY = /サンリオ|ハローキティ|マイメロ|クロミ|シナモロール|ポムポムプリン|ポチャッコ|けろけろけろっぴ|ハンギョドン|タキシードサム|ディズニー|ミッキー|ミニー|ピクサー|スティッチ|トイ・ストーリー|くまのプーさん|ちいかわ|ハチワレ|たまごっち|めじるしアクセサリー/;
+    const items = JSON.parse(fs.readFileSync(path.join(ROOT, "data", "items.json"), "utf8"));
+    const ym = x.today.slice(0, 7), d0 = new Date(x.today + "T00:00:00Z"); d0.setUTCMonth(d0.getUTCMonth() + 1); const ym2 = d0.toISOString().slice(0, 7);
+    const weekIds = new Set(((x.week && x.week.items) || []).map((i) => i.id));
+    const day = Math.floor(Date.parse(x.today + "T00:00:00Z") / 864e5);
+    const fresh = items.filter((i) => (i.release === ym || i.release === ym2 || weekIds.has(i.id)) && has(i.id));
+    const fav = fresh.filter((i) => KEY.test(i.name)).sort((a, b) => (weekIds.has(b.id) - weekIds.has(a.id)) || String(b.added || "").localeCompare(String(a.added || "")) || a.id.localeCompare(b.id));
+    // 5つの系統から順番に1つずつ（今週発売のものを先に。ほかは日ごとにずらす）
+    const CATS = [/サンリオ|ハローキティ|マイメロ|クロミ|シナモロール|ポムポムプリン|ポチャッコ|けろけろけろっぴ|ハンギョドン|タキシードサム/, /ディズニー|Disney|ミッキー|ミニー|ピクサー|スティッチ|トイ・ストーリー|くまのプーさん/, /ちいかわ|ハチワレ/, /たまごっち/, /めじるしアクセサリー/];
+    const buckets = CATS.map((re, ci) => { const L = fav.filter((i) => re.test(i.name) && CATS.findIndex((r) => r.test(i.name)) === ci); const wk = L.filter((i) => weekIds.has(i.id)), rest = L.filter((i) => !weekIds.has(i.id)); const r = rest.length ? (day * 2 + ci) % rest.length : 0; return [...wk, ...rest.slice(r), ...rest.slice(0, r)]; });
+    for (let round = 0; pool.length < 8 && buckets.some((b) => b.length > round); round++) for (const bk of buckets) { if (pool.length >= 8) break; const it = bk[round]; if (it && !seen.has(it.id)) { seen.add(it.id); pool.push(it); } }
+    for (const it of ((x.week && x.week.items) || [])) { if (pool.length >= 8) break; if (it && !seen.has(it.id) && has(it.id)) { seen.add(it.id); pool.push(it); } }
+    const allWeek = pool.length && pool.every((i) => weekIds.has(i.id));
+    let title = allWeek ? "今週発売のガチャが熱い🔥" : "新作ガチャが熱い🔥", sub = allWeek && x.week ? `${x.week.from}〜${x.week.to}` : `${+ym.slice(5)}月・${+ym2.slice(5)}月発売`, top = allWeek ? "今週発売" : "新作";
     if (pool.length < 3) { console.log("リール：写真のある商品が足りないので作りません"); return; }
     fs.rmSync(TMP, { recursive: true, force: true }); fs.mkdirSync(TMP, { recursive: true }); fs.mkdirSync(OUT, { recursive: true });
     const frames = [];
