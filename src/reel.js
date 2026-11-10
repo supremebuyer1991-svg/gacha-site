@@ -22,13 +22,13 @@ function stars() { return Array.from({ length: 70 }, (_, i) => `<circle cx="${(i
 const BG = `<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#232a7a"/><stop offset="1" stop-color="#0d1033"/></linearGradient></defs><rect width="${W}" height="${H}" fill="url(#g)"/>${stars()}`;
 const LOGO = `<text x="${W / 2 - 8}" y="${H - 120}" text-anchor="end" font-family="${LAT}" font-weight="700" font-size="40" fill="#ff4f7b">GACHA</text><text x="${W / 2 + 8}" y="${H - 120}" text-anchor="start" font-family="${LAT}" font-weight="700" font-size="40" fill="#3aa0ff">PLANET</text>`;
 
-async function cover(title, sub, ids, file) {
+async function cover(title, sub, ids, file, word) {
   // 中身は見せずに「なにが出る？」と思わせる表紙：モザイクの写真＋「？」
   const fsz = title.length > 11 ? 84 : 100;
   const svg = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">${BG}
 <text x="${W / 2}" y="300" text-anchor="middle" font-family="${FONT}" font-weight="900" font-size="${fsz}" fill="#fff" stroke="#ff4f7b" stroke-width="12" paint-order="stroke" stroke-linejoin="round">${esc(title)}</text>
 <rect x="${W / 2 - 230}" y="360" width="460" height="74" rx="37" fill="#ffc93c"/>
-<text x="${W / 2}" y="412" text-anchor="middle" font-family="${FONT}" font-weight="900" font-size="40" fill="#1b1f5e">${esc(sub)}</text>${LOGO}</svg>`);
+<text x="${W / 2}" y="412" text-anchor="middle" font-family="${FONT}" font-weight="900" font-size="40" fill="#1b1f5e">${esc(sub)}</text>${word ? `<text x="${W / 2}" y="1530" text-anchor="middle" font-family="${FONT}" font-weight="900" font-size="${("ラストの" + word + "が").length > 13 ? 60 : 68}" fill="#fff">${esc("ラストの" + word + "が")}</text><text x="${W / 2}" y="1640" text-anchor="middle" font-family="${FONT}" font-weight="900" font-size="96" fill="#ff8fb1" stroke="#ffffff" stroke-width="10" paint-order="stroke" stroke-linejoin="round">可愛すぎる♡</text>` : ""}${LOGO}</svg>`);
   const layers = [], S = 440, g = 30, x0 = (W - S * 2 - g) / 2, y0 = 520;
   for (let i = 0; i < Math.min(4, ids.length); i++) {
     const x = Math.round(x0 + (i % 2) * (S + g)), y = y0 + Math.floor(i / 2) * (S + g);
@@ -113,7 +113,7 @@ function music(file, secs, beats) {
     let word = "", kw = [];
     for (const w of KAWAII) { const m = pool.filter((i) => clean(i.name).includes(w) || (w === "サンリオ" && /ハローキティ|マイメロ|クロミ|シナモロール|ポムポムプリン/.test(i.name))); if (m.length) { word = w; kw = m; break; } }
     const main = pool.filter((i) => !kw.includes(i));
-    await cover(title, sub, pool.map((i) => i.id), path.join(TMP, "f0.png")); frames.push([path.join(TMP, "f0.png"), 1.8]);
+    await cover(title, sub, pool.map((i) => i.id), path.join(TMP, "f0.png"), word); frames.push([path.join(TMP, "f0.png"), 1.8]);
     for (let i = 0; i < main.length; i++) { const f = path.join(TMP, `f${i + 1}.png`); await card(main[i], i, pool.length, f, top); frames.push([f, 2.0]); }
     if (kw.length) {
       await kawaiiTitle(word, kw.length, path.join(TMP, "fk.png")); frames.push([path.join(TMP, "fk.png"), 1.8]);
