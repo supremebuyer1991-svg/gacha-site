@@ -5,6 +5,8 @@ const fs = require("fs"), path = require("path"), { execFileSync } = require("ch
 let sharp; try { sharp = require("sharp"); } catch (e) { console.log("sharp がないのでリールは作りません"); process.exit(0); }
 const ROOT = path.join(__dirname, ".."), OUT = path.join(ROOT, "dist", "images", "social"), TMP = path.join(ROOT, ".reel-tmp");
 const W = 1080, H = 1920, FONT = "Noto Sans CJK JP, Noto Sans JP, sans-serif", LAT = "DejaVu Sans, Arial, sans-serif";
+// 同じ日に作り直すと名前が同じになり、TikTok・Instagram が前の画像を使ってしまうので、中身から作った印を URL に付ける
+const ver = (f) => require("crypto").createHash("md5").update(fs.readFileSync(f)).digest("hex").slice(0, 8);
 const RING = ["#ff4f7b", "#3aa0ff", "#ffc93c", "#2fd6a3", "#a855f7"];
 const esc = (t) => String(t == null ? "" : t).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const clean = (s) => String(s || "").replace(/【[^】]*】/g, "").replace(/\s+/g, " ").trim();
@@ -161,9 +163,9 @@ function music(file, secs, beats) {
     await sharp(frames[0][0]).jpeg({ quality: 86 }).toFile(path.join(OUT, file.replace(/\.mp4$/, ".jpg"))); // リールの表紙（グリッドに出る画像）
     // TikTok の写真スライド用：1枚ずつの画像（reel-日付-s1.jpg 〜）
     const slides = [];
-    for (let k = 0; k < frames.length; k++) { const sf = file.replace(/\.mp4$/, `-s${k + 1}.jpg`); await sharp(frames[k][0]).jpeg({ quality: 88 }).toFile(path.join(OUT, sf)); slides.push(`https://gachapla.com/images/social/${sf}`); }
+    for (let k = 0; k < frames.length; k++) { const sf = file.replace(/\.mp4$/, `-s${k + 1}.jpg`); await sharp(frames[k][0]).jpeg({ quality: 88 }).toFile(path.join(OUT, sf)); slides.push(`https://gachapla.com/images/social/${sf}?v=${ver(path.join(OUT, sf))}`); }
     fs.rmSync(TMP, { recursive: true, force: true });
-    fs.writeFileSync(path.join(ROOT, "dist", "data", "social-reel.json"), JSON.stringify({ date: x.today, title, sub, word, kawaii: kw.map((i) => i.id), slides, url: `https://gachapla.com/images/social/${file}`, cover: `https://gachapla.com/images/social/${file.replace(/\.mp4$/, ".jpg")}`, items: pool.map((i) => ({ id: i.id, name: clean(i.name), price: i.price, lineup: i.lineup })) }));
+    fs.writeFileSync(path.join(ROOT, "dist", "data", "social-reel.json"), JSON.stringify({ date: x.today, title, sub, word, kawaii: kw.map((i) => i.id), slides, url: `https://gachapla.com/images/social/${file}?v=${ver(path.join(OUT, file))}`, cover: `https://gachapla.com/images/social/${file.replace(/\.mp4$/, ".jpg")}?v=${ver(path.join(OUT, file.replace(/\.mp4$/, ".jpg")))}`, items: pool.map((i) => ({ id: i.id, name: clean(i.name), price: i.price, lineup: i.lineup })) }));
     console.log(`リール：${title}（${pool.length}商品・${total.toFixed(1)}秒）`);
   } catch (e) { console.log(`⚠ リール: ${e.message}`); fs.rmSync(TMP, { recursive: true, force: true }); }
 })();
