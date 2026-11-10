@@ -13335,7 +13335,7 @@
     "maker_en": "Bandai",
     "price": 500,
     "release": "2026-11",
-    "release_note": "7月第3週より順次",
+    "release_note": "11月第2週より順次",
     "genre": "anime",
     "moods": [],
     "tags": [],
@@ -14099,7 +14099,7 @@
     "maker_en": "Bandai",
     "price": 600,
     "release": "2026-11",
-    "release_note": "7月第3週より順次",
+    "release_note": "11月第4週より順次",
     "genre": "anime",
     "moods": [],
     "tags": [],
@@ -56532,5 +56532,199 @@
       "female"
     ],
     "tags_auto": false
+  },
+  {
+    "id": "bushicap-10295",
+    "name": "学園アイドルマスター むぎゅみにコレクションフィギュア vol.2",
+    "name_en": "",
+    "maker": "ブシロードクリエイティブ",
+    "maker_en": "Bushiroad Creative",
+    "price": 500,
+    "release": "2027-04",
+    "release_note": "4月下旬",
+    "genre": "anime",
+    "moods": [
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "jan": "4570194455376",
+    "image": "",
+    "official_url": "https://capsule.bushiroad-creative.com/product/10295/",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-11",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "oshi:idol",
+      "type:figure"
+    ],
+    "q_ages": [
+      "10",
+      "20"
+    ],
+    "q_genders": [
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "kenele-gc0803z",
+    "name": "mojojojo テディ ジョージョー フィギュアコレクション 2nd Color",
+    "name_en": "",
+    "maker": "ケンエレファント",
+    "maker_en": "Kenelephant",
+    "price": 500,
+    "release": "2026-11",
+    "release_note": "11月",
+    "genre": "anime",
+    "moods": [
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "image": "",
+    "official_url": "https://kenelestore.jp/products/gc0803z",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-11",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:figure",
+      "real:miniature",
+      "retro:heisei"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "kenele-gc0798z",
+    "name": "トケコザッカテン フィギュアマスコット",
+    "name_en": "",
+    "maker": "ケンエレファント",
+    "maker_en": "Kenelephant",
+    "price": 500,
+    "release": "2026-11",
+    "release_note": "11月",
+    "genre": "anime",
+    "moods": [
+      "kawaii",
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "image": "",
+    "official_url": "https://kenelestore.jp/products/gc0798z",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-11",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "type:figure",
+      "type:plush"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "kenele-gc0801z",
+    "name": "ARADOMO People フィギュアコレクション",
+    "name_en": "",
+    "maker": "ケンエレファント",
+    "maker_en": "Kenelephant",
+    "price": 500,
+    "release": "2026-11",
+    "release_note": "11月",
+    "genre": "anime",
+    "moods": [
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "image": "",
+    "official_url": "https://kenelestore.jp/products/gc0801z",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-11",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:figure",
+      "real:miniature"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "kenele-gc0802c",
+    "name": "A.C.S_月刊漫画ガロ 蛭子能収 グッズコレクション",
+    "name_en": "",
+    "maker": "ケンエレファント",
+    "maker_en": "Kenelephant",
+    "price": 400,
+    "release": "2026-11",
+    "release_note": "11月",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "image": "",
+    "official_url": "https://kenelestore.jp/products/gc0802c",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-11",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "real:space"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
   }
 ]
