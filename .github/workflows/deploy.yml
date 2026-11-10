@@ -4,8 +4,12 @@ name: サイトを公開
 on:
   push:
     branches: [main]
+    # 11/10：Actions の無料枠のため、データだけの更新（毎日の自動作業：抽選情報・英語名・メルカリのリンク・ラインナップ名など）では公開しない。
+    # 次の決まった時刻（0時・9時・15時）の公開でまとめて出る。プログラム・デザインを直したときは今までどおりすぐ公開
     paths-ignore:
-      - "data/social-state.json"
+      - "data/**"
+      - "images/**"
+      - "lineup-src/**"
   workflow_dispatch:
     inputs:
       backfill:
