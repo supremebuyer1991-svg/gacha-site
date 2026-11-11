@@ -57179,5 +57179,287 @@
       "手ぬぐいB",
       "アクリルブロック"
     ]
+  },
+  {
+    "id": "bandai-4582770141344",
+    "name": "ふわふわ大根おろしのねこちゃあぁぁん めじるしアクセサリー",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-12",
+    "release_note": "12月第3週より順次",
+    "genre": "animal",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770141344000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770141344",
+    "popularity": 50,
+    "added": "2026-11-12",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:animal",
+      "kawaii:mascot",
+      "kawaii:accessory",
+      "type:plush",
+      "type:mejirushi",
+      "type:fashion",
+      "funny:neta"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y904219",
+    "name": "つながリングチャーム ピクミン",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-11",
+    "release_note": "11月9日週発売",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "lineup_names": [
+      "赤ピクミン",
+      "青ピクミン",
+      "黄ピクミン",
+      "羽ピクミン",
+      "岩ピクミン"
+    ],
+    "jan_checked": true,
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y904219",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-12",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:pokemon",
+      "kawaii:accessory",
+      "type:charm",
+      "type:fashion"
+    ],
+    "q_ages": [
+      "10"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y909795",
+    "name": "オトメン（乙男） アクリルめじるしガチャマスコット",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-11",
+    "release_note": "11月16日週発売",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 12,
+    "lineup_names": [
+      "8巻表紙",
+      "10巻表紙",
+      "11巻表紙",
+      "12巻表紙",
+      "13巻表紙",
+      "14巻表紙",
+      "正宗 飛鳥",
+      "都塚 りょう",
+      "多武峰 一",
+      "橘 充太",
+      "黒川 樹虎",
+      "有明 大和"
+    ],
+    "jan_checked": true,
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y909795",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-12",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "kawaii:accessory",
+      "type:plush",
+      "type:mejirushi"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y911767",
+    "name": "ピクサーキャラクター ファッションリング オーロラクリア",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-11",
+    "release_note": "予定",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 9,
+    "lineup_names": [
+      "イヴ",
+      "ピクサー・ボール",
+      "マイク",
+      "サリー",
+      "リトル・マイキー",
+      "バターカップ",
+      "エイリアン",
+      "ロッツォ",
+      "ドーリー"
+    ],
+    "jan_checked": true,
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y911767",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-12",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:disney",
+      "kawaii:accessory",
+      "kawaii:yumekawa",
+      "type:fashion"
+    ],
+    "q_ages": [
+      "20",
+      "30"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y912771",
+    "name": "カプセルプラレール きかんしゃトーマス ヘリコプターのハロルドがやってきた！編",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-11",
+    "release_note": "予定",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 11,
+    "lineup_names": [
+      "ハロルド（ゼンマイ車）",
+      "トーマス（連結パーツ付）",
+      "テレンス（ゼンマイ車）",
+      "パーシー（連結パーツ付）",
+      "キャプテン",
+      "背景付駅",
+      "ハロルドのヘリポート",
+      "十字レールセット",
+      "まがレール",
+      "ポイントレール（L）+ハーフレール 2本付",
+      "ポイントレール（R）+ハーフレール 2本付"
+    ],
+    "jan_checked": true,
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y912771",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-12",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "real:vehicle"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bushicap-10297",
+    "name": "BanG Dream! カプセルアソートコレクション MyGO!!!!! vol.4",
+    "name_en": "",
+    "maker": "ブシロードクリエイティブ",
+    "maker_en": "Bushiroad Creative",
+    "price": 600,
+    "release": "2026-11",
+    "release_note": "11月",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 11,
+    "jan": "4570194502674",
+    "image": "",
+    "official_url": "https://capsule.bushiroad-creative.com/product/10297/",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-12",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "oshi:idol",
+      "oshi:trend",
+      "hobby:music"
+    ],
+    "q_ages": [
+      "20"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
   }
 ]
