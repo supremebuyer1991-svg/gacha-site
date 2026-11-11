@@ -386,6 +386,18 @@
       "added": "2026-11-10"
     },
     {
+      "title": "サンリオキャラクターズ ふわふわめじるしアクセサリー ～Baby～",
+      "store": "#C-pla+ くずはモール",
+      "pref": "大阪府",
+      "kind": "item",
+      "start": "2026-11-10T18:00",
+      "end": "2026-11-11T23:59",
+      "method": "LivePocket",
+      "url": "https://livepocket.jp/e/9zzen",
+      "note": "販売日は11/16。1人5個まで",
+      "added": "2026-11-11"
+    },
+    {
       "title": "どうぶつの森 めじるしアクセサリー",
       "store": "#C-pla アミュプラザ博多",
       "pref": "福岡県",
@@ -503,6 +515,30 @@
       "method": "LivePocket",
       "url": "https://livepocket.jp/e/mc2zt",
       "note": "販売日は11/17。1人2個まで",
+      "added": "2026-11-11"
+    },
+    {
+      "title": "どうぶつの森 めじるしアクセサリー",
+      "store": "#C-pla 神戸マルイ",
+      "pref": "兵庫県",
+      "kind": "item",
+      "start": "2026-11-11T10:00",
+      "end": "2026-11-13T23:59",
+      "method": "LivePocket",
+      "url": "https://livepocket.jp/e/lwitj",
+      "note": "販売日は11/18。1人4個まで",
+      "added": "2026-11-11"
+    },
+    {
+      "title": "ちいかわ めじるしアクセサリー3",
+      "store": "#C-pla 神戸マルイ",
+      "pref": "兵庫県",
+      "kind": "item",
+      "start": "2026-11-11T10:00",
+      "end": "2026-11-13T23:59",
+      "method": "LivePocket",
+      "url": "https://livepocket.jp/e/axqao",
+      "note": "販売日は11/18。1人4個まで",
       "added": "2026-11-11"
     },
     {
