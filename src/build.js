@@ -1558,7 +1558,7 @@ ${content}
 <div class="wrap">
   <nav class="breadcrumb" aria-label="breadcrumb"><a href="${c.H}index.html">${t.home}</a><span>/</span><a href="${c.H}genre/${g.slug}.html">${gl}</a><span>/</span><span>${esc(name)}</span></nav>
   <article class="item">
-    <div>${thumb(it, c.R, { eager: true })}</div>
+    <div class="item-photo">${thumb(it, c.R, { eager: true })}<button type="button" class="heart heart-on-photo" data-vote="${c.R}api/vote/${it.id}" data-id="${it.id}" aria-label="${t.heartAria}" title="${t.heartNote}"><i aria-hidden="true">♥</i><span>${t.heart}</span><b>${heartsOf(it)}</b></button></div>
     <div>
       <h1>${esc(name)}</h1>
       ${lang !== "ja" && it.name_en ? `<p class="name-ja" lang="ja">${esc(it.name)}</p>` : ""}
@@ -1578,7 +1578,6 @@ ${content}
         ${state === "up" ? pushBox(t, "item", it.id) : ""}
         ${it.official_url ? `<a class="btn" href="${esc(it.official_url)}" target="_blank" rel="noopener">${t.official}</a>` : ""}
         ${state === "up" ? "" : `<button type="button" class="fav-item" data-fav="${it.id}" aria-pressed="false"><i aria-hidden="true">★</i><span>${esc(t.u.save)}</span></button>`}
-        <button type="button" class="heart" data-vote="${c.R}api/vote/${it.id}" data-id="${it.id}" aria-label="${t.heartAria}" title="${t.heartNote}"><i aria-hidden="true">♥</i><span>${t.heart}</span><b>${heartsOf(it)}</b></button>
       </div>
       ${janHtml}
     </div>

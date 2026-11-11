@@ -1358,3 +1358,12 @@ p.hero-lead { font-size: clamp(15px, 1.7vw, 20px); font-weight: 700; color: var(
   .lead-more::after { content: "▼"; font-size: 10px; }
   .lead-clamp.open + .lead-more::after { content: "▲"; }
 }
+
+/* 商品ページ：推し（♥）ボタンは写真の右下に重ねる（写真のすぐそばで押せるように） */
+.item-photo { position: relative; }
+.item-photo .heart-on-photo { position: absolute; right: 10px; bottom: 10px; min-height: 40px; padding: 0 14px; gap: 6px; font-size: 13px; box-shadow: 0 4px 12px rgba(27, 31, 94, .18); z-index: 2; }
+@media (max-width: 760px) {
+  .item > .item-photo { max-width: 260px; margin: 0 auto; width: 100%; }
+  .item > .item-photo .thumb { max-width: 100%; }
+  .item-photo .heart-on-photo { right: -14px; bottom: -12px; }
+}
