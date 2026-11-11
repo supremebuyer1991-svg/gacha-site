@@ -1080,7 +1080,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "デンジ",
+      "レゼ",
+      "マキマ",
+      "ビーム",
+      "ポチタ"
+    ]
   },
   {
     "id": "bandai-4582770139860",
@@ -15326,7 +15333,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "カビゴン",
+      "メタモン",
+      "ヒメグマ",
+      "チラーミィ",
+      "テラパゴス(ノーマルフォルム)"
+    ]
   },
   {
     "id": "bandai-4582769911507",
@@ -15369,7 +15383,13 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ライオン",
+      "ミッフィー",
+      "雪の日のミッフィー",
+      "ボリス"
+    ]
   },
   {
     "id": "bandai-4582769927515",
@@ -15408,7 +15428,16 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "Koya",
+      "RJ",
+      "Shooky",
+      "Mang",
+      "Chimmy",
+      "Tata",
+      "Cooky"
+    ]
   },
   {
     "id": "bandai-4582769866364",
@@ -15448,7 +15477,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "オコリン坊",
+      "ニコリン坊",
+      "おじゃる丸",
+      "電ボ",
+      "公ちゃん"
+    ]
   },
   {
     "id": "bandai-4582769722820",
@@ -15486,7 +15522,18 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "フシギダネ&ヒトカゲ&ゼニガメ",
+      "チコリータ&ヒノアラシ&ワニノコ",
+      "キモリ&アチャモ&ミズゴロウ",
+      "ナエトル&ヒコザル&ポッチャマ",
+      "ツタージャ&ポカブ&ミジュマル",
+      "ハリマロン&フォッコ&ケロマツ",
+      "モクロー&ニャビー&アシマリ",
+      "サルノリ&ヒバニー&メッソン",
+      "ニャオハ&ホゲータ&クワッス"
+    ]
   },
   {
     "id": "bandai-4582769842184",
@@ -15526,7 +15573,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "あみ",
+      "イヨ",
+      "イッサ",
+      "ケンタ",
+      "ヤマナミさん"
+    ]
   },
   {
     "id": "bandai-4582769916946",
@@ -15565,7 +15619,12 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "天使なんかじゃない",
+      "ご近所物語",
+      "NANA"
+    ]
   },
   {
     "id": "bandai-4570118186744",
@@ -15650,7 +15709,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ワニ山さんしんちゃん",
+      "ワニ山さん",
+      "ぶりぶりざえもん",
+      "シロしんちゃん",
+      "シロ"
+    ]
   },
   {
     "id": "bandai-4582769897900",
@@ -15687,7 +15753,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "CIPHER 1",
+      "彼氏彼女の事情 1",
+      "桜蘭高校ホスト部 1",
+      "ヴァンパイア騎士 1",
+      "夏目友人帳 1",
+      "会長はメイド様！1"
+    ]
   },
   {
     "id": "bandai-4582769979453",
@@ -15728,7 +15802,13 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "金木 研",
+      "霧嶋董香",
+      "神代利世",
+      "鈴屋什造"
+    ]
   },
   {
     "id": "bandai-4582769995538",
@@ -15765,7 +15845,18 @@
     "q_genders": [
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "烈海王",
+      "愚地独歩",
+      "エア夜食!!!",
+      "範馬刃牙",
+      "範馬勇次郎",
+      "郭海皇",
+      "ビスケット・オリバ",
+      "渋川剛気",
+      "ジャック・ハンマー"
+    ]
   },
   {
     "id": "bandai-4582770027044",
@@ -15802,7 +15893,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "バッドばつ丸",
+      "ハローキティ",
+      "ポチャッコ",
+      "クロミ",
+      "チョコキャット"
+    ]
   },
   {
     "id": "bandai-4582770027624",
@@ -15841,7 +15939,13 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "フレンチクルーラー",
+      "フィナンシェ",
+      "パウンドケーキ",
+      "メレンゲ"
+    ]
   },
   {
     "id": "bandai-4582770053791",
@@ -15879,7 +15983,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "アンパンマン",
+      "ばいきんまん",
+      "ドキンちゃん",
+      "コキンちゃん",
+      "あかちゃんまん",
+      "めいけんチーズ"
+    ]
   },
   {
     "id": "bandai-4582770054552",
@@ -15920,7 +16032,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ガシャポンステーションA",
+      "ガシャポンステーションB",
+      "ガシャポンステーションC",
+      "カプセル大(赤)",
+      "カプセル小(ピンク&紫&青)"
+    ]
   },
   {
     "id": "bandai-4582770068405",
@@ -15961,7 +16080,13 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ハローキティ",
+      "マイメロディ",
+      "シナモロール",
+      "クロミ"
+    ]
   },
   {
     "id": "bandai-4582770068641",
@@ -16001,7 +16126,8 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": []
   },
   {
     "id": "bandai-4582770071276",
@@ -16039,7 +16165,28 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ルフィ",
+      "ゾロ",
+      "ナミ",
+      "ウソップ",
+      "サンジ",
+      "チョッパー",
+      "ロビン",
+      "フランキー",
+      "ブルック",
+      "ジンベエ",
+      "赤髪海賊団",
+      "九蛇海賊団",
+      "白ひげ海賊団",
+      "ビッグ・マム海賊団",
+      "百獣海賊団",
+      "ロジャー海賊団",
+      "世界政府",
+      "海軍",
+      "革命軍"
+    ]
   },
   {
     "id": "bandai-4570118184139",
@@ -16184,7 +16331,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "リョク",
+      "ロン",
+      "ハナ",
+      "アール",
+      "ムギ"
+    ]
   },
   {
     "id": "bandai-4570118197375",
@@ -16222,7 +16376,14 @@
     "q_genders": [
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ガンプラくん",
+      "グフプラくん",
+      "ドムプラくん",
+      "シャアズゴくん",
+      "アッガイプラくん"
+    ]
   },
   {
     "id": "bandai-4570118205988",
@@ -16259,7 +16420,13 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "アフロ犬",
+      "みかんぼうや",
+      "にゃんにゃんにゃんこ",
+      "ぷるぷるどっぐ"
+    ]
   },
   {
     "id": "bandai-4570118211590",
@@ -16299,7 +16466,8 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": []
   },
   {
     "id": "bandai-4582769776601",
@@ -16336,7 +16504,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "SION",
+      "RIKU",
+      "YUSHI",
+      "JAEHEE",
+      "RYO",
+      "SAKUYA"
+    ]
   },
   {
     "id": "bandai-4582769935855",
@@ -16373,7 +16549,15 @@
     "q_genders": [
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "大谷 翔平",
+      "山本 由伸",
+      "佐々木 朗希",
+      "今永 昇太",
+      "鈴木 誠也",
+      "ダルビッシュ有"
+    ]
   },
   {
     "id": "bandai-4582769972386",
@@ -16411,7 +16595,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "くまのプーさん",
+      "ディズニー スティッチ",
+      "エイリアン",
+      "ベイマックス",
+      "ロッツォ"
+    ]
   },
   {
     "id": "bandai-4582769995323",
@@ -16451,7 +16642,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "MINIちゃん",
+      "PANDA MINIちゃん",
+      "TEDDY MINIちゃん",
+      "DEVILKINちゃん",
+      "Little Bee"
+    ]
   },
   {
     "id": "bandai-4582770026511",
@@ -16489,7 +16687,13 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "バッグス・バニー",
+      "トゥイーティー",
+      "ダフィー・ダック",
+      "タズマニアン・デビル"
+    ]
   },
   {
     "id": "bandai-4582770027662",
@@ -16527,7 +16731,8 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": []
   },
   {
     "id": "bandai-4582770068740",
@@ -16565,7 +16770,15 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "花海咲季",
+      "月村手毬",
+      "藤田ことね",
+      "花海佑芽",
+      "秦谷美鈴",
+      "十王星南"
+    ]
   },
   {
     "id": "bandai-4582770071627",
@@ -16603,7 +16816,8 @@
     "q_genders": [
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": []
   },
   {
     "id": "bandai-4582770076691",
@@ -16642,7 +16856,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "日向 翔陽",
+      "影山 飛雄",
+      "月島 蛍",
+      "孤爪 研磨",
+      "黒尾 鉄朗"
+    ]
   },
   {
     "id": "bandai-4549660800392",
@@ -16682,7 +16903,15 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ジョナサン・ジョースター",
+      "ジョセフ・ジョースター",
+      "空条承太郎",
+      "東方仗助",
+      "ジョルノ・ジョバァーナ",
+      "空条徐倫"
+    ]
   },
   {
     "id": "bandai-4570118183781",
@@ -16766,7 +16995,15 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ディオ・ブランドー",
+      "シーザー・A・ツェペリ",
+      "花京院 典明",
+      "岸辺 露伴",
+      "ブローノ・ブチャラティ",
+      "E・コステロ"
+    ]
   },
   {
     "id": "bandai-4582769836824",
@@ -16804,7 +17041,13 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ブロッサム",
+      "バブルス",
+      "バターカップ",
+      "電話"
+    ]
   },
   {
     "id": "bandai-4582769793349",
@@ -16844,7 +17087,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ダッキー",
+      "バニー",
+      "ロッツォ",
+      "エイリアン",
+      "ドーリー"
+    ]
   },
   {
     "id": "bandai-4582769842085",
@@ -16885,7 +17135,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "クルル曹長",
+      "ドロロ兵長",
+      "タママ二等兵",
+      "ケロロ軍曹",
+      "ギロロ伍長"
+    ]
   },
   {
     "id": "bandai-4582769842399",
@@ -16922,7 +17179,13 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "まめっち",
+      "くちぱっち",
+      "ふらわっち",
+      "めめっち"
+    ]
   },
   {
     "id": "bandai-4582769842177",
@@ -16962,7 +17225,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "Witzy",
+      "Boof",
+      "Lulla",
+      "Ellie Funt",
+      "Patches"
+    ]
   },
   {
     "id": "bandai-4582769889387",
@@ -17002,7 +17272,13 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ポチャッコ",
+      "ハンギョドン",
+      "けろけろけろっぴ",
+      "ポムポムプリン"
+    ]
   },
   {
     "id": "bandai-4582769890130",
@@ -17040,7 +17316,15 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ぷちきゅあ こめこめ",
+      "ぷちきゅあ しふぉん",
+      "ぷちきゅあ しふれ",
+      "ぷちきゅあ きゃんでぃ",
+      "ぷちきゅあ にこ",
+      "ぷちきゅあ だいふく"
+    ]
   },
   {
     "id": "bandai-4582769708145",
@@ -17080,7 +17364,18 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "NAVELY",
+      "JEONGVELY",
+      "MOVELY",
+      "SAVELY",
+      "JIVELY",
+      "MIVELY",
+      "DAVELY",
+      "CHAENGVELY",
+      "TZUVELY"
+    ]
   },
   {
     "id": "bandai-4582769935756",
@@ -17120,7 +17415,15 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "桑原和真",
+      "蔵馬",
+      "浦飯幽助",
+      "飛影",
+      "コエンマ",
+      "ぼたん"
+    ]
   },
   {
     "id": "bandai-4582769935299",
@@ -17159,7 +17462,18 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "しずえ",
+      "たぬきち",
+      "ブーケ",
+      "ベーター",
+      "バッチ",
+      "アポロ",
+      "アップル",
+      "ミッチェル",
+      "ティーナ"
+    ]
   },
   {
     "id": "bandai-4582769709210",
@@ -17199,7 +17513,14 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "罪木蜜柑",
+      "狛枝凪斗",
+      "日向創",
+      "七海千秋",
+      "モノクマ"
+    ]
   },
   {
     "id": "bandai-4582769916656",
@@ -17239,7 +17560,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ハローキティ",
+      "ポチャッコ",
+      "ポムポムプリン",
+      "シナモロール",
+      "マイメロディ"
+    ]
   },
   {
     "id": "bandai-4582769729140",
@@ -17280,7 +17608,15 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "江戸川コナン",
+      "毛利蘭",
+      "工藤新一",
+      "蝶ネクタイ型変声機",
+      "探偵バッジ",
+      "ターボエンジン付きスケートボード"
+    ]
   },
   {
     "id": "bandai-4582769935206",
@@ -17319,7 +17655,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ジュディ・ホップス",
+      "ニック・ワイルド",
+      "フィニック",
+      "フラッシュ",
+      "アイスキャンディ"
+    ]
   },
   {
     "id": "bandai-4582769918964",
@@ -17361,7 +17704,15 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "トロ",
+      "クロ",
+      "リッキー",
+      "スズキ",
+      "ピエール",
+      "ジュン"
+    ]
   },
   {
     "id": "bandai-4570118202062",
@@ -17401,7 +17752,13 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "モンチッチくん",
+      "モンチッチちゃん",
+      "ベビチッチ",
+      "チムたん"
+    ]
   },
   {
     "id": "bandai-4582769888717",
@@ -17441,7 +17798,16 @@
     "q_genders": [
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ウルトラマン",
+      "ウルトラマンゼロ",
+      "ウルトラセブン",
+      "ウルトラマンティガ",
+      "ティガダーク",
+      "ブースカ",
+      "バルタン星人"
+    ]
   },
   {
     "id": "bandai-4535123850622",
@@ -17483,7 +17849,13 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "竈門炭治郎",
+      "竈門禰豆子",
+      "我妻善逸",
+      "嘴平伊之助"
+    ]
   },
   {
     "id": "bandai-4570118181688",
@@ -17523,7 +17895,11 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "オタマトーン",
+      "パックマン ver."
+    ]
   },
   {
     "id": "bandai-4570118181824",
@@ -17559,7 +17935,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "キュアエクレール",
+      "キュアアルカナ",
+      "シュシュタン",
+      "マシュタン",
+      "ジェット先輩"
+    ]
   },
   {
     "id": "bandai-4570118183590",
@@ -17647,7 +18030,15 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "トラッキー",
+      "DB.スターマン",
+      "ジャビット",
+      "ドアラ",
+      "スラィリー",
+      "つば九郎"
+    ]
   },
   {
     "id": "bandai-4570118183675",
@@ -51056,6 +51447,7 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "hobby:sports",
       "type:stationery"
     ],
     "q_ages": [
@@ -51064,10 +51456,9 @@
       "40"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769792724",
@@ -51093,18 +51484,18 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:idol",
+      "hobby:music",
       "type:stationery"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769855658",
@@ -51131,7 +51522,7 @@
     "auto": true,
     "q_subs": [
       "cool:shonen",
-      "type:stationery",
+      "oshi:trend",
       "type:fashion"
     ],
     "q_ages": [
@@ -51140,9 +51531,10 @@
       "40"
     ],
     "q_genders": [
+      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769935848",
@@ -51168,7 +51560,8 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "hobby:sports"
+      "hobby:sports",
+      "type:useful"
     ],
     "q_ages": [
       "20",
@@ -51179,7 +51572,7 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769978975",
@@ -51213,14 +51606,13 @@
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769995491",
@@ -51246,18 +51638,18 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "hobby:books"
+      "cool:shonen",
+      "hobby:books",
+      "type:charm"
     ],
     "q_ages": [
-      "20",
       "30",
       "40"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770054736",
@@ -51286,18 +51678,16 @@
     "auto": true,
     "q_subs": [
       "kawaii:sanrio",
-      "kawaii:accessory",
       "type:useful"
     ],
     "q_ages": [
       "10",
-      "20",
-      "30"
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770070989",
@@ -51324,17 +51714,19 @@
     "auto": true,
     "q_subs": [
       "oshi:kids",
-      "type:useful",
-      "hobby:movie"
+      "hobby:movie",
+      "type:useful"
     ],
     "q_ages": [
-      "10"
+      "20",
+      "30",
+      "40"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4549660377375",
@@ -51360,16 +51752,19 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "oshi:kids"
+      "oshi:kids",
+      "type:figure"
     ],
     "q_ages": [
-      "10"
+      "10",
+      "20",
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769746017",
@@ -51399,18 +51794,16 @@
     "q_subs": [
       "kawaii:sanrio",
       "kawaii:accessory",
-      "type:mejirushi",
-      "type:fashion"
+      "type:mejirushi"
     ],
     "q_ages": [
       "10",
-      "20",
-      "30"
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769836459",
@@ -51438,21 +51831,19 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
       "cool:shonen",
-      "type:mejirushi",
-      "type:fashion",
-      "hobby:sports"
+      "hobby:sports",
+      "kawaii:accessory",
+      "type:mejirushi"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769897665",
@@ -51485,12 +51876,15 @@
       "funny:machibouke"
     ],
     "q_ages": [
+      "10",
+      "20",
       "30"
     ],
     "q_genders": [
+      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769832567",
@@ -51518,19 +51912,19 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
       "kawaii:accessory",
       "type:mejirushi",
-      "type:fashion"
+      "retro:heisei"
     ],
     "q_ages": [
-      "20",
       "30",
       "40"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769889486",
@@ -51558,21 +51952,20 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
       "oshi:kids",
+      "kawaii:character",
+      "kawaii:accessory",
       "type:mejirushi",
-      "type:fashion",
       "retro:showa"
     ],
     "q_ages": [
-      "20",
       "30",
       "40"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769917349",
@@ -51604,13 +51997,12 @@
       "type:figure"
     ],
     "q_ages": [
-      "10",
-      "30"
+      "10"
     ],
     "q_genders": [
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769916359",
@@ -51638,9 +52030,10 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "cool:shonen",
+      "cool:dark",
       "kawaii:accessory",
-      "type:mejirushi",
-      "type:fashion"
+      "type:mejirushi"
     ],
     "q_ages": [
       "20",
@@ -51650,7 +52043,7 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769837333",
@@ -51679,18 +52072,20 @@
     "auto": true,
     "q_subs": [
       "oshi:kids",
+      "hobby:movie",
       "type:figure",
-      "funny:machibouke",
-      "hobby:movie"
+      "funny:machibouke"
     ],
     "q_ages": [
-      "10"
+      "20",
+      "30",
+      "40"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769866401",
@@ -51719,20 +52114,21 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
+      "oshi:game",
       "type:charm",
       "type:minipkg",
-      "real:miniature"
+      "real:miniature",
+      "retro:heisei"
     ],
     "q_ages": [
       "30",
-      "40",
-      "50"
+      "40"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769742699",
@@ -51760,9 +52156,11 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "hobby:brand",
+      "real:food",
       "kawaii:accessory",
       "type:mejirushi",
-      "type:fashion"
+      "retro:showa"
     ],
     "q_ages": [
       "20",
@@ -51772,7 +52170,7 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769865978",
@@ -51800,9 +52198,9 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "cool:robot",
       "kawaii:accessory",
-      "type:mejirushi",
-      "type:fashion"
+      "type:mejirushi"
     ],
     "q_ages": [
       "20",
@@ -51810,9 +52208,10 @@
       "40"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118184078",
@@ -51838,17 +52237,17 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "oshi:vtuber",
-      "hobby:music"
+      "oshi:vtuber"
     ],
     "q_ages": [
       "10",
       "20"
     ],
     "q_genders": [
+      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118184672",
@@ -51875,16 +52274,17 @@
     "auto": true,
     "q_subs": [
       "oshi:kids",
-      "real:food"
+      "type:fashion",
+      "type:sound"
     ],
     "q_ages": [
-      "10"
+      "10",
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118185358",
@@ -51914,7 +52314,7 @@
     "q_subs": [
       "kawaii:pokemon",
       "kawaii:mascot",
-      "type:plush"
+      "type:charm"
     ],
     "q_ages": [
       "10",
@@ -51925,7 +52325,7 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118186584",
@@ -51950,17 +52350,20 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "kawaii:disney",
+      "hobby:movie",
+      "type:figure"
+    ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118197658",
@@ -51988,19 +52391,19 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
       "oshi:kids",
-      "type:plush",
-      "real:food"
+      "kawaii:mascot",
+      "type:sound"
     ],
     "q_ages": [
-      "10"
+      "10",
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118198150",
@@ -52028,18 +52431,19 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
       "kawaii:accessory",
-      "kawaii:yumekawa",
       "type:charm",
       "retro:heisei"
     ],
     "q_ages": [
+      "20",
       "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118202048",
@@ -52067,19 +52471,19 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "hobby:music",
       "type:figure",
       "funny:machibouke"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118202345",
@@ -52105,18 +52509,19 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:vtuber",
+      "oshi:game",
       "type:useful"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118203748",
@@ -52142,7 +52547,9 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:disney"
+      "kawaii:disney",
+      "kawaii:accessory",
+      "type:charm"
     ],
     "q_ages": [
       "20",
@@ -52151,7 +52558,7 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118205629",
@@ -52177,17 +52584,18 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:sanrio"
+      "kawaii:sanrio",
+      "kawaii:yumekawa",
+      "kawaii:accessory"
     ],
     "q_ages": [
       "10",
-      "20",
-      "30"
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118206541",
@@ -52212,17 +52620,19 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "kawaii:animal",
+      "real:food",
+      "type:figure"
+    ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118235169",
@@ -52250,19 +52660,19 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "cool:dark",
+      "cool:shonen",
       "type:figure",
       "funny:machibouke"
     ],
     "q_ages": [
-      "20",
       "30",
       "40"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118252456",
@@ -52288,6 +52698,7 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "hobby:sports",
       "real:miniature"
     ],
     "q_ages": [
@@ -52296,10 +52707,9 @@
       "40"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769811630",
@@ -52325,19 +52735,19 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "type:sound",
-      "hobby:music"
+      "kawaii:disney",
+      "hobby:movie",
+      "type:sound"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769828867",
@@ -52366,19 +52776,19 @@
     "auto": true,
     "q_subs": [
       "oshi:idol",
-      "type:figure",
-      "hobby:music"
+      "hobby:music",
+      "type:figure"
     ],
     "q_ages": [
+      "10",
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769832680",
@@ -52406,20 +52816,18 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
       "cool:shonen",
-      "type:mejirushi",
-      "type:fashion"
+      "kawaii:accessory",
+      "type:mejirushi"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769841842",
@@ -52449,19 +52857,18 @@
     "q_subs": [
       "kawaii:character",
       "kawaii:animal",
-      "kawaii:mascot",
-      "type:plush",
-      "type:useful",
-      "type:sound"
+      "type:sound",
+      "type:charm"
     ],
     "q_ages": [
       "10",
-      "20"
+      "20",
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769847264",
@@ -52489,19 +52896,20 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:game",
+      "kawaii:animal",
       "kawaii:accessory",
       "type:mejirushi",
-      "type:fashion"
+      "retro:heisei"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769927980",
@@ -52526,17 +52934,19 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "cool:shonen",
+      "type:figure",
+      "funny:neta"
+    ],
     "q_ages": [
-      "20",
       "30",
       "40"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769934827",
@@ -52564,18 +52974,18 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
-      "type:plush"
+      "kawaii:animal",
+      "type:plush",
+      "hobby:art"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769936067",
@@ -52603,19 +53013,20 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:girls",
+      "hobby:books",
       "kawaii:accessory",
       "type:mejirushi",
-      "type:fashion"
+      "retro:heisei"
     ],
     "q_ages": [
-      "20",
       "30",
       "40"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769979132",
@@ -52644,22 +53055,20 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
       "oshi:kids",
+      "real:food",
       "type:charm",
-      "type:minipkg",
-      "real:miniature"
+      "type:minipkg"
     ],
     "q_ages": [
-      "10",
-      "30",
-      "40",
-      "50"
+      "20",
+      "30"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769979163",
@@ -52687,17 +53096,18 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
       "type:figure",
       "retro:heisei"
     ],
     "q_ages": [
+      "20",
       "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769995101",
@@ -52723,18 +53133,17 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
+      "kawaii:character",
       "type:useful"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769995705",
@@ -52762,6 +53171,8 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "hobby:sports",
+      "real:building",
       "real:miniature"
     ],
     "q_ages": [
@@ -52770,10 +53181,9 @@
       "50"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769995781",
@@ -52801,10 +53211,11 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
       "cool:shonen",
-      "type:mejirushi",
-      "type:fashion"
+      "hobby:sports",
+      "kawaii:animal",
+      "kawaii:accessory",
+      "type:mejirushi"
     ],
     "q_ages": [
       "10",
@@ -52813,7 +53224,7 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769995842",
@@ -52839,17 +53250,17 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "real:creature"
+      "real:creature",
+      "type:figure"
     ],
     "q_ages": [
-      "40",
-      "50"
+      "10",
+      "40"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770021684",
@@ -52874,17 +53285,18 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "retro:heisei",
+      "hobby:sports"
+    ],
     "q_ages": [
-      "20",
       "30",
       "40"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770026733",
@@ -52910,7 +53322,8 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:pokemon"
+      "kawaii:pokemon",
+      "real:miniature"
     ],
     "q_ages": [
       "10",
@@ -52921,7 +53334,7 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770026771",
@@ -52949,19 +53362,20 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:game",
+      "cool:dark",
       "type:figure",
       "funny:machibouke"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770027501",
@@ -52991,13 +53405,14 @@
       "type:useful"
     ],
     "q_ages": [
+      "20",
       "30",
       "40"
     ],
     "q_genders": [
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770028027",
@@ -53023,16 +53438,17 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "real:creature"
+      "real:creature",
+      "type:figure"
     ],
     "q_ages": [
-      "40",
-      "50"
+      "10",
+      "40"
     ],
     "q_genders": [
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770056129",
@@ -53058,18 +53474,19 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "funny:neta"
+      "kawaii:animal",
+      "funny:neta",
+      "type:figure"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770076745",
@@ -53097,19 +53514,19 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
-      "kawaii:yumekawa",
       "oshi:girls",
+      "kawaii:accessory",
       "type:charm",
       "retro:heisei"
     ],
     "q_ages": [
+      "20",
       "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769701184",
@@ -53135,17 +53552,18 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
       "type:stationery",
       "retro:heisei"
     ],
     "q_ages": [
+      "20",
       "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769769184",
@@ -53176,19 +53594,16 @@
       "kawaii:sanrio",
       "kawaii:mascot",
       "kawaii:accessory",
-      "kawaii:yumekawa",
-      "type:plush",
       "type:charm"
     ],
     "q_ages": [
       "10",
-      "20",
-      "30"
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769875786",
@@ -53214,15 +53629,18 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "oshi:girls"
+      "oshi:idol",
+      "oshi:girls",
+      "type:stationery"
     ],
     "q_ages": [
-      "10"
+      "20",
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769836848",
@@ -53251,10 +53669,8 @@
     "auto": true,
     "q_subs": [
       "kawaii:sanrio",
-      "kawaii:character",
       "kawaii:accessory",
       "type:mejirushi",
-      "type:fashion",
       "retro:showa"
     ],
     "q_ages": [
@@ -53265,7 +53681,7 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769842122",
@@ -53293,19 +53709,21 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "retro:showa",
+      "hobby:books",
       "kawaii:accessory",
-      "type:mejirushi",
-      "type:fashion"
+      "type:mejirushi"
     ],
     "q_ages": [
-      "20",
       "30",
-      "40"
+      "40",
+      "50"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769889769",
@@ -53331,16 +53749,18 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
+      "type:fashion",
       "retro:heisei"
     ],
     "q_ages": [
+      "20",
       "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769898679",
@@ -53368,20 +53788,19 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
       "kawaii:animal",
       "kawaii:accessory",
-      "type:mejirushi",
-      "type:fashion"
+      "type:mejirushi"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769889615",
@@ -53414,12 +53833,13 @@
       "type:charm"
     ],
     "q_ages": [
-      "40"
+      "20",
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769875731",
@@ -53447,19 +53867,19 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
+      "hobby:art",
       "kawaii:accessory",
-      "type:mejirushi",
-      "type:fashion"
+      "type:mejirushi"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769842443",
@@ -53487,18 +53907,18 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
+      "hobby:books",
+      "funny:neta",
       "type:charm"
     ],
     "q_ages": [
-      "20",
       "30",
       "40"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769891854",
@@ -53528,18 +53948,16 @@
     "q_subs": [
       "kawaii:character",
       "kawaii:accessory",
-      "type:mejirushi",
-      "type:fashion"
+      "type:mejirushi"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769934957",
@@ -53567,20 +53985,19 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
       "oshi:kids",
-      "type:mejirushi",
-      "type:fashion",
-      "retro:showa"
+      "kawaii:accessory",
+      "type:mejirushi"
     ],
     "q_ages": [
-      "10",
-      "50"
+      "20",
+      "30",
+      "40"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769889165",
@@ -53608,19 +54025,19 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
+      "real:food",
       "kawaii:accessory",
-      "type:mejirushi",
-      "type:fashion"
+      "type:mejirushi"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769810503",
@@ -53648,9 +54065,10 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "cool:western",
+      "hobby:movie",
       "kawaii:accessory",
-      "type:mejirushi",
-      "type:fashion"
+      "type:mejirushi"
     ],
     "q_ages": [
       "20",
@@ -53660,7 +54078,7 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118182081",
@@ -53688,20 +54106,19 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
       "cool:western",
-      "type:mejirushi",
-      "type:fashion",
-      "hobby:movie"
+      "hobby:movie",
+      "kawaii:accessory",
+      "type:mejirushi"
     ],
     "q_ages": [
-      "30",
-      "40"
+      "20",
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118182104",
@@ -53730,21 +54147,19 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "cool:western",
       "kawaii:character",
-      "kawaii:accessory",
       "type:charm",
-      "type:minipkg",
-      "real:miniature"
+      "type:minipkg"
     ],
     "q_ages": [
       "30",
-      "40",
-      "50"
+      "40"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118183699",
@@ -53769,17 +54184,20 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "type:charm",
+      "type:minipkg",
+      "hobby:art"
+    ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118183750",
@@ -53805,7 +54223,8 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "oshi:girls"
+      "oshi:girls",
+      "type:fashion"
     ],
     "q_ages": [
       "10"
@@ -53813,7 +54232,7 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118183774",
@@ -53839,8 +54258,9 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:girls",
       "kawaii:yumekawa",
-      "oshi:girls"
+      "type:fashion"
     ],
     "q_ages": [
       "10"
@@ -53848,7 +54268,7 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118184016",
@@ -53888,7 +54308,7 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118184856",
@@ -53914,18 +54334,19 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:character"
+      "cool:western",
+      "kawaii:character",
+      "type:figure"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118184955",
@@ -53953,22 +54374,18 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
-      "type:plush",
-      "type:useful",
+      "kawaii:character",
       "type:sound",
       "retro:heisei"
     ],
     "q_ages": [
-      "20",
       "30",
       "40"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118186829",
@@ -53998,17 +54415,16 @@
     "q_subs": [
       "kawaii:sanrio",
       "kawaii:mascot",
-      "type:plush"
+      "type:charm"
     ],
     "q_ages": [
       "10",
-      "20",
-      "30"
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118187222",
@@ -54036,19 +54452,18 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
       "kawaii:accessory",
-      "type:mejirushi",
-      "type:fashion"
+      "type:mejirushi"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118196774",
@@ -54078,19 +54493,17 @@
     "q_subs": [
       "cool:shonen",
       "type:figure",
-      "retro:showa",
-      "funny:machibouke"
+      "funny:machibouke",
+      "retro:showa"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "40",
+      "50"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118196996",
@@ -54123,13 +54536,14 @@
       "funny:machibouke"
     ],
     "q_ages": [
+      "30",
       "40",
       "50"
     ],
     "q_genders": [
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118205582",
@@ -54156,17 +54570,17 @@
     "auto": true,
     "q_subs": [
       "kawaii:sanrio",
-      "kawaii:yumekawa"
+      "kawaii:yumekawa",
+      "type:useful"
     ],
     "q_ages": [
       "10",
-      "20",
-      "30"
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118206282",
@@ -54196,19 +54610,19 @@
     "q_subs": [
       "kawaii:character",
       "kawaii:animal",
+      "real:food",
       "kawaii:accessory",
-      "type:mejirushi",
-      "type:fashion",
-      "real:food"
+      "type:mejirushi"
     ],
     "q_ages": [
       "10",
-      "20"
+      "20",
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118208781",
@@ -54233,17 +54647,19 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "cool:shonen",
+      "type:plush",
+      "type:charm"
+    ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769709180",
@@ -54273,23 +54689,18 @@
     "auto": true,
     "q_subs": [
       "kawaii:character",
-      "kawaii:mascot",
       "type:figure",
-      "type:plush",
       "type:stationery",
-      "real:miniature",
       "funny:neta"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769769610",
@@ -54317,19 +54728,18 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
       "kawaii:accessory",
-      "type:mejirushi",
-      "type:fashion"
+      "type:mejirushi"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769927508",
@@ -54357,21 +54767,19 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:idol",
       "kawaii:character",
-      "kawaii:mascot",
-      "kawaii:accessory",
       "type:plush",
       "type:fashion"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769928468",
@@ -54397,16 +54805,18 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
+      "type:plush",
       "retro:heisei"
     ],
     "q_ages": [
+      "20",
       "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769978913",
@@ -54432,17 +54842,17 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:sanrio"
+      "kawaii:sanrio",
+      "type:useful"
     ],
     "q_ages": [
       "10",
-      "20",
-      "30"
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769978937",
@@ -54471,17 +54881,17 @@
     "auto": true,
     "q_subs": [
       "kawaii:sanrio",
+      "kawaii:animal",
       "type:figure"
     ],
     "q_ages": [
       "10",
-      "20",
-      "30"
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769978944",
@@ -54515,13 +54925,12 @@
     ],
     "q_ages": [
       "10",
-      "20",
-      "30"
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769979866",
@@ -54547,18 +54956,20 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:pokemon"
+      "kawaii:pokemon",
+      "oshi:game",
+      "type:useful"
     ],
     "q_ages": [
+      "10",
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769981814",
@@ -54584,15 +54995,19 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "cool:shonen"
+      "cool:shonen",
+      "type:figure"
     ],
     "q_ages": [
-      "30"
+      "20",
+      "30",
+      "40"
     ],
     "q_genders": [
+      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769981869",
@@ -54620,19 +55035,19 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:trend",
+      "cool:dark",
       "type:figure",
       "funny:machibouke"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769995637",
@@ -54660,18 +55075,20 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
       "oshi:kids",
-      "type:charm",
-      "retro:heisei"
+      "kawaii:accessory",
+      "type:charm"
     ],
     "q_ages": [
-      "30"
+      "20",
+      "30",
+      "40"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769995712",
@@ -54701,13 +55118,14 @@
       "type:figure"
     ],
     "q_ages": [
+      "20",
       "30",
       "40"
     ],
     "q_genders": [
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769995736",
@@ -54733,16 +55151,19 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "cool:robot"
+      "cool:robot",
+      "oshi:game",
+      "type:figure"
     ],
     "q_ages": [
+      "20",
       "30",
       "40"
     ],
     "q_genders": [
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770027488",
@@ -54768,19 +55189,19 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
       "cool:shonen",
-      "cool:dark",
       "type:useful"
     ],
     "q_ages": [
+      "10",
+      "20",
       "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770027792",
@@ -54808,19 +55229,19 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
       "oshi:kids",
-      "type:mejirushi",
-      "type:fashion",
-      "retro:heisei"
+      "kawaii:accessory",
+      "type:mejirushi"
     ],
     "q_ages": [
-      "30"
+      "20",
+      "30",
+      "40"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770056013",
@@ -54848,19 +55269,19 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
       "cool:shonen",
-      "cool:dark",
-      "type:mejirushi",
-      "type:fashion"
+      "oshi:trend",
+      "kawaii:accessory",
+      "type:mejirushi"
     ],
     "q_ages": [
-      "10"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770068849",
@@ -54889,17 +55310,18 @@
     "auto": true,
     "q_subs": [
       "kawaii:accessory",
-      "type:charm",
       "type:fashion",
-      "retro:heisei"
+      "retro:heisei",
+      "hobby:brand"
     ],
     "q_ages": [
+      "20",
       "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770069099",
@@ -54927,19 +55349,18 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
       "cool:hero",
       "type:charm"
     ],
     "q_ages": [
+      "30",
       "40",
       "50"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770096033",
@@ -54964,17 +55385,18 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "oshi:game",
+      "cool:robot",
+      "type:figure"
+    ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769708183",
@@ -55003,19 +55425,19 @@
     "auto": true,
     "q_subs": [
       "kawaii:disney",
+      "hobby:movie",
       "type:figure",
       "funny:machibouke"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769867422",
@@ -55043,19 +55465,18 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
       "kawaii:accessory",
-      "type:mejirushi",
-      "type:fashion"
+      "type:mejirushi"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769744822",
@@ -55082,7 +55503,8 @@
     "auto": true,
     "q_subs": [
       "kawaii:chiikawa",
-      "kawaii:character"
+      "real:food",
+      "type:charm"
     ],
     "q_ages": [
       "10",
@@ -55091,7 +55513,7 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769888397",
@@ -55117,17 +55539,18 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
       "oshi:girls",
-      "type:fashion"
+      "type:fashion",
+      "retro:heisei"
     ],
     "q_ages": [
-      "30"
+      "30",
+      "40"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118184818",
@@ -55155,18 +55578,20 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
       "cool:western",
-      "type:mejirushi",
-      "type:fashion"
+      "hobby:movie",
+      "kawaii:accessory",
+      "type:mejirushi"
     ],
     "q_ages": [
+      "30",
       "40"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118186140",
@@ -55194,19 +55619,20 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:kids",
+      "kawaii:character",
       "kawaii:accessory",
       "type:mejirushi",
-      "type:fashion"
+      "retro:heisei"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118186508",
@@ -55232,21 +55658,17 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
       "oshi:idol",
-      "type:fashion",
-      "type:useful",
-      "hobby:art"
+      "type:useful"
     ],
     "q_ages": [
       "10",
       "20"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118187147",
@@ -55274,18 +55696,19 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
       "oshi:girls",
+      "kawaii:accessory",
       "type:charm",
       "retro:heisei"
     ],
     "q_ages": [
+      "20",
       "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118205568",
@@ -55319,13 +55742,12 @@
     ],
     "q_ages": [
       "10",
-      "20",
-      "30"
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4570118208422",
@@ -55351,16 +55773,18 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "cool:shonen"
+      "cool:shonen",
+      "type:figure"
     ],
     "q_ages": [
+      "20",
       "30",
       "40"
     ],
     "q_genders": [
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769823176",
@@ -55388,19 +55812,19 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:game",
       "kawaii:accessory",
-      "type:mejirushi",
-      "type:fashion"
+      "type:mejirushi"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769829369",
@@ -55429,18 +55853,20 @@
     "auto": true,
     "q_subs": [
       "oshi:kids",
+      "cool:shonen",
       "type:figure",
       "funny:machibouke"
     ],
     "q_ages": [
       "10",
-      "20"
+      "20",
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769832505",
@@ -55469,21 +55895,20 @@
     "auto": true,
     "q_subs": [
       "kawaii:pokemon",
-      "kawaii:mascot",
-      "type:plush",
-      "type:useful",
-      "type:sound"
+      "oshi:game",
+      "type:sound",
+      "type:charm"
     ],
     "q_ages": [
+      "10",
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769836336",
@@ -55511,17 +55936,19 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
       "oshi:kids",
       "type:plush"
     ],
     "q_ages": [
-      "10"
+      "10",
+      "20",
+      "30"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769855184",
@@ -55548,17 +55975,17 @@
     "auto": true,
     "q_subs": [
       "cool:shonen",
-      "funny:neta"
+      "funny:neta",
+      "type:figure"
     ],
     "q_ages": [
       "20",
       "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769875984",
@@ -55584,18 +56011,18 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:character"
+      "kawaii:character",
+      "type:plush",
+      "type:charm"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769916625",
@@ -55624,20 +56051,17 @@
     "auto": true,
     "q_subs": [
       "kawaii:character",
-      "kawaii:animal",
-      "kawaii:mascot",
-      "type:plush"
+      "hobby:brand",
+      "type:charm"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769927669",
@@ -55665,20 +56089,19 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
       "cool:western",
-      "type:charm",
-      "hobby:movie"
+      "hobby:movie",
+      "type:charm"
     ],
     "q_ages": [
       "30",
-      "40"
+      "40",
+      "50"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769935015",
@@ -55706,20 +56129,20 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:animal",
+      "oshi:girls",
       "cool:shonen",
-      "real:miniature"
+      "type:figure",
+      "real:miniature",
+      "retro:heisei"
     ],
     "q_ages": [
       "30",
-      "40",
-      "50"
+      "40"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769968426",
@@ -55747,19 +56170,19 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "type:figure",
-      "real:miniature"
+      "cool:shonen",
+      "oshi:trend",
+      "type:figure"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769979033",
@@ -55784,17 +56207,19 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "oshi:vtuber",
+      "oshi:game",
+      "type:figure"
+    ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769979040",
@@ -55819,17 +56244,19 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "oshi:vtuber",
+      "oshi:game",
+      "type:figure"
+    ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769979064",
@@ -55858,18 +56285,18 @@
     "auto": true,
     "q_subs": [
       "kawaii:character",
-      "kawaii:mascot",
-      "kawaii:accessory",
       "type:plush",
       "type:charm"
     ],
     "q_ages": [
+      "20",
+      "30",
       "40"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769979071",
@@ -55897,19 +56324,18 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
+      "kawaii:character",
       "type:plush",
       "type:charm"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769979156",
@@ -55937,18 +56363,19 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
       "kawaii:accessory",
-      "type:mejirushi",
-      "type:fashion",
-      "retro:heisei"
+      "type:mejirushi"
     ],
     "q_ages": [
+      "10",
+      "20",
       "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769995156",
@@ -55974,17 +56401,18 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
+      "kawaii:character",
+      "type:charm",
       "retro:heisei"
     ],
     "q_ages": [
+      "20",
       "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582769995804",
@@ -56012,19 +56440,19 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
       "cool:shonen",
-      "type:mejirushi",
-      "type:fashion",
-      "hobby:japan"
+      "hobby:sports",
+      "kawaii:accessory",
+      "type:mejirushi"
     ],
     "q_ages": [
-      "10"
+      "10",
+      "20"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770026597",
@@ -56051,18 +56479,17 @@
     "auto": true,
     "q_subs": [
       "kawaii:character",
-      "kawaii:mascot"
+      "kawaii:yumekawa",
+      "type:charm"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "10",
+      "20"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770027747",
@@ -56088,19 +56515,18 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
       "cool:hero",
       "type:useful"
     ],
     "q_ages": [
+      "30",
       "40",
       "50"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770027808",
@@ -56128,19 +56554,16 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
       "oshi:game",
       "type:charm"
     ],
     "q_ages": [
-      "10",
-      "30"
+      "10"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770053845",
@@ -56168,19 +56591,20 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:game",
       "kawaii:animal",
-      "kawaii:mascot",
       "type:plush"
     ],
     "q_ages": [
+      "10",
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770054538",
@@ -56220,7 +56644,7 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bandai-4582770055672",
@@ -56259,7 +56683,7 @@
     "q_genders": [
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "tarts-y097263",
@@ -56536,7 +56960,7 @@
   {
     "id": "bushicap-10295",
     "name": "学園アイドルマスター むぎゅみにコレクションフィギュア vol.2",
-    "name_en": "",
+    "name_en": "Gakuen iDOLM@STER Mugyu Mini Collection Figure Vol.2",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 500,
@@ -56560,6 +56984,7 @@
     "auto": true,
     "q_subs": [
       "oshi:idol",
+      "oshi:game",
       "type:figure"
     ],
     "q_ages": [
@@ -56569,12 +56994,19 @@
     "q_genders": [
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false,
+    "lineup_names": [
+      "葛城リーリヤ",
+      "倉本千奈",
+      "紫雲清夏",
+      "篠澤 広",
+      "十王星南"
+    ]
   },
   {
     "id": "kenele-gc0803z",
     "name": "mojojojo テディ ジョージョー フィギュアコレクション 2nd Color",
-    "name_en": "",
+    "name_en": "mojojojo Teddy Jojo Figure Collection 2nd Color",
     "maker": "ケンエレファント",
     "maker_en": "Kenelephant",
     "price": 500,
@@ -56596,25 +57028,28 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "type:figure",
-      "real:miniature",
-      "retro:heisei"
+      "kawaii:character",
+      "type:figure"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false,
+    "lineup_names": [
+      "Cotton candy",
+      "Orange soda",
+      "Toy yellow",
+      "Gummy"
+    ]
   },
   {
     "id": "kenele-gc0798z",
     "name": "トケコザッカテン フィギュアマスコット",
-    "name_en": "",
+    "name_en": "Tokeko Zakkaten Figure Mascot",
     "maker": "ケンエレファント",
     "maker_en": "Kenelephant",
     "price": 500,
@@ -56639,23 +57074,26 @@
     "q_subs": [
       "kawaii:mascot",
       "type:figure",
-      "type:plush"
+      "hobby:art"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false,
+    "lineup_names": [
+      "かまぼこ",
+      "イエティ",
+      "コアラ"
+    ]
   },
   {
     "id": "kenele-gc0801z",
     "name": "ARADOMO People フィギュアコレクション",
-    "name_en": "",
+    "name_en": "ARADOMO People Figure Collection",
     "maker": "ケンエレファント",
     "maker_en": "Kenelephant",
     "price": 500,
@@ -56678,23 +57116,29 @@
     "auto": true,
     "q_subs": [
       "type:figure",
-      "real:miniature"
+      "hobby:art"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false,
+    "lineup_names": [
+      "Rizento",
+      "Tasuki",
+      "Dekamimi",
+      "Sankaku",
+      "Wakka"
+    ]
   },
   {
     "id": "kenele-gc0802c",
     "name": "A.C.S_月刊漫画ガロ 蛭子能収 グッズコレクション",
-    "name_en": "",
+    "name_en": "A.C.S Monthly Manga Garo Yoshikazu Ebisu Goods Collection",
     "maker": "ケンエレファント",
     "maker_en": "Kenelephant",
     "price": 400,
@@ -56714,17 +57158,26 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "real:space"
+      "hobby:books",
+      "hobby:art",
+      "retro:showa",
+      "funny:neta"
     ],
     "q_ages": [
-      "20",
-      "30",
-      "40"
+      "40",
+      "50"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false,
+    "lineup_names": [
+      "スライドミラー",
+      "小銭入れ",
+      "エコバッグ",
+      "手ぬぐいA",
+      "手ぬぐいB",
+      "アクリルブロック"
+    ]
   }
 ]
