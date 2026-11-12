@@ -4159,7 +4159,7 @@
     "maker_en": "Bandai",
     "price": 400,
     "release": "2026-11",
-    "release_note": "",
+    "release_note": "11月第4週より順次",
     "genre": "anime",
     "moods": [],
     "tags": [],
@@ -57898,5 +57898,218 @@
       "Soyo",
       "Taki"
     ]
+  },
+  {
+    "id": "tarts-y086861",
+    "name": "でふぉフィグ！ 薬屋のひとりごとキーホルダー",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-11",
+    "release_note": "2026年3月16日週再発売・2026年11月23日週再発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "lineup_names": [
+      "猫猫1",
+      "猫猫2",
+      "猫猫3",
+      "壬氏"
+    ],
+    "jan_checked": true,
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y086861",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-13",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "oshi:trend",
+      "type:charm"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y088766",
+    "name": "肩ズンFig. ペルソナ５ ザ・ロイヤル vol.2",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-11",
+    "release_note": "8月11日週発売・2026年11月23日週再発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "lineup_names": [
+      "クイーン（QUEEN）",
+      "ナビ（NAVI）",
+      "ノワール（NOIR）",
+      "ヴァイオレット（VIOLET）",
+      "クロウ（CROW）"
+    ],
+    "jan_checked": true,
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y088766",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-13",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "oshi:game",
+      "type:figure",
+      "funny:machibouke"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y094453",
+    "name": "肩ズンFig. 鬼滅の刃 第肆弾",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 500,
+    "release": "2026-11",
+    "release_note": "3月23日週発売・2026年11月23日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "lineup_names": [
+      "鬼舞辻 無惨",
+      "童磨",
+      "猗窩座",
+      "獪岳"
+    ],
+    "jan_checked": true,
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y094453",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-13",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "cool:shonen",
+      "type:figure",
+      "funny:machibouke"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "kitan-touchkoneko-mc",
+    "name": "たっちTouch～こねこ～ マーカーチャーム",
+    "name_en": "",
+    "maker": "キタンクラブ",
+    "maker_en": "Kitan Club",
+    "price": 300,
+    "release": "2026-11",
+    "release_note": "11月",
+    "genre": "animal",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "image": "",
+    "official_url": "https://kitan.jp/products/touchkoneko_mc/",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-13",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:animal",
+      "kawaii:accessory",
+      "type:charm"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "kenele-gc0795c",
+    "name": "HONGAMA ゴースト アクリルチャーム",
+    "name_en": "",
+    "maker": "ケンエレファント",
+    "maker_en": "Kenelephant",
+    "price": 300,
+    "release": "2026-11",
+    "release_note": "11月",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 20,
+    "image": "",
+    "official_url": "https://kenelestore.jp/products/gc0795c",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-13",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "cool:dark",
+      "type:charm"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
   }
 ]
