@@ -1235,7 +1235,7 @@ ${site.naver_verification ? `<meta name="naver-site-verification" content="${esc
 <meta http-equiv="Cache-Control" content="no-siteapp">
 <meta name="applicable-device" content="pc,mobile">
 <meta name="keywords" content="日本扭蛋,扭蛋新品,扭蛋店,扭蛋发售日,GACHA PLANET">\n` : ""}${lang === "zh-tw" ? `<meta property="og:locale:alternate" content="zh_HK">\n` : ""}<link rel="alternate" type="application/rss+xml" title="${esc(site.name)}" href="${esc(SITE_URL + "/" + langDir(lang) + "rss.xml")}">
-<meta property="og:site_name" content="${esc(site.name)}">
+<meta property="og:site_name" content="${lang === "ja" ? "ガチャプラネット" : esc(site.name)}">
 <meta property="og:locale" content="${t.ogLocale}">
 <meta property="og:title" content="${esc(fullTitle)}">
 <meta property="og:description" content="${esc(description)}">
@@ -1459,9 +1459,9 @@ ${content}
       rel: "index.html", title: site.name, lastmod: maxAdded(items),
       // 説明文：日本語は今週・今月の数と最新の名前を足して、ひと目で中身がわかるように（ほかの言語は site.json の長い説明のまま）
       description: lang === "ja" ? `${t.description.replace(/^新作ガチャガチャ/, "新作ガチャガチャ・ガシャポン")}今週発売${WEEK.items.length}件・今月の新作${releasingNow}件。${newest.slice(0, 2).map((it) => `「${it.name}」`).join("")}など最新の情報を毎日更新。` : t.description, body,
-      jsonld: [{ "@context": "https://schema.org", "@type": "WebSite", name: site.name, alternateName: ["ガチャプラネット", "GACHA PLANET"], url: canonical(lang, "index.html"), description: t.description, inLanguage: LANG_META[lang].hreflang,
+      jsonld: [{ "@context": "https://schema.org", "@type": "WebSite", name: lang === "ja" ? "ガチャプラネット" : site.name, alternateName: lang === "ja" ? ["GACHA PLANET", "gachapla", "ガチャプラ"] : ["ガチャプラネット", "gachapla"], url: canonical(lang, "index.html"), description: t.description, inLanguage: LANG_META[lang].hreflang,
         potentialAction: { "@type": "SearchAction", target: { "@type": "EntryPoint", urlTemplate: canonical(lang, "search.html") + "?q={search_term_string}" }, "query-input": "required name=search_term_string" } },
-        { "@context": "https://schema.org", "@type": "Organization", name: site.name, alternateName: "ガチャプラネット", url: SITE_URL + "/", logo: `${SITE_URL}/images/og/site.png`, sameAs: ["https://x.com/gachapla"], foundingDate: "2026-10" }],
+        { "@context": "https://schema.org", "@type": "Organization", name: lang === "ja" ? "ガチャプラネット" : site.name, alternateName: lang === "ja" ? ["GACHA PLANET", "gachapla"] : ["ガチャプラネット", "gachapla"], url: SITE_URL + "/", logo: `${SITE_URL}/images/og/site.png`, sameAs: ["https://x.com/gachapla", "https://x.com/gacha_jpn", "https://www.instagram.com/gacha_pla/", "https://www.threads.net/@gacha_pla"], foundingDate: "2026-10" }],
     });
   }
 
