@@ -3455,7 +3455,7 @@
     "maker_en": "Bandai",
     "price": 400,
     "release": "2026-11",
-    "release_note": "",
+    "release_note": "11月第2週より順次",
     "genre": "anime",
     "moods": [],
     "tags": [],
@@ -58508,5 +58508,54 @@
     ],
     "tags_auto": false,
     "lineup_names": []
+  },
+  {
+    "id": "tarts-y907760",
+    "name": "Spookiz めじるしガチャマスコット",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-11",
+    "release_note": "11月16日週発売",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "lineup_names": [
+      "Cula",
+      "Frankie",
+      "Kebi",
+      "Kongkong",
+      "Zizi"
+    ],
+    "jan_checked": true,
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y907760",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-14",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "kawaii:accessory",
+      "type:plush",
+      "type:mejirushi"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
   }
 ]
