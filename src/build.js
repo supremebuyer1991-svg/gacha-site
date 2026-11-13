@@ -2491,7 +2491,7 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
     <div class="chara-list">${CHAINS.map((ch) => `<a class="chara-chip" href="${c.H}chain/${ch.slug}.html">${esc(ch.label)}<small>${ch.shops.length}</small></a>`).join("")}</div>
   </section>
 </div>`;
-      layout({ rel, title: katsu ? "ガチャ活ルート｜近くのガチャのあるお店を効率よく回る" : "みんなのガチャマップ｜全国のガチャガチャ設置場所・設置店を地図で探す", description: katsu ? "ガチャ活（ガチャ巡り）のルートを自動で作成。今いる場所から近いガチャのあるお店を、回りやすい順番でご案内。探したいガチャの取扱店だけで作ることもできます。" : `全国${SHOPS.length}店のガチャガチャ設置場所（設置店）を地図で探せます。在庫や台数はみんなの報告で更新。地図にないお店も追加できます。`, body, current: katsu ? "katsu" : "map", jaOnly: true, extraHead: LEAF });
+      layout({ rel, title: katsu ? "ガチャ活ルート｜近くのガチャのあるお店を効率よく回る" : "近くのガチャガチャを地図で探す｜全国の設置場所・設置店（みんなのガチャマップ）", description: katsu ? "ガチャ活（ガチャ巡り）のルートを自動で作成。今いる場所から近いガチャのあるお店を、回りやすい順番でご案内。探したいガチャの取扱店だけで作ることもできます。" : `全国${SHOPS.length}店のガチャガチャ設置場所（設置店）を地図で探せます。在庫や台数はみんなの報告で更新。地図にないお店も追加できます。`, body, current: katsu ? "katsu" : "map", jaOnly: true, extraHead: LEAF });
     }
     // 市区町村ページ（/shops/<都道府県>/<市区町村>）：3店以上ある市区町村だけ。URL は主要な市・区はローマ字、それ以外は市区町村名から作るハッシュ（名前が同じなら毎回同じ）
     const CITY_MIN = 3;
@@ -2772,7 +2772,10 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
       const thinShop = !off.length && !(rp && rp.n) && !SHOP_RATINGS[sh.id];
       // lastmod：みんなの報告の最新日と、公式の取扱（stock.json）の更新日のうち新しいほう。どちらもなければ付けない
       const shopLm = [rp && rp.last, off.length && stockFile.updated_at].filter(Boolean).sort().pop() || "";
-      layout({ rel, title: `${sh.name}｜${city || sh.pref || ""}のガチャガチャ設置場所・取扱ガチャ${off.length ? `${off.length}種` : ""}`, noindex: thinShop, lastmod: shopLm, description: `${sh.pref && !(sh.address || "").startsWith(sh.pref) ? sh.pref : ""}${sh.address ? sh.address.replace(/\s+/g, " ") : sh.pref || ""}にある${sh.name}のガチャガチャ設置場所・取扱ガチャの情報。${off.length ? `取扱中のガチャ${off.length}種（${off.slice(0, 2).map((x) => x.name).join("、")}など）や、` : ""}みんなの在庫報告・台数・評価を確認できます。`, body, current: "map", jaOnly: true, extraHead: LEAF,
+      // 住所の最後が「〇〇店内」のときは、入っている施設名（例：山陽マルナカ可部店）をタイトルに足す。検索は「施設名 ガチャガチャ」が多いため
+      const hostM = (sh.address || "").match(/[\s　]([^\s　]{2,24}?)内\s*$/);
+      const host = hostM && !/namco|施設|[階Ff]|フロア|^[0-9０-９]/.test(hostM[1]) && !sh.name.includes(hostM[1].replace(/店$/, "")) ? hostM[1] : "";
+      layout({ rel, title: `${sh.name}${host ? `（${host}内）` : ""}｜${city || sh.pref || ""}のガチャガチャ設置場所・取扱ガチャ${off.length ? `${off.length}種` : ""}`, noindex: thinShop, lastmod: shopLm, description: `${sh.pref && !(sh.address || "").startsWith(sh.pref) ? sh.pref : ""}${sh.address ? sh.address.replace(/\s+/g, " ") : sh.pref || ""}にある${sh.name}のガチャガチャ設置場所・取扱ガチャの情報。${off.length ? `取扱中のガチャ${off.length}種（${off.slice(0, 2).map((x) => x.name).join("、")}など）や、` : ""}みんなの在庫報告・台数・評価を確認できます。`, body, current: "map", jaOnly: true, extraHead: LEAF,
         jsonld: [{ "@context": "https://schema.org", ...storeLd(sh) }] });
     }
     // 投稿のきまり
