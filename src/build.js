@@ -1294,6 +1294,11 @@ for (const l of ["en", "ko", "zh-cn", "zh-tw"]) {
   fs.copyFileSync(src, path.join(OUT, "images", "og", `site-${l}.jpg`));
   OG_SITE_LANGS.add(l);
 }
+// まとめページの共有画像（コラージュ）の計画：{ ページ: { title, sub, ids } }。ビルドのあと src/og-img.js がこれを読んで画像を作り、og:image を差し替える（日本語だけ）
+const OG_PLAN = {};
+const OG_CHARA = new Set([...CHARAS].sort((a, b) => b.list.length - a.list.length).slice(0, 40)); // キャラ・作品は商品の多い上位40ページ
+const OG_NEXT_MONTH = new Date(Date.UTC(+thisMonth.slice(0, 4), +thisMonth.slice(5, 7), 1)).toISOString().slice(0, 7);
+const ogPlan = (rel, title, sub, list) => { OG_PLAN[rel] = { title, sub, ids: list.filter((it) => it && it.image && !/^https?:/.test(it.image)).slice(0, 12).map((it) => it.id) }; };
 
 // 在庫を確認する商品の一覧（Cloudflareの在庫確認ワーカーが読む）：先月以降に発売のバンダイ商品
 {
@@ -1472,6 +1477,7 @@ ${site.naver_verification ? `<meta name="naver-site-verification" content="${esc
 <meta property="og:type" content="${ogType}">
 <meta property="og:url" content="${esc(canonical(lang, rel))}">
 <meta property="og:image" content="${esc(ogImage || `${SITE_URL}/images/og/${OG_SITE_LANGS.has(lang) ? `site-${lang}` : "site"}.jpg`)}">
+${!ogImage || /\/images\/og\/week\.jpg/.test(ogImage) ? `<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">\n` : ""}<meta property="og:image:alt" content="${esc(title)}">
 <meta name="twitter:card" content="summary_large_image">
 ${xAcc ? `<meta name="twitter:site" content="@${esc(xAcc)}">` : ""}
 <meta name="theme-color" content="#f6f8ff">
@@ -2278,6 +2284,7 @@ ${content}
     const top = list[0];
     const fy = freshYM(list);
     const cx = charaExtra(ch, L, list);
+    if (lang === "ja" && OG_CHARA.has(ch)) ogPlan(`chara/${ch.slug}.html`, `${L}のガチャガチャ`, `${list.length}シリーズ・新作と発売日`, list);
     listPage(`chara/${ch.slug}.html`, {
       title: lang === "ja" ? `${L}のガチャガチャ新作・発売日一覧${fy && fy.ja ? `【${fy.ja}最新】` : ""}` : t.x.charaTitle(L, fy || YM_NOW_EN), ...hubHead(L, list),
       lead: lang === "ja"
@@ -2325,6 +2332,7 @@ ${content}
     lead: lang !== "ja" ? t.x.nextLead(NEXT_WEEK.items.length, NEXT_WEEK.range, NEXT_WEEK.items.slice(0, 3).map((it) => nameOf(it, lang))) : `${NEXT_WEEK.label}（${NEXT_WEEK.range}）に発売予定のガチャ${NEXT_WEEK.items.length}シリーズです。${NEXT_WEEK.items.length ? `${NEXT_WEEK.items.slice(0, 2).map((it) => `「${it.name}」`).join("")}など、` : ""}値段・全何種か・在庫店の情報もまとめています。発売日は地域や店舗によって前後します。`,
     list: NEXT_WEEK.items, current: "next", extra: weekSwap("week.html", navT.week, WEEK.items.length, false) + permaLink(NEXT_WEEK) + listAff(lang, "予約", "発売前に予約・まとめ買い"),
   });
+  if (lang === "ja") ogPlan("next-week.html", "来週発売のガチャガチャ", `${NEXT_WEEK.range}・${NEXT_WEEK.items.length}シリーズ`, NEXT_WEEK.items);
   // 季節・テーマの一覧（/theme/christmas など。定義は上の THEME_DEFS・日本語だけ）
   if (lang === "ja") for (const th of THEMES) {
     const list = th.list, L = th.label, n = list.length;
@@ -2334,6 +2342,7 @@ ${content}
     // この一覧に多く入っているキャラクター・作品（上位5つ）
     const rel = CHARAS.map((ch) => ({ ch, k: ch.list.filter((it) => list.includes(it)).length })).filter((x) => x.k).sort((a, b) => b.k - a.k || b.ch.list.length - a.ch.list.length).slice(0, 5);
     const others = THEMES.filter((x) => x !== th);
+    ogPlan(`theme/${th.slug}.html`, `${L}のガチャガチャ`, `${th.y}年・${n}シリーズ`, [...list].sort(byPopular));
     listPage(`theme/${th.slug}.html`, {
       title: `${L}のガチャガチャ【${th.y}年】${th.motif}の新作一覧`,
       h1: `${L}のガチャガチャ（${th.y}年）`,
@@ -2541,6 +2550,7 @@ ${content}
       const c = ctx(rel);
       const [y, mo] = m.split("-");
       const n = monthCount(m);
+      if (lang === "ja" && (m === thisMonth || m === OG_NEXT_MONTH)) ogPlan(rel, `${y}年${Number(mo)}月発売のガチャガチャ`, `${n}シリーズ・発売週ごとの一覧`, weeksOf(m).groups.flatMap((g) => g.list).sort(byPopular));
       const future = m >= thisMonth;
       const h1 = en ? C.monthH1(Number(y), Number(mo), n, future)
         : `${y}年${Number(mo)}月発売のガチャガチャ${future ? "新作" : ""}一覧（${n}シリーズ）`;
@@ -3112,6 +3122,7 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
       // タイトル・説明文は件数から（「ガチャガチャ 抽選」の検索結果で、いま何件あるかがひと目でわかるように）
       const mdNow = `${nowJST.getUTCMonth() + 1}/${nowJST.getUTCDate()}`;
       const cntTxt = [sumN.open ? `受付中${sumN.open}件` : live.length ? `受付予定${live.length}件` : "", sumN.today ? `本日締切${sumN.today}件` : ""].filter(Boolean).join("・");
+      ogPlan(rel, "ガチャガチャ抽選情報まとめ", `${cntTxt || "受付中・これからの抽選"}・${mdNow}更新`, [...LOT_BY_ITEM.entries()].sort((a, b) => b[1].length - a[1].length).map(([id]) => itemById.get(id)));
       layout({ rel, title: `ガチャガチャ抽選情報まとめ【${mdNow}更新】${cntTxt || "受付中・これからの抽選"}`,
         description: `${live.length ? `${[sumN.open ? `受付中${sumN.open}件` : `これから受付${live.length}件`, sumN.today ? `本日締切${sumN.today}件` : "", sumN.tomorrow ? `明日締切${sumN.tomorrow}件` : ""].filter(Boolean).join("・")}（${mdNow}更新）。${topLot.length ? `${topLot.map((n) => `「${n}」`).join("")}など、` : ""}` : ""}人気ガチャガチャの抽選販売・入場整理券を、締切が近い順にお店・受付期間・応募方法（LivePocket・店頭）つきでまとめています。`,
         body, current: "lottery", jaOnly: true,
@@ -3171,6 +3182,7 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
     <ul class="where-shops lot-item">${Hh.others.map((x) => `<li><span class="lot-item-store">${esc(x.title)}<small>${esc(x.store)}${x.pref ? `（${esc(x.pref)}）` : ""}</small></span><span>受付 ${md(x.start)}〜${md(x.end)}・${esc(x.method || "")}</span></li>`).join("")}</ul></section>` : ""}
   <p class="lot-more"><a href="${c.R}lottery.html">いま受付中の抽選情報 →</a>　<a href="${c.H}chain.html">チェーンからお店をさがす →</a></p>
 </div>`;
+      ogPlan(rel, "ガチャガチャ抽選販売の記録", `${Hh.groups.length}商品・${Hh.total}件`, Hh.groups.map((g) => g.it));
       layout({ rel, title: "ガチャガチャ抽選販売の記録｜これまでに抽選になったガチャ一覧",
         description: `これまでに抽選販売になったガチャガチャ${Hh.groups.length}商品・${Hh.total}件の記録（${monthsTxt}）。${topG.slice(0, 2).map((g) => `「${g.name}」${g.stores.size}店`).join("、")}など、商品ごとに抽選の店数・受付期間・チェーン（${topCh.slice(0, 1).map(([k]) => k.label).join("")}など）・応募方法・販売日をまとめています。`,
         body, current: "lottery", jaOnly: true,
@@ -3413,6 +3425,7 @@ if (!PREVIEW) {
   const out = "{\n" + [...(built ? [`"_built": ${JSON.stringify(built)}`] : []), ...Object.keys(rest).sort().map((k) => `${JSON.stringify(k)}: ${JSON.stringify(rest[k])}`)].join(",\n") + "\n}\n"; // 1ページ1行（変わった所だけが差分になる）
   if (process.env.GITHUB_ACTIONS || process.env.PAGE_HASHES_WRITE) fs.writeFileSync(HASH_FILE, out);
   fs.writeFileSync(path.join(ROOT, ".indexnow-urls.json"), JSON.stringify([...new Set(hashChanged)]));
+  fs.writeFileSync(path.join(ROOT, ".og-plan.json"), JSON.stringify(OG_PLAN)); // 共有画像の計画（src/og-img.js 用。リポジトリには入れない）
 }
 // 古いURL → 新しいURL
 write("_redirects", [

@@ -6,3 +6,5 @@ data/votes.json
 data/shops-live.json
 .reel-tmp/
 .indexnow-urls.json
+.og-plan.json
+.og-cache/
