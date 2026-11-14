@@ -51,8 +51,10 @@ const MIN_LINE = 3;
 const isReissue = (it) => /再販|再生産|復刻|reissue/i.test(it.name) || /再発売/.test(it.release_note || "");
 const isBox = (it) => /箱売/.test(it.name);
 const KAN = "〇一二三四五六七八九";
+const DAIJI = { 壱: "一", 弐: "二", 参: "三", 肆: "四", 伍: "五", 陸: "六", 漆: "七", 捌: "八", 玖: "九", 拾: "十" };
 const kanNum = (s) => {
   if (/^\d+$/.test(s)) return Number(s);
+  s = String(s).replace(/[壱弐参肆伍陸漆捌玖拾]/g, (ch) => DAIJI[ch]);
   const m = s.match(/^(?:([一二三四五六七八九])?(十))?([一二三四五六七八九])?$/);
   if (!m || (!m[2] && !m[3])) return null;
   return (m[2] ? (m[1] ? KAN.indexOf(m[1]) : 1) * 10 : 0) + (m[3] ? KAN.indexOf(m[3]) : 0);
@@ -61,7 +63,9 @@ const kanNum = (s) => {
 const volOf = (name) => {
   let n = String(name || "").normalize("NFKC").replace(/【[^】]*】/g, " ").replace(/[（(][^）)]*(?:再販|再生産|復刻)[^）)]*[）)]/g, " ")
     .replace(/^From TV animation\s+/i, "").replace(/\s*[～〜~][^～〜~]*[～〜~]?\s*$/, "").replace(/\s+/g, " ").trim();
-  const m = n.match(/^(.*?)\s*(?:第([0-9一二三四五六七八九十]+)(?:弾|海戦|章)|vol\.?\s*(\d+)|part\.?\s*(\d+)|(?<!\d)(\d{1,2}))$/i);
+  // 「第4弾 ふたば幼稚園大集合シリーズ」のように、番号のあとに副題がつくものは副題を外して数える
+  n = n.replace(/(第[0-9一二三四五六七八九十壱弐参肆伍陸漆捌玖拾]+(?:弾|海戦|章))\s+(?!.*(?:BOX|ボックス|セット)).+$/i, "$1");
+  const m = n.match(/^(.*?)\s*(?:第([0-9一二三四五六七八九十壱弐参肆伍陸漆捌玖拾]+)(?:弾|海戦|章)|vol\.?\s*(\d+)|part\.?\s*(\d+)|(?<!\d)(\d{1,2}))$/i);
   if (!m || m[1].replace(/[\s!！]/g, "").length < 3) return { base: n, vol: null };
   const v = kanNum(m[2] || m[3] || m[4] || m[5]);
   return v ? { base: m[1].replace(/[\s:：・-]+$/, "").trim(), vol: v } : { base: n, vol: null };

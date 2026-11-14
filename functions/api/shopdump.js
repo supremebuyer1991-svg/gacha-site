@@ -5,7 +5,7 @@ const q = async (env, sql, ...bind) => { try { const st = env.DB.prepare(sql); r
 export async function onRequestGet({ env, request }) {
   if (!env.DB) return json({}, 503, 0);
   // 重い（全部の取扱を読む）ので、結果を3時間キャッシュする。D1 の無料枠（1日の読み込み行数）を使い切らないため
-  const cache = caches.default, key = new Request(new URL("/api/shopdump?v=1", request.url).toString());
+  const cache = caches.default, key = new Request(new URL("/api/shopdump?v=2", request.url).toString());
   const hit = await cache.match(key);
   if (hit && !new URL(request.url).searchParams.has("fresh")) return hit;
   const errors = [];
@@ -24,7 +24,11 @@ export async function onRequestGet({ env, request }) {
   for (const r of off || []) (official[String(r.shop).toLowerCase()] ||= []).push(r.item_id);
   const reports = {};
   for (const r of rep || []) reports[r.s] = { n: r.n, last: r.last };
-  const res = json({ generated: new Date().toISOString(), shops, official, reports, ratings, errors }, 200, 0);
+  // 商品ごとの入荷の記録（商品ページに「初めて店頭で確認した日・補充の回数・今の在庫店数」を文字で出すため）
+  const obs = (await q(env, "SELECT item_id, first_seen, restocks, in_count FROM item_obs")) || [];
+  const arrivals = {};
+  for (const r of obs) arrivals[r.item_id] = { f: r.first_seen, r: r.restocks || 0, n: r.in_count || 0 };
+  const res = json({ generated: new Date().toISOString(), shops, official, reports, ratings, arrivals, errors }, 200, 0);
   if (!errors.length) { const c = new Response(res.clone().body, res); c.headers.set("Cache-Control", "public, max-age=10800"); await cache.put(key, c); }
   return res;
 }

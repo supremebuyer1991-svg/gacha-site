@@ -131,7 +131,7 @@ const T = {
       const paren = [sfx, short || /ガチャ|ガシャ/.test(base) ? "" : "ガチャ"].filter(Boolean).join("・");
       return `${base}${paren ? `（${paren}）` : ""}${short ? "｜ガチャ 発売日・在庫店" : "｜発売日・値段・どこで売ってる？"}`;
     },
-    itemDesc: (it, n, mk, mo) => `${n}（${mk}）は${mo}発売${it.price ? `、1回${it.price}円` : ""}${it.lineup ? `・全${it.lineup}種` : ""}のガチャガチャ。${it.description ? it.description + " " : ""}近くの在庫店や通販での入手方法もまとめています。`,
+    itemDesc: (it, n, mk, mo) => `${n}（${mk}）は${mo}発売${it.price ? `、1回${it.price}円` : ""}${it.lineup ? `・全${it.lineup}種` : ""}のガチャガチャ。${it.summary ? it.summary + " " : ""}近くの在庫店や通販での入手方法もまとめています。`,
     genrePage: (g, ym = YM_NOW) => `${g}のガチャガチャ新作・発売日一覧${ym ? `【${ym}】` : ""}`, genreLead: (g, n, list) => `${g}ジャンルの新作・発売予定ガチャ${n}シリーズを新しい順に掲載しています。${leadTail(list)}`,
     makerPage: (m, ym = YM_NOW) => `${m}の${m === "バンダイ" ? "ガシャポン" : "ガチャガチャ"}新作・発売日一覧${ym ? `【${ym}】` : ""}`, makerLead: (m, n, list) => `${m}のガチャ${n}シリーズを新しい順に掲載しています。${leadTail(list)}`,
     empty: "まだ掲載している商品はありません。",
@@ -904,6 +904,9 @@ const SHOP_OFFICIAL = (() => {
   const o = {}; for (const [k, v] of Object.entries(m)) o[k] = [...v]; return o;
 })();
 const SHOP_REPORTS = shopsLive.reports || {};
+// 商品ごとの入荷の記録（サイトのデータベースから。作った時点の数字を文字でページに入れる）
+const ARRIVALS = shopsLive.arrivals || {};
+const ARR_AT = shopsLive.generated ? new Date(Date.parse(shopsLive.generated) + 9 * 3600e3) : null;
 const SHOP_BY_ID = new Map(SHOPS.map((x) => [x.id, x]));
 // 商品 → 公式の取扱店（お店ごとの一覧を逆引き）
 const OFFICIAL_BY_ITEM = (() => {
@@ -1554,7 +1557,9 @@ ${content}
       // 残りは2文まで：キャラクター・ラインナップを先に、シリーズと取扱店はハッシュでどちらを先にするか決める
       const extra = [A.chara(d, v(6)), ...(v(9) % 2 ? [d.shops ? A.shops(d, v(12)) : "", A.series(d, v(15))] : [A.series(d, v(15)), d.shops ? A.shops(d, v(12)) : ""])].filter(Boolean);
       out.push(...extra.slice(0, 2));
-      return `<section class="section section-tight about-item"><h2>${esc(A.h)}</h2><p>${out.join(lang === "en" || lang === "ko" ? " " : "")}</p></section>`;
+      // 日本語：メーカー公式の情報をもとに書いた商品説明（段落ごと）
+      const long = lang === "ja" && description ? String(description).split(/\n+/).filter(Boolean).map((x) => `<p>${esc(x)}</p>`).join("") : "";
+      return `<section class="section section-tight about-item"><h2>${esc(A.h)}</h2><p>${out.join(lang === "en" || lang === "ko" ? " " : "")}</p>${long}</section>`;
     })();
 
     // 通販・フリマのチップ（スマホで最初の画面に入るよう、価格のすぐ下に置く。JANコードは元の場所＝ボタンの下）
@@ -1585,7 +1590,7 @@ ${content}
         <dt>${t.genre}</dt><dd><a href="${c.H}genre/${g.slug}.html">${gl}</a></dd>
         ${tags.length ? `<dt>${t.tags}</dt><dd><div class="tags">${tags.map((x) => `<span class="chip chip-ai">${esc(x)}</span>`).join("")}</div></dd>` : ""}
       </dl>
-      ${description ? `<p class="desc">${esc(description)}</p>` : ""}
+      ${description && lang !== "ja" ? `<p class="desc">${esc(description)}</p>` : ""}
       <div class="item-actions"${state === "up" ? ' id="notify" style="scroll-margin-top:24px"' : ""}>
         ${state === "up" ? `<button type="button" class="btn btn-gold" data-fav="${it.id}" aria-pressed="false"><i aria-hidden="true" style="font-style:normal">★</i><span>${esc(t.u.save)}</span></button>` /* 発売前：まだお店に置かれないので、一番のボタンは★保存（下の「発売日にお知らせ」を押しても★に入る） */
         : `<a class="btn btn-gold" href="#stock">${t.findStores}</a>`}
@@ -1635,7 +1640,7 @@ ${content}
   ${hubs.seriesNav(HUB, it, { lang, c, t, nameOf, esc })}
   ${(it.lineup_names || []).length ? `<section class="section lineup-sec">
     <div class="section-head"><h2>${t.lineupTitle(it.lineup || it.lineup_names.length)}</h2></div>
-    <ol class="lineup">${it.lineup_names.map((n) => `<li lang="ja">${esc(n)}</li>`).join("")}</ol>
+    <ol class="lineup${lang === "ja" && it.lineup_notes ? " lineup-notes" : ""}">${it.lineup_names.map((n) => { const nt = lang === "ja" && it.lineup_notes && it.lineup_notes[n]; return `<li lang="ja">${nt ? `<span><b>${esc(n)}</b><small>${esc(nt)}</small></span>` : esc(n)}</li>`; }).join("")}</ol>
     <p class="fine">${t.lineupNote}</p>
   </section>` : ""}
 
@@ -1651,19 +1656,28 @@ ${content}
     const whenTxt = ws ? `${wi.m}月${wi.no ? `第${wi.no}週` : ""}（${wi.range}）ごろ` : `${t.month(it.release)}${it.release_note ? `（${it.release_note}）` : ""}`;
     const whereTxt = shs.length
       ? `バンダイ公式の取扱店情報では、全国${shs.length}店で取扱があります（${prefTop.slice(0, 5).map(([p, k]) => `${p}${k}店`).join("・")}${prefTop.length > 5 ? "など" : ""}）。`
-      : `${MAKER_WHERE[it.maker] || "全国のカプセルトイ専門店やショッピングモールのガチャコーナー"}で販売されます。取扱店はお店ごとに違うので、下の在庫店リストやみんなの報告も参考にしてください。`;
+      : `${MAKER_WHERE[it.maker] || "全国のカプセルトイ専門店やショッピングモールのガチャコーナー"}で販売されます。`;
+    // 入荷の記録（初めて店頭で確認した日・補充の回数・今の在庫店数）。データベースにある商品だけ
+    const ar = ARRIVALS[it.id];
+    const arTxt = (() => {
+      if (!ar || !ar.f || !ARR_AT) return "";
+      const f = new Date(Date.parse(ar.f) + 9 * 3600e3), md = (d) => `${d.getUTCMonth() + 1}月${d.getUTCDate()}日`;
+      const at = `${md(ARR_AT)}${ARR_AT.getUTCHours()}時`;
+      return `当サイトの観測では、店頭での入荷を初めて確認したのは${md(f)}です。${ar.r ? `これまでに補充を${ar.r}回確認していて、` : ""}${ar.n ? `${at}の時点で${ar.n}店に在庫があります。` : `${at}の時点で、在庫のあるお店は確認できていません。`}`;
+    })();
     const qa = [
       ...(Number(it.price) > 0 ? [[`${it.name}は1回いくら？`, `1回${it.price}円です。`]] : []), // 値段が0＝未定のときは出さない（priceTxt と同じ条件）
       ...(n ? [[`全部で何種類？`, `全${n}種${(it.lineup_names || []).length ? `（${it.lineup_names.slice(0, 4).join("、")}${it.lineup_names.length > 4 ? "など" : ""}）` : ""}です。`]] : []),
       [`発売日はいつ？`, `${whenTxt}の発売です。地域やお店によって並ぶ日が前後します。`],
-      [`どこで売ってる？`, whereTxt],
+      [`どこで売ってる？`, shs.length ? `全国${shs.length}店で取扱があります（バンダイ公式の取扱店情報）。下の在庫店リストで近くのお店を探せます。` : whereTxt],
       ...(draws ? [[`全種類そろえるには何回くらい？`, `どれも同じ確率で出るとすると、全${n}種そろうまでに平均で約${draws}回${Number(it.price) > 0 ? `（約${(draws * it.price).toLocaleString("ja-JP")}円）` : ""}かかる計算です。欲しいものが決まっているなら、フリマアプリなどで単品を探すのも手です。`]] : []),
     ];
     whereLd = { "@context": "https://schema.org", "@type": "FAQPage", inLanguage: "ja", mainEntity: qa.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) };
     return `<section class="section where-sec">
     <div class="panel">
       <h2 style="font-size:22px">${esc(it.name)}はどこで売ってる？</h2>
-      <p>${esc(whereTxt)}</p>
+      <p>${esc(shs.length ? whereTxt : "取扱店はお店ごとに違います。下の在庫店リストやみんなの報告から、近くで置いているお店を探せます。")}</p>
+      ${arTxt ? `<p class="arr-static">${esc(arTxt)}</p>` : ""}
       ${shs.length ? `<ul class="where-shops">${(prefTop.length ? prefTop.slice(0, 3).flatMap(([p]) => shs.filter((x) => x.pref === p)) : shs).slice(0, 10).map((x) => `<li><a href="${c.R}shop/${x.id}.html">${esc(x.name)}</a><span>${esc(x.pref || "")}</span></li>`).join("")}</ul>` : ""}
       ${draws ? `<p class="comp-cost">全${n}種そろえる目安：<b>平均 約${draws}回${Number(it.price) > 0 ? `・約${(draws * it.price).toLocaleString("ja-JP")}円` : ""}</b><small>（どれも同じ確率で出る場合の計算）<a href="${esc(aff.rakuten)}" target="_blank" rel="sponsored nofollow noopener">${esc(t.compCompare)} →</a><span class="pr">PR</span></small></p>` : ""}
       <h3 class="arr-h">よくある質問</h3>
