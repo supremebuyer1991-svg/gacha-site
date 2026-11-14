@@ -303,7 +303,7 @@ const T = {
       footer: "By station", crumb: "Shops by station",
       idxTitle: "Gacha shops near major stations in Japan",
       idxLead: (n) => `Capsule toy (gacha) shops near ${n} major stations and airports in Japan, from Bandai's official shop list. Pick a station to see the shops within walking distance.`,
-      regions: { kanto: "Tokyo area", kansai: "Osaka, Kyoto & Kobe", chubu: "Nagoya", kyushu: "Fukuoka & Okinawa", north: "Hokkaido & Tohoku", chugoku: "Hiroshima", airport: "Airports" },
+      regions: { kanto: "Tokyo area", kansai: "Osaka, Kyoto & Kobe", chubu: "Nagoya, Shizuoka & Kanazawa", kyushu: "Kyushu & Okinawa", north: "Hokkaido & Tohoku", chugoku: "Hiroshima & Shikoku", airport: "Airports" },
       h1: (name) => `Gacha shops near ${name}`,
       title: (name) => `Gachapon (gashapon) shops near ${name}`,
       desc: (name, n, km, near) => `${n} official Bandai gacha (capsule toy) shops within ${km} km of ${name}. The closest is ${near}. Walking times, addresses and Google Maps links.`,
@@ -1163,7 +1163,7 @@ const LOT_HIST = (() => {
 const lotPeriod = (a, b) => { const p = (d) => [+d.slice(0, 4), `${+d.slice(5, 7)}/${+d.slice(8, 10)}`]; const [ya, da] = p(a), [yb, db] = p(b); return a.slice(0, 10) === b.slice(0, 10) ? `${ya}年${da}` : `${ya}年${da}〜${yb !== ya ? `${yb}年` : ""}${db}`; };
 // 主要な駅・空港（data/stations.json）。公式の取扱店を1.5km以内（3店未満なら3km以内）で近い順に。0店の駅は作らない
 const STATION_REGIONS = ["kanto", "kansai", "chubu", "kyushu", "north", "chugoku", "airport"];
-const STATION_REGION_JA = { kanto: "関東（東京・神奈川・埼玉・千葉）", kansai: "関西（大阪・京都・神戸）", chubu: "中部（名古屋）", kyushu: "九州・沖縄", north: "北海道・東北", chugoku: "中国（広島）", airport: "空港" };
+const STATION_REGION_JA = { kanto: "関東（東京・神奈川・埼玉・千葉）", kansai: "関西（大阪・京都・神戸）", chubu: "中部（名古屋・静岡・金沢）", kyushu: "九州・沖縄", north: "北海道・東北", chugoku: "中国・四国（広島・高松・松山）", airport: "空港" };
 const LANDMARKS_FILE = readJSON("landmarks.json", {}) || {};
 const LANDMARKS_CHECKED = LANDMARKS_FILE.checked || "";
 const LANDMARKS = (LANDMARKS_FILE.landmarks || []).filter((lm) => lm.verify !== true && typeof lm.lat === "number" && typeof lm.lng === "number" && lm.station);
