@@ -1,0 +1,37 @@
+# 商品説明を書く材料（メーカー公式ページの文章）を取ってくる。手動で動かす
+name: 公式ページの文章を取ってくる
+
+on:
+  workflow_dispatch:
+    inputs:
+      count:
+        description: "何件取るか（人気の高い順）"
+        default: "200"
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: 取ってくる
+        env:
+          SITE_URL: https://gachapla.com
+        run: node src/official-text.js "${{ github.event.inputs.count }}"
+      - name: 保存
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/official-text.json
+          if ! git diff --cached --quiet; then
+            git commit -m "公式ページの文章を取得"
+            for i in 1 2 3; do
+              git push && break
+              git pull --rebase -X theirs origin main || { git rebase --abort; exit 1; }
+              sleep 3
+            done
+          fi
