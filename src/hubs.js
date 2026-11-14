@@ -143,6 +143,8 @@ const prepare = (E) => {
 
 const ymOf = (w) => `${w.y}-${String(w.m).padStart(2, "0")}`;
 const weekRel = (w) => `calendar/${ymOf(w)}/w${w.no}.html`;
+// 週へのリンク先：今週・来週は（検索に出している）/week・/next-week へ。ほかの週は週ごとの固定ページへ
+const weekHref = (w, { WEEK, NEXT_WEEK } = {}) => (WEEK && w.key === WEEK.key ? "week.html" : NEXT_WEEK && w.key === NEXT_WEEK.key ? "next-week.html" : weekRel(w));
 
 /* ---------- 一覧ページの「最終更新」と CollectionPage（週・月のページで使う） ---------- */
 // 商品がサイトに載った日（added）から：いちばん古い日＝公開日、いちばん新しい日＝更新日、その日に載った件数＝新着
@@ -198,7 +200,7 @@ const build = (P, E) => {
     const top = list.slice(0, 3).map((it) => nameOf(it, lang));
     const desc = ja ? `${lead.split("。")[0]}。${top.join("、")}など。` : `${lead} ${h.including(top)}`;
     const prev = WL[i - 1], next = WL[i + 1];
-    const pager = `<nav class="month-pager" aria-label="${ja ? "前後の週" : h.weekNavAria}">${prev ? `<a href="${c.H}${weekRel(prev.w)}">${ja ? `← ${weekLabel(prev.w)}` : `← ${weekLabel(prev.w)}`}</a>` : "<span></span>"}<a href="${c.H}calendar/${ym}.html">${ja ? `${monthLabel(ym)}の一覧` : h.toMonth(monthLabel(ym))}</a>${next ? `<a href="${c.H}${weekRel(next.w)}">${weekLabel(next.w)} →</a>` : "<span></span>"}</nav>`;
+    const pager = `<nav class="month-pager" aria-label="${ja ? "前後の週" : h.weekNavAria}">${prev ? `<a href="${c.H}${weekHref(prev.w, E)}">${ja ? `← ${weekLabel(prev.w)}` : `← ${weekLabel(prev.w)}`}</a>` : "<span></span>"}<a href="${c.H}calendar/${ym}.html">${ja ? `${monthLabel(ym)}の一覧` : h.toMonth(monthLabel(ym))}</a>${next ? `<a href="${c.H}${weekHref(next.w, E)}">${weekLabel(next.w)} →</a>` : "<span></span>"}</nav>`;
     const sec = (inner, extra = "") => `<section class="section section-tight"${extra}>${inner}</section>`;
     const secH = (txt) => `<div class="section-head"><h2>${txt}</h2></div>`;
     // 日本語：注目5選（ひとことつき）→ 全部 → メーカー別 → 再販
@@ -381,13 +383,13 @@ const seriesNav = (P, it, { lang, c, t, nameOf, esc }) => {
   </nav>`;
 };
 // 月のページ：週ごとのページへの目次
-const weekIndex = (P, ym, { lang, c, t, WEEK }) => {
+const weekIndex = (P, ym, { lang, c, t, WEEK, NEXT_WEEK }) => {
   const ws = P.weekList.filter((g) => ymOf(g.w) === ym);
   if (!ws.length) return "";
   const ja = lang === "ja", h = t.hub;
-  return `<nav class="hub-links week-idx" aria-label="${ja ? "週ごとのページ" : h.weekIdx}"><b>${ja ? "週ごとのページ" : h.weekIdx}</b>${ws.map((g) => `<a href="${c.H}${weekRel(g.w)}"${g.w.key === WEEK.key ? ' class="on"' : ""}>${ja ? `第${g.w.no}週` : h.weekShort(g.w.no)}<small>${g.w.range}・${g.list.length}${ja ? "件" : ""}</small></a>`).join("")}</nav>`;
+  return `<nav class="hub-links week-idx" aria-label="${ja ? "週ごとのページ" : h.weekIdx}"><b>${ja ? "週ごとのページ" : h.weekIdx}</b>${ws.map((g) => `<a href="${c.H}${weekHref(g.w, { WEEK, NEXT_WEEK })}"${g.w.key === WEEK.key ? ' class="on"' : ""}>${ja ? `第${g.w.no}週` : h.weekShort(g.w.no)}<small>${g.w.range}・${g.list.length}${ja ? "件" : ""}</small></a>`).join("")}</nav>`;
 };
 // 月のページ：その月に多いキャラクター・作品（上位5つ）
 const monthTops = (list, { CHARAS }) => CHARAS.filter((ch) => ch.slug !== "mejirushi").map((ch) => [ch, list.filter((it) => ch.list.includes(it)).length]).filter(([, n]) => n >= 2).sort((a, b) => b[1] - a[1]).slice(0, 5);
 
-module.exports = { prepare, build, seriesNav, weekIndex, weekRel, monthTops, PRICES, isReissue, updatedLine, collectionLd };
+module.exports = { prepare, build, seriesNav, weekIndex, weekRel, weekHref, monthTops, PRICES, isReissue, updatedLine, collectionLd };
