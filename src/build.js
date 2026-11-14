@@ -994,16 +994,7 @@ for (const g of LOT_GROUPS) { g.parts = g.title.split(/\s+\/\s+/).map((p) => ({ 
 const LOT_BY_ITEM = new Map(); // 商品id → 受付中の抽選
 for (const g of LOT_GROUPS) for (const it of new Set(g.parts.map((x) => x.it).filter(Boolean))) LOT_BY_ITEM.set(it.id, [...(LOT_BY_ITEM.get(it.id) || []), ...g.list]);
 for (const l of LOT_BY_ITEM.values()) l.sort((a, b) => (a.end > b.end ? 1 : -1));
-const lotTz = (d) => (/T\d\d:\d\d$/.test(d) ? `${d}:00+09:00` : d);
-// 構造化データ：抽選（Event）。url は応募ページ、なければ載せているページ
-const lotEventLd = (x, pageUrl, img) => ({
-  "@context": "https://schema.org", "@type": "Event", name: `${x.title}｜${LOT_KIND[x.kind] || "抽選"}（${x.store}）`,
-  startDate: lotTz(x.start), endDate: lotTz(x.end), eventStatus: "https://schema.org/EventScheduled", eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-  location: { "@type": "Place", name: x.store, address: { "@type": "PostalAddress", ...(x.pref ? { addressRegion: x.pref } : {}), addressCountry: "JP" } },
-  organizer: { "@type": "Organization", name: x.store }, url: x.url || pageUrl,
-  description: `応募方法：${x.method || "お店でご確認ください"}${x.note ? `。${x.note}` : ""}`,
-  ...(img ? { image: [img] } : {}),
-});
+// 抽選の構造化データ（Event）は出さない：受付期間・販売の告知を Event にするのは Google が非推奨のため
 const starsHtml = (r) => r && r.n ? `<span class="stars-v" style="--v:${r.avg}" aria-label="☆${r.avg}"></span><b class="stars-n">${Number(r.avg).toFixed(1)}</b><small>（${r.n}）</small>` : "";
 const PREF_ORDER = Object.keys(PREF_EN);
 const KIND_LABEL = { gacha: "ガチャ専門店", game: "ゲームセンター", mall: "ショッピングモール・スーパー", station: "駅・空港・サービスエリア", shop: "そのほかのお店" };
@@ -1892,7 +1883,7 @@ ${content}
         { "@type": "ListItem", position: 3, name },
       ],
     };
-    layout({ rel, title: t.itemTitle(name), description: desc, body, jsonld: [...(product.image ? [product] : []) /* 写真のない商品は Product を出さない（Google で「image がない」と無効になるため） */, crumbs, ...(whereLd ? [whereLd] : []), ...lots.map((x) => lotEventLd(x, canonical(lang, rel), absImg(it)))], ogImage: absImg(it), ogType: "product",
+    layout({ rel, title: t.itemTitle(name), description: desc, body, jsonld: [...(product.image ? [product] : []) /* 写真のない商品は Product を出さない（Google で「image がない」と無効になるため） */, crumbs, ...(whereLd ? [whereLd] : [])], ogImage: absImg(it), ogType: "product",
       noindex: !hasName(it, lang), alts: LANGS.filter((l) => hasName(it, l)), lastmod: it.updated || it.added || "" });
   }
 
@@ -2782,8 +2773,13 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
       // タイトル・説明文に、抽選の多い商品の名前を2つ入れる
       const topLot = [...LOT_BY_ITEM.entries()].sort((a, b) => b[1].length - a[1].length).slice(0, 2).map(([id]) => itemById.get(id)).filter(Boolean).map((it) => it.name);
       const titleHtml = (g) => g.parts.map(({ p, it }) => (it ? `<a href="${c.H}item/${it.id}.html">${esc(p)}</a>` : esc(p))).join(" / ");
+      // 締切のラベル（今日＝赤、明日＝オレンジ）。ビルド時に入れて、見ている人の時刻で app.js が入れ直す
+      const dToday = nowJST.toISOString().slice(0, 10), dTomorrow = new Date(nowJST.getTime() + 864e5).toISOString().slice(0, 10), nowIso = nowJST.toISOString().slice(0, 16);
+      const dlHtml = (x) => { const d = x.end.slice(0, 10), hm = x.end.slice(11, 16); return d === dToday ? `<span class="lot-dl is-today">本日${hm}まで</span>` : d === dTomorrow ? `<span class="lot-dl is-tomorrow">明日${hm}まで</span>` : '<span class="lot-dl" hidden></span>'; };
+      const sumN = { today: live.filter((x) => x.end.slice(0, 10) === dToday).length, tomorrow: live.filter((x) => x.end.slice(0, 10) === dTomorrow).length, open: live.filter((x) => x.start <= nowIso).length };
+      const LOT_SHOW = 3; // 商品ごとに、締切が近い3店だけ先に見せる
       const lotRow = (x) => `<li class="lot" data-pref="${esc(x.pref || "")}" data-start="${esc(x.start)}" data-end="${esc(x.end)}">
-        <div class="lot-top"><span class="lot-state"></span><span class="lot-kind">${KIND[x.kind] || "抽選"}</span>${x.pref ? `<span class="lot-pref">📍${esc(x.pref)}</span>` : ""}</div>
+        <div class="lot-top"><span class="lot-state"></span>${dlHtml(x)}<span class="lot-kind">${KIND[x.kind] || "抽選"}</span>${x.pref ? `<span class="lot-pref">📍${esc(x.pref)}</span>` : ""}</div>
         <p class="lot-store">${esc(x.store)}</p>
         <p class="lot-when">受付：${fmt(x.start)} 〜 <b>${fmt(x.end)}</b></p>
         <p class="lot-how">応募方法：${esc(x.method || "お店でご確認ください")}</p>
@@ -2792,25 +2788,27 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
       </li>`;
       const body = `<div class="wrap">
   <nav class="breadcrumb" aria-label="breadcrumb"><a href="${c.H}index.html">${t.home}</a><span>/</span><span>抽選情報</span></nav>
-  <header class="page-head"><h1>ガチャの抽選情報</h1><p class="lead">人気ガチャの抽選販売や、新しいお店のオープン日の入場整理券など、いま受付中・これから始まる抽選をまとめています。商品ごとにまとめて、締め切りが近い順です。</p></header>
+  <header class="page-head lot-pagehead"><h1>ガチャの抽選情報</h1>
+    <p class="lot-sum" id="lot-sum"><span class="is-today">今日締切 <b data-k="today">${sumN.today}</b>件</span><i>／</i><span class="is-tomorrow">明日締切 <b data-k="tomorrow">${sumN.tomorrow}</b>件</span><i>／</i><span>受付中 <b data-k="open">${sumN.open}</b>件</span></p>
+    <p class="lead">商品ごとに、締切が近いお店から順にのせています。</p></header>
   <section class="section" style="padding-top:24px">
     ${prefs.length > 1 ? `<div class="lot-filter" id="lot-filter"><button class="sort is-on" type="button" data-pref="">すべて</button>${prefs.map((p) => `<button class="sort" type="button" data-pref="${p}">${p}</button>`).join("")}</div>` : ""}
     <div class="lot-list" id="lot-list">${groups.length ? groups.map((g) => `<article class="lot-group">
-      <div class="lot-head">${g.it && g.it.image ? `<a class="lot-thumb" href="${c.H}item/${g.it.id}.html" tabindex="-1" aria-hidden="true"><img src="${esc(imgURL({ image: thumbOf(g.it.image) }, c.R))}" alt="" width="64" height="64" loading="lazy" decoding="async"></a>` : ""}<div><h3>${titleHtml(g)}</h3><p class="lot-n">${g.list.length}店舗${g.it ? `・<a href="${c.H}item/${g.it.id}.html">商品ページ（発売日・値段）→</a>` : ""}</p></div></div>
+      <div class="lot-head">${g.it && g.it.image ? `<a class="lot-thumb" href="${c.H}item/${g.it.id}.html" tabindex="-1" aria-hidden="true"><img src="${esc(imgURL({ image: thumbOf(g.it.image) }, c.R))}" alt="" width="64" height="64" loading="lazy" decoding="async"></a>` : ""}<div><h2>${titleHtml(g)}</h2><p class="lot-n">${g.list.length}店舗${g.it ? `・<a href="${c.H}item/${g.it.id}.html">商品ページ（発売日・値段）→</a>` : ""}</p></div></div>
+      <ul class="lot-stores">${g.list.slice(0, LOT_SHOW).map(lotRow).join("")}</ul>
+      ${g.list.length > LOT_SHOW ? `<details class="lot-rest"><summary><span class="lot-rest-open">あと <b>${g.list.length - LOT_SHOW}</b>店を見る</span><span class="lot-rest-close">閉じる</span></summary><ul class="lot-stores">${g.list.slice(LOT_SHOW).map(lotRow).join("")}</ul></details>` : ""}
       ${(() => { // 抽選に外れたとき・行けないときの通販（抽選の商品はお店で売り切れが多いので、メルカリを先頭に）
         const its = [...new Map(g.parts.filter((x) => x.it).map((x) => [x.it.id, x.it])).values()];
         return its.map((it) => { const L = shopLinks(it); return `<div class="shop-links lot-shop"><span style="font-size:12.5px;font-weight:700;color:var(--text-2)">${its.length > 1 ? `${esc(affName(it).slice(0, 18))}：` : ""}抽選に外れたら・行けないときは</span><span class="sl-pr">PR</span><a class="sl sl-mer" href="${esc(L.mercari)}" target="_blank" rel="${L.mercariAf ? "sponsored nofollow noopener" : "noopener"}">${esc(L.mercariLabel)}</a><a class="sl sl-rak" href="${esc(L.rakuten)}" target="_blank" rel="sponsored nofollow noopener">楽天市場</a><a class="sl sl-amz" href="${esc(L.amazon)}" target="_blank" rel="sponsored nofollow noopener">Amazon</a></div>`; }).join("");
       })()}
-      <ul class="lot-stores">${g.list.map(lotRow).join("")}</ul>
     </article>`).join("") : '<p class="fine">いま受付中の抽選はありません。</p>'}</div>
     <p class="lot-more"><a href="${c.H}chara/mejirushi.html">めじるしアクセサリーの新作・発売日一覧 →</a>　<a href="${c.H}week.html">今週発売のガチャ →</a></p>
     <p class="lot-caution">抽選の内容は変わることがあります。応募の前に、必ずお店の公式X・公式サイトで最新の情報をご確認ください。</p>
   </section>
 </div>`;
-      const events = live.map((x) => lotEventLd(x, canonical(lang, rel), (() => { const g = groups.find((y) => y.title === x.title); return g && g.it ? absImg(g.it) : ""; })()));
       layout({ rel, title: topLot.length ? `ガチャの抽選情報｜${topLot.join("・")}ほか受付中` : "ガチャの抽選情報（受付中・これから）",
         description: `人気ガチャの抽選販売、お店のオープン日の入場整理券など、受付中・これから始まるガチャの抽選情報まとめ。${live.length ? `いま受付中は${live.length}件${topLot.length ? `（${topLot.map((n) => `「${n}」`).join("")}など）` : ""}。` : ""}締切が近い順に、お店・受付期間・応募方法をまとめています。`,
-        body, current: "lottery", jaOnly: true, jsonld: events });
+        body, current: "lottery", jaOnly: true });
     }
     // お店ごとのページ
     for (const sh of SHOPS) {

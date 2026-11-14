@@ -1874,13 +1874,25 @@
     var jstNow = function () { return new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 16); };
     var paintLot = function () {
       var n = jstNow(), soon = new Date(Date.now() + 9 * 3600e3 + 24 * 3600e3).toISOString().slice(0, 16);
+      // 締切のラベル（本日＝赤・明日＝オレンジ）と、いちばん上の件数を、見ている人のいまの時刻（日本時間）で入れ直す
+      var dT = n.slice(0, 10), dM = soon.slice(0, 10), cnt = { today: 0, tomorrow: 0, open: 0 };
       [].forEach.call(lotList.querySelectorAll(".lot"), function (li) {
-        var st = li.getAttribute("data-start"), en = li.getAttribute("data-end"), lab = li.querySelector(".lot-state");
+        var st = li.getAttribute("data-start") || "", en = li.getAttribute("data-end") || "", lab = li.querySelector(".lot-state"), dl = li.querySelector(".lot-dl");
+        if (!lab) return;
+        if (dl && en >= n) {
+          var d = en.slice(0, 10), hm = en.slice(11, 16), k = d === dT ? "today" : d === dM ? "tomorrow" : "";
+          dl.hidden = !k; dl.className = "lot-dl" + (k ? " is-" + k : "");
+          dl.textContent = k ? (k === "today" ? "本日" : "明日") + hm + "まで" : "";
+          if (k) cnt[k]++;
+          if (st <= n) cnt.open++;
+        }
         if (en < n) { li.classList.add("is-over"); lab.textContent = "受付終了"; return; }
         if (st > n) { lab.textContent = "開始前"; lab.className = "lot-state is-before"; }
         else if (en <= soon) { lab.textContent = "まもなく締切"; lab.className = "lot-state is-soon"; }
         else { lab.textContent = "受付中"; lab.className = "lot-state is-open"; }
       });
+      var sum = document.getElementById("lot-sum");
+      if (sum) [].forEach.call(sum.querySelectorAll("b[data-k]"), function (b) { b.textContent = cnt[b.getAttribute("data-k")]; });
       lotGroups();
     };
     // 商品ごとのカード：見えるお店がひとつもなければカードごと隠す
@@ -1888,6 +1900,12 @@
       [].forEach.call(lotList.querySelectorAll(".lot-group"), function (g) {
         var vis = [].some.call(g.querySelectorAll(".lot"), function (li) { return !li.hidden && !li.classList.contains("is-over"); });
         g.hidden = !vis;
+        // 「あと N店を見る」：たたんだ中に見えるお店がなければ消す。上の3店がぜんぶ見えなくなったら開く
+        var rest = g.querySelector(".lot-rest"); if (!rest) return;
+        var shown = function (li) { return !li.hidden && !li.classList.contains("is-over"); };
+        var nRest = [].filter.call(rest.querySelectorAll(".lot"), shown).length, nb = rest.querySelector("summary b");
+        rest.hidden = !nRest; if (nb) nb.textContent = nRest;
+        if (nRest && nRest === [].filter.call(g.querySelectorAll(".lot"), shown).length) rest.open = true;
       });
     };
     paintLot(); setInterval(paintLot, 60000);
@@ -1897,6 +1915,9 @@
       [].forEach.call(lf.querySelectorAll("button"), function (x) { x.classList.toggle("is-on", x === b); });
       var p = b.getAttribute("data-pref");
       [].forEach.call(lotList.querySelectorAll(".lot"), function (li) { li.hidden = !!p && li.getAttribute("data-pref") !== p; });
+      // 都道府県を選んだときは、たたまずに当てはまるお店をぜんぶ見せる。「すべて」にもどしたら、またたたむ
+      lotList.classList.toggle("is-filtered", !!p);
+      [].forEach.call(lotList.querySelectorAll(".lot-rest"), function (d) { d.open = !!p; });
       lotGroups();
     });
   }
