@@ -1663,7 +1663,7 @@ ${content}
       if (!ar || !ar.f || !ARR_AT) return "";
       const f = new Date(Date.parse(ar.f) + 9 * 3600e3), md = (d) => `${d.getUTCMonth() + 1}月${d.getUTCDate()}日`;
       const at = `${md(ARR_AT)}${ARR_AT.getUTCHours()}時`;
-      return `当サイトの観測では、店頭での入荷を初めて確認したのは${md(f)}です。${ar.r ? `これまでに補充を${ar.r}回確認していて、` : ""}${ar.n ? `${at}の時点で${ar.n}店に在庫があります。` : ""}`.replace(/、$/, "。");
+      return `当サイトの観測では、店頭での入荷を初めて確認したのは${md(f)}です。${ar.r ? `これまでに補充を${ar.r}回確認していて、` : ""}${ar.n ? `${at}の時点で${ar.n}店に在庫があります。` : ""}`.replace(/していて、$/, "しています。");
     })();
     const qa = [
       ...(Number(it.price) > 0 ? [[`${it.name}は1回いくら？`, `1回${it.price}円です。`]] : []), // 値段が0＝未定のときは出さない（priceTxt と同じ条件）
