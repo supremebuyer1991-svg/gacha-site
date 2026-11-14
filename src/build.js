@@ -783,6 +783,10 @@ for (const it of items) {
   for (const tt of titleRx) if (tt.rx.test(it.name)) tt.subs.forEach((k) => subKeys.has(k) && qs.add(k));
   // "auto" の項目（あとから増やした項目）は、商品名から毎回自動で判定する
   for (const a of autoSubs) if (a.rx.test(it.name)) qs.add(a.key);
+  // 「かわいい系」の中の「アクセサリー」は、チャーム・めじるしという名前だけで付いてしまう。
+  // かわいい系がそれだけで、かっこいい系・乗りもののタグがある商品（ホットウィール・仮面ライダーのめじるし等）は、かわいい系から外す
+  if ([...qs].filter((k) => k.startsWith("kawaii:")).every((k) => k === "kawaii:accessory") && qs.has("kawaii:accessory")
+    && [...qs].some((k) => k.startsWith("cool:") || k === "real:vehicle") && !/ふわふわ|アニマル|ぬい|いきもの|ゆめ|パステル/.test(it.name)) qs.delete("kawaii:accessory");
   it._qs = [...qs];
   // ジャンル：診断の項目から決める（複数のジャンルに入ることもある）。最初に当てはまったものがカードに出る
   it._genres = GENRES.filter((g) => (g.subs || []).some((k) => it._qs.includes(k))).map((g) => g.slug);
