@@ -1,0 +1,31 @@
+# 試し公開：preview/ で始まるブランチに push すると、本番とは別の確認用URL（https://preview.gacha-site.pages.dev）に出す
+name: 試し公開（確認用）
+
+on:
+  push:
+    branches: ["preview/**"]
+
+concurrency:
+  group: preview
+  cancel-in-progress: true
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: ページを作る
+        run: node src/build.js
+        env:
+          SITE_URL: https://gachapla.com
+      - name: 確認用URLに公開
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          PROJECT: ${{ vars.CF_PROJECT_NAME || 'gacha-site' }}
+        run: |
+          rm -f wrangler.toml; rm -rf functions
+          npx --yes wrangler@4 pages deploy dist --project-name="$PROJECT" --branch=preview
