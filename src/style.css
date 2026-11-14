@@ -1632,3 +1632,12 @@ label.tile:focus-within { outline: none; }
 .shop-facts dd { margin: 0; }
 .shop-facts a { text-decoration: underline; text-underline-offset: 2px; }
 @media (max-width: 560px) { .shop-facts > div { grid-template-columns: 1fr; gap: 2px; } }
+
+/* 抽選の記録（/lottery/history）：商品ごとの表と、商品ページの1行 */
+.lot-hist-dl { margin: 10px 0 0; display: grid; gap: 4px; font-size: 14px; }
+.lot-hist-dl > div { display: grid; grid-template-columns: 7.5em 1fr; gap: 10px; padding: 5px 0; border-bottom: 1px dashed var(--line, #e6e6ee); }
+.lot-hist-dl dt { color: var(--text-2); font-size: 12.5px; font-weight: 700; }
+.lot-hist-dl dd { margin: 0; }
+.lot-hist-sum b { font-size: 18px; }
+.lot-hist h3 { font-size: 17px; margin: 0; }
+.lot-past-line { margin: 16px 0 0; padding: 10px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }

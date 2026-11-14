@@ -1129,6 +1129,38 @@ const CHAINS = (() => {
 const CHAIN_BY_SHOP = new Map(CHAINS.flatMap((ch) => ch.shops.map((sh) => [sh.id, ch])));
 const chainName = (ch) => ch.short || ch.label;
 const chainLabel = (ch, lang) => (lang === "ja" ? chainName(ch) : (ch.i && (ch.i[lang] || ch.i.en)) || ch.label);
+// 抽選の記録（/lottery/history）：締切が過ぎた抽選を商品ごとにまとめる。「A / B」の抽選は両方の商品に数える。数字はすべてデータから出す
+const LOT_HIST = (() => {
+  const chainOf = (store) => CHAIN_DEFS.find((d) => d.re.test(String(store || "").normalize("NFKC"))) || null;
+  const inc = (m, k) => m.set(k, (m.get(k) || 0) + 1);
+  const top = (m) => [...m.entries()].sort((a, b) => b[1] - a[1]);
+  // 「販売日は11/16」→ 2026-11-16（年は締切の年。締切より前の月なら翌年）
+  const saleOf = (x) => { const m = String(x.note || "").match(/販売日は(\d{1,2})\/(\d{1,2})/); if (!m) return ""; const y = +x.end.slice(0, 4) + (+m[1] < +x.end.slice(5, 7) ? 1 : 0); return `${y}-${String(m[1]).padStart(2, "0")}-${String(m[2]).padStart(2, "0")}`; };
+  const limOf = (x) => { const m = String(x.note || "").match(/1人(\d+)(個|回)まで/); return m ? +m[1] : 0; };
+  const by = new Map();
+  const add = (key, name, it, x) => {
+    let g = by.get(key);
+    if (!g) by.set(key, (g = { key, name, it, list: [], stores: new Set(), prefs: new Map(), chains: new Map(), methods: new Map(), sales: new Set(), lims: new Set(), start: x.start, end: x.end }));
+    g.list.push(x); g.stores.add(x.store); if (x.pref) inc(g.prefs, x.pref);
+    inc(g.chains, chainOf(x.store) || "other"); inc(g.methods, x.method || "お店でご確認ください");
+    const sd = saleOf(x); if (sd) g.sales.add(sd);
+    const lim = limOf(x); if (lim) g.lims.add(lim);
+    if (x.start < g.start) g.start = x.start; if (x.end > g.end) g.end = x.end;
+  };
+  const items_ = LOT_PAST.filter((x) => x.kind === "item"), others = LOT_PAST.filter((x) => x.kind !== "item");
+  for (const x of items_) {
+    const seen = new Set();
+    for (const p of x.title.split(/\s+\/\s+/)) { const it = lotMatchItem(p); const key = it ? `i:${it.id}` : `t:${lotNorm(p)}`; if (seen.has(key)) continue; seen.add(key); add(key, it ? it.name : p, it, x); }
+  }
+  const groups = [...by.values()].sort((a, b) => (a.end < b.end ? 1 : a.end > b.end ? -1 : b.stores.size - a.stores.size || (a.name < b.name ? -1 : 1)));
+  for (const g of groups) { g.chains = top(g.chains); g.methods = top(g.methods); g.prefs = top(g.prefs); g.sales = [...g.sales].sort(); g.lims = [...g.lims].sort((a, b) => a - b); }
+  const chains = new Map(), methods = new Map(), prefs = new Map(), months = new Set();
+  for (const x of LOT_PAST) { inc(chains, chainOf(x.store) || "other"); inc(methods, x.method || "お店でご確認ください"); if (x.pref) inc(prefs, x.pref); months.add(x.start.slice(0, 7)); months.add(x.end.slice(0, 7)); }
+  return { total: LOT_PAST.length, nItem: items_.length, others, groups, byItem: new Map(groups.filter((g) => g.it).map((g) => [g.it.id, g])), chains: top(chains), methods: top(methods), prefs: top(prefs), stores: new Set(LOT_PAST.map((x) => x.store)).size,
+    months: [...months].sort(), start: LOT_PAST.reduce((m, x) => (!m || x.start < m ? x.start : m), ""), end: LOT_PAST.reduce((m, x) => (x.end > m ? x.end : m), "") };
+})();
+// 受付期間の書き方：「2026年11/1〜11/11」（年をまたぐときは終わりにも年を付ける）
+const lotPeriod = (a, b) => { const p = (d) => [+d.slice(0, 4), `${+d.slice(5, 7)}/${+d.slice(8, 10)}`]; const [ya, da] = p(a), [yb, db] = p(b); return a.slice(0, 10) === b.slice(0, 10) ? `${ya}年${da}` : `${ya}年${da}〜${yb !== ya ? `${yb}年` : ""}${db}`; };
 // 主要な駅・空港（data/stations.json）。公式の取扱店を1.5km以内（3店未満なら3km以内）で近い順に。0店の駅は作らない
 const STATION_REGIONS = ["kanto", "kansai", "chubu", "kyushu", "north", "chugoku", "airport"];
 const STATION_REGION_JA = { kanto: "関東（東京・神奈川・埼玉・千葉）", kansai: "関西（大阪・京都・神戸）", chubu: "中部（名古屋）", kyushu: "九州・沖縄", north: "北海道・東北", chugoku: "中国（広島）", airport: "空港" };
@@ -1834,6 +1866,9 @@ ${content}
       ]; return `<div class="shop-links"><span class="sl-pr">PR</span>${b.map(([k, u, l]) => `<a class="sl ${k}" href="${esc(u)}" target="_blank" rel="sponsored nofollow noopener">${l}</a>`).join("")}</div>`; })() : (() => { const L = shopLinks(it); return `<div class="shop-links">${SW.chips ? `<span style="font-size:12.5px;font-weight:700;color:var(--text-2)">${esc(SW.chips)}</span>` : ""}<span class="sl-pr">PR</span><a class="sl sl-rak" href="${esc(L.rakuten)}" target="_blank" rel="sponsored nofollow noopener">楽天市場</a><a class="sl sl-amz" href="${esc(L.amazon)}" target="_blank" rel="sponsored nofollow noopener">Amazon</a><a class="sl sl-yah" href="${esc(L.yahoo)}" target="_blank" rel="sponsored nofollow noopener">Yahoo!ショッピング</a><a class="sl sl-mer" href="${esc(L.mercari)}" target="_blank" rel="${L.mercariAf ? "sponsored nofollow noopener" : "noopener"}">${esc(L.mercariLabel)}</a></div>`; })();
     // 抽選を受付中の商品：価格のすぐ下に帯を出して、下の抽選の一覧（#lots）へ飛ばす。lots は締切が近い順
     const lotEnd = (d) => { const m = String(d).match(/^\d{4}-(\d\d)-(\d\d)T(\d\d):(\d\d)/); return m ? `${+m[1]}/${+m[2]} ${m[3]}:${m[4]}` : d; };
+    // 過去に抽選販売があった商品（締切が過ぎた記録）：抽選の記録ページへの1行
+    const lotPastG = lang === "ja" ? LOT_HIST.byItem.get(it.id) : null;
+    const lotPastLine = lotPastG ? `この商品は過去に${lotPastG.stores.size}店で抽選販売がありました（${lotPeriod(lotPastG.start, lotPastG.end)}） → <a href="${c.R}lottery/history.html#${lotPastG.it.id}">抽選の記録</a>` : "";
     const lotBand = lots.length ? `<a class="lot-band" href="#lots"><b>🎯 抽選受付中 ${lots.length}店</b><span>いちばん早い締切 ${esc(lotEnd(lots[0].end))}</span><i aria-hidden="true">›</i></a>` : "";
     const janHtml = L0.jan ? (lang !== "ja" ? `<p class="jan">JAN: <span>${L0.jan}</span></p>` : `<p class="jan">JANコード：<span>${L0.jan}</span></p>`) : "";
     const body = `
@@ -1879,10 +1914,11 @@ ${content}
       <h2 style="font-size:22px">${esc(it.name)}の抽選販売・整理券（受付中${lots.length}店）</h2>
       <p class="fine" style="margin-top:4px">店頭で抽選販売・整理券の受付をしているお店です。応募の前に、お店の公式X・公式サイトで最新の情報をご確認ください。</p>
       <ul class="where-shops lot-item">${lots.map((x) => `<li><span class="lot-item-store">${x.url ? `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.store)}</a>` : esc(x.store)}${x.pref ? `<small>${esc(x.pref)}</small>` : ""}</span><span>締切 ${esc(end(x.end))}・${esc(x.method || "お店でご確認ください")}</span></li>`).join("")}</ul>
+      ${lotPastLine ? `<p class="fine">${lotPastLine}</p>` : ""}
       <p class="fine"><a href="${c.R}lottery.html">ほかのガチャの抽選情報も見る →</a></p>
     </div>
   </section>`;
-  })() : ""}
+  })() : lotPastLine ? `<p class="fine lot-past-line" id="lots">🎯 ${lotPastLine}</p>` : ""}
   ${lang === "ja" ? (() => {
     const shs = offShops, prefTop = offPrefs;
     // 代表の取扱店（最大10店）：店数の多い都道府県から1店ずつ順に取る。駅の近く（駅ページに載っている店）を先に。クローラーにも見える静的HTML
@@ -2967,7 +3003,7 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
         const lotLi = (x, past) => `<li><span class="lot-item-store">${lotTitle(x)}<small>${esc(x.store)}${x.pref ? `（${esc(x.pref)}）` : ""}</small></span><span>${past ? `受付 ${md(x.start)}〜${md(x.end)}・${esc(x.method || "")}` : `締切 ${md(x.end)}・${esc(x.method || "お店でご確認ください")}`}${(() => { const nt = past ? String(x.note || "").replace(/。?くわしくはお店の公式Xで。?/, "").replace(/受付開始は[^。]*。?/, "") : x.note; return nt ? `<small style="display:block">${esc(nt)}</small>` : ""; })()}${!past && x.url ? `<small style="display:block"><a href="${esc(x.url)}" target="_blank" rel="noopener">応募ページ →</a></small>` : ""}</span></li>`;
         const lotSec = lotLive.length || lotPast.length ? `<section class="section section-tight lot-sec" id="lottery"><div class="section-head"><h2>${esc(chainName(ch))}の抽選販売・整理券</h2><a class="more" href="${c.R}lottery.html">抽選情報をすべて見る</a></div>
     ${lotLive.length ? `<h3 class="arr-h">いま受付中（${lotLive.length}件）</h3><ul class="where-shops lot-item">${lotLive.map((x) => lotLi(x, false)).join("")}</ul>` : ""}
-    ${lotPast.length ? `<h3 class="arr-h">過去の抽選販売（新しい順・${lotPast.length}件${lotPast.length > 60 ? "のうち60件" : ""}）</h3><p class="fine" style="margin-top:-4px;margin-bottom:10px">受付が終わった抽選の記録です。どんな商品が抽選になりやすいか、受付がいつごろ始まるかの目安にどうぞ。</p><ul class="where-shops lot-item">${lotPast.slice(0, 60).map((x) => lotLi(x, true)).join("")}</ul>` : ""}
+    ${lotPast.length ? `<h3 class="arr-h">過去の抽選販売（新しい順・${lotPast.length}件${lotPast.length > 60 ? "のうち60件" : ""}）</h3><p class="fine" style="margin-top:-4px;margin-bottom:10px">受付が終わった抽選の記録です。どんな商品が抽選になりやすいか、受付がいつごろ始まるかの目安にどうぞ。</p><ul class="where-shops lot-item">${lotPast.slice(0, 60).map((x) => lotLi(x, true)).join("")}</ul><p class="fine" style="margin-top:12px"><a href="${c.R}lottery/history.html">これまでに抽選になったガチャの記録（商品ごと・全チェーン） →</a></p>` : ""}
   </section>` : "";
         const body = `<div class="wrap">
   <nav class="breadcrumb" aria-label="breadcrumb"><a href="${c.H}index.html">${t.home}</a><span>/</span><a href="${c.H}chain.html">チェーンからさがす</a><span>/</span><span>${esc(ch.label)}</span></nav>
@@ -3053,7 +3089,7 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
   <nav class="breadcrumb" aria-label="breadcrumb"><a href="${c.H}index.html">${t.home}</a><span>/</span><span>抽選情報</span></nav>
   <header class="page-head lot-pagehead"><h1>ガチャの抽選情報</h1>
     <p class="lot-sum" id="lot-sum"><span class="is-today">今日締切 <b data-k="today">${sumN.today}</b>件</span><i>／</i><span class="is-tomorrow">明日締切 <b data-k="tomorrow">${sumN.tomorrow}</b>件</span><i>／</i><span>受付中 <b data-k="open">${sumN.open}</b>件</span></p>
-    <p class="lead">商品ごとに、締切が近いお店から順にのせています。</p></header>
+    <p class="lead">商品ごとに、締切が近いお店から順にのせています。${LOT_HIST.total ? `　<a href="${c.R}lottery/history.html">これまでの抽選の記録 →</a>` : ""}</p></header>
   <section class="section" style="padding-top:24px">
     ${prefs.length > 1 ? `<div class="lot-filter" id="lot-filter"><button class="sort is-on" type="button" data-pref="">すべて</button>${prefs.map((p) => `<button class="sort" type="button" data-pref="${p}">${p}</button>`).join("")}</div>` : ""}
     <div class="lot-list" id="lot-list">${groups.length ? groups.map((g) => `<article class="lot-group">
@@ -3065,7 +3101,7 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
         return its.map((it) => { const L = shopLinks(it); return `<div class="shop-links lot-shop"><span style="font-size:12.5px;font-weight:700;color:var(--text-2)">${its.length > 1 ? `${esc(affName(it).slice(0, 18))}：` : ""}抽選に外れたら・行けないときは</span><span class="sl-pr">PR</span><a class="sl sl-mer" href="${esc(L.mercari)}" target="_blank" rel="${L.mercariAf ? "sponsored nofollow noopener" : "noopener"}">${esc(L.mercariLabel)}</a><a class="sl sl-rak" href="${esc(L.rakuten)}" target="_blank" rel="sponsored nofollow noopener">楽天市場</a><a class="sl sl-amz" href="${esc(L.amazon)}" target="_blank" rel="sponsored nofollow noopener">Amazon</a></div>`; }).join("");
       })()}
     </article>`).join("") : '<p class="fine">いま受付中の抽選はありません。</p>'}</div>
-    <p class="lot-more"><a href="${c.H}chara/mejirushi.html">めじるしアクセサリーの新作・発売日一覧 →</a>　<a href="${c.H}week.html">今週発売のガチャ →</a></p>
+    <p class="lot-more"><a href="${c.H}chara/mejirushi.html">めじるしアクセサリーの新作・発売日一覧 →</a>　<a href="${c.H}week.html">今週発売のガチャ →</a>${LOT_HIST.total ? `　<a href="${c.R}lottery/history.html">これまでの抽選の記録（${LOT_HIST.groups.length}商品・${LOT_HIST.total}件） →</a>` : ""}</p>
     <p class="lot-caution">抽選の内容は変わることがあります。応募の前に、必ずお店の公式X・公式サイトで最新の情報をご確認ください。</p>
   </section>
   <section class="section section-tight" id="howto"><div class="panel">
@@ -3080,6 +3116,68 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
         description: `${live.length ? `${[sumN.open ? `受付中${sumN.open}件` : `これから受付${live.length}件`, sumN.today ? `本日締切${sumN.today}件` : "", sumN.tomorrow ? `明日締切${sumN.tomorrow}件` : ""].filter(Boolean).join("・")}（${mdNow}更新）。${topLot.length ? `${topLot.map((n) => `「${n}」`).join("")}など、` : ""}` : ""}人気ガチャガチャの抽選販売・入場整理券を、締切が近い順にお店・受付期間・応募方法（LivePocket・店頭）つきでまとめています。`,
         body, current: "lottery", jaOnly: true,
         jsonld: [{ "@context": "https://schema.org", "@type": "FAQPage", inLanguage: "ja", mainEntity: LOT_FAQ.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) }] });
+    }
+    // 抽選の記録（締切が過ぎた抽選を商品ごとに。数字はすべて LOT_HIST＝データから）
+    if (LOT_HIST.total) {
+      const rel = "lottery/history.html", c = ctx(rel), Hh = LOT_HIST;
+      const chLabel = (k) => (k === "other" ? "そのほかのお店" : k.label);
+      const chHtml = (k) => { const pg = k !== "other" && CHAINS.find((x) => x.slug === k.slug); return pg ? `<a href="${c.H}chain/${k.slug}.html">${esc(k.label)}</a>` : esc(chLabel(k)); };
+      const md = (d) => `${+d.slice(5, 7)}/${+d.slice(8, 10)}`;
+      const ymd = (d) => `${+d.slice(0, 4)}年${+d.slice(5, 7)}月${+d.slice(8, 10)}日`;
+      const monthsTxt = (() => { const a = Hh.months[0], b = Hh.months[Hh.months.length - 1]; const f = (m) => `${+m.slice(0, 4)}年${+m.slice(5, 7)}月`; return a === b ? f(a) : `${f(a)}〜${a.slice(0, 4) === b.slice(0, 4) ? `${+b.slice(5, 7)}月` : f(b)}`; })();
+      const topCh = Hh.chains.filter(([k]) => k !== "other"), topG = Hh.groups.slice().sort((a, b) => b.stores.size - a.stores.size).slice(0, 3);
+      const liveOf = (g) => (g.it ? (LOT_BY_ITEM.get(g.it.id) || []).length : 0);
+      const row = (g) => {
+        const live = liveOf(g), nm = esc(g.name);
+        return `<article class="lot-group lot-hist"${g.it ? ` id="${g.it.id}"` : ""} style="scroll-margin-top:24px">
+      <div class="lot-head">${g.it && g.it.image ? `<a class="lot-thumb" href="${c.H}item/${g.it.id}.html" tabindex="-1" aria-hidden="true"><img src="${esc(imgURL({ image: thumbOf(g.it.image) }, c.R))}" alt="" width="64" height="64" loading="lazy" decoding="async"></a>` : ""}<div><h3>${g.it ? `<a href="${c.H}item/${g.it.id}.html">${nm}</a>` : nm}</h3><p class="lot-n">${g.stores.size}店で抽選（${g.list.length}件）${g.it ? `・<a href="${c.H}item/${g.it.id}.html">商品ページ（発売日・値段）→</a>` : ""}</p></div></div>
+      <dl class="lot-hist-dl">
+        <div><dt>受付の期間</dt><dd>${lotPeriod(g.start, g.end)}</dd></div>
+        ${g.sales.length ? `<div><dt>販売日</dt><dd>${g.sales.length === 1 ? md(g.sales[0]) : `${md(g.sales[0])}〜${md(g.sales[g.sales.length - 1])}`}${g.sales.length > 1 ? "（お店による）" : ""}</dd></div>` : ""}
+        <div><dt>チェーン</dt><dd>${g.chains.map(([k, n]) => `${chHtml(k)} ${n}件`).join("、")}</dd></div>
+        <div><dt>応募方法</dt><dd>${g.methods.map(([k, n]) => `${esc(k)} ${n}件`).join("、")}</dd></div>
+        ${g.prefs.length ? `<div><dt>都道府県</dt><dd>${g.prefs.slice(0, 6).map(([p, n]) => `${esc(p)} ${n}`).join("、")}${g.prefs.length > 6 ? ` ほか${g.prefs.length - 6}都府県` : ""}</dd></div>` : ""}
+        ${g.lims.length ? `<div><dt>購入の上限</dt><dd>1人${g.lims.length === 1 ? g.lims[0] : `${g.lims[0]}〜${g.lims[g.lims.length - 1]}`}個まで${g.lims.length > 1 ? "（お店による）" : ""}</dd></div>` : ""}
+      </dl>
+      ${live ? `<p class="fine" style="margin-top:8px"><a href="${c.R}lottery.html">いまも${live}店で受付中 → 抽選情報を見る</a></p>` : ""}
+      <details class="lot-rest"><summary><span class="lot-rest-open">抽選があった<b>${g.stores.size}</b>店を見る</span><span class="lot-rest-close">閉じる</span></summary><ul class="where-shops lot-item">${g.list.map((x) => `<li><span class="lot-item-store">${esc(x.store)}${x.pref ? `<small>${esc(x.pref)}</small>` : ""}</span><span>受付 ${md(x.start)}〜${md(x.end)}・${esc(x.method || "")}</span></li>`).join("")}</ul></details>
+    </article>`;
+      };
+      const lead = `受付が終わったガチャガチャの抽選販売を、商品ごとにまとめた記録です。${monthsTxt}の受付ぶん、${Hh.groups.length}商品・${Hh.total}件（${Hh.stores}店）。どの商品が何店で抽選になったか、応募方法や販売日の目安がわかります。`;
+      const body = `<div class="wrap">
+  <nav class="breadcrumb" aria-label="breadcrumb"><a href="${c.H}index.html">${t.home}</a><span>/</span><a href="${c.R}lottery.html">抽選情報</a><span>/</span><span>抽選の記録</span></nav>
+  <header class="page-head lot-pagehead"><h1>ガチャガチャ抽選販売の記録</h1><p class="hub-sub">これまでに抽選になったガチャ一覧</p>
+    <p class="lead">${esc(lead)}</p>
+    <p class="fine" style="margin-top:8px"><a href="${c.R}lottery.html">いま受付中の抽選（${LOT_LIVE.length}件）を見る →</a></p></header>
+  <section class="section section-tight"><div class="panel">
+    <h2 style="font-size:20px">記録のまとめ</h2>
+    <dl class="lot-hist-dl lot-hist-sum">
+      <div><dt>記録した抽選</dt><dd><b>${Hh.total}</b>件（商品の抽選${Hh.nItem}件${Hh.others.length ? `・オープン日の入場など${Hh.others.length}件` : ""}）</dd></div>
+      <div><dt>抽選になった商品</dt><dd><b>${Hh.groups.length}</b>商品</dd></div>
+      <div><dt>抽選をしたお店</dt><dd><b>${Hh.stores}</b>店（${Hh.prefs.length}都道府県）</dd></div>
+      <div><dt>受付の期間</dt><dd>${ymd(Hh.start)}〜${ymd(Hh.end)}（${monthsTxt}）</dd></div>
+      <div><dt>チェーン別</dt><dd>${Hh.chains.map(([k, n]) => `${chHtml(k)} ${n}件`).join("、")}</dd></div>
+      <div><dt>応募方法</dt><dd>${Hh.methods.map(([k, n]) => `${esc(k)} ${n}件`).join("、")}</dd></div>
+      <div><dt>多かった都道府県</dt><dd>${Hh.prefs.slice(0, 5).map(([p, n]) => `${esc(p)} ${n}件`).join("、")}</dd></div>
+    </dl>
+    <p class="fine" style="margin-top:10px">ガチャプラネットが各店の公式X・応募ページで確認できた抽選だけの記録です。すべての抽選を網羅したものではありません。1件の抽選に2つ以上の商品が入っているときは、それぞれの商品に数えています。</p>
+  </div></section>
+  <section class="section section-tight">
+    <div class="section-head"><h2>抽選になったガチャ（締切が新しい順・${Hh.groups.length}商品）</h2></div>
+    <div class="lot-list">${Hh.groups.map(row).join("")}</div>
+  </section>
+  ${Hh.others.length ? `<section class="section section-tight"><div class="section-head"><h2>お店のオープン日などの抽選（${Hh.others.length}件）</h2></div>
+    <p class="fine" style="margin-top:-12px;margin-bottom:10px">商品ではなく、新しいお店のオープン日の入場整理券などの抽選です。</p>
+    <ul class="where-shops lot-item">${Hh.others.map((x) => `<li><span class="lot-item-store">${esc(x.title)}<small>${esc(x.store)}${x.pref ? `（${esc(x.pref)}）` : ""}</small></span><span>受付 ${md(x.start)}〜${md(x.end)}・${esc(x.method || "")}</span></li>`).join("")}</ul></section>` : ""}
+  <p class="lot-more"><a href="${c.R}lottery.html">いま受付中の抽選情報 →</a>　<a href="${c.H}chain.html">チェーンからお店をさがす →</a></p>
+</div>`;
+      layout({ rel, title: "ガチャガチャ抽選販売の記録｜これまでに抽選になったガチャ一覧",
+        description: `これまでに抽選販売になったガチャガチャ${Hh.groups.length}商品・${Hh.total}件の記録（${monthsTxt}）。${topG.slice(0, 2).map((g) => `「${g.name}」${g.stores.size}店`).join("、")}など、商品ごとに抽選の店数・受付期間・チェーン（${topCh.slice(0, 1).map(([k]) => k.label).join("")}など）・応募方法・販売日をまとめています。`,
+        body, current: "lottery", jaOnly: true,
+        jsonld: [{ "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
+          { "@type": "ListItem", position: 1, name: t.home, item: canonical(lang, "index.html") },
+          { "@type": "ListItem", position: 2, name: "抽選情報", item: canonical(lang, "lottery.html") },
+          { "@type": "ListItem", position: 3, name: "抽選の記録" } ] }] });
     }
     // お店ごとのページ
     for (const sh of SHOPS) {
