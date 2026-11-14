@@ -108,6 +108,13 @@
   if (sForm) {
     var sInput = sForm.querySelector("input");
     var sPop = sForm.querySelector(".search-pop");
+    // スマホ：検索欄は虫めがねボタンにたたんである（style.css）。文字が入っている間は、ほかを押しても開いたままにする
+    if (sInput && sForm.classList) {
+      var sSync = function () { sForm.classList.toggle("is-open", !!sInput.value || document.activeElement === sInput); };
+      ["focus", "blur", "input", "change"].forEach(function (ev) { sInput.addEventListener(ev, sSync); });
+      window.addEventListener("pageshow", function () { setTimeout(sSync, 0); });
+      setTimeout(sSync, 0);
+    }
     var sIndex = null, sLoading = null;
     var home = sForm.getAttribute("data-home"), root = sForm.getAttribute("data-root");
     // ひらがな・カタカナ、全角・半角、大文字・小文字の違いをなくして比べる

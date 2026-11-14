@@ -1403,26 +1403,38 @@ ${content}
 
 
 `;
+    // 1画面目の大きなボタン（近くのお店・抽選・今週発売）。抽選とマップは日本語だけのページなので、外国語は「駅からさがす」と「今週発売」の2つ
+    const heroCta = (() => {
+      const nowIso = nowJST.toISOString().slice(0, 16);
+      const lotNow = LOT_LIVE.filter((x) => !x.start || x.start <= nowIso).length;
+      const wk = WEEK.items.length;
+      const btn = (href, emoji, label, n, cls) => `<a class="hc${cls ? ` ${cls}` : ""}" href="${href}"><span class="hc-e" aria-hidden="true">${emoji}</span><span class="hc-l">${label}${n ? ` <b>${n}</b>` : ""}</span></a>`;
+      return `<div class="hero-cta">${lang === "ja"
+        ? btn(`${c.R}map.html`, "📍", "近くのお店を探す", "", "hc-main") + btn(`${c.R}lottery.html`, "🎯", lotNow ? "受付中の抽選" : LOT_LIVE.length ? "これから始まる抽選" : "抽選情報", lotNow ? `${lotNow}件` : LOT_LIVE.length ? `${LOT_LIVE.length}件` : "") + btn(`${c.H}week.html`, "🆕", "今週発売", wk ? `${wk}件` : "")
+        : btn(`${c.H}station.html`, "📍", esc(t.stn.heroBtn), "", "hc-main") + btn(`${c.H}week.html`, "🆕", t.x.weekH, wk ? String(wk) : "")}</div>`;
+    })();
     const body = `
 <div class="wrap">
   <section class="hero">
     <div class="hero-intro">
       <div class="hero-text">
+        <div class="hero-planet" aria-hidden="true"><i class="ring"></i><i class="orb"></i><i class="ring ring-front"></i><i class="moon"></i></div>
         <h1 class="hero-h1">${esc(t.u.homeH1(YM_NOW_EN)).replace(/\s*([【（(][^【（(]*)$/, ' <span class="h1-ym">$1</span>')}</h1>
         <p class="hero-lead">${t.heroLead}</p>
-        ${lang !== "ja" ? `<div class="item-actions"><a class="btn btn-gold" href="${c.H}station.html">${esc(t.stn.heroBtn)} →</a><a class="btn" href="${c.H}week.html">${t.x.weekH} →</a></div>` : ""}
-        <div class="hero-planet" aria-hidden="true"><i class="ring"></i><i class="orb"></i><i class="ring ring-front"></i><i class="moon"></i></div>
-        <p class="hero-sub">${t.heroSub}</p>
-        <dl class="hero-stats">
-          ${[items.length, releasingNow, stockedStores].map((n, i) => `<div><dt>${t.stats[i]}</dt><dd>${n.toLocaleString("en-US")}</dd></div>`).join("")}
-        </dl>
+        ${heroCta}
       </div>
     </div>
-  ${homeSeries}
   ${WEEK.items.length ? `<section class="section section-tight" id="thisweek">
     <div class="section-head"><h2>${lang !== "ja" ? t.x.weekH : "今週発売のガチャ"}</h2><a class="more" href="${c.H}week.html">${lang !== "ja" ? t.x.weekMore(lang === "en" ? enRange(WEEK.range) : WEEK.range.replace("〜", "–"), WEEK.items.length) : `${WEEK.range}・全${WEEK.items.length}件`}</a></div>
     <div class="grid row-scroll">${WEEK.items.slice(0, 12).map((it, i) => card(it, c, i)).join("")}<a class="card see-all" href="${c.H}week.html"><span class="see-all-in"><b>${lang !== "ja" ? t.x.seeAll : "全部見る"}</b><span>→</span></span></a></div>
   </section>` : ""}
+  ${homeSeries}
+    <div class="hero-about">
+      <p class="hero-sub">${t.heroSub}</p>
+      <dl class="hero-stats">
+        ${[items.length, releasingNow, stockedStores].map((n, i) => `<div><dt>${t.stats[i]}</dt><dd>${n.toLocaleString("en-US")}</dd></div>`).join("")}
+      </dl>
+    </div>
   </section>
   ${lang !== "ja" ? homeStnSeries : ""}
 
