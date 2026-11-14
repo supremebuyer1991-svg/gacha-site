@@ -753,10 +753,10 @@ const seriesItems = (sr) => items.filter((it) => sr.re.test([it.name, it.name_en
 const subKeys = new Set((site.quiz_groups || []).flatMap((g) => g.subs.map((x) => `${g.slug}:${x.slug}`)));
 const titleRx = titles.map((tt) => ({ ...tt, rx: new RegExp(tt.match, "i"), exact: new RegExp(`^(?:${tt.match})$`, "i") }));
 // ラインナップ名だけで当たったとき、ほかの意味もある言葉（「黒のハチワレ」＝猫の柄）では作品に入れない。
-// 商品名に作品名があるか、ラインナップ名がその言葉ぴったりのときだけ
 const CHARA_AMBIG = /ハチワレ/g;
 const charaHit = (tt, it) => tt.rx.test([it.name, it.name_en].join(" "))
-  || (it.lineup_names || []).some((n) => tt.rx.test(n) && (tt.rx.test(n.replace(CHARA_AMBIG, "")) || tt.exact.test(String(n).trim())));
+  // ラインナップ名に「ハチワレ」とだけある商品は、ねこの柄（たっち〜こねこ〜・グレネコ等）のことが多いので、ちいかわには入れない
+  || (it.lineup_names || []).some((n) => tt.rx.test(n.replace(CHARA_AMBIG, "")));
 // キャラクター・作品ごとのページ（作品名カタログから、3シリーズ以上あるものだけ）
 const CHARAS = (() => {
   const by = new Map(); // 同じ作品がカタログに2回あるときはまとめる
