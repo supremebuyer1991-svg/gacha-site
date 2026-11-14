@@ -138,14 +138,37 @@ const T = {
     oshiLabel: "推しの名前・キャラ名（あれば）", oshiPh: "例：タママ、ちいかわ、ルフィ",
     related: "同じジャンルのガチャ", seeAll: (g) => `${g}をすべて見る`,
     // <title> だけ：先頭の【…】は外して、意味のあるもの（再販・限定・箱売）は短い補足にする。長い商品名は短い後ろ書きにする（H1 は商品名のまま）
-    itemTitle: (n, lot) => { // lot：抽選を受付中の商品（タイトルに「抽選」を入れる）
+    // 後ろは「答え」（発売週・値段・種類数・取扱店数）を発売の状態で出し分ける。o＝{ it, wk（11月第3週）, up（発売前）, shops（公式の取扱店数）, abbr（略称）, lots（受付中の抽選の店数） }
+    // 全体は60字まで（後ろに「｜ガチャプラネット」9字が自動で付くので、ここは51字まで）。入りきらないときは短い後ろ書きにする
+    itemTitle: (n, lot, o = {}) => { // lot：抽選を受付中の商品（タイトルに「抽選」を入れる）
       const m = n.match(/^【([^】]*)】\s*/), pre = m ? m[1] : "", base = (m ? n.slice(m[0].length) : n).trim();
       const sfx = /オフィシャルショップ限定/.test(pre) ? (/再販/.test(pre) ? "オフィシャルショップ限定再販" : "オフィシャルショップ限定") : /再販/.test(pre) ? "再販" : /箱売/.test(pre) ? "箱売" : "";
-      const short = base.length > 24;
-      const paren = [sfx, short || /ガチャ|ガシャ/.test(base) ? "" : "ガチャ"].filter(Boolean).join("・");
-      return `${base}${paren ? `（${paren}）` : ""}${short ? (lot ? "｜ガチャ 抽選・発売日・在庫店" : "｜ガチャ 発売日・在庫店") : lot ? "｜抽選・発売日・どこで売ってる？" : "｜発売日・値段・どこで売ってる？"}`;
+      const it = o.it || {}, ab = o.abbr || "", hasG = /ガチャ|ガシャ/.test(base);
+      const yen = Number(it.price) > 0 ? `¥${it.price}` : "", kinds = it.lineup ? `全${it.lineup}種` : "", pk = yen + kinds;
+      const j = (...a) => a.filter(Boolean).join("・");
+      const tails = lot
+        ? [j(`抽選受付中${o.lots || ""}${o.lots ? "店" : ""}`, o.wk && `${o.wk}発売`, pk), j(`抽選受付中${o.lots || ""}${o.lots ? "店" : ""}`, o.wk && `${o.wk}発売`, yen), j("抽選受付中", pk), j("抽選受付中", yen)]
+        : o.up
+          ? [j(`${o.wk}発売予定`, pk) + "｜発売日・取扱店", j(`${o.wk}発売予定`, pk), j(`${o.wk}発売予定`, yen), j("発売予定", yen)]
+          : o.shops
+            ? [j("発売中", pk, `全国${o.shops}店`) + "｜どこで売ってる？", j("発売中", pk, `全国${o.shops}店`) + "｜取扱店", j("発売中", pk, `全国${o.shops}店`), j("発売中", yen, `全国${o.shops}店`), j(yen, `全国${o.shops}店`)]
+            : [j(`${o.wk}発売`, pk) + "｜どこで売ってる？", j(`${o.wk}発売`, pk) + "｜取扱店", j(`${o.wk}発売`, pk), j(`${o.wk}発売`, yen), j(pk) || "発売日・取扱店"];
+      // かっこ書き：補足（再販など）＋略称（モンハン など）＋「ガチャ」。長い名前では短いものへ落とす
+      const gach = hasG ? "" : "ガチャ";
+      const parens = [[sfx, [ab, gach].filter(Boolean).join(" ")], [sfx, gach], [sfx]]
+        .map((a) => a.filter(Boolean).join("・")).filter((x, i, a) => a.indexOf(x) === i);
+      const make = (pa, tl) => `${base}${pa ? `（${pa}）` : "｜"}${tl}`;
+      for (const pa of parens) for (const tl of tails) if (tl && make(pa, tl).length <= 51) return make(pa, tl);
+      return make(parens[parens.length - 1], tails.filter(Boolean).pop());
     },
-    itemDesc: (it, n, mk, mo) => `${n}（${mk}）は${mo}発売${it.price ? `、1回${it.price}円` : ""}${it.lineup ? `・全${it.lineup}種` : ""}のガチャガチャ。${it.summary ? it.summary + " " : ""}近くの在庫店や通販での入手方法もまとめています。`,
+    // 説明文：先頭は数字（値段・種類・発売週・取扱店数）。商品名とメーカー名のくり返しから始めない。o＝{ wk, shops, prefs（[県, 店数]）, abbr, lots, lotEnd }
+    itemDesc: (it, n, mk, mo, o = {}) => {
+      const ln = it.lineup_names || [], names = ln.length > 6 ? ln.slice(0, 5) : ln;
+      const facts = [Number(it.price) > 0 ? `¥${it.price}` : "", it.lineup ? `全${it.lineup}種` : "", `${mo}発売${o.up ? "予定" : ""}`].filter(Boolean).join("・");
+      const short = (p) => p.replace(/(都|府|県)$/, "");
+      const where = o.shops ? `全国${o.shops}店で取扱${(o.prefs || []).length ? `（${o.prefs.slice(0, 2).map(([p, k]) => `${short(p)}${k}店`).join("・")}${o.prefs.length > 2 ? "など" : ""}）` : ""}。` : "";
+      return `${o.lots ? `抽選受付中${o.lots}店${o.lotEnd ? `（いちばん早い締切は${o.lotEnd}）` : ""}。` : ""}${facts}${o.abbr ? `の${o.abbr}ガチャ` : ""}。${where}${names.length ? `ラインナップ：${names.join("、")}${(Number(it.lineup) || ln.length) > names.length ? "など" : ""}。` : ""}${it.summary ? it.summary.replace(/。?$/, "。") : ""}${mk}のガチャガチャ。`;
+    },
     genrePage: (g, ym = YM_NOW) => `${g}のガチャガチャ新作・発売日一覧${ym ? `【${ym}】` : ""}`, genreLead: (g, n, list) => `${g}ジャンルの新作・発売予定ガチャ${n}シリーズを新しい順に掲載しています。${leadTail(list)}`,
     makerPage: (m, ym = YM_NOW) => `${m}の${m === "バンダイ" ? "ガシャポン" : "ガチャガチャ"}新作・発売日一覧${ym ? `【${ym}】` : ""}`, makerLead: (m, n, list) => `${m}のガチャ${n}シリーズを新しい順に掲載しています。${leadTail(list)}`,
     empty: "まだ掲載している商品はありません。",
@@ -1649,12 +1672,16 @@ ${content}
     const relatedShown = related.filter((x) => !sameWeekList.includes(x));
     let whereLd = null; // 「どこで売ってる？／日本のどこで買える？」のFAQPage（全言語。下の where-sec で作る）
     const mo =wi ? (lang !== "ja" ? t.x.weekOf(t.month(it.release), wi.range.split("〜")[0]) : `${wi.m}月第${wi.no}週（${wi.range.split("〜")[0]}〜）`) : t.month(it.release);
-    const ln = (it.lineup_names || []).slice(0, 3);
-    let desc = t.itemDesc(it, name, maker, mo);
-    // 略称（モンハン・マイクラなど）：検索は略称で来るのに、ページに略称が1つもないと出にくい。日本語の説明文の頭に足す
-    if (lang === "ja") { const ab = ABBR.filter(([re, a]) => re.test(it.name) && !it.name.includes(a)).map(([, a]) => a); if (ab.length) desc = `（${[...new Set(ab)].slice(0, 2).join("・")}）${desc}`; }
-    if (ln.length && lang === "ja") desc = desc.replace("のガチャガチャ。", `のガチャガチャ。ラインナップは${ln.join("、")}${it.lineup > ln.length ? "など" : ""}。`);
-    if (lots.length) desc = `抽選受付中${lots.length}店。${desc}`;
+        // 略称（モンハン・マイクラなど）：検索は略称で来るのに、ページに略称が1つもないと出にくい。日本語のタイトルと説明文に入れる
+    const abbrJa = lang === "ja" ? [...new Set(ABBR.filter(([re, a]) => re.test(it.name) && !it.name.includes(a)).map(([, a]) => a))].slice(0, 2).join("・") : "";
+    // 公式の取扱店（作った時点。データがない日は0店＝店数を書かない）。タイトル・説明文・「どこで売ってる？」で同じ数字を使う
+    const offShops = (OFFICIAL_BY_ITEM.get(it.id) || []).map((id) => SHOP_BY_ID.get(id)).filter(Boolean);
+    const offPrefs = Object.entries(offShops.reduce((a, x) => { if (x.pref) a[x.pref] = (a[x.pref] || 0) + 1; return a; }, {})).sort((a, b) => b[1] - a[1]);
+    const lotFirst = lots.length ? String(lots.map((x) => x.end || "").filter(Boolean).sort()[0] || "").match(/^\d{4}-(\d\d)-(\d\d)T(\d\d):(\d\d)/) : null;
+    const seoOpt = { it, wk: wi && wi.no ? `${wi.m}月第${wi.no}週` : t.month(it.release), up: isUp, shops: offShops.length, prefs: offPrefs, abbr: abbrJa, lots: lots.length, lotEnd: lotFirst ? `${+lotFirst[1]}/${+lotFirst[2]} ${lotFirst[3]}:${lotFirst[4]}` : "" };
+    // 今週・来週の週ページ（/calendar/2026-11/w3）は noindex なので、その週は /week・/next-week へつなぐ
+    const weekHref = wi ? (wi.key === WEEK.key ? "week.html" : wi.key === NEXT_WEEK.key ? "next-week.html" : hubs.weekRel(wi)) : "";
+    const desc = t.itemDesc(it, name, maker, mo, seoOpt);
     // 「このガチャについて」：データにあることだけで2〜4文。言い回しは商品idのハッシュで変える
     const aboutHtml = (() => {
       const A = t.ab, seed = hashStr(it.id), v = (k) => (seed >>> k) & 0xff;
@@ -1718,7 +1745,7 @@ ${content}
       ${chipsHtml}
       <dl class="spec">
         <dt>${t.maker}</dt><dd><a href="${c.H}maker/${makerSlug(it.maker)}.html">${esc(maker)}</a></dd>
-        <dt>${t.release}</dt><dd><a href="${c.H}calendar/${ws ? ws.toISOString().slice(0, 7) : it.release}.html">${t.month(it.release)}</a>${lang === "ja" && it.release_note ? (ws ? `<a class="rel-note" href="${c.H}${hubs.weekRel(wi)}">${esc(it.release_note)}</a>` : `<span class="rel-note">${esc(it.release_note)}</span>`) : ""}</dd>
+        <dt>${t.release}</dt><dd><a href="${c.H}calendar/${ws ? ws.toISOString().slice(0, 7) : it.release}.html">${t.month(it.release)}</a>${lang === "ja" && it.release_note ? (ws ? `<a class="rel-note" href="${c.H}${weekHref}">${esc(it.release_note)}</a>` : `<span class="rel-note">${esc(it.release_note)}</span>`) : ""}</dd>
         ${it.age_min ? `<dt>${t.ageLabel}</dt><dd>${t.ageMin(it.age_min)}</dd>` : ""}
         <dt>${t.genre}</dt><dd><a href="${c.H}genre/${g.slug}.html">${gl}</a></dd>
         ${tags.length ? `<dt>${t.tags}</dt><dd><div class="tags">${tags.map((x) => `<span class="chip chip-ai">${esc(x)}</span>`).join("")}</div></dd>` : ""}
@@ -1753,11 +1780,18 @@ ${content}
   </section>`;
   })() : ""}
   ${lang === "ja" ? (() => {
-    const sids = OFFICIAL_BY_ITEM.get(it.id) || [];
-    const shs = sids.map((id) => SHOP_BY_ID.get(id)).filter(Boolean);
-    const byPref = {};
-    for (const x of shs) if (x.pref) byPref[x.pref] = (byPref[x.pref] || 0) + 1;
-    const prefTop = Object.entries(byPref).sort((a, b) => b[1] - a[1]);
+    const shs = offShops, prefTop = offPrefs;
+    // 代表の取扱店（最大10店）：店数の多い都道府県から1店ずつ順に取る。駅の近く（駅ページに載っている店）を先に。クローラーにも見える静的HTML
+    const repShops = (() => {
+      const groups = (prefTop.length ? prefTop.map(([p]) => shs.filter((x) => x.pref === p)) : [shs.slice()])
+        .map((g) => g.map((sh) => ({ sh, so: STATION_OF_SHOP.get(sh.id) || null })).sort((a, b) => !a.so - !b.so || (a.so && b.so ? a.so.d - b.so.d : 0)));
+      const out = [];
+      for (let i = 0; out.length < 10 && groups.some((g) => g.length > i); i++) for (const g of groups) if (g[i] && out.length < 10) out.push(g[i]);
+      return out;
+    })();
+    // この商品の取扱店が多い駅（最大5駅）。駅ページと同じ範囲（駅から1.5km、少ない駅は3km）で数える
+    const shIds = new Set(shs.map((x) => x.id));
+    const stTop = shs.length ? STATIONS.map((st) => ({ st, n: st.shops.filter((x) => shIds.has(x.sh.id)).length })).filter((x) => x.n > 0).sort((a, b) => b.n - a.n).slice(0, 5) : [];
     const n = Number(it.lineup) || (it.lineup_names || []).length;
     const draws = n >= 2 && n <= 40 ? compDraws(n) : 0;
     const whenTxt = ws ? `${wi.m}月${wi.no ? `第${wi.no}週` : ""}（${wi.range}）ごろ` : `${t.month(it.release)}${it.release_note ? `（${it.release_note}）` : ""}`;
@@ -1783,9 +1817,11 @@ ${content}
     return `<section class="section where-sec">
     <div class="panel">
       <h2 style="font-size:22px">${esc(it.name)}はどこで売ってる？</h2>
-      <p>${esc(shs.length ? whereTxt : "取扱店はお店ごとに違います。下の在庫店リストやみんなの報告から、近くで置いているお店を探せます。")}</p>
+      <p>${esc(shs.length ? (prefTop.length ? whereTxt.replace(/（[^（）]*）。$/, "。都道府県ごとの店数と、代表的なお店は次のとおりです。") : whereTxt) : "取扱店はお店ごとに違います。下の在庫店リストやみんなの報告から、近くで置いているお店を探せます。")}</p>
       ${arTxt ? `<p class="arr-static">${esc(arTxt)}</p>` : ""}
-      ${shs.length ? `<ul class="where-shops">${(prefTop.length ? prefTop.slice(0, 3).flatMap(([p]) => shs.filter((x) => x.pref === p)) : shs).slice(0, 10).map((x) => `<li><a href="${c.R}shop/${x.id}.html">${esc(x.name)}</a><span>${esc(x.pref || "")}</span></li>`).join("")}</ul>` : ""}
+      ${prefTop.length ? `<p class="where-prefs"><b>取扱店 ${shs.length}店</b>${prefTop.slice(0, 6).map(([p, k]) => `<a href="${c.R}shops/${prefSlug(p)}.html">${esc(p)} ${k}店</a>`).join("")}${prefTop.length > 6 ? `<span>ほか${prefTop.length - 6}都道府県</span>` : ""}</p>` : ""}
+      ${repShops.length ? `<ul class="where-shops">${repShops.map(({ sh, so }) => `<li><a href="${c.R}shop/${sh.id}.html">${esc(sh.name)}</a><span>${esc(sh.pref || "")}${so && so.d <= 1500 ? `・${esc(so.st.ja)}` : ""}</span></li>`).join("")}</ul>${shs.length > repShops.length ? `<p class="fine where-more">ほか${shs.length - repShops.length}店。近くのお店は下の在庫店リストで探せます。</p>` : ""}` : ""}
+      ${stTop.length ? `<p class="where-stations"><b>駅の近くで探す</b>${stTop.map(({ st, n: k }) => `<a href="${c.H}station/${st.slug}.html">${esc(st.ja)}（${k}店）</a>`).join("")}</p>` : ""}
       ${draws ? `<p class="comp-cost">全${n}種そろえる目安：<b>平均 約${draws}回${Number(it.price) > 0 ? `・約${(draws * it.price).toLocaleString("ja-JP")}円` : ""}</b><small>（どれも同じ確率で出る場合の計算）<a href="${esc(aff.rakuten)}" target="_blank" rel="sponsored nofollow noopener">${esc(t.compCompare)} →</a><span class="pr">PR</span></small></p>` : ""}
       <h3 class="arr-h">よくある質問</h3>
       <dl class="item-qa">${qa.map(([q, a]) => `<div><dt>${esc(q)}</dt><dd>${esc(a)}</dd></div>`).join("")}</dl>
@@ -1891,7 +1927,7 @@ ${content}
   ${hubs.seriesNav(HUB, it, { lang, c, t, nameOf, esc })}
   ${charasOf(it).length ? `<section class="section section-tight"><div class="section-head"><h2>${lang === "ja" ? "このキャラクター・作品のガチャ" : t.x.moreSeries}</h2></div><div class="chara-list">${charasOf(it).map((ch) => `<a class="chara-chip" href="${c.H}chara/${ch.slug}.html">${esc(lang === "ja" ? `${ch.label}のガチャ一覧` : t.x.charaChip(charaLabel(ch, lang)))}<small>${ch.list.length}</small></a>`).join("")}</div></section>` : ""}
   ${sameWeekList.length ? `<section class="section">
-    <div class="section-head"><h2>${esc(SW.h)}</h2><a class="more" href="${c.H}${hubs.weekRel(wi)}">${lang === "ja" ? `${wi.m}月第${wi.no}週（${wi.range}）をすべて見る` : esc(t.hub.weekPage)}</a></div>
+    <div class="section-head"><h2>${esc(SW.h)}</h2><a class="more" href="${c.H}${weekHref}">${lang === "ja" ? `${wi.m}月第${wi.no}週（${wi.range}）をすべて見る` : esc(t.hub.weekPage)}</a></div>
     <div class="grid">${sameWeekList.map((x) => card(x, c)).join("")}</div>
   </section>` : ""}
   ${relatedShown.length ? `<section class="section">
@@ -1927,7 +1963,7 @@ ${content}
         { "@type": "ListItem", position: 3, name },
       ],
     };
-    layout({ rel, title: t.itemTitle(name, lots.length > 0), description: desc, body, jsonld: [...(product.image && product.offers ? [product] : []) /* 写真のない商品・値段が未定の商品は Product を出さない（Google で「image がない」「offers がない」と無効になるため） */, crumbs, ...(whereLd ? [whereLd] : [])], ogImage: absImg(it), ogType: "product",
+    layout({ rel, title: t.itemTitle(name, lots.length > 0, seoOpt), description: desc, body, jsonld: [...(product.image && product.offers ? [product] : []) /* 写真のない商品・値段が未定の商品は Product を出さない（Google で「image がない」「offers がない」と無効になるため） */, crumbs, ...(whereLd ? [whereLd] : [])], ogImage: absImg(it), ogType: "product",
       noindex: !hasName(it, lang), alts: LANGS.filter((l) => hasName(it, l)),
       // 更新日のもとになる中身（在庫・今日の日付・関連商品は入れない）
       sig: [name, it.price, it.lineup, it.lineup_names || [], it.lineup_notes || {}, descOf(it, lang) || "", lang === "ja" ? it.summary || "" : "", it.release, it.release_note || "", it.image, lots.map((l) => [l.shop || l.store || "", l.title || "", l.url || "", l.end || ""])] });
