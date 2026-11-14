@@ -8,10 +8,13 @@ on:
     - cron: "7 23 * * *"   # 日本時間 8:07
     - cron: "37 11 * * *"  # 日本時間 20:37
     - cron: "37 3 * * *"   # 日本時間 12:37（Instagram リール）
+    - cron: "17 22 * * *"  # 日本時間 7:17（注目の新作：めじるし×サンリオ・ディズニー・たまごっち・ちいかわ。夜中に見つけた分）
+    - cron: "52 6 * * *"   # 日本時間 15:52（注目の新作：昼に見つけた分）
+    - cron: "57 12 * * *"  # 日本時間 21:57（注目の新作：夕方〜夜に見つけた分）
   workflow_dispatch:
     inputs:
       mode:
-        description: "morning・evening・instagram（Instagramだけ）・reel（Instagramリール）・deadline（本日締切の抽選まとめ）"
+        description: "morning・evening・instagram（Instagramだけ）・reel（Instagramリール）・deadline（本日締切の抽選まとめ）・hot（注目の新作）"
         default: "evening"
 
 concurrency:
@@ -32,7 +35,7 @@ jobs:
         env:
           GACHA_THREADS_TOKEN: ${{ secrets.GACHA_THREADS_TOKEN }}
           GACHA_IG_TOKEN: ${{ secrets.GACHA_IG_TOKEN }}
-          MODE: ${{ github.event.inputs.mode || (github.event.schedule == '52 22 * * *' && 'deadline' || (github.event.schedule == '7 23 * * *' && 'morning' || (github.event.schedule == '37 3 * * *' && 'reel' || 'evening'))) }}
+          MODE: ${{ github.event.inputs.mode || ((github.event.schedule == '17 22 * * *' || github.event.schedule == '52 6 * * *' || github.event.schedule == '57 12 * * *') && 'hot' || (github.event.schedule == '52 22 * * *' && 'deadline' || (github.event.schedule == '7 23 * * *' && 'morning' || (github.event.schedule == '37 3 * * *' && 'reel' || 'evening')))) }}
         run: node src/social.js
       - name: 投稿した記録を保存
         run: |

@@ -75,7 +75,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           mkdir -p lineup-src
-          git add images lineup-src data/items.json data/stores.json data/stock.json data/backfill.json data/import-skip.json data/page-hashes.json
+          git add images lineup-src data/items.json data/stores.json data/stock.json data/backfill.json data/import-skip.json data/page-hashes.json data/hot-state.json
           if ! git diff --cached --quiet; then
             git commit -m "画像・店舗・在庫・ページの更新日を自動保存"
             # 取り込み中にほかの自動作業が push していることがあるので、取り込み直してから送る（最大3回）

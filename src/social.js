@@ -162,6 +162,30 @@ async function igReel(tok, caption, videoUrl, coverUrl) {
   const fav = new Set(x.fav_ids || []);
   let changed = false;
 
+  // 注目の新作（めじるし×サンリオ・ディズニー・たまごっち・ちいかわ）：予約の時刻が来たものを Threads・Instagram に出す（build.js が data/hot.json を作る）
+  if (MODE === "hot") {
+    let Q = [];
+    try { Q = LOCAL ? JSON.parse(fs.readFileSync(path.join(ROOT, "dist", "data", "hot.json"), "utf8")) : await getJSON(`${SITE}/data/hot.json`); } catch (e) { log("⚠ hot.json が読めません", e.message); }
+    const st = (state.hot ||= {}); const nowMs = Number.isFinite(NOW_MS) ? NOW_MS : Date.now();
+    for (const k of Object.keys(st)) if (nowMs - Date.parse(st[k]) > 14 * 864e5) delete st[k];
+    const due = Q.filter((q) => Date.parse(q.ja_at) <= nowMs + 60e3 && nowMs - Date.parse(q.ja_at) < 2 * 864e5);
+    if (!due.length) { log("注目の新作：出すものはなし"); }
+    for (const q of due) {
+      const body = q.ja.split("\n").filter((l) => !/リプ欄/.test(l) && !/^#/.test(l)).join("\n").replace(/\n+$/, "");
+      if ((thSecret || DRY) && !st[`${q.id}|th`]) {
+        const text = [body, ``, `発売日・ラインナップ・近くの取扱店はこちら👇`, utm(q.url, "threads", "hot"), ``, `#ガチャガチャ`].join("\n");
+        try { const tok = DRY ? "" : await refresh("threads", thSecret, tokenOf("threads", thSecret), "https://graph.threads.net/refresh_access_token?grant_type=th_refresh_token&access_token="); await thPost(tok, short(text, 490), [q.img]); st[`${q.id}|th`] = new Date(nowMs).toISOString(); changed = true; log("Threads：注目の新作を投稿", q.id); }
+        catch (e) { log("⚠ Threads の投稿に失敗", e.message); try { await thPost(await refresh("threads", thSecret, tokenOf("threads", thSecret), "https://graph.threads.net/refresh_access_token?grant_type=th_refresh_token&access_token="), short(text, 490), []); st[`${q.id}|th`] = new Date(nowMs).toISOString(); changed = true; log("Threads：写真なしで投稿"); } catch (e2) { log("⚠ 写真なしでも失敗", e2.message); } }
+      }
+      if ((igSecret || DRY) && !st[`${q.id}|ig`]) {
+        const cap = [body, ``, `発売日・ラインナップ・近くの取扱店は、プロフィールのリンク（gachapla.com）から検索できます🪐`, ``, `#ガチャガチャ #ガチャ #カプセルトイ #めじるしアクセサリー #${q.work} #新作ガチャ`].join("\n");
+        try { await igPost(igSecret, cap.slice(0, 2100), [q.img]); st[`${q.id}|ig`] = new Date(nowMs).toISOString(); changed = true; log("Instagram：注目の新作を投稿", q.id); }
+        catch (e) { log("⚠ Instagram の投稿に失敗", e.message); }
+      }
+    }
+    if (changed) save();
+    return;
+  }
   if (MODE === "morning" && (thSecret || DRY)) {
     const done = recent("threads");
     const cands = [...(x.picks || []), ...((x.new_info && x.new_info.items) || [])].filter((it) => it && !done[it.id]);

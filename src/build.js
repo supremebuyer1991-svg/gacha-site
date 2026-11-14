@@ -3492,6 +3492,51 @@ write("data/shops.json", JSON.stringify(SHOPS.map((x) => [x.id, x.name, x.pref, 
     if (!picks.includes(it)) picks.push(it);
   }
   if (picks.length < 4) for (let k = 0; picks.length < 4 && k < pool.length; k++) { const it = pool[(dayNo * 2 + k) % pool.length]; if (!picks.includes(it)) picks.push(it); }
+  // ---- 注目の新作（めじるしアクセサリー × サンリオ・ディズニー・たまごっち・ちいかわ）----
+  // 新しく見つけたら、SNS（X @gachapla・@gacha_jpn、Threads・Instagram）に予約で出す（ユーザー依頼 11/14）。
+  // 見つけた時刻の5分後。夜中（22:30〜6:30）に見つけたものは朝7:15。英語の @gacha_jpn は 7:15・12:15・21:15 のどれか（URLの返信の作業に合わせる）。
+  // data/hot-state.json に「もう見た商品」と予約の列を残す（デプロイのときに自動で保存）。最初の1回は今ある商品を「見た」にするだけ。
+  {
+    const HOT_P = path.join(ROOT, "data", "hot-state.json");
+    const listOf = (slug) => new Set((CHARAS.find((c) => c.slug === slug) || { list: [] }).list);
+    const mej = listOf("mejirushi");
+    const FAM = [["sanrio", "サンリオ", "Sanrio"], ["disney", "ディズニー", "Disney"], ["tamagotchi", "たまごっち", "Tamagotchi"], ["chiikawa", "ちいかわ", "Chiikawa"]].map(([s, ja, en]) => ({ s, ja, en, set: listOf(s) }));
+    const hotOf = (it) => mej.has(it) && FAM.find((f) => f.set.has(it));
+    const first = !fs.existsSync(HOT_P);
+    const hs = first ? { seen: {}, queue: [] } : JSON.parse(fs.readFileSync(HOT_P, "utf8"));
+    const nowMs = Date.now(), jstOf = (ms) => new Date(ms + 9 * 3600e3);
+    const at = (ms) => jstOf(ms).toISOString().slice(0, 16) + "+09:00";
+    const nextSlot = (ms, slots) => { // ms 以降で最初の「時:分」（日本時間）
+      const d = jstOf(ms); for (let add = 0; add < 3; add++) for (const [h, m] of slots) {
+        const t = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() + add, h, m) - 9 * 3600e3; if (t >= ms) return t; }
+      return ms; };
+    const relW = (it) => { const ws = weekStartOf(it); if (ws) { const w = weekInfo(ws); return `${w.m}月第${w.no}週`; } return it.release ? `${+it.release.slice(5, 7)}月` : ""; };
+    const enMon = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    for (const it of items) {
+      const f = hotOf(it); if (!f || hs.seen[it.id]) continue;
+      hs.seen[it.id] = new Date(nowMs).toISOString().slice(0, 10);
+      if (first) continue;
+      const h = jstOf(nowMs).getUTCHours() + jstOf(nowMs).getUTCMinutes() / 60;
+      const jaAt = h >= 22.5 || h < 6.5 ? nextSlot(nowMs, [[7, 15]]) : nowMs + 5 * 60e3;
+      const enAt = nextSlot(nowMs + 5 * 60e3, [[7, 15], [12, 15], [21, 15]]);
+      const name = String(it.name).replace(/【[^】]*】/g, "").trim(), url = `https://gachapla.com/item/${it.id}`;
+      const ln = (it.lineup_names || []).slice(0, 5).join("・");
+      const ja = [`🔖めじるし新作｜${f.ja}`, ``, `「${name}」`, `1回${it.price}円・全${it.lineup}種｜${relW(it)}発売`, ln ? `${ln}${(it.lineup_names || []).length > 5 ? "ほか" : ""}` : "", ``, `発売日・ラインナップはリプ欄へ👇`, `#ガチャガチャ #めじるしアクセサリー #${f.ja}`].filter((x, i, a) => x !== "" || a[i - 1] !== "").join("\n");
+      const en = it.name_en ? [`🔖 New ${f.en} Mejirushi gacha`, ``, `${it.name_en}`, `¥${it.price} / ${it.lineup} designs / out ${it.release ? enMon[+it.release.slice(5, 7) - 1] + " " + it.release.slice(0, 4) : "soon"} in Japan`, ``, `Which one would you pick? 👀`].join("\n") : "";
+      hs.queue.push({ id: it.id, found: at(nowMs), work: f.ja, ja_at: at(jaAt), en_at: en ? at(enAt) : "", ja, en, url, url_en: `https://gachapla.com/en/item/${it.id}`, img: `https://gachapla.com/images/og/item/${it.id}.jpg` });
+    }
+    hs.queue = hs.queue.filter((q) => nowMs - Date.parse(q.found) < 4 * 864e5); // 4日たったら列から外す
+    if (process.env.GITHUB_ACTIONS || process.env.HOT_WRITE) fs.writeFileSync(HOT_P, JSON.stringify(hs, null, 1) + "\n");
+    // X の予約の作業が読む列（/x-queue.json）。返信でつけるURLもここに入れておく
+    const xq = [];
+    for (const q of hs.queue) {
+      xq.push({ k: `${q.id}|ja`, acct: "gachapla", at: q.ja_at, text: q.ja, first: q.ja.split("\n")[0], reply: `発売日・ラインナップ・近くの取扱店はこちら👇\n${q.url}?utm_source=x&utm_medium=reply `, work: q.work });
+      if (q.en) xq.push({ k: `${q.id}|en`, acct: "gacha_jpn", at: q.en_at, text: q.en, first: q.en.split("\n")[0], reply: `Release date, lineup & where to find it in Japan 👇\n${q.url_en}?utm_source=x&utm_campaign=hot `, work: q.work });
+    }
+    write("x-queue.json", JSON.stringify(xq));
+    write("data/hot.json", JSON.stringify(hs.queue));
+    console.log(`  注目の新作（めじるし×サンリオ・ディズニー・たまごっち・ちいかわ）：対象${items.filter(hotOf).length}件・予約の列${hs.queue.length}件${first ? "（初回：今ある商品を記録しただけ）" : ""}`);
+  }
   const favIds = items.filter(isFav).map((it) => it.id);
   write("data/x.json", JSON.stringify({ generated: new Date().toISOString(), today: today, week: { label: WEEK.label, from: WEEK.range.split("〜")[0], to: WEEK.range.split("〜")[1], count: week.length, items: week.slice(0, 12).map(pack) }, picks: picks.map(pack), lottery_today: (() => { const nowIso = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 16); return LOTTERY.filter((x) => x.added === today && x.end > nowIso).sort((a, b) => (a.end > b.end ? 1 : -1)).map((x) => ({ title: x.title, store: x.store, pref: x.pref || "", kind: x.kind, start: x.start, end: x.end, method: x.method || "", url: x.url || "" })); })(), morning: (() => {
     // 朝の「ジャンルまとめ」：毎日1ジャンルを4つまとめて紹介。たまごっち・サンリオ・ディズニー・ポケモン・めじるし・人気アニメを中心に、ときどきほかのジャンルも
