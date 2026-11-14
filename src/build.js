@@ -739,12 +739,12 @@ const ABBR = [[/モンスターハンター/, "モンハン"], [/マインクラ
 
 // 人気シリーズだけのページ（/series/〇〇.html）
 const SERIES = [
+  { slug: "mejirushi", label: "めじるしアクセサリー", en: "Mejirushi Accessory", emoji: "🔖", re: /めじるし/ },
   { slug: "sanrio", label: "サンリオ", en: "Sanrio", emoji: "🎀", re: /サンリオ|ハローキティ|キティ|マイメロ|クロミ|シナモロール|ポムポムプリン|ポチャッコ|ハンギョドン|けろけろけろっぴ|キキ&ララ|キキララ|タキシードサム|ばつ丸|ぐでたま|Sanrio/i },
   { slug: "chiikawa", label: "ちいかわ", en: "Chiikawa", emoji: "🐾", keep: true, tile: false, re: /ちいかわ|Chiikawa/i },
   { slug: "disney", label: "ディズニー", en: "Disney", emoji: "🏰", re: /ディズニー|ミッキー|ミニー|ドナルド|くまのプーさん|スティッチ|ピクサー|トイ・ストーリー|ラプンツェル|アナと雪|プリンセス|ツイステ|Disney/i },
   { slug: "nintendo", label: "任天堂", en: "Nintendo", emoji: "🎮", i18n: { ko: "닌텐도", "zh-tw": "任天堂", "zh-cn": "任天堂" }, re: /任天堂|Nintendo|スーパーマリオ|マリオカート|ゼルダの伝説|カービィ|スプラトゥーン|ピクミン|どうぶつの森|ドンキーコング|ヨッシー|メトロイド|ファイアーエムブレム|スマブラ|大乱闘スマッシュ/i },
   { slug: "tamagotchi", label: "たまごっち", en: "Tamagotchi", emoji: "🥚", tile: false, re: /たまごっち|Tamagotchi/i },
-  { slug: "mejirushi", label: "めじるしアクセサリー", en: "Mejirushi Accessory", emoji: "🔖", re: /めじるし/ },
 ];
 const seriesItems = (sr) => items.filter((it) => sr.re.test([it.name, it.name_en, (it.lineup_names || []).join(" ")].join(" ")));
 
