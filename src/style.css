@@ -1054,6 +1054,11 @@ body { font-variant-numeric: tabular-nums lining-nums; }
 .where-shops li { display: flex; justify-content: space-between; gap: 8px; font-size: 14px; border-bottom: 1px dashed var(--line, #e6e6ee); padding: 6px 0; }
 .where-shops a { color: var(--text); font-weight: 700; }
 .where-shops span { color: var(--text-2); font-size: 12px; white-space: nowrap; }
+.where-prefs, .where-stations { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin: 12px 0 0; font-size: 13px; }
+.where-prefs b, .where-stations b { font-size: 14px; margin-right: 4px; }
+.where-prefs a, .where-stations a { border: 1px solid var(--line, #e6e6ee); border-radius: 999px; padding: 3px 10px; color: var(--text); font-weight: 700; text-decoration: none; }
+.where-prefs span { color: var(--text-2); font-size: 12px; }
+.where-more { margin-top: 8px; }
 .comp-cost { margin-top: 14px; padding: 10px 14px; border-radius: 12px; background: var(--bg-2, #f6f4ff); }
 .comp-cost small { display: block; color: var(--text-2); font-size: 11.5px; }
 .comp-cost small a { margin-left: 8px; color: var(--gold-soft); font-weight: 700; border-bottom: 1px solid var(--line-strong); }
