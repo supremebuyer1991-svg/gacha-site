@@ -138,12 +138,12 @@ const T = {
     oshiLabel: "推しの名前・キャラ名（あれば）", oshiPh: "例：タママ、ちいかわ、ルフィ",
     related: "同じジャンルのガチャ", seeAll: (g) => `${g}をすべて見る`,
     // <title> だけ：先頭の【…】は外して、意味のあるもの（再販・限定・箱売）は短い補足にする。長い商品名は短い後ろ書きにする（H1 は商品名のまま）
-    itemTitle: (n) => {
+    itemTitle: (n, lot) => { // lot：抽選を受付中の商品（タイトルに「抽選」を入れる）
       const m = n.match(/^【([^】]*)】\s*/), pre = m ? m[1] : "", base = (m ? n.slice(m[0].length) : n).trim();
       const sfx = /オフィシャルショップ限定/.test(pre) ? (/再販/.test(pre) ? "オフィシャルショップ限定再販" : "オフィシャルショップ限定") : /再販/.test(pre) ? "再販" : /箱売/.test(pre) ? "箱売" : "";
       const short = base.length > 24;
       const paren = [sfx, short || /ガチャ|ガシャ/.test(base) ? "" : "ガチャ"].filter(Boolean).join("・");
-      return `${base}${paren ? `（${paren}）` : ""}${short ? "｜ガチャ 発売日・在庫店" : "｜発売日・値段・どこで売ってる？"}`;
+      return `${base}${paren ? `（${paren}）` : ""}${short ? (lot ? "｜ガチャ 抽選・発売日・在庫店" : "｜ガチャ 発売日・在庫店") : lot ? "｜抽選・発売日・どこで売ってる？" : "｜発売日・値段・どこで売ってる？"}`;
     },
     itemDesc: (it, n, mk, mo) => `${n}（${mk}）は${mo}発売${it.price ? `、1回${it.price}円` : ""}${it.lineup ? `・全${it.lineup}種` : ""}のガチャガチャ。${it.summary ? it.summary + " " : ""}近くの在庫店や通販での入手方法もまとめています。`,
     genrePage: (g, ym = YM_NOW) => `${g}のガチャガチャ新作・発売日一覧${ym ? `【${ym}】` : ""}`, genreLead: (g, n, list) => `${g}ジャンルの新作・発売予定ガチャ${n}シリーズを新しい順に掲載しています。${leadTail(list)}`,
@@ -1668,6 +1668,9 @@ ${content}
         ...(O.buyee && lang !== "zh-tw" ? [["sl-buyee", O.buyee, "Buyee (Mercari Japan)"]] : []),
         ["sl-rak", L.rakuten, "Rakuten Japan"],
       ]; return `<div class="shop-links"><span class="sl-pr">PR</span>${b.map(([k, u, l]) => `<a class="sl ${k}" href="${esc(u)}" target="_blank" rel="sponsored nofollow noopener">${l}</a>`).join("")}</div>`; })() : (() => { const L = shopLinks(it); return `<div class="shop-links">${SW.chips ? `<span style="font-size:12.5px;font-weight:700;color:var(--text-2)">${esc(SW.chips)}</span>` : ""}<span class="sl-pr">PR</span><a class="sl sl-rak" href="${esc(L.rakuten)}" target="_blank" rel="sponsored nofollow noopener">楽天市場</a><a class="sl sl-amz" href="${esc(L.amazon)}" target="_blank" rel="sponsored nofollow noopener">Amazon</a><a class="sl sl-yah" href="${esc(L.yahoo)}" target="_blank" rel="sponsored nofollow noopener">Yahoo!ショッピング</a><a class="sl sl-mer" href="${esc(L.mercari)}" target="_blank" rel="${L.mercariAf ? "sponsored nofollow noopener" : "noopener"}">${esc(L.mercariLabel)}</a></div>`; })();
+    // 抽選を受付中の商品：価格のすぐ下に帯を出して、下の抽選の一覧（#lots）へ飛ばす。lots は締切が近い順
+    const lotEnd = (d) => { const m = String(d).match(/^\d{4}-(\d\d)-(\d\d)T(\d\d):(\d\d)/); return m ? `${+m[1]}/${+m[2]} ${m[3]}:${m[4]}` : d; };
+    const lotBand = lots.length ? `<a class="lot-band" href="#lots"><b>🎯 抽選受付中 ${lots.length}店</b><span>いちばん早い締切 ${esc(lotEnd(lots[0].end))}</span><i aria-hidden="true">›</i></a>` : "";
     const janHtml = L0.jan ? (lang !== "ja" ? `<p class="jan">JAN: <span>${L0.jan}</span></p>` : `<p class="jan">JANコード：<span>${L0.jan}</span></p>`) : "";
     const body = `
 <div class="wrap">
@@ -1678,6 +1681,7 @@ ${content}
       <h1>${esc(name)}</h1>
       ${lang !== "ja" && it.name_en ? `<p class="name-ja" lang="ja">${esc(it.name)}</p>` : ""}
       <div class="price"><small>${lang === "ja" && it.price > 0 ? t.perPlay : ""}</small><b>${priceTxt(it.price)}</b><span>${lang !== "ja" && it.price > 0 ? t.perPlay : ""}${it.lineup ? `${lang !== "ja" && it.price > 0 ? " · " : ""}${t.lineup(it.lineup)}` : ""}</span>${relPill(it)}</div>
+      ${lotBand}
       ${chipsHtml}
       <dl class="spec">
         <dt>${t.maker}</dt><dd><a href="${c.H}maker/${makerSlug(it.maker)}.html">${esc(maker)}</a></dd>
@@ -1698,49 +1702,23 @@ ${content}
     </div>
   </article>
   ${aboutHtml}
-  ${(() => {
-    // 通販（Amazon・楽天）とフリマの2つの案内。発売前は「予約」の見出し、発売から60日より前はフリマを先に（コンプセットが売り切れがちなため）
-    // 日本語以外：メルカリ・ヤフオク・ラクマは日本の住所がないと使えないので、Buyee のリンクがないときは出さず、代理購入の案内を1文だけ
-    const O = overseas(it);
-    const shopAside = `<aside class="buy" id="buy" aria-label="${t.buyAria}">
-      <div>
-        ${lang === "ja" && state !== "up" && compD ? `<p class="comp-cost" style="margin:0 0 10px">${SW.comp(compN, compD, compYen)}</p>` : ""}
-        <h2 style="font-size:20px">${isUp && t.buyTitleUp ? t.buyTitleUp : t.buyTitle}<span class="pr">${lang === "ja" ? "PR・広告" : "PR"}</span></h2>
-        <p>${isUp && t.buyLeadUp ? t.buyLeadUp : t.buyLead}</p>
-      </div>
-      <div class="btns">
-        ${lang === "en" && O.amazon ? `<a class="btn btn-gold" href="${esc(O.amazon)}" target="_blank" rel="sponsored nofollow noopener">Search on Amazon</a><a class="btn" href="${esc(aff.amazon + "&language=en_US")}" target="_blank" rel="sponsored nofollow noopener">Amazon Japan (in Japan)</a>` : `<a class="btn btn-gold" href="${esc(aff.amazon + ({ "zh-cn": "&language=zh_CN", "zh-tw": "&language=zh_TW", ko: "&language=ko_KR" }[lang] || ""))}" target="_blank" rel="sponsored nofollow noopener">${t.amazon}</a>`}
-        ${lang !== "ja" && O.ebay ? `<a class="btn" href="${esc(O.ebay)}" target="_blank" rel="sponsored nofollow noopener">Search on eBay</a>` : ""}
-        <a class="btn" href="${esc(aff.rakuten)}" target="_blank" rel="sponsored nofollow noopener">${t.rakuten}</a>
-      </div>
-    </aside>`;
-    // メルカリ：公式ツールで作ったリンクがある商品だけ、そのURLをそのまま使う（PR表示つき）。なければふつうの検索ページ
-    const merc = lang === "ja" && L0.mercariAf ? `<a class="btn" href="${esc(L0.mercari)}" target="_blank" rel="sponsored nofollow noopener">${t.mercari}<span class="pr">PR</span></a>` : `<a class="btn" href="https://jp.mercari.com/search?keyword=${encodeURIComponent(it.name)}" target="_blank" rel="noopener">${t.mercari}</a>`;
-    const BUY_ON = lang !== "ja" && O.buyee && lang !== "zh-tw"; /* Buyee は台湾・香港が報酬の対象外 */
-    const BUYEE_T = { en: ["Buy from Mercari Japan via Buyee", "Yahoo! Auctions Japan via Buyee"], ko: ["Buyee로 일본 메루카리에서 구매", "Buyee로 야후 옥션에서 구매"], "zh-cn": ["通过Buyee在日本Mercari购买", "通过Buyee在雅虎拍卖购买"] }[lang] || ["Buy from Mercari Japan via Buyee", "Yahoo! Auctions Japan via Buyee"];
-    const fleaAside = lang !== "ja" && !BUY_ON ? (t.fleaProxy ? `<p class="fine buy-note">${esc(t.fleaProxy)}</p>` : "") : `<aside class="buy flea" aria-label="${t.fleaTitle}">
-      <div>
-        <h2 style="font-size:20px">${isOld && t.fleaTitleOld ? t.fleaTitleOld : t.fleaTitle}</h2>
-        <p>${isOld && t.fleaLeadOld ? t.fleaLeadOld : t.fleaLead}</p>
-      </div>
-      <div class="btns">
-        ${BUY_ON ? `<a class="btn btn-gold" href="${esc(O.buyee)}" target="_blank" rel="sponsored nofollow noopener">${esc(BUYEE_T[0])}<span class="pr">PR</span></a><a class="btn" href="${esc(O.buyeeYa)}" target="_blank" rel="sponsored nofollow noopener">${esc(BUYEE_T[1])}<span class="pr">PR</span></a>` : ""}
-        ${BUY_ON ? "" : merc + [["yahoo", `https://auctions.yahoo.co.jp/search/search?p=${encodeURIComponent(it.name)}`], ["rakuma", `https://fril.jp/s?query=${encodeURIComponent(it.name)}`]]
-          .map(([k, u]) => `<a class="btn" href="${esc(u)}" target="_blank" rel="noopener">${t[k]}</a>`).join("")}
-      </div>
-    </aside>`;
-    return `<section class="section section-tight buy-sec">
-    ${isOld && fleaAside.startsWith("<aside") ? fleaAside + "\n    " + shopAside : shopAside + "\n    " + fleaAside}
-  </section>`;
-  })()}
-  ${hubs.seriesNav(HUB, it, { lang, c, t, nameOf, esc })}
   ${(it.lineup_names || []).length ? `<section class="section lineup-sec">
     <div class="section-head"><h2>${t.lineupTitle(it.lineup || it.lineup_names.length)}</h2></div>
     <ol class="lineup${lang === "ja" && it.lineup_notes ? " lineup-notes" : ""}">${it.lineup_names.map((n) => { const nt = lang === "ja" && it.lineup_notes && it.lineup_notes[n]; return `<li lang="ja">${nt ? `<span><b>${esc(n)}</b><small>${esc(nt)}</small></span>` : esc(n)}</li>`; }).join("")}</ol>
     <p class="fine">${t.lineupNote}</p>
   </section>` : ""}
-
-
+  ${lots.length ? (() => {
+    // この商品の抽選販売・整理券（受付中のものだけ。締切が近い順）
+    const end = lotEnd;
+    return `<section class="section section-tight lot-sec" id="lots" style="scroll-margin-top:24px">
+    <div class="panel">
+      <h2 style="font-size:22px">${esc(it.name)}の抽選販売・整理券（受付中${lots.length}店）</h2>
+      <p class="fine" style="margin-top:4px">店頭で抽選販売・整理券の受付をしているお店です。応募の前に、お店の公式X・公式サイトで最新の情報をご確認ください。</p>
+      <ul class="where-shops lot-item">${lots.map((x) => `<li><span class="lot-item-store">${x.url ? `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.store)}</a>` : esc(x.store)}${x.pref ? `<small>${esc(x.pref)}</small>` : ""}</span><span>締切 ${esc(end(x.end))}・${esc(x.method || "お店でご確認ください")}</span></li>`).join("")}</ul>
+      <p class="fine"><a href="${c.R}lottery.html">ほかのガチャの抽選情報も見る →</a></p>
+    </div>
+  </section>`;
+  })() : ""}
   ${lang === "ja" ? (() => {
     const sids = OFFICIAL_BY_ITEM.get(it.id) || [];
     const shs = sids.map((id) => SHOP_BY_ID.get(id)).filter(Boolean);
@@ -1813,18 +1791,6 @@ ${content}
     </div>
   </section>`;
   })()}
-  ${lots.length ? (() => {
-    // この商品の抽選販売・整理券（受付中のものだけ。締切が近い順）
-    const end = (d) => { const m = String(d).match(/^\d{4}-(\d\d)-(\d\d)T(\d\d):(\d\d)/); return m ? `${+m[1]}/${+m[2]} ${m[3]}:${m[4]}` : d; };
-    return `<section class="section section-tight lot-sec">
-    <div class="panel">
-      <h2 style="font-size:22px">${esc(it.name)}の抽選販売・整理券（受付中${lots.length}店）</h2>
-      <p class="fine" style="margin-top:4px">店頭で抽選販売・整理券の受付をしているお店です。応募の前に、お店の公式X・公式サイトで最新の情報をご確認ください。</p>
-      <ul class="where-shops lot-item">${lots.map((x) => `<li><span class="lot-item-store">${x.url ? `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.store)}</a>` : esc(x.store)}${x.pref ? `<small>${esc(x.pref)}</small>` : ""}</span><span>締切 ${esc(end(x.end))}・${esc(x.method || "お店でご確認ください")}</span></li>`).join("")}</ul>
-      <p class="fine"><a href="${c.R}lottery.html">ほかのガチャの抽選情報も見る →</a></p>
-    </div>
-  </section>`;
-  })() : ""}
 
   <section class="section" id="stock" data-api="${c.R}api/stock/${it.id}" data-src="${c.R}data/stock/${it.id}.json" data-rak="${esc(L0.rakuten)}"${L0.mercari ? ` data-mer="${esc(L0.mercari)}"` : ""} style="scroll-margin-top:24px">
     <div class="panel">
@@ -1854,6 +1820,42 @@ ${content}
     </div>
   </section>
 
+  ${(() => {
+    // 通販（Amazon・楽天）とフリマの2つの案内（在庫店の下）。抽選を受付中の商品はフリマ（メルカリ）を先に。発売前は「予約」の見出し、発売から60日より前はフリマを先に（コンプセットが売り切れがちなため）
+    // 日本語以外：メルカリ・ヤフオク・ラクマは日本の住所がないと使えないので、Buyee のリンクがないときは出さず、代理購入の案内を1文だけ
+    const O = overseas(it);
+    const shopAside = `<aside class="buy" id="buy" aria-label="${t.buyAria}">
+      <div>
+        ${lang === "ja" && state !== "up" && compD ? `<p class="comp-cost" style="margin:0 0 10px">${SW.comp(compN, compD, compYen)}</p>` : ""}
+        <h2 style="font-size:20px">${lang === "ja" && state !== "old" ? (isUp ? "予約・入荷を通販で探す" : "全種そろえるならコンプセット") : isUp && t.buyTitleUp ? t.buyTitleUp : t.buyTitle}<span class="pr">${lang === "ja" ? "PR・広告" : "PR"}</span></h2>
+        <p>${isUp && t.buyLeadUp ? t.buyLeadUp : t.buyLead}</p>
+      </div>
+      <div class="btns">
+        ${lang === "en" && O.amazon ? `<a class="btn btn-gold" href="${esc(O.amazon)}" target="_blank" rel="sponsored nofollow noopener">Search on Amazon</a><a class="btn" href="${esc(aff.amazon + "&language=en_US")}" target="_blank" rel="sponsored nofollow noopener">Amazon Japan (in Japan)</a>` : `<a class="btn btn-gold" href="${esc(aff.amazon + ({ "zh-cn": "&language=zh_CN", "zh-tw": "&language=zh_TW", ko: "&language=ko_KR" }[lang] || ""))}" target="_blank" rel="sponsored nofollow noopener">${t.amazon}</a>`}
+        ${lang !== "ja" && O.ebay ? `<a class="btn" href="${esc(O.ebay)}" target="_blank" rel="sponsored nofollow noopener">Search on eBay</a>` : ""}
+        <a class="btn" href="${esc(aff.rakuten)}" target="_blank" rel="sponsored nofollow noopener">${t.rakuten}</a>
+      </div>
+    </aside>`;
+    // メルカリ：公式ツールで作ったリンクがある商品だけ、そのURLをそのまま使う（PR表示つき）。なければふつうの検索ページ
+    const merc = lang === "ja" && L0.mercariAf ? `<a class="btn" href="${esc(L0.mercari)}" target="_blank" rel="sponsored nofollow noopener">${t.mercari}<span class="pr">PR</span></a>` : `<a class="btn" href="https://jp.mercari.com/search?keyword=${encodeURIComponent(it.name)}" target="_blank" rel="noopener">${t.mercari}</a>`;
+    const BUY_ON = lang !== "ja" && O.buyee && lang !== "zh-tw"; /* Buyee は台湾・香港が報酬の対象外 */
+    const BUYEE_T = { en: ["Buy from Mercari Japan via Buyee", "Yahoo! Auctions Japan via Buyee"], ko: ["Buyee로 일본 메루카리에서 구매", "Buyee로 야후 옥션에서 구매"], "zh-cn": ["通过Buyee在日本Mercari购买", "通过Buyee在雅虎拍卖购买"] }[lang] || ["Buy from Mercari Japan via Buyee", "Yahoo! Auctions Japan via Buyee"];
+    const fleaAside = lang !== "ja" && !BUY_ON ? (t.fleaProxy ? `<p class="fine buy-note">${esc(t.fleaProxy)}</p>` : "") : `<aside class="buy flea" aria-label="${t.fleaTitle}">
+      <div>
+        <h2 style="font-size:20px">${lots.length ? "抽選に外れたら・行けないなら" : isOld && t.fleaTitleOld ? t.fleaTitleOld : t.fleaTitle}</h2>
+        <p>${lots.length ? "抽選に外れた、応募できるお店が遠い。そんなときは、フリマや通販でも探せます。" : isOld && t.fleaLeadOld ? t.fleaLeadOld : t.fleaLead}</p>
+      </div>
+      <div class="btns">
+        ${BUY_ON ? `<a class="btn btn-gold" href="${esc(O.buyee)}" target="_blank" rel="sponsored nofollow noopener">${esc(BUYEE_T[0])}<span class="pr">PR</span></a><a class="btn" href="${esc(O.buyeeYa)}" target="_blank" rel="sponsored nofollow noopener">${esc(BUYEE_T[1])}<span class="pr">PR</span></a>` : ""}
+        ${BUY_ON ? "" : merc + [["yahoo", `https://auctions.yahoo.co.jp/search/search?p=${encodeURIComponent(it.name)}`], ["rakuma", `https://fril.jp/s?query=${encodeURIComponent(it.name)}`]]
+          .map(([k, u]) => `<a class="btn" href="${esc(u)}" target="_blank" rel="noopener">${t[k]}</a>`).join("")}
+      </div>
+    </aside>`;
+    return `<section class="section section-tight buy-sec">
+    ${(isOld || lots.length) && fleaAside.startsWith("<aside") ? fleaAside + "\n    " + shopAside : shopAside + "\n    " + fleaAside}
+  </section>`;
+  })()}
+  ${hubs.seriesNav(HUB, it, { lang, c, t, nameOf, esc })}
   ${charasOf(it).length ? `<section class="section section-tight"><div class="section-head"><h2>${lang === "ja" ? "このキャラクター・作品のガチャ" : t.x.moreSeries}</h2></div><div class="chara-list">${charasOf(it).map((ch) => `<a class="chara-chip" href="${c.H}chara/${ch.slug}.html">${esc(lang === "ja" ? `${ch.label}のガチャ一覧` : t.x.charaChip(charaLabel(ch, lang)))}<small>${ch.list.length}</small></a>`).join("")}</div></section>` : ""}
   ${sameWeekList.length ? `<section class="section">
     <div class="section-head"><h2>${esc(SW.h)}</h2><a class="more" href="${c.H}${hubs.weekRel(wi)}">${lang === "ja" ? `${wi.m}月第${wi.no}週（${wi.range}）をすべて見る` : esc(t.hub.weekPage)}</a></div>
@@ -1892,7 +1894,7 @@ ${content}
         { "@type": "ListItem", position: 3, name },
       ],
     };
-    layout({ rel, title: t.itemTitle(name), description: desc, body, jsonld: [...(product.image ? [product] : []) /* 写真のない商品は Product を出さない（Google で「image がない」と無効になるため） */, crumbs, ...(whereLd ? [whereLd] : []), ...lots.map((x) => lotEventLd(x, canonical(lang, rel), absImg(it)))], ogImage: absImg(it), ogType: "product",
+    layout({ rel, title: t.itemTitle(name, lots.length > 0), description: desc, body, jsonld: [...(product.image ? [product] : []) /* 写真のない商品は Product を出さない（Google で「image がない」と無効になるため） */, crumbs, ...(whereLd ? [whereLd] : []), ...lots.map((x) => lotEventLd(x, canonical(lang, rel), absImg(it)))], ogImage: absImg(it), ogType: "product",
       noindex: !hasName(it, lang), alts: LANGS.filter((l) => hasName(it, l)), lastmod: it.updated || it.added || "" });
   }
 
@@ -2483,8 +2485,9 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
     ${mapHtml}
   </section>
   ${list.length ? `<section class="section section-tight" id="shops">
-    <div class="section-head"><h2>${ja ? `${lms.length ? "ほかの設置店" : `${esc(name)}から近い順`}（${list.length}店）` : `${esc(lms.length ? S.shopsMoreH : S.shopsH)} (${list.length})`}</h2></div>
-    <div class="shop-list">${list.map(row).join("")}</div>
+    ${ja ? [["徒歩15分以内のお店", list.filter((x) => x.d <= 1200)], ["少し離れたお店", list.filter((x) => x.d > 1200)]].filter(([, l]) => l.length).map(([h, l], i) => `<div class="section-head"${i ? ' style="margin-top:28px"' : ""}><h2>${h}（${l.length}店）</h2></div>
+    <div class="shop-list">${l.map(row).join("")}</div>`).join("\n    ") /* 日本語：徒歩15分（1.2km）で2つに分ける。それぞれ近い順のまま */ : `<div class="section-head"><h2>${esc(lms.length ? S.shopsMoreH : S.shopsH)} (${list.length})</h2></div>
+    <div class="shop-list">${list.map(row).join("")}</div>`}
     <p class="fine" style="margin-top:12px">${ja ? "お店の情報はバンダイ公式「ガシャポンどこ？」の取扱店をもとにしています。距離はまっすぐ測った目安で、徒歩は分速80mで計算しています。営業時間はお店でご確認ください。" : esc(S.note)}</p>
   </section>` : ""}
   ${faq.length ? `<section class="section section-tight" id="faq"><div class="section-head"><h2>${esc(S.faqH)}</h2></div>
@@ -2550,7 +2553,7 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
       const prefs = PREF_ORDER.filter((p) => SHOPS.some((x) => x.pref === p));
       const body = `<div class="wrap">
   <nav class="breadcrumb" aria-label="breadcrumb"><a href="${c.H}index.html">${t.home}</a><span>/</span><span>${katsu ? "ガチャ活" : "みんなのガチャマップ"}</span></nav>
-  <header class="page-head"><h1>${katsu ? "ガチャ活｜近くのガチャを効率よく回ろう" : "みんなのガチャマップ｜ガチャガチャの設置場所をさがす"}</h1><p class="lead">${katsu ? "ガチャ活は、ガチャのあるお店を巡ってお目当てのガチャを探すこと。今いる場所から近いお店を、回りやすい順番でご案内します。" : "全国のガチャのあるお店を地図で探せます。お店の在庫や台数は、みんなの報告で更新されます。地図にないお店は「ガチャのある場所をピン」から、だれでも足せます。"}</p></header>
+  <header class="page-head"><h1>${katsu ? "ガチャ活｜近くのガチャを効率よく回ろう" : `近くのガチャガチャを現在地から探す（全国${SHOPS.length}店・地図）`}</h1><p class="lead">${katsu ? "ガチャ活は、ガチャのあるお店を巡ってお目当てのガチャを探すこと。今いる場所から近いお店を、回りやすい順番でご案内します。" : "全国のガチャのあるお店を地図で探せます。お店の在庫や台数は、みんなの報告で更新されます。地図にないお店は「ガチャのある場所をピン」から、だれでも足せます。"}</p></header>
   <section class="map-wrap${katsu ? " is-katsu" : ""}">
     <div class="map-tools">
       <button class="btn btn-gold" type="button" id="map-geo">現在地のまわり</button>
@@ -2616,7 +2619,7 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
     <div class="chara-list">${CHAINS.map((ch) => `<a class="chara-chip" href="${c.H}chain/${ch.slug}.html">${esc(ch.label)}<small>${ch.shops.length}</small></a>`).join("")}</div>
   </section>
 </div>`;
-      layout({ rel, title: katsu ? "ガチャ活ルート｜近くのガチャのあるお店を効率よく回る" : "近くのガチャガチャを地図で探す｜全国の設置場所・設置店（みんなのガチャマップ）", description: katsu ? "ガチャ活（ガチャ巡り）のルートを自動で作成。今いる場所から近いガチャのあるお店を、回りやすい順番でご案内。探したいガチャの取扱店だけで作ることもできます。" : `全国${SHOPS.length}店のガチャガチャ設置場所（設置店）を地図で探せます。在庫や台数はみんなの報告で更新。地図にないお店も追加できます。`, body, current: katsu ? "katsu" : "map", jaOnly: true, extraHead: LEAF });
+      layout({ rel, title: katsu ? "ガチャ活ルート｜近くのガチャのあるお店を効率よく回る" : `近くのガチャガチャを現在地から探す（全国${SHOPS.length}店・地図）`, description: katsu ? "ガチャ活（ガチャ巡り）のルートを自動で作成。今いる場所から近いガチャのあるお店を、回りやすい順番でご案内。探したいガチャの取扱店だけで作ることもできます。" : `全国${SHOPS.length}店のガチャガチャ設置場所（設置店）を地図で探せます。在庫や台数はみんなの報告で更新。地図にないお店も追加できます。`, body, current: katsu ? "katsu" : "map", jaOnly: true, extraHead: LEAF });
     }
     // 市区町村ページ（/shops/<都道府県>/<市区町村>）：3店以上ある市区町村だけ。URL は主要な市・区はローマ字、それ以外は市区町村名から作るハッシュ（名前が同じなら毎回同じ）
     const CITY_MIN = 3;
@@ -2832,6 +2835,9 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
       <p class="lead">設置場所：${esc(sh.address || sh.pref || "")}</p>
       <div class="item-actions shop-actions"><a class="btn btn-gold" href="${esc(gmap)}" target="_blank" rel="noopener">Googleマップで開く</a><a class="sort" href="${c.R}map.html#${sh.id}">ガチャマップで見る</a>${sto ? `<a class="sort" href="${c.H}station/${sto.st.slug}.html">${esc(sto.st.ja)}周辺のお店</a>` : ""}${chn ? `<a class="sort" href="${c.H}chain/${chn.slug}.html">${esc(chn.label)}の店舗一覧</a>` : ""}</div>
     </header>
+    ${off.length ? `<section class="section section-tight shop-off" style="padding-top:20px"><div class="section-head"><h2>取扱中のガチャ（公式）</h2></div>
+      <p class="fine" style="margin-top:-16px;margin-bottom:20px">バンダイ公式「ガシャポンどこ？」で、このお店の取扱があるガチャです（通信機能のあるマシンのみ）。</p>
+      <div class="grid">${off.slice(0, 40).map((it) => card(it, c)).join("")}</div>${off.length > 8 ? `<p class="cal-more-wrap"><button type="button" class="btn cal-more-btn" data-open="すべて見る（${Math.min(off.length, 40)}種）" data-close="閉じる">すべて見る（${Math.min(off.length, 40)}種）</button></p>` : ""}${listAff(lang, "新作", "このお店で売り切れだったら → 楽天・Amazonで探す")}</section>` : ""}
     <div class="shop-grid">
       <div class="shop-mapbox"><div id="shop-map" class="map map-sm"></div>
         ${sh.src === "user" ? `<div class="map-add-btns" id="mv-btns"><button class="sort" type="button" id="mv-start">📍 ピンの位置がずれていたら直す</button></div>` : ""}
@@ -2847,10 +2853,6 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
     </div>
     <p class="shop-warn" id="shop-warn" hidden></p>
     <script>(function(){var Z=/^(0種|0件|—|)$/,f=document.getElementById("st-first");["st-off","st-rep","st-mac"].forEach(function(id){var d=document.getElementById(id);if(!d||!window.MutationObserver)return;new MutationObserver(function(){var on=!Z.test(d.textContent.trim());d.parentNode.hidden=!on;if(on&&f)f.hidden=true;}).observe(d,{childList:true,characterData:true,subtree:true});});})();</script>
-
-    ${off.length ? `<section class="section section-tight shop-off"><div class="section-head"><h2>取扱中のガチャ（公式）</h2></div>
-      <p class="fine" style="margin-top:-16px;margin-bottom:20px">バンダイ公式「ガシャポンどこ？」で、このお店の取扱があるガチャです（通信機能のあるマシンのみ）。</p>
-      <div class="grid">${off.slice(0, 40).map((it) => card(it, c)).join("")}</div>${off.length > 8 ? `<p class="cal-more-wrap"><button type="button" class="btn cal-more-btn" data-open="すべて見る（${Math.min(off.length, 40)}種）" data-close="閉じる">すべて見る（${Math.min(off.length, 40)}種）</button></p>` : ""}</section>` : ""}
 
     <section class="section panel" id="report-box">
       <h2 style="font-size:20px">在庫を報告する</h2>
