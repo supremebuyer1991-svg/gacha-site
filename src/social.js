@@ -4,16 +4,20 @@
 //   MODE=morning … Threads：今日の注目ガチャ（1つ、写真1枚）
 //   MODE=evening … Threads：今日のテーマのガチャ4選（写真4枚）／Instagram：同じ4選のカルーセル
 //   MODE=reel    … Instagram：リール（デプロイで作った dist/images/social/reel-日付.mp4。src/reel.js）
+//   MODE=deadline … Threads：本日締切の抽選まとめ（data/lottery.json から。文字だけの投稿。今日締切が無ければ何もしない）
+// ・投稿に入れる gachapla.com のURLには、どこから来たかがわかる印（utm_source=threads&utm_medium=social&utm_campaign=モード）を付ける
+// ・手元の確認：DRY=1（または DRY_RUN=1）で投稿せずに文面だけ表示（記録も書かない）。NOW_ISO=2026-11-15T07:52+09:00 で「今」を仮に決められる
 // ・トークンは約60日で切れるので、20日ごとに自動で延長し、延長したものは data/social-state.json に暗号化して保存する
 // ・同じ商品を続けて出さないよう、出した商品を state に記録する（14日間）
 "use strict";
 const fs = require("fs"), path = require("path"), crypto = require("crypto");
 const ROOT = path.join(__dirname, ".."), STATE = path.join(ROOT, "data", "social-state.json");
-const SITE = "https://gachapla.com", MODE = process.env.MODE || "evening", DRY = !!process.env.DRY;
+const SITE = "https://gachapla.com", MODE = process.env.MODE || "evening", DRY = !!(process.env.DRY || process.env.DRY_RUN);
 const state = fs.existsSync(STATE) ? JSON.parse(fs.readFileSync(STATE, "utf8")) : {};
-const save = () => fs.writeFileSync(STATE, JSON.stringify(state, null, 1) + "\n");
+const save = () => { if (DRY) return; fs.writeFileSync(STATE, JSON.stringify(state, null, 1) + "\n"); };
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-const jst = () => new Date(Date.now() + 9 * 3600e3);
+const NOW_MS = process.env.NOW_ISO ? Date.parse(process.env.NOW_ISO) : NaN; // 確認用：「今」を仮に決める
+const jst = () => new Date((Number.isFinite(NOW_MS) ? NOW_MS : Date.now()) + 9 * 3600e3);
 const today = jst().toISOString().slice(0, 10);
 const log = (...a) => console.log(...a);
 
@@ -51,6 +55,25 @@ const imgOk = async (id) => { if (LOCAL) return fs.existsSync(path.join(ROOT, "d
 const recent = (name) => { const p = (state[name] ||= {}).posted ||= {}; const lim = new Date(Date.now() - 14 * 864e5).toISOString().slice(0, 10); for (const k of Object.keys(p)) if (p[k] < lim) delete p[k]; return p; };
 const short = (s, n) => (s.length > n ? s.slice(0, n - 1) + "…" : s);
 const cleanName = (s) => String(s || "").replace(/【[^】]*】/g, "").trim();
+// 自分のサイトのURLに「どのSNSの・どの投稿から来たか」の印を付ける（メルカリなど外のURLには付けない）
+const utm = (url, source, campaign) => {
+  if (!url || !String(url).startsWith(SITE) || /[?&]utm_source=/.test(url)) return url;
+  const [base, hash] = String(url).split("#");
+  return `${base}${base.includes("?") ? "&" : "?"}utm_source=${encodeURIComponent(source)}&utm_medium=social&utm_campaign=${encodeURIComponent(campaign)}${hash ? "#" + hash : ""}`;
+};
+// テーマ名 → キャラクターページ（/chara/〇〇）。ページが無いテーマは検索ページへ
+const CHARA_SLUG = { "サンリオ": "sanrio", "ちいかわ": "chiikawa", "ディズニー": "disney", "たまごっち": "tamagotchi", "めじるし": "mejirushi", "めじるしアクセサリー": "mejirushi", "任天堂": "nintendo", "ポケモン": "pokemon" };
+let charaList; // サイトの data/chara-ja.json（いまあるキャラクターページの一覧）
+async function themeUrl(cat) {
+  const search = `${SITE}/?q=${encodeURIComponent(cat)}`;
+  if (charaList === undefined) { try { charaList = LOCAL ? JSON.parse(fs.readFileSync(path.join(ROOT, "dist", "data", "chara-ja.json"), "utf8")) : await getJSON(`${SITE}/data/chara-ja.json`); } catch (e) { charaList = null; } }
+  const hit = charaList && charaList.find((c) => c.j === cat || c.l === cat);
+  const slug = CHARA_SLUG[cat] || (hit && hit.s);
+  if (!slug) return search;
+  if (charaList) return charaList.some((c) => c.s === slug) ? `${SITE}/chara/${slug}` : search;
+  if (LOCAL) return fs.existsSync(path.join(ROOT, "dist", "chara", `${slug}.html`)) ? `${SITE}/chara/${slug}` : search;
+  try { const r = await fetch(`${SITE}/chara/${slug}`, { method: "HEAD" }); return r.ok ? `${SITE}/chara/${slug}` : search; } catch (e) { return search; }
+}
 const relText = (it) => it.release_note || (it.release ? `${+it.release.slice(5, 7)}月発売` : "");
 
 // ---- Threads ----
@@ -60,7 +83,8 @@ async function thPost(tok, text, ids) {
   if (DRY) { log("[DRY threads]", text, urls); return true; }
   const call = async (p, params) => { const r = await fetch(`${TH}/${p}`, { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: new URLSearchParams({ ...params, access_token: tok }) }).then((x) => x.json()); if (!r.id) throw new Error(JSON.stringify(r).slice(0, 300)); return r.id; };
   let cid;
-  if (urls.length === 1) cid = await call("me/threads", { media_type: "IMAGE", image_url: urls[0], text });
+  if (!urls.length) cid = await call("me/threads", { media_type: "TEXT", text }); // 文字だけの投稿
+  else if (urls.length === 1) cid = await call("me/threads", { media_type: "IMAGE", image_url: urls[0], text });
   else {
     const kids = []; for (const u of urls) kids.push(await call("me/threads", { media_type: "IMAGE", image_url: u, is_carousel_item: "true" }));
     await sleep(5000);
@@ -109,6 +133,30 @@ async function igReel(tok, caption, videoUrl, coverUrl) {
 (async () => {
   const thSecret = (process.env.GACHA_THREADS_TOKEN || "").trim(), igSecret = (process.env.GACHA_IG_TOKEN || "").trim();
   if (!thSecret && !igSecret && !DRY) { log("トークンがないので何もしません"); return; }
+  // 本日締切の抽選まとめ（サイトのデータではなく、リポジトリの data/lottery.json を読む）
+  if (MODE === "deadline") {
+    if (!thSecret && !DRY) { log("Threads のトークンがないので何もしません"); return; }
+    const st = (state.threads ||= {});
+    if (st.deadline_date === today && !DRY) { log("今日の締切まとめはもう投稿済み"); return; }
+    let entries = [];
+    try { entries = JSON.parse(fs.readFileSync(path.join(ROOT, "data", "lottery.json"), "utf8")).entries || []; } catch (e) { log("⚠ 抽選のデータが読めません", e.message); return; }
+    const nowIso = jst().toISOString().slice(0, 16);
+    const L = entries.filter((e) => e && e.store && e.title && typeof e.end === "string" && e.end.slice(0, 10) === today && e.end > nowIso)
+      .sort((a, b) => (a.end > b.end ? 1 : a.end < b.end ? -1 : 0));
+    if (!L.length) { log("今日締切の抽選はないので投稿しません"); return; }
+    const hm = (e) => { const t = e.end.slice(11, 16); return t ? t.replace(/^0/, "") : ""; };
+    // 店名の「#」は Threads でタグ扱いになるので外す
+    const line = (e) => `・${short(String(e.store).replace(/[#＃]/g, "").trim(), 24)}｜${short(cleanName(e.title), 26)}（${hm(e)}まで）`;
+    const head = [`⏰本日締切のガチャ抽選まとめ（${+today.slice(5, 7)}/${+today.slice(8, 10)}・${L.length}件）`, ``];
+    const tail = (rest) => [...(rest ? [`ほか ${rest}件`] : []), ``, `応募ページ・全国の抽選一覧はこちら👇`, utm(`${SITE}/lottery`, "threads", "deadline"), ``, `#ガチャガチャ`];
+    let n = Math.min(6, L.length), text = "";
+    for (; n >= 1; n--) { text = [...head, ...L.slice(0, n).map(line), ...tail(L.length - n)].join("\n"); if (text.length <= 490) break; } // 500字に収まるところまで
+    try {
+      const tok = DRY ? "" : await refresh("threads", thSecret, tokenOf("threads", thSecret), "https://graph.threads.net/refresh_access_token?grant_type=th_refresh_token&access_token=");
+      await thPost(tok, text, []); st.deadline_date = today; log("Threads：本日締切の抽選まとめを投稿", `${L.length}件`);
+    } catch (e) { log("⚠ Threads の投稿に失敗", e.message); }
+    save(); return;
+  }
   const x = LOCAL ? JSON.parse(fs.readFileSync(path.join(ROOT, "dist", "data", "x.json"), "utf8")) : await getJSON(`${SITE}/data/x.json`);
   if (x.today !== today) { log(`データが古いので投稿しません（${x.today}）`); return; }
   const fav = new Set(x.fav_ids || []);
@@ -121,7 +169,7 @@ async function igReel(tok, caption, videoUrl, coverUrl) {
     let it = null; for (const c of cands) if (await imgOk(c.id)) { it = c; break; }
     if (it) {
       const names = (it.lineup_names || []).slice(0, 4).join("・");
-      const text = [`🪐今日の注目ガチャ`, ``, cleanName(it.name), `1回${it.price}円・全${it.lineup}種｜${relText(it)}`, names ? `ラインナップ：${names}` : "", ``, `見かけたら回したいのはどれ？`, ``, `発売日・近くの取扱店はこちら👇`, it.url, ``, `#ガチャガチャ`].filter((l, i, a) => l !== "" || a[i - 1] !== "").join("\n");
+      const text = [`🪐今日の注目ガチャ`, ``, cleanName(it.name), `1回${it.price}円・全${it.lineup}種｜${relText(it)}`, names ? `ラインナップ：${names}` : "", ``, `見かけたら回したいのはどれ？`, ``, `発売日・近くの取扱店はこちら👇`, utm(it.url, "threads", "morning"), ``, `#ガチャガチャ`].filter((l, i, a) => l !== "" || a[i - 1] !== "").join("\n");
       try { const tok = await refresh("threads", thSecret, tokenOf("threads", thSecret), "https://graph.threads.net/refresh_access_token?grant_type=th_refresh_token&access_token="); await thPost(tok, short(text, 490), [it.id]); done[it.id] = today; changed = true; log("Threads：注目ガチャを投稿", it.name); }
       catch (e) { log("⚠ Threads の投稿に失敗", e.message); }
     } else log("Threads：出せる商品がありません");
@@ -157,15 +205,15 @@ async function igReel(tok, caption, videoUrl, coverUrl) {
       if (cover) {
         const byId = {}; for (const it of [...(m.items || []), ...((x.week && x.week.items) || [])]) byId[it.id] = it;
         const L = []; for (const id of cover.ids) if (byId[id] && await imgOk(id)) L.push(byId[id]);
-        if (L.length >= 2) { cat = cover.cat; themed = cover.cat !== "今週発売"; q = themed ? `${SITE}/?q=${encodeURIComponent(cover.cat)}` : `${SITE}/week`; return L; }
+        if (L.length >= 2) { cat = cover.cat; themed = cover.cat !== "今週発売"; q = themed ? await themeUrl(cover.cat) : `${SITE}/week`; return L; }
       }
-      if (m.active) { const L = await fromPool(name, m.items || []); if (L.length >= 3) { cat = m.category; q = `${SITE}/?q=${encodeURIComponent(m.category)}`; themed = true; return L; } }
+      if (m.active) { const L = await fromPool(name, m.items || []); if (L.length >= 3) { cat = m.category; q = await themeUrl(m.category); themed = true; return L; } }
       cat = "今週発売"; q = `${SITE}/week`; themed = false; return fromPool(name, (x.week && x.week.items) || []);
     };
     if ((thSecret || DRY) && MODE !== "instagram") {
       const L = await pick("threads");
       if (L.length >= 2) {
-        const text = [`✨今日の${cat}ガチャ${L.length}選`, ``, ...L.map((it) => `・${short(cleanName(it.name), 34)}（${it.price}円）`), ``, `発売日・ラインナップ・近くの取扱店はこちら👇`, q, ``, `#ガチャガチャ`].join("\n");
+        const text = [`✨今日の${cat}ガチャ${L.length}選`, ``, ...L.map((it) => `・${short(cleanName(it.name), 34)}（${it.price}円）`), ``, `発売日・ラインナップ・近くの取扱店はこちら👇`, utm(q, "threads", "theme"), ``, `#ガチャガチャ`].join("\n");
         try { const tok = await refresh("threads", thSecret, tokenOf("threads", thSecret), "https://graph.threads.net/refresh_access_token?grant_type=th_refresh_token&access_token="); await thPost(tok, short(text, 490), [...(cover ? [cover.url] : []), ...L.map((i) => i.id)]); for (const it of L) recent("threads")[it.id] = today; changed = true; log("Threads：4選を投稿", cat); }
         catch (e) { log("⚠ Threads の投稿に失敗", e.message); }
       }
