@@ -698,6 +698,18 @@ const shopLinks = (it) => {
   return { jan, rakuten: a.rakuten, amazon: a.amazon, yahoo, mercari, mercariLabel: maf ? `メルカリ（${maf.kw}）` : "メルカリ", mercariAf: !!(mi || maf) };
 };
 
+// 一覧ページ（キャラ・今週・来週）に1つだけ置く通販の入口（日本語ページだけ。メルカリは公式ツールで作った作品別リンクがあればそれ、なければ普通の検索）
+const listAff = (lang, kw, label) => {
+  if (lang !== "ja") return "";
+  const a = affSearch(`${kw} ガチャ`);
+  const maf = MERCARI_AF.find(([k]) => k === kw || (KW_ALIAS[k] || new RegExp(k)).test(kw));
+  const mer = maf ? maf[1] : `https://jp.mercari.com/search?keyword=${encodeURIComponent(`${kw} ガチャ`)}&status=on_sale`;
+  return `<div class="shop-links list-aff"><span style="font-size:12.5px;font-weight:700;color:var(--text-2)">${esc(label)}</span><span class="sl-pr">PR</span><a class="sl sl-rak" href="${esc(a.rakuten)}" target="_blank" rel="sponsored nofollow noopener">楽天市場</a><a class="sl sl-amz" href="${esc(a.amazon)}" target="_blank" rel="sponsored nofollow noopener">Amazon</a><a class="sl sl-mer" href="${esc(mer)}" target="_blank" rel="${maf ? "sponsored nofollow noopener" : "noopener"}">メルカリ</a></div>`;
+};
+
+// 作品名の略称（商品名に正式名があって略称がないとき、説明文に足す）
+const ABBR = [[/モンスターハンター/, "モンハン"], [/マインクラフト|MINECRAFT/i, "マイクラ"], [/ポケットモンスター/, "ポケモン"], [/鬼滅の刃/, "鬼滅"], [/呪術廻戦/, "呪術"], [/僕のヒーローアカデミア/, "ヒロアカ"], [/エヴァンゲリオン/, "エヴァ"], [/アナと雪の女王/, "アナ雪"], [/名探偵コナン/, "コナン"], [/スプラトゥーン/, "スプラ"], [/東京リベンジャーズ/, "東リベ"], [/すみっコぐらし/, "すみっコ"], [/SPY×FAMILY/i, "スパイファミリー"], [/進撃の巨人/, "進撃"], [/大乱闘スマッシュブラザーズ/, "スマブラ"], [/ジョジョの奇妙な冒険/, "ジョジョ"], [/葬送のフリーレン/, "フリーレン"], [/ドラゴンクエスト/, "ドラクエ"], [/ファイナルファンタジー/, "FF"], [/新世紀エヴァンゲリオン/, "エヴァ"], [/ONE PIECE/i, "ワンピース"], [/HUNTER×HUNTER/i, "ハンターハンター"], [/ハイキュー!!/, "ハイキュー"], [/あんさんぶるスターズ/, "あんスタ"], [/ブルーアーカイブ/, "ブルアカ"], [/ウマ娘 プリティーダービー/, "ウマ娘"], [/ちいかわ/, "ちいかわ"]];
+
 // 人気シリーズだけのページ（/series/〇〇.html）
 const SERIES = [
   { slug: "sanrio", label: "サンリオ", en: "Sanrio", emoji: "🎀", re: /サンリオ|ハローキティ|キティ|マイメロ|クロミ|シナモロール|ポムポムプリン|ポチャッコ|ハンギョドン|けろけろけろっぴ|キキ&ララ|キキララ|タキシードサム|ばつ丸|ぐでたま|Sanrio/i },
@@ -1507,6 +1519,8 @@ ${content}
     const mo =wi ? (lang !== "ja" ? t.x.weekOf(t.month(it.release), wi.range.split("〜")[0]) : `${wi.m}月第${wi.no}週（${wi.range.split("〜")[0]}〜）`) : t.month(it.release);
     const ln = (it.lineup_names || []).slice(0, 3);
     let desc = t.itemDesc(it, name, maker, mo);
+    // 略称（モンハン・マイクラなど）：検索は略称で来るのに、ページに略称が1つもないと出にくい。日本語の説明文の頭に足す
+    if (lang === "ja") { const ab = ABBR.filter(([re, a]) => re.test(it.name) && !it.name.includes(a)).map(([, a]) => a); if (ab.length) desc = `（${[...new Set(ab)].slice(0, 2).join("・")}）${desc}`; }
     if (ln.length && lang === "ja") desc = desc.replace("のガチャガチャ。", `のガチャガチャ。ラインナップは${ln.join("、")}${it.lineup > ln.length ? "など" : ""}。`);
     if (lots.length) desc = `抽選受付中${lots.length}店。${desc}`;
     // 「このガチャについて」：データにあることだけで2〜4文。言い回しは商品idのハッシュで変える
@@ -1751,7 +1765,7 @@ ${content}
     ? `${L0.mercariAf ? `<a class="ib-mer" href="${esc(L0.mercari)}" target="_blank" rel="sponsored nofollow noopener">${esc(t.u.mercari)}<small>PR</small></a>` : `<a class="ib-stock" href="#stock">${esc(t.u.stockShort)}</a>`}
   <a class="ib-mer" href="${esc(L0.rakuten)}" target="_blank" rel="sponsored nofollow noopener">${esc(SW.rak)}<small>PR</small></a>`
     : `<a class="ib-stock" href="#stock">${esc(t.u.stockShort)}</a>
-  ${lang === "ja" ? `<a class="ib-mer" href="${esc(L0.mercari)}" target="_blank" rel="${L0.mercariAf ? "sponsored nofollow noopener" : "noopener"}">${esc(t.u.mercari)}${L0.mercariAf ? "<small>PR</small>" : ""}</a>` : ""}`}
+  ${lang === "ja" ? (L0.mercariAf ? `<a class="ib-mer" href="${esc(L0.mercari)}" target="_blank" rel="sponsored nofollow noopener">${esc(t.u.mercari)}<small>PR</small></a>` : `<a class="ib-mer" href="${esc(L0.rakuten)}" target="_blank" rel="sponsored nofollow noopener">${esc(SW.rak)}<small>PR</small></a>`) /* メルカリの報酬つきリンクがない商品は、下のバーを楽天に */ : ""}`}
 </nav>`;
 
     const product = {
@@ -1919,7 +1933,8 @@ ${content}
       lead: lang === "ja"
         ? `${L}のガチャガチャ${list.length}シリーズを新しい順にまとめました。最新は「${top.name}」（${t.month(top.release)}・1回${top.price}円）。それぞれのページで発売日・値段・全何種か・どこで売っているか（在庫店）を確認できます。`
         : t.x.charaLead(L, list.length),
-      list, current: "genre", ...charaExtra(ch, L, list), extra: ticketBlock(lang, ch.slug),
+      list, current: "genre", ...charaExtra(ch, L, list), extra: ticketBlock(lang, ch.slug) + listAff(lang, L, `${L}のガチャを通販で探す（売り切れ・まとめ買い）`),
+      ...(lang === "ja" ? { h1: `${L}のガチャガチャ最新作・新作一覧` } : {}),
     });
   }
   {
@@ -1943,13 +1958,13 @@ ${content}
   listPage("week.html", {
     title: lang !== "ja" ? t.x.weekTitle(WEEK.range, WEEK.items.length) : `今週発売のガチャガチャ新作（${WEEK.range}）${WEEK.items.length}シリーズ`,
     lead: lang !== "ja" ? t.x.weekLead(WEEK.items.length, WEEK.range, WEEK.items.slice(0, 3).map((it) => nameOf(it, lang))) : `${WEEK.label}（${WEEK.range}）に発売されるガチャ${WEEK.items.length}シリーズを、人気の順に並べています。${WEEK.items.length ? `${WEEK.items.slice(0, 2).map((it) => `「${it.name}」`).join("")}など。` : ""}発売日は地域や店舗によって前後します。`,
-    list: WEEK.items, current: "calendar", extra: permaLink(WEEK),
+    list: WEEK.items, current: "calendar", extra: permaLink(WEEK) + listAff(lang, "新作", "お店で売り切れていたら、通販でも探せます"),
     ogImage: fs.existsSync(path.join(ROOT, "images", "og", "week.jpg")) ? `${SITE_URL}/images/og/week.jpg?v=${today}` : "",
   });
   listPage("next-week.html", {
     title: lang !== "ja" ? t.x.nextTitle(NEXT_WEEK.range, NEXT_WEEK.items.length) : `来週発売のガチャガチャ新作（${NEXT_WEEK.range}）${NEXT_WEEK.items.length}シリーズ`,
     lead: lang !== "ja" ? t.x.nextLead(NEXT_WEEK.items.length, NEXT_WEEK.range, NEXT_WEEK.items.slice(0, 3).map((it) => nameOf(it, lang))) : `${NEXT_WEEK.label}（${NEXT_WEEK.range}）に発売予定のガチャ${NEXT_WEEK.items.length}シリーズです。${NEXT_WEEK.items.length ? `${NEXT_WEEK.items.slice(0, 2).map((it) => `「${it.name}」`).join("")}など、` : ""}値段・全何種か・在庫店の情報もまとめています。発売日は地域や店舗によって前後します。`,
-    list: NEXT_WEEK.items, current: "calendar", extra: permaLink(NEXT_WEEK),
+    list: NEXT_WEEK.items, current: "calendar", extra: permaLink(NEXT_WEEK) + listAff(lang, "予約", "発売前に予約・まとめ買い"),
   });
   // 新着ガチャ（トップの「全部見る」のリンク先）
   {
@@ -2315,7 +2330,7 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
         : kOf(best) ? S.leadBest(name, st.shops.length, st.km, bestLabel, kOf(best), walkMin(best.d)) : S.lead(name, st.shops.length, st.km, bestLabel || chainLabelOr(near), walkMin(near.d));
       const lead = [lmLead, leadShops].filter(Boolean).join(ja ? "" : " ");
       const desc = ja
-        ? `${name}の周りにあるガチャガチャの設置場所（設置店）${n}店。${big ? `有名なガチャ専門店「${bigName}」をはじめ、` : ""}${near ? `いちばん近いのは「${near.sh.name}」（徒歩約${walkMin(near.d)}分）。` : ""}住所・徒歩の目安・営業時間・取扱中のガチャの数・地図つき。`
+        ? `${name}の周りにあるガチャガチャの設置場所（設置店）${n}店。${big ? `有名なガチャ専門店「${bigName}」をはじめ、` : ""}${near ? (walkMin(near.d) > 10 ? `駅のすぐ近くにはなく、いちばん近いのは「${near.sh.name}」（徒歩約${walkMin(near.d)}分）。` : `いちばん近いのは「${near.sh.name}」（徒歩約${walkMin(near.d)}分）。`) : ""}住所・徒歩の目安・営業時間・取扱中のガチャの数・地図つき。`
         : S.descN(name, n, bigName || bestLabel || (near ? chainLabelOr(near) : ""));
       const lmCard = lmCardAt(c), row = rowAt(c);
       // 地図（Leaflet。地図が画面に近づいたときに読み込む）。有名店は金色、ほかは青
@@ -2672,8 +2687,13 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
     ${prefs.length > 1 ? `<div class="lot-filter" id="lot-filter"><button class="sort is-on" type="button" data-pref="">すべて</button>${prefs.map((p) => `<button class="sort" type="button" data-pref="${p}">${p}</button>`).join("")}</div>` : ""}
     <div class="lot-list" id="lot-list">${groups.length ? groups.map((g) => `<article class="lot-group">
       <div class="lot-head">${g.it && g.it.image ? `<a class="lot-thumb" href="${c.H}item/${g.it.id}.html" tabindex="-1" aria-hidden="true"><img src="${esc(imgURL({ image: thumbOf(g.it.image) }, c.R))}" alt="" width="64" height="64" loading="lazy" decoding="async"></a>` : ""}<div><h3>${titleHtml(g)}</h3><p class="lot-n">${g.list.length}店舗${g.it ? `・<a href="${c.H}item/${g.it.id}.html">商品ページ（発売日・値段）→</a>` : ""}</p></div></div>
+      ${(() => { // 抽選に外れたとき・行けないときの通販（抽選の商品はお店で売り切れが多いので、メルカリを先頭に）
+        const its = [...new Map(g.parts.filter((x) => x.it).map((x) => [x.it.id, x.it])).values()];
+        return its.map((it) => { const L = shopLinks(it); return `<div class="shop-links lot-shop"><span style="font-size:12.5px;font-weight:700;color:var(--text-2)">${its.length > 1 ? `${esc(affName(it).slice(0, 18))}：` : ""}抽選に外れたら・行けないときは</span><span class="sl-pr">PR</span><a class="sl sl-mer" href="${esc(L.mercari)}" target="_blank" rel="${L.mercariAf ? "sponsored nofollow noopener" : "noopener"}">${esc(L.mercariLabel)}</a><a class="sl sl-rak" href="${esc(L.rakuten)}" target="_blank" rel="sponsored nofollow noopener">楽天市場</a><a class="sl sl-amz" href="${esc(L.amazon)}" target="_blank" rel="sponsored nofollow noopener">Amazon</a></div>`; }).join("");
+      })()}
       <ul class="lot-stores">${g.list.map(lotRow).join("")}</ul>
     </article>`).join("") : '<p class="fine">いま受付中の抽選はありません。</p>'}</div>
+    <p class="lot-more"><a href="${c.H}chara/mejirushi.html">めじるしアクセサリーの新作・発売日一覧 →</a>　<a href="${c.H}week.html">今週発売のガチャ →</a></p>
     <p class="lot-caution">抽選の内容は変わることがあります。応募の前に、必ずお店の公式X・公式サイトで最新の情報をご確認ください。</p>
   </section>
 </div>`;
@@ -2775,7 +2795,11 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
       // 住所の最後が「〇〇店内」のときは、入っている施設名（例：山陽マルナカ可部店）をタイトルに足す。検索は「施設名 ガチャガチャ」が多いため
       const hostM = (sh.address || "").match(/[\s　]([^\s　]{2,24}?)内\s*$/);
       const host = hostM && !/namco|施設|[階Ff]|フロア|^[0-9０-９]/.test(hostM[1]) && !sh.name.includes(hostM[1].replace(/店$/, "")) ? hostM[1] : "";
-      layout({ rel, title: `${sh.name}${host ? `（${host}内）` : ""}｜${city || sh.pref || ""}のガチャガチャ設置場所・取扱ガチャ${off.length ? `${off.length}種` : ""}`, noindex: thinShop, lastmod: shopLm, description: `${sh.pref && !(sh.address || "").startsWith(sh.pref) ? sh.pref : ""}${sh.address ? sh.address.replace(/\s+/g, " ") : sh.pref || ""}にある${sh.name}のガチャガチャ設置場所・取扱ガチャの情報。${off.length ? `取扱中のガチャ${off.length}種（${off.slice(0, 2).map((x) => x.name).join("、")}など）や、` : ""}みんなの在庫報告・台数・評価を確認できます。`, body, current: "map", jaOnly: true, extraHead: LEAF,
+      // タイトル：お店の名前のすぐ後に「のガチャガチャ」（「〇〇 ガチャガチャ」の検索に合わせる）＋いま何種＋月（新しさ）
+      const short20 = (x) => { const v = x.replace(/【[^】]*】/g, "").trim(); return v.length > 20 ? v.slice(0, 19) + "…" : v; };
+      const shopTitle = off.length ? `${sh.name}${host ? `（${host}内）` : ""}のガチャガチャ｜取扱中${off.length}種・${city || sh.pref || ""}【${+today.slice(5, 7)}月】` : `${sh.name}${host ? `（${host}内）` : ""}のガチャガチャ設置場所｜${city || sh.pref || ""}`;
+      const shopDesc = `${sh.name}${host ? `（${host}内）` : ""}にあるガチャガチャ${off.length ? `は取扱中${off.length}種。${off.slice(0, 3).map((x) => `「${short20(x.name)}」`).join("")}など。` : "の情報。"}場所は${sh.pref && !(sh.address || "").startsWith(sh.pref) ? sh.pref : ""}${sh.address ? sh.address.replace(/\s+/g, " ") : sh.pref || ""}。売り切れ・台数・評価はみんなの報告で確認できます。`;
+      layout({ rel, title: shopTitle, noindex: thinShop, lastmod: shopLm, description: shopDesc, body, current: "map", jaOnly: true, extraHead: LEAF,
         jsonld: [{ "@context": "https://schema.org", ...storeLd(sh) }] });
     }
     // 投稿のきまり

@@ -1367,3 +1367,7 @@ p.hero-lead { font-size: clamp(15px, 1.7vw, 20px); font-weight: 700; color: var(
   .item > .item-photo .thumb { max-width: 100%; }
   .item-photo .heart-on-photo { right: -14px; bottom: -12px; }
 }
+
+/* 抽選情報：商品ごとの通販チップと、下のリンク */
+.lot-group .lot-shop { margin: 10px 0 4px; }
+.lot-more { margin: 18px 0 6px; font-weight: 700; display: flex; flex-wrap: wrap; gap: 6px 18px; }

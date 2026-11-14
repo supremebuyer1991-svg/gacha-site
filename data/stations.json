@@ -38,5 +38,6 @@
   { "slug": "narita-airport", "region": "airport", "pref": "千葉県", "lat": 35.7700, "lng": 140.3870, "ja": "成田空港", "en": "Narita Airport", "zh-cn": "成田机场", "zh-tw": "成田機場", "ko": "나리타공항" },
   { "slug": "haneda-airport", "region": "airport", "pref": "東京都", "lat": 35.5494, "lng": 139.7798, "ja": "羽田空港", "en": "Haneda Airport", "zh-cn": "羽田机场", "zh-tw": "羽田機場", "ko": "하네다공항" },
   { "slug": "kansai-airport", "region": "airport", "pref": "大阪府", "lat": 34.4347, "lng": 135.2440, "ja": "関西空港", "en": "Kansai Airport", "zh-cn": "关西机场", "zh-tw": "關西機場", "ko": "간사이공항" },
-  { "slug": "new-chitose-airport", "region": "airport", "pref": "北海道", "lat": 42.7752, "lng": 141.6923, "ja": "新千歳空港", "en": "New Chitose Airport", "zh-cn": "新千岁机场", "zh-tw": "新千歲機場", "ko": "신치토세공항" }
+  { "slug": "new-chitose-airport", "region": "airport", "pref": "北海道", "lat": 42.7752, "lng": 141.6923, "ja": "新千歳空港", "en": "New Chitose Airport", "zh-cn": "新千岁机场", "zh-tw": "新千歲機場", "ko": "신치토세공항" },
+  { "slug": "gotanda", "region": "kanto", "pref": "東京都", "lat": 35.6262, "lng": 139.7234, "ja": "五反田駅", "en": "Gotanda Station", "zh-cn": "五反田站", "zh-tw": "五反田站", "ko": "고탄다역" }
 ]

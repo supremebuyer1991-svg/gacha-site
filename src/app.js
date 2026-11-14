@@ -1525,7 +1525,7 @@
       var shop = /kkday/.test(u.href) ? "kkday" : /klook/.test(u.href) ? "klook" : shopOfHost(u.hostname);
       var sponsored = /(^|\s)sponsored(\s|$)/i.test(a.getAttribute("rel") || "");
       if (!shop && !sponsored) return;
-      var place = a.closest(".shop-links") ? "chip" : a.closest(".item-bar") ? "bar" : a.closest(".comp-cost") ? "comp" : "aside";
+      var place = a.closest(".lot-group") ? "lottery" : a.closest(".list-aff") ? "list" : a.closest(".shop-links") ? "chip" : a.closest(".item-bar") ? "bar" : a.closest(".comp-cost") ? "comp" : "aside";
       window.gtag("event", "aff_click", { shop: shop || u.hostname, place: place, item_path: path, transport_type: "beacon" });
     } catch (er) {}
   }, true);
