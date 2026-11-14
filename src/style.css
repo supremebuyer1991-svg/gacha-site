@@ -1251,14 +1251,44 @@ p.hero-lead { font-size: clamp(15px, 1.7vw, 20px); font-weight: 700; color: var(
 .lot-group { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 16px; }
 .lot-head { display: flex; gap: 12px; align-items: center; margin-bottom: 12px; }
 .lot-thumb img { display: block; width: 64px; height: 64px; object-fit: contain; border-radius: 12px; background: #fff; border: 1px solid var(--line); }
-.lot-head h3 { margin: 0; font-size: 16px; line-height: 1.45; }
-.lot-head h3 a { color: var(--text); border-bottom: 1px solid var(--gold); }
+.lot-head h2 { margin: 0; font-size: 16px; line-height: 1.45; }
+.lot-head h2 a { color: var(--text); border-bottom: 1px solid var(--gold); }
 .lot-n { margin: 4px 0 0; font-size: 13px; color: var(--muted); font-weight: 700; }
 .lot-n a { color: var(--gold-soft); }
 .lot-stores { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
 .lot-stores .lot { background: var(--surface-2); border: 0; border-radius: 12px; padding: 12px; }
 .lot p.lot-note { font-size: 13px; color: var(--text-2); font-weight: 700; }
 .lot-caution { margin-top: 20px; font-size: 13px; color: var(--text-2); }
+/* 抽選ページ：いちばん上の件数、締切ラベル、「あと N店を見る」 */
+.lot-sum { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; margin: 12px 0 0; padding: 10px 14px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); font-size: 14px; font-weight: 700; color: var(--text-2); }
+.lot-sum b { font-size: 18px; margin: 0 1px; }
+.lot-sum i { font-style: normal; color: var(--muted); font-weight: 400; }
+.lot-sum .is-today b { color: #e5484d; }
+.lot-sum .is-tomorrow b { color: #e8720c; }
+.lot-pagehead .lead { margin-top: 8px; font-size: 13px; }
+.lot-top .lot-dl { font-weight: 700; color: #fff; }
+.lot-top .lot-dl.is-today { background: #e5484d; }
+.lot-top .lot-dl.is-tomorrow { background: #e8720c; }
+.lot-rest { margin-top: 10px; }
+.lot-rest > summary { list-style: none; cursor: pointer; text-align: center; padding: 10px; border: 2px solid var(--line); border-radius: 999px; font-size: 13.5px; font-weight: 700; color: var(--text-2); }
+.lot-rest > summary::-webkit-details-marker { display: none; }
+.lot-rest[open] > summary { margin-bottom: 10px; }
+.lot-rest-close, .lot-rest[open] .lot-rest-open { display: none; }
+.lot-rest[open] .lot-rest-close { display: inline; }
+.lot-list.is-filtered .lot-rest > summary { display: none; }
+.lot-list.is-filtered .lot-rest { margin-top: 10px; }
+@media (max-width: 700px) {
+  .lot-pagehead { padding-top: 20px; }
+  .lot-sum { font-size: 12.5px; gap: 2px 5px; padding: 8px 12px; flex-wrap: nowrap; white-space: nowrap; }
+  .lot-sum b { font-size: 16px; }
+  .lot-top .lot-state.is-soon:has(+ .lot-dl:not([hidden])) { display: none; } /* 「本日／明日まで」があるときは「まもなく締切」を重ねない */
+  .lot-pagehead + .section { padding-top: 12px !important; }
+  .lot-filter { flex-wrap: nowrap; overflow-x: auto; margin: 0 -16px 12px; padding: 0 16px 4px; scrollbar-width: none; }
+  .lot-filter::-webkit-scrollbar { display: none; }
+  .lot-filter .sort { flex: none; }
+  .lot-head { margin-bottom: 10px; }
+  .lot-thumb img { width: 48px; height: 48px; }
+}
 
 /* ---------- 統計ページ ---------- */
 .st-kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 24px; }
