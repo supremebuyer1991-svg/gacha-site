@@ -98,6 +98,20 @@ const T = {
     groupsHint: "詳しく選ばない場合は、その系統のすべてが対象になります。詳しい項目を選ぶと、さらに細かい項目が出てきます。",
     budgets: [["any", "こだわらない"], ["300", "300円まで"], ["500", "400〜500円"], ["premium", "600円以上"]],
     quizBtn: "診断する", results: "診断結果",
+    // 診断（1問ずつ答える形）の文言。[値, 絵文字, 名前, ひとこと]
+    qz: {
+      kicker: "GACHA TYPE CHECK", lead: "6つの質問で、あなたのガチャタイプとおすすめがわかります（約30秒）。",
+      q1: "どんなガチャにときめく？", multi: "いくつでもOK", detail: "くわしく選ぶ", detailClose: "閉じる",
+      q2: "好きな作品・キャラクターはいる？", q2hint: "名前を入れると候補が出ます。特になければ、そのまま次へ。", favPh: "例：ちいかわ、ルフィ、タママ", favAria: "作品名・キャラクター名", favPop: "よく選ばれている作品",
+      q3: "手に入れたら、どうしたい？", useMore: "種類をもっと細かく選ぶ",
+      uses: [["deco", "🖼️", "かざる", "フィギュア・ミニチュア"], ["wear", "🎒", "つける", "キーホルダー・めじるし・アクセ"], ["use", "✏️", "つかう", "ポーチ・文具・光るもの"], ["plush", "🧸", "ぬいぐるみ", "ぬいぐるみ・マスコット"]],
+      q4: "1回の予算は？", budgets: [["300", "🍬", "300円まで", ""], ["400", "🍩", "400円まで", ""], ["500", "🍰", "500円まで", ""], ["any", "✨", "こだわらない", ""]],
+      q5: "新作と人気、どっち派？", fresh: [["new", "🆕", "新作を追いかけたい", "今月〜これから発売"], ["classic", "👑", "人気のものがいい", "発売中の人気シリーズ"], ["any", "🎲", "どっちも気になる", ""]],
+      q6: "最後に、よければ教えてください", q6hint: "近い年代・性別に人気のガチャを少し優先します。", genderL: "性別", ageL: "年代",
+      submit: "結果を見る", early: "ここまでで結果を見る", busy: "診断しています…",
+      resKicker: "あなたのガチャタイプは…", top3: "あなたへのおすすめ TOP3", rest: "ほかにも合いそうなガチャ",
+      share: "結果をシェア", shareX: "Xでポスト", retry: "もう一度診断する", edit: "答えを直す",
+    },
     newTitle: "新着ガチャ", toCalendar: "発売カレンダーを見る", rankTitle: "人気ランキング", genreTitle: "ジャンルから探す", typeTitle: "種類から探す", typePage: (g, ym = YM_NOW) => `${g}のガチャガチャ新作・発売日一覧${ym ? `【${ym}】` : ""}`, typeLead: (g, n, list) => `${g}のガチャ${n}シリーズを新しい順に掲載しています。${leadTail(list)}`,
     maker: "メーカー", release: "発売月", genre: "ジャンル", tags: "タグ",
     findStores: "近くの在庫のある店舗を探す", official: "公式サイトで見る",
@@ -200,6 +214,19 @@ const T = {
     groupsHint: "If you don't narrow it down, everything in that group counts. Pick a detail to see even finer options.",
     budgets: [["any", "Any"], ["300", "Up to ¥300"], ["500", "¥400–500"], ["premium", "¥600+"]],
     quizBtn: "Show my matches", results: "Your matches",
+    qz: {
+      kicker: "GACHA TYPE CHECK", lead: "Six quick questions to find your gacha type and best matches (about 30 seconds).",
+      q1: "What kind of gacha excites you?", multi: "Pick any", detail: "More detail", detailClose: "Close",
+      q2: "Any favorite series or characters?", q2hint: "Type a name to see suggestions, or just go on.", favPh: "e.g. Pokémon, Hello Kitty, Chiikawa", favAria: "Series or character name", favPop: "Popular picks",
+      q3: "What will you do with it?", useMore: "Choose item types in detail",
+      uses: [["deco", "🖼️", "Display", "Figures & miniatures"], ["wear", "🎒", "Attach", "Keychains, charms & accessories"], ["use", "✏️", "Use", "Pouches, stationery & gadgets"], ["plush", "🧸", "Plush", "Plushies & mascots"]],
+      q4: "Budget per play?", budgets: [["300", "🍬", "Up to ¥300", ""], ["400", "🍩", "Up to ¥400", ""], ["500", "🍰", "Up to ¥500", ""], ["any", "✨", "Any", ""]],
+      q5: "New or popular?", fresh: [["new", "🆕", "New releases", "This month & upcoming"], ["classic", "👑", "Popular picks", "Out now and well loved"], ["any", "🎲", "Both", ""]],
+      q6: "Last one — tell us if you like", q6hint: "We slightly favor gacha popular with people like you.", genderL: "Gender", ageL: "Age",
+      submit: "See my result", early: "See my result now", busy: "Finding your type…",
+      resKicker: "Your gacha type is…", top3: "Your top 3 picks", rest: "More gacha you may like",
+      share: "Share result", shareX: "Post on X", retry: "Try again", edit: "Edit answers",
+    },
     newTitle: "New in Japan", toCalendar: "Release calendar", rankTitle: "Most popular right now", genreTitle: "Browse by genre", typeTitle: "Browse by type", typePage: (g) => `${g} gachapon (capsule toys) in Japan – new releases`, typeLead: (g, n) => `${n} ${g.toLowerCase()} gacha series sold in Japan, newest first. Tap one to see the price, release week and shops that have it.`,
     maker: "Maker", release: "Release", genre: "Genre", tags: "Tags",
     findStores: "Where can I buy it?", official: "Maker's page (Japanese)",
@@ -782,6 +809,13 @@ const liveLeaves = (g, x) => (x.leaves || []).map((l) => {
   const rx = new RegExp(l.match, "i");
   return { ...l, n: items.filter((it) => it._qs.includes(`${g.slug}:${x.slug}`) && rx.test(it.name)).length };
 }).filter((l) => l.n > 0).sort((a, b) => b.n - a.n);
+/* ---------- 診断（1問ずつの形）で使う決まりごと ---------- */
+const QZ_EMOJI = { kawaii: "🎀", cool: "⚡", oshi: "💗", real: "🔎", retro: "📼", funny: "🤣", hobby: "🎨" };
+// 「手に入れたら、どうしたい？」の答え → アイテムの種類（site.json の type グループの項目）
+const QZ_CAP_JA = { kawaii: "サンリオ・どうぶつ・ゆめかわ", cool: "ロボット・ヒーロー・少年マンガ", oshi: "アニメ・アイドル・ゲーム", real: "ミニチュア・食べもの・乗りもの", retro: "昭和レトロ・平成なつかし", funny: "まちぼうけ・シュール", hobby: "アート・映画・スポーツ" };
+const QZ_USES = { deco: ["type:figure", "type:minipkg"], wear: ["type:charm", "type:mejirushi", "type:fashion"], use: ["type:useful", "type:stationery", "type:sound"], plush: ["type:plush"] };
+// 「よく選ばれている作品」に出すのは、作品・キャラクターの項目だけ（どうぶつ・アクセサリーなどは出さない）
+const QZ_FAV_SUBS = /^(kawaii:(sanrio|chiikawa|disney|pokemon|character)|cool:|oshi:)/;
 const LEAF_SHOW = 12; // これより多いときは、しぼりこみ欄と「ぜんぶ見る」を出す
 
 /* ---------- 今週発売（バンダイ「11月第2週」、タカラトミーアーツ「11月9日週」の表記から判定） ---------- */
@@ -1317,12 +1351,32 @@ ${content}
     const embed = {
       home: c.H, root: c.R,
       groups: (site.quiz_groups || []).map((g) => ({ slug: g.slug, subs: g.subs.map((x) => ({ slug: x.slug, leaves: (x.leaves || []).map((l) => ({ slug: l.slug, match: l.match })) })) })),
+      uses: QZ_USES,
       src: `${c.R}data/quiz-${lang}.json?v=${QUIZ_V}`,
       _items: items.map((it) => ({
         id: it.id, name: nameOf(it, lang), jn: it.name, price: it.price, lineup: it.lineup, genre: it.genre, genre_label: genreLabel(genreOf(it.genre), lang),
         moods: it.moods, popularity: it.popularity * 0.01 + heartsOf(it), on: (it.lineup_names || []).join("｜"), ad: it.added, rl: it.release, qa: it.q_ages || [], qg: it.q_genders || [], qs: it._qs, image: thumbOf(it.image), release_label: t.month(it.release),
       })),
     };
+    // 診断：「どうしたい？」のボタン、よく選ばれている作品
+    const qz = t.qz;
+    const tasteGroups = (site.quiz_groups || []).filter((g) => g.slug !== "type");
+    const typeGroup = (site.quiz_groups || []).find((g) => g.slug === "type");
+    // 系統のボタンに出す例：日本語は短い言い方、ほかの言語は商品が多い項目を2つ
+    const tasteCap = (g) => (lang === "ja" && QZ_CAP_JA[g.slug]) || liveSubs(g).map((x) => ({ x, n: items.filter((it) => it._qs.includes(`${g.slug}:${x.slug}`)).length })).sort((p, q) => q.n - p.n).slice(0, 2).map((v) => qLabel(v.x, lang)).join(" · ");
+    const tile = (name, type, [v, emo, label, cap]) =>
+      `<label class="tile"><input type="${type}" name="${name}" value="${v}"><span><i aria-hidden="true">${emo}</i><b>${esc(label)}</b>${cap ? `<small>${esc(cap)}</small>` : ""}</span></label>`;
+    const favPop = (() => {
+      const seen = new Set(), out = [];
+      for (const g of tasteGroups) for (const x of liveSubs(g)) {
+        const key = `${g.slug}:${x.slug}`;
+        if (!QZ_FAV_SUBS.test(key)) continue;
+        const leaves = liveLeaves(g, x);
+        // 「さらに細かい項目」の段がある作品だけ（画面側が、その段の項目から作品名を読むため）
+        if (leaves.length > 1) for (const l of leaves) out.push({ key: `${key}:${l.slug}`, l });
+      }
+      return out.sort((p, q) => q.l.n - p.l.n).filter((o) => !seen.has(o.l.label) && seen.add(o.l.label)).slice(0, 14);
+    })();
     const opt = (name, type, value, label, checked) =>
       `<label class="opt"><input type="${type}" name="${name}" value="${value}"${checked ? " checked" : ""}><span>${label}</span></label>`;
 
@@ -1392,18 +1446,18 @@ ${content}
       <span class="kb-text"><b>${lang !== "ja" ? t.x.kbTitle : "NEW｜ガチャ活しよう！"}</b><span>${lang !== "ja" ? t.x.kbText : "近くのガチャのお店を、いちばん効率よく回るルートを自動で作成。お店の数・時間・目的地までの寄り道から選べます。"}</span></span>
       <span class="kb-go">${lang !== "ja" ? t.x.kbGo : "ルートを作る →"}</span>
     </a>
-    <form class="quiz" id="quiz" aria-labelledby="quiz-title">
+    <form class="quiz quiz-v2" id="quiz" aria-labelledby="quiz-title">
       <div class="quiz-head">
-        <h2 id="quiz-title">${t.quizTitle}</h2>
+        <h2 id="quiz-title"><small>${esc(qz.kicker)}</small>${t.quizTitle}</h2>
         <span class="quiz-step" id="quiz-step" aria-live="polite"></span>
       </div>
+      <p class="quiz-lead">${esc(qz.lead)}</p>
       <div class="quiz-bar" aria-hidden="true"><i id="quiz-bar"></i></div>
       <div class="quiz-qs">
-      <fieldset data-first><legend><b>1</b>${t.qGroups}</legend>
-        <p class="q-hint">${t.groupsHint}</p>
-        <div class="groups">${(site.quiz_groups || []).map((g) => `<div class="grp" data-group="${g.slug}">
-          <label class="grp-main"><input type="checkbox" name="group" value="${g.slug}"><span>${qLabel(g, lang)}</span></label>
-          <button type="button" class="grp-more" aria-expanded="false" aria-controls="sub-${g.slug}" data-more="${t.more}" data-less="${t.less}">${t.more}</button>
+      <fieldset data-first data-step="taste"><legend tabindex="-1"><b>1</b>${lang === "ja" || lang === "en" ? `${qz.q1}<small class="q-opt">${esc(qz.multi)}</small>` : t.qGroups}</legend>
+        <div class="groups">${tasteGroups.map((g) => `<div class="grp" data-group="${g.slug}">
+          <label class="grp-main"><input type="checkbox" name="group" value="${g.slug}"><span class="grp-face"><i aria-hidden="true">${QZ_EMOJI[g.slug] || "🎁"}</i><b>${qLabel(g, lang)}</b><small>${esc(tasteCap(g))}</small></span></label>
+          <button type="button" class="grp-more" aria-expanded="false" aria-controls="sub-${g.slug}" data-more="${esc(qz.detail)}" data-less="${esc(qz.detailClose)}">${esc(qz.detail)}</button>
           <div class="grp-subs" id="sub-${g.slug}" hidden>
             <div class="opts">${liveSubs(g).map((x) => opt("sub", "checkbox", `${g.slug}:${x.slug}`, qLabel(x, lang))).join("")}</div>
             ${liveSubs(g).map((x) => ({ x, leaves: liveLeaves(g, x) })).filter((v) => v.leaves.length > 1).map(({ x, leaves }) => `<div class="leaf-row" data-sub="${g.slug}:${x.slug}" hidden>
@@ -1414,30 +1468,65 @@ ${content}
             </div>`).join("")}
           </div>
         </div>`).join("")}</div>
-        <label class="oshi-in"><span>${t.oshiLabel}</span><input type="search" name="oshi" placeholder="${t.oshiPh}" autocomplete="off"></label>
       </fieldset>
-      <fieldset data-auto data-optional><legend><b>2</b>${t.qGender}<small class="q-opt">${esc(t.u.optional)}</small></legend>
-        <div class="opts opts-lg">${t.genders.map(([v, l]) => opt("gender", "radio", v, l)).join("")}</div>
+      <fieldset data-optional data-step="fav"><legend tabindex="-1"><b>2</b>${qz.q2}<small class="q-opt">${esc(t.u.optional)}</small></legend>
+        <p class="q-hint">${esc(qz.q2hint)}</p>
+        <div class="fav">
+          <div class="fav-box">
+            <input type="search" name="oshi" id="quiz-oshi" placeholder="${esc(lang === "ja" || lang === "en" ? qz.favPh : t.oshiPh)}" aria-label="${esc(qz.favAria)}" aria-controls="fav-sug" autocomplete="off" enterkeyhint="done">
+            <div class="fav-sug" id="fav-sug" hidden></div>
+          </div>
+          <p class="fav-pop-h">${esc(qz.favPop)}</p>
+          <div class="opts fav-pop" id="fav-pop">${favPop.map((o) => opt("fav", "checkbox", o.key, `${esc(qLabel(o.l, lang))}<small>${o.l.n}</small>`)).join("")}</div>
+        </div>
       </fieldset>
-      <fieldset data-auto data-optional><legend><b>3</b>${t.qAge}<small class="q-opt">${esc(t.u.optional)}</small></legend>
-        <div class="opts opts-lg opts-age">${t.ages.map(([v, l]) => opt("age", "radio", v, l)).join("")}</div>
+      <fieldset data-optional data-step="use"><legend tabindex="-1"><b>3</b>${qz.q3}<small class="q-opt">${esc(qz.multi)}</small></legend>
+        <div class="tiles">${qz.uses.map((u) => tile("use", "checkbox", u)).join("")}</div>
+        ${typeGroup ? `<details class="q-more"><summary>${esc(qz.useMore)}</summary><div class="opts">${liveSubs(typeGroup).map((x) => opt("sub", "checkbox", `type:${x.slug}`, qLabel(x, lang))).join("")}</div></details>` : ""}
+      </fieldset>
+      <fieldset data-auto data-optional data-step="budget"><legend tabindex="-1"><b>4</b>${qz.q4}</legend>
+        <div class="tiles">${qz.budgets.map((u) => tile("budget", "radio", u)).join("")}</div>
+      </fieldset>
+      <fieldset data-auto data-optional data-step="fresh"><legend tabindex="-1"><b>5</b>${qz.q5}</legend>
+        <div class="tiles tiles-row">${qz.fresh.map((u) => tile("fresh", "radio", u)).join("")}</div>
+      </fieldset>
+      <fieldset data-optional data-step="you"><legend tabindex="-1"><b>6</b>${qz.q6}<small class="q-opt">${esc(t.u.optional)}</small></legend>
+        <p class="q-hint">${esc(qz.q6hint)}</p>
+        <div class="q-sub" role="group" aria-label="${esc(qz.genderL)}"><span class="q-sub-l" aria-hidden="true">${esc(qz.genderL)}</span><div class="opts opts-lg">${t.genders.map(([v, l]) => opt("gender", "radio", v, l)).join("")}</div></div>
+        <div class="q-sub" role="group" aria-label="${esc(qz.ageL)}"><span class="q-sub-l" aria-hidden="true">${esc(qz.ageL)}</span><div class="opts opts-lg opts-age">${t.ages.map(([v, l]) => opt("age", "radio", v, l)).join("")}</div></div>
       </fieldset>
       </div>
+      <div class="quiz-busy" id="quiz-busy" role="status" hidden><i aria-hidden="true"></i><span>${esc(qz.busy)}</span></div>
       <div class="quiz-nav">
         <button class="btn btn-ghost" type="button" id="quiz-back" hidden>${t.back}</button>
-        <button class="btn" type="button" id="quiz-next" hidden data-next="${esc(t.next)}" data-skip="${esc(t.u.skipQ)}">${t.next}</button>
-        <button class="btn btn-gold" type="submit" id="quiz-submit">${t.quizBtn}</button>
+        <button class="btn btn-gold" type="submit" id="quiz-submit" data-final="${esc(qz.submit)}" data-early="${esc(qz.early)}">${esc(qz.submit)}</button>
+        <button class="btn btn-gold" type="button" id="quiz-next" hidden data-next="${esc(t.next)}" data-skip="${esc(t.u.skipQ)}">${t.next}</button>
       </div>
     </form>
   </div>
 
-  <section class="section" id="results" hidden aria-live="polite">
-    <div class="section-head"><h2>${t.results}</h2>
+  <section class="section" id="results" hidden>
+    <div class="qr" id="qr">
+      <p class="qr-kicker">${esc(qz.resKicker)}</p>
+      <h2 class="qr-type" id="qr-type" tabindex="-1"></h2>
+      <p class="qr-comment" id="qr-comment"></p>
+      <ul class="qr-tags" id="qr-tags"></ul>
+      <div class="qr-actions">
+        <button type="button" class="btn btn-gold" id="qr-share">${esc(qz.share)}</button>
+        <a class="btn" id="qr-x" href="https://x.com/intent/post" target="_blank" rel="noopener">${esc(qz.shareX)}</a>
+        <button type="button" class="btn btn-ghost" id="qr-retry">${esc(qz.retry)}</button>
+      </div>
+      <p class="qr-toast" id="qr-toast" role="status" hidden></p>
+    </div>
+    <h3 class="qr-h" id="qr-top-h">${esc(qz.top3)}</h3>
+    <div class="qr-top" id="qr-top"></div>
+    <div class="section-head"><h2>${lang === "ja" ? qz.rest : t.results}</h2>
       <div class="sortbar" role="group" aria-label="${t.sortAria}">${t.sorts.map(([v, l], i) => `<button type="button" class="sort${i === 0 ? " is-on" : ""}" data-sort="${v}" aria-pressed="${i === 0}">${l}</button>`).join("")}</div>
     </div>
-    <p class="results-note" id="results-note"></p>
+    <p class="results-note" id="results-note" role="status"></p>
     <div class="grid" id="results-grid"></div>
     <p class="more-wrap"><button type="button" class="btn" id="results-more" hidden>${t.showMore}</button></p>
+    <p class="more-wrap qr-again"><button type="button" class="btn" id="qr-retry2">${esc(qz.retry)}</button><button type="button" class="btn btn-sub" id="qr-edit">${esc(qz.edit)}</button></p>
   </section>
 
   ${lang === "ja" ? homeStnSeries : ""}

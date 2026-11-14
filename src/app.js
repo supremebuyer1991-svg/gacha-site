@@ -224,27 +224,309 @@
     return itemsP;
   };
 
+  /* QUIZ-CORE-START
+     診断の点数づけ（画面には触らない計算だけ）。test/quiz-score.test.js が同じ部分を読んで確かめる。
+     ・好み：系統 3点／詳しい項目 6点／作品・キャラ 9点／名前の自由入力 12点（ラインナップ名だけなら 8点）。
+       いちばん高い1つ＋ほかに当たった分の 25%（上限あり）
+     ・種類：選んだ種類なら 4点（種類がわからない商品は 1点）
+     ・予算：予算内 3点／100円オーバー 0.5点／それ以上は −2点（外しはしない）
+     ・新作／人気：最大 2点
+     ・年代・性別：合わないときは 0.85 倍（外しはしない）
+     ・人気は、同じ点のときの順番を決めるためだけに少し足す（対数）
+     ・相性％＝その答えで取れる最高点に対する割合 */
+  var quizCore = function (NORM) {
+    var W = { group: 3, sub: 6, leaf: 9, text: 12, textLineup: 8, relSub: 2, relGroup: 1, extra: 0.25, type: 4, typeUnknown: 1, budget: 3, budgetNear: 0.5, budgetOver: -2, fresh: 2, demo: 0.85, pop: 0.3 };
+    var TOP = 12; // 上位12件は、同じ作品・同じシリーズに片寄らないようにする
+    var has = function (a, v) { return a.indexOf(v) !== -1; };
+    var inGroup = function (it, g) { return it.qs.some(function (k) { return k.indexOf(g + ":") === 0; }); };
+    var prevMonth = function (ym) { var y = +ym.slice(0, 4), m = +ym.slice(5, 7) - 1; if (!m) { m = 12; y--; } return y + "-" + (m < 10 ? "0" : "") + m; };
+    var uniq = function (a) { return a.filter(function (v, i) { return a.indexOf(v) === i; }); };
+
+    // 答えから「好み」の条件を作る。val＝ぴったり当たったときの点、rel＝近い系統のときの点
+    function conds(cfg, ans) {
+      var out = [], leafKeys = uniq(ans.l.concat(ans.f));
+      cfg.groups.forEach(function (g) {
+        if (g.slug === "type") return;
+        var gk = g.slug + ":";
+        var subOn = false;
+        g.subs.forEach(function (x) {
+          var key = gk + x.slug;
+          var leaves = x.leaves.filter(function (l) { return has(leafKeys, key + ":" + l.slug); });
+          leaves.forEach(function (l) {
+            out.push({ k: "l:" + key + ":" + l.slug, w: W.leaf,
+              val: function (it) { return has(it.qs, key) && l.rx.test(it.jn) ? W.leaf : 0; },
+              rel: function (it) { return has(it.qs, key) ? W.relSub : inGroup(it, g.slug) ? W.relGroup : 0; } });
+          });
+          if (!has(ans.s, key)) return;
+          subOn = true;
+          if (!leaves.length) out.push({ k: "s:" + key, w: W.sub,
+            val: function (it) { return has(it.qs, key) ? W.sub : 0; },
+            rel: function (it) { return inGroup(it, g.slug) ? W.relGroup : 0; } });
+        });
+        if (!subOn && has(ans.g, g.slug)) out.push({ k: "g:" + g.slug, w: W.group,
+          val: function (it) { return inGroup(it, g.slug) ? W.group : 0; },
+          rel: function () { return 0; } });
+      });
+      var q = NORM(ans.o);
+      if (q) out.push({ k: "o", w: W.text,
+        val: function (it) { return NORM(it.jn + "｜" + it.name).indexOf(q) !== -1 ? W.text : NORM(it.on).indexOf(q) !== -1 ? W.textLineup : 0; },
+        rel: function () { return 0; } });
+      return out;
+    }
+
+    // 同じ作品（名前の最初のことば）・同じシリーズ（数字ちがい・再販）・同じ種類（めじるし・フィギュアなど）を見分けるためのキー
+    function seriesKeys(it) {
+      var nm = String(it.jn || it.name || "").replace(/【[^】]*】/g, "").replace(/[（(][^）)]*[）)]/g, "").trim();
+      return { h: NORM(nm.split(/[\s　]+/)[0] || "").replace(/\d+/g, "").slice(0, 8), b: NORM(nm).replace(/(?:part|vol)?\d+/g, ""),
+        t: it.qs.filter(function (k) { return k.indexOf("type:") === 0; })[0] || "" };
+    }
+    // 上から n 件を選ぶとき、同じ作品・同じシリーズが続いたら点を割り引いて、ほかのものにも順番を回す
+    function diversify(arr, n) {
+      if (arr.length < 3) return arr;
+      var pool = arr.slice(0, Math.max(n * 5, 60)), rest = arr.slice(pool.length), out = [], cH = {}, cB = {}, cT = {};
+      while (out.length < n && pool.length) {
+        // 点が近いもの（いちばん高い点の92%以上）の中だけで入れ替える。点が離れた商品を前に出すことはしない
+        var bi = 0, bv = -1, floor = pool[0].s * 0.92;
+        for (var i = 0; i < pool.length && pool[i].s >= floor; i++) {
+          var k = pool[i].k || (pool[i].k = seriesKeys(pool[i].it));
+          var v = pool[i].s * Math.pow(0.85, cH[k.h] || 0) * Math.pow(0.5, cB[k.b] || 0) * Math.pow(0.95, cT[k.t] || 0);
+          if (v > bv) { bv = v; bi = i; }
+        }
+        var x = pool.splice(bi, 1)[0];
+        cH[x.k.h] = (cH[x.k.h] || 0) + 1; cB[x.k.b] = (cB[x.k.b] || 0) + 1; cT[x.k.t] = (cT[x.k.t] || 0) + 1;
+        out.push(x);
+      }
+      // 選んだ中では相性％の高い順に並べ直す（同じ％なら、片寄らないように選んだ順のまま）
+      out.forEach(function (x, j) { x.j = j; });
+      out.sort(function (a, c) { return (c.pct == null ? -1 : c.pct) - (a.pct == null ? -1 : a.pct) || a.j - c.j; });
+      return out.concat(pool, rest);
+    }
+
+    /* items＝商品、cfg＝{ groups, uses }、ans＝答え、ym＝今月（"2026-11"）
+       戻り値 list＝相性順（tier 0＝ぴったり／1＝近い系統／2＝ほかの答えから）、level＝0 ふつう／1 近い系統も足した／2 ぴったりが無い／3 何も選んでいない */
+    function score(items, cfg, ans, ym) {
+      var cs = conds(cfg, ans), wTop = 0, wSum = 0;
+      cs.forEach(function (c) { wTop = Math.max(wTop, c.w); wSum += c.w; });
+      var iMax = cs.length ? wTop + W.extra * Math.min(wSum - wTop, wTop) : 0;
+      var typeKeys = [];
+      ans.u.forEach(function (u) { (cfg.uses[u] || []).forEach(function (k) { if (!has(typeKeys, k)) typeKeys.push(k); }); });
+      ans.s.forEach(function (k) { if (k.indexOf("type:") === 0 && !has(typeKeys, k)) typeKeys.push(k); });
+      var tMax = typeKeys.length ? W.type : 0;
+      var lim = +ans.b || 0, bMax = lim ? W.budget : 0;
+      var fMax = ans.n === "new" || ans.n === "classic" ? W.fresh : 0;
+      var max = iMax + tMax + bMax + fMax;
+      var gender = ans.x === "male" || ans.x === "female" ? ans.x : "";
+      var popMax = 0;
+      items.forEach(function (it) { popMax = Math.max(popMax, it.popularity || 0); });
+      var popN = function (it) { return popMax > 0 ? Math.log(1 + Math.max(0, it.popularity || 0)) / Math.log(1 + popMax) : 0; };
+      var pm = prevMonth(ym);
+
+      var rows = items.map(function (it) {
+        var best = 0, sum = 0, rel = 0, hits = [];
+        cs.forEach(function (c) {
+          var v = c.val(it);
+          if (v > 0) { sum += v; hits.push([v, c.k]); if (v > best) best = v; }
+          else rel = Math.max(rel, c.rel(it));
+        });
+        var interest = best ? best + W.extra * Math.min(sum - best, best) : 0;
+        var t = 0, tk = "";
+        if (tMax) {
+          for (var i = 0; i < typeKeys.length; i++) if (has(it.qs, typeKeys[i])) { t = W.type; tk = typeKeys[i]; break; }
+          if (!t && !inGroup(it, "type")) t = W.typeUnknown;
+        }
+        var b = 0, p = it.price || 0;
+        if (lim) b = !p ? W.budgetNear : p <= lim ? W.budget : p <= lim + 100 ? W.budgetNear : W.budgetOver;
+        var f = 0, rl = it.rl || "", pn = popN(it);
+        if (ans.n === "new") f = rl >= ym ? W.fresh : rl === pm ? W.fresh / 2 : 0;
+        else if (ans.n === "classic") f = rl && rl <= ym ? W.fresh * (0.5 + 0.5 * pn) : 0;
+        var demo = (ans.a && it.qa && it.qa.length && !has(it.qa, ans.a) ? W.demo : 1) * (gender && it.qg && it.qg.length && !has(it.qg, gender) ? W.demo : 1);
+        var rest = t + b + f;
+        var direct = best > 0;
+        var base = Math.max(0, (cs.length && !direct ? 0 : interest) + rest) * demo;
+        var s;
+        if (!max) s = 2 * pn + (rl >= ym ? 1 : rl === pm ? 0.6 : 0); // 何も選んでいないとき：人気と新しさで
+        else if (!cs.length || direct) s = base + W.pop * pn;
+        else s = (rel + Math.max(0, rest)) * demo + W.pop * pn;
+        hits.sort(function (a, c) { return c[0] - a[0]; });
+        return { it: it, s: s, tier: !cs.length || direct ? 0 : rel > 0 ? 1 : 2,
+          pct: max && (!cs.length || direct) ? Math.max(0, Math.min(100, Math.round(base / max * 100))) : null,
+          why: hits.map(function (h) { return h[1]; }), tk: tk, bOk: !!lim && p > 0 && p <= lim, fOk: fMax > 0 && f >= W.fresh * 0.75 };
+      });
+      // 同じ点のとき：人気 → 発売が新しい順（これから発売のものは今月と同じ扱い） → 名前の順
+      var rlOf = function (it) { var r = it.rl || ""; return r > ym ? ym : r; };
+      var byS = function (a, c) { return c.s - a.s || (c.it.popularity || 0) - (a.it.popularity || 0) || (rlOf(c.it) > rlOf(a.it) ? 1 : rlOf(c.it) < rlOf(a.it) ? -1 : 0) || (a.it.id < c.it.id ? -1 : a.it.id > c.it.id ? 1 : 0); };
+      var tier = function (n) { return rows.filter(function (x) { return x.tier === n; }).sort(byS); };
+      var list, level = 0, nDirect = 0;
+      if (cs.length) {
+        var direct = tier(0);
+        nDirect = direct.length;
+        list = diversify(direct, TOP);
+        // ぴったりが少ないときは、近い系統 → ほかの答えに合うもの、の順で足す（何も出ない、をなくす）
+        if (list.length < TOP) {
+          list = list.concat(diversify(tier(1), TOP).slice(0, 36));
+          if (list.length < TOP) list = list.concat(diversify(tier(2), TOP).slice(0, 36));
+          level = nDirect ? 1 : 2;
+        }
+      } else if (max) {
+        list = rows.filter(function (x) { return x.pct > 0; }).sort(byS);
+        if (list.length < TOP) { list = rows.slice().sort(byS); level = 2; }
+        nDirect = list.length;
+        list = diversify(list, TOP);
+      } else {
+        list = diversify(rows.slice().sort(byS), TOP);
+        level = 3;
+      }
+      list.forEach(function (x, i) { x.i = i; });
+      return { list: list, level: level, nDirect: nDirect, max: max };
+    }
+
+    // 答えから「あなたのタイプ」を決める。p＝前半（好みの系統）、sub＝詳しい項目があればそれ、s＝後半（楽しみ方）
+    function typeOf(ans, cfg) {
+      var gs = ans.g.filter(function (g) { return g !== "type"; });
+      ans.s.forEach(function (k) { var g = k.split(":")[0]; if (g !== "type" && !has(gs, g)) gs.push(g); });
+      var p = ans.f.length || ans.l.length || NORM(ans.o) ? "oshi" : !gs.length ? "free" : gs.length >= 3 ? "mix" : gs[0];
+      var sub = "";
+      if (p !== "oshi" && p !== "free" && p !== "mix") sub = ans.s.filter(function (k) { return k.indexOf(p + ":") === 0; })[0] || "";
+      var uses = ans.u.slice();
+      ans.s.forEach(function (k) {
+        if (k.indexOf("type:") !== 0) return;
+        Object.keys(cfg.uses).forEach(function (u) { if (has(cfg.uses[u], k) && !has(uses, u)) uses.push(u); });
+      });
+      var s = uses.length && uses.length <= 2 ? uses[0] : ans.n === "new" ? "newh" : ans.n === "classic" ? "classic" : ans.b === "300" ? "saver" : "hunter";
+      return { p: p, sub: sub, s: s };
+    }
+    return { score: score, typeOf: typeOf, W: W };
+  };
+  /* QUIZ-CORE-END */
+
+  /* QUIZ-TEXT-START：診断の結果に出す文言（日本語と英語。中国語・韓国語は英語で出す） */
+  var quizText = function (EN) {
+    return EN ? {
+      emo: { kawaii: "🎀", cool: "⚡", oshi: "💗", real: "🔎", retro: "📼", funny: "🤣", hobby: "🎨", mix: "🌈", free: "🎲" },
+      pre: { kawaii: "Dreamy-Cute", cool: "Cool", oshi: "Fandom", real: "Miniature", retro: "Retro", funny: "Quirky", hobby: "Culture", mix: "All-Round", free: "Free-Spirit" },
+      subPre: { "kawaii:animal": "Animal-Loving", "cool:robot": "Mecha", "cool:hero": "Hero", "real:food": "Foodie", "real:vehicle": "Vehicle", "real:creature": "Creature", "real:dino": "Dino", "retro:showa": "Showa-Retro", "retro:heisei": "Heisei-Retro" },
+      suf: { deco: "Collector", wear: "Decorator", use: "Pragmatist", plush: "Plushie Pal", newh: "New-Release Hunter", classic: "Classics Fan", saver: "Bargain Explorer", hunter: "Gacha Hunter" },
+      join: " ",
+      cP: {
+        kawaii: "Cute things stop you in your tracks.", cool: "Sharp designs and mecha get your heart going.",
+        oshi: "Your favorite series and characters guide what you turn.", real: "You love tiny things that look just like the real ones.",
+        retro: "Nostalgic finds make your day.", funny: "You can't walk past a gacha that makes you laugh.",
+        hobby: "You like bringing your hobbies into your gacha picks.", mix: "So many things catch your eye that you want to try them all.",
+        free: "You go with whatever clicks on the day."
+      },
+      cFav: function (n) { return "Your love for " + n + " guides what you turn."; },
+      cS: {
+        deco: "Lining up your favorites and admiring them sounds like your thing.", wear: "You'd rather clip them on a bag and take them out with you.",
+        use: "You want something that's actually useful, not only cute.", plush: "You'd love a soft little friend to bring home.",
+        newh: "You like to check new releases early.", classic: "You prefer choosing from well-loved series.",
+        saver: "You enjoy turning more for less.", hunter: "When something catches your eye, you give it a turn."
+      },
+      found: function (n) { return n + " gacha match your answers."; },
+      few: function (n) { return "Only " + n + " exact match" + (n === 1 ? "" : "es") + ", so we added some close picks."; },
+      noneText: function (q) { return "No gacha with “" + q + "” yet. Here are picks based on your other answers."; },
+      noneAny: "No exact match yet. Here are the closest picks.",
+      omakase: "No preferences chosen, so here are popular and new gacha.",
+      near: "Similar", inBudget: "In budget", isNew: "New", isPop: "Popular", rank: function (n) { return "No. " + n; },
+      freeText: function (q) { return "We'll also look for gacha with “" + q + "” in the name."; },
+      shareText: function (n, e) { return "My gacha type is “" + n + "” " + e + "\nWhat's yours? #gachapon"; },
+      copied: "Link copied.", copyNg: "Couldn't copy the link. Please copy it from the address bar.",
+      loadErr: "Couldn't load the data. Please try again."
+    } : {
+      emo: { kawaii: "🎀", cool: "⚡", oshi: "💗", real: "🔎", retro: "📼", funny: "🤣", hobby: "🎨", mix: "🌈", free: "🎲" },
+      pre: { kawaii: "ゆめかわ", cool: "クール", oshi: "推し活", real: "ミニチュア", retro: "レトロ", funny: "おもしろ", hobby: "カルチャー", mix: "よくばり", free: "気まぐれ" },
+      subPre: { "kawaii:animal": "どうぶつ好き", "cool:robot": "ロボ好き", "cool:hero": "ヒーロー好き", "real:food": "食いしんぼう", "real:vehicle": "のりもの好き", "real:creature": "いきもの好き", "real:dino": "恐竜好き", "retro:showa": "昭和レトロ", "retro:heisei": "平成レトロ" },
+      suf: { deco: "コレクター", wear: "デコ職人", use: "実用派", plush: "ぬい活さん", newh: "新作ハンター", classic: "定番マイスター", saver: "コスパ探検家", hunter: "ガチャハンター" },
+      join: "",
+      cP: {
+        kawaii: "かわいいものを見つけると、つい足が止まるタイプ。", cool: "かっこいい造形やメカに、心が動くタイプ。",
+        oshi: "好きな作品やキャラクターが、ガチャ選びの軸になっているタイプ。", real: "小さいのに本物そっくり、という細かさにひかれるタイプ。",
+        retro: "なつかしいものに出会うと、うれしくなるタイプ。", funny: "「なにこれ？」と笑えるガチャを見逃せないタイプ。",
+        hobby: "自分の趣味や好きなカルチャーを、ガチャでも楽しみたいタイプ。", mix: "気になるものが多くて、いろいろ回してみたくなるタイプ。",
+        free: "その日の気分で、ピンときたものを回すタイプ。"
+      },
+      cFav: function (n) { return "「" + n + "」への気持ちが、ガチャ選びの軸になっているタイプ。"; },
+      cS: {
+        deco: "お気に入りを並べて、ながめる時間が好きそうです。", wear: "バッグやポーチにつけて、いっしょにお出かけしたい派ですね。",
+        use: "かわいいだけでなく、ちゃんと使えるものを選びたい派ですね。", plush: "ふわふわの子をお迎えして、いっしょに過ごしたい派ですね。",
+        newh: "発売されたばかりの新作を、早めにチェックしたい派ですね。", classic: "みんなに選ばれている人気シリーズから、じっくり選びたい派ですね。",
+        saver: "手ごろな価格で、たくさん回して楽しみたい派ですね。", hunter: "気になるガチャを見つけたら、まず回してみる行動派です。"
+      },
+      found: function (n) { return "あなたの答えに合うガチャが " + n + "件 見つかりました。"; },
+      few: function (n) { return "ぴったり合うガチャは" + n + "件でした。近いガチャもあわせて紹介します。"; },
+      noneText: function (q) { return "「" + q + "」のガチャはまだ見つかりませんでした。ほかの答えに近いガチャを紹介します。"; },
+      noneAny: "ぴったり合うガチャはまだ見つかりませんでした。近いガチャを紹介します。",
+      omakase: "好みを選ばなかったので、いま人気のガチャと新作を集めました。",
+      near: "近いガチャ", inBudget: "予算内", isNew: "新作", isPop: "人気", rank: function (n) { return n + "位"; },
+      freeText: function (q) { return "「" + q + "」の名前が入ったガチャも探します。"; },
+      shareText: function (n, e) { return "ガチャ診断の結果は「" + n + "」でした" + e + "\nあなたのタイプは？ #ガチャ診断 #ガチャプラネット"; },
+      copied: "リンクをコピーしました。", copyNg: "コピーできませんでした。アドレスバーのURLをコピーしてください。",
+      loadErr: "データを読み込めませんでした。もう一度お試しください。"
+    };
+  };
+  /* QUIZ-TEXT-END */
+
   /* ================= 診断（トップページ） ================= */
   var quiz = document.getElementById("quiz");
   if (quiz) {
     var data = DATA;
+    var core = quizCore(NORM);
+    var QZ = quizText(EN);
+    var $id = function (id) { return document.getElementById(id); };
+    var results = $id("results");
+    var grid = $id("results-grid");
+    var note = $id("results-note");
+    var qTopEl = $id("qr-top");
+    var qTypeEl = $id("qr-type");
+    var calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var track = function (name, p) { if (typeof window.gtag === "function") try { window.gtag("event", name, p || {}); } catch (e) {} };
     // 診断を触り始めたら、裏で商品の一覧を読んでおく
-    quiz.addEventListener("change", function () { loadItems(); }, { once: true });
-    var results = document.getElementById("results");
-    var grid = document.getElementById("results-grid");
-    var note = document.getElementById("results-note");
+    var started = false;
+    var onFirst = function () {
+      if (started) return;
+      started = true;
+      loadItems().catch(function () { itemsP = null; });
+      track("quiz_start");
+    };
+    quiz.addEventListener("change", onFirst);
+    quiz.addEventListener("input", onFirst);
+
+    var val = function (n) { return (quiz.querySelector('input[name="' + n + '"]:checked') || {}).value || ""; };
+    var vals = function (n) { return [].map.call(quiz.querySelectorAll('input[name="' + n + '"]:checked'), function (x) { return x.value; }); };
+    var qPick = function (n, v) { return quiz.querySelector('input[name="' + n + '"][value="' + v + '"]'); };
+    var CFG = {
+      uses: data.uses || {},
+      groups: (data.groups || []).map(function (g) {
+        return { slug: g.slug, subs: g.subs.map(function (x) {
+          return { slug: x.slug, leaves: (x.leaves || []).map(function (l) { return { slug: l.slug, rx: new RegExp(l.match, "i") }; }) };
+        }) };
+      })
+    };
 
     /* 1問ずつ表示する（JavaScriptが動かないときは全部の質問がそのまま並ぶ） */
     var steps = [].slice.call(quiz.querySelectorAll(".quiz-qs > fieldset"));
     var cur = 0;
-    var stepEl = document.getElementById("quiz-step");
-    var barEl = document.getElementById("quiz-bar");
-    var backBtn = document.getElementById("quiz-back");
-    var nextBtn = document.getElementById("quiz-next");
-    var submitBtn = document.getElementById("quiz-submit");
-    var calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var stepEl = $id("quiz-step");
+    var barEl = $id("quiz-bar");
+    var backBtn = $id("quiz-back");
+    var nextBtn = $id("quiz-next");
+    var submitBtn = $id("quiz-submit");
+    var busyEl = $id("quiz-busy");
     quiz.classList.add("is-wizard");
-    function show(i, dir) {
+    var answered = function (f) {
+      return !!f.querySelector("input:checked") || [].some.call(f.querySelectorAll('input[name="oshi"]'), function (x) { return x.value.trim(); });
+    };
+    function syncNav() {
+      var last = cur === steps.length - 1;
+      backBtn.hidden = cur === 0;
+      nextBtn.hidden = last;
+      // 答えを選んだら「次へ」、まだなら「スキップ」。どの質問も答えなくて進める
+      nextBtn.textContent = nextBtn.getAttribute(answered(steps[cur]) ? "data-next" : "data-skip") || nextBtn.textContent;
+      // 最後の質問では「結果を見る」を大きく。途中では小さな文字のボタンで、いつでも結果へ進める
+      submitBtn.classList.toggle("is-quiet", !last);
+      submitBtn.textContent = submitBtn.getAttribute(last ? "data-final" : "data-early") || submitBtn.textContent;
+      submitBtn.hidden = !last && !steps.some(answered);
+    }
+    function show(i, dir, focus) {
       cur = Math.max(0, Math.min(steps.length - 1, i));
       steps.forEach(function (f, k) {
         f.hidden = k !== cur;
@@ -253,40 +535,48 @@
       });
       stepEl.textContent = (cur + 1) + " / " + steps.length;
       barEl.style.width = ((cur + 1) / steps.length * 100) + "%";
-      backBtn.hidden = cur === 0;
-      // 1問目（好きな系統）のあとは答えなくてもOK：「次へ／スキップ」と「診断する」をいつでも出す
-      var last = cur === steps.length - 1;
-      nextBtn.hidden = last;
-      nextBtn.textContent = nextBtn.getAttribute(steps[cur].hasAttribute("data-optional") ? "data-skip" : "data-next") || nextBtn.textContent;
-      submitBtn.hidden = false;
+      syncNav();
+      if (focus) {
+        // 次の質問の見出しにフォーカスを移す（読み上げ・キーボード操作のため）。画面の外なら診断の先頭まで戻す
+        var lg = steps[cur].querySelector("legend");
+        if (lg) try { lg.focus({ preventScroll: true }); } catch (e) { lg.focus(); }
+        if (quiz.getBoundingClientRect().top < 0) quiz.scrollIntoView({ behavior: calm ? "auto" : "smooth", block: "start" });
+      }
     }
-    nextBtn.addEventListener("click", function () { show(cur + 1, 1); });
+    nextBtn.addEventListener("click", function () { show(cur + 1, 1, true); });
+    backBtn.addEventListener("click", function () { show(cur - 1, -1, true); });
     steps.forEach(function (f) {
       if (!f.hasAttribute("data-auto")) return;
       // 選んだら次へ。戻ってきて同じ答えをもう一度押したときも進む（そのときは「change」が起きないので「click」で見る）
+      // キーボードの矢印キーで選んでいるとき（座標のないクリック）は進めない
       var timer = null;
       f.addEventListener("click", function (e) {
         if (!e.target.matches || !e.target.matches('input[type="radio"]')) return;
+        if (!e.clientX && !e.clientY) return;
         var me = steps.indexOf(f);
         if (timer || me !== cur) return;
-        timer = setTimeout(function () { timer = null; if (cur !== me) return; if (me === steps.length - 1) submitBtn.click(); else show(me + 1, 1); }, 220);
+        timer = setTimeout(function () { timer = null; if (cur !== me) return; show(me + 1, 1, true); }, 260);
       });
     });
-    backBtn.addEventListener("click", function () { show(cur - 1, -1); });
-    show(0);
 
-    /* 系統：「さらに詳しく」で細かい項目を開く。細かい項目を選ぶと親の系統も選ばれる */
+    /* 系統：「くわしく選ぶ」で細かい項目を開く。細かい項目を選ぶと親の系統も選ばれる */
+    var lnorm = function (v) {
+      return String(v || "").normalize("NFKC").toLowerCase()
+        .replace(/[ぁ-ゖ]/g, function (c) { return String.fromCharCode(c.charCodeAt(0) + 0x60); })
+        .replace(/[\s・･!！?？'’"“”:：\-‐–—~〜～、。,.\/／|｜【】\[\]「」『』()（）♪☆★™=＝]/g, "");
+    };
+    var groupSyncs = [];
     [].forEach.call(quiz.querySelectorAll(".grp"), function (g) {
       var main = g.querySelector('input[name="group"]');
       var more = g.querySelector(".grp-more");
       var subs = g.querySelector(".grp-subs");
-      more.addEventListener("click", function () {
-        var open = subs.hidden;
+      var setOpen = function (open) {
         subs.hidden = !open;
         more.setAttribute("aria-expanded", open ? "true" : "false");
         more.textContent = open ? more.getAttribute("data-less") : more.getAttribute("data-more");
         g.classList.toggle("is-open", open);
-      });
+      };
+      more.addEventListener("click", function () { setOpen(subs.hidden); });
       // 詳しい項目を選ぶと、その下の細かい項目の段が出る
       var syncLeaves = function () {
         [].forEach.call(subs.querySelectorAll(".leaf-row"), function (row) {
@@ -295,6 +585,12 @@
           if (row.hidden) [].forEach.call(row.querySelectorAll('input[name="leaf"]'), function (x) { x.checked = false; });
         });
       };
+      groupSyncs.push(function (close) {
+        if (subs.querySelector("input:checked")) main.checked = true;
+        syncLeaves();
+        g.classList.toggle("is-on", main.checked);
+        if (close) setOpen(false);
+      });
       subs.addEventListener("change", function (e) {
         if (e.target.name === "leaf" && e.target.checked) {
           var key = e.target.value.split(":").slice(0, 2).join(":");
@@ -306,17 +602,14 @@
         g.classList.toggle("is-on", main.checked);
       });
       // 作品がたくさんある段：しぼりこみ欄と「ぜんぶ見る」
-      var lnorm = function (v) {
-        return String(v || "").normalize("NFKC").toLowerCase()
-          .replace(/[\u3041-\u3096]/g, function (c) { return String.fromCharCode(c.charCodeAt(0) + 0x60); })
-          .replace(/[\s・･!！?？'’"“”:：\-‐–—~〜～、。,.\/／|｜【】\[\]「」『』()（）♪☆★™=＝]/g, "");
-      };
       [].forEach.call(subs.querySelectorAll(".leaf-row"), function (row) {
         var box = row.querySelector(".opts"), f = row.querySelector(".leaf-filter"), all = row.querySelector(".leaf-all"), none = row.querySelector(".leaf-none");
         if (!f) return;
         var labels = [].slice.call(box.querySelectorAll(".opt"));
         labels.forEach(function (l) { l._s = lnorm(l.querySelector("span").firstChild.textContent); });
         all.addEventListener("click", function () { box.classList.remove("is-clipped"); all.hidden = true; });
+        // Enter で診断が始まってしまわないように
+        f.addEventListener("keydown", function (e) { if (e.key === "Enter") e.preventDefault(); });
         f.addEventListener("input", function () {
           var q = lnorm(f.value), hit = 0;
           box.classList.toggle("is-filtering", !!q);
@@ -335,33 +628,202 @@
         g.classList.toggle("is-on", main.checked);
       });
     });
-
-    var val = function (n) { return (quiz.querySelector('input[name="' + n + '"]:checked') || {}).value || ""; };
-    var vals = function (n) { return [].map.call(quiz.querySelectorAll('input[name="' + n + '"]:checked'), function (x) { return x.value; }); };
-    var GROUPS = (data.groups || []).map(function (g) {
-      return { slug: g.slug, subs: g.subs.map(function (x) {
-        return { slug: x.slug, leaves: (x.leaves || []).map(function (l) { return { slug: l.slug, rx: new RegExp(l.match, "i") }; }) };
-      }) };
-    });
-
-    /* 診断結果の並び替え・もっと見る */
-    var lastResults = [], lastMax = 1, lastAny = false, lastRelaxed = false, shown = 12, sortKey = "match";
-    var moreBtn = document.getElementById("results-more");
-    var SORTS = {
-      match: function (a, b) { return b.s - a.s || b.it.popularity - a.it.popularity; },
-      "new": function (a, b) { return (b.it.ad || "").localeCompare(a.it.ad || "") || (b.it.rl || "").localeCompare(a.it.rl || "") || b.s - a.s; },
-      popular: function (a, b) { return b.it.popularity - a.it.popularity || b.s - a.s; },
-      release: function (a, b) { return (a.it.rl || "").localeCompare(b.it.rl || "") || b.s - a.s; },
-      cheap: function (a, b) { return a.it.price - b.it.price || b.s - a.s; }
+    // 系統を選んだ順番をおぼえておく（最初に選んだ系統がタイプ名になる）
+    var gOrder = [];
+    var syncOrder = function () {
+      var on = vals("group");
+      gOrder = gOrder.filter(function (g) { return on.indexOf(g) !== -1; });
+      on.forEach(function (g) { if (gOrder.indexOf(g) === -1) gOrder.push(g); });
     };
+    quiz.addEventListener("change", function () { syncOrder(); syncNav(); });
+
+    /* 好きな作品・キャラ：名前を打つと候補が出る。候補は「くわしく選ぶ」の中の作品名と同じもの */
+    var oshiEl = quiz.querySelector('input[name="oshi"]');
+    var sugEl = $id("fav-sug");
+    var favPopEl = $id("fav-pop");
+    var LEAF = {}, LEAVES = [];
+    (function () {
+      var alias = {};
+      (data.groups || []).forEach(function (g) { g.subs.forEach(function (x) { (x.leaves || []).forEach(function (l) {
+        alias[g.slug + ":" + x.slug + ":" + l.slug] = String(l.match || "").split("|").filter(function (a) { return a && !/[\\()\[\]?.*+^${}]/.test(a); }).map(NORM).filter(Boolean);
+      }); }); });
+      var byName = {};
+      [].forEach.call(quiz.querySelectorAll('input[name="leaf"]'), function (inp) {
+        var sp = inp.nextElementSibling, label = sp && sp.firstChild ? String(sp.firstChild.textContent || "").trim() : "";
+        if (!label) return;
+        var sm = sp.querySelector("small");
+        var o = { key: inp.value, label: label, s: NORM(label), n: sm ? +sm.textContent || 0 : 0, m: alias[inp.value] || [] };
+        LEAF[o.key] = o;
+        if (!byName[o.s] || byName[o.s].n < o.n) byName[o.s] = o;
+      });
+      LEAVES = Object.keys(byName).map(function (k) { return byName[k]; });
+    })();
+    function addFav(key) {
+      var o = LEAF[key];
+      if (!o || !favPopEl) return null;
+      var inp = qPick("fav", key) || [].filter.call(quiz.querySelectorAll('input[name="fav"]'), function (x) { return LEAF[x.value] && LEAF[x.value].s === o.s; })[0];
+      if (!inp) {
+        var lab = document.createElement("label");
+        lab.className = "opt opt-new";
+        lab.innerHTML = '<input type="checkbox" name="fav" value="' + esc(key) + '"><span>' + esc(o.label) + (o.n ? "<small>" + o.n + "</small>" : "") + "</span>";
+        favPopEl.insertBefore(lab, favPopEl.firstChild);
+        inp = lab.firstChild;
+      }
+      inp.checked = true;
+      return inp;
+    }
+    var sugHits = [];
+    function suggest() {
+      var raw = oshiEl.value.trim(), q = NORM(raw);
+      sugHits = [];
+      if (!q) { sugEl.hidden = true; sugEl.innerHTML = ""; return; }
+      sugHits = LEAVES.filter(function (o) {
+        return o.s.indexOf(q) !== -1 || o.m.some(function (a) { return a.indexOf(q) !== -1 || (a.length >= 2 && q.indexOf(a) !== -1); });
+      }).sort(function (a, b) { return (b.s.indexOf(q) === 0) - (a.s.indexOf(q) === 0) || b.n - a.n; }).slice(0, 6);
+      sugEl.innerHTML = sugHits.map(function (o) {
+        return '<button type="button" class="fav-sug-i" data-key="' + esc(o.key) + '">' + esc(o.label) + (o.n ? "<small>" + o.n + "</small>" : "") + "</button>";
+      }).join("") + '<p class="fav-free">' + esc(QZ.freeText(raw)) + "</p>";
+      sugEl.hidden = false;
+    }
+    function takeSug(key) {
+      var inp = addFav(key);
+      oshiEl.value = "";
+      suggest();
+      syncNav();
+      if (inp) try { inp.focus({ preventScroll: true }); } catch (e) {}
+    }
+    if (oshiEl && sugEl) {
+      oshiEl.addEventListener("input", function () { suggest(); syncNav(); });
+      oshiEl.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+          // Enter：候補があれば一番上を選ぶ。なければ入れた名前のまま次の質問へ
+          e.preventDefault();
+          if (sugHits.length) takeSug(sugHits[0].key);
+          else if (steps[cur] && steps[cur].contains(oshiEl) && cur < steps.length - 1) { sugEl.hidden = true; show(cur + 1, 1, true); }
+        } else if (e.key === "ArrowDown") {
+          var first = sugEl.querySelector(".fav-sug-i");
+          if (first) { e.preventDefault(); first.focus(); }
+        } else if (e.key === "Escape") { sugEl.hidden = true; }
+      });
+      sugEl.addEventListener("click", function (e) {
+        var b = e.target.closest ? e.target.closest(".fav-sug-i") : null;
+        if (b) takeSug(b.getAttribute("data-key"));
+      });
+      sugEl.addEventListener("keydown", function (e) {
+        var b = e.target.closest ? e.target.closest(".fav-sug-i") : null;
+        if (!b) return;
+        if (e.key === "ArrowDown" && b.nextElementSibling && b.nextElementSibling.matches(".fav-sug-i")) { e.preventDefault(); b.nextElementSibling.focus(); }
+        else if (e.key === "ArrowUp") { e.preventDefault(); (b.previousElementSibling || oshiEl).focus(); }
+        else if (e.key === "Escape") { sugEl.hidden = true; oshiEl.focus(); }
+      });
+    }
+
+    /* 答えを読む・戻す。URLの #q=1&g=…（結果をシェア・開き直したときに同じ結果を出す） */
+    var LISTS = ["g", "s", "l", "f", "u"], ONES = ["o", "b", "n"];
+    function readAns() {
+      syncOrder();
+      var b = val("budget"), n = val("fresh"), x = val("gender");
+      return { g: gOrder.slice(), s: vals("sub"), l: vals("leaf"), f: vals("fav"), o: oshiEl ? oshiEl.value.trim().slice(0, 40) : "", u: vals("use"),
+        b: b === "any" ? "" : b, n: n === "any" ? "" : n, x: x === "none" ? "" : x, a: val("age") };
+    }
+    // 年代・性別はURLに入れない（シェアした相手に伝わらないように）
+    function toHash(a) {
+      var p = ["q=1"], enc = function (v) { return encodeURIComponent(v).replace(/%3A/g, ":"); };
+      LISTS.forEach(function (k) { if (a[k].length) p.push(k + "=" + a[k].map(enc).join(",")); });
+      ONES.forEach(function (k) { if (a[k]) p.push(k + "=" + enc(a[k])); });
+      return "#" + p.join("&");
+    }
+    function fromHash(h) {
+      if (!/^#q=1(&|$)/.test(h || "")) return null;
+      var a = { g: [], s: [], l: [], f: [], u: [], o: "", b: "", n: "", x: "", a: "" };
+      h.slice(1).split("&").forEach(function (kv) {
+        var i = kv.indexOf("="), k = kv.slice(0, i), v = kv.slice(i + 1);
+        try {
+          if (LISTS.indexOf(k) !== -1) a[k] = v.split(",").map(decodeURIComponent).filter(function (s) { return /^[\w:-]+$/.test(s); }).slice(0, 40);
+          else if (k === "o") a.o = decodeURIComponent(v).slice(0, 40);
+          else if (ONES.indexOf(k) !== -1 && /^[\w-]+$/.test(v)) a[k] = v;
+        } catch (e) {}
+      });
+      return a;
+    }
+    function clearForm() {
+      quiz.reset();
+      [].forEach.call(quiz.querySelectorAll(".opt-new"), function (l) { l.parentNode.removeChild(l); });
+      gOrder = [];
+      if (sugEl) { sugEl.hidden = true; sugEl.innerHTML = ""; }
+      groupSyncs.forEach(function (f) { f(true); });
+    }
+    function applyAns(a) {
+      clearForm();
+      var on = function (n, v) { var el = qPick(n, v); if (el) el.checked = true; return el; };
+      a.g.forEach(function (v) { if (on("group", v)) gOrder.push(v); });
+      a.s.forEach(function (v) { on("sub", v); });
+      a.l.forEach(function (v) { if (on("leaf", v)) on("sub", v.split(":").slice(0, 2).join(":")); });
+      a.f.forEach(function (v) { addFav(v); });
+      if (oshiEl) oshiEl.value = a.o || "";
+      a.u.forEach(function (v) { on("use", v); });
+      if (a.b) on("budget", a.b);
+      if (a.n) on("fresh", a.n);
+      groupSyncs.forEach(function (f) { f(false); });
+      syncOrder();
+    }
+
+    /* 結果の表示 */
+    var qLast = null, shown = 12, sortKey = "match";
+    var moreBtn = $id("results-more");
+    var SORTS = {
+      match: function (a, b) { return a.i - b.i; },
+      "new": function (a, b) { return (b.it.ad || "").localeCompare(a.it.ad || "") || (b.it.rl || "").localeCompare(a.it.rl || "") || a.i - b.i; },
+      popular: function (a, b) { return b.it.popularity - a.it.popularity || a.i - b.i; },
+      release: function (a, b) { return (a.it.rl || "").localeCompare(b.it.rl || "") || a.i - b.i; },
+      cheap: function (a, b) { return (a.it.price || 1e9) - (b.it.price || 1e9) || a.i - b.i; } // 価格未定は最後
+    };
+    var qTxt = function (el) { return el ? String(el.textContent || "").trim() : ""; };
+    function labelOf(kind, v) {
+      if (kind === "g") return qTxt(quiz.querySelector('.grp[data-group="' + v + '"] .grp-face b')) || v;
+      if (kind === "s") { var s = qPick("sub", v); return s ? qTxt(s.nextElementSibling) : v; }
+      if (kind === "l") return LEAF[v] ? LEAF[v].label : v;
+      var t = qPick({ u: "use", b: "budget", n: "fresh" }[kind], v);
+      return t ? qTxt(t.nextElementSibling.querySelector("b")) : v;
+    }
+    var typeName = function (ty) { return (QZ.subPre[ty.sub] || QZ.pre[ty.p] || "") + QZ.join + (QZ.suf[ty.s] || ""); };
+    // おすすめTOP3に出す「合っている理由」（最大4つ）
+    function whyOf(x, a) {
+      var out = x.why.slice(0, 2).map(function (k) {
+        return k === "o" ? a.o : labelOf(k.charAt(0), k.slice(2));
+      });
+      if (x.tk) {
+        var u = a.u.filter(function (v) { return (CFG.uses[v] || []).indexOf(x.tk) !== -1; })[0];
+        out.push(u ? labelOf("u", u) : labelOf("s", x.tk));
+      }
+      if (x.bOk) out.push(QZ.inBudget);
+      if (x.fOk) out.push(a.n === "new" ? QZ.isNew : QZ.isPop);
+      if (x.tier) out.unshift(QZ.near);
+      return out.filter(function (v, i) { return v && out.indexOf(v) === i; }).slice(0, 4);
+    }
+    function pickHTML(x, n, a) {
+      var it = x.it;
+      var img = it.image
+        ? '<img src="' + esc(/^https?:/.test(it.image) ? it.image : data.root + it.image) + '" alt="" loading="lazy" width="400" height="400">'
+        : '<div class="capsule" aria-hidden="true"><i></i><span>NO IMAGE</span></div>';
+      return '<a class="pick pick-' + n + '" href="' + data.home + "item/" + esc(it.id) + '">' +
+        '<span class="pick-rank" aria-label="' + esc(QZ.rank(n)) + '">' + n + "</span>" +
+        '<div class="thumb">' + img + "</div>" +
+        '<div class="pick-body"><div class="pick-name">' + esc(it.name) + "</div>" +
+        '<div class="pick-foot"><b>' + (it.price > 0 ? "¥" + it.price : esc(M.priceTba)) + "</b>" + (it.lineup ? " / " + M.lineup(it.lineup) : "") + "<span>" + esc(it.release_label) + "</span></div>" +
+        '<div class="pick-why">' + whyOf(x, a).map(function (w) { return "<span>" + esc(w) + "</span>"; }).join("") + "</div>" +
+        (x.pct != null ? '<div class="pick-match"><span class="pick-bar" aria-hidden="true"><i style="width:' + x.pct + '%"></i></span><b>' + M.match + " " + x.pct + "%</b></div>" : "") +
+        "</div></a>";
+    }
     function drawResults() {
-      var list = lastResults.slice().sort(SORTS[sortKey]);
-      if (!list.length) { note.textContent = M.none; grid.innerHTML = ""; moreBtn.hidden = true; return; }
-      note.textContent = lastRelaxed ? M.relaxed(list.length) : M.found(list.length);
-      grid.innerHTML = list.slice(0, shown).map(function (x) {
-        var pct = Math.min(99, Math.round((x.s / lastMax) * 100) - (lastRelaxed ? 20 : 0));
-        return cardHTML(x.it, data, lastAny ? pct : null);
-      }).join("");
+      if (!qLast) return;
+      var all = qLast.res.list, a = qLast.a;
+      qTopEl.innerHTML = all.slice(0, 3).map(function (x, i) { return pickHTML(x, i + 1, a); }).join("");
+      // 相性順のときは、TOP3の続きから。ほかの並び順のときは全部を並べ直す
+      var list = sortKey === "match" ? all.slice(3) : all.slice().sort(SORTS[sortKey]);
+      var lv = qLast.res.level;
+      note.textContent = lv === 3 ? QZ.omakase : lv === 2 ? (a.o ? QZ.noneText(a.o) : QZ.noneAny) : lv === 1 ? QZ.few(qLast.res.nDirect) : QZ.found(all.length);
+      grid.innerHTML = list.slice(0, shown).map(function (x) { return cardHTML(x.it, data, x.pct); }).join("");
       moreBtn.hidden = list.length <= shown;
     }
     function setSort(k) {
@@ -370,7 +832,6 @@
         var on = b.getAttribute("data-sort") === k;
         b.classList.toggle("is-on", on); b.setAttribute("aria-pressed", on ? "true" : "false");
       });
-      results.hidden = false;
       drawResults();
     }
     [].forEach.call(document.querySelectorAll(".sortbar .sort"), function (b) {
@@ -378,54 +839,131 @@
     });
     moreBtn.addEventListener("click", function () { shown += 12; drawResults(); });
 
+    var shareURL = function () { return location.origin + location.pathname + toHash(qLast.a); };
+    function drawHead() {
+      var a = qLast.a, ty = qLast.ty, name = typeName(ty), emo = QZ.emo[ty.p] || "";
+      qTypeEl.innerHTML = '<i aria-hidden="true">' + emo + "</i><span>" + esc(name) + "</span>";
+      var favName = (a.f.length ? labelOf("l", a.f[0]) : a.l.length ? labelOf("l", a.l[0]) : a.o).replace(/[（(][^）)]*[）)]/g, "").trim();
+      $id("qr-comment").textContent = (ty.p === "oshi" && favName ? QZ.cFav(favName) : QZ.cP[ty.p] || "") + (EN ? " " : "") + (QZ.cS[ty.s] || "");
+      // 選んだ答えのまとめ
+      var tags = [];
+      a.g.forEach(function (v) { if (!a.s.some(function (k) { return k.indexOf(v + ":") === 0; })) tags.push(labelOf("g", v)); });
+      a.s.forEach(function (v) { if (!a.l.some(function (k) { return k.indexOf(v + ":") === 0; })) tags.push(labelOf("s", v)); });
+      a.l.concat(a.f).forEach(function (v) { tags.push(labelOf("l", v)); });
+      if (a.o) tags.push(EN ? "“" + a.o + "”" : "「" + a.o + "」");
+      a.u.forEach(function (v) { tags.push(labelOf("u", v)); });
+      if (a.b) tags.push(labelOf("b", a.b));
+      if (a.n) tags.push(labelOf("n", a.n));
+      $id("qr-tags").innerHTML = tags.filter(function (v, i) { return v && tags.indexOf(v) === i; }).slice(0, 10).map(function (v) { return "<li>" + esc(v) + "</li>"; }).join("");
+      $id("qr-x").href = "https://x.com/intent/post?text=" + encodeURIComponent(QZ.shareText(name, emo)) + "&url=" + encodeURIComponent(shareURL());
+    }
+    // restored＝URLから開き直したとき（計測のイベント名を分ける・演出を短く）
+    function run(a, restored) {
+      var res = core.score(data.items, CFG, a, todayJST().slice(0, 7));
+      qLast = { res: res, a: a, ty: core.typeOf(a, CFG) };
+      shown = 12;
+      drawHead();
+      setSort("match");
+      results.hidden = false;
+      results.classList.remove("is-reveal");
+      if (!calm) { void results.offsetWidth; results.classList.add("is-reveal"); }
+      try { history.replaceState(null, "", toHash(a)); } catch (e) {}
+      track(restored ? "quiz_view_shared" : "quiz_complete", {
+        quiz_type: typeName(qLast.ty), type_key: qLast.ty.p + "-" + qLast.ty.s, groups: a.g.join(","), uses: a.u.join(","), budget: a.b || "any", fresh: a.n || "any",
+        has_fav: a.f.length || a.l.length || a.o ? 1 : 0, result_count: res.list.length, relax_level: res.level
+      });
+      results.scrollIntoView({ behavior: calm || restored ? "auto" : "smooth", block: "start" });
+      try { qTypeEl.focus({ preventScroll: true }); } catch (e) {}
+    }
+
+    var busyT = null;
+    var setBusy = function (on, msg) {
+      quiz.classList.toggle("is-busy", on);
+      busyEl.hidden = !on;
+      if (on) { var sp = busyEl.querySelector("span"); if (!sp._t) sp._t = sp.textContent; sp.textContent = msg || sp._t; }
+    };
     quiz.addEventListener("submit", function (e) {
       e.preventDefault();
-      if (!data.items) {
-        loadItems().then(function () { quiz.dispatchEvent(new Event("submit", { cancelable: true })); }).catch(function () {});
-        return;
-      }
-      var gender = val("gender"), age = val("age");
-      var chosen = vals("group");
-      var chosenSubs = vals("sub");
-      // 系統ごとに、細かい項目を選んでいればそれだけ、選んでいなければ全部を対象にする
-      var chosenLeaves = vals("leaf");
-      // 条件を作る：系統だけ→その系統全部（3点）、詳しい項目→その項目（6点）、さらに細かい項目→その中の作品・キャラ（9点）
-      var conds = [];
-      GROUPS.forEach(function (g) {
-        if (chosen.indexOf(g.slug) === -1) return;
-        var picked = g.subs.filter(function (x) { return chosenSubs.indexOf(g.slug + ":" + x.slug) !== -1; });
-        if (!picked.length) {
-          conds.push({ w: 3, test: function (it) { return it.qs.some(function (k) { return k.indexOf(g.slug + ":") === 0; }); } });
-          return;
-        }
-        picked.forEach(function (x) {
-          var key = g.slug + ":" + x.slug;
-          var leaves = x.leaves.filter(function (l) { return chosenLeaves.indexOf(key + ":" + l.slug) !== -1; });
-          if (leaves.length) conds.push({ w: 9, test: function (it) { return it.qs.indexOf(key) !== -1 && leaves.some(function (l) { return l.rx.test(it.jn); }); } });
-          else conds.push({ w: 6, test: function (it) { return it.qs.indexOf(key) !== -1; } });
-        });
+      if (busyT) return;
+      // 少しだけ「診断しています…」を見せてから結果へ（動きを減らす設定のときは待たない）
+      var t0 = Date.now(), wait = calm ? 0 : 700;
+      setBusy(true);
+      busyT = setTimeout(function () {}, 0);
+      loadItems().then(function () {
+        busyT = setTimeout(function () { busyT = null; setBusy(false); run(readAns(), false); }, Math.max(0, wait - (Date.now() - t0)));
+      }).catch(function () {
+        itemsP = null;
+        setBusy(true, QZ.loadErr);
+        busyT = setTimeout(function () { busyT = null; setBusy(false); }, 2600);
       });
-      // 推しの名前（自由入力）：商品名かラインナップ名に入っていれば一番強く当てる
-      var oshiEl = quiz.querySelector('input[name="oshi"]');
-      var oshiQ = oshiEl ? NORM(oshiEl.value) : "";
-      if (oshiQ) conds.push({ w: 12, test: function (it) { return NORM(it.jn + "｜" + it.name + "｜" + (it.on || "")).indexOf(oshiQ) !== -1; } });
-      var cands = data.items.map(function (it) {
-        var s = 0;
-        conds.forEach(function (c) { if (c.test(it)) s += c.w; });
-        return { it: it, s: s };
-      }).filter(function (x) { return !conds.length || x.s > 0; });
-      // 年代・性別のタグが当てはまる商品だけに絞る（0件になるときは絞らずに出す）
-      var fit = function (x) {
-        return (!age || x.it.qa.indexOf(age) !== -1) && (!(gender === "male" || gender === "female") || x.it.qg.indexOf(gender) !== -1);
+    });
+
+    /* 結果をシェア・もう一度・答えを直す */
+    var toastEl = $id("qr-toast"), toastT = null;
+    var toast = function (msg) {
+      toastEl.textContent = msg; toastEl.hidden = false;
+      clearTimeout(toastT); toastT = setTimeout(function () { toastEl.hidden = true; }, 2600);
+    };
+    var copyURL = function (url) {
+      var done = function () { toast(QZ.copied); track("quiz_share", { method: "copy" }); };
+      var old = function () {
+        try {
+          var ta = document.createElement("textarea");
+          ta.value = url; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.opacity = "0";
+          document.body.appendChild(ta); ta.select();
+          var ok = document.execCommand("copy");
+          document.body.removeChild(ta);
+          if (ok) done(); else toast(QZ.copyNg);
+        } catch (e) { toast(QZ.copyNg); }
       };
-      var strict = cands.filter(fit);
-      var relaxed = !strict.length && cands.length && (age || gender === "male" || gender === "female");
-      var scored = (strict.length ? strict : cands).sort(function (a, b) { return b.s - a.s || b.it.popularity - a.it.popularity; });
-      var max = conds.reduce(function (a, c) { return Math.max(a, c.w); }, 0) || 1;
-      var anyChoice = conds.length;
-      lastResults = scored; lastMax = max; lastAny = anyChoice; lastRelaxed = relaxed; shown = 12;
-      setSort("match");
-      results.scrollIntoView({ behavior: calm ? "auto" : "smooth", block: "start" });
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(done, old);
+      else old();
+    };
+    $id("qr-share").addEventListener("click", function () {
+      if (!qLast) return;
+      var name = typeName(qLast.ty), url = shareURL();
+      if (navigator.share) {
+        navigator.share({ title: document.title, text: QZ.shareText(name, QZ.emo[qLast.ty.p] || ""), url: url })
+          .then(function () { track("quiz_share", { method: "native" }); })
+          .catch(function (err) { if (!err || err.name !== "AbortError") copyURL(url); });
+      } else copyURL(url);
+    });
+    $id("qr-x").addEventListener("click", function () { track("quiz_share", { method: "x" }); });
+    var backToQuiz = function () {
+      show(0);
+      quiz.scrollIntoView({ behavior: calm ? "auto" : "smooth", block: "start" });
+      var lg = steps[0].querySelector("legend");
+      if (lg) try { lg.focus({ preventScroll: true }); } catch (e) {}
+    };
+    var retry = function () {
+      clearForm();
+      qLast = null;
+      results.hidden = true;
+      try { history.replaceState(null, "", location.pathname + location.search); } catch (e) {}
+      track("quiz_retry");
+      backToQuiz();
+    };
+    $id("qr-retry").addEventListener("click", retry);
+    $id("qr-retry2").addEventListener("click", retry);
+    $id("qr-edit").addEventListener("click", backToQuiz);
+
+    show(0);
+    // シェアされたURL（#q=1&…）で開いたとき：同じ答えを入れて、同じ結果を出す
+    var restore = function () {
+      var a = fromHash(location.hash);
+      if (!a) return;
+      started = true; // 自分で答えたわけではないので quiz_start は数えない
+      loadItems().then(function () {
+        applyAns(a);
+        show(steps.length - 1);
+        run(readAns(), true);
+      }).catch(function () { itemsP = null; });
+    };
+    restore();
+    window.addEventListener("hashchange", function () {
+      // 自分で結果を出したあとの同じURLでは何もしない
+      if (qLast && toHash(qLast.a) === location.hash) return;
+      restore();
     });
   }
 
