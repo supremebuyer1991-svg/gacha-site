@@ -72,7 +72,7 @@ module.exports = {
       footer: "依車站找", crumb: "依車站找扭蛋店",
       idxTitle: "日本主要車站附近的扭蛋（轉蛋）店",
       idxLead: (n) => `根據萬代官方店鋪資料，整理了日本${n}個主要車站和機場附近的扭蛋店。選好車站，就能看到走路就到的扭蛋店喔。`,
-      regions: { kanto: "東京周邊", kansai: "大阪・京都・神戶", chubu: "名古屋", kyushu: "福岡・沖繩", north: "北海道・東北", chugoku: "廣島", airport: "機場" },
+      regions: { kanto: "東京周邊", kansai: "大阪・京都・神戶", chubu: "名古屋・靜岡・金澤", kyushu: "九州・沖繩", north: "北海道・東北", chugoku: "廣島・四國", airport: "機場" },
       h1: (name) => `${name}附近的扭蛋店`,
       title: (name, n) => `${name}附近扭蛋（轉蛋）店${n}家｜日本扭蛋地圖`,
       desc: (name, n, km, near) => `${name}周邊${km}公里內共有${n}家萬代官方扭蛋店，最近的是「${near}」。附步行時間、地址與Google地圖連結。`,

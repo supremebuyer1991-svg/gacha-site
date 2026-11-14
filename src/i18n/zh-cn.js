@@ -7,7 +7,7 @@ module.exports = {
       footer: "按车站找", crumb: "按车站找扭蛋店",
       idxTitle: "日本主要车站附近的扭蛋店",
       idxLead: (n) => `根据万代官方店铺数据，整理了日本${n}个主要车站和机场附近的扭蛋店。选好车站，就能看到走路就能到的扭蛋店哦。`,
-      regions: { kanto: "东京周边", kansai: "大阪・京都・神户", chubu: "名古屋", kyushu: "福冈・冲绳", north: "北海道・东北", chugoku: "广岛", airport: "机场" },
+      regions: { kanto: "东京周边", kansai: "大阪・京都・神户", chubu: "名古屋・静冈・金泽", kyushu: "九州・冲绳", north: "北海道・东北", chugoku: "广岛・四国", airport: "机场" },
       h1: (name) => `${name}附近的扭蛋店`,
       title: (name, n) => `${name}附近扭蛋店${n}家 - 日本扭蛋地图`,
       desc: (name, n, km, near) => `${name}周边${km}公里内共有${n}家万代官方扭蛋店，最近的是「${near}」。附步行时间、地址和Google地图链接。`,

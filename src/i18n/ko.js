@@ -10,7 +10,7 @@ module.exports = {
       footer: "역에서 찾기", crumb: "역 주변 가챠샵",
       idxTitle: "일본 주요 역 근처 가챠샵",
       idxLead: (n) => `반다이 공식 매장 정보를 바탕으로 일본 주요 역과 공항 ${n}곳 근처의 가챠샵을 모았어요. 역을 고르면 걸어서 갈 수 있는 가챠샵을 볼 수 있어요.`,
-      regions: { kanto: "도쿄 주변", kansai: "오사카·교토·고베", chubu: "나고야", kyushu: "후쿠오카·오키나와", north: "홋카이도·도호쿠", chugoku: "히로시마", airport: "공항" },
+      regions: { kanto: "도쿄 주변", kansai: "오사카·교토·고베", chubu: "나고야·시즈오카·가나자와", kyushu: "규슈·오키나와", north: "홋카이도·도호쿠", chugoku: "히로시마·시코쿠", airport: "공항" },
       h1: (name) => `${name} 근처 가챠샵`,
       title: (name, n, region) => `${name} 가챠샵(캡슐토이) ${n}곳 | ${region ? `${region} ` : ""}가챠 매장 지도`,
       desc: (name, n, km, near) => `${name} 주변 ${km}km 안에 반다이 공식 가챠샵이 ${n}곳 있어요. 가장 가까운 곳은 '${near}'. 도보 시간, 주소, 구글 지도 링크를 확인해 보세요.`,
