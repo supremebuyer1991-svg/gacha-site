@@ -290,7 +290,7 @@ const build = (P, E) => {
       const upcoming = desc.filter((it) => P.isUpcoming(it));
       const latest = desc.find((it) => !P.isUpcoming(it));
       const from = monthLabel(l.list[0].release), newest = latest || desc[0];
-      const title = ja ? `${l.label} 歴代シリーズ一覧（全${n}作）｜最新作・発売日` : h.colTitle(l.en, n);
+      const title = ja ? `${l.label} 歴代シリーズ一覧（全${n}作）｜第1弾から最新作まで` : h.colTitle(l.en, n);
       const lead = ja
         ? `${l.label}のガチャガチャを発売の新しい順にまとめました（当サイトに載っている${from}以降の${n}作）。${latest ? `最新作は「${latest.name}」（${relOf(latest)}・1回${latest.price}円）。` : ""}${upcoming.length ? `次回作は${upcoming.length}作が発売予定です。` : ""}`
         : h.colLead(l.en, n, from, latest ? nameOf(latest, lang) : "", upcoming.length);
