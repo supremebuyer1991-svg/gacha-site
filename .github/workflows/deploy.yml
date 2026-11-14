@@ -86,12 +86,28 @@ jobs:
             done
           fi
 
-      - name: SNS（Threads・Instagram・Pinterest）用の画像を作る
+      # 共有画像（og:image）の作りおき：中身が変わっていない画像は作り直さない。保存は1日1回（その日の最初の公開のあと）
+      - name: 共有画像の作りおきの日付
+        id: ogday
+        run: echo "d=$(TZ=Asia/Tokyo date +%F)" >> "$GITHUB_OUTPUT"
+      - name: 共有画像の作りおきを取り出す
+        uses: actions/cache@v4
+        continue-on-error: true
+        with:
+          path: .og-cache
+          key: og-cache-v1-${{ steps.ogday.outputs.d }}
+          restore-keys: |
+            og-cache-v1-
+
+      - name: SNS（Threads・Instagram・Pinterest）用の画像と、共有画像（og:image）を作る
         continue-on-error: true
         run: |
           npm install --no-save --no-package-lock sharp@0.33.5 > /dev/null 2>&1 || true
           (fc-list | grep -qi "Noto Sans CJK") || (sudo apt-get install -y -qq fonts-noto-cjk > /dev/null 2>&1 || true)
-          node src/social-img.js
+          S=0; node src/social-img.js || S=$?
+          # 共有画像（商品のカード・まとめページのコラージュ。1200×630）。SNS用の画像が失敗した回も作る
+          node src/og-img.js
+          exit $S
 
       - name: Instagram リールの動画を作る
         continue-on-error: true
