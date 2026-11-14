@@ -83,7 +83,7 @@ module.exports = {
       leadTop: (name, n, km, top, k, w, near, wn) => `${name}周邊${km}公里內，共有${n}家萬代官方合作的扭蛋店。販售扭蛋最多的是「${top}」（官方販售${k}種，步行約${w}分鐘）；離車站最近的是「${near}」（步行約${wn}分鐘）。`,
       shopsH: "附近的扭蛋店", walk: (m, d) => `步行約${m}分鐘（${d}）`, titles: (n) => `官方販售${n}種`,
       gmaps: "用Google地圖開啟", mapGo: "在地圖上查看",
-      weekH: "附近店家本週發售的扭蛋", weekAllH: "本週發售的扭蛋",
+      weekH: "附近店家本週發售的扭蛋", weekAllH: "本週發售的扭蛋", hotH: "此站周邊店家中上架最多的扭蛋",
       routeH: "想一次逛好幾家？", routeText: "用扭蛋之旅路線規劃，可以把附近的扭蛋店排成最順路的順序。頁面是日文的，輸入車站名稱或使用目前位置就能用。", routeGo: "規劃扭蛋路線 →",
       tipsH: "在日本轉扭蛋的小提醒",
       tips: [

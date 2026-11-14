@@ -1623,3 +1623,12 @@ label.tile:focus-within { outline: none; }
 @media (max-width: 900px) { .quiz.is-wizard .quiz-nav { position: sticky; bottom: 0; z-index: 5; background: var(--surface, #fff); margin-left: -18px; margin-right: -18px; margin-bottom: -14px; border-radius: 0 0 var(--radius) var(--radius); padding: 10px 18px calc(10px + env(safe-area-inset-bottom)); box-shadow: 0 -6px 12px -10px rgba(0,0,0,.25); } }
 /* 幅400px以下（iPhone mini・SE など）：ロゴを少し小さくして、🔍・★・🌐 を1段目に収める */
 @media (max-width: 420px) { .site-header .logo { zoom: .84; } .site-header .wrap { gap: 6px 6px; } .site-header .lang-menu summary { padding: 0; width: 40px; justify-content: center; } }
+
+/* お店のページ：このお店のガチャ情報まとめ（最寄り駅・ジャンル・近くのお店） */
+.shop-facts-h { font-size: 18px; margin: 0 0 10px; }
+.shop-facts { margin: 0; display: grid; gap: 8px; }
+.shop-facts > div { display: grid; grid-template-columns: 9.5em 1fr; gap: 10px; padding: 9px 12px; border: 1px solid var(--line, #e6e6ee); border-radius: 10px; background: var(--surface, #fff); font-size: 14px; line-height: 1.6; }
+.shop-facts dt { font-weight: 800; color: var(--text-2); }
+.shop-facts dd { margin: 0; }
+.shop-facts a { text-decoration: underline; text-underline-offset: 2px; }
+@media (max-width: 560px) { .shop-facts > div { grid-template-columns: 1fr; gap: 2px; } }

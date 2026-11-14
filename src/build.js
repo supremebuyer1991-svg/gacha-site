@@ -316,7 +316,7 @@ const T = {
       leadTop: (name, n, km, top, k, w, near, wn) => `There are ${n} official Bandai gacha (capsule toy) shops within ${km} km of ${name}. The best-stocked is “${top}” with ${k} official series, about ${w} min on foot; the closest is “${near}” (${wn} min).`,
       shopsH: "Gacha shops nearby", walk: (m, d) => `${m} min walk (${d})`, titles: (n) => `${n} official series`,
       gmaps: "Open in Google Maps", mapGo: "See on the map",
-      weekH: "Releasing this week at shops nearby", weekAllH: "Releasing this week",
+      weekH: "Releasing this week at shops nearby", weekAllH: "Releasing this week", hotH: "Most-stocked gacha at shops near this station",
       routeH: "Visiting several shops?", routeText: "Our gacha route planner puts nearby shops in the most efficient order. The page is in Japanese, but you can just type a station name or use your location.", routeGo: "Plan a gacha route →",
       tipsH: "Tips for gacha in Japan",
       tips: [
@@ -1119,6 +1119,41 @@ const nearShops = (sh, n) => {
   let pool = SHOPS.filter((x) => x !== sh && Math.abs(x.lat - sh.lat) < 0.05 && Math.abs(x.lng - sh.lng) < 0.06);
   if (pool.length < n) pool = SHOPS.filter((x) => x !== sh);
   return pool.map((x) => ({ sh: x, d: distM(sh.lat, sh.lng, x.lat, x.lng) })).sort((a, b) => a.d - b.d).slice(0, n);
+};
+// 市区町村ページ（/shops/<都道府県>/<市区町村>）の決まり。お店・駅のページからもリンクするので、ここで1回だけ決める
+const CITY_MIN = 3;
+const CITY_SLUG = {
+    "札幌市": "sapporo", "仙台市": "sendai", "さいたま市": "saitama", "千葉市": "chiba", "横浜市": "yokohama", "川崎市": "kawasaki", "相模原市": "sagamihara", "新潟市": "niigata", "静岡市": "shizuoka", "浜松市": "hamamatsu",
+    "名古屋市": "nagoya", "京都市": "kyoto", "大阪市": "osaka", "堺市": "sakai", "神戸市": "kobe", "岡山市": "okayama", "広島市": "hiroshima", "北九州市": "kitakyushu", "福岡市": "fukuoka", "熊本市": "kumamoto",
+    "千代田区": "chiyoda", "中央区": "chuo", "港区": "minato", "新宿区": "shinjuku", "文京区": "bunkyo", "台東区": "taito", "墨田区": "sumida", "江東区": "koto", "品川区": "shinagawa", "目黒区": "meguro", "大田区": "ota", "世田谷区": "setagaya",
+    "渋谷区": "shibuya", "中野区": "nakano", "杉並区": "suginami", "豊島区": "toshima", "北区": "kita", "荒川区": "arakawa", "板橋区": "itabashi", "練馬区": "nerima", "足立区": "adachi", "葛飾区": "katsushika", "江戸川区": "edogawa",
+    "八王子市": "hachioji", "立川市": "tachikawa", "町田市": "machida", "船橋市": "funabashi", "柏市": "kashiwa", "川口市": "kawaguchi", "高松市": "takamatsu", "松山市": "matsuyama", "那覇市": "naha", "鹿児島市": "kagoshima", "金沢市": "kanazawa", "宇都宮市": "utsunomiya",
+};
+const citySlug = (k) => CITY_SLUG[k] || hashSlug(k);
+// 「都道府県|市区町村」→ 市区町村ページ（3店以上ある市区町村だけ）
+const CITY_PAGES = (() => {
+  const cnt = new Map();
+  for (const sh of SHOPS) { if (!PREF_EN[sh.pref]) continue; const k = addrParts(sh.address, sh.pref).city; if (k) cnt.set(`${sh.pref}|${k}`, (cnt.get(`${sh.pref}|${k}`) || 0) + 1); }
+  const m = new Map();
+  for (const [key, n] of cnt) if (n >= CITY_MIN) { const [p, k] = key.split("|"); m.set(key, { pref: p, city: k, n, rel: `shops/${prefSlug(p)}/${citySlug(k)}.html` }); }
+  return m;
+})();
+const cityPageOf = (sh) => (sh && sh.pref ? CITY_PAGES.get(`${sh.pref}|${addrParts(sh.address, sh.pref).city}`) || null : null);
+// 歩いて行ける距離（徒歩15分＝1.2km）。お店 → 近い駅のページ、駅 → 歩けるお店
+const WALK_M = 1200;
+const STATIONS_NEAR_SHOP = (() => {
+  const m = new Map();
+  for (const sh of SHOPS) {
+    const l = STATIONS.filter((st) => Math.abs(sh.lat - st.lat) < 0.02 && Math.abs(sh.lng - st.lng) < 0.03).map((st) => ({ st, d: distM(st.lat, st.lng, sh.lat, sh.lng) })).filter((x) => x.d <= WALK_M).sort((a, b) => a.d - b.d);
+    if (l.length) m.set(sh.id, l);
+  }
+  return m;
+})();
+// お店の集まりで取扱が多いガチャ（公式の取扱店の数が多い順。同じなら新しい順）。データがなければ空
+const hotItemsOf = (shops, n) => {
+  const cnt = new Map();
+  for (const sh of shops) for (const id of SHOP_OFFICIAL[sh.id] || []) { const it = itemById.get(id); if (it) cnt.set(it, (cnt.get(it) || 0) + 1); }
+  return [...cnt.entries()].sort((a, b) => b[1] - a[1] || (b[0].release > a[0].release ? 1 : b[0].release < a[0].release ? -1 : 0) || byPopular(a[0], b[0])).slice(0, n);
 };
 // 構造化データ：お店（Store）
 const storeLd = (sh) => {
@@ -2598,9 +2633,18 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
           faq.push([S.qNear(name), S.aNear(walkable.lm ? lmName(walkable.lm) : ch ? chainLabel(ch, lang) : S.shopGeneric, walkMin(walkable.d), fmtDist(walkable.d))]);
         }
       }
-      const ids = new Set(st.shops.flatMap((x) => SHOP_OFFICIAL[x.sh.id] || []));
-      const local = WEEK.items.filter((it) => ids.has(it.id));
-      const wk = (local.length ? local : WEEK.items).slice(0, 12);
+      // この駅周辺で取扱が多いガチャ（徒歩15分以内のお店の公式の取扱から。なければ駅ページに載せているお店全部、それもなければ今週発売）
+      const walkShops = st.shops.filter((x) => x.d <= WALK_M).map((x) => x.sh);
+      const hotWalk = hotItemsOf(walkShops, 10);
+      const hot = hotWalk.length ? hotWalk : hotItemsOf(st.shops.map((x) => x.sh), 10);
+      const hotN = hotWalk.length ? walkShops.length : st.shops.length;
+      const wk = hot.length ? [] : WEEK.items.slice(0, 12);
+      // この駅からのリンク：周辺にあるチェーン、都道府県・市区町村のページ（日本語だけ）
+      const stChains = [...chainCount.entries()].sort((a, b) => b[1] - a[1]);
+      for (const x of st.shops) { const ch = CHAIN_BY_SHOP.get(x.sh.id); if (ch && ch.store && !stChains.some(([o]) => o === ch)) stChains.push([ch, st.shops.filter((y) => CHAIN_BY_SHOP.get(y.sh.id) === ch).length]); }
+      const stCities = [...new Map(st.shops.map((x) => cityPageOf(x.sh)).filter(Boolean).map((cp) => [cp.rel, cp])).values()]
+        .map((cp) => ({ cp, k: st.shops.filter((x) => cityPageOf(x.sh) === cp).length })).sort((a, b) => b.k - a.k).slice(0, 6);
+      const stPrefs = [...new Set([st.pref, ...st.shops.map((x) => x.sh.pref)].filter((p) => PREF_EN[p] && SHOPS.some((sh) => sh.pref === p)))].slice(0, 3);
       const others = STATIONS.filter((x) => x.region === st.region && x !== st);
       const mapGoId = near ? near.sh.id : lms[0] && lms[0].sh ? lms[0].sh.id : "";
       const body = `<div class="wrap">
@@ -2624,10 +2668,18 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
   </section>` : ""}
   ${faq.length ? `<section class="section section-tight" id="faq"><div class="section-head"><h2>${esc(S.faqH)}</h2></div>
     <dl class="prose stn-faq">${faq.map(([q, a]) => `<dt>${esc(q)}</dt><dd>${esc(a)}</dd>`).join("")}</dl></section>` : ""}
-  ${wk.length ? `<section class="section section-tight">
-    <div class="section-head"><h2>${ja ? (local.length ? "このあたりで今週発売のガチャ" : "今週発売のガチャ") : esc(local.length ? S.weekH : S.weekAllH)}</h2><a class="more" href="${c.H}week.html">${lang !== "ja" ? t.x.seeAll : "全部見る"}</a></div>
+  ${hot.length ? `<section class="section section-tight" id="hot">
+    <div class="section-head"><h2>${ja ? "この駅周辺で取扱が多いガチャ" : esc(S.hotH || S.weekH)}</h2></div>
+    ${ja ? `<p class="fine" style="margin-top:-12px;margin-bottom:16px">${esc(name)}${hotWalk.length ? "から徒歩15分以内" : "の周り"}のお店${hotN}店のうち、取扱店が多いのは${hot.slice(0, 3).map(([it, k]) => `${esc(it.name)}（${k}店）`).join("、")}など。バンダイ公式「ガシャポンどこ？」の取扱店の数です。</p>` : ""}
+    <div class="grid row-scroll">${hot.map(([it]) => card(it, c)).join("")}</div>
+  </section>` : wk.length ? `<section class="section section-tight">
+    <div class="section-head"><h2>${ja ? "今週発売のガチャ" : esc(S.weekAllH)}</h2><a class="more" href="${c.H}week.html">${lang !== "ja" ? t.x.seeAll : `今週発売のガチャ${WEEK.items.length}件を見る`}</a></div>
     <div class="grid row-scroll">${wk.map((it) => card(it, c)).join("")}</div>
   </section>` : ""}
+  ${ja && stChains.length ? `<section class="section section-tight"><div class="section-head"><h2>${esc(name)}周辺にあるチェーン</h2></div>
+    <div class="chara-list">${stChains.map(([ch, k]) => `<a class="chara-chip" href="${c.H}chain/${ch.slug}.html">${esc(ch.label)}の店舗一覧<small>周辺${k}店</small></a>`).join("")}</div></section>` : ""}
+  ${ja && (stPrefs.length || stCities.length) ? `<section class="section section-tight"><div class="section-head"><h2>市区町村・都道府県からさがす</h2></div>
+    <div class="chara-list">${stCities.map(({ cp }) => `<a class="chara-chip" href="${c.R}${cp.rel}">${esc(cp.city)}のガチャガチャ設置店<small>${cp.n}店</small></a>`).join("")}${stPrefs.map((p) => `<a class="chara-chip" href="${c.R}shops/${prefSlug(p)}.html">${p}のガチャガチャ設置店<small>${SHOPS.filter((sh) => sh.pref === p).length}店</small></a>`).join("")}</div></section>` : ""}
   ${ja ? `<section class="section section-tight"><div class="panel">
     <h2 style="font-size:20px">何店か回るなら「ガチャ活ルート」</h2>
     <p class="fine" style="margin-top:4px">出発する場所に「${esc(name.replace(/（.*?）/g, ""))}」と入れると、近くのお店を回りやすい順番に並べます。探したいガチャを入れれば、取扱のあるお店だけで作れます。</p>
@@ -2754,15 +2806,6 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
       layout({ rel, title: katsu ? "ガチャ活ルート｜近くのガチャのあるお店を効率よく回る" : `近くのガチャガチャを現在地から探す（全国${SHOPS.length}店・地図）`, description: katsu ? "ガチャ活（ガチャ巡り）のルートを自動で作成。今いる場所から近いガチャのあるお店を、回りやすい順番でご案内。探したいガチャの取扱店だけで作ることもできます。" : `全国${SHOPS.length}店のガチャガチャ設置場所（設置店）を地図で探せます。在庫や台数はみんなの報告で更新。地図にないお店も追加できます。`, body, current: katsu ? "katsu" : "map", jaOnly: true, extraHead: LEAF });
     }
     // 市区町村ページ（/shops/<都道府県>/<市区町村>）：3店以上ある市区町村だけ。URL は主要な市・区はローマ字、それ以外は市区町村名から作るハッシュ（名前が同じなら毎回同じ）
-    const CITY_MIN = 3;
-    const CITY_SLUG = {
-      "札幌市": "sapporo", "仙台市": "sendai", "さいたま市": "saitama", "千葉市": "chiba", "横浜市": "yokohama", "川崎市": "kawasaki", "相模原市": "sagamihara", "新潟市": "niigata", "静岡市": "shizuoka", "浜松市": "hamamatsu",
-      "名古屋市": "nagoya", "京都市": "kyoto", "大阪市": "osaka", "堺市": "sakai", "神戸市": "kobe", "岡山市": "okayama", "広島市": "hiroshima", "北九州市": "kitakyushu", "福岡市": "fukuoka", "熊本市": "kumamoto",
-      "千代田区": "chiyoda", "中央区": "chuo", "港区": "minato", "新宿区": "shinjuku", "文京区": "bunkyo", "台東区": "taito", "墨田区": "sumida", "江東区": "koto", "品川区": "shinagawa", "目黒区": "meguro", "大田区": "ota", "世田谷区": "setagaya",
-      "渋谷区": "shibuya", "中野区": "nakano", "杉並区": "suginami", "豊島区": "toshima", "北区": "kita", "荒川区": "arakawa", "板橋区": "itabashi", "練馬区": "nerima", "足立区": "adachi", "葛飾区": "katsushika", "江戸川区": "edogawa",
-      "八王子市": "hachioji", "立川市": "tachikawa", "町田市": "machida", "船橋市": "funabashi", "柏市": "kashiwa", "川口市": "kawaguchi", "高松市": "takamatsu", "松山市": "matsuyama", "那覇市": "naha", "鹿児島市": "kagoshima", "金沢市": "kanazawa", "宇都宮市": "utsunomiya",
-    };
-    const citySlug = (k) => CITY_SLUG[k] || hashSlug(k);
     const cityFromM = new Date(Date.UTC(nowJST.getUTCFullYear(), nowJST.getUTCMonth() - 2, 1)).toISOString().slice(0, 7);
     let cityPages = 0;
     // 都道府県ごとのお店一覧
@@ -2806,7 +2849,7 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
         const cnt = new Map();
         for (const sh of v) for (const id of SHOP_OFFICIAL[sh.id] || []) { const it = itemById.get(id); if (it && it.release >= cityFromM) cnt.set(it, (cnt.get(it) || 0) + 1); }
         const hot = [...cnt.entries()].sort((a, b) => b[1] - a[1] || byPopular(a[0], b[0])).slice(0, 8);
-        const sts = [...new Set(v.map((sh) => (STATION_OF_SHOP.get(sh.id) || {}).st).filter(Boolean))];
+        const sts = [...new Set(v.flatMap((sh) => [(STATION_OF_SHOP.get(sh.id) || {}).st, ...(STATIONS_NEAR_SHOP.get(sh.id) || []).map((x) => x.st)]).filter(Boolean))];
         const cCh = CHAINS.map((ch) => ({ ch, k: v.filter((sh) => CHAIN_BY_SHOP.get(sh.id) === ch).length })).filter((x) => x.k).sort((a, b) => b.k - a.k);
         const others = pageCities.filter(([o]) => o !== k);
         const lead = `${k}（${p}）でガチャガチャを置いているお店${n}店の設置場所をまとめました。${most.length ? `取扱中のガチャが多いのは${most.map((x) => `「${x.sh.name}」（${x.k}種）`).join("、")}。` : ""}${hot.length ? `いま${k}で取扱店が多いガチャは「${hot[0][0].name}」（${hot[0][1]}店）です。` : ""}お店のページで住所・地図・取扱中のガチャ・みんなの在庫報告が見られます。`;
@@ -2847,6 +2890,7 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
         const cnt = new Map();
         for (const sh of ch.shops) for (const id of SHOP_OFFICIAL[sh.id] || []) { const it = itemById.get(id); if (it && it.release >= fromM) cnt.set(it, (cnt.get(it) || 0) + 1); }
         const hot = [...cnt.entries()].sort((a, b) => b[1] - a[1] || byPopular(a[0], b[0])).slice(0, 12);
+        const chSts = STATIONS.map((st) => ({ st, k: st.shops.filter((x) => CHAIN_BY_SHOP.get(x.sh.id) === ch).length })).filter((x) => x.k).sort((a, b) => b.k - a.k || b.st.count - a.st.count).slice(0, 10);
         const what = ch.store ? `${ch.label}のガチャガチャ設置店` : ch.label;
         const title = `${ch.store ? `${ch.label}のガチャガチャ設置店一覧` : `${ch.label} 店舗一覧`}（全国${n}店）｜都道府県別・取扱中のガチャ`;
         const lead = `${what}は、バンダイ公式の取扱店情報で全国${n}店（${topPrefs.map(([p, v]) => `${p}${v.length}店`).join("・")}${prefs.length > 3 ? "など" : ""}）。都道府県ごとに一覧にしています。${hot.length ? `いま取扱が多いのは「${hot[0][0].name}」（${hot[0][1]}店）です。` : ""}`;
@@ -2868,6 +2912,9 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
     <p class="fine" style="margin-top:-12px;margin-bottom:16px">${hot.slice(0, 3).map(([it, k]) => `${esc(it.name)}（${k}店）`).join("、")}など。バンダイ公式「ガシャポンどこ？」の取扱店の数です。</p>
     <div class="grid row-scroll">${hot.map(([it]) => card(it, c)).join("")}</div></section>` : ""}
   ${lotSec}
+  ${chSts.length ? `<section class="section section-tight" id="stations"><div class="section-head"><h2>${esc(chainName(ch))}がある駅</h2></div>
+    <p class="fine" style="margin-top:-12px;margin-bottom:16px">主要な駅の周りで${esc(what)}が多いのは${chSts.slice(0, 3).map(({ st, k }) => `${esc(st.ja)}（${k}店）`).join("、")}${chSts.length > 3 ? "など" : ""}です。駅のページで、駅から近い順にお店が見られます。</p>
+    <div class="chara-list">${chSts.map(({ st, k }) => `<a class="chara-chip" href="${c.H}station/${st.slug}.html">${esc(st.ja)}周辺のガチャガチャ設置店<small>${k}店</small></a>`).join("")}</div></section>` : ""}
   ${prefs.map(([p, v]) => `<section class="section section-tight" id="${prefSlug(p)}"><div class="section-head"><h2>${p}の${esc(what)}（${v.length}店）</h2><a class="more" href="${c.R}shops/${prefSlug(p)}.html">${p}のお店をすべて見る</a></div>
     <ul class="where-shops">${v.map((sh) => `<li><a href="${c.R}shop/${sh.id}.html">${esc(sh.name)}</a><span>${esc(addrParts(sh.address, p).city || "")}${(SHOP_OFFICIAL[sh.id] || []).length ? `・${(SHOP_OFFICIAL[sh.id] || []).length}種` : ""}</span></li>`).join("")}</ul></section>`).join("\n  ")}
   <p class="fine" style="margin-top:32px">お店の情報は、バンダイ公式「ガシャポンどこ？」の取扱店をもとに、店名からチェーンを判定しています。実際と違うことがあります。</p>
@@ -2979,8 +3026,29 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
       const ap = addrParts(sh.address, sh.pref), chn = CHAIN_BY_SHOP.get(sh.id), sto = STATION_OF_SHOP.get(sh.id);
       const nRep = rp ? rp.n : 0, thin0 = !off.length && !nRep;
       const nearby = nearShops(sh, 5);
+      // パンくず（見た目と構造化データを同じにする）：トップ › ガチャマップ › 都道府県 › 市区町村 › 店名
+      const cp = cityPageOf(sh), hasPrefPage = !!(sh.pref && PREF_EN[sh.pref]);
+      const crumbs = [[t.home, "index.html"], ["ガチャマップ", "map.html"], ...(hasPrefPage ? [[sh.pref, `shops/${prefSlug(sh.pref)}.html`]] : []), ...(cp ? [[cp.city, cp.rel]] : [])];
+      // このお店だけの事実（最寄り駅・ジャンルの内訳・いちばん新しい取扱・近くのお店の数）。データがない行は出さない
+      const nearSts = (STATIONS_NEAR_SHOP.get(sh.id) || []).slice(0, 3);
+      const gCnt = new Map();
+      for (const it of off) gCnt.set(it.genre, (gCnt.get(it.genre) || 0) + 1);
+      const topG = [...gCnt.entries()].sort((a, b) => b[1] - a[1]).slice(0, 3).map(([g, k]) => ({ g: genreOf(g), k }));
+      const newest = off.length ? [...off].sort((a, b) => (b.release > a.release ? 1 : b.release < a.release ? -1 : byNewest(a, b)))[0] : null;
+      const newestAr = newest && ARR_AT && ARRIVALS[newest.id] && ARRIVALS[newest.id].f ? new Date(Date.parse(ARRIVALS[newest.id].f) + 9 * 3600e3) : null;
+      const newestN = newest ? off.filter((it) => it.release === newest.release).length : 0;
+      const around = SHOPS.filter((x) => x !== sh && Math.abs(x.lat - sh.lat) < 0.012 && Math.abs(x.lng - sh.lng) < 0.015).map((x) => distM(sh.lat, sh.lng, x.lat, x.lng)).filter((d) => d <= 1000);
+      const sameSpot = around.filter((d) => d <= 100).length;
+      const ymJa = (m) => { const x = String(m || "").match(/^(\d{4})-(\d\d)/); return x ? `${x[1]}年${+x[2]}月` : ""; };
+      const facts = [
+        nearSts.length ? `<div><dt>最寄り駅</dt><dd>${nearSts.map((x) => `<a href="${c.H}station/${x.st.slug}.html">${esc(x.st.ja)}</a> 徒歩約${walkMin(x.d)}分（${fmtDist(x.d)}）`).join("、")}</dd></div>` : "",
+        topG.length ? `<div><dt>取扱中のジャンル</dt><dd>${topG.map(({ g, k }) => `<a href="${c.H}genre/${g.slug}.html">${esc(g.label)}</a> ${k}種`).join("、")}（公式の取扱${off.length}種のうち）</dd></div>` : "",
+        newest && ymJa(newest.release) ? `<div><dt>いちばん新しい取扱</dt><dd>${ymJa(newest.release)}発売のガチャが${newestN}種（<a href="${c.H}item/${newest.id}.html">${esc(newest.name)}</a>${newestN > 1 ? "など" : ""}）${newestAr ? `。当サイトで店頭への入荷を初めて確認したのは${newestAr.getUTCMonth() + 1}月${newestAr.getUTCDate()}日（全国）` : ""}</dd></div>` : "",
+        hasPrefPage || chn ? `<div><dt>エリア・チェーン</dt><dd>${[cp ? `<a href="${c.R}${cp.rel}">${esc(cp.city)}のガチャガチャ設置店（${cp.n}店）</a>` : "", hasPrefPage ? `<a href="${c.R}shops/${prefSlug(sh.pref)}.html">${esc(sh.pref)}のガチャガチャ設置店</a>` : "", chn ? `<a href="${c.H}chain/${chn.slug}.html">${esc(chn.label)}の店舗一覧（全国${chn.shops.length}店）</a>` : ""].filter(Boolean).join("、")}</dd></div>` : "",
+        around.length ? `<div><dt>近くのお店</dt><dd>半径1km以内にほかのガチャガチャ設置店が${around.length}店${sameSpot ? `（うち同じ施設内・すぐとなりが${sameSpot}店）` : ""}。<a href="#nearby">近い順に見る</a></dd></div>` : "",
+      ].filter(Boolean);
       const body = `<div class="wrap">
-  <nav class="breadcrumb" aria-label="breadcrumb"><a href="${c.H}index.html">${t.home}</a><span>/</span><a href="${c.R}map.html">ガチャマップ</a><span>/</span>${sh.pref ? `<a href="${c.R}shops/${prefSlug(sh.pref)}.html">${esc(sh.pref)}</a><span>/</span>` : ""}<span>${esc(sh.name)}</span></nav>
+  <nav class="breadcrumb" aria-label="breadcrumb">${crumbs.map(([nm, r], i) => `<a href="${i ? c.R : c.H}${r}">${esc(nm)}</a><span>/</span>`).join("")}<span>${esc(sh.name)}</span></nav>
   <article class="shop" id="shop" data-id="${sh.id}" data-api="${c.R}api/shop/${sh.id}" data-report="${c.R}api/report" data-comment="${c.R}api/comment" data-root="${c.R}" data-lat="${sh.lat}" data-lng="${sh.lng}">
     <header class="page-head" style="padding-top:28px">
       <p class="eyebrow">${sh.src === "user" ? `みんなが追加した場所${KIND_LABEL[sh.kind] ? `・${KIND_LABEL[sh.kind]}` : ""}` : "ガシャポン公式の取扱店"}</p>
@@ -2989,6 +3057,7 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
       <p class="lead">設置場所：${esc(sh.address || sh.pref || "")}</p>
       <div class="item-actions shop-actions"><a class="btn btn-gold" href="${esc(gmap)}" target="_blank" rel="noopener">Googleマップで開く</a><a class="sort" href="${c.R}map.html#${sh.id}">ガチャマップで見る</a>${sto ? `<a class="sort" href="${c.H}station/${sto.st.slug}.html">${esc(sto.st.ja)}周辺のお店</a>` : ""}${chn ? `<a class="sort" href="${c.H}chain/${chn.slug}.html">${esc(chn.label)}の店舗一覧</a>` : ""}</div>
     </header>
+    ${facts.length ? `<section class="section section-tight shop-facts-sec" style="padding-top:20px"><h2 class="shop-facts-h">このお店のガチャ情報まとめ</h2><dl class="shop-facts">${facts.join("")}</dl></section>` : ""}
     ${off.length ? `<section class="section section-tight shop-off" style="padding-top:20px"><div class="section-head"><h2>取扱中のガチャ（公式）</h2></div>
       <p class="fine" style="margin-top:-16px;margin-bottom:20px">バンダイ公式「ガシャポンどこ？」で、このお店の取扱があるガチャです（通信機能のあるマシンのみ）。</p>
       <div class="grid">${off.slice(0, 40).map((it) => card(it, c)).join("")}</div>${off.length > 8 ? `<p class="cal-more-wrap"><button type="button" class="btn cal-more-btn" data-open="すべて見る（${Math.min(off.length, 40)}種）" data-close="閉じる">すべて見る（${Math.min(off.length, 40)}種）</button></p>` : ""}${listAff(lang, "新作", "このお店で売り切れだったら → 楽天・Amazonで探す")}</section>` : ""}
@@ -3046,8 +3115,8 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
       <ul class="rep-list" id="rep-list"><li class="fine">読み込み中…</li></ul>
     </section>
 
-    ${nearby.length ? `<section class="section section-tight"><div class="section-head"><h2>近くのガチャガチャ設置店</h2>${sh.pref ? `<a class="more" href="${c.R}shops/${prefSlug(sh.pref)}.html">${esc(sh.pref)}のお店をすべて見る</a>` : ""}</div>
-      <div class="shop-list">${nearby.map((x) => `<a class="shop-row" href="${c.R}shop/${x.sh.id}.html"><b>${esc(x.sh.name)}</b><span>${esc(x.sh.address || x.sh.pref || "")}</span><em>ここから${fmtDist(x.d)}${x.d <= 3000 ? `（徒歩約${walkMin(x.d)}分）` : ""}${(SHOP_OFFICIAL[x.sh.id] || []).length ? `・取扱中 ${(SHOP_OFFICIAL[x.sh.id] || []).length}種` : ""}</em></a>`).join("")}</div>
+    ${nearby.length ? `<section class="section section-tight" id="nearby"><div class="section-head"><h2>近くのガチャガチャ設置店</h2>${sh.pref ? `<a class="more" href="${c.R}shops/${prefSlug(sh.pref)}.html">${esc(sh.pref)}のお店をすべて見る</a>` : ""}</div>
+      <div class="shop-list">${nearby.map((x) => `<a class="shop-row" href="${c.R}shop/${x.sh.id}.html"><b>${esc(x.sh.name)}</b><span>${esc(x.sh.address || x.sh.pref || "")}</span><em>${x.d <= 100 ? "同じ施設内・すぐとなり・" : ""}ここから${fmtDist(x.d)}${x.d <= 3000 ? `（徒歩約${walkMin(x.d)}分）` : ""}${(SHOP_OFFICIAL[x.sh.id] || []).length ? `・取扱中 ${(SHOP_OFFICIAL[x.sh.id] || []).length}種` : ""}</em></a>`).join("")}</div>
       ${sto ? `<p style="margin-top:16px"><a class="chara-chip" href="${c.H}station/${sto.st.slug}.html">🚉 最寄り駅ガイド：${esc(sto.st.ja)}周辺のガチャガチャ設置店（${sto.st.count}店）</a></p>` : ""}
     </section>` : ""}
   </article>
@@ -3066,7 +3135,10 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
       const shopTitle = off.length ? `${sh.name}${host ? `（${host}内）` : ""}のガチャガチャ｜取扱中${off.length}種・${city || sh.pref || ""}【${+today.slice(5, 7)}月】` : `${sh.name}${host ? `（${host}内）` : ""}のガチャガチャ設置場所｜${city || sh.pref || ""}`;
       const shopDesc = `${sh.name}${host ? `（${host}内）` : ""}にあるガチャガチャ${off.length ? `は取扱中${off.length}種。${off.slice(0, 3).map((x) => `「${short20(x.name)}」`).join("")}など。` : "の情報。"}場所は${sh.pref && !(sh.address || "").startsWith(sh.pref) ? sh.pref : ""}${sh.address ? sh.address.replace(/\s+/g, " ") : sh.pref || ""}。売り切れ・台数・評価はみんなの報告で確認できます。`;
       layout({ rel, title: shopTitle, noindex: thinShop, lastmod: shopLm, description: shopDesc, body, current: "map", jaOnly: true, extraHead: LEAF,
-        jsonld: [{ "@context": "https://schema.org", ...storeLd(sh) }] });
+        jsonld: [{ "@context": "https://schema.org", ...storeLd(sh) },
+          { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
+            ...crumbs.map(([nm, r], i) => ({ "@type": "ListItem", position: i + 1, name: nm, item: canonical(lang, r) })),
+            { "@type": "ListItem", position: crumbs.length + 1, name: sh.name } ] }] });
     }
     // 投稿のきまり
     {
