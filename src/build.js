@@ -1375,7 +1375,10 @@ ${content}
         // 「さらに細かい項目」の段がある作品だけ（画面側が、その段の項目から作品名を読むため）
         if (leaves.length > 1) for (const l of leaves) out.push({ key: `${key}:${l.slug}`, l });
       }
-      return out.sort((p, q) => q.l.n - p.l.n).filter((o) => !seen.has(o.l.label) && seen.add(o.l.label)).slice(0, 14);
+      // 人気シリーズ（ちいかわ・サンリオ・ディズニー・たまごっち・ポケモン）を先頭に、あとは商品が多い順
+      const PIN = [/ちいかわ/, /サンリオ/, /ディズニー|ミッキー/, /たまごっち/, /ポケモン|ポケットモンスター/];
+      const pin = (o) => { const i = PIN.findIndex((rx) => rx.test(o.l.label)); return i < 0 ? 99 : i; };
+      return out.sort((p, q) => pin(p) - pin(q) || q.l.n - p.l.n).filter((o) => !seen.has(o.l.label) && seen.add(o.l.label)).slice(0, 14);
     })();
     const opt = (name, type, value, label, checked) =>
       `<label class="opt"><input type="${type}" name="${name}" value="${value}"${checked ? " checked" : ""}><span>${label}</span></label>`;

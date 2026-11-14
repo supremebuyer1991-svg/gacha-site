@@ -384,7 +384,9 @@
     function typeOf(ans, cfg) {
       var gs = ans.g.filter(function (g) { return g !== "type"; });
       ans.s.forEach(function (k) { var g = k.split(":")[0]; if (g !== "type" && !has(gs, g)) gs.push(g); });
-      var p = ans.f.length || ans.l.length || NORM(ans.o) ? "oshi" : !gs.length ? "free" : gs.length >= 3 ? "mix" : gs[0];
+      var fg = (ans.f[0] || ans.l[0] || "").split(":")[0];
+      // 作品を選んだときは、その作品の系統（サンリオ→ゆめかわ、ガンダム→クール）。名前を入れただけのときは推し活
+      var p = fg && fg !== "type" ? fg : NORM(ans.o) ? "oshi" : !gs.length ? "free" : gs.length >= 3 ? "mix" : gs[0];
       var sub = "";
       if (p !== "oshi" && p !== "free" && p !== "mix") sub = ans.s.filter(function (k) { return k.indexOf(p + ":") === 0; })[0] || "";
       var uses = ans.u.slice();
@@ -844,7 +846,7 @@
       var a = qLast.a, ty = qLast.ty, name = typeName(ty), emo = QZ.emo[ty.p] || "";
       qTypeEl.innerHTML = '<i aria-hidden="true">' + emo + "</i><span>" + esc(name) + "</span>";
       var favName = (a.f.length ? labelOf("l", a.f[0]) : a.l.length ? labelOf("l", a.l[0]) : a.o).replace(/[（(][^）)]*[）)]/g, "").trim();
-      $id("qr-comment").textContent = (ty.p === "oshi" && favName ? QZ.cFav(favName) : QZ.cP[ty.p] || "") + (EN ? " " : "") + (QZ.cS[ty.s] || "");
+      $id("qr-comment").textContent = (favName ? QZ.cFav(favName) : QZ.cP[ty.p] || "") + (EN ? " " : "") + (QZ.cS[ty.s] || "");
       // 選んだ答えのまとめ
       var tags = [];
       a.g.forEach(function (v) { if (!a.s.some(function (k) { return k.indexOf(v + ":") === 0; })) tags.push(labelOf("g", v)); });
