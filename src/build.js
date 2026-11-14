@@ -1178,6 +1178,26 @@ const crypto = require("crypto");
 const ver = (f) => crypto.createHash("md5").update(fs.readFileSync(path.join(__dirname, f))).digest("hex").slice(0, 8);
 const QUIZ_V = crypto.createHash("md5").update(JSON.stringify(rawItems) + JSON.stringify(votes) + JSON.stringify(titles) + JSON.stringify(site)).digest("hex").slice(0, 8);
 const CSS_V = ver("style.css");
+
+/* ---------- ページの更新日（サイトマップの lastmod） ----------
+   ページの「中身の指紋（ハッシュ）」を data/page-hashes.json に { 住所: { h: 指紋, d: 変わった日 } } で覚えておき、
+   指紋が前回と変わったページだけ、更新日を今日（日本時間）にする。在庫の数・今日の日付・並び順など毎日変わるものは指紋に入れない。
+   ファイルに書き出すのは公開のとき（GitHub Actions）だけ。手元のビルドでは書かない（手元の古いデータで日付がずれるのを防ぐ）。試すときは PAGE_HASHES_WRITE=1 */
+const HASH_FILE = path.join(ROOT, "data", "page-hashes.json");
+const hashPrev = (() => { try { return JSON.parse(fs.readFileSync(HASH_FILE, "utf8")); } catch { return {}; } })();
+const hashNext = { ...hashPrev }; // 今回作らなかったページ（お店の一覧を読めなかった回など）の記録は残す
+const hashChanged = []; // 今回 指紋が変わった（または初めての）ページ。公開のあと IndexNow に知らせる
+const hashKey = (lang, rel) => canonical(lang, rel).slice(SITE_URL.length);
+const noDigits = (x) => String(x || "").replace(/[0-9０-９]+/g, "");
+const pageLastmod = (lang, rel, value) => {
+  const k = hashKey(lang, rel), h = crypto.createHash("md5").update(JSON.stringify(value)).digest("hex").slice(0, 12), p = hashPrev[k];
+  const d = p && p.h === h && p.d ? p.d : today;
+  if (!p || p.h !== h || p.d > (hashPrev._built || "")) hashChanged.push(canonical(lang, rel)); // 前回の公開より後に変わったページも（知らせそこねを防ぐ）
+  hashNext[k] = { h, d };
+  return d;
+};
+// 一覧ページの指紋に入れる、商品カード1枚ぶんの中身
+const cardSig = (it, lang) => [it.id, nameOf(it, lang), it.price, it.lineup, it.release, it.release_note || "", it.image];
 const JS_V = ver("app.js");
 
 // 本文は端末の日本語フォント。Googleのフォントは見出し用の太さだけ読む（Zen Maru Gothic 700・Nunito 700・Fredoka 600）
@@ -1250,7 +1270,17 @@ for (const lang of LANGS) {
   <div class="card-foot"><span><b>${priceTxt(it.price)}</b>${it.lineup ? ` / ${t.lineup(it.lineup)}` : ""}</span>${relLabel(it)}</div>
 </a>`;
 
-  const layout = ({ rel, title, description, body, jsonld = [], ogImage = "", ogType = "website", current = "", jaOnly = false, extraHead = "", noindex = false, noAlt = false, lastmod = "", alts = null, only = null }) => {
+  const layout = ({ rel, title, description, body, jsonld = [], ogImage = "", ogType = "website", current = "", jaOnly = false, extraHead = "", noindex = false, noAlt = false, lastmod = "", alts = null, only = null, sig = null }) => {
+    // 更新日：中身の指紋が変わった日（上の pageLastmod）。呼び出し側の lastmod は使わない（追加日のままだったり、毎日「今日」になったりしていたため）
+    // 商品ページは sig（名前・値段・ラインナップ・説明など）。それ以外は、タイトルと説明（数字ぬき）＋載っている商品カードの中身（並び順は見ない）。商品が1つも載らないページは本文の文字
+    if (noindex) delete hashNext[hashKey(lang, rel)]; // 検索に出さない間は覚えない（出すようになった日が更新日になる）
+    else {
+      const ids = [...new Set((body.match(/item\/[A-Za-z0-9_-]+(?=\.html)/g) || []).map((x) => x.slice(5)))].sort();
+      lastmod = pageLastmod(lang, rel, ogType === "product" && sig ? sig : [noDigits(title), noDigits(description), ids.map((id) => itemById.get(id)).filter(Boolean).map((it) => cardSig(it, lang)), sig,
+        ids.length ? "" : noDigits(body.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<[^>]+>/g, " ").replace(/\s+/g, " "))]);
+      // 記事（Article）の dateModified も同じ日にする
+      jsonld = jsonld.map((o) => (o && o["@type"] === "Article" ? { ...o, dateModified: o.datePublished && o.datePublished > lastmod ? o.datePublished : lastmod } : o));
+    }
     // この内容がある言語（hreflang と言語メニューに使う）
     const ALT = jaOnly ? ["ja"] : alts || LANGS;
     const c = ctx(rel);
@@ -1897,8 +1927,10 @@ ${content}
         { "@type": "ListItem", position: 3, name },
       ],
     };
-    layout({ rel, title: t.itemTitle(name, lots.length > 0), description: desc, body, jsonld: [...(product.image ? [product] : []) /* 写真のない商品は Product を出さない（Google で「image がない」と無効になるため） */, crumbs, ...(whereLd ? [whereLd] : [])], ogImage: absImg(it), ogType: "product",
-      noindex: !hasName(it, lang), alts: LANGS.filter((l) => hasName(it, l)), lastmod: it.updated || it.added || "" });
+    layout({ rel, title: t.itemTitle(name, lots.length > 0), description: desc, body, jsonld: [...(product.image && product.offers ? [product] : []) /* 写真のない商品・値段が未定の商品は Product を出さない（Google で「image がない」「offers がない」と無効になるため） */, crumbs, ...(whereLd ? [whereLd] : [])], ogImage: absImg(it), ogType: "product",
+      noindex: !hasName(it, lang), alts: LANGS.filter((l) => hasName(it, l)),
+      // 更新日のもとになる中身（在庫・今日の日付・関連商品は入れない）
+      sig: [name, it.price, it.lineup, it.lineup_names || [], it.lineup_notes || {}, descOf(it, lang) || "", lang === "ja" ? it.summary || "" : "", it.release, it.release_note || "", it.image, lots.map((l) => [l.shop || l.store || "", l.title || "", l.url || "", l.end || ""])] });
   }
 
   /* ---------- 一覧ページ（ジャンル別・メーカー別） ---------- */
@@ -2311,7 +2343,7 @@ ${content}
   ${pager}
   ${archiveNav(c, m)}
 </div>`;
-      layout({ rel, title, description: desc, body, current: "calendar", lastmod: maxAdded(groups.flatMap((g) => g.list)), jsonld: [crumbLd(rel, monthLabel(m)), itemListLd(rel, groups.flatMap((g) => g.list)),
+      layout({ rel, title, description: desc, body, current: "calendar", lastmod: maxAdded(groups.flatMap((g) => g.list)), noindex: n < 2 /* 1件しか載っていない月は検索に出さない（商品が増えたら自動で戻る） */, jsonld: [crumbLd(rel, monthLabel(m)), itemListLd(rel, groups.flatMap((g) => g.list)),
         hubs.collectionLd({ name: en ? h1 : `${y}年${Number(mo)}月発売のガチャ`, url: canonical(lang, rel), list: groups.flatMap((g) => g.list), inLanguage: t.htmlLang, siteUrl: SITE_URL })] });
     }
     void past;
@@ -3027,6 +3059,14 @@ ${Object.keys(groups).map((g) => `  <sitemap><loc>${SITE_URL}/sitemap-${g}.xml</
 </sitemapindex>
 `);
 }
+// ページの指紋と更新日を保存（公開のときだけ）。今回変わったページの一覧は IndexNow 用に書き出す（.indexnow-urls.json はリポジトリには入れない）
+if (!PREVIEW) {
+  const { _built, ...rest } = hashNext;
+  const built = process.env.GITHUB_ACTIONS ? today : _built; // _built：最後に公開した日（IndexNow に知らせたかどうかの目印）。手元のビルドでは進めない
+  const out = "{\n" + [...(built ? [`"_built": ${JSON.stringify(built)}`] : []), ...Object.keys(rest).sort().map((k) => `${JSON.stringify(k)}: ${JSON.stringify(rest[k])}`)].join(",\n") + "\n}\n"; // 1ページ1行（変わった所だけが差分になる）
+  if (process.env.GITHUB_ACTIONS || process.env.PAGE_HASHES_WRITE) fs.writeFileSync(HASH_FILE, out);
+  fs.writeFileSync(path.join(ROOT, ".indexnow-urls.json"), JSON.stringify([...new Set(hashChanged)]));
+}
 // 古いURL → 新しいURL
 write("_redirects", [
   ...SERIES.map((sr) => `/series/${sr.slug} /chara/${sr.slug} 301\n/series/${sr.slug}.html /chara/${sr.slug} 301\n/en/series/${sr.slug} /en/chara/${sr.slug} 301\n/en/series/${sr.slug}.html /en/chara/${sr.slug} 301`),
@@ -3147,7 +3187,7 @@ write("data/shops.json", JSON.stringify(SHOPS.map((x) => [x.id, x.name, x.pref, 
     return { dow, daily, pick, spot, pickone, stats: sm, week: { range: WEEK.range, count: WEEK.items.length, url: `${SITE_URL}/en/week`, items: wk.slice(0, 4).map(packEn) } };
   })(), fav_ids: favIds, site: SITE_URL }));
 }
-write("_headers", `/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n/assets/*\n  Cache-Control: public, max-age=31536000, immutable\n/images/*\n  Cache-Control: public, max-age=604800\n  Access-Control-Allow-Origin: *\n/data/*\n  Cache-Control: public, max-age=300\n  Access-Control-Allow-Origin: *\n/sw.js\n  Cache-Control: no-cache\n`);
+write("_headers", `/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n/assets/*\n  Cache-Control: public, max-age=31536000, immutable\n/images/*\n  Cache-Control: public, max-age=604800\n  Access-Control-Allow-Origin: *\n/data/*\n  Cache-Control: public, max-age=300\n  Access-Control-Allow-Origin: *\n/sw.js\n  Cache-Control: no-cache\nhttps://:project.pages.dev/*\n  X-Robots-Tag: noindex\nhttps://:branch.:project.pages.dev/*\n  X-Robots-Tag: noindex\n`); // 最後の2つ：Cloudflare の元の住所（◯◯.pages.dev と、その前に枝の名前が付く確認用の住所）は検索に出さない。gachapla.com には付かない
 
 const noEn = items.filter((it) => !it.name_en).length;
 if (noEn) warnings.push(`英語名（name_en）がまだない商品が${noEn}件あります（英語ページでは日本語名を表示）`);

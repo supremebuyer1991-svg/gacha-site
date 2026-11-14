@@ -40,6 +40,7 @@ jobs:
 
       # 取り込みは時間がかかるので、決まった時間（と手動実行）のときだけ。デザインの修正などはすぐ公開する
       - name: 画像・店舗・在庫を取り込む
+        id: fetch
         if: github.event_name != 'push'
         env:
           # 9時・15時は新作と写真の取り込みをしない（GitHub Actions の無料枠を節約するため。新作の確認は0時の1日1回で十分）
@@ -50,23 +51,6 @@ jobs:
         run: |
           npm install --no-save --no-package-lock sharp@0.33.5
           node src/fetch-assets.js
-
-      - name: 取り込んだものを保存
-        if: github.event_name != 'push'
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          mkdir -p lineup-src
-          git add images lineup-src data/items.json data/stores.json data/stock.json data/backfill.json data/import-skip.json
-          if ! git diff --cached --quiet; then
-            git commit -m "画像・店舗・在庫を自動取り込み"
-            # 取り込み中にほかの自動作業が push していることがあるので、取り込み直してから送る（最大3回）
-            for i in 1 2 3; do
-              git push && break
-              git pull --rebase -X theirs origin main || { git rebase --abort; exit 1; }
-              sleep 3
-            done
-          fi
 
       - name: ハートの数・ガチャマップのお店を読み込む
         continue-on-error: true
@@ -82,6 +66,25 @@ jobs:
         run: node src/build.js
         env:
           SITE_URL: https://gachapla.com
+
+      # ページを作ったあとに保存する：ページの更新日の記録（data/page-hashes.json）はビルドが書き出すため。
+      # ビルドが失敗した回も、取り込んだ画像などは保存する（取り込みが失敗した回は、これまでどおり保存しない）。data/ だけの変更では公開は動かないので、くり返しにはならない
+      - name: 取り込んだもの・ページの更新日の記録を保存
+        if: ${{ !cancelled() && steps.fetch.outcome != 'failure' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir -p lineup-src
+          git add images lineup-src data/items.json data/stores.json data/stock.json data/backfill.json data/import-skip.json data/page-hashes.json
+          if ! git diff --cached --quiet; then
+            git commit -m "画像・店舗・在庫・ページの更新日を自動保存"
+            # 取り込み中にほかの自動作業が push していることがあるので、取り込み直してから送る（最大3回）
+            for i in 1 2 3; do
+              git push && break
+              git pull --rebase -X theirs origin main || { git rebase --abort; exit 1; }
+              sleep 3
+            done
+          fi
 
       - name: SNS（Threads・Instagram・Pinterest）用の画像を作る
         continue-on-error: true
@@ -129,10 +132,8 @@ jobs:
           $W pages project create "$PROJECT" --production-branch=main 2>/dev/null || true
           $W pages deploy dist --project-name="$PROJECT" --branch=main
 
-      - name: 新しいページを検索サイトに知らせる（IndexNow：Bing・Naver など）
+      - name: 中身が変わったページを検索サイトに知らせる（IndexNow：Bing・Naver など）
         continue-on-error: true
-        env:
-          INDEXNOW_DAYS: "3"
         run: node src/indexnow.js
 
       - name: 在庫確認ワーカーを公開

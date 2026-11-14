@@ -5,3 +5,4 @@ node_modules/
 data/votes.json
 data/shops-live.json
 .reel-tmp/
+.indexnow-urls.json

@@ -267,7 +267,7 @@ const build = (P, E) => {
   ${pager}
 </div>`;
     // 今週・来週の週ページは /week・/next-week と中身が同じになるので、その間は検索に出さない（Google が重複と判断していたため。週が過ぎたら自動で戻る）
-    layout({ rel, title, description: desc, body, current: "calendar", lastmod: maxAdded(list), noindex: w.key === WEEK.key || w.key === NEXT_WEEK.key,
+    layout({ rel, title, description: desc, body, current: "calendar", lastmod: maxAdded(list), noindex: w.key === WEEK.key || w.key === NEXT_WEEK.key || n < 2 /* 1件しか載っていない週は検索に出さない */,
       jsonld: [crumbs([[t.home, "index.html"], [t.calH1, "calendar.html"], [monthLabel(ym), `calendar/${ym}.html`], [lab]]), itemList(list),
         collectionLd({ name: h1, url: canonical(lang, rel), list, inLanguage: t.htmlLang, siteUrl: SITE_URL })] });
   });
