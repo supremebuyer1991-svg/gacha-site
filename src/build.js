@@ -889,6 +889,47 @@ const NEXT_WEEK = (() => {
 const hubs = require("./hubs");
 const HUB = hubs.prepare({ items, weekStartOf, weekInfo, mondayOf, nowJST, thisMonth, hashSlug });
 const stats = require("./stats"); // 統計ページ /stats（日本語・英語）
+/* ---------- 季節・テーマの一覧ページ（/theme/〇〇・日本語だけ） ----------
+ * ここに1つ足すと、ページ・サイトマップ・トップの小さなリンク（season の期間だけ）・商品ページのリンクが自動でできる。
+ *   name   : 商品名・タグに入っていれば当たり
+ *   lineup : ラインナップ名のうち、ちがう言葉が2つ以上当たれば当たり（1つだけ＝たまたま、を避ける）
+ *   strip  : 判定の前に取りのぞく言葉（作品名に季節の言葉が入っているもの。例『ナイトメア・ビフォア・クリスマス』）
+ *   min    : この件数に届かない季節はページを作らない（中身のうすいページを出さない）
+ *   season : トップにリンクを出す期間 [開始, 終了]（月-日）。期間の外でもページは残す
+ *   year   : タイトルに入れる年（お正月は年をまたぐので翌年）
+ * 説明文では判定しない（「プレゼントにも向いています」などで関係ない商品が入るため）。 */
+const THEME_DEFS = [
+  { slug: "christmas", emoji: "🎄", label: "クリスマス", min: 5, season: ["11-01", "12-25"], year: (y) => y,
+    motif: "サンタ・ツリー・雪だるま", motifLong: "サンタクロース・クリスマスツリー・雪だるま・オーナメント",
+    strip: /ナイトメアー?・?ビフォア・?クリスマス/g,
+    name: /クリスマス|Xmas|X['’]mas|Christmas|サンタ|トナカイ|雪だるま|スノーマン|ジングルベル|Holiday|ホリデー|聖夜/i,
+    lineup: /クリスマス|サンタ|トナカイ|雪だるま|スノーマン|ツリー|リース|プレゼント|ジンジャー|くつした|オーナメント|キャンドル/ },
+  { slug: "newyear", emoji: "🎍", label: "お正月・縁起物", min: 5, season: ["12-01", "01-15"], year: (y, m) => (m >= 6 ? y + 1 : y),
+    motif: "干支・だるま・招き猫", motifLong: "干支・だるま・招き猫・鏡餅",
+    name: /お?正月|干支|福袋|年賀|鏡餅|おせち|お年玉|門松|初詣|おみくじ|獅子舞|縁起物|開運|七福神/,
+    lineup: /鏡餅|かがみもち|(?<![雪き])だるま|達磨|招き猫|まねきねこ|門松|獅子舞|おみくじ|羽子板|干支|お年玉|おせち|しめ縄|絵馬|富士山/ },
+  { slug: "winter", emoji: "⛄", label: "冬", min: 8, season: ["11-15", "02-28"], year: (y, m) => (m >= 6 ? y : y - 1),
+    motif: "雪だるま・おでん・こたつ", motifLong: "雪だるま・おでん・ストーブ・こたつ",
+    strip: /春夏秋冬|冬獅郎|光月おでん/g,
+    name: /冬|雪だるま|雪うさぎ|おでん|こたつ|コタツ|マフラー|ニット帽|ストーブ|湯たんぽ|手袋|ウィンター|スノードーム|あったか|あったま/,
+    lineup: /冬|雪だるま|雪うさぎ|おでん|こたつ|コタツ|マフラー|ニット|ストーブ|湯たんぽ|手袋|みかん|肉まん|鍋/ },
+];
+const themeHit = (th, it) => {
+  const clean = (x) => String(x || "").normalize("NFKC").replace(th.strip || /$^/g, "");
+  if (th.name.test(clean([it.name, (it.tags || []).join(" ")].join(" ")))) return true;
+  const kinds = new Set();
+  for (const n of it.lineup_names || []) { const m = clean(n).match(th.lineup); if (m) kinds.add(m[0]); }
+  return kinds.size >= 2;
+};
+const THEMES_ALL = THEME_DEFS.map((th) => {
+  const md = today.slice(5), [from, to] = th.season;
+  // これから発売（近い順）→ 発売中（新しい順）
+  const hit = items.filter((it) => themeHit(th, it));
+  const list = [...hit.filter((it) => HUB.isUpcoming(it)).sort(HUB.order), ...hit.filter((it) => !HUB.isUpcoming(it)).sort((a, b) => HUB.order(b, a))];
+  return { ...th, list, on: list.length >= th.min, inSeason: from <= to ? md >= from && md <= to : md >= from || md <= to, y: th.year(nowJST.getUTCFullYear(), nowJST.getUTCMonth() + 1) };
+});
+const THEMES = THEMES_ALL.filter((th) => th.on);
+const themesOf = (it) => THEMES.filter((th) => th.list.includes(it));
 // KKday（バリューコマース経由）：外国人旅行者向けの「旅の準備」リンク（eSIM・交通・入場券・アニメ体験）。駅ページとガイドに出す
 const KK_LANG = { en: "en", ko: "ko", "zh-tw": "zh-tw", "zh-cn": "zh-cn" };
 const KK_T = {
@@ -1496,7 +1537,8 @@ ${content}
     <div class="section-head"><h2>${lang === "ja" ? "人気シリーズ" : t.x.popSeries}</h2></div>
     <div class="series-tiles">${SERIES.filter((sr) => sr.tile !== false).map((sr) => { const ch = CHARAS.find((x) => x.slug === sr.slug); const n = ch ? ch.list.length : 0; return n ? `<a class="st st-${sr.slug}" href="${c.H}chara/${sr.slug}.html"><span class="st-e" aria-hidden="true">${sr.emoji}</span><span class="st-l">${lang === "ja" ? sr.label : (I18N_CHARA[lang] && I18N_CHARA[lang][sr.en]) || (sr.i18n && sr.i18n[lang]) || sr.en}</span><span class="st-n">${t.series(n)}</span></a>` : ""; }).join("")}</div>
     <div class="chara-list chara-list-top">${(() => { const tiles = new Set(SERIES.filter((sr) => sr.tile !== false).map((sr) => sr.slug)); const first = SERIES.filter((sr) => sr.tile === false).map((sr) => CHARAS.find((x) => x.slug === sr.slug)).filter(Boolean); return first.concat(CHARAS.filter((ch) => !tiles.has(ch.slug) && !first.includes(ch))).slice(0, 15); })().map((ch) => `<a class="chara-chip" href="${c.H}chara/${ch.slug}.html">${esc(charaLabel(ch, lang))}<small>${ch.list.length}</small></a>`).join("")}</div>
-    <div class="series-more"><a class="chara-chip chara-more" href="${c.H}chara.html">${lang === "ja" ? "キャラクター・作品をすべて見る →" : t.x.allChara}</a><a class="chara-chip chara-more" href="#genres">${t.genreTitle} ↓</a><a class="chara-chip chara-more" href="#types">${t.typeTitle} ↓</a></div>
+    <div class="series-more"><a class="chara-chip chara-more" href="${c.H}chara.html">${lang === "ja" ? "キャラクター・作品をすべて見る →" : t.x.allChara}</a><a class="chara-chip chara-more" href="#genres">${t.genreTitle} ↓</a><a class="chara-chip chara-more" href="#types">${t.typeTitle} ↓</a></div>${lang === "ja" && THEMES.some((th) => th.inSeason) ? `
+    <div class="series-more theme-chips">${THEMES.filter((th) => th.inSeason).map((th) => `<a class="chara-chip" href="${c.H}theme/${th.slug}.html">${th.emoji} ${esc(th.label)}のガチャ<small>${th.list.length}</small></a>`).join("")}</div>` : ""}
   </section>
 `;
     const homeStnSeries = `  ${(() => { const pick = ["akihabara", "ikebukuro", "shinjuku", "shibuya", "harajuku", "umeda", "namba", "hakata", "sapporo"].map((s) => STATIONS.find((x) => x.slug === s)).filter(Boolean); return pick.length ? `<section class="section section-tight" id="stations">
@@ -1702,6 +1744,8 @@ ${content}
     const maker = makerOf(it, lang);
     const description = descOf(it, lang);
     const tags = tagsOf(it, lang);
+    // 季節・テーマの一覧（/theme/）へ。日本語だけ
+    const themeChips = lang === "ja" ? themesOf(it).map((th) => `<a class="chip" href="${c.H}theme/${th.slug}.html">${th.emoji} ${esc(th.label)}のガチャ一覧</a>`).join("") : "";
     const aff = affiliate(it);
     const hasStock = (stockByItem.get(it.id) || []).length > 0;
     // 公式の取扱店データがまだない商品は、バンダイ公式「ガシャポンどこ？」を一番のボタンに
@@ -1808,7 +1852,7 @@ ${content}
         <dt>${t.release}</dt><dd><a href="${c.H}calendar/${ws ? ws.toISOString().slice(0, 7) : it.release}.html">${t.month(it.release)}</a>${lang === "ja" && it.release_note ? (ws ? `<a class="rel-note" href="${c.H}${weekHref}">${esc(it.release_note)}</a>` : `<span class="rel-note">${esc(it.release_note)}</span>`) : ""}</dd>
         ${it.age_min ? `<dt>${t.ageLabel}</dt><dd>${t.ageMin(it.age_min)}</dd>` : ""}
         <dt>${t.genre}</dt><dd><a href="${c.H}genre/${g.slug}.html">${gl}</a></dd>
-        ${tags.length ? `<dt>${t.tags}</dt><dd><div class="tags">${tags.map((x) => `<span class="chip chip-ai">${esc(x)}</span>`).join("")}</div></dd>` : ""}
+        ${tags.length || themeChips ? `<dt>${t.tags}</dt><dd><div class="tags">${tags.map((x) => `<span class="chip chip-ai">${esc(x)}</span>`).join("")}${themeChips}</div></dd>` : ""}
       </dl>
       ${description && lang !== "ja" ? `<p class="desc">${esc(description)}</p>` : ""}
       <div class="item-actions"${state === "up" ? ' id="notify" style="scroll-margin-top:24px"' : ""}>
@@ -2245,6 +2289,27 @@ ${content}
     lead: lang !== "ja" ? t.x.nextLead(NEXT_WEEK.items.length, NEXT_WEEK.range, NEXT_WEEK.items.slice(0, 3).map((it) => nameOf(it, lang))) : `${NEXT_WEEK.label}（${NEXT_WEEK.range}）に発売予定のガチャ${NEXT_WEEK.items.length}シリーズです。${NEXT_WEEK.items.length ? `${NEXT_WEEK.items.slice(0, 2).map((it) => `「${it.name}」`).join("")}など、` : ""}値段・全何種か・在庫店の情報もまとめています。発売日は地域や店舗によって前後します。`,
     list: NEXT_WEEK.items, current: "next", extra: weekSwap("week.html", navT.week, WEEK.items.length, false) + permaLink(NEXT_WEEK) + listAff(lang, "予約", "発売前に予約・まとめ買い"),
   });
+  // 季節・テーマの一覧（/theme/christmas など。定義は上の THEME_DEFS・日本語だけ）
+  if (lang === "ja") for (const th of THEMES) {
+    const list = th.list, L = th.label, n = list.length;
+    const up = list.filter((it) => HUB.isUpcoming(it)).length;
+    const prices = list.map((it) => Number(it.price)).filter((p) => p > 0);
+    const pr = prices.length ? (Math.min(...prices) === Math.max(...prices) ? `1回${prices[0]}円` : `1回${Math.min(...prices)}〜${Math.max(...prices)}円`) : "";
+    // この一覧に多く入っているキャラクター・作品（上位5つ）
+    const rel = CHARAS.map((ch) => ({ ch, k: ch.list.filter((it) => list.includes(it)).length })).filter((x) => x.k).sort((a, b) => b.k - a.k || b.ch.list.length - a.ch.list.length).slice(0, 5);
+    const others = THEMES.filter((x) => x !== th);
+    listPage(`theme/${th.slug}.html`, {
+      title: `${L}のガチャガチャ【${th.y}年】${th.motif}の新作一覧`,
+      h1: `${L}のガチャガチャ（${th.y}年）`,
+      sub: `${n}シリーズ${up ? `・これから発売${up}` : ""}${pr ? `・${pr}` : ""}`,
+      lead: `${L}をモチーフにしたガチャガチャ（カプセルトイ）を${n}シリーズ集めました。${th.motifLong}などのデザインがあり、${up ? `これから発売が${up}シリーズ、発売中が${n - up}シリーズ` : `${n}シリーズすべて発売中`}${pr ? `、値段は${pr}` : ""}です。発売が近いものから順に並べていて、それぞれのページで発売される週・値段・全何種か・売っているお店を確認できます。`,
+      description: `${th.y}年の${L}のガチャガチャ${n}シリーズの発売日・値段・全何種か・売っているお店。${list.slice(0, 3).map((it) => `「${it.name}」`).join("")}など。`,
+      list, jaOnly: true,
+      extra: (c2) => `<p class="hub-links"><a href="${c2.H}week.html">今週発売のガチャ${WEEK.items.length ? `<small>${WEEK.items.length}</small>` : ""}</a><a href="${c2.H}next-week.html">来週発売のガチャ${NEXT_WEEK.items.length ? `<small>${NEXT_WEEK.items.length}</small>` : ""}</a>${others.map((x) => `<a href="${c2.H}theme/${x.slug}.html">${x.emoji} ${esc(x.label)}のガチャ<small>${x.list.length}</small></a>`).join("")}</p>`
+        + (rel.length ? `<p class="hub-links"><b>キャラクター・作品</b>${rel.map(({ ch, k }) => `<a href="${c2.H}chara/${ch.slug}.html">${esc(charaLabel(ch, lang))}<small>${k}</small></a>`).join("")}</p>` : "")
+        + listAff(lang, L.split("・")[0], `${L}のガチャを通販で探す（売り切れ・まとめ買い）`),
+    });
+  }
   // 新着ガチャ（トップの「全部見る」のリンク先）
   {
     // 載った日が新しい順 → 同じ日なら発売が先の新作から（まとめて取り込んだ日に古い商品が上に来ないように）
@@ -3378,4 +3443,5 @@ if (noEn) warnings.push(`英語名（name_en）がまだない商品が${noEn}�
 
 /* ---------- 結果 ---------- */
 console.log(`✔ ${items.length}商品・${validStores.length}店舗から 日本語${pages.filter((p) => p[0] === "ja").length}・英語${pages.filter((p) => p[0] === "en").length}ページを ${path.relative(ROOT, OUT)}/ に書き出しました`);
+console.log(`  季節ページ: ${THEMES_ALL.map((th) => `${th.label} ${th.list.length}件${th.on ? "" : `（${th.min}件未満のため作らない）`}`).join(" / ")}`);
 if (warnings.length) { console.log(`⚠ 注意 ${warnings.length}件:`); warnings.forEach((w) => console.log("  - " + w)); }
