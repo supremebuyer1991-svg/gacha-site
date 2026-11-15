@@ -617,6 +617,8 @@ label.opt:focus-within { outline: none; }
 .map-tools { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
 .map-q { flex: 1 1 220px; height: 44px; padding: 0 16px; border-radius: 999px; border: 2px solid var(--line); background: #fff; font: 500 14px var(--font-body); }
 .map-tools .btn { min-height: 44px; }
+.map-near { margin-bottom: 12px; }
+.map-near-h { margin: 0 0 8px; font-weight: 700; font-size: 14px; }
 .map { position: relative; height: min(68vh, 620px); border-radius: var(--radius); overflow: hidden; box-shadow: 0 10px 30px rgba(58,77,160,.10), 0 2px 0 var(--line); background: #eef2ff; z-index: 0; }
 .map-sm { height: 260px; }
 .map.is-adding::after { content: "＋"; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -54%); font: 700 48px/1 var(--font-latin); color: var(--gold); text-shadow: 0 0 6px #fff, 0 0 2px #fff; z-index: 500; pointer-events: none; }
