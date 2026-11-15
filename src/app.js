@@ -1563,6 +1563,17 @@
       if (!navigator.geolocation) return;
       navigator.geolocation.getCurrentPosition(function (p) {
         map.setView([p.coords.latitude, p.coords.longitude], 14);
+        // 現在地から近いお店を5つ、近い順に文字でも出す（地図だけだと「どこが近いか」が分かりにくいので）
+        var nb = document.getElementById("map-near");
+        if (nb && list.length) {
+          var la = p.coords.latitude, lo = p.coords.longitude, kx = Math.cos(la * Math.PI / 180);
+          var nr = list.map(function (s) { var dy = (s[3] - la) * 111320, dx = (s[4] - lo) * 111320 * kx; return [Math.sqrt(dx * dx + dy * dy), s]; }).sort(function (x, y) { return x[0] - y[0]; }).slice(0, 5);
+          nb.innerHTML = '<p class="map-near-h">現在地から近いガチャガチャ設置店（近い順）</p><div class="shop-list">' + nr.map(function (x) {
+            var m = x[0], s = x[1];
+            return '<a class="shop-row" href="' + root + 'shop/' + esc(s[0]) + '"><b>' + esc(s[1]) + '</b><span>' + esc(s[2] || "") + '</span><em>' + (m < 1000 ? "約" + Math.max(10, Math.round(m / 10) * 10) + "m" : "約" + (m / 1000).toFixed(1) + "km") + (m <= 1200 ? "・徒歩約" + Math.max(1, Math.round(m / 80)) + "分" : "") + '</em></a>';
+          }).join("") + '</div>';
+          nb.hidden = false;
+        }
         if (p.coords.accuracy > 1000) window.L.circle([p.coords.latitude, p.coords.longitude], { radius: p.coords.accuracy, color: "#3aa0ff", weight: 1, fillOpacity: 0.06 }).addTo(map).bindTooltip("このあたり（誤差 約" + Math.round(p.coords.accuracy / 1000) + "km）", { permanent: true }).openTooltip();
       }, function () {}, { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 });
     });
