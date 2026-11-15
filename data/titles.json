@@ -2071,5 +2071,85 @@
   "subs": [
    "kawaii:character"
   ]
+ },
+ {
+  "label": "にっこりーノ",
+  "en": "Nikkorino",
+  "match": "にっこりーノ",
+  "subs": [
+   "kawaii:mascot"
+  ]
+ },
+ {
+  "label": "こびとづかん",
+  "en": "Kobito Dukan",
+  "match": "こびとづかん",
+  "subs": [
+   "kawaii:character"
+  ]
+ },
+ {
+  "label": "パンダの穴",
+  "en": "Panda no Ana",
+  "match": "パンダの穴",
+  "subs": [
+   "funny:neta"
+  ]
+ },
+ {
+  "label": "カラフルピーチ",
+  "en": "Colorful Peach",
+  "match": "カラフルピーチ|からぴち",
+  "subs": [
+   "oshi:vtuber"
+  ]
+ },
+ {
+  "label": "トイ・ストーリー",
+  "en": "Toy Story",
+  "match": "トイ・ストーリー|トイストーリー|TOY ?STORY",
+  "subs": [
+   "kawaii:disney"
+  ]
+ },
+ {
+  "label": "カプセルプラレール",
+  "en": "Capsule Plarail",
+  "match": "カプセルプラレール",
+  "subs": [
+   "real:vehicle"
+  ]
+ },
+ {
+  "label": "Fate",
+  "en": "Fate",
+  "match": "Fate/",
+  "subs": [
+   "oshi:game"
+  ]
+ },
+ {
+  "label": "おさるのジョージ",
+  "en": "Curious George",
+  "match": "おさるのジョージ",
+  "subs": [
+   "kawaii:character"
+  ]
+ },
+ {
+  "label": "夏目友人帳",
+  "en": "Natsume's Book of Friends",
+  "match": "夏目友人帳|ニャンコ先生",
+  "subs": [
+   "kawaii:character"
+  ]
+ },
+ {
+  "label": "セサミストリート",
+  "en": "Sesame Street",
+  "match": "セサミストリート",
+  "subs": [
+   "kawaii:character"
+  ]
  }
 ]

@@ -2207,6 +2207,10 @@ ${content}
     })();
     const spec = (it) => (ja ? `1回${it.price}円${it.lineup ? `・全${it.lineup}種` : ""}` : H.cxSpec(it.price, it.lineup));
     let qa, html, desc;
+    // 最新作の発売時期（週が分かれば「2026年11月第2週発売」、発売前なら「発売予定」）
+    const latestUp = HUB.isUpcoming(latest);
+    const bare = (it) => it.name.replace(/^(?:【[^】]*】\s*)+/, "") || it.name; // 説明文では先頭の【…】を外す
+    const latestWhen = `${t.month(latest.release)}${ja && weekStartOf(latest) ? `第${weekInfo(weekStartOf(latest)).no}週` : ""}${ja ? (latestUp ? "発売予定" : "発売") : ""}`;
     if (ja) {
       const byPref = {}; for (const x of shs) if (x.pref) byPref[x.pref] = (byPref[x.pref] || 0) + 1;
       const prefTop = Object.entries(byPref).sort((a, b) => b[1] - a[1]).slice(0, 5);
@@ -2237,7 +2241,8 @@ ${content}
     <h3 class="arr-h">${esc(L)}のガチャガチャ よくある質問</h3>
     <dl class="item-qa">${qa.map(([q, , a]) => `<div><dt>${esc(q)}</dt><dd>${a}</dd></div>`).join("")}</dl>
   </div></section>`;
-      desc = `${L}のガチャガチャ${list.length}シリーズの発売日・値段・売ってる場所。最新作「${cut(latest.name, 22)}」（${t.month(latest.release)}・${latest.price}円）${next ? `、次は「${cut(next.name, 22)}」が${relShort(next)}発売予定` : ""}。${pmin === pmax ? `1回${pmin}円` : `1回${pmin}〜${pmax}円`}。`;
+      // 「（キャラ）ガチャガチャ 最新」で探す人向けに、説明文は最新作の名前と発売時期から始める
+      desc = `${L}のガチャガチャ最新作は「${cut(bare(latest), 24)}」（${latestWhen}・${spec(latest)}）${next && next !== latest ? `、次は「${cut(bare(next), 22)}」が${relShort(next)}発売予定` : ""}。全${list.length}シリーズの発売日・値段・売ってる場所を新しい順に一覧。${pmin === pmax ? `1回${pmin}円` : `1回${pmin}〜${pmax}円`}。`;
     } else {
       // 駅のページに載っているお店（st.shops）が公式に扱うこのキャラのシリーズの数を駅ごとに数えて、多い順に3駅
       const inList = new Set(list.map((it) => it.id));
@@ -2275,20 +2280,36 @@ ${content}
     }
     const ld = [{ "@context": "https://schema.org", "@type": "FAQPage", inLanguage: LANG_META[lang].hreflang, mainEntity: qa.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) }];
     // 発売状況・よくある質問は、商品の一覧の下に（スマホで写真までが遠くならないように）
-    return { afterList: relHtml + html, description: desc, jsonldExtra: ld, lotBand };
+    return { afterList: relHtml + html, description: desc, jsonldExtra: ld, lotBand, latest, next, upcoming, latestUp, latestWhen, spec, relShort };
   };
   // キャラクター・作品ごとのページ
   for (const ch of CHARAS) {
-    const list = [...ch.list].sort(byNewest);
+    // 並び順：発売予定（近い順）→ 発売ずみ（発売が新しい順）。取り込んだ日（added）の順だと、あとから足した古い商品が先頭に来てしまうため
+    const list = [...ch.list.filter((it) => HUB.isUpcoming(it)).sort(HUB.order), ...ch.list.filter((it) => !HUB.isUpcoming(it)).sort((a, b) => HUB.order(b, a))];
     const L = charaLabel(ch, lang);
-    const top = list[0];
     const fy = freshYM(list);
     const cx = charaExtra(ch, L, list);
+    // 日本語のタイトル：「最新」で探す人に、最新作の名前と発売月で答える（作品名で始まる商品名は、作品名を外して短く）
+    const jaTitle = lang !== "ja" ? "" : (() => {
+      // 今月発売のものがあればそれ、なければ次に出る発売予定、どちらもなければ発売ずみでいちばん新しいもの
+      // 名前を出すのは、商品名そのものに作品名が入っている商品だけ（ラインナップ名や英語名だけで当たった商品は、別の作品のことがあるので出さない）
+      const rxName = new RegExp(`${L.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}|${ch.match}`, "i"), hit = (it) => rxName.test(it.name);
+      const rel = list.filter((it) => !HUB.isUpcoming(it) && hit(it)), ups = list.filter((it) => HUB.isUpcoming(it) && hit(it));
+      const latestN = hit(cx.latest) ? cx.latest : rel.find((it) => !HUB.isReissue(it)) || rel[0], nextN = cx.next && hit(cx.next) ? cx.next : ups.find((it) => !HUB.isReissue(it)) || ups[0];
+      const pick = latestN && latestN.release >= thisMonth ? latestN : nextN || latestN;
+      // 名前を出せる商品がない、または出せる商品がこのページの最新作より古い月のものなら、これまでのタイトルのまま
+      if (!pick || (!HUB.isUpcoming(pick) && pick.release < cx.latest.release)) return `${L}のガチャガチャ新作・発売日一覧${fy && fy.ja ? `【${fy.ja}最新】` : ""}`;
+      const up = HUB.isUpcoming(pick);
+      const base = pick.name.replace(/【[^】]*】/g, "").trim();
+      const cutHead = base.replace(new RegExp(`^(?:${L.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}|${ch.match})[\\s　・:：]+`, "i"), "");
+      const short = cutHead !== base && cutHead.length >= 4 ? cutHead : base;
+      return `${L}のガチャガチャ最新作【${t.month(pick.release)}${up ? "発売予定" : "発売"}】${short.length > 18 ? short.slice(0, 17) + "…" : short}ほか新作・発売日一覧`;
+    })();
     if (lang === "ja" && OG_CHARA.has(ch)) ogPlan(`chara/${ch.slug}.html`, `${L}のガチャガチャ`, `${list.length}シリーズ・新作と発売日`, list);
     listPage(`chara/${ch.slug}.html`, {
-      title: lang === "ja" ? `${L}のガチャガチャ新作・発売日一覧${fy && fy.ja ? `【${fy.ja}最新】` : ""}` : t.x.charaTitle(L, fy || YM_NOW_EN), ...hubHead(L, list),
+      title: lang === "ja" ? jaTitle : t.x.charaTitle(L, fy || YM_NOW_EN), ...hubHead(L, list),
       lead: lang === "ja"
-        ? `${L}のガチャガチャ${list.length}シリーズを新しい順にまとめました。最新は「${top.name}」（${t.month(top.release)}・1回${top.price}円）。それぞれのページで発売日・値段・全何種か・どこで売っているか（在庫店）を確認できます。`
+        ? `${L}のガチャガチャ最新作は「${cx.latest.name}」（${cx.latestWhen}・${cx.spec(cx.latest)}）${cx.next && cx.next !== cx.latest ? `、次の新作は「${cx.next.name}」（${cx.relShort(cx.next)}発売予定）` : ""}です。${cx.upcoming.length ? `発売予定${cx.upcoming.length}シリーズを先頭に、` : ""}全${list.length}シリーズを発売が新しい順にまとめました。それぞれのページで発売日・値段・全何種か・どこで売っているか（在庫店）を確認できます。`
         : t.x.charaLead(L, list.length),
       list, current: "chara", ...cx, extra: (c2) => cx.lotBand(c2) + ticketBlock(lang, ch.slug) + listAff(lang, L, `${L}のガチャを通販で探す（売り切れ・まとめ買い）`),
       ...(lang === "ja" ? { h1: `${L}のガチャガチャ最新作・新作一覧` } : {}),
