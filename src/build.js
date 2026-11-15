@@ -64,6 +64,8 @@ const enRange = (r) => {
   const [, m1, d1, m2, d2] = m.map(Number);
   return m1 === m2 ? `${MONTH_EN[m1 - 1]} ${d1}–${d2}` : `${MONTH_EN[m1 - 1]} ${d1}–${MONTH_EN[m2 - 1]} ${d2}`;
 };
+// 英語のタイトル用：「2026年11月」→「 (Nov 2026)」（空・形が違うときは何も付けない）
+const enYM = (ym) => { const m = String(ym || "").match(/^(\d{4})年(\d{1,2})月$/); return m ? ` (${MONTH_EN[m[2] - 1]} ${m[1]})` : ""; };
 
 // 一覧ページの説明文の後半（今月の新作の数・最新の2つの名前）。list は新しい順に並んだ商品
 const leadTail = (list = []) => { const m = list.filter((it) => it.release === thisMonth).length, top = list.slice(0, 2).map((it) => `「${it.name}」`).join(""); return `${m ? `今月の新作${m}件。` : ""}${top ? `最新は${top}など。` : ""}発売日・値段・全何種か・在庫店をまとめています。`; };
@@ -250,7 +252,7 @@ const T = {
       resKicker: "Your gacha type is…", top3: "Your top 3 picks", rest: "More gacha you may like",
       share: "Share result", shareX: "Post on X", retry: "Try again", edit: "Edit answers",
     },
-    newTitle: "New in Japan", toCalendar: "Release calendar", rankTitle: "Most popular right now", genreTitle: "Browse by genre", typeTitle: "Browse by type", typePage: (g) => `${g} gachapon (capsule toys) in Japan – new releases`, typeLead: (g, n) => `${n} ${g.toLowerCase()} gacha series sold in Japan, newest first. Tap one to see the price, release week and shops that have it.`,
+    newTitle: "New in Japan", toCalendar: "Release calendar", rankTitle: "Most popular right now", genreTitle: "Browse by genre", typeTitle: "Browse by type", typePage: (g, ym) => `${g} gachapon in Japan – new capsule toys${enYM(ym)}`, typeLead: (g, n) => `${n} ${g.toLowerCase()} gacha series sold in Japan, newest first. Tap one to see the price, release week and shops that have it.`,
     maker: "Maker", release: "Release", genre: "Genre", tags: "Tags",
     findStores: "Where can I buy it?", official: "Maker's page (Japanese)",
     storesTitle: "Shops in Japan that have it", geoBtn: "Show shops near me", or: "or", prefAria: "Filter by prefecture", loading: "Loading…",
@@ -286,7 +288,8 @@ const T = {
       relNow: "This week", relFrom: (m, d) => `From ${m}/${d}`, relOut: "Out now",
       popSeries: "Popular series", allChara: "All characters →", moreSeries: "More from this series", charaChip: (L) => `${L} gacha`,
       listMore: (max, n, href) => `Showing the latest ${max} of ${n}. Older ones are in the <a href="${href}">release calendar</a>.`,
-      charaTitle: (L, ym) => `${L} gachapon (capsule toys) in Japan – new releases & where to buy`,
+      // n：シリーズの数。新作がある月だけ (Nov 2026) を付ける（60字前後に収める）
+      charaTitle: (L, ym, n) => `${L} Gachapon in Japan: ${n ? `${n} ` : ""}Capsule Toy Series${ym && ym.ja ? ` (${MONTH_EN[ym.m - 1]} ${ym.y})` : ""}`,
       charaLead: (L, n) => `${n} ${L} capsule toy series, newest first, with release dates, prices and where to buy.`,
       charaIdxTitle: "Gachapon by character & series",
       charaIdxLead: (n) => `Looking for a favorite character? Browse capsule toys sold in Japan by character or series – ${n} lists.`,
@@ -392,8 +395,8 @@ const T = {
       saihanLead: (n) => `${n} capsule toys coming back as reissues or re-releases, by month. Where we know it, we link to the original release.`,
     },
     itemDesc: (it, n, mk, mo) => `${n} by ${mk}: released ${mo}${it.price ? `, ¥${it.price} per play` : ""}${it.lineup ? `, ${it.lineup} designs` : ""}. ${it.description_en ? it.description_en + " " : ""}Find shops in Japan that have it in stock, or buy the full set online.`,
-    genrePage: (g) => `${g} gachapon (capsule toys) in Japan – new releases`, genreLead: (g, n) => `${n} new and upcoming ${g.toLowerCase()} gacha in Japan, newest first. Tap one to see the price, release week and shops that have it.`,
-    makerPage: (m) => `${m} gachapon – new capsule toy releases in Japan`, makerLead: (m, n, list) => `${n} gacha series by ${m}, newest first.${leadTailEn(list)}`,
+    genrePage: (g, ym) => `${g} gachapon in Japan – new capsule toys${enYM(ym)}`, genreLead: (g, n) => `${n} new and upcoming ${g.toLowerCase()} gacha in Japan, newest first. Tap one to see the price, release week and shops that have it.`,
+    makerPage: (m, ym) => `${m} gachapon – new capsule toys in Japan${enYM(ym)}`, makerLead: (m, n, list) => `${n} gacha series by ${m}, newest first.${leadTailEn(list)}`,
     empty: "No items listed yet.",
     calTitle: "Japan gacha release calendar", calH1: "Gacha release calendar", calLead: "Every announced capsule toy in Japan, sorted by release week. Visiting soon? Check what comes out during your trip. Shops can get them a few days earlier or later.",
     calDesc: "Monthly calendar of new Japanese capsule toy (gacha) releases with prices, number of designs and makers.",
@@ -2286,7 +2289,7 @@ ${content}
     const cx = charaExtra(ch, L, list);
     if (lang === "ja" && OG_CHARA.has(ch)) ogPlan(`chara/${ch.slug}.html`, `${L}のガチャガチャ`, `${list.length}シリーズ・新作と発売日`, list);
     listPage(`chara/${ch.slug}.html`, {
-      title: lang === "ja" ? `${L}のガチャガチャ新作・発売日一覧${fy && fy.ja ? `【${fy.ja}最新】` : ""}` : t.x.charaTitle(L, fy || YM_NOW_EN), ...hubHead(L, list),
+      title: lang === "ja" ? `${L}のガチャガチャ新作・発売日一覧${fy && fy.ja ? `【${fy.ja}最新】` : ""}` : t.x.charaTitle(L, fy || YM_NOW_EN, list.length), ...hubHead(L, list),
       lead: lang === "ja"
         ? `${L}のガチャガチャ${list.length}シリーズを新しい順にまとめました。最新は「${top.name}」（${t.month(top.release)}・1回${top.price}円）。それぞれのページで発売日・値段・全何種か・どこで売っているか（在庫店）を確認できます。`
         : t.x.charaLead(L, list.length),
