@@ -138,7 +138,7 @@
  {
   "label": "ディズニープリンセス",
   "en": "Disney Princess",
-  "match": "プリンセス|Princess",
+  "match": "ディズニープリンセス|Disney Princess|プリンセス(?=.*ディズニー)",
   "subs": [
    "kawaii:disney"
   ]
@@ -675,7 +675,7 @@
  {
   "label": "チェンソーマン",
   "en": "Chainsaw Man",
-  "match": "チェンソー",
+  "match": "チェンソーマン|Chainsaw Man",
   "subs": [
    "cool:shonen"
   ]
@@ -1475,7 +1475,7 @@
  {
   "label": "涼宮ハルヒ",
   "en": "Haruhi Suzumiya",
-  "match": "ハルヒ",
+  "match": "涼宮ハルヒ|涼宮|Haruhi Suzumiya",
   "subs": [
    "oshi:trend"
   ]
