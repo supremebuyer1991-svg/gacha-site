@@ -1,81 +1,77 @@
 // Instagram リール用の縦長動画（1080×1920・約17秒）を作る。サイトを作ったあと（deploy の SNS画像の手順のあと）に動く。
-// 中身：表紙 → 商品8つ（写真を大きく・名前・値段・全何種・発売）→ しめ。音はこのファイルで作るオリジナルのピコピコ音（著作権の心配なし）。
+// 中身：表紙 → 商品8つ（写真を大きく・名前・値段・全何種）→ しめ。見た目は src/sns-style.js の部品で、SNS用の画像とそろえる。音はこのファイルで作るオリジナルのピコピコ音（著作権の心配なし）。
 // 出力：dist/images/social/reel-{日付}.mp4（TikTok 用の音なし版 reel-{日付}-silent.mp4、写真スライド用の reel-{日付}-s1.jpg〜 も） と dist/data/social-reel.json（social.js が Instagram に投稿するときに読む）
 const fs = require("fs"), path = require("path"), { execFileSync } = require("child_process");
-let sharp; try { sharp = require("sharp"); } catch (e) { console.log("sharp がないのでリールは作りません"); process.exit(0); }
+let sharp, S; try { sharp = require("sharp"); S = require("./sns-style"); } catch (e) { console.log("sharp がないのでリールは作りません"); process.exit(0); }
 const ROOT = path.join(__dirname, ".."), OUT = path.join(ROOT, "dist", "images", "social"), TMP = path.join(ROOT, ".reel-tmp");
-const W = 1080, H = 1920, FONT = "Noto Sans CJK JP, Noto Sans JP, sans-serif", LAT = "DejaVu Sans, Arial, sans-serif";
+const W = 1080, H = 1920;
 // 同じ日に作り直すと名前が同じになり、TikTok・Instagram が前の画像を使ってしまうので、中身から作った印を URL に付ける
 const ver = (f) => require("crypto").createHash("md5").update(fs.readFileSync(f)).digest("hex").slice(0, 8);
-const RING = ["#ff4f7b", "#3aa0ff", "#ffc93c", "#2fd6a3", "#a855f7"];
-const esc = (t) => String(t == null ? "" : t).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const clean = (s) => String(s || "").replace(/【[^】]*】/g, "").replace(/\s+/g, " ").trim();
-// 名前を1行 n 文字くらいで折り返す（最大3行）
-const wrap = (s, n) => { // 半角は0.55文字分として数え、英単語の途中ではなるべく切らない
-  const w = (c) => (/[\x20-\x7e]/.test(c) ? 0.55 : 1), out = []; let cur = "", cw = 0;
-  const toks = String(s).match(/[A-Za-z0-9'’.&!:-]+ ?|[\s\S]/g) || [];
-  for (const t of toks) { const tw = [...t].reduce((a, c) => a + w(c), 0); if (cw + tw > n && cur) { out.push(cur.trim()); cur = ""; cw = 0; } cur += t; cw += tw; }
-  if (cur.trim()) out.push(cur.trim());
-  if (out.length > 3) { out.length = 3; out[2] = out[2].slice(0, -1) + "…"; }
-  return out; };
-const relTxt = (it) => it.release_note || (it.release ? `${+it.release.slice(5, 7)}月発売` : "");
-
-function stars() { return Array.from({ length: 70 }, (_, i) => `<circle cx="${(i * 197) % W}" cy="${(i * 389) % H}" r="${(i % 3) + 1.2}" fill="#fff" fill-opacity="${0.2 + (i % 4) * 0.15}"/>`).join(""); }
-const BG = `<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#232a7a"/><stop offset="1" stop-color="#0d1033"/></linearGradient></defs><rect width="${W}" height="${H}" fill="url(#g)"/>${stars()}`;
-const LOGO = `<text x="${W / 2 - 8}" y="${H - 120}" text-anchor="end" font-family="${LAT}" font-weight="700" font-size="40" fill="#ff4f7b">GACHA</text><text x="${W / 2 + 8}" y="${H - 120}" text-anchor="start" font-family="${LAT}" font-weight="700" font-size="40" fill="#3aa0ff">PLANET</text>`;
+// 見た目の部品（配色・写真のカード・チップ・文字）は src/sns-style.js（SNS用の 1200×1200 画像と共通）。SNS_STYLE=B で B案（ダーク）
+// TikTok の実際の画面で測った「見える範囲」：上の検索欄の下〜下の説明文の上＝ y 360〜1555 くらい。大事なもの（写真・商品名・値段）はこの中（SAFE_T〜SAFE_B）に置く。
+// その外（上の y 300〜350、下の y 1650 あたり）には、隠れてもいいもの（サイト名・「おすすめ 1/8」・進みぐあいの線）だけ。
+const SAFE_T = 372, SAFE_B = 1548, SX = 70;
+const svgOpen = (pal) => `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">${S.bgSvg(W, H, pal, 0.5, 0.45)}`;
+// 上のほそい帯：左にサイト名、右に「おすすめ 01/08」、その下に進みぐあいの線（n 本のうち i 本目が今）
+const head = (pal, right, i, n) => {
+  const g = 8, sw = n ? (W - SX * 2 - g * (n - 1)) / n : 0;
+  return `${S.brand(SX, 326, 24, pal, "start", false)}${right ? S.text(right, W - SX, 326, 26, pal.ink, { anchor: "end", ls: 1 }) : ""}`
+    + Array.from({ length: n || 0 }, (_, k) => `<rect x="${(SX + k * (sw + g)).toFixed(1)}" y="344" width="${sw.toFixed(1)}" height="6" rx="3" fill="${pal.ink}" fill-opacity="${k === i ? 1 : 0.16}"/>`).join("");
+};
+const foot = (pal) => S.text("gachapla.com", W / 2, 1650, 30, pal.sub, { anchor: "middle", ls: 1.5, weight: 400 });
 
 async function cover(title, sub, ids, file, word) {
-  // 中身は見せずに「なにが出る？」と思わせる表紙：モザイクの写真＋「？」
-  const fsz = Math.min(100, Math.floor(1000 / [...title].length));
-  const svg = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">${BG}
-<text x="${W / 2}" y="530" text-anchor="middle" font-family="${FONT}" font-weight="900" font-size="${fsz}" fill="#fff" stroke="#ff4f7b" stroke-width="12" paint-order="stroke" stroke-linejoin="round">${esc(title)}</text>
-<rect x="${W / 2 - 230}" y="575" width="460" height="70" rx="35" fill="#ffc93c"/>
-<text x="${W / 2}" y="624" text-anchor="middle" font-family="${FONT}" font-weight="900" font-size="40" fill="#1b1f5e">${esc(sub)}</text>${word ? `<text x="${W / 2}" y="730" text-anchor="middle" font-family="${FONT}" font-weight="900" font-size="${("ラストの" + word + "が").length > 13 ? 52 : 58}" fill="#fff">${esc("ラストの" + word + "が")}</text><text x="${W / 2}" y="825" text-anchor="middle" font-family="${FONT}" font-weight="900" font-size="84" fill="#ff8fb1" stroke="#ffffff" stroke-width="10" paint-order="stroke" stroke-linejoin="round">可愛すぎる♡</text>` : ""}${LOGO}</svg>`);
-  const layers = [], S = 320, g = 24, x0 = (W - S * 2 - g) / 2, y0 = word ? 870 : 730;
+  // 中身は見せずに「なにが出る？」と思わせる表紙：タイトル → 「ラストの〇〇が可愛すぎる♡」 → モザイクの写真＋「？」
+  const pal = S.palette(S.STYLE === "B" ? null : 342), t = S.noEmoji(title), tsz = Math.min(88, Math.floor(940 / S.units(t)));
+  const chip = S.chips([sub], pal, 30, 54), tease = S.STYLE === "B" ? "#ff9dbb" : S.PINK;
+  const w1 = word ? `ラストの${word}が` : "", top = word ? 744 : 600, g = 20, T = Math.floor((SAFE_B - top - g) / 2), x0 = Math.round((W - T * 2 - g) / 2);
+  const rects = [], layers = [];
   for (let i = 0; i < Math.min(4, ids.length); i++) {
-    const x = Math.round(x0 + (i % 2) * (S + g)), y = y0 + Math.floor(i / 2) * (S + g);
-    const mask = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${S - 16}" height="${S - 16}"><rect width="${S - 16}" height="${S - 16}" rx="28" fill="#fff"/></svg>`);
-    const tile = await sharp(await mosaic(ids[i], S - 16, S - 16)).composite([{ input: mask, blend: "dest-in" }]).png().toBuffer();
-    layers.push({ input: Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${S}" height="${S}"><rect x="4" y="4" width="${S - 8}" height="${S - 8}" rx="34" fill="#fff" stroke="${RING[i]}" stroke-width="8"/></svg>`), left: x, top: y });
-    layers.push({ input: tile, left: x + 8, top: y + 8 });
-    layers.push({ input: Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${S}" height="${S}"><circle cx="${S / 2}" cy="${S / 2}" r="48" fill="#1b1f5e" fill-opacity="0.6"/><text x="${S / 2}" y="${S / 2 + 27}" text-anchor="middle" font-family="${LAT}" font-weight="700" font-size="76" fill="#fff">?</text></svg>`), left: x, top: y });
+    const x = x0 + (i % 2) * (T + g), y = top + Math.floor(i / 2) * (T + g);
+    rects.push({ x, y, w: T, h: T });
+    layers.push({ ...(await S.mosaicTile(await S.loadPhoto(ids[i]), T, T, 34)), left: x, top: y });
   }
-  await sharp(svg).composite(layers).png().toFile(file);
-}
-async function photo(id, w, h) {
-  return sharp(path.join(ROOT, "images", `${id}.webp`)).flatten({ background: "#ffffff" }).trim({ background: "#ffffff", threshold: 12 }).resize(w, h, { fit: "contain", background: "#ffffff" }).toBuffer();
-}
-// 表紙用：写真をモザイクにして中身を隠す
-async function mosaic(id, w, h) {
-  const small = await sharp(path.join(ROOT, "images", `${id}.webp`)).flatten({ background: "#ffffff" }).trim({ background: "#ffffff", threshold: 12 }).resize(36, 36, { fit: "contain", background: "#ffffff" }).toBuffer();
-  return sharp(small).resize(w, h, { kernel: "nearest" }).toBuffer();
+  const svg = Buffer.from(`${svgOpen(pal)}${head(pal, "", 0, 0)}
+${chip.make(W / 2, SAFE_T + 4, "middle")}
+${S.text(t, W / 2, word ? 530 : 540, tsz, pal.ink, { anchor: "middle" })}
+${word ? S.text(w1, W / 2, 612, Math.min(50, Math.floor(900 / S.units(w1))), pal.ink, { anchor: "middle" }) + S.text("可愛すぎる♡", W / 2, 708, 88, tease, { anchor: "middle" }) : ""}
+${foot(pal)}</svg>`);
+  // 「？」の丸はモザイクの上に重ねる
+  const q = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">${rects.map((r) => `<circle cx="${r.x + r.w / 2}" cy="${r.y + r.h / 2 + 3}" r="48" fill="#1b1f5e" fill-opacity="0.18"/><circle cx="${r.x + r.w / 2}" cy="${r.y + r.h / 2}" r="46" fill="#ffffff"/>${S.text("?", r.x + r.w / 2, r.y + r.h / 2 + 21, 58, S.INK, { anchor: "middle" })}`).join("")}</svg>`);
+  await sharp(svg).composite([await S.shadowLayer(W, H, rects, pal, 34, 0.7), ...layers, { input: q, left: 0, top: 0 }]).png().toFile(file);
 }
 async function card(it, i, n, file, top) {
-  // TikTok の実際の画面で測った見える範囲（上の検索欄の下〜下の説明文の上）＝ y 360〜1550 くらいに収める。
-  // 写真は白い余白を付けず、写真の形のまま最大 940×920 に合わせて大きく、まわりに色の枠だけ
-  const MAXW = 940, MAXH = 920, B = 10, top0 = 385;
-  const src = await sharp(path.join(ROOT, "images", `${it.id}.webp`)).flatten({ background: "#ffffff" }).trim({ background: "#ffffff", threshold: 12 }).toBuffer();
-  const m = await sharp(src).metadata(), k = Math.min(MAXW / m.width, MAXH / m.height);
-  const pw = Math.round(m.width * k), ph = Math.round(m.height * k), px = Math.round((W - pw) / 2), py = top0 + Math.round((MAXH - ph) / 2);
-  const R = 36, mask = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${pw}" height="${ph}"><rect width="${pw}" height="${ph}" rx="${R}" fill="#fff"/></svg>`);
-  const pic = await sharp(src).resize(pw, ph).composite([{ input: mask, blend: "dest-in" }]).png().toBuffer();
-  const lines = wrap(clean(it.name), 18).slice(0, 2), fs1 = 48, y1 = top0 + MAXH + 62;
-  const svg = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">${BG}
-<rect x="${px - B}" y="${py - B}" width="${pw + B * 2}" height="${ph + B * 2}" rx="${R + B}" fill="${RING[i % 5]}"/>
-${lines.map((l, j) => `<text x="${W / 2}" y="${y1 + j * (fs1 + 10)}" text-anchor="middle" font-family="${FONT}" font-weight="900" font-size="${fs1}" fill="#fff">${esc(l)}</text>`).join("")}
-<rect x="${W / 2 - 290}" y="${y1 + lines.length * (fs1 + 10) - 14}" width="580" height="78" rx="39" fill="#ffc93c"/>
-<text x="${W / 2}" y="${y1 + lines.length * (fs1 + 10) + 39}" text-anchor="middle" font-family="${FONT}" font-weight="900" font-size="42" fill="#1b1f5e">1回${it.price}円・全${it.lineup || "?"}種</text>${LOGO}</svg>`);
-  // 「おすすめ 1/8」の札は写真の枠の上の線にのせる
-  const tag = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="300" height="56"><rect width="300" height="56" rx="28" fill="${RING[i % 5]}" stroke="#fff" stroke-width="4"/><text x="150" y="40" text-anchor="middle" font-family="${FONT}" font-weight="900" font-size="34" fill="#fff">${esc(top)} ${i + 1}/${n}</text></svg>`);
-  await sharp(svg).composite([{ input: pic, left: px, top: py }, { input: tag, left: W / 2 - 150, top: py - B - 28 }]).png().toFile(file);
+  // 下から順に場所を決める：値段と種類のチップ → 商品名（1行で入れば1行、だめなら2行）→ 残りの高さをぜんぶ写真に。
+  // 写真は白い余白を付けず、写真の形のまま最大 1000×（残り）に合わせて大きく。背景は写真の色みから作る
+  const p = await S.loadPhoto(it.id), pal = S.palette(p.hue);
+  const cl = S.itemChips(it), ch = S.chips(cl, pal, 40, 76, 14);
+  const name = S.HAS_JP ? S.cleanName(it.name) : "", ft = name ? S.fitText(name, 880, [60, 56, 52, 48], [50, 46, 42, 38]) : { size: 0, lines: [] };
+  const lh = Math.round(ft.size * 1.32), chipsTop = SAFE_B - ch.h, nameBottom = cl.length ? chipsTop - 22 : SAFE_B, nameTop = nameBottom - ft.lines.length * lh;
+  const boxY = SAFE_T + 6, boxH = nameTop - 30 - boxY, boxW = 1000;
+  const c = await S.photoCard(p, boxW, boxH, 40), cx = Math.round((W - c.w) / 2), cy = boxY + Math.round((boxH - c.h) / 2);
+  const num = (v) => String(v).padStart(2, "0");
+  const svg = Buffer.from(`${svgOpen(pal)}${head(pal, S.HAS_JP ? `${top} ${num(i + 1)}/${num(n)}` : `${num(i + 1)}/${num(n)}`, i, n)}
+${ft.lines.map((l, j) => S.text(l, W / 2, nameTop + j * lh + lh / 2 + ft.size * 0.36, ft.size, pal.ink, { anchor: "middle" })).join("")}
+${cl.length ? ch.make(W / 2, chipsTop, "middle") : ""}${foot(pal)}</svg>`);
+  await sharp(svg).composite([await S.shadowLayer(W, H, [{ x: cx, y: cy, w: c.w, h: c.h }], pal, 40), { ...c.layer, left: cx, top: cy }]).png().toFile(file);
 }
-async function outro(file) {
-  const svg = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">${BG}
-<text x="${W / 2}" y="760" text-anchor="middle" font-family="${FONT}" font-weight="900" font-size="88" fill="#fff" stroke="#ff4f7b" stroke-width="10" paint-order="stroke">どれを回したい？</text>
-<text x="${W / 2}" y="900" text-anchor="middle" font-family="${FONT}" font-weight="900" font-size="54" fill="#ffc93c">コメントで教えてね🪐</text>
-<text x="${W / 2}" y="1080" text-anchor="middle" font-family="${FONT}" font-weight="700" font-size="44" fill="#cfd6ff">発売日・近くの在庫店は</text>
-<text x="${W / 2}" y="1150" text-anchor="middle" font-family="${FONT}" font-weight="700" font-size="44" fill="#cfd6ff">プロフィールのリンクから</text>${LOGO}</svg>`);
-  await sharp(svg).png().toFile(file);
+async function outro(file, ids) {
+  // しめ：問いかけ → 今日の商品の小さな一覧 → プロフィールへの案内
+  const pal = S.palette(S.STYLE === "B" ? null : 342), T = 216, g = 16, cols = 4, list = ids.slice(0, 8), rows = Math.ceil(list.length / cols), top = 760, layers = [], rects = [];
+  for (let k = 0; k < list.length; k++) {
+    const inRow = Math.min(cols, list.length - Math.floor(k / cols) * cols), x0 = Math.round((W - inRow * T - (inRow - 1) * g) / 2);
+    const x = x0 + (k % cols) * (T + g), y = top + Math.floor(k / cols) * (T + g);
+    rects.push({ x, y, w: T, h: T }); layers.push({ ...(await S.tile(await S.loadPhoto(list[k]), T, T, 22)), left: x, top: y });
+  }
+  const y2 = top + rows * (T + g) + 70;
+  const svg = Buffer.from(`${svgOpen(pal)}${head(pal, "", 0, 0)}
+${S.text("どれを回したい？", W / 2, 560, 96, pal.ink, { anchor: "middle" })}
+${S.text("コメントで教えてね", W / 2, 660, 54, S.STYLE === "B" ? "#ff9dbb" : S.PINK, { anchor: "middle" })}
+${S.text("発売日・近くの在庫店は", W / 2, y2, 42, pal.ink, { anchor: "middle" })}
+${S.text("プロフィールのリンクから", W / 2, y2 + 62, 42, pal.ink, { anchor: "middle" })}
+${S.brand(W / 2, y2 + 150, 30, pal, "middle")}</svg>`);
+  await sharp(svg).composite([await S.shadowLayer(W, H, rects, pal, 22, 0.5), ...layers]).png().toFile(file);
 }
 
 // オリジナルのBGM（矩形波のメロディ＋ベース＋カプセルの「ポン」）。WAV を書き出す
@@ -152,7 +148,7 @@ function music(file, secs, beats) {
     if (kw.length) {
       for (let j = 0; j < kw.length; j++) { const f = path.join(TMP, `fk${j}.png`); await card(kw[j], main.length + j, pool.length, f, top); frames.push([f, 2.0]); }
     }
-    await outro(path.join(TMP, "fz.png")); frames.push([path.join(TMP, "fz.png"), 2.2]);
+    await outro(path.join(TMP, "fz.png"), pool.map((i) => i.id)); frames.push([path.join(TMP, "fz.png"), 2.2]);
     // 切り替え（0.28秒のスライド）でつなぐ
     const T = 0.28, total = frames.reduce((s, [, d]) => s + d, 0) - T * (frames.length - 1);
     const beats = []; let acc = 0; for (let i = 0; i < frames.length - 1; i++) { acc += frames[i][1] - T; beats.push(acc); }

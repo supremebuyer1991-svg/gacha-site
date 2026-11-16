@@ -1,43 +1,54 @@
 #!/usr/bin/env node
-// SNS（Threads・Instagram・Pinterest）用の画像を作る：dist/images/social/商品id.jpg（1200×1200、JPEG。写真を大きく、右下にサイト名を小さく）
+// SNS（X・Threads・Instagram・Pinterest）用の画像を作る：dist/images/social/商品id.jpg（1200×1200、JPEG。写真のカードを大きく、下に商品名・値段・種類、サイト名は小さく）
+// 見た目の部品（配色・写真のカード・チップ・文字）は src/sns-style.js。SNS_STYLE=B で B案（ダーク）
 // Threads と Instagram は JPEG/PNG しか受け付けないので、商品の webp 写真から作る。
 // 対象は 先月以降に発売の商品（最大400件）。sharp が必要（デプロイのときに入れる）。
 // 画像を作ったあと、Pinterest・Bluesky の自動投稿用 RSS も書く：pinterest.xml（日本語）・pinterest-en.xml・pinterest-ko.xml・pinterest-zh-tw.xml・pinterest-zh-cn.xml
 "use strict";
 const fs = require("fs"), path = require("path");
-let sharp; try { sharp = require("sharp"); } catch (e) { console.log("sharp がないので SNS 用の画像は作りません"); process.exit(0); }
+let sharp, S; try { sharp = require("sharp"); S = require("./sns-style"); } catch (e) { console.log("sharp がないので SNS 用の画像は作りません"); process.exit(0); }
 const ROOT = path.join(__dirname, ".."), OUT = path.join(ROOT, "dist", "images", "social");
 const esc0 = (t) => String(t == null ? "" : t).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const items = JSON.parse(fs.readFileSync(path.join(ROOT, "data", "items.json"), "utf8"));
 const now = new Date(Date.now() + 9 * 3600e3), from = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - 1, 1)).toISOString().slice(0, 7);
-const W = 1200, H = 1200, PAD = 13;
-// 商品写真を画面いっぱいに。サイト名とURLは右下に小さく（ユーザーの希望）。大きさは 1080 のときの 1200/1080 倍
-const BADGE_W = 422, BADGE_H = 56, BADGE_M = 18;
-const badge = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${BADGE_W}" height="${BADGE_H}">
-<rect width="${BADGE_W}" height="${BADGE_H}" rx="28" fill="#ffffff" fill-opacity="0.88"/>
-<text x="22" y="37" font-family="DejaVu Sans, Arial, sans-serif" font-weight="700" font-size="23" fill="#ff4f7b">GACHA</text>
-<text x="124" y="37" font-family="DejaVu Sans, Arial, sans-serif" font-weight="700" font-size="23" fill="#3aa0ff">PLANET</text>
-<text x="247" y="37" font-family="DejaVu Sans, Arial, sans-serif" font-weight="700" font-size="20" fill="#6b7194">gachapla.com</text>
-</svg>`);
+const W = 1200, H = 1200, M = 36;
+// ためすとき：ONLY=商品id,商品id（その商品だけ） / LIMIT=20（20件だけ） / SNS_STYLE=B（B案＝ダーク）
+const ONLY = (process.env.ONLY || "").split(",").filter(Boolean), LIMIT = Number(process.env.LIMIT) || 0;
+// 商品1つの画像（1200×1200）：写真のカードを大きく、下に「新作ガチャ｜発売時期｜メーカー」・商品名（2行まで）・値段と種類のチップ・サイト名（小さく）
+async function itemImage(it, out) {
+  const p = await S.loadPhoto(it.id), pal = S.palette(p.hue);
+  const name = S.HAS_JP ? S.cleanName(it.name) : "";
+  const cl = S.itemChips(it), ch = S.chips(cl, pal, 32, 60);
+  const ft = name ? S.fitText(name, W - M * 2 - 8 - (cl.length ? ch.w + 32 : 0), [54, 50, 46, 42], [42, 38, 35, 32, 30]) : { size: 0, lines: [] };
+  const lh = Math.round(ft.size * 1.3), blockH = Math.max(ft.lines.length * lh, cl.length ? ch.h : 0, 8);
+  const nameTop = H - 34 - blockH, labelBase = nameTop - 18, boxY = 30, boxH = labelBase - 28 - 26 - boxY;
+  const card = await S.photoCard(p, W - 60, boxH, 40), cx = Math.round((W - card.w) / 2), cy = boxY + Math.round((boxH - card.h) / 2);
+  const bsz = 20, bw = S.units("GACHA PLANET") * bsz * 1.16 + S.units("gachapla.com") * bsz + bsz * 3;
+  const parts = S.HAS_JP ? [(it.release || "") >= from ? "新作ガチャ" : "ガチャガチャ", S.relLabel(it), it.maker] : ["GACHAPON"];
+  let label = parts.filter(Boolean).join("｜");
+  if (S.units(label) * 25 > W - M * 2 - bw - 40) label = parts.slice(0, 2).filter(Boolean).join("｜");
+  const y0 = nameTop + (blockH - ft.lines.length * lh) / 2;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">${S.bgSvg(W, H, pal, 0.5, 0.42)}
+${S.text(label, M + 4, labelBase, 24, pal.accent, { ls: 1 })}
+${S.brand(W - M - 2, labelBase, bsz, pal, "end")}
+${ft.lines.map((l, i) => S.text(l, M + 2, y0 + i * lh + lh / 2 + ft.size * 0.36, ft.size, pal.ink)).join("\n")}
+${cl.length ? ch.make(W - M, Math.round(nameTop + (blockH - ch.h) / 2), "end") : ""}
+</svg>`;
+  await sharp(Buffer.from(svg)).composite([await S.shadowLayer(W, H, [{ x: cx, y: cy, w: card.w, h: card.h }], pal, 40), { ...card.layer, left: cx, top: cy }]).jpeg({ quality: 85 }).toFile(out);
+}
 (async () => {
   fs.mkdirSync(OUT, { recursive: true });
   // X・SNSで使う商品（x.json のまとめ・注目・今週・来週）は発売月が古くても必ず作る
   const want = new Set();
   try { const x = JSON.parse(fs.readFileSync(path.join(ROOT, "dist", "data", "x.json"), "utf8")); for (const k of ["morning", "week", "next_week", "new_info"]) for (const it of (x[k] && x[k].items) || []) want.add(it.id); for (const it of x.picks || []) want.add(it.id); } catch (e) {}
   const has = (it) => fs.existsSync(path.join(ROOT, "images", `${it.id}.webp`));
-  const list = [...items.filter((it) => want.has(it.id) && has(it)),
+  let list = [...items.filter((it) => want.has(it.id) && has(it)),
     ...items.filter((it) => !want.has(it.id) && (it.release || "") >= from && has(it)).sort((a, b) => (b.release || "").localeCompare(a.release || "")).slice(0, 300)];
+  if (ONLY.length) list = items.filter((it) => ONLY.includes(it.id) && has(it));
+  if (LIMIT) list = list.slice(0, LIMIT);
   let n = 0;
   for (const it of list) {
-    const out = path.join(OUT, `${it.id}.jpg`);
-    try {
-      // 白い余白を切ってから、カードの中にできるだけ大きく
-      const photo = await sharp(path.join(ROOT, "images", `${it.id}.webp`)).flatten({ background: "#ffffff" }).trim({ background: "#ffffff", threshold: 12 })
-        .resize(W - PAD * 2, H - PAD * 2, { fit: "contain", background: "#ffffff" }).toBuffer();
-      await sharp({ create: { width: W, height: H, channels: 3, background: "#ffffff" } })
-        .composite([{ input: photo, left: PAD, top: PAD }, { input: badge, left: W - BADGE_W - BADGE_M, top: H - BADGE_H - BADGE_M }]).jpeg({ quality: 82 }).toFile(out);
-      n++;
-    } catch (e) { console.log(`⚠ ${it.id}: ${e.message}`); }
+    try { await itemImage(it, path.join(OUT, `${it.id}.jpg`)); n++; } catch (e) { console.log(`⚠ ${it.id}: ${e.message}`); }
   }
   console.log(`SNS用の画像：${n}件`);
   // 商品ページの共有画像（og:image）：webp は LINE などで出ないことがあるので、JPEG を作れた商品は差し替える
@@ -55,36 +66,26 @@ const badge = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${BADG
     }
   }
   console.log(`共有画像を JPEG に差し替え：${ogn}ページ`);
-  // ===== 今週の新作の縦長ピン（1000×1500）：商品写真を大きく2×2。見出しの文字は brand/pin-head-<言語>.png（CJKフォントがCIにないので画像で用意） =====
-  const PW = 1000, PH = 1500, GAP = 16, TOP = 236, BOT = 96, SIDE = 24;
+  // ===== 今週の新作の縦長ピン（1000×1500）：見出し＋商品写真を大きく2×2。見出しの文字は Noto Sans CJK で描く（デプロイで入れる。ないときは英語の見出しにする） =====
+  const PW = 1000, PH = 1500, GAP = 22, TOP = 232, BOT = 92, SIDE = 36;
   const CW = Math.floor((PW - SIDE * 2 - GAP) / 2), CH = Math.floor((PH - TOP - BOT - GAP) / 2);
-  const stars = Array.from({ length: 60 }, (_, i) => { const x = (i * 197) % PW, y = (i * 389) % PH, r = (i % 3) + 1; return `<circle cx="${x}" cy="${y}" r="${r}" fill="#ffffff" fill-opacity="${0.25 + (i % 4) * 0.15}"/>`; }).join("");
-  const bgSvg = (range) => Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${PW}" height="${PH}">
-<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b1f5e"/><stop offset="1" stop-color="#0d1033"/></linearGradient></defs>
-<rect width="${PW}" height="${PH}" fill="url(#g)"/>${stars}
-<circle cx="90" cy="70" r="34" fill="#ff4f7b"/><ellipse cx="90" cy="70" rx="58" ry="14" fill="none" stroke="#ffc93c" stroke-width="6"/>
-<circle cx="915" cy="82" r="28" fill="#3aa0ff"/><ellipse cx="915" cy="82" rx="48" ry="11" fill="none" stroke="#ff4f7b" stroke-width="5"/>
-<rect x="${PW / 2 - 170}" y="176" width="340" height="50" rx="25" fill="#ffc93c"/>
-<text x="${PW / 2}" y="211" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif" font-weight="700" font-size="30" fill="#1b1f5e">${range}</text>
-<text x="${PW / 2 - 8}" y="${PH - 40}" text-anchor="end" font-family="DejaVu Sans, Arial, sans-serif" font-weight="700" font-size="34" fill="#ff4f7b">GACHA</text>
-<text x="${PW / 2 + 8}" y="${PH - 40}" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" font-weight="700" font-size="34" fill="#3aa0ff">PLANET</text>
-<text x="${PW / 2}" y="${PH - 10}" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif" font-weight="700" font-size="22" fill="#c9d0ea">gachapla.com</text>
-</svg>`);
-  const RING = ["#ff4f7b", "#3aa0ff", "#ffc93c", "#a855f7"];
+  const PIN_T = { ja: "今週の新作ガチャ", en: "New Gachapon This Week", ko: "이번 주 신작 가챠", "zh-tw": "本週新款扭蛋", "zh-cn": "本周新款扭蛋" };
   const weekPin = async (lang, ids, range, key) => {
-    const head = path.join(ROOT, "brand", `pin-head-${lang}.png`);
     const pics = ids.filter((id) => fs.existsSync(path.join(ROOT, "images", `${id}.webp`))).slice(0, 4);
-    if (pics.length < 4 || !fs.existsSync(head)) return null;
-    const layers = [{ input: head, left: 0, top: 6 }];
+    if (pics.length < 4) return null;
+    const pal = S.palette(null), title = S.HAS_JP ? PIN_T[lang] : PIN_T.en, tsz = Math.min(92, Math.floor((PW - SIDE * 2 - 8) / S.units(title)));
+    const ch = S.chips([range], pal, 28, 52), layers = [], rects = [];
     for (let i = 0; i < 4; i++) {
       const x = SIDE + (i % 2) * (CW + GAP), y = TOP + Math.floor(i / 2) * (CH + GAP);
-      const tile = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${CW}" height="${CH}"><rect x="3" y="3" width="${CW - 6}" height="${CH - 6}" rx="26" fill="#ffffff" stroke="${RING[i]}" stroke-width="6"/></svg>`);
-      const ph = await sharp(path.join(ROOT, "images", `${pics[i]}.webp`)).flatten({ background: "#ffffff" }).trim({ background: "#ffffff", threshold: 12 })
-        .resize(CW - 28, CH - 28, { fit: "contain", background: "#ffffff" }).toBuffer();
-      layers.push({ input: tile, left: x, top: y }, { input: ph, left: x + 14, top: y + 14 });
+      rects.push({ x, y, w: CW, h: CH }); layers.push({ ...(await S.tile(await S.loadPhoto(pics[i]), CW, CH, 30)), left: x, top: y });
     }
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${PW}" height="${PH}">${S.bgSvg(PW, PH, pal)}
+${S.brand(SIDE + 2, 76, 24, pal, "start", false)}${ch.make(PW - SIDE, 40, "end")}
+${S.text(title, SIDE, 178, tsz, pal.ink, { font: S.FONTS[lang] || S.FONT })}
+${S.text("gachapla.com", PW / 2, PH - 34, 28, pal.sub, { anchor: "middle", ls: 1 })}
+</svg>`;
     const file = `week-${lang}-${key}.jpg`;
-    await sharp(bgSvg(range)).composite(layers).jpeg({ quality: 84 }).toFile(path.join(OUT, file));
+    await sharp(Buffer.from(svg)).composite([await S.shadowLayer(PW, PH, rects, pal, 30, 0.7), ...layers]).jpeg({ quality: 86, mozjpeg: true }).toFile(path.join(OUT, file));
     return file;
   };
   const WEEK = {};
@@ -107,36 +108,29 @@ const badge = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${BADG
   // ===== Threads・Instagram の夜の投稿の1枚目（表紙）：テーマ名＋写真2×2（1080×1080）。タイトルは日本語なので Noto Sans CJK が必要（デプロイで入れる） =====
   try {
     const x = JSON.parse(fs.readFileSync(path.join(ROOT, "dist", "data", "x.json"), "utf8"));
-    const m = x.morning || {}, hasPic = (id) => fs.existsSync(path.join(OUT, `${id}.jpg`));
+    const m = x.morning || {}, hasPic = (id) => fs.existsSync(path.join(OUT, `${id}.jpg`)) || (ONLY.length && fs.existsSync(path.join(ROOT, "images", `${id}.webp`)));
     let cat = "", pool = [];
     if (m.active) { pool = (m.items || []).filter((i) => hasPic(i.id)); if (pool.length >= 3) cat = m.category; }
     if (!cat) { pool = ((x.week && x.week.items) || []).filter((i) => hasPic(i.id)); cat = "今週発売"; }
     pool = pool.slice(0, 4);
     if (pool.length >= 2) {
-      const S = 1080, top = 170, gap = 14, side = 20, bot = 70;
-      const cols = 2, rows = pool.length > 2 ? 2 : 1, cw = Math.floor((S - side * 2 - gap) / 2), ch = Math.floor((S - top - bot - gap * (rows - 1)) / rows);
+      const C = 1080, top = 210, gap = 20, side = 36, bot = 78;
+      const cols = 2, rows = pool.length > 2 ? 2 : 1, cw = Math.floor((C - side * 2 - gap) / 2), ch = Math.floor((C - top - bot - gap * (rows - 1)) / rows);
       const title = cat === "今週発売" ? "今週発売のガチャ" : `今日の${cat}ガチャ`;
-      const fsz = title.length > 12 ? 62 : 78;
       const dt = `${+x.today.slice(5, 7)}/${+x.today.slice(8, 10)}`;
-      const svg = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${S}" height="${S}">
-<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b1f5e"/><stop offset="1" stop-color="#0d1033"/></linearGradient></defs>
-<rect width="${S}" height="${S}" fill="url(#g)"/>${Array.from({ length: 50 }, (_, i) => `<circle cx="${(i * 197) % S}" cy="${(i * 389) % S}" r="${(i % 3) + 1}" fill="#fff" fill-opacity="${0.25 + (i % 4) * 0.15}"/>`).join("")}
-<text x="${S / 2}" y="100" text-anchor="middle" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif" font-weight="900" font-size="${fsz}" fill="#ffffff" stroke="#ff4f7b" stroke-width="9" paint-order="stroke" stroke-linejoin="round">${esc0(title)}</text>
-<rect x="${S / 2 - 120}" y="118" width="240" height="40" rx="20" fill="#ffc93c"/>
-<text x="${S / 2}" y="147" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif" font-weight="700" font-size="24" fill="#1b1f5e">${dt}  ${pool.length} ITEMS</text>
-<text x="${S / 2 - 8}" y="${S - 24}" text-anchor="end" font-family="DejaVu Sans, Arial, sans-serif" font-weight="700" font-size="28" fill="#ff4f7b">GACHA</text>
-<text x="${S / 2 + 8}" y="${S - 24}" text-anchor="start" font-family="DejaVu Sans, Arial, sans-serif" font-weight="700" font-size="28" fill="#3aa0ff">PLANET</text>
-</svg>`);
-      const layers = [];
+      const pal = S.palette(null), tsz = Math.min(80, Math.floor((C - side * 2 - 8) / S.units(title)));
+      const chip = S.chips([dt, `${pool.length} ITEMS`], pal, 26, 50), layers = [], rects = [];
       for (let i = 0; i < pool.length; i++) {
         const xx = side + (i % cols) * (cw + gap), yy = top + Math.floor(i / cols) * (ch + gap);
-        const w = rows === 1 ? cw : cw, h = ch;
-        const tile = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}"><rect x="3" y="3" width="${w - 6}" height="${h - 6}" rx="22" fill="#ffffff" stroke="${RING[i % 4]}" stroke-width="6"/></svg>`);
-        const ph = await sharp(path.join(ROOT, "images", `${pool[i].id}.webp`)).flatten({ background: "#ffffff" }).trim({ background: "#ffffff", threshold: 12 }).resize(w - 20, h - 20, { fit: "contain", background: "#ffffff" }).toBuffer();
-        layers.push({ input: tile, left: xx, top: yy }, { input: ph, left: xx + 10, top: yy + 10 });
+        rects.push({ x: xx, y: yy, w: cw, h: ch }); layers.push({ ...(await S.tile(await S.loadPhoto(pool[i].id), cw, ch, 30)), left: xx, top: yy });
       }
+      const svg = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${C}" height="${C}">${S.bgSvg(C, C, pal)}
+${S.brand(side + 2, 70, 22, pal, "start", false)}${chip.make(C - side, 36, "end")}
+${S.HAS_JP ? S.text(title, side, 166, tsz, pal.ink) : ""}
+${S.text("gachapla.com", C / 2, C - 28, 26, pal.sub, { anchor: "middle", ls: 1 })}
+</svg>`);
       const file = `cover-${x.today}.jpg`;
-      await sharp(svg).composite(layers).jpeg({ quality: 86 }).toFile(path.join(OUT, file));
+      await sharp(svg).composite([await S.shadowLayer(C, C, rects, pal, 30, 0.7), ...layers]).jpeg({ quality: 88, mozjpeg: true }).toFile(path.join(OUT, file));
       fs.writeFileSync(path.join(ROOT, "dist", "data", "social-cover.json"), JSON.stringify({ date: x.today, cat, url: `https://gachapla.com/images/social/${file}`, ids: pool.map((i) => i.id) }));
       console.log(`SNSの表紙：${title}（${pool.length}枚）`);
     }
