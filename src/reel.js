@@ -78,7 +78,7 @@ ${S.text(info.head, X0, 524, fitSize(info.head, CW0, 72), pal.ink)}
 ${S.text(num, X0 - 14, 846, nsz, S.PINK)}${S.text(info.unit, X0 + nw + 6, 846, usz, pal.ink)}
 <rect x="${X0}" y="884" width="${CW0}" height="8" fill="${pal.ink}"/>
 ${tl ? S.text(tl, X0, 968, fitSize(tl, CW0, 54), pal.ink) : ""}
-${S.text("このあと ぜんぶ紹介", X0, Math.min(SAFE_B - 8, end + 62), 44, pal.ink)}${foot(pal)}</svg>`);
+${S.text(info.num === info.n ? "このあと ぜんぶ紹介" : `このあと ${info.n}つを紹介`, X0, Math.min(SAFE_B - 8, end + 62), 44, pal.ink)}${foot(pal)}</svg>`);
   await sharp(svg).composite([await S.shadowLayer(W, H, rects, pal, 22, 0.5), ...layers]).png().toFile(file);
 }
 // 3「問いかけ・参加型」：「どれ回す？」＋番号つきの大きな写真4枚（うっすらモザイク）。コメントで番号を答えてもらう
