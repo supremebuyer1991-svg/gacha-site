@@ -146,9 +146,10 @@ async function tile(p, w, h, rad = 28) {
   return rawLayer(r);
 }
 // モザイク（リールの表紙で中身を隠す）：写真を 36×36 のあらい点にしてから大きくする
-async function mosaicTile(p, w, h, rad = 34) {
-  const small = await sharp(p.data, { raw: p.raw }).extract(p.box).resize(36, 36, { fit: "cover" }).raw().toBuffer({ resolveWithObject: true });
-  const r = await sharp(small.data, { raw: { width: 36, height: 36, channels: small.info.channels } }).resize(w, h, { kernel: "nearest" }).ensureAlpha().composite([{ input: mask(w, h, rad), blend: "dest-in" }]).raw().toBuffer({ resolveWithObject: true });
+async function mosaicTile(p, w, h, rad = 34, n = 36) { // n＝横にならぶ点の数（小さいほど濃く隠れる）
+  const nh = Math.max(2, Math.round((n * h) / w));
+  const small = await sharp(p.data, { raw: p.raw }).extract(p.box).resize(n, nh, { fit: "cover" }).raw().toBuffer({ resolveWithObject: true });
+  const r = await sharp(small.data, { raw: { width: n, height: nh, channels: small.info.channels } }).resize(w, h, { kernel: "nearest" }).ensureAlpha().composite([{ input: mask(w, h, rad), blend: "dest-in" }]).raw().toBuffer({ resolveWithObject: true });
   return rawLayer(r);
 }
 

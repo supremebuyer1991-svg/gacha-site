@@ -1,5 +1,6 @@
 // Instagram リール用の縦長動画（1080×1920・約17秒）を作る。サイトを作ったあと（deploy の SNS画像の手順のあと）に動く。
 // 中身：表紙 → 商品8つ（写真を大きく・名前・値段・全何種）→ しめ。見た目は src/sns-style.js の部品で、SNS用の画像とそろえる。音はこのファイルで作るオリジナルのピコピコ音（著作権の心配なし）。
+// 表紙の別案：REEL_COVER=1（1枚だけ大きく・半分隠す）／2（数字で引く）／3（どれ回す？）／4（イチオシは最後に発表）。指定なしは今の表紙
 // 出力：dist/images/social/reel-{日付}.mp4（TikTok 用の音なし版 reel-{日付}-silent.mp4、写真スライド用の reel-{日付}-s1.jpg〜 も） と dist/data/social-reel.json（social.js が Instagram に投稿するときに読む）
 const fs = require("fs"), path = require("path"), { execFileSync } = require("child_process");
 let sharp, S; try { sharp = require("sharp"); S = require("./sns-style"); } catch (e) { console.log("sharp がないのでリールは作りません"); process.exit(0); }
@@ -21,7 +22,8 @@ const head = (pal, right, i, n) => {
 };
 const foot = (pal) => S.text("gachapla.com", W / 2, 1650, 30, pal.sub, { anchor: "middle", ls: 1.5, weight: 400 });
 
-async function cover(title, sub, ids, file, word) {
+async function cover(title, sub, ids, file, word, info) {
+  if (COVER_V >= 1 && COVER_V <= 4) return [cover1, cover2, cover3, cover4][COVER_V - 1](title, sub, ids, file, word, info);
   // 中身は見せずに「なにが出る？」と思わせる表紙：タイトル → 「ラストの〇〇が可愛すぎる♡」 → モザイクの写真＋「？」
   const pal = S.palette(S.STYLE === "B" ? null : 342), t = S.noEmoji(title), tsz = Math.min(88, Math.floor(940 / S.units(t)));
   const chip = S.chips([sub], pal, 30, 54), tease = S.STYLE === "B" ? "#ff9dbb" : S.PINK;
@@ -41,6 +43,74 @@ ${foot(pal)}</svg>`);
   const q = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">${rects.map((r) => `<circle cx="${r.x + r.w / 2}" cy="${r.y + r.h / 2 + 3}" r="48" fill="#1b1f5e" fill-opacity="0.18"/><circle cx="${r.x + r.w / 2}" cy="${r.y + r.h / 2}" r="46" fill="#ffffff"/>${S.text("?", r.x + r.w / 2, r.y + r.h / 2 + 21, 58, S.INK, { anchor: "middle" })}`).join("")}</svg>`);
   await sharp(svg).composite([await S.shadowLayer(W, H, rects, pal, 34, 0.7), ...layers, { input: q, left: 0, top: 0 }]).png().toFile(file);
 }
+// ===== 表紙の別案（REEL_COVER=1〜4。指定しなければ、いまの表紙のまま） =====
+// どの案も：「ラストの〇〇が可愛すぎる♡」と、中身を隠して期待させるやり方（うっすらモザイク）は残す。大事なものは y 372〜1548・右はしから 120px より内側（x 70〜960、中心 515）に置く。
+// 数字や日付は当日のデータ（info）だけを使う。info＝{ n: 紹介する数, head: 見出し, num: 大きく出す数, unit: その単位, lastId: 最後の可愛い枠の商品id }
+const COVER_V = Number(process.env.REEL_COVER) || 0, CX = 515, CW0 = 890, HOT = "#ff9dbb";
+const teaseLine = (word) => (word ? `ラストの${word}が可愛すぎる♡` : "");
+const fitSize = (t, w, max) => Math.min(max, Math.floor(w / Math.max(1, S.units(t))));
+const rawOf = (l) => sharp(l.input, { raw: l.raw });
+// 1「1枚だけ大きく・半分隠す」：最後の可愛い枠の写真を大きく1枚。上だけ見せて、下はモザイク。背景は同じ写真を大きくぼかして暗くしたもの
+async function cover1(title, sub, ids, file, word, info) {
+  const p = await S.loadPhoto(info.lastId || ids[0]), pal = S.palette(null, "B");
+  const sm = await sharp(p.data, { raw: p.raw }).extract(p.box).resize(54, 96, { fit: "cover" }).blur(3).raw().toBuffer({ resolveWithObject: true });
+  const bg = await sharp(sm.data, { raw: { width: 54, height: 96, channels: sm.info.channels } }).resize(W, H, { fit: "fill", kernel: "cubic" }).modulate({ brightness: 0.5, saturation: 1.15 }).png().toBuffer();
+  const top = word ? 760 : 700, c = await S.photoCard(p, CW0, SAFE_B - top, 40), x = Math.round(CX - c.w / 2), y = top + Math.round((SAFE_B - top - c.h) / 2), cutY = Math.round(c.h * 0.4);
+  const mz = await rawOf(await S.mosaicTile(p, c.w, c.h, 40, 26)).extract({ left: 0, top: cutY, width: c.w, height: c.h - cutY }).png().toBuffer();
+  const t = S.noEmoji(title), w1 = word ? `ラストの${word}が` : "", chip = S.chips([sub], pal, 30, 54), tag = S.chips([word ? "つづきはラストで" : "つづきはこのあと"], pal, 34, 64);
+  const svg = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}"><rect width="${W}" height="${H}" fill="#0e1136" fill-opacity="0.28"/>${head(pal, "", 0, 0)}
+${chip.make(CX, SAFE_T + 4, "middle")}
+${word ? S.text(t, CX, 492, fitSize(t, CW0, 46), "#ffffff", { anchor: "middle" }) + S.text(w1, CX, 578, fitSize(w1, CW0, 64), "#ffffff", { anchor: "middle" }) + S.text("可愛すぎる♡", CX, 712, 124, HOT, { anchor: "middle" })
+    : S.text(t, CX, 560, fitSize(t, CW0, 96), "#ffffff", { anchor: "middle" }) + S.text("これ、なんのガチャ？", CX, 650, 56, HOT, { anchor: "middle" })}
+${foot(pal)}</svg>`);
+  const over = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}"><rect x="${x}" y="${y + cutY - 3}" width="${c.w}" height="6" fill="#ffffff"/>${tag.make(CX, y + cutY - 32, "middle")}</svg>`);
+  await sharp(bg).composite([{ input: svg, left: 0, top: 0 }, await S.shadowLayer(W, H, [{ x, y, w: c.w, h: c.h }], pal, 40), { ...c.layer, left: x, top: y }, { input: mz, left: x, top: y + cutY }, { input: over, left: 0, top: 0 }]).png().toFile(file);
+}
+// 2「数字で引く」：雑誌の表紙のように、大きな数字（今日は◯選／今週は◯シリーズ）＋うっすらモザイクの小さな写真
+async function cover2(title, sub, ids, file, word, info) {
+  const pal = S.palette(null, "A"), X0 = SX, num = String(info.num), nsz = 340, nw = S.units(num) * nsz * 0.98, usz = fitSize(info.unit, CW0 - nw - 30, 120), tl = teaseLine(word);
+  const cols = 4, g = 14, T = Math.floor((CW0 - g * (cols - 1)) / cols), top = tl ? 1010 : 940, list = ids.slice(0, 8), rects = [], layers = [];
+  for (let k = 0; k < list.length; k++) { const x = X0 + (k % cols) * (T + g), y = top + Math.floor(k / cols) * (T + g); rects.push({ x, y, w: T, h: T }); layers.push({ ...(await S.mosaicTile(await S.loadPhoto(list[k]), T, T, 22, 22)), left: x, top: y }); }
+  const chip = S.chips([sub], pal, 30, 54), end = top + Math.ceil(list.length / cols) * (T + g);
+  const svg = Buffer.from(`${svgOpen(pal)}${head(pal, "", 0, 0)}
+${chip.make(X0, SAFE_T + 4)}
+${S.text(info.head, X0, 524, fitSize(info.head, CW0, 72), pal.ink)}
+${S.text(num, X0 - 14, 846, nsz, S.PINK)}${S.text(info.unit, X0 + nw + 6, 846, usz, pal.ink)}
+<rect x="${X0}" y="884" width="${CW0}" height="8" fill="${pal.ink}"/>
+${tl ? S.text(tl, X0, 968, fitSize(tl, CW0, 54), pal.ink) : ""}
+${S.text("このあと ぜんぶ紹介", X0, Math.min(SAFE_B - 8, end + 62), 44, pal.ink)}${foot(pal)}</svg>`);
+  await sharp(svg).composite([await S.shadowLayer(W, H, rects, pal, 22, 0.5), ...layers]).png().toFile(file);
+}
+// 3「問いかけ・参加型」：「どれ回す？」＋番号つきの大きな写真4枚（うっすらモザイク）。コメントで番号を答えてもらう
+async function cover3(title, sub, ids, file, word, info) {
+  const pal = S.palette(342, "A"), tl = teaseLine(word), list = ids.slice(0, 4), g = 16, top = tl ? 624 : 580, T = Math.min(430, Math.floor((SAFE_B - 76 - top - g) / 2)), x0 = Math.round(CX - T - g / 2), rects = [], layers = [];
+  for (let k = 0; k < list.length; k++) { const x = x0 + (k % 2) * (T + g), y = top + Math.floor(k / 2) * (T + g); rects.push({ x, y, w: T, h: T }); layers.push({ ...(await S.mosaicTile(await S.loadPhoto(list[k]), T, T, 34, 30)), left: x, top: y }); }
+  const svg = Buffer.from(`${svgOpen(pal)}${head(pal, sub, 0, 0)}
+${S.text("どれ回す？", CX, 520, 156, pal.ink, { anchor: "middle" })}
+${tl ? S.text(tl, CX, 596, fitSize(tl, CW0, 48), S.PINK, { anchor: "middle" }) : ""}
+${S.text("コメントで番号を教えてね", CX, SAFE_B - 12, 46, pal.ink, { anchor: "middle" })}${foot(pal)}</svg>`);
+  const nums = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">${rects.map((r, k) => `<circle cx="${r.x + 58}" cy="${r.y + 58}" r="42" fill="#ffffff"/><circle cx="${r.x + 58}" cy="${r.y + 58}" r="36" fill="${S.INK}"/>${S.text(String(k + 1), r.x + 58, r.y + 77, 52, "#ffffff", { anchor: "middle" })}`).join("")}</svg>`);
+  await sharp(svg).composite([await S.shadowLayer(W, H, rects, pal, 34, 0.7), ...layers, { input: nums, left: 0, top: 0 }]).png().toFile(file);
+}
+// 4「カウントダウン」：「イチオシは最後に発表」。1〜7枚目は小さく番号つきで並べ、最後の1枚（可愛い枠）は大きく・濃いモザイクで隠す
+// ※人気投票の順位ではないので「1位」とは書かない（事実と違ってしまうため）。「イチオシ」「ラスト」と言う
+async function cover4(title, sub, ids, file, word, info) {
+  const pal = S.palette(null, "B"), tl = teaseLine(word), lastId = info.lastId || ids[ids.length - 1], rest = ids.filter((i) => i !== lastId).slice(0, 7), n = rest.length;
+  const g = 12, T = Math.floor((CW0 - g * (n - 1)) / Math.max(1, n)), Ts = Math.min(T, 150), sx = Math.round(CX - (n * Ts + (n - 1) * g) / 2), sy = 786, rects = [], layers = [];
+  for (let k = 0; k < n; k++) { const x = sx + k * (Ts + g); rects.push({ x, y: sy, w: Ts, h: Ts }); layers.push({ ...(await S.mosaicTile(await S.loadPhoto(rest[k]), Ts, Ts, 16, 16)), left: x, top: sy }); }
+  const by = sy + Ts + 78, B = Math.min(560, SAFE_B - 10 - by), bx = Math.round(CX - B / 2), big = await S.mosaicTile(await S.loadPhoto(lastId), B, B, 40, 9);
+  const dark = await rawOf(big).modulate({ brightness: 0.62 }).png().toBuffer();
+  const chip = S.chips([sub], pal, 30, 54), tag = S.chips([`ラスト ${String(n + 1).padStart(2, "0")}`], pal, 34, 64), num = (v) => String(v).padStart(2, "0");
+  const svg = Buffer.from(`${svgOpen(pal)}${head(pal, "", 0, 0)}
+${chip.make(CX, SAFE_T + 4, "middle")}
+${S.text("イチオシは", CX, 520, 72, "#ffffff", { anchor: "middle" })}
+${S.text("最後に発表", CX, 662, 136, S.GOLD, { anchor: "middle" })}
+${tl ? S.text(tl, CX, 740, fitSize(tl, CW0, 46), HOT, { anchor: "middle" }) : ""}
+${rects.map((r, k) => S.text(num(k + 1), r.x + r.w / 2, r.y + r.h + 36, 26, pal.sub, { anchor: "middle" })).join("")}${foot(pal)}</svg>`);
+  const over = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}"><rect x="${bx + 3}" y="${by + 3}" width="${B - 6}" height="${B - 6}" rx="38" fill="none" stroke="${S.GOLD}" stroke-width="6"/>${S.text("?", CX, by + B / 2 + 70, 200, "#ffffff", { anchor: "middle" })}<g>${tag.make(CX, by - 32, "middle").replace(/fill="#ffffff"/, `fill="${S.GOLD}"`)}</g></svg>`);
+  await sharp(svg).composite([await S.shadowLayer(W, H, [...rects, { x: bx, y: by, w: B, h: B }], pal, 20, 0.5), ...layers, { input: dark, left: bx, top: by }, { input: over, left: 0, top: 0 }]).png().toFile(file);
+}
+
 async function card(it, i, n, file, top) {
   // 下から順に場所を決める：値段と種類のチップ → 商品名（1行で入れば1行、だめなら2行）→ 残りの高さをぜんぶ写真に。
   // 写真は白い余白を付けず、写真の形のまま最大 1000×（残り）に合わせて大きく。背景は写真の色みから作る
@@ -143,7 +213,9 @@ function music(file, secs, beats) {
     fs.rmSync(TMP, { recursive: true, force: true }); fs.mkdirSync(TMP, { recursive: true }); fs.mkdirSync(OUT, { recursive: true });
     const frames = [];
     const main = pool.filter((i) => !kw.includes(i));
-    await cover(title, sub, pool.map((i) => i.id), path.join(TMP, "f0.png"), word); frames.push([path.join(TMP, "f0.png"), 1.8]);
+    // 表紙の別案（REEL_COVER=1〜4）で使う当日の数字：今日は「紹介する数（◯選）」、今週・今月・来月は「その期間に発売のシリーズ数」
+    const info = { n: pool.length, lastId: kw.length ? kw[0].id : "", head: MODE === "week" ? "今週発売の新作ガチャ" : MODE === "month" ? "今月発売の新作ガチャ" : MODE === "next" ? "来月発売の新作ガチャ" : "今日のおすすめガチャ", num: MODE === "daily" ? pool.length : MODE === "week" && x.week ? x.week.count : range.length, unit: MODE === "daily" ? "選" : "シリーズ" };
+    await cover(title, sub, pool.map((i) => i.id), path.join(TMP, "f0.png"), word, info); frames.push([path.join(TMP, "f0.png"), 1.8]);
     for (let i = 0; i < main.length; i++) { const f = path.join(TMP, `f${i + 1}.png`); await card(main[i], i, pool.length, f, top); frames.push([f, 2.0]); }
     if (kw.length) {
       for (let j = 0; j < kw.length; j++) { const f = path.join(TMP, `fk${j}.png`); await card(kw[j], main.length + j, pool.length, f, top); frames.push([f, 2.0]); }
