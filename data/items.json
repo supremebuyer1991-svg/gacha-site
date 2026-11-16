@@ -64538,5 +64538,750 @@
     ],
     "tags_auto": false,
     "summary": "アニメ『Spookiz』のモンスターたちがクリア素材のめじるしマスコットになった全5種。"
+  },
+  {
+    "id": "tarts-y910319",
+    "name": "星のカービィ ぷくっとラバーカンバッジ",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-11",
+    "release_note": "11月23日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "lineup_names": [
+      "カービィ",
+      "ワドルディ",
+      "マホロア",
+      "エフィリン",
+      "カービィ（フェイス）",
+      "ワドルディ（フェイス）"
+    ],
+    "jan_checked": true,
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y910319",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-17",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:pokemon",
+      "kawaii:accessory"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y906510",
+    "name": "スター・ウォーズ ライトセーバー -ダイキャストセレクション/シス-",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 500,
+    "release": "2026-12",
+    "release_note": "予定",
+    "genre": "anime",
+    "moods": [
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "lineup_names": [
+      "ダース・モール",
+      "ドゥークー伯爵",
+      "ダース・ベイダー",
+      "ダース・シディアス",
+      "カイロ・レン"
+    ],
+    "jan_checked": true,
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y906510",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-17",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "cool:western",
+      "type:useful",
+      "type:sound",
+      "hobby:movie"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y912917",
+    "name": "アイアンマン -MOVIE ITEM COLLECTION DELUXE-",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 500,
+    "release": "2026-12",
+    "release_note": "予定",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "lineup_names": [
+      "アイアンマン MARK 2",
+      "アイアンマン MARK 3",
+      "アイアンマン アークリアクター MARK 1",
+      "アイアンマン アークリアクター MARK 6",
+      "アイアンマン アークリアクター MARK 85",
+      "アイアンマン スーツケース"
+    ],
+    "jan_checked": true,
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y912917",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-17",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "hobby:movie"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "toyscabin-20261116-1524",
+    "name": "HondaバイクラバーキーホルダーVol.2 大型編",
+    "name_en": "",
+    "maker": "トイズキャビン",
+    "maker_en": "Toys Cabin",
+    "price": 400,
+    "release": "2027-03",
+    "release_note": "3月",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": null,
+    "jan": "4589415444211",
+    "image": "",
+    "official_url": "https://toyscabin.com/product/20261116_1524.php",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-17",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:charm"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "toyscabin-20261116-1523",
+    "name": "ドラネッツ 幼竜型 ソフビフィギュア",
+    "name_en": "",
+    "maker": "トイズキャビン",
+    "maker_en": "Toys Cabin",
+    "price": 400,
+    "release": "2027-03",
+    "release_note": "3月",
+    "genre": "anime",
+    "moods": [
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": null,
+    "jan": "4589415444327",
+    "image": "",
+    "official_url": "https://toyscabin.com/product/20261116_1523.php",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-17",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:figure"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "toyscabin-20261116-1522",
+    "name": "刀剣乱舞ONLINE 対大侵寇防人作戦サーバーアクリルチャーム2",
+    "name_en": "",
+    "maker": "トイズキャビン",
+    "maker_en": "Toys Cabin",
+    "price": 400,
+    "release": "2027-03",
+    "release_note": "3月",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": null,
+    "jan": "4589415444259",
+    "image": "",
+    "official_url": "https://toyscabin.com/product/20261116_1522.php",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-17",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "cool:weaponry",
+      "oshi:game",
+      "type:charm"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "toyscabin-20261116-1521",
+    "name": "たまケロ クリアVer.",
+    "name_en": "",
+    "maker": "トイズキャビン",
+    "maker_en": "Toys Cabin",
+    "price": 500,
+    "release": "2027-03",
+    "release_note": "3月",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": null,
+    "jan": "4589415444365",
+    "image": "",
+    "official_url": "https://toyscabin.com/product/20261116_1521.php",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-17",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "toyscabin-20261116-1520",
+    "name": "1/64 Honda BEAT MUGEN Ver.",
+    "name_en": "",
+    "maker": "トイズキャビン",
+    "maker_en": "Toys Cabin",
+    "price": 400,
+    "release": "2027-03",
+    "release_note": "3月",
+    "genre": "miniature",
+    "moods": [
+      "real"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": null,
+    "jan": "4589415444310",
+    "image": "",
+    "official_url": "https://toyscabin.com/product/20261116_1520.php",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-17",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "real:miniature"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "toyscabin-20261116-1519",
+    "name": "いらすとや わっかチャーム",
+    "name_en": "",
+    "maker": "トイズキャビン",
+    "maker_en": "Toys Cabin",
+    "price": 400,
+    "release": "2027-03",
+    "release_note": "3月",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": null,
+    "jan": "4589415444334",
+    "image": "",
+    "official_url": "https://toyscabin.com/product/20261116_1519.php",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-17",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "type:charm"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "toyscabin-20261116-1518",
+    "name": "劇場版 PSYCHO-PASS PROVIDENCE ドミネーター ミニチュアコレクション",
+    "name_en": "",
+    "maker": "トイズキャビン",
+    "maker_en": "Toys Cabin",
+    "price": 500,
+    "release": "2027-03",
+    "release_note": "3月",
+    "genre": "miniature",
+    "moods": [
+      "real"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": null,
+    "jan": "4589415444266",
+    "image": "",
+    "official_url": "https://toyscabin.com/product/20261116_1518.php",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-17",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "real:miniature",
+      "hobby:movie"
+    ],
+    "q_ages": [
+      "30",
+      "40",
+      "50"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "toyscabin-20261116-1517",
+    "name": "1/64HONDA Cubフィギュアキーホルダー2",
+    "name_en": "",
+    "maker": "トイズキャビン",
+    "maker_en": "Toys Cabin",
+    "price": 400,
+    "release": "2027-02",
+    "release_note": "2月",
+    "genre": "miniature",
+    "moods": [
+      "real",
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": null,
+    "jan": "4589415444273",
+    "image": "",
+    "official_url": "https://toyscabin.com/product/20261116_1517.php",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-17",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:figure",
+      "type:charm",
+      "real:miniature"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "toyscabin-20261116-1516",
+    "name": "ダライアス ミニフィギュアコレクション2 グレートシング級戦艦",
+    "name_en": "",
+    "maker": "トイズキャビン",
+    "maker_en": "Toys Cabin",
+    "price": 500,
+    "release": "2027-02",
+    "release_note": "2月",
+    "genre": "anime",
+    "moods": [
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": null,
+    "jan": "4589415444303",
+    "image": "",
+    "official_url": "https://toyscabin.com/product/20261116_1516.php",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-17",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:figure",
+      "real:miniature"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "toyscabin-20261116-1515",
+    "name": "メダリスト スピンアクリルスタンド2",
+    "name_en": "",
+    "maker": "トイズキャビン",
+    "maker_en": "Toys Cabin",
+    "price": 400,
+    "release": "2027-02",
+    "release_note": "2月",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": null,
+    "jan": "4589415444341",
+    "image": "",
+    "official_url": "https://toyscabin.com/product/20261116_1515.php",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-17",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "toyscabin-20261116-1514",
+    "name": "【再販】卓上呼び出しボタンコレクション2",
+    "name_en": "",
+    "maker": "トイズキャビン",
+    "maker_en": "Toys Cabin",
+    "price": 400,
+    "release": "2027-02",
+    "release_note": "2月",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": null,
+    "jan": "4589415440893",
+    "image": "",
+    "official_url": "https://toyscabin.com/product/20261116_1514.php",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-17",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "toyscabin-20261116-1513",
+    "name": "ラミィの大冒険 アクリルキーホルダー",
+    "name_en": "",
+    "maker": "トイズキャビン",
+    "maker_en": "Toys Cabin",
+    "price": 300,
+    "release": "2027-02",
+    "release_note": "2月",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": null,
+    "jan": "4589415444112",
+    "image": "",
+    "official_url": "https://toyscabin.com/product/20261116_1513.php",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-17",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:charm"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "toyscabin-20261116-1512",
+    "name": "名画ねこ",
+    "name_en": "",
+    "maker": "トイズキャビン",
+    "maker_en": "Toys Cabin",
+    "price": 400,
+    "release": "2027-02",
+    "release_note": "2月",
+    "genre": "animal",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": null,
+    "jan": "4589415444280",
+    "image": "",
+    "official_url": "https://toyscabin.com/product/20261116_1512.php",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-17",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:animal"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "toyscabin-20261116-1511",
+    "name": "ガードポーン",
+    "name_en": "",
+    "maker": "トイズキャビン",
+    "maker_en": "Toys Cabin",
+    "price": 500,
+    "release": "2027-02",
+    "release_note": "2月",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": null,
+    "jan": "4589415444358",
+    "image": "",
+    "official_url": "https://toyscabin.com/product/20261116_1511.php",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-17",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bushicap-10306",
+    "name": "学園アイドルマスター むぎゅみにコレクションフィギュア vol.3",
+    "name_en": "",
+    "maker": "ブシロードクリエイティブ",
+    "maker_en": "Bushiroad Creative",
+    "price": 500,
+    "release": "2027-05",
+    "release_note": "5月下旬",
+    "genre": "anime",
+    "moods": [
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "jan": "4570194455383",
+    "image": "",
+    "official_url": "https://capsule.bushiroad-creative.com/product/10306/",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-17",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "oshi:idol",
+      "type:figure"
+    ],
+    "q_ages": [
+      "10",
+      "20"
+    ],
+    "q_genders": [
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "kenele-gc0792c",
+    "name": "mojojojo Pack Charm",
+    "name_en": "",
+    "maker": "ケンエレファント",
+    "maker_en": "Kenelephant",
+    "price": 400,
+    "release": "2026-12",
+    "release_note": "12月",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 8,
+    "image": "",
+    "official_url": "https://kenelestore.jp/products/gc0792c",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-17",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "retro:heisei"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
   }
 ]
