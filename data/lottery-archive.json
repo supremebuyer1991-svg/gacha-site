@@ -2,6 +2,46 @@
   "note": "締切が過ぎて lottery.json から外した抽選の記録（チェーンのページの「過去の抽選」に使う）。毎晩の見回りで、lottery.json から消した項目をここへ移す（url と added は入れない）。新しい順。",
   "entries": [
     {
+      "title": "ちいかわ めじるしアクセサリー3",
+      "store": "#C-pla ゆめタウンはません",
+      "pref": "熊本県",
+      "kind": "item",
+      "start": "2026-11-12T12:00",
+      "end": "2026-11-15T12:00",
+      "method": "LivePocket",
+      "note": "販売日は11/19。購入できる数は申込ページで確認を"
+    },
+    {
+      "title": "ちいかわ めじるしアクセサリー3",
+      "store": "#C-pla ゆめタウンサンピアン",
+      "pref": "熊本県",
+      "kind": "item",
+      "start": "2026-11-12T12:00",
+      "end": "2026-11-15T12:00",
+      "method": "LivePocket",
+      "note": "販売日は11/19。購入できる数は申込ページで確認を"
+    },
+    {
+      "title": "HYSTERIC MINI めじるしアクセサリー ～アナザーカラー～",
+      "store": "#C-pla ゆめタウンはません",
+      "pref": "熊本県",
+      "kind": "item",
+      "start": "2026-11-12T12:00",
+      "end": "2026-11-15T12:00",
+      "method": "LivePocket",
+      "note": "販売日は11/19。締切はお昼12時"
+    },
+    {
+      "title": "HYSTERIC MINI めじるしアクセサリー ～アナザーカラー～",
+      "store": "#C-pla ゆめタウンサンピアン",
+      "pref": "熊本県",
+      "kind": "item",
+      "start": "2026-11-12T12:00",
+      "end": "2026-11-15T12:00",
+      "method": "LivePocket",
+      "note": "販売日は11/19。締切はお昼12時"
+    },
+    {
       "title": "どうぶつの森 めじるしアクセサリー",
       "store": "#C-pla minamoa広島",
       "pref": "広島県",
