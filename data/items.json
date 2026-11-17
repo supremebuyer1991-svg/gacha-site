@@ -65760,5 +65760,175 @@
       "female"
     ],
     "tags_auto": false
+  },
+  {
+    "id": "tarts-y906787",
+    "name": "バーバパパ いっぱいコレクション",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-11",
+    "release_note": "11月23日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "lineup_names": [
+      "階段のバーバパパ",
+      "うまのバーバパパ",
+      "生まれる前のバーバパパ＋じょうろ",
+      "おりのバーバパパ",
+      "ボートのバーバパパ"
+    ],
+    "jan_checked": true,
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y906787",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-18",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y911958",
+    "name": "グレムリン2 キョロ目アクリルキーチェーン",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-12",
+    "release_note": "予定",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "lineup_names": [
+      "GIZMO",
+      "MOHAWK",
+      "DAFFY",
+      "LENNY",
+      "GREMLIN"
+    ],
+    "jan_checked": true,
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y911958",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-18",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "cool:western",
+      "type:charm"
+    ],
+    "q_ages": [
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "kenele-gc0799c",
+    "name": "ギチギチ マスコット",
+    "name_en": "",
+    "maker": "ケンエレファント",
+    "maker_en": "Kenelephant",
+    "price": 500,
+    "release": "2026-11",
+    "release_note": "11月",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "lineup_names": [
+      "パウチ詰め",
+      "缶詰め",
+      "袋詰め",
+      "ネット通販の箱詰め"
+    ],
+    "image": "",
+    "official_url": "https://kenelestore.jp/products/gc0799c",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-18",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "type:plush"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "kenele-gc0800z",
+    "name": "FLAVORS ゆめかわいい フィギュアコレクション ミルキーウェイ",
+    "name_en": "",
+    "maker": "ケンエレファント",
+    "maker_en": "Kenelephant",
+    "price": 500,
+    "release": "2026-11",
+    "release_note": "11月",
+    "genre": "anime",
+    "moods": [
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "image": "",
+    "official_url": "https://kenelestore.jp/products/gc0800z",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-18",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:yumekawa",
+      "type:figure",
+      "real:miniature"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
   }
 ]
