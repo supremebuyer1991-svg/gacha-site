@@ -30302,7 +30302,13 @@
       "male"
     ],
     "tags_auto": false,
-    "summary": "「HG ONE PIECE 01」の全4種をメタリック塗装で仕上げた、オフィシャルショップ限定の特別版です。"
+    "summary": "「HG ONE PIECE 01」の全4種をメタリック塗装で仕上げた、オフィシャルショップ限定の特別版です。",
+    "lineup_names": [
+      "モンキー・D・ルフィ",
+      "ロロノア・ゾロ",
+      "サンジ",
+      "モンキー・D・ルフィ（ギア5）"
+    ]
   },
   {
     "id": "bandai-4549660501879",
@@ -32983,7 +32989,8 @@
       "female"
     ],
     "tags_auto": false,
-    "summary": "ミッキー＆フレンズをデザインした、吊り下げても立てて飾っても楽しめるアクリルブロックチャーム全5種です。"
+    "summary": "ミッキー＆フレンズをデザインした、吊り下げても立てて飾っても楽しめるアクリルブロックチャーム全5種です。",
+    "lineup_names": []
   },
   {
     "id": "bandai-4570118186805",
@@ -38138,7 +38145,15 @@
       "male"
     ],
     "tags_auto": false,
-    "summary": "「週刊少年ジャンプ」のジャンプコミックスを題材にした豆ガシャ本シリーズの第5弾、全6種です。"
+    "summary": "「週刊少年ジャンプ」のジャンプコミックスを題材にした豆ガシャ本シリーズの第5弾、全6種です。",
+    "lineup_names": [
+      "ハイキュー!!",
+      "しのびごと",
+      "黒子のバスケ",
+      "さむわんへるつ",
+      "約束のネバーランド",
+      "トリコ"
+    ]
   },
   {
     "id": "bandai-4582770095494",
@@ -38178,7 +38193,31 @@
       "male"
     ],
     "tags_auto": false,
-    "summary": "アニメ『呪術廻戦』5周年を記念した、マスキングテープとフレークシールセットの全10種です。"
+    "summary": "アニメ『呪術廻戦』5周年を記念した、マスキングテープとフレークシールセットの全10種です。",
+    "lineup_names": [
+      "マスキングテープA",
+      "マスキングテープB",
+      "虎杖",
+      "伏黒",
+      "釘崎",
+      "真希",
+      "狗巻",
+      "パンダ",
+      "東堂",
+      "加茂",
+      "メカ丸",
+      "五条",
+      "真依",
+      "三輪",
+      "西宮",
+      "七海",
+      "乙骨",
+      "夏油",
+      "家入",
+      "脹相",
+      "日車",
+      "秤"
+    ]
   },
   {
     "id": "bandai-4570118183637",
@@ -38700,7 +38739,14 @@
       "male"
     ],
     "tags_auto": false,
-    "summary": "「いきもの大図鑑レプティ」恐竜の第5弾。全長約115mmのブラキオサウルスが目玉です。"
+    "summary": "「いきもの大図鑑レプティ」恐竜の第5弾。全長約115mmのブラキオサウルスが目玉です。",
+    "lineup_names": [
+      "ブラキオサウルス",
+      "ティラノサウルス（ブルー）",
+      "トリケラトプス（ブルー）",
+      "スピノサウルス（ストライプイエロー）",
+      "モササウルス（ストライプダークグリーン）"
+    ]
   },
   {
     "id": "bandai-4582769708466",
@@ -41141,7 +41187,14 @@
       "female"
     ],
     "tags_auto": false,
-    "summary": "『おジャ魔女どれみ』のタップをモチーフにしたコンパクトミラー第3弾。本体がパールカラー仕様です。"
+    "summary": "『おジャ魔女どれみ』のタップをモチーフにしたコンパクトミラー第3弾。本体がパールカラー仕様です。",
+    "lineup_names": [
+      "見習いタップ",
+      "リズムタップ",
+      "パララタップ",
+      "コロンタップ",
+      "ピュアリンハナちゃんコンパクト"
+    ]
   },
   {
     "id": "tarts-y905049",
@@ -50906,7 +50959,13 @@
       "male"
     ],
     "tags_auto": false,
-    "summary": "SNSで支持を集める「神影録」を初めて立体化した、全長約75〜120mmの大型フィギュアです。"
+    "summary": "SNSで支持を集める「神影録」を初めて立体化した、全長約75〜120mmの大型フィギュアです。",
+    "lineup_names": [
+      "件異",
+      "祈蝉",
+      "駆像",
+      "無顔鹿"
+    ]
   },
   {
     "id": "bushicap-9936",
@@ -56168,7 +56227,14 @@
       "female"
     ],
     "tags_auto": false,
-    "summary": "『キャッチ！ティニピン』のデザインをあしらった、鏡付きのアクセサリーケース全5種です。"
+    "summary": "『キャッチ！ティニピン』のデザインをあしらった、鏡付きのアクセサリーケース全5種です。",
+    "lineup_names": [
+      "ハチュピン",
+      "ワワピン",
+      "ソソピン",
+      "ネネピン",
+      "ラッキーピン"
+    ]
   },
   {
     "id": "bushicap-10095",
@@ -56210,7 +56276,14 @@
       "female"
     ],
     "tags_auto": false,
-    "summary": "アニメ「ハイキュー!!」烏野高校のメンバーが「みあげてすたぁマスコット」になった第1弾、全5種です。"
+    "summary": "アニメ「ハイキュー!!」烏野高校のメンバーが「みあげてすたぁマスコット」になった第1弾、全5種です。",
+    "lineup_names": [
+      "菅原孝支",
+      "日向翔陽",
+      "澤村大地",
+      "影山飛雄",
+      "東峰旭"
+    ]
   },
   {
     "id": "bushicap-10068",
@@ -56248,7 +56321,13 @@
       "female"
     ],
     "tags_auto": false,
-    "summary": "TVアニメ『氷の城壁』のキャラクターをデザインした、全8種のラバーキーホルダーです。"
+    "summary": "TVアニメ『氷の城壁』のキャラクターをデザインした、全8種のラバーキーホルダーです。",
+    "lineup_names": [
+      "氷川小雪",
+      "安曇美姫",
+      "雨宮湊",
+      "日野陽太"
+    ]
   },
   {
     "id": "bushicap-10048",
@@ -56287,7 +56366,15 @@
       "male"
     ],
     "tags_auto": false,
-    "summary": "「カラフルピーチ」のぺたっとねじまきますこっと第4弾で、vol.3と同時に登場する全6種です。"
+    "summary": "「カラフルピーチ」のぺたっとねじまきますこっと第4弾で、vol.3と同時に登場する全6種です。",
+    "lineup_names": [
+      "なおきり",
+      "うり",
+      "のあ",
+      "ゆあんくん",
+      "シヴァ",
+      "ヒロ"
+    ]
   },
   {
     "id": "bushicap-10047",
@@ -56326,7 +56413,14 @@
       "male"
     ],
     "tags_auto": false,
-    "summary": "「カラフルピーチ」のぺたっとねじまきますこっと第3弾で、vol.4と同時に登場する全5種です。"
+    "summary": "「カラフルピーチ」のぺたっとねじまきますこっと第3弾で、vol.4と同時に登場する全5種です。",
+    "lineup_names": [
+      "えと",
+      "たっつん",
+      "じゃぱぱ",
+      "どぬく",
+      "もふ"
+    ]
   },
   {
     "id": "bushicap-10010",
@@ -56368,7 +56462,10 @@
       "male"
     ],
     "tags_auto": false,
-    "summary": "TVアニメ『名探偵コナン』から、江戸川コナンばかりを集めたコレクションフィギュア全5種です。"
+    "summary": "TVアニメ『名探偵コナン』から、江戸川コナンばかりを集めたコレクションフィギュア全5種です。",
+    "lineup_names": [
+      "コナン"
+    ]
   },
   {
     "id": "bushicap-9981",
@@ -56835,7 +56932,25 @@
       "female"
     ],
     "tags_auto": false,
-    "summary": "アイドリッシュセブンのホログラム仕様・大きめ缶バッジコレクション第7弾で、全16種がそろいます。"
+    "summary": "アイドリッシュセブンのホログラム仕様・大きめ缶バッジコレクション第7弾で、全16種がそろいます。",
+    "lineup_names": [
+      "和泉一織",
+      "二階堂大和",
+      "和泉三月",
+      "四葉環",
+      "逢坂壮五",
+      "六弥ナギ",
+      "七瀬陸",
+      "八乙女楽",
+      "九条天",
+      "十龍之介",
+      "百",
+      "千",
+      "亥清悠",
+      "狗丸トウマ",
+      "棗巳波",
+      "御堂虎於"
+    ]
   },
   {
     "id": "bandai-4570118105790",
@@ -57712,7 +57827,15 @@
       "female"
     ],
     "tags_auto": false,
-    "summary": "涼しげなデザインをあしらった新顔のチャーム、「ゆらゆらチャーム」の全6種ガシャポンです。"
+    "summary": "涼しげなデザインをあしらった新顔のチャーム、「ゆらゆらチャーム」の全6種ガシャポンです。",
+    "lineup_names": [
+      "ひまわり",
+      "花火",
+      "金魚",
+      "あさがお",
+      "すいか",
+      "海"
+    ]
   },
   {
     "id": "bandai-4570118206589",
@@ -58121,7 +58244,17 @@
       "male"
     ],
     "tags_auto": false,
-    "summary": "『映画クレヨンしんちゃん ヘンダーランドの大冒険』のキャラクターや名場面を使ったマウスシート全8種です。"
+    "summary": "『映画クレヨンしんちゃん ヘンダーランドの大冒険』のキャラクターや名場面を使ったマウスシート全8種です。",
+    "lineup_names": [
+      "しんのすけ",
+      "マカオ",
+      "ジョマ",
+      "ス・ノーマン・パー",
+      "ヘンダーくん",
+      "トッペマ・マペット",
+      "シーンA",
+      "シーンB"
+    ]
   },
   {
     "id": "bandai-4549660377375",
@@ -59170,7 +59303,15 @@
       "female"
     ],
     "tags_auto": false,
-    "summary": "サンリオキャラクターズを題材にした、全8種の「きらきらアソートコレクション」。価格は400円です。"
+    "summary": "サンリオキャラクターズを題材にした、全8種の「きらきらアソートコレクション」。価格は400円です。",
+    "lineup_names": [
+      "シナモロール",
+      "ハローキティ",
+      "クロミ",
+      "マイメロディ",
+      "ポムポムプリン",
+      "リトルツインスターズ"
+    ]
   },
   {
     "id": "bandai-4570118206541",
@@ -59208,7 +59349,14 @@
       "female"
     ],
     "tags_auto": false,
-    "summary": "お寿司になりきったシマエナガたちが、ころんと丸いボリューム感で登場する全5種のシリーズです。"
+    "summary": "お寿司になりきったシマエナガたちが、ころんと丸いボリューム感で登場する全5種のシリーズです。",
+    "lineup_names": [
+      "マグロ",
+      "おいなりさん",
+      "たまご",
+      "いくら",
+      "え…んがわ？"
+    ]
   },
   {
     "id": "bandai-4570118235169",
@@ -59249,7 +59397,14 @@
       "male"
     ],
     "tags_auto": false,
-    "summary": "「ベルセルク」黄金時代篇より、若き日のガッツたちをそろえた「まちぼうけ」シリーズ全5種です。"
+    "summary": "「ベルセルク」黄金時代篇より、若き日のガッツたちをそろえた「まちぼうけ」シリーズ全5種です。",
+    "lineup_names": [
+      "ガッツ",
+      "キャスカ",
+      "グリフィス",
+      "ゾッド",
+      "ベヘリット"
+    ]
   },
   {
     "id": "bandai-4570118252456",
@@ -59287,7 +59442,15 @@
       "male"
     ],
     "tags_auto": false,
-    "summary": "MLB™でプレーする日本人選手をテーマにした、デスクに飾れるCapsuleトルソー全6種です。"
+    "summary": "MLB™でプレーする日本人選手をテーマにした、デスクに飾れるCapsuleトルソー全6種です。",
+    "lineup_names": [
+      "大谷翔平",
+      "山本由伸",
+      "村上宗隆",
+      "千賀滉大",
+      "鈴木誠也",
+      "ラーズ・ヌートバー"
+    ]
   },
   {
     "id": "bandai-4582769811630",
@@ -59326,7 +59489,15 @@
       "male"
     ],
     "tags_auto": false,
-    "summary": "『TOY STORY』を題材にした「サウンドロップ」の新作。全6種、1回500円のラインナップです。"
+    "summary": "『TOY STORY』を題材にした「サウンドロップ」の新作。全6種、1回500円のラインナップです。",
+    "lineup_names": [
+      "ウッディ",
+      "バズ・ライトイヤー",
+      "ジェシー",
+      "ボー・ピープ",
+      "エイリアン",
+      "ハム"
+    ]
   },
   {
     "id": "bandai-4582769828867",
@@ -59368,7 +59539,13 @@
       "male"
     ],
     "tags_auto": false,
-    "summary": "初音ミクたちがプールで遊ぶ姿をイメージした、夏らしい雰囲気のフィギュア全5種です。"
+    "summary": "初音ミクたちがプールで遊ぶ姿をイメージした、夏らしい雰囲気のフィギュア全5種です。",
+    "lineup_names": [
+      "初音ミク",
+      "鏡音リン",
+      "MEIKO",
+      "巡音ルカ"
+    ]
   },
   {
     "id": "bandai-4582769832680",
@@ -59408,7 +59585,15 @@
       "female"
     ],
     "tags_auto": false,
-    "summary": "めじるしアクセサリーの『BLEACH』版、その第3弾。千年血戦篇から選ばれた全6種のラインナップです。"
+    "summary": "めじるしアクセサリーの『BLEACH』版、その第3弾。千年血戦篇から選ばれた全6種のラインナップです。",
+    "lineup_names": [
+      "黒崎一護",
+      "朽木ルキア",
+      "石田雨竜",
+      "平子真子",
+      "藍染惣右介",
+      "ユーグラム・ハッシュヴァルト"
+    ]
   },
   {
     "id": "bandai-4582769841842",
@@ -59450,7 +59635,13 @@
       "female"
     ],
     "tags_auto": false,
-    "summary": "サメにゃんをはじめ、海の生き物の被りものをしたmofusandのにゃんこ4種のライトマスコットです。"
+    "summary": "サメにゃんをはじめ、海の生き物の被りものをしたmofusandのにゃんこ4種のライトマスコットです。",
+    "lineup_names": [
+      "シャチにゃん",
+      "サメにゃん",
+      "ジンベエザメにゃん",
+      "メンダコにゃん"
+    ]
   },
   {
     "id": "bandai-4582769847264",
@@ -59492,7 +59683,14 @@
       "female"
     ],
     "tags_auto": false,
-    "summary": "パズルゲーム「ズーキーパー」のめじるしアクセサリー。全5種、1回300円で登場しました。"
+    "summary": "パズルゲーム「ズーキーパー」のめじるしアクセサリー。全5種、1回300円で登場しました。",
+    "lineup_names": [
+      "ライオン",
+      "パンダ",
+      "ウサギ",
+      "サル",
+      "園長"
+    ]
   },
   {
     "id": "bandai-4582769927980",
@@ -59530,7 +59728,13 @@
       "male"
     ],
     "tags_auto": false,
-    "summary": "「刃牙」シリーズのキャラクターが「すわらせ隊」に登場。集めると名場面も再現できる全4種です。"
+    "summary": "「刃牙」シリーズのキャラクターが「すわらせ隊」に登場。集めると名場面も再現できる全4種です。",
+    "lineup_names": [
+      "範馬勇次郎",
+      "範馬刃牙＆エアちゃぶ台",
+      "烈海王",
+      "渋川剛気"
+    ]
   },
   {
     "id": "bandai-4582769934827",
@@ -59570,7 +59774,13 @@
       "female"
     ],
     "tags_auto": false,
-    "summary": "懐かしい中嶋製作所のぬいぐるみを題材にした、capsule flockiesシリーズの全4種です。"
+    "summary": "懐かしい中嶋製作所のぬいぐるみを題材にした、capsule flockiesシリーズの全4種です。",
+    "lineup_names": [
+      "ころりんねこ（黒猫）",
+      "ころりんねこ（三毛猫）",
+      "ころりんぶた（ピンク）",
+      "ころりんぶた（白）"
+    ]
   },
   {
     "id": "bandai-4582769936067",
@@ -59612,7 +59822,18 @@
       "female"
     ],
     "tags_auto": false,
-    "summary": "『花ざかりの君たちへ』のふらっとめじるしアクセサリー。全9種のラインナップで登場しました。"
+    "summary": "『花ざかりの君たちへ』のふらっとめじるしアクセサリー。全9種のラインナップで登場しました。",
+    "lineup_names": [
+      "芦屋瑞稀",
+      "佐野泉",
+      "中津秀一",
+      "難波南",
+      "梅田北斗",
+      "関目京悟",
+      "野江伸二",
+      "中央千里",
+      "萱島大樹"
+    ]
   },
   {
     "id": "bandai-4582769979132",
@@ -59655,7 +59876,14 @@
       "male"
     ],
     "tags_auto": false,
-    "summary": "しんちゃんたちが駄菓子モチーフになった、のぼり付きダブルチャーム仕様のミニチュアチャームです。"
+    "summary": "しんちゃんたちが駄菓子モチーフになった、のぼり付きダブルチャーム仕様のミニチュアチャームです。",
+    "lineup_names": [
+      "しんちゃんカラフルチョコレート",
+      "シロヨーグルト",
+      "ぶりぶりラーメン",
+      "ネネちゃんうさぎ棒付きアメ",
+      "カンタム・グミ"
+    ]
   },
   {
     "id": "bandai-4582769979163",
@@ -59695,7 +59923,14 @@
       "female"
     ],
     "tags_auto": false,
-    "summary": "夏の装いをしたたまごっちたちがそろう、バカンスがテーマのフィギュア全5種です。"
+    "summary": "夏の装いをしたたまごっちたちがそろう、バカンスがテーマのフィギュア全5種です。",
+    "lineup_names": [
+      "まめっち",
+      "くちぱっち",
+      "みみっち",
+      "ふらわっち",
+      "めめっち"
+    ]
   },
   {
     "id": "bandai-4582769995101",
@@ -59732,7 +59967,14 @@
       "female"
     ],
     "tags_auto": false,
-    "summary": "エスターバニーたちをデザインした、プールバッグ風のビニール製ミニポーチ全5種です。"
+    "summary": "エスターバニーたちをデザインした、プールバッグ風のビニール製ミニポーチ全5種です。",
+    "lineup_names": [
+      "リボンバニー",
+      "クリームバニー",
+      "ラベンダーバニー",
+      "ハッピーバニー",
+      "ブルーバニー"
+    ]
   },
   {
     "id": "bandai-4582769995705",
@@ -59773,7 +60015,13 @@
       "male"
     ],
     "tags_auto": false,
-    "summary": "阪神甲子園球場のミニチュア2026年夏版。応援曲3曲をラインナップに加えた全6種です。"
+    "summary": "阪神甲子園球場のミニチュア2026年夏版。応援曲3曲をラインナップに加えた全6種です。",
+    "lineup_names": [
+      "サイレン＋宇宙戦艦ヤマト",
+      "サイレン＋テキーラ",
+      "サイレン＋アルプス一万尺",
+      "リアル阪神甲子園球場チャーム"
+    ]
   },
   {
     "id": "bandai-4582769995781",
@@ -59815,7 +60063,14 @@
       "female"
     ],
     "tags_auto": false,
-    "summary": "ハイキュー!!のアニマルデザインめじるしアクセサリー第2弾。音駒・梟谷の5人が登場します。"
+    "summary": "ハイキュー!!のアニマルデザインめじるしアクセサリー第2弾。音駒・梟谷の5人が登場します。",
+    "lineup_names": [
+      "孤爪研磨",
+      "黒尾鉄朗",
+      "夜久衛輔",
+      "木兎光太郎",
+      "赤葦京治"
+    ]
   },
   {
     "id": "bandai-4582769995842",
@@ -59852,7 +60107,14 @@
       "male"
     ],
     "tags_auto": false,
-    "summary": "アクティオンゾウカブトをはじめ、世界のカブトムシやカナブンを再現した、いきもの大図鑑の全6種です。"
+    "summary": "アクティオンゾウカブトをはじめ、世界のカブトムシやカナブンを再現した、いきもの大図鑑の全6種です。",
+    "lineup_names": [
+      "アクティオンゾウカブト",
+      "ケンタウルスオオカブト",
+      "オオツノメンガタカブト",
+      "オキナワカブト",
+      "シロヘリミドリツノカナブン"
+    ]
   },
   {
     "id": "bandai-4582770021684",
@@ -59889,7 +60151,15 @@
       "male"
     ],
     "tags_auto": false,
-    "summary": "球体のカプセルを組み立てて遊ぶ、メタルベアリング搭載のハイパーヨーヨー。カラーは全6種類です。"
+    "summary": "球体のカプセルを組み立てて遊ぶ、メタルベアリング搭載のハイパーヨーヨー。カラーは全6種類です。",
+    "lineup_names": [
+      "スフィアドラゴン",
+      "スフィアコスモ",
+      "スフィアアクア",
+      "スフィアタイガー",
+      "スフィアビッグバン",
+      "スフィアファイヤー"
+    ]
   },
   {
     "id": "bandai-4582770026733",
@@ -59928,7 +60198,15 @@
       "male"
     ],
     "tags_auto": false,
-    "summary": "春夏秋冬をテーマにしたポケモンのイラストを楽しめる、水を入れて仕上げるカプセルレス仕様のウォータードーム。"
+    "summary": "春夏秋冬をテーマにしたポケモンのイラストを楽しめる、水を入れて仕上げるカプセルレス仕様のウォータードーム。",
+    "lineup_names": [
+      "満開のお花",
+      "雨宿り",
+      "お月見",
+      "お花畑で追いかけっこ",
+      "紅葉狩り",
+      "木漏れ日"
+    ]
   },
   {
     "id": "bandai-4582770026771",
@@ -59970,7 +60248,14 @@
       "male"
     ],
     "tags_auto": false,
-    "summary": "ホラーゲーム『青鬼』の青鬼たちが、ひろしを待つ「まちぼうけ」シリーズになった全5種です。"
+    "summary": "ホラーゲーム『青鬼』の青鬼たちが、ひろしを待つ「まちぼうけ」シリーズになった全5種です。",
+    "lineup_names": [
+      "青鬼",
+      "フワッティー",
+      "スクワット鬼",
+      "クラゲ鬼",
+      "たけし"
+    ]
   },
   {
     "id": "bandai-4582770027501",
@@ -60008,7 +60293,16 @@
       "male"
     ],
     "tags_auto": false,
-    "summary": "クリアラバーコースターの『ドラゴンボール』版、その第2弾。フラットガシャポンで全7種が登場です。"
+    "summary": "クリアラバーコースターの『ドラゴンボール』版、その第2弾。フラットガシャポンで全7種が登場です。",
+    "lineup_names": [
+      "孫悟空",
+      "ブルマ",
+      "ウーロン",
+      "孫悟空＆クリリン",
+      "マイ",
+      "人造人間8号",
+      "餃子"
+    ]
   },
   {
     "id": "bandai-4582770028027",
@@ -60045,7 +60339,13 @@
       "male"
     ],
     "tags_auto": false,
-    "summary": "水生の甲虫で最大のゲンゴロウを題材にした、いきもの大図鑑アドバンスの水生昆虫第2弾です。"
+    "summary": "水生の甲虫で最大のゲンゴロウを題材にした、いきもの大図鑑アドバンスの水生昆虫第2弾です。",
+    "lineup_names": [
+      "ナミゲンゴロウ（オス）",
+      "ナミゲンゴロウ（メス）",
+      "シャープゲンゴロウモドキ（メス）",
+      "タガメ（つや消しライトカラー）"
+    ]
   },
   {
     "id": "bandai-4582770056129",
@@ -60084,7 +60384,14 @@
       "male"
     ],
     "tags_auto": false,
-    "summary": "プンプン怒る姿がかわいい「怒ったわんちゃあぁぁん」を立体化した、フィギュア第2弾の全5種です。"
+    "summary": "プンプン怒る姿がかわいい「怒ったわんちゃあぁぁん」を立体化した、フィギュア第2弾の全5種です。",
+    "lineup_names": [
+      "寝転んで怒ってるわんちゃん",
+      "寝ながら怒ってるわんちゃん",
+      "待ちくたびれて怒ってるわんちゃん",
+      "ボールを投げてくれなくて怒ってるわんちゃん",
+      "ボサボサになって怒ってるわんちゃん"
+    ]
   },
   {
     "id": "bandai-4582770076745",
@@ -60125,7 +60432,14 @@
       "female"
     ],
     "tags_auto": false,
-    "summary": "『おジャ魔女どれみにょん』のタップとコンパクト型チャーム。中のパーツがシャカシャカ揺れます。"
+    "summary": "『おジャ魔女どれみにょん』のタップとコンパクト型チャーム。中のパーツがシャカシャカ揺れます。",
+    "lineup_names": [
+      "見習いタップ",
+      "リズムタップ",
+      "パララタップ",
+      "コロンタップ",
+      "ピュアリンハナちゃんコンパクト"
+    ]
   },
   {
     "id": "bandai-4582769701184",
@@ -60163,7 +60477,8 @@
       "female"
     ],
     "tags_auto": false,
-    "summary": "懐かしさのあるPETシールで作られた、90'sや20周年のイラストを収録するたまごっちジャンボシールダスです。"
+    "summary": "懐かしさのあるPETシールで作られた、90'sや20周年のイラストを収録するたまごっちジャンボシールダスです。",
+    "lineup_names": []
   },
   {
     "id": "bandai-4582769769184",
@@ -60204,7 +60519,15 @@
       "female"
     ],
     "tags_auto": false,
-    "summary": "リップクリーム等に装着できるフェイス型マスコットキャップの、ボールチェーン付きチャーム全6種です。"
+    "summary": "リップクリーム等に装着できるフェイス型マスコットキャップの、ボールチェーン付きチャーム全6種です。",
+    "lineup_names": [
+      "ハローキティ",
+      "ポチャッコ",
+      "ポムポムプリン",
+      "シナモロール",
+      "クロミ",
+      "けろけろけろっぴ"
+    ]
   },
   {
     "id": "bandai-4582769875786",
@@ -60242,7 +60565,13 @@
       "female"
     ],
     "tags_auto": false,
-    "summary": "大スター宮いちごまつりがテーマ。オルゴールやコースター、ミニチャームほか、全15種のグッズコレクションです。"
+    "summary": "大スター宮いちごまつりがテーマ。オルゴールやコースター、ミニチャームほか、全15種のグッズコレクションです。",
+    "lineup_names": [
+      "ドラム式オルゴール",
+      "ラバーコースター",
+      "劇場版限定バインダー",
+      "ピンクステージバインダー"
+    ]
   },
   {
     "id": "bandai-4582769836848",
@@ -60284,7 +60613,14 @@
       "female"
     ],
     "tags_auto": false,
-    "summary": "モンチッチとハローキティのコラボデザインを楽しめる、めじるしアクセサリー全5種です。"
+    "summary": "モンチッチとハローキティのコラボデザインを楽しめる、めじるしアクセサリー全5種です。",
+    "lineup_names": [
+      "モンチッチ",
+      "ハローキティ",
+      "ケーキ（モンチッチ）",
+      "ケーキ（ハローキティ）",
+      "ハローキティ型のビン"
+    ]
   },
   {
     "id": "bandai-4582769842122",
@@ -60327,7 +60663,14 @@
       "male"
     ],
     "tags_auto": false,
-    "summary": "ピノコ、アトム、レオ、ユニコ、ヒョウタンツギがそろう、手塚治虫キャラクターのめじるしアクセサリー。"
+    "summary": "ピノコ、アトム、レオ、ユニコ、ヒョウタンツギがそろう、手塚治虫キャラクターのめじるしアクセサリー。",
+    "lineup_names": [
+      "ピノコ",
+      "アトム",
+      "レオ",
+      "ユニコ",
+      "ヒョウタンツギ"
+    ]
   },
   {
     "id": "bandai-4582769889769",
@@ -60365,7 +60708,13 @@
       "female"
     ],
     "tags_auto": false,
-    "summary": "「てんしっちのたまごっち」「Tamagotchi P's」など4タイトルを収録したRingcolle!第4弾、全14種。"
+    "summary": "「てんしっちのたまごっち」「Tamagotchi P's」など4タイトルを収録したRingcolle!第4弾、全14種。",
+    "lineup_names": [
+      "てんしっちのたまごっち",
+      "デビルっちのたまごっち",
+      "ウラじんせーエンジョイ！たまごっちプラス",
+      "Tamagotchi P's"
+    ]
   },
   {
     "id": "bandai-4582769898679",
@@ -60406,7 +60755,15 @@
       "female"
     ],
     "tags_auto": false,
-    "summary": "若槻千夏さんが手がけるキャラクター「クマタン」の、カニカン付きめじるしアクセサリー全6種です。"
+    "summary": "若槻千夏さんが手がけるキャラクター「クマタン」の、カニカン付きめじるしアクセサリー全6種です。",
+    "lineup_names": [
+      "レインコートクマタン",
+      "レインコート彼女",
+      "クマタン",
+      "クマタンの彼女",
+      "ヤギタン",
+      "ビィータン"
+    ]
   },
   {
     "id": "bandai-4582769889615",
@@ -60446,7 +60803,14 @@
       "female"
     ],
     "tags_auto": false,
-    "summary": "カラフルなケアベア™のマスコットチャームが、ブリスター付きで登場する全5種のコレクションです。"
+    "summary": "カラフルなケアベア™のマスコットチャームが、ブリスター付きで登場する全5種のコレクションです。",
+    "lineup_names": [
+      "グッドラックベア",
+      "チアベア",
+      "ファンシャインベア",
+      "シェアベア",
+      "ウィッシュベア"
+    ]
   },
   {
     "id": "bandai-4582769875731",
@@ -60487,7 +60851,16 @@
       "female"
     ],
     "tags_auto": false,
-    "summary": "動物や自然をモチーフに制作するDAISUKE KONDOの作品世界を楽しめる、めじるしアクセサリー全7種です。"
+    "summary": "動物や自然をモチーフに制作するDAISUKE KONDOの作品世界を楽しめる、めじるしアクセサリー全7種です。",
+    "lineup_names": [
+      "taiyo",
+      "tsuki",
+      "kumo",
+      "ametsubu",
+      "dokodemoniji",
+      "kuma",
+      "pengin"
+    ]
   },
   {
     "id": "bandai-4582769842443",
@@ -60527,7 +60900,12 @@
       "female"
     ],
     "tags_auto": false,
-    "summary": "『うちの3姉妹』のフー・スー・チーが、セリフプレート付きのWチャームになった全6種です。"
+    "summary": "『うちの3姉妹』のフー・スー・チーが、セリフプレート付きのWチャームになった全6種です。",
+    "lineup_names": [
+      "長女・フー",
+      "次女・スー",
+      "三女・チー"
+    ]
   },
   {
     "id": "bandai-4582769891854",
@@ -60567,7 +60945,14 @@
       "female"
     ],
     "tags_auto": false,
-    "summary": "パペットスンスンのキャラクターたちを集めた、シリーズ初登場のめじるしアクセサリー全5種です。"
+    "summary": "パペットスンスンのキャラクターたちを集めた、シリーズ初登場のめじるしアクセサリー全5種です。",
+    "lineup_names": [
+      "ノンノン",
+      "スンスン",
+      "ゾンゾン",
+      "スンスン（ドーナツ）",
+      "スンスン（いちご）"
+    ]
   },
   {
     "id": "bandai-4582769934957",
@@ -60608,7 +60993,15 @@
       "female"
     ],
     "tags_auto": false,
-    "summary": "クリアカラーがかわいい、ドラえもんのめじるしアクセサリー第4弾。全6種で登場しました。"
+    "summary": "クリアカラーがかわいい、ドラえもんのめじるしアクセサリー第4弾。全6種で登場しました。",
+    "lineup_names": [
+      "どらやき",
+      "ドラえもん（ごきげん）",
+      "ドラミ（ごきげん）",
+      "タイムマシン",
+      "タイムふろしき",
+      "桃太郎印のきびだんご"
+    ]
   },
   {
     "id": "bandai-4582769889165",
@@ -60649,7 +61042,14 @@
       "female"
     ],
     "tags_auto": false,
-    "summary": "お寿司のキャラクター「おしゅしだよ」の、シリーズ初となるめじるしアクセサリー全5種です。"
+    "summary": "お寿司のキャラクター「おしゅしだよ」の、シリーズ初となるめじるしアクセサリー全5種です。",
+    "lineup_names": [
+      "たまご",
+      "いなり",
+      "おしゅし（まぐろ）",
+      "いくら",
+      "おすしピープル"
+    ]
   },
   {
     "id": "bandai-4582769810503",
@@ -60691,7 +61091,12 @@
       "female"
     ],
     "tags_auto": false,
-    "summary": "クレイアニメ「ウォレスとグルミット」を題材にした、めじるしアクセサリー全6種です。"
+    "summary": "クレイアニメ「ウォレスとグルミット」を題材にした、めじるしアクセサリー全6種です。",
+    "lineup_names": [
+      "グルミット",
+      "フェザー・マッグロウ",
+      "ショーン"
+    ]
   },
   {
     "id": "bandai-4570118182081",
@@ -60732,7 +61137,13 @@
       "female"
     ],
     "tags_auto": false,
-    "summary": "ホグワーツ4寮の制服とエンブレムをモチーフにした、ハリー・ポッターのめじるしアクセサリーです。"
+    "summary": "ホグワーツ4寮の制服とエンブレムをモチーフにした、ハリー・ポッターのめじるしアクセサリーです。",
+    "lineup_names": [
+      "グリフィンドール",
+      "スリザリン",
+      "レイブンクロー",
+      "ハッフルパフ"
+    ]
   },
   {
     "id": "bandai-4570118182104",
@@ -60774,7 +61185,14 @@
       "female"
     ],
     "tags_auto": false,
-    "summary": "TOM and JERRYの立体フィギュアが小さなパッケージに収まった、ミニチュアパッケージ型のチャームです。"
+    "summary": "TOM and JERRYの立体フィギュアが小さなパッケージに収まった、ミニチュアパッケージ型のチャームです。",
+    "lineup_names": [
+      "トム",
+      "ジェリー",
+      "タフィー",
+      "スパイク",
+      "マッスル"
+    ]
   },
   {
     "id": "bandai-4570118183699",
@@ -60813,7 +61231,19 @@
       "male"
     ],
     "tags_auto": false,
-    "summary": "クマ型フィギュア「BE@RBRICK」のミニチュアチャーム第3弾で、今回はメッキVer.が並びます。"
+    "summary": "クマ型フィギュア「BE@RBRICK」のミニチュアチャーム第3弾で、今回はメッキVer.が並びます。",
+    "lineup_names": [
+      "SILVER",
+      "ORANGE",
+      "RED",
+      "BLACK",
+      "SKY BLUE",
+      "MULTICOLOR",
+      "PINK",
+      "PURPLE",
+      "EMERALD GREEN",
+      "GOLD"
+    ]
   },
   {
     "id": "bandai-4570118183750",
@@ -60849,7 +61279,14 @@
       "female"
     ],
     "tags_auto": false,
-    "summary": "『名探偵プリキュア！』の変身アイテムなどで遊べる、なりきりプリキュアシリーズの第3弾です。"
+    "summary": "『名探偵プリキュア！』の変身アイテムなどで遊べる、なりきりプリキュアシリーズの第3弾です。",
+    "lineup_names": [
+      "トップオブプリリーフレグランス",
+      "プリキットミラールーペ",
+      "プリキットライト（キュアアンサー）",
+      "プリキットライト（キュアミスティック）",
+      "プリキットライト（キュアエクレール）"
+    ]
   },
   {
     "id": "bandai-4570118183774",
@@ -60886,7 +61323,13 @@
       "female"
     ],
     "tags_auto": false,
-    "summary": "『名探偵プリキュア！』の玩具と連動して音声が楽しめる、プリキュアマコトジュエルの第3弾です。"
+    "summary": "『名探偵プリキュア！』の玩具と連動して音声が楽しめる、プリキュアマコトジュエルの第3弾です。",
+    "lineup_names": [
+      "プリキュアマコトジュエル キュアエクレール変身ver.",
+      "プリキュアマコトジュエル キュアエクレール浄化ver.",
+      "プリキュアマコトジュエル キュアエクレール プレゼントver.",
+      "プリキュアマコトジュエル レッドジュエルver."
+    ]
   },
   {
     "id": "bandai-4570118184016",
@@ -64542,7 +64985,7 @@
   {
     "id": "tarts-y910319",
     "name": "星のカービィ ぷくっとラバーカンバッジ",
-    "name_en": "",
+    "name_en": "Kirby Puffy Rubber Can Badge",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 400,
@@ -64572,23 +65015,24 @@
     "auto": true,
     "q_subs": [
       "kawaii:pokemon",
-      "kawaii:accessory"
+      "kawaii:character",
+      "type:stationery"
     ],
     "q_ages": [
+      "10",
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "tarts-y906510",
     "name": "スター・ウォーズ ライトセーバー -ダイキャストセレクション/シス-",
-    "name_en": "",
+    "name_en": "Star Wars Lightsaber -Diecast Selection / Sith-",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 500,
@@ -64619,9 +65063,8 @@
     "auto": true,
     "q_subs": [
       "cool:western",
-      "type:useful",
-      "type:sound",
-      "hobby:movie"
+      "hobby:movie",
+      "real:miniature"
     ],
     "q_ages": [
       "20",
@@ -64629,15 +65072,14 @@
       "40"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "tarts-y912917",
     "name": "アイアンマン -MOVIE ITEM COLLECTION DELUXE-",
-    "name_en": "",
+    "name_en": "Iron Man -MOVIE ITEM COLLECTION DELUXE-",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 500,
@@ -64666,7 +65108,10 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "hobby:movie"
+      "cool:western",
+      "cool:hero",
+      "hobby:movie",
+      "real:miniature"
     ],
     "q_ages": [
       "20",
@@ -64674,15 +65119,14 @@
       "40"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20261116-1524",
     "name": "HondaバイクラバーキーホルダーVol.2 大型編",
-    "name_en": "",
+    "name_en": "Honda Bike Rubber Keychain Vol.2 Large Bikes",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 400,
@@ -64703,23 +65147,25 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "type:charm"
+      "real:vehicle",
+      "real:miniature",
+      "type:charm",
+      "hobby:brand"
     ],
     "q_ages": [
-      "20",
       "30",
-      "40"
+      "40",
+      "50"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20261116-1523",
     "name": "ドラネッツ 幼竜型 ソフビフィギュア",
-    "name_en": "",
+    "name_en": "Doranets Young Dragon Soft Vinyl Figure",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 400,
@@ -64742,7 +65188,8 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "type:figure"
+      "type:figure",
+      "real:creature"
     ],
     "q_ages": [
       "20",
@@ -64750,15 +65197,15 @@
       "40"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "male",
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20261116-1522",
     "name": "刀剣乱舞ONLINE 対大侵寇防人作戦サーバーアクリルチャーム2",
-    "name_en": "",
+    "name_en": "Touken Ranbu ONLINE Countering the Great Invasion Defense Operation Server Acrylic Charm 2",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 400,
@@ -64781,25 +65228,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:accessory",
-      "cool:weaponry",
       "oshi:game",
-      "type:charm"
+      "cool:weaponry",
+      "type:charm",
+      "kawaii:accessory"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20261116-1521",
     "name": "たまケロ クリアVer.",
-    "name_en": "",
+    "name_en": "Tamakero Clear Ver.",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 500,
@@ -64819,22 +65265,25 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "kawaii:mascot",
+      "kawaii:animal",
+      "type:figure"
+    ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20261116-1520",
     "name": "1/64 Honda BEAT MUGEN Ver.",
-    "name_en": "",
+    "name_en": "1/64 Honda BEAT MUGEN Ver.",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 400,
@@ -64857,23 +65306,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "real:miniature"
+      "real:vehicle",
+      "real:miniature",
+      "hobby:brand"
     ],
     "q_ages": [
-      "20",
       "30",
-      "40"
+      "40",
+      "50"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20261116-1519",
     "name": "いらすとや わっかチャーム",
-    "name_en": "",
+    "name_en": "Irasutoya Ring Charm",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 400,
@@ -64896,8 +65346,10 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "type:charm",
       "kawaii:accessory",
-      "type:charm"
+      "funny:neta",
+      "hobby:art"
     ],
     "q_ages": [
       "20",
@@ -64905,14 +65357,15 @@
       "40"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20261116-1518",
     "name": "劇場版 PSYCHO-PASS PROVIDENCE ドミネーター ミニチュアコレクション",
-    "name_en": "",
+    "name_en": "PSYCHO-PASS PROVIDENCE Dominator Miniature Collection",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 500,
@@ -64935,24 +65388,26 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:trend",
+      "cool:dark",
       "real:miniature",
       "hobby:movie"
     ],
     "q_ages": [
+      "20",
       "30",
-      "40",
-      "50"
+      "40"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "male",
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20261116-1517",
     "name": "1/64HONDA Cubフィギュアキーホルダー2",
-    "name_en": "",
+    "name_en": "1/64 HONDA Cub Figure Keychain 2",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 400,
@@ -64976,25 +65431,26 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "real:vehicle",
+      "real:miniature",
       "type:figure",
       "type:charm",
-      "real:miniature"
+      "hobby:brand"
     ],
     "q_ages": [
-      "20",
       "30",
-      "40"
+      "40",
+      "50"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20261116-1516",
     "name": "ダライアス ミニフィギュアコレクション2 グレートシング級戦艦",
-    "name_en": "",
+    "name_en": "DARIUS Mini Figure Collection 2 Great Thing-class Battleship",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 500,
@@ -65017,24 +65473,26 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:game",
+      "real:miniature",
+      "real:space",
       "type:figure",
-      "real:miniature"
+      "retro:showa"
     ],
     "q_ages": [
-      "20",
       "30",
-      "40"
+      "40",
+      "50"
     ],
     "q_genders": [
-      "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20261116-1515",
     "name": "メダリスト スピンアクリルスタンド2",
-    "name_en": "",
+    "name_en": "Medalist Spin Acrylic Stand 2",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 400,
@@ -65054,22 +65512,26 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "oshi:trend",
+      "hobby:sports",
+      "type:stationery"
+    ],
     "q_ages": [
+      "10",
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20261116-1514",
     "name": "【再販】卓上呼び出しボタンコレクション2",
-    "name_en": "",
+    "name_en": "[Reissue] Desk Call Button Collection 2",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 400,
@@ -65089,7 +65551,11 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "real:miniature",
+      "funny:neta",
+      "type:sound"
+    ],
     "q_ages": [
       "20",
       "30",
@@ -65099,12 +65565,12 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20261116-1513",
     "name": "ラミィの大冒険 アクリルキーホルダー",
-    "name_en": "",
+    "name_en": "Lamy's Great Adventure Acrylic Keychain",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 300,
@@ -65125,23 +65591,25 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:vtuber",
+      "oshi:game",
       "type:charm"
     ],
     "q_ages": [
+      "10",
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "male",
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20261116-1512",
     "name": "名画ねこ",
-    "name_en": "",
+    "name_en": "Masterpiece Cats",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 400,
@@ -65162,7 +65630,10 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:animal"
+      "kawaii:animal",
+      "hobby:art",
+      "funny:neta",
+      "type:figure"
     ],
     "q_ages": [
       "20",
@@ -65170,15 +65641,14 @@
       "40"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "toyscabin-20261116-1511",
     "name": "ガードポーン",
-    "name_en": "",
+    "name_en": "Guard Pawn",
     "maker": "トイズキャビン",
     "maker_en": "Toys Cabin",
     "price": 500,
@@ -65198,22 +65668,25 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "funny:neta",
+      "type:figure"
+    ],
     "q_ages": [
       "20",
       "30",
       "40"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "male",
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10306",
     "name": "学園アイドルマスター むぎゅみにコレクションフィギュア vol.3",
-    "name_en": "",
+    "name_en": "Gakuen Idolmaster Mugyu Mini Collection Figure Vol.3",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 500,
@@ -65237,21 +65710,24 @@
     "auto": true,
     "q_subs": [
       "oshi:idol",
+      "oshi:game",
       "type:figure"
     ],
     "q_ages": [
       "10",
-      "20"
+      "20",
+      "30"
     ],
     "q_genders": [
-      "male"
+      "male",
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "kenele-gc0792c",
     "name": "mojojojo Pack Charm",
-    "name_en": "",
+    "name_en": "mojojojo Pack Charm",
     "maker": "ケンエレファント",
     "maker_en": "Kenelephant",
     "price": 400,
@@ -65271,17 +65747,18 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "retro:heisei"
+      "type:minipkg",
+      "type:charm",
+      "kawaii:accessory",
+      "hobby:brand"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   }
 ]
