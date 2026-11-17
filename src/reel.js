@@ -46,7 +46,7 @@ ${foot(pal)}</svg>`);
 // ===== 表紙の別案（REEL_COVER=1〜4。指定しなければ、いまの表紙のまま） =====
 // どの案も：「ラストの〇〇が可愛すぎる♡」と、中身を隠して期待させるやり方（うっすらモザイク）は残す。大事なものは y 372〜1548・右はしから 120px より内側（x 70〜960、中心 515）に置く。
 // 数字や日付は当日のデータ（info）だけを使う。info＝{ n: 紹介する数, head: 見出し, num: 大きく出す数, unit: その単位, lastId: 最後の可愛い枠の商品id }
-const COVER_V = Number(process.env.REEL_COVER) || 0, CX = 515, CW0 = 890, HOT = "#ff9dbb";
+const COVER_V = process.env.REEL_COVER === "0" ? 0 : Number(process.env.REEL_COVER) || 2, /* ユーザーが2案（数字で引く）に決定 11/17 */ CX = 515, CW0 = 890, HOT = "#ff9dbb";
 const teaseLine = (word) => (word ? `ラストの${word}が可愛すぎる♡` : "");
 const fitSize = (t, w, max) => Math.min(max, Math.floor(w / Math.max(1, S.units(t))));
 const rawOf = (l) => sharp(l.input, { raw: l.raw });
@@ -78,7 +78,7 @@ ${S.text(info.head, X0, 524, fitSize(info.head, CW0, 72), pal.ink)}
 ${S.text(num, X0 - 14, 846, nsz, S.PINK)}${S.text(info.unit, X0 + nw + 6, 846, usz, pal.ink)}
 <rect x="${X0}" y="884" width="${CW0}" height="8" fill="${pal.ink}"/>
 ${tl ? S.text(tl, X0, 968, fitSize(tl, CW0, 54), pal.ink) : ""}
-${S.text(info.num === info.n ? "このあと ぜんぶ紹介" : `このあと ${info.n}つを紹介`, X0, Math.min(SAFE_B - 8, end + 62), 44, pal.ink)}${foot(pal)}</svg>`);
+${foot(pal)}</svg>`);
   await sharp(svg).composite([await S.shadowLayer(W, H, rects, pal, 22, 0.5), ...layers]).png().toFile(file);
 }
 // 3「問いかけ・参加型」：「どれ回す？」＋番号つきの大きな写真4枚（うっすらモザイク）。コメントで番号を答えてもらう
