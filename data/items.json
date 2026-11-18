@@ -66344,5 +66344,126 @@
       "female"
     ],
     "tags_auto": false
+  },
+  {
+    "id": "bandai-4582770071191",
+    "name": "Sassy めじるしアクセサリー2",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-11",
+    "release_note": "11月第3週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770071191000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770071191",
+    "popularity": 50,
+    "added": "2026-11-19",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "type:mejirushi",
+      "type:fashion"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "kitan-sanrio-suizokukan",
+    "name": "PUTITTO サンリオキャラクターズ 水族館１",
+    "name_en": "",
+    "maker": "キタンクラブ",
+    "maker_en": "Kitan Club",
+    "price": 500,
+    "release": "2026-11",
+    "release_note": "11月下旬",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "lineup_names": [
+      "ハローキティ / イルカ",
+      "リトルツインスターズ / エイ",
+      "ポチャッコ / カワウソ",
+      "バッドばつ丸 / あざらしの赤ちゃん",
+      "シナモロール / クラゲ"
+    ],
+    "image": "",
+    "official_url": "https://kitan.jp/products/sanrio_suizokukan/",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-19",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:sanrio"
+    ],
+    "q_ages": [
+      "10",
+      "20",
+      "30"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bushicap-10279",
+    "name": "ずんだもん ずんだもんがいっぱいコレクションフィギュアRICH",
+    "name_en": "",
+    "maker": "ブシロードクリエイティブ",
+    "maker_en": "Bushiroad Creative",
+    "price": 500,
+    "release": "2027-03",
+    "release_note": "3月下旬",
+    "genre": "anime",
+    "moods": [
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "jan": "4570194439826",
+    "image": "",
+    "official_url": "https://capsule.bushiroad-creative.com/product/10279/",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-19",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:figure"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
   }
 ]
