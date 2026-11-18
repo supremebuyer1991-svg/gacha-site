@@ -123,15 +123,15 @@
     },
     {
       "title": "ちいかわ めじるしアクセサリー3",
-      "store": "#C-pla minamoa広島",
-      "pref": "広島県",
+      "store": "#C-pla 博多駅博多口",
+      "pref": "福岡県",
       "kind": "item",
-      "start": "2026-11-17T10:00",
-      "end": "2026-11-19T23:59",
+      "start": "2026-11-14T11:00",
+      "end": "2026-11-18T23:59",
       "method": "LivePocket",
-      "url": "https://livepocket.jp/e/g5g0l",
-      "note": "販売日は11/23。1人5個まで",
-      "added": "2026-11-17"
+      "url": "https://livepocket.jp/e/yc3kh",
+      "note": "販売日は11/22。1人3個まで",
+      "added": "2026-11-18"
     },
     {
       "title": "どうぶつの森 めじるしアクセサリー",
@@ -144,6 +144,18 @@
       "url": "https://livepocket.jp/e/3r_b_",
       "note": "販売日は11/23。1人3個まで",
       "added": "2026-11-15"
+    },
+    {
+      "title": "ちいかわ めじるしアクセサリー3",
+      "store": "#C-pla minamoa広島",
+      "pref": "広島県",
+      "kind": "item",
+      "start": "2026-11-17T10:00",
+      "end": "2026-11-19T23:59",
+      "method": "LivePocket",
+      "url": "https://livepocket.jp/e/g5g0l",
+      "note": "販売日は11/23。1人5個まで",
+      "added": "2026-11-17"
     },
     {
       "title": "サンリオキャラクターズ ボンボンドロップミニチュアチャーム2",
@@ -206,18 +218,6 @@
       "added": "2026-11-17"
     },
     {
-      "title": "オープン初日の入場チケット",
-      "store": "#C-pla アコルデ新百合ヶ丘北館",
-      "pref": "神奈川県",
-      "kind": "open",
-      "start": "2026-11-16T00:01",
-      "end": "2026-11-20T23:59",
-      "method": "LivePocket",
-      "url": "https://livepocket.jp/e/pocux",
-      "note": "オープンは11/26",
-      "added": "2026-11-16"
-    },
-    {
       "title": "リラックマ きょうりゅう着ぐるみフィギュア",
       "store": "#C-pla アミュプラザ鹿児島",
       "pref": "鹿児島県",
@@ -228,6 +228,18 @@
       "url": "https://livepocket.jp/e/e1ay5",
       "note": "販売日は11/24。1人5個まで",
       "added": "2026-11-15"
+    },
+    {
+      "title": "オープン初日の入場チケット",
+      "store": "#C-pla アコルデ新百合ヶ丘北館",
+      "pref": "神奈川県",
+      "kind": "open",
+      "start": "2026-11-16T00:01",
+      "end": "2026-11-20T23:59",
+      "method": "LivePocket",
+      "url": "https://livepocket.jp/e/pocux",
+      "note": "オープンは11/26",
+      "added": "2026-11-16"
     },
     {
       "title": "めじるしアクセサリー サンリオキャラクターズオールスターズ Part.3",
