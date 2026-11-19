@@ -2112,7 +2112,7 @@ ${content}
         { "@type": "ListItem", position: 3, name },
       ],
     };
-    layout({ rel, title: t.itemTitle(name, lots.length > 0, seoOpt), description: desc, body, jsonld: [...(product.image && product.offers ? [product] : []) /* 写真のない商品・値段が未定の商品は Product を出さない（Google で「image がない」「offers がない」と無効になるため） */, crumbs, ...(whereLd ? [whereLd] : [])], ogImage: absImg(it), ogType: "product",
+    layout({ rel, title: t.itemTitle(name, lots.length > 0, seoOpt), description: desc, body, jsonld: [...(product.image && product.offers ? [product] : []) /* 写真のない商品・値段が未定の商品は Product を出さない（Google で「image がない」「offers がない」と無効になるため） */, crumbs /* 商品ごとの定型FAQPageは11/19に外した（FAQのリッチリザルトは一般サイトに出ず、同じ型の量産だけが目立つため。見えるQ&Aは残す） */], ogImage: absImg(it), ogType: "product",
       noindex: !hasName(it, lang), alts: LANGS.filter((l) => hasName(it, l)),
       // 更新日のもとになる中身（在庫・今日の日付・関連商品は入れない）
       sig: [name, it.price, it.lineup, it.lineup_names || [], it.lineup_notes || {}, descOf(it, lang) || "", lang === "ja" ? it.summary || "" : "", it.release, it.release_note || "", it.image, lots.map((l) => [l.shop || l.store || "", l.title || "", l.url || "", l.end || ""])] });
@@ -2281,7 +2281,7 @@ ${content}
   </div></section>`;
       desc = H.cxDesc(L, list.length, cut(nm(latest), 40), t.month(latest.release), latest.price, next ? cut(nm(next), 40) : "", next ? relShort(next) : "", H.cxPriceShort(pmin, pmax));
     }
-    const ld = [{ "@context": "https://schema.org", "@type": "FAQPage", inLanguage: LANG_META[lang].hreflang, mainEntity: qa.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) }];
+    const ld = []; // キャラごとの定型FAQPageは11/19に外した（見えるQ&Aは残す）
     // 発売状況・よくある質問は、商品の一覧の下に（スマホで写真までが遠くならないように）
     return { afterList: relHtml + html, description: desc, jsonldExtra: ld, lotBand, latest, next, upcoming, latestUp, latestWhen, spec, relShort };
   };
@@ -2866,7 +2866,7 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
           { "@type": "ListItem", position: 3, name } ] },
         { "@context": "https://schema.org", "@type": "ItemList", name: ja ? `${name}周辺のガチャガチャ設置店` : S.h1(name), numberOfItems: n,
           itemListElement: [...lms.map(lmLd), ...list.map((x) => storeLd(x.sh))].slice(0, 30).map((item, i) => ({ "@type": "ListItem", position: i + 1, item })) },
-        ...(faq.length ? [{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faq.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) }] : []),
+        // 駅ごとの定型FAQPageは11/19に外した（見えるQ&Aは残す）
       ];
       layout({ rel, title, description: desc, body, jsonld, current: ja ? "map" : "station" });
     }
