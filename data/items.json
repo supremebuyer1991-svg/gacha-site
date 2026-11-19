@@ -4428,7 +4428,7 @@
     "maker_en": "Bandai",
     "price": 300,
     "release": "2026-11",
-    "release_note": "11月第3週より順次",
+    "release_note": "11月第4週より順次",
     "genre": "anime",
     "moods": [
       "kawaii"
@@ -7017,7 +7017,7 @@
     "maker_en": "Bandai",
     "price": 500,
     "release": "2026-11",
-    "release_note": "",
+    "release_note": "11月第3週より順次",
     "genre": "anime",
     "moods": [
       "kawaii"
@@ -66848,5 +66848,97 @@
       "ずんだもん（ガーン）",
       "ずんだもん（ふむふむ）"
     ]
+  },
+  {
+    "id": "tarts-y912016",
+    "name": "miffy きらきら星空の めじるしガチャマスコット",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-11",
+    "release_note": "11月16日週発売",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "lineup_names": [
+      "Moonlight miffy",
+      "Shooting Star miffy",
+      "Starlight miffy",
+      "Ghost miffy",
+      "Rainy Day boris"
+    ],
+    "jan_checked": true,
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y912016",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-20",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:character",
+      "kawaii:mascot",
+      "kawaii:accessory",
+      "type:plush",
+      "type:mejirushi"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y912030",
+    "name": "BRANDALISED ナップサックコレクション",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 500,
+    "release": "2026-11",
+    "release_note": "11月16日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "lineup_names": [
+      "デザインA",
+      "デザインB",
+      "デザインC",
+      "デザインD",
+      "デザインE"
+    ],
+    "jan_checked": true,
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y912030",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-20",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
   }
 ]
