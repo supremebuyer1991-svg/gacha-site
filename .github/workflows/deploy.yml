@@ -58,9 +58,12 @@ jobs:
           curl -fsS --max-time 15 "${SITE_URL:-https://gachapla.com}/api/votes" -o data/votes.json || echo '{}' > data/votes.json
           # お店の一覧は重いので、決まった時間の公開（1日3回）のときだけ新しく読む。ふだんの公開はサイト側のキャッシュ（3時間）を使う
           if [ "${{ github.event_name }}" = "push" ]; then Q=""; else Q="?fresh=1"; fi
-          curl -fsS --max-time 30 "${SITE_URL:-https://gachapla.com}/api/shopdump$Q" -o data/shops-live.json || echo '{}' > data/shops-live.json
+          # みんなが追加したピンは協力した人だけに見せるので、お店の全部のデータは合言葉（DUMP_KEY）つきでだけ読める（2026-11-20）
+          KEY=$(printf '%s' "${CF_TOKEN}-shopdump" | sha256sum | cut -c1-40)
+          curl -fsS --max-time 30 -H "X-Dump-Key: $KEY" "${SITE_URL:-https://gachapla.com}/api/shopdump$Q" -o data/shops-live.json || echo '{}' > data/shops-live.json
         env:
           SITE_URL: https://gachapla.com
+          CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
 
       - name: ページを作る
         run: node src/build.js
@@ -130,6 +133,8 @@ jobs:
           sed -i "s/__D1_ID__/$ID/" wrangler.toml worker/wrangler.toml
           $W d1 execute gacha-stock --remote --file worker/schema.sql
           $W d1 execute gacha-stock --remote --file worker/migrate.sql > /dev/null 2>&1 || true
+          # shopdump の合言葉をサイト側にも置く（APIトークンから作るので、だれも手で扱わない）
+          printf '%s' "$(printf '%s' "${CLOUDFLARE_API_TOKEN}-shopdump" | sha256sum | cut -c1-40)" | $W pages secret put DUMP_KEY --project-name="${{ vars.CF_PROJECT_NAME || 'gacha-site' }}" > /dev/null 2>&1 || echo "DUMP_KEY を置けませんでした"
           $W d1 execute gacha-stock --remote --file worker/fix.sql > /dev/null 2>&1 || true
           # ガチャマップのお店（公式の取扱店）を入れる。すでにあるお店は変えない
           node src/shops-seed-sql.js > /tmp/seed-shops.sql && $W d1 execute gacha-stock --remote --file /tmp/seed-shops.sql > /dev/null || echo "お店の登録に失敗（次回また試します）"

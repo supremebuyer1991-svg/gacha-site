@@ -6,8 +6,21 @@ export async function onRequestGet({ env, request }) {
   if (!env.DB) return json({}, 503, 0);
   // 重い（全部の取扱を読む）ので、結果を3時間キャッシュする。D1 の無料枠（1日の読み込み行数）を使い切らないため
   const cache = caches.default, key = new Request(new URL("/api/shopdump?v=2", request.url).toString());
+  // みんなが追加したピン（src=user）は、合言葉（サイトを作る GitHub Actions だけが知っている）がないと外して返す（2026-11-20）
+  const full = !env.DUMP_KEY || request.headers.get("X-Dump-Key") === env.DUMP_KEY;
+  const out = async (res) => {
+    if (full) return res;
+    const d = await res.clone().json().catch(() => null);
+    if (!d || !Array.isArray(d.shops)) return res;
+    const hide = new Set(d.shops.filter((s) => s.src === "user").map((s) => String(s.id)));
+    d.shops = d.shops.filter((s) => !hide.has(String(s.id)));
+    for (const k of Object.keys(d.official || {})) if (hide.has(k)) delete d.official[k];
+    for (const k of Object.keys(d.reports || {})) if (hide.has(k)) delete d.reports[k];
+    for (const k of Object.keys(d.ratings || {})) if (hide.has(k)) delete d.ratings[k];
+    return json(d, 200, 0);
+  };
   const hit = await cache.match(key);
-  if (hit && !new URL(request.url).searchParams.has("fresh")) return hit;
+  if (hit && !new URL(request.url).searchParams.has("fresh")) return out(hit);
   const errors = [];
   const shopsRaw = await q(env, "SELECT * FROM shops");
   if (!shopsRaw) errors.push("shops");
@@ -30,5 +43,5 @@ export async function onRequestGet({ env, request }) {
   for (const r of obs) arrivals[r.item_id] = { f: r.first_seen, r: r.restocks || 0, n: r.in_count || 0 };
   const res = json({ generated: new Date().toISOString(), shops, official, reports, ratings, arrivals, errors }, 200, 0);
   if (!errors.length) { const c = new Response(res.clone().body, res); c.headers.set("Cache-Control", "public, max-age=10800"); await cache.put(key, c); }
-  return res;
+  return out(res);
 }
