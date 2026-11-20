@@ -2911,6 +2911,7 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
       <button class="btn" type="button" id="map-add">＋ ガチャのある場所をピン</button>
     </div>
     <div id="map-near" class="map-near" hidden></div>
+    <p id="map-contrib" class="map-contrib" hidden></p>
     <div id="map" class="map" data-shops="${c.R}api/shops" data-fallback="${c.R}data/shops.json" data-root="${c.R}"></div>
     <div class="map-add" id="map-add-box" hidden>
       <p><b>地図を動かして、真ん中の＋をお店の場所に合わせてください。</b></p>
@@ -3637,7 +3638,7 @@ write("_routes.json", JSON.stringify({ version: 1, include: ["/api/*", "/", "/ma
   for (const [sid, list] of Object.entries(SHOP_OFFICIAL)) { const a = list.map((id) => ix.get(id)).filter((v) => v != null); if (a.length) shopsMap[sid] = a; }
   write("data/shop-items.json", JSON.stringify({ items: ids, shops: shopsMap }));
 }
-write("data/shops.json", JSON.stringify(SHOPS.map((x) => [x.id, x.name, x.pref, x.lat, x.lng, x.src === "user" ? 1 : 0])));
+write("data/shops.json", JSON.stringify(SHOPS.filter((x) => x.src !== "user").map((x) => [x.id, x.name, x.pref, x.lat, x.lng, 0]))); // みんなが追加したピンは協力した人だけ（api/shops）
 // X投稿用のデータ（毎朝の自動予約で使う）：今週発売・紹介する新作の候補
 {
   const pack = (it) => ({ id: it.id, name: it.name, maker: it.maker, price: it.price, lineup: it.lineup, lineup_names: (it.lineup_names || []).slice(0, 12), release: it.release, release_note: it.release_note || "", genre: genreLabel(genreOf(it.genre), "ja"), img: it.image ? `${SITE_URL}/${thumbOf(it.image)}` : "", img_large: it.image ? `${SITE_URL}/${it.image}` : "", url: `${SITE_URL}/item/${it.id}`, hearts: heartsOf(it) });
