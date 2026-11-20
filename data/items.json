@@ -67326,5 +67326,142 @@
       "male"
     ],
     "tags_auto": false
+  },
+  {
+    "id": "tarts-y910555",
+    "name": "STRANGER THINGS メタルチャームマスコット",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-11",
+    "release_note": "11月23日週発売",
+    "genre": "anime",
+    "moods": [
+      "kawaii",
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "lineup_names": [
+      "STRANGER THINGS",
+      "DEMOGORGON",
+      "HELLFIRE CLUB",
+      "HAWKINS HIGH SCHOOL",
+      "WSQK VAN",
+      "Vecna Stained Glass"
+    ],
+    "jan_checked": true,
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y910555",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-21",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "kawaii:accessory",
+      "type:plush",
+      "type:charm"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y901614",
+    "name": "サンリオキャラクターズ ふわわフロッキーマスコット",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-11",
+    "release_note": "2月23日週発売・2026年11月30日週再発売",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "lineup_names": [
+      "ポムポムプリン",
+      "シナモロール",
+      "ポチャッコ",
+      "クロミ",
+      "ハローキティ"
+    ],
+    "jan_checked": true,
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y901614",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-21",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:sanrio",
+      "kawaii:mascot",
+      "type:plush"
+    ],
+    "q_ages": [
+      "10",
+      "20",
+      "30"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bushicap-10223",
+    "name": "ハイキュー!! みあげてすたぁマスコット 稲荷崎高校",
+    "name_en": "",
+    "maker": "ブシロードクリエイティブ",
+    "maker_en": "Bushiroad Creative",
+    "price": 500,
+    "release": "2027-02",
+    "release_note": "2月下旬",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "jan": "4570194464729",
+    "image": "",
+    "official_url": "https://capsule.bushiroad-creative.com/product/10223/",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-21",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "cool:shonen",
+      "type:plush"
+    ],
+    "q_ages": [
+      "10",
+      "20"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
   }
 ]
