@@ -122,6 +122,18 @@
       "added": "2026-11-16"
     },
     {
+      "title": "ちいかわ めじるしアクセサリー3",
+      "store": "#C-pla ゆめタウン博多",
+      "pref": "福岡県",
+      "kind": "item",
+      "start": "2026-11-19T13:00",
+      "end": "2026-11-20T23:59",
+      "method": "LivePocket",
+      "url": "https://livepocket.jp/e/uf363",
+      "note": "販売日は11/24。1人3個まで",
+      "added": "2026-11-20"
+    },
+    {
       "title": "めじるしアクセサリー サンリオキャラクターズオールスターズ Part.3",
       "store": "#C-pla アミュプラザ鹿児島",
       "pref": "鹿児島県",
@@ -204,6 +216,30 @@
       "url": "https://livepocket.jp/e/a6v3h",
       "note": "オープン日は11/27",
       "added": "2026-11-17"
+    },
+    {
+      "title": "HYSTERIC MINI めじるしアクセサリー ～アナザーカラー～",
+      "store": "ふぇすたらんど 平島",
+      "pref": "岡山県",
+      "kind": "item",
+      "start": "2026-11-19T12:00",
+      "end": "2026-11-23T23:59",
+      "method": "LivePocket",
+      "url": "https://livepocket.jp/e/c3csl",
+      "note": "販売日は11/29。1人3個まで",
+      "added": "2026-11-20"
+    },
+    {
+      "title": "ちいかわ めじるしアクセサリー3",
+      "store": "ふぇすたらんど 平島",
+      "pref": "岡山県",
+      "kind": "item",
+      "start": "2026-11-19T12:00",
+      "end": "2026-11-23T23:59",
+      "method": "LivePocket",
+      "url": "https://livepocket.jp/e/oz4mo",
+      "note": "販売日は11/29。1人4個まで",
+      "added": "2026-11-20"
     }
   ]
 }
