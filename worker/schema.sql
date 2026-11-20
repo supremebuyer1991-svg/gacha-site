@@ -28,3 +28,5 @@ CREATE INDEX IF NOT EXISTS push_subs_week ON push_subs (last_sent_week);
 CREATE INDEX IF NOT EXISTS push_subs_who ON push_subs (who, created_at);
 -- 通知の送り主の鍵（VAPID）。最初に使うときに自動で作る（1つだけ）
 CREATE TABLE IF NOT EXISTS push_keys (id INTEGER PRIMARY KEY, public_raw TEXT NOT NULL, private_jwk TEXT NOT NULL, created_at TEXT);
+
+CREATE TABLE IF NOT EXISTS contrib (token TEXT PRIMARY KEY, who TEXT, created_at TEXT);

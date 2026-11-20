@@ -1549,12 +1549,33 @@
     var popup = function (s) {
       return '<b>' + esc(s[1]) + '</b><br><span style="color:#6b7194">' + esc(s[2] || "") + (s[5] ? "・みんなが追加" : "") + '</span><br><a href="' + root + 'shop/' + esc(s[0]) + '">お店のページ（在庫・報告）→</a>';
     };
+    // みんなが追加したピン：オレンジ。追加から30日以内は「NEW」。ピンさしに協力してくれた人だけに見える（2026-11-20）
+    var CK = "gp_contrib", ctok = ""; try { ctok = localStorage.getItem(CK) || ""; } catch (e) {}
+    var newSince = new Date(Date.now() + 9 * 3600e3 - 30 * 864e5).toISOString().slice(0, 10);
     var add = function (s) {
-      var m = L.circleMarker([s[3], s[4]], { radius: 7, weight: 2, color: "#fff", fillColor: s[5] ? (s[6] === "gacha" ? "#8b5cf6" : "#2ccfa6") : "#ff4f7b", fillOpacity: 0.95 }).addTo(map).bindPopup(popup(s));
+      var isNew = s[5] && s[7] && s[7] >= newSince;
+      var m = L.circleMarker([s[3], s[4]], { radius: s[5] ? 8 : 7, weight: 2, color: "#fff", fillColor: s[5] ? "#ff8a00" : "#ff4f7b", fillOpacity: 0.95 }).addTo(map).bindPopup(popup(s));
+      if (isNew) m.bindTooltip("NEW", { permanent: true, direction: "top", offset: [0, -6], className: "pin-new" });
       markers[s[0]] = m; list.push(s);
     };
-    var load = function (u) { return fetch(u).then(function (r) { if (!r.ok) throw 0; return r.json(); }); };
-    load(mapEl.getAttribute("data-shops")).catch(function () { return load(mapEl.getAttribute("data-fallback")); }).then(function (rows) {
+    var cbox = document.getElementById("map-contrib");
+    var cnote = function (hidden, on) {
+      if (!cbox) return;
+      if (on) { cbox.innerHTML = '<span class="dot-u"></span>オレンジのピン＝みんなが追加したお店（<b class="pin-new-s">NEW</b>＝30日以内）。ピンさしへのご協力ありがとうございます！'; cbox.hidden = false; }
+      else if (hidden > 0) { cbox.innerHTML = '🔒 みんなが追加したお店が <b>' + hidden + '件</b> あります。地図にないガチャの場所を1つピンでさすと、見られるようになります。'; cbox.hidden = false; }
+    };
+    var load = function (u) { return fetch(u).then(function (r) { if (!r.ok) throw 0; return r.json().then(function (d) { d._h = r.headers; return d; }); }); };
+    var shopsUrl = mapEl.getAttribute("data-shops");
+    load(ctok ? shopsUrl + "?c=1&t=" + encodeURIComponent(ctok === "1" ? "" : ctok) : shopsUrl).then(function (rows) {
+      var h = rows._h, hid = Number(h.get("X-Gp-Hidden") || 0);
+      // 合言葉なしでも、前にピンをさした人かもしれないので一度だけ確かめる
+      if (!ctok && hid > 0) return load(shopsUrl + "?c=1").catch(function () { return rows; });
+      return rows;
+    }).catch(function () { return load(mapEl.getAttribute("data-fallback")); }).then(function (rows) {
+      var h = rows._h, on = false, hid = h ? Number(h.get("X-Gp-Hidden") || 0) : 0, ck = h && h.get("X-Gp-Contrib");
+      if (ck && ck !== "0") { on = true; if (ck !== "1") { try { localStorage.setItem(CK, ck); } catch (e) {} } }
+      else if (ck === "0" && ctok) { try { localStorage.removeItem(CK); } catch (e) {} }
+      cnote(hid, on);
       rows.forEach(add);
       var h = decodeURIComponent(location.hash.slice(1));
       if (h && markers[h]) { map.setView(markers[h].getLatLng(), 16); markers[h].openPopup(); }
@@ -1874,9 +1895,11 @@
       var auto = !typed || adEl.getAttribute("data-auto") === adEl.value;
       (auto ? addrAt(c.lat, c.lng) : Promise.resolve(typed)).then(function (address) {
       if (!address) address = auto ? "" : typed;
-      return post(root + "api/shops", { name: name, address: address, kind: document.getElementById("add-kind").value, memo: document.getElementById("add-memo").value.trim(), lat: c.lat, lng: c.lng }).then(function (d) {
+      return post(root + "api/shops", { name: name, address: address, kind: document.getElementById("add-kind").value, memo: document.getElementById("add-memo").value.trim(), lat: c.lat, lng: c.lng, t: (function () { try { return localStorage.getItem(CK) || ""; } catch (e) { return ""; } })() }).then(function (d) {
         if (d.ok) {
-          add([d.id, name, "", c.lat, c.lng, 1]); markers[d.id].openPopup();
+          var wasOn = false; try { wasOn = !!localStorage.getItem(CK); if (d.t) localStorage.setItem(CK, d.t); } catch (e) {}
+          add([d.id, name, "", c.lat, c.lng, 1, "", new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10)]); markers[d.id].openPopup();
+          if (!wasOn) { load(shopsUrl + "?c=1&t=" + encodeURIComponent(d.t || "")).then(function (rows) { rows.forEach(function (s) { if (s[5] && !markers[s[0]]) add(s); }); cnote(0, true); }).catch(function () {}); }
           msg.textContent = "追加しました！ありがとうございます。お店のページは数時間後にできます。";
           document.getElementById("add-name").value = ""; adEl.value = ""; adEl.removeAttribute("data-auto"); document.getElementById("add-memo").value = "";
           mapEl.classList.remove("is-adding");
