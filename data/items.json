@@ -50482,7 +50482,15 @@
       "male"
     ],
     "tags_auto": false,
-    "summary": "トイズキャビンの人気作「踏切コレクション2」が、1回500円で再販されるカプセルトイです。"
+    "summary": "トイズキャビンの人気作「踏切コレクション2」が、1回500円で再販されるカプセルトイです。",
+    "lineup_names": [
+      "A型踏切 旧警報灯",
+      "A型踏切 新警報灯",
+      "B型踏切 旧警報灯",
+      "B型踏切 新警報灯",
+      "C型踏切 旧警報灯",
+      "C型踏切 新警報灯"
+    ]
   },
   {
     "id": "toyscabin-20261006-1502",
@@ -50521,7 +50529,13 @@
       "male"
     ],
     "tags_auto": false,
-    "summary": "業務スーパーの商品などを布グッズにした、トイズキャビンとのコラボ第2弾のガチャです。"
+    "summary": "業務スーパーの商品などを布グッズにした、トイズキャビンとのコラボ第2弾のガチャです。",
+    "lineup_names": [
+      "エコバッグ",
+      "ペットボトルカバー",
+      "ショルダーポーチ",
+      "ハンカチセット"
+    ]
   },
   {
     "id": "toyscabin-20261006-1501",
@@ -50561,7 +50575,17 @@
       "female"
     ],
     "tags_auto": false,
-    "summary": "『刀剣乱舞ONLINE』の刀帳をイメージした、絵や写真を入れて楽しめるフレームチャームです。"
+    "summary": "『刀剣乱舞ONLINE』の刀帳をイメージした、絵や写真を入れて楽しめるフレームチャームです。",
+    "lineup_names": [
+      "太刀",
+      "短刀",
+      "脇差",
+      "打刀",
+      "大太刀",
+      "槍",
+      "薙刀",
+      "剣"
+    ]
   },
   {
     "id": "toyscabin-20261006-1500",
@@ -50602,7 +50626,14 @@
       "male"
     ],
     "tags_auto": false,
-    "summary": "造形作家チカ氏のメカ作品「タコロボ」を、脚が動くフィギュアにしたカプセルトイです。"
+    "summary": "造形作家チカ氏のメカ作品「タコロボ」を、脚が動くフィギュアにしたカプセルトイです。",
+    "lineup_names": [
+      "クリムゾン",
+      "コバルト",
+      "ヴィンテージ",
+      "シグナル",
+      "スケルトン"
+    ]
   },
   {
     "id": "toyscabin-20261006-1499",
@@ -50643,7 +50674,15 @@
       "male"
     ],
     "tags_auto": false,
-    "summary": "造形作家ともりん堂の「サカバン戦車」第2弾で、装備とカラーが新しくなった1/144モデルです。"
+    "summary": "造形作家ともりん堂の「サカバン戦車」第2弾で、装備とカラーが新しくなった1/144モデルです。",
+    "lineup_names": [
+      "エースレッダー",
+      "エースオレンジ",
+      "コマンド",
+      "ポリコー",
+      "エンジェル",
+      "エビ"
+    ]
   },
   {
     "id": "toyscabin-20261006-1498",
@@ -50681,7 +50720,15 @@
       "male"
     ],
     "tags_auto": false,
-    "summary": "造形作家・渡辺やまと氏のフィギュア「LightBoy」を、LEDで光る全6種にしたガチャです。"
+    "summary": "造形作家・渡辺やまと氏のフィギュア「LightBoy」を、LEDで光る全6種にしたガチャです。",
+    "lineup_names": [
+      "BLACK Reading",
+      "GREEN Reading",
+      "BLACK Watering",
+      "GREEN Watering",
+      "BLACK Moving",
+      "GREEN Moving"
+    ]
   },
   {
     "id": "toyscabin-20261006-1497",
@@ -50723,7 +50770,13 @@
       "male"
     ],
     "tags_auto": false,
-    "summary": "くまみね氏の「仕事猫」が約35ミリのめじるしフィギュアになった、10周年記念のガチャです。"
+    "summary": "くまみね氏の「仕事猫」が約35ミリのめじるしフィギュアになった、10周年記念のガチャです。",
+    "lineup_names": [
+      "てるてる",
+      "ぶらさがり",
+      "くびねっこ",
+      "ヨシ！"
+    ]
   },
   {
     "id": "toyscabin-20261006-1496",
@@ -50763,7 +50816,14 @@
       "male"
     ],
     "tags_auto": false,
-    "summary": "トヨタ「GR86」を1/64で再現した、ボンネット開閉やステア可動付きの全5種のミニカーです。"
+    "summary": "トヨタ「GR86」を1/64で再現した、ボンネット開閉やステア可動付きの全5種のミニカーです。",
+    "lineup_names": [
+      "スパークレッド",
+      "アイスシルバーメタリック",
+      "クリスタルホワイトパール",
+      "クリスタルブラックシリカ",
+      "サファイアブルー"
+    ]
   },
   {
     "id": "toyscabin-20260904-1488",
@@ -50802,7 +50862,15 @@
       "male"
     ],
     "tags_auto": false,
-    "summary": "V-MAXやSEROWなどヤマハの名車を集めた、全6種のバイクラバーキーホルダーです。"
+    "summary": "V-MAXやSEROWなどヤマハの名車を集めた、全6種のバイクラバーキーホルダーです。",
+    "lineup_names": [
+      "VMAX",
+      "SEROW",
+      "TZR250",
+      "RZ250",
+      "XS-1",
+      "XT500"
+    ]
   },
   {
     "id": "toyscabin-20260904-1487",
@@ -50840,7 +50908,17 @@
       "male"
     ],
     "tags_auto": false,
-    "summary": "『ブラッククローバー』のキャラクターが、スタンドにもなる全8種のアクリルキーチェーンに。"
+    "summary": "『ブラッククローバー』のキャラクターが、スタンドにもなる全8種のアクリルキーチェーンに。",
+    "lineup_names": [
+      "アスタ",
+      "ユノ",
+      "ノエル",
+      "ヤミ",
+      "ラック",
+      "ナハト",
+      "マグナ",
+      "セクレ"
+    ]
   },
   {
     "id": "toyscabin-20260904-1486",
@@ -50879,7 +50957,14 @@
       "male"
     ],
     "tags_auto": false,
-    "summary": "音楽素材サイト「魔王魂」の楽曲がボタンを押すと流れる、サウンドギミック付きのガチャです。"
+    "summary": "音楽素材サイト「魔王魂」の楽曲がボタンを押すと流れる、サウンドギミック付きのガチャです。",
+    "lineup_names": [
+      "シャイニングスター",
+      "12345",
+      "Burning Heart",
+      "ハルジオン",
+      "月と狼"
+    ]
   },
   {
     "id": "toyscabin-20260904-1485",
@@ -66300,7 +66385,15 @@
     "q_genders": [
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "CB1000F",
+      "CB1300 SUPER FOUR",
+      "CRF1100L Africa Twin",
+      "X-ADV",
+      "Rebel500",
+      "CBR650R"
+    ]
   },
   {
     "id": "toyscabin-20261116-1523",
@@ -66340,7 +66433,15 @@
       "male",
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ブルー",
+      "ミケ",
+      "ストロベリー",
+      "プリン",
+      "フロスト",
+      "ネオン"
+    ]
   },
   {
     "id": "toyscabin-20261116-1522",
@@ -66380,7 +66481,16 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "薩摩国",
+      "備後国",
+      "陸奥国",
+      "筑前国",
+      "石見国",
+      "伯耆国",
+      "越中国"
+    ]
   },
   {
     "id": "toyscabin-20261116-1521",
@@ -66418,7 +66528,15 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "クリアアズマ",
+      "クリアナガレ",
+      "クリアグリーン",
+      "クリアレッド",
+      "クリアミヤコ",
+      "クリアブルー"
+    ]
   },
   {
     "id": "toyscabin-20261116-1520",
@@ -66458,7 +66576,14 @@
     "q_genders": [
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "カーニバルイエロー",
+      "ブレードシルバー・メタリック",
+      "キャプティバブルーパール",
+      "エバーグレイドグリーン・メタリック",
+      "フェスティバルレッド"
+    ]
   },
   {
     "id": "toyscabin-20261116-1519",
@@ -66500,7 +66625,15 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ぴえん（女性）",
+      "ぴえん（男性）",
+      "ギャルピース",
+      "できる会社員",
+      "うさぎ",
+      "ねこ"
+    ]
   },
   {
     "id": "toyscabin-20261116-1518",
@@ -66542,7 +66675,13 @@
       "male",
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "標準型 通常 ver.",
+      "標準型 クリア ver.",
+      "SG型 通常 ver.",
+      "SG型 クリア ver."
+    ]
   },
   {
     "id": "toyscabin-20261116-1517",
@@ -66585,7 +66724,15 @@
     "q_genders": [
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "Super Cub 50 グリントウェーブブルーメタリック",
+      "CT125 アステロイドブラックメタリック",
+      "CROSS CUB 110 マットアーマードグリーンメタリック",
+      "Super Cub 50 60周年アニバーサリー",
+      "CT125 ターメリックイエロー",
+      "CROSS CUB 110 ハーベストベージュ"
+    ]
   },
   {
     "id": "toyscabin-20261116-1516",
@@ -66627,7 +66774,13 @@
     "q_genders": [
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "G.T.V",
+      "GREAT THING",
+      "ANOTHER",
+      "G.T.B"
+    ]
   },
   {
     "id": "toyscabin-20261116-1515",
@@ -66666,7 +66819,15 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "結束 いのり",
+      "夜鷹 純",
+      "結束 いのり&明浦路 司",
+      "狼嵜 光",
+      "岡崎 いるか",
+      "亜昼 美玖"
+    ]
   },
   {
     "id": "toyscabin-20261116-1514",
@@ -66705,7 +66866,15 @@
       "female",
       "male"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "碗型ホワイト",
+      "碗型レッド",
+      "碗型ブラウン",
+      "平型グレー",
+      "平型ブラック",
+      "平型ブルー"
+    ]
   },
   {
     "id": "toyscabin-20261116-1513",
@@ -66744,7 +66913,16 @@
       "male",
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "ラミィ",
+      "カボッチャマ",
+      "ワーミー",
+      "チョッパーウッド",
+      "プチデビル",
+      "マンドラゴラ",
+      "リリス"
+    ]
   },
   {
     "id": "toyscabin-20261116-1512",
@@ -66783,7 +66961,14 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "パレル",
+      "ナミウラ",
+      "エトワレ",
+      "ポール",
+      "エドベー"
+    ]
   },
   {
     "id": "toyscabin-20261116-1511",
@@ -66821,7 +67006,13 @@
       "male",
       "female"
     ],
-    "tags_auto": false
+    "tags_auto": false,
+    "lineup_names": [
+      "レッド",
+      "ブラック",
+      "イエロー",
+      "ブルー"
+    ]
   },
   {
     "id": "bushicap-10306",
@@ -67330,7 +67521,7 @@
   {
     "id": "tarts-y910555",
     "name": "STRANGER THINGS メタルチャームマスコット",
-    "name_en": "",
+    "name_en": "STRANGER THINGS Metal Charm Mascot",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 400,
@@ -67362,9 +67553,9 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
-      "kawaii:accessory",
-      "type:plush",
+      "cool:western",
+      "cool:dark",
+      "hobby:movie",
       "type:charm"
     ],
     "q_ages": [
@@ -67373,14 +67564,15 @@
       "40"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "tarts-y901614",
     "name": "サンリオキャラクターズ ふわわフロッキーマスコット",
-    "name_en": "",
+    "name_en": "Sanrio Characters Fuwawa Flocky Mascot",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 300,
@@ -67411,7 +67603,7 @@
     "auto": true,
     "q_subs": [
       "kawaii:sanrio",
-      "kawaii:mascot",
+      "kawaii:character",
       "type:plush"
     ],
     "q_ages": [
@@ -67422,12 +67614,12 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10223",
     "name": "ハイキュー!! みあげてすたぁマスコット 稲荷崎高校",
-    "name_en": "",
+    "name_en": "Haikyu!! Miagete Star Mascot Inarizaki High School",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 500,
@@ -67450,18 +67642,26 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
       "cool:shonen",
-      "type:plush"
+      "oshi:trend",
+      "hobby:sports",
+      "type:plush",
+      "kawaii:mascot"
     ],
     "q_ages": [
       "10",
-      "20"
+      "20",
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false,
+    "lineup_names": [
+      "宮侑",
+      "宮治",
+      "北信介",
+      "角名倫太郎"
+    ]
   }
 ]
