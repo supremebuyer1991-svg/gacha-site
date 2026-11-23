@@ -1874,7 +1874,7 @@ ${content}
         ...(!XLG && O.ebay ? [["sl-ebay", O.ebay, "eBay"]] : []),
         ...(O.buyee && lang !== "zh-tw" ? [["sl-buyee", O.buyee, "Buyee (Mercari Japan)"]] : []),
         ["sl-rak", L.rakuten, "Rakuten Japan"],
-      ]; return `<div class="shop-links"><span class="sl-pr">PR</span>${b.map(([k, u, l]) => `<a class="sl ${k}" href="${esc(u)}" target="_blank" rel="sponsored nofollow noopener">${l}</a>`).join("")}</div>`; })() : (() => { const L = shopLinks(it); return `<div class="shop-links">${SW.chips ? `<span style="font-size:12.5px;font-weight:700;color:var(--text-2)">${esc(SW.chips)}</span>` : ""}<span class="sl-pr">PR</span><a class="sl sl-rak" href="${esc(L.rakuten)}" target="_blank" rel="sponsored nofollow noopener">楽天市場</a><a class="sl sl-amz" href="${esc(L.amazon)}" target="_blank" rel="sponsored nofollow noopener">Amazon</a><a class="sl sl-yah" href="${esc(L.yahoo)}" target="_blank" rel="sponsored nofollow noopener">Yahoo!ショッピング</a><a class="sl sl-mer" href="${esc(L.mercari)}" target="_blank" rel="${L.mercariAf ? "sponsored nofollow noopener" : "noopener"}">${esc(L.mercariLabel)}</a></div>`; })();
+      ]; return `<div class="shop-links"><div class="sl-lbl"><span class="sl-pr">PR</span></div><div class="sl-row">${b.map(([k, u, l]) => `<a class="sl ${k}" href="${esc(u)}" target="_blank" rel="sponsored nofollow noopener">${l}</a>`).join("")}</div></div>`; })() : (() => { const L = shopLinks(it); return `<div class="shop-links"><div class="sl-lbl">${SW.chips ? `<span style="font-size:12.5px;font-weight:700;color:var(--text-2)">${esc(SW.chips)}</span>` : ""}<span class="sl-pr">PR</span></div><div class="sl-row"><a class="sl sl-rak" href="${esc(L.rakuten)}" target="_blank" rel="sponsored nofollow noopener">楽天市場</a><a class="sl sl-amz" href="${esc(L.amazon)}" target="_blank" rel="sponsored nofollow noopener">Amazon</a><a class="sl sl-yah" href="${esc(L.yahoo)}" target="_blank" rel="sponsored nofollow noopener">Yahoo!ショッピング</a><a class="sl sl-mer" href="${esc(L.mercari)}" target="_blank" rel="${L.mercariAf ? "sponsored nofollow noopener" : "noopener"}">${esc(L.mercariLabel)}</a></div></div>`; })();
     // 抽選を受付中の商品：価格のすぐ下に帯を出して、下の抽選の一覧（#lots）へ飛ばす。lots は締切が近い順
     const lotEnd = (d) => { const m = String(d).match(/^\d{4}-(\d\d)-(\d\d)T(\d\d):(\d\d)/); return m ? `${+m[1]}/${+m[2]} ${m[3]}:${m[4]}` : d; };
     // 過去に抽選販売があった商品（締切が過ぎた記録）：抽選の記録ページへの1行
@@ -1882,55 +1882,26 @@ ${content}
     const lotPastLine = lotPastG ? `この商品は過去に${lotPastG.stores.size}店で抽選販売がありました（${lotPeriod(lotPastG.start, lotPastG.end)}） → <a href="${c.R}lottery/history.html#${lotPastG.it.id}">抽選の記録</a>` : "";
     const lotBand = lots.length ? `<a class="lot-band" href="#lots"><b>🎯 抽選受付中 ${lots.length}店</b><span>いちばん早い締切 ${esc(lotEnd(lots[0].end))}</span><i aria-hidden="true">›</i></a>` : "";
     const janHtml = L0.jan ? (lang !== "ja" ? `<p class="jan">JAN: <span>${L0.jan}</span></p>` : `<p class="jan">JANコード：<span>${L0.jan}</span></p>`) : "";
-    const body = `
-<div class="wrap">
-  <nav class="breadcrumb" aria-label="breadcrumb"><a href="${c.H}index.html">${t.home}</a><span>/</span><a href="${c.H}genre/${g.slug}.html">${gl}</a><span>/</span><span>${esc(name)}</span></nav>
-  <article class="item">
-    <div class="item-photo">${thumb(it, c.R, { eager: true })}<button type="button" class="heart heart-on-photo" data-vote="${c.R}api/vote/${it.id}" data-id="${it.id}" aria-label="${t.heartAria}" title="${t.heartNote}"><i aria-hidden="true">♥</i><span>${t.heart}</span><b>${heartsOf(it)}</b></button></div>
-    <div>
-      <h1>${esc(name)}</h1>
-      ${lang !== "ja" && it.name_en ? `<p class="name-ja" lang="ja">${esc(it.name)}</p>` : ""}
-      <div class="price"><small>${lang === "ja" && it.price > 0 ? t.perPlay : ""}</small><b>${priceTxt(it.price)}</b><span>${lang !== "ja" && it.price > 0 ? t.perPlay : ""}${it.lineup ? `${lang !== "ja" && it.price > 0 ? " · " : ""}${t.lineup(it.lineup)}` : ""}</span>${relPill(it)}</div>
-      ${lotBand}
-      ${chipsHtml}
-      <dl class="spec">
-        <dt>${t.maker}</dt><dd><a href="${c.H}maker/${makerSlug(it.maker)}.html">${esc(maker)}</a></dd>
-        <dt>${t.release}</dt><dd><a href="${c.H}calendar/${ws ? ws.toISOString().slice(0, 7) : it.release}.html">${t.month(it.release)}</a>${lang === "ja" && it.release_note ? (ws ? `<a class="rel-note" href="${c.H}${weekHref}">${esc(it.release_note)}</a>` : `<span class="rel-note">${esc(it.release_note)}</span>`) : ""}</dd>
-        ${it.age_min ? `<dt>${t.ageLabel}</dt><dd>${t.ageMin(it.age_min)}</dd>` : ""}
-        <dt>${t.genre}</dt><dd><a href="${c.H}genre/${g.slug}.html">${gl}</a></dd>
-        ${tags.length || themeChips ? `<dt>${t.tags}</dt><dd><div class="tags">${tags.map((x) => `<span class="chip chip-ai">${esc(x)}</span>`).join("")}${themeChips}</div></dd>` : ""}
-      </dl>
-      ${description && lang !== "ja" ? `<p class="desc">${esc(description)}</p>` : ""}
-      <div class="item-actions"${state === "up" ? ' id="notify" style="scroll-margin-top:24px"' : ""}>
-        ${state === "up" ? `<button type="button" class="btn btn-gold" data-fav="${it.id}" aria-pressed="false"><i aria-hidden="true" style="font-style:normal">★</i><span>${esc(t.u.save)}</span></button>` /* 発売前：まだお店に置かれないので、一番のボタンは★保存（下の「発売日にお知らせ」を押しても★に入る） */
-        : `<a class="btn btn-gold" href="#stock">${t.findStores}</a>`}
-        ${state === "up" ? pushBox(t, "item", it.id) : ""}
-        ${it.official_url ? `<a class="btn" href="${esc(it.official_url)}" target="_blank" rel="noopener">${t.official}</a>` : ""}
-        ${state === "up" ? "" : `<button type="button" class="fav-item" data-fav="${it.id}" aria-pressed="false"><i aria-hidden="true">★</i><span>${esc(t.u.save)}</span></button>`}
-      </div>
-      ${janHtml}
-    </div>
-  </article>
-  ${aboutHtml}
-  ${(it.lineup_names || []).length ? `<section class="section lineup-sec">
-    <div class="section-head"><h2>${t.lineupTitle(it.lineup || it.lineup_names.length)}</h2></div>
-    <ol class="lineup${lang === "ja" && it.lineup_notes ? " lineup-notes" : ""}">${it.lineup_names.map((n) => { const nt = lang === "ja" && it.lineup_notes && it.lineup_notes[n]; return `<li lang="ja">${nt ? `<span><b>${esc(n)}</b><small>${esc(nt)}</small></span>` : esc(n)}</li>`; }).join("")}</ol>
-    <p class="fine">${t.lineupNote}</p>
-  </section>` : ""}
-  ${lots.length ? (() => {
-    // この商品の抽選販売・整理券（受付中のものだけ。締切が近い順）
-    const end = lotEnd;
-    return `<section class="section section-tight lot-sec" id="lots" style="scroll-margin-top:24px">
+    // 2026-11-23 商品ページの並べ替え：目次バー・たたむ部品の文言（新しく足したボタン類だけ。本文は変えていない）
+    const U = {
+      ja: { jumpAria: "このページの目次", j: { lineup: "ラインナップ", lots: "抽選", stock: "在庫のある店", arrivals: "入荷情報", buy: "通販", faq: "よくある質問", related: "関連" }, lineMore: (k) => `残り${k}種を見る`, less: "閉じる", shopsMore: (k, st) => `代表的な取扱店をもっと見る（あと${k}店${st ? "・駅から探す" : ""}）`, stockAbout: "この在庫情報について" },
+      en: { jumpAria: "On this page", j: { lineup: "Lineup", lots: "Lottery", stock: "Shops", arrivals: "Arrivals", buy: "Buy online", faq: "FAQ", related: "Related" }, lineMore: (k) => `Show ${k} more`, less: "Show less", shopsMore: (k) => `More shops (${k})`, stockAbout: "About this stock info" },
+      ko: { jumpAria: "이 페이지의 목차", j: { lineup: "라인업", lots: "추첨", stock: "재고 매장", arrivals: "입고 정보", buy: "온라인 구매", faq: "자주 묻는 질문", related: "관련" }, lineMore: (k) => `나머지 ${k}종 보기`, less: "접기", shopsMore: (k) => `매장 더 보기 (${k})`, stockAbout: "재고 정보 안내" },
+      "zh-tw": { jumpAria: "本頁目錄", j: { lineup: "全款式", lots: "抽選", stock: "有貨店家", arrivals: "到貨資訊", buy: "網購", faq: "常見問題", related: "相關" }, lineMore: (k) => `顯示其餘${k}款`, less: "收起", shopsMore: (k) => `查看更多店家（${k}）`, stockAbout: "關於庫存資訊" },
+      "zh-cn": { jumpAria: "本页目录", j: { lineup: "全款式", lots: "抽选", stock: "有货店铺", arrivals: "到货信息", buy: "网购", faq: "常见问题", related: "相关" }, lineMore: (k) => `显示其余${k}款`, less: "收起", shopsMore: (k) => `查看更多店铺（${k}）`, stockAbout: "关于库存信息" },
+    }[lang];
+    // よくある質問：質問だけ並べて、押すと答えが開く（答えの文章はページに全部入っている。FAQPage の構造化データと同じ qa から作る）
+    const faqSec = (h, qa, extra) => `<section class="section section-tight faq-sec" id="faq">
     <div class="panel">
-      <h2 style="font-size:22px">${esc(it.name)}の抽選販売・整理券（受付中${lots.length}店）</h2>
-      <p class="fine" style="margin-top:4px">店頭で抽選販売・整理券の受付をしているお店です。応募の前に、お店の公式X・公式サイトで最新の情報をご確認ください。</p>
-      <ul class="where-shops lot-item">${lots.map((x) => `<li><span class="lot-item-store">${x.url ? `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.store)}</a>` : esc(x.store)}${x.pref ? `<small>${esc(x.pref)}</small>` : ""}</span><span>締切 ${esc(end(x.end))}・${esc(x.method || "お店でご確認ください")}</span></li>`).join("")}</ul>
-      ${lotPastLine ? `<p class="fine">${lotPastLine}</p>` : ""}
-      <p class="fine"><a href="${c.R}lottery.html">ほかのガチャの抽選情報も見る →</a></p>
+      <h2 class="ph">${h}</h2>
+      <div class="item-qa qa-fold">${qa.map(([q, a]) => `<details class="fold"><summary>${esc(q)}</summary><div class="fold-body">${esc(a)}</div></details>`).join("")}</div>
+      ${extra || ""}
     </div>
   </section>`;
-  })() : lotPastLine ? `<p class="fine lot-past-line" id="lots">🎯 ${lotPastLine}</p>` : ""}
-  ${lang === "ja" ? (() => {
+    let faqHtml = ""; // よくある質問（下で作り、通販の下に出す）
+    let compFact = ""; // 全種そろえる目安（日本語。下で作り、上の要点の下に出す）
+    // 「どこで売ってる？」の箱の上半分（この下に在庫のある店リストが続く）。2026-11-23 並べ替え：本文は変えずに、よくある質問と「そろえる目安」を別の場所へ
+    const whereTop = lang === "ja" ? (() => {
     const shs = offShops, prefTop = offPrefs;
     // 代表の取扱店（最大10店）：店数の多い都道府県から1店ずつ順に取る。駅の近く（駅ページに載っている店）を先に。クローラーにも見える静的HTML
     const repShops = (() => {
@@ -1965,19 +1936,21 @@ ${content}
       ...(draws ? [[`全種類そろえるには何回くらい？`, `どれも同じ確率で出るとすると、全${n}種そろうまでに平均で約${draws}回${Number(it.price) > 0 ? `（約${(draws * it.price).toLocaleString("ja-JP")}円）` : ""}かかる計算です。欲しいものが決まっているなら、フリマアプリなどで単品を探すのも手です。`]] : []),
     ];
     whereLd = { "@context": "https://schema.org", "@type": "FAQPage", inLanguage: "ja", mainEntity: qa.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) };
-    return `<section class="section where-sec">
-    <div class="panel">
-      <h2 style="font-size:22px">${esc(it.name)}はどこで売ってる？</h2>
+    const shLi = ({ sh, so }) => `<li><a href="${c.R}shop/${sh.id}.html">${esc(sh.name)}</a><span>${esc(sh.pref || "")}${so && so.d <= 1500 ? `・${esc(so.st.ja)}` : ""}</span></li>`;
+    const whereMore = shs.length > repShops.length ? `<p class="fine where-more">ほか${shs.length - repShops.length}店。近くのお店は下の在庫店リストで探せます。</p>` : "";
+    const whereSt = stTop.length ? `<p class="where-stations"><b>駅の近くで探す</b>${stTop.map(({ st, n: k }) => `<a href="${c.H}station/${st.slug}.html">${esc(st.ja)}（${k}店）</a>`).join("")}</p>` : "";
+    compFact = draws ? `<p class="comp-cost">全${n}種そろえる目安：<b>平均 約${draws}回${Number(it.price) > 0 ? `・約${(draws * it.price).toLocaleString("ja-JP")}円` : ""}</b><small>（どれも同じ確率で出る場合の計算）<a href="${esc(aff.rakuten)}" target="_blank" rel="sponsored nofollow noopener">${esc(t.compCompare)} →</a><span class="pr">PR</span></small></p>` : "";
+    faqHtml = faqSec("よくある質問", qa, "");
+    return `<h2 class="ph">${esc(it.name)}はどこで売ってる？</h2>
       <p>${esc(shs.length ? (prefTop.length ? whereTxt.replace(/（[^（）]*）。$/, "。都道府県ごとの店数と、代表的なお店は次のとおりです。") : whereTxt) : "取扱店はお店ごとに違います。下の在庫店リストやみんなの報告から、近くで置いているお店を探せます。")}</p>
       ${arTxt ? `<p class="arr-static">${esc(arTxt)}</p>` : ""}
       ${prefTop.length ? `<p class="where-prefs"><b>取扱店 ${shs.length}店</b>${prefTop.slice(0, 6).map(([p, k]) => `<a href="${c.R}shops/${prefSlug(p)}.html">${esc(p)} ${k}店</a>`).join("")}${prefTop.length > 6 ? `<span>ほか${prefTop.length - 6}都道府県</span>` : ""}</p>` : ""}
-      ${repShops.length ? `<ul class="where-shops">${repShops.map(({ sh, so }) => `<li><a href="${c.R}shop/${sh.id}.html">${esc(sh.name)}</a><span>${esc(sh.pref || "")}${so && so.d <= 1500 ? `・${esc(so.st.ja)}` : ""}</span></li>`).join("")}</ul>${shs.length > repShops.length ? `<p class="fine where-more">ほか${shs.length - repShops.length}店。近くのお店は下の在庫店リストで探せます。</p>` : ""}` : ""}
-      ${stTop.length ? `<p class="where-stations"><b>駅の近くで探す</b>${stTop.map(({ st, n: k }) => `<a href="${c.H}station/${st.slug}.html">${esc(st.ja)}（${k}店）</a>`).join("")}</p>` : ""}
-      ${draws ? `<p class="comp-cost">全${n}種そろえる目安：<b>平均 約${draws}回${Number(it.price) > 0 ? `・約${(draws * it.price).toLocaleString("ja-JP")}円` : ""}</b><small>（どれも同じ確率で出る場合の計算）<a href="${esc(aff.rakuten)}" target="_blank" rel="sponsored nofollow noopener">${esc(t.compCompare)} →</a><span class="pr">PR</span></small></p>` : ""}
-      <h3 class="arr-h">よくある質問</h3>
-      <dl class="item-qa">${qa.map(([q, a]) => `<div><dt>${esc(q)}</dt><dd>${esc(a)}</dd></div>`).join("")}</dl>
-    </div>
-  </section>`;
+      ${repShops.length > 3
+        // 代表の取扱店は3店まで見せて、残り・駅の一覧はたたむ（HTMLには全部入っている）
+        ? `<ul class="where-shops">${repShops.slice(0, 3).map(shLi).join("")}</ul>
+      <details class="fold where-fold"><summary>${esc(U.shopsMore(repShops.length - 3, stTop.length))}</summary><div class="fold-body"><ul class="where-shops">${repShops.slice(3).map(shLi).join("")}</ul>${whereMore}${whereSt}</div></details>`
+        : `${repShops.length ? `<ul class="where-shops">${repShops.map(shLi).join("")}</ul>${whereMore}` : ""}
+      ${whereSt}`}`;
   })() : (() => {
     // 日本語以外：駅ページに載っている公式取扱店を、駅の並び順（人気順）→ 近い順で最大8店（1駅2店まで）。クローラーにも見える静的HTML
     const W = t.where, n = Number(it.lineup) || (it.lineup_names || []).length;
@@ -2000,41 +1973,99 @@ ${content}
       const [pre, post] = W.walkFrom(walkMin(so.d)).split("{st}").map(esc);
       return `<li><a href="${c.R}shop/${sh.id}.html"${chn ? "" : ' lang="ja"'}>${esc(chn ? chainLabel(chn, lang) : sh.name)}</a><span style="white-space:normal;text-align:right">${pre}<a href="${c.H}station/${so.st.slug}.html">${esc(stOf(so.st))}</a>${post || ""} · <a href="${esc(gmapUrl(sh))}" target="_blank" rel="noopener">${esc(t.stn.gmaps)}</a></span></li>`;
     };
-    return `<section class="section where-sec">
-    <div class="panel">
-      <h2 style="font-size:22px">${esc(W.h(name))}</h2>
+    faqHtml = faqSec(esc(W.qaH), qa, GUIDE_HOWTO[lang] ? `<p class="fine" style="margin-top:10px"><a href="${c.H}guide/how-to-play-gachapon.html">${esc(GUIDE_HOWTO[lang])} →</a></p>` : "");
+    return `<h2 class="ph">${esc(W.h(name))}</h2>
       <p>${esc(shs.length ? W.lead(shs.length) : W.none)}</p>
-      ${rows.length ? `<ul class="where-shops">${rows.map(row).join("")}</ul>` : ""}
-      <h3 class="arr-h">${esc(W.qaH)}</h3>
-      <dl class="item-qa">${qa.map(([q, a]) => `<div><dt>${esc(q)}</dt><dd>${esc(a)}</dd></div>`).join("")}</dl>
-      ${GUIDE_HOWTO[lang] ? `<p class="fine" style="margin-top:10px"><a href="${c.H}guide/how-to-play-gachapon.html">${esc(GUIDE_HOWTO[lang])} →</a></p>` : ""}
+      ${rows.length > 3
+        ? `<ul class="where-shops">${rows.slice(0, 3).map(row).join("")}</ul>
+      <details class="fold where-fold"><summary>${esc(U.shopsMore(rows.length - 3))}</summary><div class="fold-body"><ul class="where-shops">${rows.slice(3).map(row).join("")}</ul></div></details>`
+        : rows.length ? `<ul class="where-shops">${rows.map(row).join("")}</ul>` : ""}`;
+  })();
+    // 目次バー：そのページにある場所だけ（押すとその場所へ飛ぶ。スクロールしても上に残る）
+    const hasLineup = (it.lineup_names || []).length > 0;
+    const hasRelated = !!(hubs.seriesNav(HUB, it, { lang, c, t, nameOf, esc }) || charasOf(it).length || sameWeekList.length || relatedShown.length);
+    const jumpHtml = `<nav class="item-jump" aria-label="${U.jumpAria}"><div>${[hasLineup && ["lineup", U.j.lineup], lots.length && ["lots", U.j.lots], ["stock", U.j.stock], ["arrivals", U.j.arrivals], ["buy-sec", U.j.buy], ["faq", U.j.faq], hasRelated && ["related", U.j.related]].filter(Boolean).map(([k, l]) => `<a href="#${k}">${l}</a>`).join("")}</div></nav>`;
+    const LINE_MAX = 8; // ラインナップ：9種以上は8つまで見せて「残りを見る」（スマホだけ。app.js）
+    const body = `
+<div class="wrap">
+  <nav class="breadcrumb" aria-label="breadcrumb"><a href="${c.H}index.html">${t.home}</a><span>/</span><a href="${c.H}genre/${g.slug}.html">${gl}</a><span>/</span><span>${esc(name)}</span></nav>
+  <article class="item">
+    <div class="item-photo">${thumb(it, c.R, { eager: true })}<button type="button" class="heart heart-on-photo" data-vote="${c.R}api/vote/${it.id}" data-id="${it.id}" aria-label="${t.heartAria}" title="${t.heartNote}"><i aria-hidden="true">♥</i><span>${t.heart}</span><b>${heartsOf(it)}</b></button></div>
+    <div>
+      <h1>${esc(name)}</h1>
+      ${lang !== "ja" && it.name_en ? `<p class="name-ja" lang="ja">${esc(it.name)}</p>` : ""}
+      <div class="price"><small>${lang === "ja" && it.price > 0 ? t.perPlay : ""}</small><b>${priceTxt(it.price)}</b><span>${lang !== "ja" && it.price > 0 ? t.perPlay : ""}${it.lineup ? `${lang !== "ja" && it.price > 0 ? " · " : ""}${t.lineup(it.lineup)}` : ""}</span>${relPill(it)}</div>
+      ${lotBand}
+      <dl class="spec facts">
+        <div><dt>${t.maker}</dt><dd><a href="${c.H}maker/${makerSlug(it.maker)}.html">${esc(maker)}</a></dd></div>
+        <div><dt>${t.release}</dt><dd><a href="${c.H}calendar/${ws ? ws.toISOString().slice(0, 7) : it.release}.html">${t.month(it.release)}</a>${lang === "ja" && it.release_note ? (ws ? `<a class="rel-note" href="${c.H}${weekHref}">${esc(it.release_note)}</a>` : `<span class="rel-note">${esc(it.release_note)}</span>`) : ""}</dd></div>
+        ${it.age_min ? `<div><dt>${t.ageLabel}</dt><dd>${t.ageMin(it.age_min)}</dd></div>` : ""}
+        <div><dt>${t.genre}</dt><dd><a href="${c.H}genre/${g.slug}.html">${gl}</a></dd></div>
+        ${tags.length || themeChips ? `<div class="f-wide"><dt>${t.tags}</dt><dd><div class="tags">${tags.map((x) => `<span class="chip chip-ai">${esc(x)}</span>`).join("")}${themeChips}</div></dd></div>` : ""}
+      </dl>
+      ${compFact}
+      ${description && lang !== "ja" ? `<p class="desc">${esc(description)}</p>` : ""}
+      <div class="item-actions"${state === "up" ? ' id="notify"' : ""}>
+        ${state === "up" ? `<button type="button" class="btn btn-gold" data-fav="${it.id}" aria-pressed="false"><i aria-hidden="true" style="font-style:normal">★</i><span>${esc(t.u.save)}</span></button>` /* 発売前：まだお店に置かれないので、一番のボタンは★保存（下の「発売日にお知らせ」を押しても★に入る） */
+        : `<a class="btn btn-gold" href="#stock">${t.findStores}</a>`}
+        ${state === "up" ? pushBox(t, "item", it.id) : ""}
+        ${it.official_url ? `<a class="btn" href="${esc(it.official_url)}" target="_blank" rel="noopener">${t.official}</a>` : ""}
+        ${state === "up" ? "" : `<button type="button" class="fav-item" data-fav="${it.id}" aria-pressed="false"><i aria-hidden="true">★</i><span>${esc(t.u.save)}</span></button>`}
+      </div>
+      ${chipsHtml}
+      ${janHtml}
+    </div>
+  </article>
+  ${jumpHtml}
+  ${hasLineup ? `<section class="section lineup-sec" id="lineup">
+    <div class="section-head"><h2>${t.lineupTitle(it.lineup || it.lineup_names.length)}</h2></div>
+    <ol class="lineup${lang === "ja" && it.lineup_notes ? " lineup-notes" : ""}"${it.lineup_names.length > LINE_MAX ? ` data-clamp="${LINE_MAX}"` : ""}>${it.lineup_names.map((n) => { const nt = lang === "ja" && it.lineup_notes && it.lineup_notes[n]; return `<li lang="ja">${nt ? `<span><b>${esc(n)}</b><small>${esc(nt)}</small></span>` : esc(n)}</li>`; }).join("")}</ol>
+    ${it.lineup_names.length > LINE_MAX ? `<button type="button" class="lineup-more" data-less="${U.less}" hidden>${U.lineMore(it.lineup_names.length - LINE_MAX)}</button>` : ""}
+    <p class="fine">${t.lineupNote}</p>
+  </section>` : ""}
+  ${aboutHtml}
+  ${lots.length ? (() => {
+    // この商品の抽選販売・整理券（受付中のものだけ。締切が近い順）
+    const end = lotEnd;
+    return `<section class="section section-tight lot-sec" id="lots">
+    <div class="panel">
+      <h2 class="ph">${esc(it.name)}の抽選販売・整理券（受付中${lots.length}店）</h2>
+      <p class="fine" style="margin-top:4px">店頭で抽選販売・整理券の受付をしているお店です。応募の前に、お店の公式X・公式サイトで最新の情報をご確認ください。</p>
+      <ul class="where-shops lot-item">${lots.map((x) => `<li><span class="lot-item-store">${x.url ? `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.store)}</a>` : esc(x.store)}${x.pref ? `<small>${esc(x.pref)}</small>` : ""}</span><span>締切 ${esc(end(x.end))}・${esc(x.method || "お店でご確認ください")}</span></li>`).join("")}</ul>
+      ${lotPastLine ? `<p class="fine">${lotPastLine}</p>` : ""}
+      <p class="fine"><a href="${c.R}lottery.html">ほかのガチャの抽選情報も見る →</a></p>
     </div>
   </section>`;
-  })()}
-
-  <section class="section" id="stock" data-api="${c.R}api/stock/${it.id}" data-src="${c.R}data/stock/${it.id}.json" data-rak="${esc(L0.rakuten)}"${L0.mercari ? ` data-mer="${esc(L0.mercari)}"` : ""} style="scroll-margin-top:24px">
+  })() : lotPastLine ? `<p class="fine lot-past-line" id="lots">🎯 ${lotPastLine}</p>` : ""}
+  <section class="section section-tight where-sec" id="where">
     <div class="panel">
-      <h2 style="font-size:22px">${t.storesTitle}</h2>
-      <div class="stock-tools">
-        <button class="btn btn-gold" type="button" id="geo-btn">${t.geoBtn}</button>
-        <label for="pref" style="font-size:13px;color:var(--muted)">${t.or}</label>
-        <select id="pref" aria-label="${t.prefAria}"><option value="">${t.loading}</option></select>
+      ${whereTop}
+      <div class="stock-box" id="stock" data-api="${c.R}api/stock/${it.id}" data-src="${c.R}data/stock/${it.id}.json" data-rak="${esc(L0.rakuten)}"${L0.mercari ? ` data-mer="${esc(L0.mercari)}"` : ""}>
+        <h2 class="ph">${t.storesTitle}</h2>
+        <div class="stock-tools">
+          <button class="btn btn-gold" type="button" id="geo-btn">${t.geoBtn}</button>
+          <label for="pref" style="font-size:13px;color:var(--muted)">${t.or}</label>
+          <select id="pref" aria-label="${t.prefAria}"><option value="">${t.loading}</option></select>
+        </div>
+        <p class="stock-status" id="stock-status" role="status">${t.stockLoading}</p>
+        <ul class="stores" id="store-list"></ul>
+        <p class="fine stock-upd"><span id="stock-updated"></span></p>
+        <details class="fold stock-about"><summary>${U.stockAbout}</summary><div class="fold-body"><p class="fine">${t.stockFine}
+        ${it.store_search_url ? `<br><a href="${esc(it.store_search_url)}" target="_blank" rel="noopener" style="color:var(--gold-soft);border-bottom:1px solid var(--line-strong)">${t.officialStores}</a>` : ""}</p></div></details>
       </div>
-      <p class="stock-status" id="stock-status" role="status">${t.stockLoading}</p>
-      <ul class="stores" id="store-list"></ul>
-      <p class="fine"><span id="stock-updated"></span>${t.stockFine}
-      ${it.store_search_url ? `<br><a href="${esc(it.store_search_url)}" target="_blank" rel="noopener" style="color:var(--gold-soft);border-bottom:1px solid var(--line-strong)">${t.officialStores}</a>` : ""}</p>
     </div>
+  </section>
 
+  <section class="section section-tight arr-sec">
     <div class="panel arrivals" id="arrivals" data-api="${c.R}api/arrivals/${it.id}" data-lang="${lang}">
-      <h2 style="font-size:22px">${t.arrTitle}</h2>
+      <h2 class="ph">${t.arrTitle}</h2>
       <p class="stock-status" id="arr-status">${t.arrLoading}</p>
       <div id="arr-body" hidden>
         <dl class="arr-stats"><div><dt>${t.arrIn}</dt><dd id="arr-in"></dd></div><div><dt>${t.arrRestock}</dt><dd id="arr-re"></dd></div><div><dt>${t.arrFirst}</dt><dd id="arr-first"></dd></div></dl>
-        <h3 class="arr-h">${t.arrFastTitle}</h3><p class="fine" style="margin-top:4px">${t.arrFastNote}</p>
-        <ol class="arr-fast" id="arr-fast"></ol>
-        <h3 class="arr-h">${t.arrPrefTitle}</h3><p class="fine" style="margin-top:4px">${t.arrPrefNote}</p>
-        <ul class="arr-prefs" id="arr-prefs"></ul>
+        <details class="fold"><summary><h3 class="arr-h">${t.arrFastTitle}</h3></summary><div class="fold-body"><p class="fine" style="margin-top:4px">${t.arrFastNote}</p>
+        <ol class="arr-fast" id="arr-fast"></ol></div></details>
+        <details class="fold"><summary><h3 class="arr-h">${t.arrPrefTitle}</h3></summary><div class="fold-body"><p class="fine" style="margin-top:4px">${t.arrPrefNote}</p>
+        <ul class="arr-prefs" id="arr-prefs"></ul></div></details>
       </div>
       <script type="application/json" id="arr-i18n">${JSON.stringify({ shops: t.arrShops(0).replace("0", "{n}"), times: t.arrTimes(0).replace("0", "{n}"), avg: t.arrAvg(0).replace("0", "{n}"), noavg: t.arrNoAvg, on: t.arrStockOn, off: t.arrStockOff, none: t.arrNone })}</script>
     </div>
@@ -2071,20 +2102,23 @@ ${content}
           .map(([k, u]) => `<a class="btn" href="${esc(u)}" target="_blank" rel="noopener">${t[k]}</a>`).join("")}
       </div>
     </aside>`;
-    return `<section class="section section-tight buy-sec">
+    return `<section class="section section-tight buy-sec" id="buy-sec">
     ${(isOld || lots.length) && fleaAside.startsWith("<aside") ? fleaAside + "\n    " + shopAside : shopAside + "\n    " + fleaAside}
   </section>`;
   })()}
+  ${faqHtml}
+  ${hasRelated ? `<div class="rel-wrap" id="related">` : ""}
   ${hubs.seriesNav(HUB, it, { lang, c, t, nameOf, esc })}
   ${charasOf(it).length ? `<section class="section section-tight"><div class="section-head"><h2>${lang === "ja" ? "このキャラクター・作品のガチャ" : t.x.moreSeries}</h2></div><div class="chara-list">${charasOf(it).map((ch) => `<a class="chara-chip" href="${c.H}chara/${ch.slug}.html">${esc(lang === "ja" ? `${ch.label}のガチャ一覧` : t.x.charaChip(charaLabel(ch, lang)))}<small>${ch.list.length}</small></a>`).join("")}</div></section>` : ""}
   ${sameWeekList.length ? `<section class="section">
     <div class="section-head"><h2>${esc(SW.h)}</h2><a class="more" href="${c.H}${weekHref}">${lang === "ja" ? `${wi.m}月第${wi.no}週（${wi.range}）をすべて見る` : esc(t.hub.weekPage)}</a></div>
-    <div class="grid">${sameWeekList.map((x) => card(x, c)).join("")}</div>
+    <div class="grid row-m">${sameWeekList.map((x) => card(x, c)).join("")}</div>
   </section>` : ""}
   ${relatedShown.length ? `<section class="section">
     <div class="section-head"><h2>${lang === "ja" ? "関連するガチャ" : t.related}</h2><a class="more" href="${c.H}genre/${g.slug}.html">${t.seeAll(gl)}</a></div>
-    <div class="grid">${relatedShown.map((x) => card(x, c)).join("")}</div>
+    <div class="grid row-m">${relatedShown.map((x) => card(x, c)).join("")}</div>
   </section>` : ""}
+  ${hasRelated ? `</div>` : ""}
 </div>
 <nav class="item-bar" aria-label="${esc(name)}">
   <button type="button" class="ib-fav" data-fav="${it.id}" aria-pressed="false"><i aria-hidden="true">★</i><span>${esc(t.u.save)}</span></button>
