@@ -1001,7 +1001,7 @@
     var RANK = { in_stock: 0, few: 1, out_of_stock: 2 };
     var FAR_KM = 30;
     var PREF_KEY = "gp-pref"; // 前に選んだ都道府県をおぼえておく
-    var PAGE0 = 20, PAGE = 40, shownN = PAGE0;
+    var PAGE0 = 5, PAGE = 40, shownN = PAGE0; // 2026-11-23：最初は5店だけ見せて「残り○店を見る」
     var moreEl = document.createElement("p"); moreEl.className = "more-wrap"; moreEl.hidden = true; listEl.parentNode.insertBefore(moreEl, listEl.nextSibling);
     var altEl = document.createElement("p"); altEl.className = "stock-alt"; altEl.hidden = true; moreEl.parentNode.insertBefore(altEl, moreEl.nextSibling);
     moreEl.addEventListener("click", function (e) { if (e.target.closest(".stock-more")) { shownN += PAGE; render(); } });
@@ -2182,13 +2182,52 @@
 // 商品ページ「このガチャについて」：長いときだけ数行にたたんで「続きを読む」
 document.querySelectorAll(".about-item .about-body").forEach(function (el) {
   var b = el.nextElementSibling; if (!b || !b.classList.contains("about-more")) return;
-  if (el.scrollHeight <= 190) return;
+  // スマホは3行まで見せる（style.css の .about-body.clamp と合わせる）
+  if (el.scrollHeight <= (window.matchMedia && window.matchMedia("(max-width: 820px)").matches ? 130 : 190)) return;
   el.classList.add("clamp"); b.hidden = false;
   var more = b.textContent;
   function tog() { var o = el.classList.toggle("open"); b.textContent = o ? b.getAttribute("data-less") : more; }
   el.addEventListener("click", function () { if (!el.classList.contains("open")) tog(); });
   b.addEventListener("click", tog);
 });
+// 商品ページ：ラインナップが多いとき（スマホ）は途中まで見せて「残りを見る」（中身はページに全部入っている）
+(function () {
+  var ol = document.querySelector(".lineup[data-clamp]");
+  if (!ol) return;
+  var b = ol.nextElementSibling, li = ol.children[Number(ol.getAttribute("data-clamp")) || 8];
+  if (!b || !b.classList.contains("lineup-more") || !li || !window.matchMedia || !window.matchMedia("(max-width: 820px)").matches) return;
+  var more = b.textContent;
+  ol.classList.add("clamp");
+  ol.style.maxHeight = (li.offsetTop + 18) + "px";
+  b.hidden = false; b.setAttribute("aria-expanded", "false");
+  b.addEventListener("click", function () {
+    var o = ol.classList.toggle("open");
+    b.textContent = o ? b.getAttribute("data-less") : more;
+    b.setAttribute("aria-expanded", o ? "true" : "false");
+    if (!o && ol.getBoundingClientRect().top < 0) ol.scrollIntoView({ block: "start" });
+  });
+})();
+// 商品ページ：目次バー（今見ている場所に色をつける）
+(function () {
+  var jump = document.querySelector(".item-jump");
+  if (!jump) return;
+  var box = jump.firstElementChild;
+  var links = [].slice.call(jump.querySelectorAll('a[href^="#"]'));
+  var secs = links.map(function (a) { return document.getElementById(a.getAttribute("href").slice(1)); });
+  var cur = null, tick = false;
+  function upd() {
+    tick = false;
+    var on = null, line = jump.offsetHeight + 24;
+    for (var i = 0; i < links.length; i++) if (secs[i] && secs[i].getBoundingClientRect().top <= line) on = links[i];
+    if (on && window.innerHeight + window.pageYOffset >= document.documentElement.scrollHeight - 4) on = links[links.length - 1];
+    if (on === cur) return;
+    if (cur) { cur.classList.remove("is-on"); cur.removeAttribute("aria-current"); }
+    if (on) { on.classList.add("is-on"); on.setAttribute("aria-current", "true"); if (box) box.scrollLeft = on.offsetLeft - (box.clientWidth - on.offsetWidth) / 2; }
+    cur = on;
+  }
+  window.addEventListener("scroll", function () { if (!tick) { tick = true; (window.requestAnimationFrame || setTimeout)(upd); } }, { passive: true });
+  upd();
+})();
 document.querySelectorAll(".lead-clamp").forEach(function (el) {
   var b = el.nextElementSibling && el.nextElementSibling.classList.contains("lead-more") ? el.nextElementSibling : null;
   var more = b ? b.textContent : "";
