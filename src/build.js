@@ -1995,6 +1995,7 @@ ${content}
       <h1>${esc(name)}</h1>
       ${lang !== "ja" && it.name_en ? `<p class="name-ja" lang="ja">${esc(it.name)}</p>` : ""}
       <div class="price"><small>${lang === "ja" && it.price > 0 ? t.perPlay : ""}</small><b>${priceTxt(it.price)}</b><span>${lang !== "ja" && it.price > 0 ? t.perPlay : ""}${it.lineup ? `${lang !== "ja" && it.price > 0 ? " · " : ""}${t.lineup(it.lineup)}` : ""}</span>${relPill(it)}</div>
+      ${chipsHtml /* 通販ボタンは値段のすぐ下（2026-11-23 ユーザー指定） */}
       ${lotBand}
       <dl class="spec facts">
         <div><dt>${t.maker}</dt><dd><a href="${c.H}maker/${makerSlug(it.maker)}.html">${esc(maker)}</a></dd></div>
@@ -2012,7 +2013,6 @@ ${content}
         ${it.official_url ? `<a class="btn" href="${esc(it.official_url)}" target="_blank" rel="noopener">${t.official}</a>` : ""}
         ${state === "up" ? "" : `<button type="button" class="fav-item" data-fav="${it.id}" aria-pressed="false"><i aria-hidden="true">★</i><span>${esc(t.u.save)}</span></button>`}
       </div>
-      ${chipsHtml}
       ${janHtml}
     </div>
   </article>
