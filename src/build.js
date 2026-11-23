@@ -1860,7 +1860,9 @@ ${content}
       out.push(...extra.slice(0, 2));
       // 日本語：メーカー公式の情報をもとに書いた商品説明（段落ごと）
       const long = lang === "ja" && description ? String(description).split(/\n+/).filter(Boolean).map((x) => `<p>${esc(x)}</p>`).join("") : "";
-      return `<section class="section section-tight about-item"><h2>${esc(A.h)}</h2><p>${out.join(lang === "en" || lang === "ko" ? " " : "")}</p>${long}</section>`;
+      const M = { ja: ["続きを読む", "閉じる"], en: ["Read more", "Show less"], ko: ["더 보기", "접기"], "zh-tw": ["展開全文", "收起"], "zh-cn": ["展开全文", "收起"] }[lang] || ["Read more", "Show less"];
+      // 長いので最初は数行だけ見せて、押すと全部（文章はページに全部入っているので検索には影響しない）。2026-11-23 ユーザー指定
+      return `<section class="section section-tight about-item"><h2>${esc(A.h)}</h2><div class="about-body"><p>${out.join(lang === "en" || lang === "ko" ? " " : "")}</p>${long}</div><button type="button" class="about-more" data-less="${M[1]}" hidden>${M[0]}</button></section>`;
     })();
 
     // 通販・フリマのチップ（スマホで最初の画面に入るよう、価格のすぐ下に置く。JANコードは元の場所＝ボタンの下）

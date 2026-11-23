@@ -2178,6 +2178,16 @@
   })();
 })();
 // 長い説明文（スマホでは2行だけ表示）は、押すと全部表示
+// 商品ページ「このガチャについて」：長いときだけ数行にたたんで「続きを読む」
+document.querySelectorAll(".about-item .about-body").forEach(function (el) {
+  var b = el.nextElementSibling; if (!b || !b.classList.contains("about-more")) return;
+  if (el.scrollHeight <= 190) return;
+  el.classList.add("clamp"); b.hidden = false;
+  var more = b.textContent;
+  function tog() { var o = el.classList.toggle("open"); b.textContent = o ? b.getAttribute("data-less") : more; }
+  el.addEventListener("click", function () { if (!el.classList.contains("open")) tog(); });
+  b.addEventListener("click", tog);
+});
 document.querySelectorAll(".lead-clamp").forEach(function (el) {
   var b = el.nextElementSibling && el.nextElementSibling.classList.contains("lead-more") ? el.nextElementSibling : null;
   var more = b ? b.textContent : "";
