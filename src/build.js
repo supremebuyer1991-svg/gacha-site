@@ -77,7 +77,7 @@ const T = {
     htmlLang: "ja", ogLocale: "ja_JP", switchLabel: "EN", switchAria: "English version",
     tagline: site.tagline, description: site.description,
     sampleBar: "ただいまサンプルデータを表示しています。商品・店舗・在庫はすべて架空です。",
-    navShort: { calendar: "カレンダー", map: "マップ", toprated: "高評価店", faq: "Q&A" },
+    navShort: { calendar: "カレンダー", map: "マップ", toprated: "高評価店", faq: "Q&A", chara: "キャラ" },
     nav: { map: "ガチャマップ", katsu: "ガチャ活", week: "今週発売", lottery: "抽選情報", toprated: "評価の高いお店", new: "新着", ranking: "人気", calendar: "発売カレンダー", genre: "種類", faq: "よくある質問" },
     navAria: "メインメニュー", footAria: "サイト情報", about: "運営者情報・お問い合わせ",
     disclosure: "Amazonのアソシエイトとして、当サイトは適格販売により収入を得ています。また、楽天アフィリエイトなどの広告プログラムにも参加しています。掲載商品の画像・名称の権利は各メーカーに帰属します。",
