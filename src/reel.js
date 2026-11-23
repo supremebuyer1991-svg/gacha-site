@@ -138,7 +138,7 @@ async function outro(file, ids) {
   const svg = Buffer.from(`${svgOpen(pal)}${head(pal, "", 0, 0)}
 ${S.text("どれを回したい？", W / 2, 560, 96, pal.ink, { anchor: "middle" })}
 ${S.text("コメントで教えてね", W / 2, 660, 54, S.STYLE === "B" ? "#ff9dbb" : S.PINK, { anchor: "middle" })}
-${S.text("発売日・近くの在庫店は", W / 2, y2, 42, pal.ink, { anchor: "middle" })}
+${S.text("発売日・近くの在庫のある店は", W / 2, y2, 42, pal.ink, { anchor: "middle" })}
 ${S.text("プロフィールのリンクから", W / 2, y2 + 62, 42, pal.ink, { anchor: "middle" })}
 ${S.brand(W / 2, y2 + 150, 30, pal, "middle")}</svg>`);
   await sharp(svg).composite([await S.shadowLayer(W, H, rects, pal, 22, 0.5), ...layers]).png().toFile(file);

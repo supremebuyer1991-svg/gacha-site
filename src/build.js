@@ -86,7 +86,7 @@ const T = {
     lineup: (n) => `全${n}種`, perPlay: "1回", series: (n) => `${n} シリーズ`,
     home: "トップ", logoAria: "トップへ",
     heroH1: "手のひらの名品を、<br>いちばん早く見つける。",
-    heroLead: "<span class=\"ph\">新作ガチャの</span><span class=\"ph\">発売日・</span><span class=\"ph\">価格・</span><span class=\"ph\">ラインナップから、</span><br class=\"br-pc\"><span class=\"ph\">近くの在庫店まで。</span>",
+    heroLead: "<span class=\"ph\">新作ガチャの</span><span class=\"ph\">発売日・</span><span class=\"ph\">価格・</span><span class=\"ph\">ラインナップから、</span><br class=\"br-pc\"><span class=\"ph\">近くの在庫のある店まで。</span>",
     heroSub: "<span class=\"ph\">ガチャ好きのための情報を、</span><span class=\"ph\">ひとつの場所に。</span>",
     stats: ["掲載シリーズ", "今月の発売", "取扱店舗"],
     quizTitle: "あなたに合うガチャ診断", qGender: "あなたの性別は？", qAge: "年代は？", q1: "好きなジャンルは？（いくつでも）", q2: "好みのテイストは？（いくつでも）", q3: "1回あたりの予算は？",
@@ -117,7 +117,7 @@ const T = {
     newTitle: "新着ガチャ", toCalendar: "発売カレンダーを見る", rankTitle: "人気ランキング", genreTitle: "ジャンルから探す", typeTitle: "種類から探す", typePage: (g, ym = YM_NOW) => `${g}のガチャガチャ新作・発売日一覧${ym ? `【${ym}】` : ""}`, typeLead: (g, n, list) => `${g}のガチャ${n}シリーズを新しい順に掲載しています。${leadTail(list)}`,
     maker: "メーカー", release: "発売月", genre: "ジャンル", tags: "タグ",
     findStores: "近くの在庫のある店舗を探す", official: "公式サイトで見る",
-    storesTitle: "近くの在庫店", geoBtn: "現在地から探す", or: "または", prefAria: "都道府県で絞り込む", loading: "読み込み中…",
+    storesTitle: "近くの在庫のある店", geoBtn: "現在地から探す", or: "または", prefAria: "都道府県で絞り込む", loading: "読み込み中…",
     stockLoading: "在庫情報を読み込んでいます…", stockNone: "この商品の在庫情報はまだありません。",
     stockFine: "取扱店の情報はバンダイ公式「ガシャポンどこ？」をもとにしています（通信機能のあるマシンを置いている店舗のみ）。実際の在庫と異なる場合があります。営業時間はご来店前に各店舗でご確認ください。現在地は距離の計算だけに使い、どこにも送信しません。",
     officialStores: "公式の店舗検索でも確かめる",
@@ -200,7 +200,7 @@ const T = {
     aboutTitle: "運営者情報・お問い合わせ", aboutH1: "運営者情報", aboutDesc: `${site.name}の運営者情報、お問い合わせ先、広告・免責事項について。`,
     contactForm: "お問い合わせフォーム", contactX: (x) => `X（旧Twitter）の <b>@${x}</b> までDMでご連絡ください。`, contactNone: "お問い合わせ窓口は準備中です。",
     aboutSections: (s) => [
-      ["このサイトについて", `${s.name}は、ガチャガチャ好きのためのカプセルトイ情報サイトです。新作の発売日・価格・ラインナップと、近くの在庫店をひとつの場所で確かめられることを目指しています。`],
+      ["このサイトについて", `${s.name}は、ガチャガチャ好きのためのカプセルトイ情報サイトです。新作の発売日・価格・ラインナップと、近くの在庫のある店をひとつの場所で確かめられることを目指しています。`],
       ["データの集め方", "新作の発売日・価格・ラインナップは、メーカー公式サイト（バンダイ・タカラトミーアーツなど）で発表された情報を毎日自動で取得しています。取扱店はバンダイのガシャポン公式の店舗検索（ガシャポンどこ？）をもとにしており、ガチャマップの在庫報告は利用者の皆さんからの投稿です。"],
       ["更新頻度", "新作・発売予定・取扱店の情報は毎日更新しています。人気ランキングも毎日集計し直しています。"],
       ["編集方針", "メーカーの紹介文などの文章は転載せず、発売日・価格・種類数などの事実をもとに当サイトで書いています。ジャンル・テイストのタグ付けには、AIを補助的に使っています。誤りを見つけた場合は確認のうえ修正します。"],
@@ -462,7 +462,7 @@ T.ja.u = {
   save: "保存", saved: "保存済み", saveAria: "マイリストに保存", unsaveAria: "マイリストから外す",
   mylist: "マイリスト", mylistTitle: "マイリスト（保存したガチャ）", mylistLead: "★で保存したガチャを、発売の状態ごとにまとめています。保存はこのブラウザの中だけで、ログインはいりません。",
   mlNow: "今週発売", mlSoon: "来週以降", mlOut: "発売中", mlEmpty: "まだ保存したガチャはありません。商品の★を押すと、ここに集まります。", mlBrowse: "今週発売のガチャを見る",
-  stockShort: "在庫店", mercari: "メルカリ", whereBtn: "ガシャポンどこ？で探す（公式）", findLater: "このサイトの在庫店リスト",
+  stockShort: "在庫のある店", mercari: "メルカリ", whereBtn: "ガシャポンどこ？で探す（公式）", findLater: "このサイトの在庫のある店リスト",
   relOut: "発売中", relSoon: (m) => `${m}月発売予定`,
   monthsH: "月別の発売カレンダー", thisM: "今月", nextM: "来月", prevM: "先月",
   makersH: "メーカーから探す", prefsLink: "都道府県からガチャガチャ設置店を探す",
@@ -1961,7 +1961,7 @@ ${content}
       ...(Number(it.price) > 0 ? [[`${it.name}は1回いくら？`, `1回${it.price}円です。`]] : []), // 値段が0＝未定のときは出さない（priceTxt と同じ条件）
       ...(n ? [[`全部で何種類？`, `全${n}種${(it.lineup_names || []).length ? `（${it.lineup_names.slice(0, 4).join("、")}${it.lineup_names.length > 4 ? "など" : ""}）` : ""}です。`]] : []),
       [`発売日はいつ？`, `${whenTxt}の発売です。地域やお店によって並ぶ日が前後します。`],
-      [`どこで売ってる？`, shs.length ? `全国${shs.length}店で取扱があります（バンダイ公式の取扱店情報）。下の在庫店リストで近くのお店を探せます。` : whereTxt],
+      [`どこで売ってる？`, shs.length ? `全国${shs.length}店で取扱があります（バンダイ公式の取扱店情報）。下の「近くの在庫のある店」で近くのお店を探せます。` : whereTxt],
       ...(draws ? [[`全種類そろえるには何回くらい？`, `どれも同じ確率で出るとすると、全${n}種そろうまでに平均で約${draws}回${Number(it.price) > 0 ? `（約${(draws * it.price).toLocaleString("ja-JP")}円）` : ""}かかる計算です。欲しいものが決まっているなら、フリマアプリなどで単品を探すのも手です。`]] : []),
     ];
     whereLd = { "@context": "https://schema.org", "@type": "FAQPage", inLanguage: "ja", mainEntity: qa.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) };

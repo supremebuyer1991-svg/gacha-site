@@ -1008,8 +1008,9 @@
 
     // まずサイトに置いた在庫ファイルを読み、ないとき（404など）だけCloudflareの在庫データベースに聞く（Functionsの呼び出しを減らす）
     var getJSON = function (u) { return fetch(u).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (d) { if (!d) throw new Error("empty"); return d; }); };
-    getJSON(stock.getAttribute("data-src"))
-      .catch(function () { return getJSON(stock.getAttribute("data-api")); })
+    // 2026-11-23：最新の在庫（Cloudflareの在庫データベース。10分おきに更新）を先に読む。読めないときだけサイトに置いたファイル（古い）を使う
+    getJSON(stock.getAttribute("data-api"))
+      .catch(function () { return getJSON(stock.getAttribute("data-src")); })
       .then(function (d) {
         stores = d.stores || [];
         var up = document.getElementById("stock-updated");
