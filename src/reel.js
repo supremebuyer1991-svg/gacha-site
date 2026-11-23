@@ -214,7 +214,10 @@ function music(file, secs, beats) {
     const frames = [];
     const main = pool.filter((i) => !kw.includes(i));
     // 表紙の別案（REEL_COVER=1〜4）で使う当日の数字：今日は「紹介する数（◯選）」、今週・今月・来月は「その期間に発売のシリーズ数」
-    const info = { n: pool.length, lastId: kw.length ? kw[0].id : "", head: MODE === "week" ? "今週発売の新作ガチャ" : MODE === "month" ? "今月発売の新作ガチャ" : MODE === "next" ? "来月発売の新作ガチャ" : "今日のおすすめガチャ", num: MODE === "daily" ? pool.length : MODE === "week" && x.week ? x.week.count : range.length, unit: MODE === "daily" ? "選" : "シリーズ" };
+    // 表紙の大きな数字は、実際に紹介する数（◯選）にする。今週・今月・来月は見出しに「全◯シリーズから」と添える
+    // （2026-11-23：「今週発売 61シリーズ」なのに8つしか出てこないのはおかしい、とユーザー指摘）
+    const seriesN = MODE === "week" && x.week ? x.week.count : range.length;
+    const info = { n: pool.length, lastId: kw.length ? kw[0].id : "", head: MODE === "week" ? `今週発売 全${seriesN}シリーズから` : MODE === "month" ? `今月発売 全${seriesN}シリーズから` : MODE === "next" ? `来月発売 全${seriesN}シリーズから` : "今日のおすすめガチャ", num: pool.length, unit: "選" };
     await cover(title, sub, pool.map((i) => i.id), path.join(TMP, "f0.png"), word, info); frames.push([path.join(TMP, "f0.png"), 1.8]);
     for (let i = 0; i < main.length; i++) { const f = path.join(TMP, `f${i + 1}.png`); await card(main[i], i, pool.length, f, top); frames.push([f, 2.0]); }
     if (kw.length) {
