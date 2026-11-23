@@ -1649,3 +1649,18 @@ label.tile:focus-within { outline: none; }
 .leaflet-tooltip.pin-new { background: #ff3b6b; color: #fff; border: 0; border-radius: 6px; padding: 0 5px; font: 800 10px/16px Fredoka, sans-serif; box-shadow: 0 1px 3px rgba(0,0,0,.25); }
 .leaflet-tooltip.pin-new::before { display: none; }
 .pin-new-s { background: #ff3b6b; color: #fff; border-radius: 5px; padding: 0 4px; font-size: 11px; }
+/* スマホ：メニューは横スクロールをやめて、ひと目で全部見える2段に（2026-11-23 ユーザー指定） */
+@media (max-width: 960px) {
+  .site-header .nav { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 5px; overflow: visible; padding: 2px 0; -webkit-mask-image: none; mask-image: none; scroll-snap-type: none; }
+  .site-header .nav a { min-width: 0; padding: 5px 2px; min-height: 34px; font-size: 11.5px; white-space: normal; word-break: keep-all; overflow-wrap: anywhere; line-height: 1.2; }
+}
+@media (max-width: 360px) { .site-header .nav a { font-size: 10.5px; } }
+/* 商品ページ「このガチャについて」：最初は約5行、押すと全部 */
+.about-body.clamp { max-height: 150px; overflow: hidden; position: relative; cursor: pointer; }
+.about-body.clamp::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 48px; background: linear-gradient(rgba(255,255,255,0), var(--bg, #fff)); }
+.about-body.clamp.open { max-height: none; cursor: auto; }
+.about-body.clamp.open::after { display: none; }
+.about-more { display: inline-flex; align-items: center; gap: 4px; margin-top: 6px; padding: 4px 0; border: 0; background: none; color: var(--accent, #ff5c8a); font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; }
+.about-more::after { content: "▼"; font-size: 10px; }
+.about-body.open + .about-more::after { content: "▲"; }
+.about-more[hidden] { display: none; }

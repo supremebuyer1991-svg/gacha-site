@@ -77,7 +77,7 @@ const T = {
     htmlLang: "ja", ogLocale: "ja_JP", switchLabel: "EN", switchAria: "English version",
     tagline: site.tagline, description: site.description,
     sampleBar: "ただいまサンプルデータを表示しています。商品・店舗・在庫はすべて架空です。",
-    navShort: { calendar: "カレンダー", map: "マップ", toprated: "高評価店", faq: "Q&A" },
+    navShort: { calendar: "カレンダー", map: "マップ", toprated: "高評価店", faq: "Q&A", chara: "キャラ" },
     nav: { map: "ガチャマップ", katsu: "ガチャ活", week: "今週発売", lottery: "抽選情報", toprated: "評価の高いお店", new: "新着", ranking: "人気", calendar: "発売カレンダー", genre: "種類", faq: "よくある質問" },
     navAria: "メインメニュー", footAria: "サイト情報", about: "運営者情報・お問い合わせ",
     disclosure: "Amazonのアソシエイトとして、当サイトは適格販売により収入を得ています。また、楽天アフィリエイトなどの広告プログラムにも参加しています。掲載商品の画像・名称の権利は各メーカーに帰属します。",
@@ -1860,7 +1860,9 @@ ${content}
       out.push(...extra.slice(0, 2));
       // 日本語：メーカー公式の情報をもとに書いた商品説明（段落ごと）
       const long = lang === "ja" && description ? String(description).split(/\n+/).filter(Boolean).map((x) => `<p>${esc(x)}</p>`).join("") : "";
-      return `<section class="section section-tight about-item"><h2>${esc(A.h)}</h2><p>${out.join(lang === "en" || lang === "ko" ? " " : "")}</p>${long}</section>`;
+      const M = { ja: ["続きを読む", "閉じる"], en: ["Read more", "Show less"], ko: ["더 보기", "접기"], "zh-tw": ["展開全文", "收起"], "zh-cn": ["展开全文", "收起"] }[lang] || ["Read more", "Show less"];
+      // 長いので最初は数行だけ見せて、押すと全部（文章はページに全部入っているので検索には影響しない）。2026-11-23 ユーザー指定
+      return `<section class="section section-tight about-item"><h2>${esc(A.h)}</h2><div class="about-body"><p>${out.join(lang === "en" || lang === "ko" ? " " : "")}</p>${long}</div><button type="button" class="about-more" data-less="${M[1]}" hidden>${M[0]}</button></section>`;
     })();
 
     // 通販・フリマのチップ（スマホで最初の画面に入るよう、価格のすぐ下に置く。JANコードは元の場所＝ボタンの下）
