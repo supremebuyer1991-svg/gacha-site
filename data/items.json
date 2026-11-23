@@ -15006,7 +15006,7 @@
     "maker_en": "Bandai",
     "price": 500,
     "release": "2026-11",
-    "release_note": "11月第2週より順次",
+    "release_note": "7月第3週より順次",
     "genre": "anime",
     "moods": [],
     "tags": [],
@@ -15854,7 +15854,7 @@
     "maker_en": "Bandai",
     "price": 600,
     "release": "2026-11",
-    "release_note": "11月第4週より順次",
+    "release_note": "7月第3週より順次",
     "genre": "anime",
     "moods": [],
     "tags": [],
@@ -67663,5 +67663,82 @@
       "北信介",
       "角名倫太郎"
     ]
+  },
+  {
+    "id": "bandai-4582770069464",
+    "name": "【フラットガシャポン】星のカービィ マウスシートコレクション",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 500,
+    "release": "2026-07",
+    "release_note": "7月第5週より順次",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 8,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770069464000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770069464",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:pokemon",
+      "type:useful"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bandai-4582770095326",
+    "name": "アイカツ！ ダイキャストドレスチャーム",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 400,
+    "release": "2026-07",
+    "release_note": "7月第5週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii",
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770095326000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770095326",
+    "popularity": 50,
+    "added": "2026-07-01",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "oshi:girls",
+      "type:charm"
+    ],
+    "q_ages": [
+      "10"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
   }
 ]
