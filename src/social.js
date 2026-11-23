@@ -210,7 +210,7 @@ async function igReel(tok, caption, videoUrl, coverUrl) {
       const main = rl.items.filter((i) => !kw.has(i.id)), kws = rl.items.filter((i) => kw.has(i.id));
       const line = (it, i) => `${i + 1}. ${it.name}（${it.price}円・全${it.lineup}種）`;
       const tags = ["#ガチャガチャ", "#ガチャ", "#カプセルトイ", "#ガシャポン", "#新作ガチャ", "#ガチャ活", "#今週発売", rl.word ? `#${rl.word.replace(/\s/g, "")}` : ""].filter(Boolean);
-      const cap = [`${rl.title}（${rl.sub}）`, ``, ...main.map(line), ...(kws.length ? [``, `ラストの${rl.word}が可愛すぎる♡`, ...kws.map((it, j) => line(it, main.length + j))] : []), ``, `どれを回したい？コメントで教えてね🪐`, `発売日・近くの在庫店は、プロフィールのリンク（gachapla.com）から検索できます`, ``, [...new Set(tags)].join(" ")].join("\n");
+      const cap = [`${rl.title}（${rl.sub}）`, ``, ...main.map(line), ...(kws.length ? [``, `ラストの${rl.word}が可愛すぎる♡`, ...kws.map((it, j) => line(it, main.length + j))] : []), ``, `どれを回したい？コメントで教えてね🪐`, `発売日・近くの在庫のある店は、プロフィールのリンク（gachapla.com）から検索できます`, ``, [...new Set(tags)].join(" ")].join("\n");
       try { await igReel(igSecret, cap.slice(0, 2100), rl.url, rl.cover); st.reel_date = today; changed = true; log("Instagram：リールを投稿", rl.title); }
       catch (e) { log("⚠ Instagram のリール投稿に失敗", e.message); }
     }
