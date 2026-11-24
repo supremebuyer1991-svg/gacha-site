@@ -15006,7 +15006,7 @@
     "maker_en": "Bandai",
     "price": 500,
     "release": "2026-11",
-    "release_note": "7月第3週より順次",
+    "release_note": "11月第2週より順次",
     "genre": "anime",
     "moods": [],
     "tags": [],
@@ -15854,7 +15854,7 @@
     "maker_en": "Bandai",
     "price": 600,
     "release": "2026-11",
-    "release_note": "7月第3週より順次",
+    "release_note": "11月第4週より順次",
     "genre": "anime",
     "moods": [],
     "tags": [],
@@ -67735,6 +67735,140 @@
     ],
     "q_ages": [
       "10"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y909474",
+    "name": "劇場版『チェンソーマン レゼ篇』 ポチタいっぱいコレクション ～Dnacing Edition～",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-11",
+    "release_note": "11月23日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "lineup_names": [
+      "ポチタA",
+      "ポチタB",
+      "ポチタC",
+      "ポチタD"
+    ],
+    "jan_checked": true,
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y909474",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-24",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "cool:shonen",
+      "hobby:movie"
+    ],
+    "q_ages": [
+      "10",
+      "20"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y909788",
+    "name": "でふぉラバ! アニメ「グロウアップショウ ～ひまわりのサーカス団～」キーホルダー",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-11",
+    "release_note": "11月23日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "lineup_names": [
+      "鶴巻瑞佳",
+      "川澄桜翔",
+      "五十土五十鈴＆吾野伊万里",
+      "由良 葵＆由良 茜",
+      "酒匂 雫＆スヴェトラーナ",
+      "間宮 凛＆麻利亜"
+    ],
+    "jan_checked": true,
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y909788",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-24",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:charm"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "kitan-estherbunny-pouch2",
+    "name": "EstherBunny ぬいぐるみポーチ２",
+    "name_en": "",
+    "maker": "キタンクラブ",
+    "maker_en": "Kitan Club",
+    "price": 500,
+    "release": "2026-12",
+    "release_note": "12月上旬",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "lineup_names": [
+      "RIBBON BUNNY",
+      "LAVENDER BUNNY",
+      "CREAM BUNNY",
+      "BLUE BUNNY"
+    ],
+    "image": "",
+    "official_url": "https://kitan.jp/products/estherbunny_pouch2/",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-24",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "kawaii:accessory",
+      "type:plush",
+      "type:useful"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
     ],
     "q_genders": [
       "female"
