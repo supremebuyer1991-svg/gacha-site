@@ -68645,5 +68645,232 @@
       "しろねこ",
       "くろねこ"
     ]
+  },
+  {
+    "id": "tarts-y909726",
+    "name": "でふぉラバ! とんでもスキルで異世界放浪メシ2 キーホルダーvol.2",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-11",
+    "release_note": "11月23日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "lineup_names": [
+      "集合1（おやすみ）",
+      "集合2（お買い物）",
+      "スイ",
+      "ドラちゃん",
+      "スイ＆ドラちゃん",
+      "女神たち"
+    ],
+    "jan_checked": true,
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y909726",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-26",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:charm"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y911248",
+    "name": "パンダの穴 ミニチュアねこ SPECIAL COLOR Ver.",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-11",
+    "release_note": "11月30日週発売",
+    "genre": "miniature",
+    "moods": [
+      "real"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "lineup_names": [
+      "ミニチュアミントタブレットねこ",
+      "ミニチュアスプーンねこ",
+      "ミニチュアえのぐねこ",
+      "ミニチュアポップコーンねこ",
+      "ミニチュアキャビアねこ"
+    ],
+    "jan_checked": true,
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y911248",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-26",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:animal",
+      "real:miniature",
+      "real:food"
+    ],
+    "q_ages": [
+      "30",
+      "40",
+      "50"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y099687",
+    "name": "ドラえもん つながリングチャーム",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-12",
+    "release_note": "3月9日週発売・2026年12月7日週再発売",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "lineup_names": [
+      "ドラえもん",
+      "ドラミ",
+      "スモールライト",
+      "スモールライト（ドラミバージョン）"
+    ],
+    "jan_checked": true,
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y099687",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-26",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:accessory",
+      "oshi:kids",
+      "type:charm",
+      "type:fashion",
+      "retro:showa"
+    ],
+    "q_ages": [
+      "10",
+      "50"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y900129",
+    "name": "トムとジェリー タフィーいっぱいコレクション2",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-12",
+    "release_note": "3月23日週発売・2026年12月7日週再発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "lineup_names": [
+      "クッションでのけぞるタフィー",
+      "食パンにダイブするタフィー",
+      "カップケーキにキスするタフィー",
+      "コーヒーカップをかぶったタフィー"
+    ],
+    "jan_checked": true,
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y900129",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-26",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:character"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y909078",
+    "name": "夏目友人帳 フェイス型シリコンケース",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-12",
+    "release_note": "12月7日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "lineup_names": [
+      "ニャンコ先生ウインク",
+      "ニャンコ先生ニヤリ",
+      "ニャンコ先生ハート",
+      "ニャンコ先生つむり目",
+      "黒ニャンコ"
+    ],
+    "jan_checked": true,
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y909078",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-26",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:useful"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
   }
 ]
