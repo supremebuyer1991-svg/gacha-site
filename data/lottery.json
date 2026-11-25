@@ -2,54 +2,6 @@
   "note": "ガチャの抽選販売・整理券・入場抽選。時刻は日本時間。毎晩の見回りで追加・更新。 新しく足した抽選には added（足した日 \"2026-11-06\" の形）を入れる。20時のXポストは added が今日の抽選だけを載せる。",
   "entries": [
     {
-      "title": "HYSTERIC MINI めじるしアクセサリー ～アナザーカラー～",
-      "store": "ふぇすたらんど 平島",
-      "pref": "岡山県",
-      "kind": "item",
-      "start": "2026-11-19T12:00",
-      "end": "2026-11-23T23:59",
-      "method": "LivePocket",
-      "url": "https://livepocket.jp/e/c3csl",
-      "note": "販売日は11/29。1人3個まで",
-      "added": "2026-11-20"
-    },
-    {
-      "title": "ちいかわ めじるしアクセサリー3",
-      "store": "ふぇすたらんど 平島",
-      "pref": "岡山県",
-      "kind": "item",
-      "start": "2026-11-19T12:00",
-      "end": "2026-11-23T23:59",
-      "method": "LivePocket",
-      "url": "https://livepocket.jp/e/oz4mo",
-      "note": "販売日は11/29。1人4個まで",
-      "added": "2026-11-20"
-    },
-    {
-      "title": "ちいかわ めじるしアクセサリー3",
-      "store": "#C-pla 御影クラッセ",
-      "pref": "兵庫県",
-      "kind": "item",
-      "start": "2026-11-21T10:00",
-      "end": "2026-11-23T23:59",
-      "method": "LivePocket",
-      "url": "https://livepocket.jp/e/3dnwf",
-      "note": "販売日は11/27（11:30〜13:30）。1人2個まで",
-      "added": "2026-11-23"
-    },
-    {
-      "title": "どうぶつの森 めじるしアクセサリー",
-      "store": "#C-pla 御影クラッセ",
-      "pref": "兵庫県",
-      "kind": "item",
-      "start": "2026-11-21T10:00",
-      "end": "2026-11-23T23:59",
-      "method": "LivePocket",
-      "url": "https://livepocket.jp/e/sg5-l",
-      "note": "販売日は11/27（14:00〜15:30）。1人2個まで",
-      "added": "2026-11-23"
-    },
-    {
       "title": "サンリオキャラクターズ 雪だるまふわふわめじるしアクセサリー",
       "store": "#C-pla 博多駅博多口",
       "pref": "福岡県",
