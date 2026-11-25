@@ -4343,7 +4343,7 @@
     "maker_en": "Bandai",
     "price": 400,
     "release": "2026-11",
-    "release_note": "",
+    "release_note": "11月第4週より順次",
     "genre": "anime",
     "moods": [],
     "tags": [],
@@ -67917,5 +67917,655 @@
       "female"
     ],
     "tags_auto": false
+  },
+  {
+    "id": "bandai-4582770149159",
+    "name": "とっとこハム太郎 スイングマスコット～スペシャルカラーver.～",
+    "name_en": "",
+    "maker": "バンダイ",
+    "maker_en": "Bandai",
+    "price": 300,
+    "release": "2026-11",
+    "release_note": "11月第4週より順次",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "age_min": 15,
+    "image": "",
+    "official_url": "https://gashapon.jp/products/detail.php?jan_code=4582770149159000",
+    "store_search_url": "https://gashapon.jp/shop/gplus_list.php?product_code=4582770149159",
+    "popularity": 50,
+    "added": "2026-11-25",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "type:plush",
+      "retro:heisei"
+    ],
+    "q_ages": [
+      "30"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y908675",
+    "name": "LOVE像",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-11",
+    "release_note": "11月23日週発売",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "lineup_names": [
+      "大仏",
+      "半跏思惟像",
+      "風神",
+      "雷神"
+    ],
+    "jan_checked": true,
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y908675",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-25",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y912238",
+    "name": "パンダの穴 アニべこ めじるしガチャマスコット",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-11",
+    "release_note": "11月30日週発売",
+    "genre": "animal",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "lineup_names": [
+      "シロべこ",
+      "ブタべこ",
+      "ワニべこ",
+      "ロバべこ",
+      "ライべこ",
+      "ゴリべこ"
+    ],
+    "jan_checked": true,
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y912238",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-25",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:animal",
+      "kawaii:mascot",
+      "kawaii:accessory",
+      "type:plush",
+      "type:mejirushi",
+      "real:food"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y906275",
+    "name": "コスチュームエイリアン ゆらゆらつながるマスコット Part1",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-12",
+    "release_note": "予定",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "lineup_names": [
+      "コスチューム：ニモ",
+      "コスチューム：ドリー",
+      "コスチューム：ボブ",
+      "コスチューム：ウッディ",
+      "コスチューム：ロッツォ"
+    ],
+    "jan_checked": true,
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y906275",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-25",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "type:plush"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y906626",
+    "name": "プレイバック・ムービー リロ＆スティッチ",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 500,
+    "release": "2026-12",
+    "release_note": "予定",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 3,
+    "lineup_names": [
+      "ディズニー スティッチ（レコード）",
+      "ディズニー スティッチ（試作品626号）",
+      "ディズニー スティッチ（洗濯物）"
+    ],
+    "jan_checked": true,
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y906626",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-25",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:disney"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y909313",
+    "name": "きかんしゃトーマス クリッカーマスコット",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-12",
+    "release_note": "予定",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "lineup_names": [
+      "トーマス（疲れ） 「トーマス（怒り）",
+      "パーシー（疲れ）",
+      "パーシー（叫び）",
+      "ジェームス（怒り）",
+      "トップハム・ハット卿"
+    ],
+    "jan_checked": true,
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y909313",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-25",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "type:plush",
+      "type:useful"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "tarts-y909344",
+    "name": "肩ズンFig. ズートピア ガラパーティ編",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 400,
+    "release": "2026-12",
+    "release_note": "予定",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "lineup_names": [
+      "ニック・ワイルド",
+      "ジュディ・ホップス",
+      "ゲイリー・ダ・スネーク",
+      "パウバート"
+    ],
+    "jan_checked": true,
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y909344",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-25",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:disney",
+      "type:figure",
+      "funny:machibouke",
+      "hobby:movie"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "bushicap-10152",
+    "name": "TVアニメ『あかね噺』 ぷちアクリルスタンド",
+    "name_en": "",
+    "maker": "ブシロードクリエイティブ",
+    "maker_en": "Bushiroad Creative",
+    "price": 300,
+    "release": "2026-11",
+    "release_note": "11月下旬",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "jan": "4570194467317",
+    "image": "",
+    "official_url": "https://capsule.bushiroad-creative.com/product/10152/",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-25",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "kenele-gc0867z",
+    "name": "そねぽん フィギュアコレクション",
+    "name_en": "",
+    "maker": "ケンエレファント",
+    "maker_en": "Kenelephant",
+    "price": 500,
+    "release": "2027-04",
+    "release_note": "4月",
+    "genre": "anime",
+    "moods": [
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "image": "",
+    "official_url": "https://kenelestore.jp/products/gc0867z",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-25",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:figure",
+      "real:miniature"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "kenele-gc0865c",
+    "name": "横尾忠則 マイマーク",
+    "name_en": "",
+    "maker": "ケンエレファント",
+    "maker_en": "Kenelephant",
+    "price": 400,
+    "release": "2027-04",
+    "release_note": "4月",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "image": "",
+    "official_url": "https://kenelestore.jp/products/gc0865c",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-25",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "kenele-gc0872c",
+    "name": "PEZ×サンリオキャラクターズ マスコット",
+    "name_en": "",
+    "maker": "ケンエレファント",
+    "maker_en": "Kenelephant",
+    "price": 500,
+    "release": "2027-04",
+    "release_note": "4月",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "image": "",
+    "official_url": "https://kenelestore.jp/products/gc0872c",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-25",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:sanrio",
+      "kawaii:mascot",
+      "type:plush"
+    ],
+    "q_ages": [
+      "10",
+      "20",
+      "30"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "kenele-gc0873z",
+    "name": "LIP SLIPS -Body POP Friends- フィギュアマスコット",
+    "name_en": "",
+    "maker": "ケンエレファント",
+    "maker_en": "Kenelephant",
+    "price": 500,
+    "release": "2027-04",
+    "release_note": "4月",
+    "genre": "anime",
+    "moods": [
+      "kawaii",
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 6,
+    "image": "",
+    "official_url": "https://kenelestore.jp/products/gc0873z",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-25",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "type:figure",
+      "type:plush"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "kenele-gc0871z",
+    "name": "maitoparta NEO FRIENDS アートピースコレクション",
+    "name_en": "",
+    "maker": "ケンエレファント",
+    "maker_en": "Kenelephant",
+    "price": 500,
+    "release": "2027-04",
+    "release_note": "4月",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "image": "",
+    "official_url": "https://kenelestore.jp/products/gc0871z",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-25",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "kenele-gc0868c",
+    "name": "ベロたん マスコットポーチ",
+    "name_en": "",
+    "maker": "ケンエレファント",
+    "maker_en": "Kenelephant",
+    "price": 500,
+    "release": "2027-04",
+    "release_note": "4月",
+    "genre": "anime",
+    "moods": [
+      "kawaii"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "image": "",
+    "official_url": "https://kenelestore.jp/products/gc0868c",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-25",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "kawaii:mascot",
+      "kawaii:accessory",
+      "type:plush",
+      "type:useful"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "kenele-gc0737z",
+    "name": "Eeosiso「イオシソ」 Tooth Treasure Box",
+    "name_en": "",
+    "maker": "ケンエレファント",
+    "maker_en": "Kenelephant",
+    "price": 500,
+    "release": "2027-05",
+    "release_note": "5月",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "image": "",
+    "official_url": "https://kenelestore.jp/products/gc0737z",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-25",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
+  },
+  {
+    "id": "kenele-gc0613z",
+    "name": "umao Plush Doll フィギュアコレクション",
+    "name_en": "",
+    "maker": "ケンエレファント",
+    "maker_en": "Kenelephant",
+    "price": 500,
+    "release": "2027-05",
+    "release_note": "5月",
+    "genre": "anime",
+    "moods": [
+      "cool"
+    ],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 4,
+    "image": "",
+    "official_url": "https://kenelestore.jp/products/gc0613z",
+    "store_search_url": "",
+    "popularity": 40,
+    "added": "2026-11-25",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [
+      "type:figure",
+      "real:miniature"
+    ],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
   }
 ]
