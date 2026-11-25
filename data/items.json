@@ -4368,7 +4368,15 @@
       "female"
     ],
     "tags_auto": false,
-    "summary": "NCT WISHの公式キャラクターが、ボールチェーンなどで付けられる連結マスコットになった全12種です。"
+    "summary": "NCT WISHの公式キャラクターが、ボールチェーンなどで付けられる連結マスコットになった全12種です。",
+    "lineup_names": [
+      "SION",
+      "RIKU",
+      "YUSHI",
+      "JAEHEE",
+      "RYO",
+      "SAKUYA"
+    ]
   },
   {
     "id": "bandai-4582769935077",
@@ -67921,7 +67929,7 @@
   {
     "id": "bandai-4582770149159",
     "name": "とっとこハム太郎 スイングマスコット～スペシャルカラーver.～",
-    "name_en": "",
+    "name_en": "Hamtaro Swing Mascot ~Special Color ver.~",
     "maker": "バンダイ",
     "maker_en": "Bandai",
     "price": 300,
@@ -67944,23 +67952,31 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
-      "type:plush",
-      "retro:heisei"
+      "kawaii:character",
+      "oshi:kids",
+      "retro:heisei",
+      "type:charm"
     ],
     "q_ages": [
+      "20",
       "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false,
+    "lineup_names": [
+      "ハム太郎",
+      "リボンちゃん",
+      "こうしくん",
+      "マフラーちゃん",
+      "ちび丸ちゃん"
+    ]
   },
   {
     "id": "tarts-y908675",
     "name": "LOVE像",
-    "name_en": "",
+    "name_en": "LOVE Statue",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 400,
@@ -67986,22 +68002,26 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "hobby:art",
+      "real:building",
+      "real:miniature"
+    ],
     "q_ages": [
-      "20",
       "30",
-      "40"
+      "40",
+      "50"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "tarts-y912238",
     "name": "パンダの穴 アニべこ めじるしガチャマスコット",
-    "name_en": "",
+    "name_en": "Panda no Ana Anibeko Mejirushi Gacha Mascot",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 300,
@@ -68032,28 +68052,26 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "funny:neta",
       "kawaii:animal",
-      "kawaii:mascot",
-      "kawaii:accessory",
-      "type:plush",
-      "type:mejirushi",
-      "real:food"
+      "hobby:japan",
+      "type:mejirushi"
     ],
     "q_ages": [
+      "10",
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "tarts-y906275",
     "name": "コスチュームエイリアン ゆらゆらつながるマスコット Part1",
-    "name_en": "",
+    "name_en": "Costume Alien Swaying Linked Mascot Part 1",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 400,
@@ -68083,24 +68101,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
-      "type:plush"
+      "kawaii:character",
+      "type:plush",
+      "type:charm"
     ],
     "q_ages": [
+      "10",
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "tarts-y906626",
     "name": "プレイバック・ムービー リロ＆スティッチ",
-    "name_en": "",
+    "name_en": "Playback Movie Lilo & Stitch",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 500,
@@ -68126,23 +68144,25 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:disney"
+      "kawaii:disney",
+      "hobby:movie",
+      "type:figure"
     ],
     "q_ages": [
+      "10",
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "tarts-y909313",
     "name": "きかんしゃトーマス クリッカーマスコット",
-    "name_en": "",
+    "name_en": "Thomas & Friends Clicker Mascot",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 400,
@@ -68172,9 +68192,9 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
-      "type:plush",
-      "type:useful"
+      "oshi:kids",
+      "real:vehicle",
+      "type:charm"
     ],
     "q_ages": [
       "20",
@@ -68185,12 +68205,12 @@
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "tarts-y909344",
     "name": "肩ズンFig. ズートピア ガラパーティ編",
-    "name_en": "",
+    "name_en": "Katazun Fig. Zootopia Gala Party",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 400,
@@ -68218,25 +68238,24 @@
     "auto": true,
     "q_subs": [
       "kawaii:disney",
-      "type:figure",
-      "funny:machibouke",
-      "hobby:movie"
+      "hobby:movie",
+      "type:figure"
     ],
     "q_ages": [
+      "10",
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "bushicap-10152",
     "name": "TVアニメ『あかね噺』 ぷちアクリルスタンド",
-    "name_en": "",
+    "name_en": "Akane-banashi TV Anime Petit Acrylic Stand",
     "maker": "ブシロードクリエイティブ",
     "maker_en": "Bushiroad Creative",
     "price": 300,
@@ -68256,22 +68275,33 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "oshi:trend",
+      "cool:shonen",
+      "hobby:japan"
+    ],
     "q_ages": [
+      "10",
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false,
+    "lineup_names": [
+      "阿良川あかね",
+      "高良木ひかる＆練磨家からし",
+      "阿良川魁生",
+      "阿良川享二＆阿良川まいける",
+      "阿良川こぐま＆阿良川ぐりこ"
+    ]
   },
   {
     "id": "kenele-gc0867z",
     "name": "そねぽん フィギュアコレクション",
-    "name_en": "",
+    "name_en": "Sonepon Figure Collection",
     "maker": "ケンエレファント",
     "maker_en": "Kenelephant",
     "price": 500,
@@ -68293,24 +68323,29 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "type:figure",
-      "real:miniature"
+      "hobby:art",
+      "kawaii:character",
+      "type:figure"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false,
+    "lineup_names": [
+      "月の番人",
+      "ひとり",
+      "hopeちゃん",
+      "星の番人"
+    ]
   },
   {
     "id": "kenele-gc0865c",
     "name": "横尾忠則 マイマーク",
-    "name_en": "",
+    "name_en": "Tadanori Yokoo My Mark",
     "maker": "ケンエレファント",
     "maker_en": "Kenelephant",
     "price": 400,
@@ -68329,22 +68364,26 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "hobby:art",
+      "retro:showa"
+    ],
     "q_ages": [
-      "20",
       "30",
-      "40"
+      "40",
+      "50"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false,
+    "lineup_names": []
   },
   {
     "id": "kenele-gc0872c",
     "name": "PEZ×サンリオキャラクターズ マスコット",
-    "name_en": "",
+    "name_en": "PEZ × Sanrio Characters Mascot",
     "maker": "ケンエレファント",
     "maker_en": "Kenelephant",
     "price": 500,
@@ -68367,8 +68406,8 @@
     "auto": true,
     "q_subs": [
       "kawaii:sanrio",
-      "kawaii:mascot",
-      "type:plush"
+      "hobby:brand",
+      "type:charm"
     ],
     "q_ages": [
       "10",
@@ -68378,12 +68417,20 @@
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false,
+    "lineup_names": [
+      "クロミ",
+      "ポムポムプリン",
+      "シナモロール",
+      "ハローキティ",
+      "マイメロディ",
+      "コロコロクリリン"
+    ]
   },
   {
     "id": "kenele-gc0873z",
     "name": "LIP SLIPS -Body POP Friends- フィギュアマスコット",
-    "name_en": "",
+    "name_en": "LIP SLIPS -Body POP Friends- Figure Mascot",
     "maker": "ケンエレファント",
     "maker_en": "Kenelephant",
     "price": 500,
@@ -68406,25 +68453,28 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
-      "type:figure",
-      "type:plush"
+      "hobby:art",
+      "kawaii:character",
+      "type:figure"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false,
+    "lineup_names": [
+      "Lovee Heart",
+      "Toothy",
+      "Liver Cool"
+    ]
   },
   {
     "id": "kenele-gc0871z",
     "name": "maitoparta NEO FRIENDS アートピースコレクション",
-    "name_en": "",
+    "name_en": "maitoparta NEO FRIENDS Art Piece Collection",
     "maker": "ケンエレファント",
     "maker_en": "Kenelephant",
     "price": 500,
@@ -68443,22 +68493,30 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "hobby:art",
+      "type:figure"
+    ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false,
+    "lineup_names": [
+      "Mt.NICONICO",
+      "PEACE",
+      "TAKE CARE",
+      "CHUM",
+      "LOVE KUMA"
+    ]
   },
   {
     "id": "kenele-gc0868c",
     "name": "ベロたん マスコットポーチ",
-    "name_en": "",
+    "name_en": "Berotan Mascot Pouch",
     "maker": "ケンエレファント",
     "maker_en": "Kenelephant",
     "price": 500,
@@ -68480,25 +68538,30 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:mascot",
-      "kawaii:accessory",
+      "kawaii:character",
       "type:plush",
       "type:useful"
     ],
     "q_ages": [
+      "10",
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female"
     ],
-    "tags_auto": true
+    "tags_auto": false,
+    "lineup_names": [
+      "健常",
+      "舌がん",
+      "舌乳頭腫",
+      "舌線維腫"
+    ]
   },
   {
     "id": "kenele-gc0737z",
     "name": "Eeosiso「イオシソ」 Tooth Treasure Box",
-    "name_en": "",
+    "name_en": "Eeosiso Tooth Treasure Box",
     "maker": "ケンエレファント",
     "maker_en": "Kenelephant",
     "price": 500,
@@ -68517,22 +68580,31 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "hobby:art",
+      "type:figure",
+      "funny:neta"
+    ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false,
+    "lineup_names": [
+      "小歯トゥーストレジャーボックス",
+      "ストロベリークリームトゥーストレジャーボックス",
+      "ドーナツトゥーストレジャーボックス",
+      "リボン付きトゥーストレジャーボックス",
+      "キャンディトゥーストレジャーボックス"
+    ]
   },
   {
     "id": "kenele-gc0613z",
     "name": "umao Plush Doll フィギュアコレクション",
-    "name_en": "",
+    "name_en": "umao Plush Doll Figure Collection",
     "maker": "ケンエレファント",
     "maker_en": "Kenelephant",
     "price": 500,
@@ -68554,18 +68626,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "type:figure",
-      "real:miniature"
+      "hobby:art",
+      "kawaii:character",
+      "type:figure"
     ],
     "q_ages": [
+      "10",
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false,
+    "lineup_names": [
+      "くま",
+      "いぬ",
+      "しろねこ",
+      "くろねこ"
+    ]
   }
 ]
