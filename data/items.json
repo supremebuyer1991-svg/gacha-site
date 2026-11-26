@@ -68874,5 +68874,47 @@
       "female"
     ],
     "tags_auto": false
+  },
+  {
+    "id": "tarts-y911279",
+    "name": "もちにまる そのよん",
+    "name_en": "",
+    "maker": "タカラトミーアーツ",
+    "maker_en": "Takara Tomy A.R.T.S",
+    "price": 300,
+    "release": "2026-12",
+    "release_note": "予定",
+    "genre": "anime",
+    "moods": [],
+    "tags": [],
+    "tags_en": [],
+    "lineup": 5,
+    "lineup_names": [
+      "ひつじもち",
+      "きつねもち",
+      "はむもち",
+      "はむもち（きなこ）",
+      "ことりもち"
+    ],
+    "jan_checked": true,
+    "image": "",
+    "official_url": "https://www.takaratomy-arts.co.jp/items/item.html?n=Y911279",
+    "store_search_url": "",
+    "popularity": 50,
+    "added": "2026-11-27",
+    "description": "",
+    "description_en": "",
+    "auto": true,
+    "q_subs": [],
+    "q_ages": [
+      "20",
+      "30",
+      "40"
+    ],
+    "q_genders": [
+      "female",
+      "male"
+    ],
+    "tags_auto": true
   }
 ]
