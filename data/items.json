@@ -68649,7 +68649,7 @@
   {
     "id": "tarts-y909726",
     "name": "でふぉラバ! とんでもスキルで異世界放浪メシ2 キーホルダーvol.2",
-    "name_en": "",
+    "name_en": "Deforaba! Campfire Cooking in Another World with My Absurd Skill 2 Keychain Vol.2",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 300,
@@ -68678,23 +68678,23 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "oshi:trend",
       "type:charm"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
       "female",
       "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "tarts-y911248",
     "name": "パンダの穴 ミニチュアねこ SPECIAL COLOR Ver.",
-    "name_en": "",
+    "name_en": "Panda no Ana Miniature Cat SPECIAL COLOR Ver.",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 300,
@@ -68726,23 +68726,22 @@
     "q_subs": [
       "kawaii:animal",
       "real:miniature",
-      "real:food"
+      "real:creature"
     ],
     "q_ages": [
+      "20",
       "30",
-      "40",
-      "50"
+      "40"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "tarts-y099687",
     "name": "ドラえもん つながリングチャーム",
-    "name_en": "",
+    "name_en": "Doraemon Tsunagaring Charm",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 300,
@@ -68771,25 +68770,26 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
       "kawaii:accessory",
       "oshi:kids",
-      "type:charm",
-      "type:fashion",
-      "retro:showa"
+      "type:charm"
     ],
     "q_ages": [
       "10",
-      "50"
+      "20",
+      "30"
     ],
     "q_genders": [
-      "female"
+      "female",
+      "male"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "tarts-y900129",
     "name": "トムとジェリー タフィーいっぱいコレクション2",
-    "name_en": "",
+    "name_en": "Tom and Jerry Taffy Collection 2",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 400,
@@ -68816,23 +68816,24 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
-      "kawaii:character"
+      "kawaii:character",
+      "cool:western",
+      "hobby:movie",
+      "type:figure"
     ],
     "q_ages": [
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   },
   {
     "id": "tarts-y909078",
     "name": "夏目友人帳 フェイス型シリコンケース",
-    "name_en": "",
+    "name_en": "Natsume's Book of Friends Face Silicone Case",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 400,
@@ -68860,6 +68861,8 @@
     "description_en": "",
     "auto": true,
     "q_subs": [
+      "kawaii:character",
+      "oshi:trend",
       "type:useful"
     ],
     "q_ages": [
@@ -68868,9 +68871,8 @@
       "40"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   }
 ]
