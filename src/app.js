@@ -987,6 +987,9 @@
       '<div class="card-foot"><span><b>' + (it.price > 0 ? "¥" + it.price : esc(M.priceTba)) + "</b>" + (it.lineup ? " / " + M.lineup(it.lineup) : "") + "</span><span>" + esc(it.release_label) + "</span></div></a>";
   }
 
+  // お知らせ（Web Push）の🔔。下の「お知らせ」のところで中身を入れる（対応していないブラウザでは空のまま＝🔔を出さない）
+  var NP = { bell: null, paint: null };
+
   /* ================= 近い順の在庫店（商品ページ） ================= */
   var stock = document.getElementById("stock");
   if (stock) {
@@ -1060,6 +1063,8 @@
     }
     function fmt(d) { return d < 1 ? Math.round(d * 1000) + "m" : (d < 10 ? d.toFixed(1) : Math.round(d)) + "km"; }
 
+    var stockItemId = (/api\/stock\/([a-z0-9-]+)/.exec(stock.getAttribute("data-api") || "") || [])[1] || "";
+    var stockItemName = (function () { var h = document.querySelector("h1"); return h ? h.textContent.replace(/\s+/g, " ").trim().slice(0, 80) : ""; })();
     function render() {
       var pref = prefSel.value;
       var rows = stores.filter(function (s) { return !pref || s.prefecture === pref; }).map(function (s) {
@@ -1078,13 +1083,16 @@
       listEl.innerHTML = shown.map(function (r) {
         var s = r.s;
         var nm = (EN && s.name_en) || s.name;
+        var sc = /shop_code=(S\d+)/i.exec(s.url || "");
         var ad = EN ? (s.address_en ? s.address_en + ", " + s.prefecture_en : s.address) : s.address;
         return '<li class="' + (s.status === "out_of_stock" ? "is-off" : "") + '">' +
           '<span class="s-name">' + (function () { var m = /shop_code=(S\d+)/i.exec(s.url || ""); return m && !EN ? '<a href="' + stock.getAttribute("data-api").replace(/api\/stock\/.*$/, "") + "shop/" + m[1].toLowerCase() + '">' + esc(nm) + "</a>" : esc(nm); })() + "</span>" +
           '<span class="s-addr">' + esc(ad) + (EN && s.name_en ? ' <span lang="ja">' + esc(s.name) + "</span>" : "") + "</span>" +
           '<span class="s-right">' + (r.d != null ? '<span class="s-dist">' + fmt(r.d) + "</span>" : "") +
-          '<span class="pill ' + s.status + '">' + LABEL[s.status] + "</span></span></li>";
+          '<span class="pill ' + s.status + '">' + LABEL[s.status] + "</span>" +
+          (sc && NP.bell && stockItemId ? NP.bell(sc[1].toLowerCase(), stockItemId, stockItemName) : "") + "</span></li>";
       }).join("");
+      if (NP.paint) NP.paint();
 
       var rest = rows.length - shown.length;
       moreEl.hidden = rest <= 0;
@@ -1284,17 +1292,22 @@
     document.addEventListener("gp-fav", drawML);
   }
 
-  /* ================= 発売週のお知らせ（Web Push）。押した人だけ。★が変わったら送り先の情報も直す ================= */
+  /* ================= お知らせ（Web Push）。どれも、自分でボタンを押してオンにした人にだけ送る =================
+   * ・★のガチャの発売週（これまでのお知らせ）／★のガチャの入荷・在庫復活（選んだ都道府県）／★のガチャの抽選開始／毎週の新作まとめ
+   * ・お店のお知らせ：お店×商品（入荷・在庫復活）、お店×キーワード（その名前のガチャが初めて入荷）
+   * 通知の許可の画面は、🔔・お知らせのボタンを押したときにだけ出す（勝手には出さない）。「お知らせ設定」でいつでも全部やめられる */
   (function () {
-    var PUSH_KEY = "gp-push", SIG_KEY = "gp-push-sig";
+    var PUSH_KEY = "gp-push", SIG_KEY = "gp-push-sig", OPT_KEY = "gp-push-opt", PREFS_KEY = "gp-push-prefs", WATCH_KEY = "gp-push-watch", ASK_KEY = "gp-push-ask";
     var lsGet = function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } };
     var lsSet = function (k, v) { try { if (v == null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) {} };
+    var lsJSON = function (k, d) { try { var v = JSON.parse(lsGet(k) || "null"); return v == null ? d : v; } catch (e) { return d; } };
     var supported = false;
     try { supported = "serviceWorker" in navigator && "PushManager" in window && "Notification" in window && window.isSecureContext !== false && !!window.fetch; } catch (e) {}
     var ua = navigator.userAgent || "";
     var isIOS = /iP(hone|ad|od)/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
     var standalone = false;
     try { standalone = navigator.standalone === true || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches); } catch (e) {}
+    var iosHome = !supported && isIOS && !standalone; // iPhone・iPad：ホーム画面に追加すると使える
     var b64ToBytes = function (s) {
       s = String(s).replace(/-/g, "+").replace(/_/g, "/");
       while (s.length % 4) s += "=";
@@ -1306,17 +1319,23 @@
       if (!supported) return Promise.resolve(null);
       return navigator.serviceWorker.getRegistration("/").then(function (reg) { return reg ? reg.pushManager.getSubscription() : null; }).catch(function () { return null; });
     };
-    var api = function (method, body) {
-      return fetch("/api/push/subscribe", { method: method, headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
+    var call = function (path, method, body) {
+      return fetch(path, { method: method, headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
         .then(function (r) { return r.json().catch(function () { return { ok: false }; }).then(function (d) { if (!r.ok || !d.ok) throw new Error(d.error || ("HTTP " + r.status)); return d; }); });
     };
-    var sigOf = function (a) { return LANG + ":" + a.slice().sort().join(","); };
+    var api = function (method, body) { return call("/api/push/subscribe", method, body); };
+    // どのお知らせを受け取るか（この端末に覚えておく。何も選んでいなければ全部オフ）
+    var optGet = function () { var o = lsJSON(OPT_KEY, null); return o && typeof o === "object" ? { rel: !!o.rel, stock: !!o.stock, lottery: !!o.lottery, weekly: !!o.weekly } : null; };
+    var prefsGet = function () { var a = lsJSON(PREFS_KEY, []); return Array.isArray(a) ? a.filter(function (x) { return typeof x === "string"; }).slice(0, 5) : []; };
+    // これまでの登録の人（設定がまだ無い）：発売週のお知らせだけ（ほかは増やさない）
+    var optNow = function () { return optGet() || { rel: true, stock: false, lottery: false, weekly: false }; };
+    var sigOf = function (a) { return LANG + ":" + a.slice().sort().join(",") + "|" + JSON.stringify(optNow()) + "|" + prefsGet().join(","); };
     var sync = function (sub) {
       var fav = favGet().slice(0, 200);
       var s = sub.toJSON ? sub.toJSON() : sub;
-      return api("POST", { subscription: { endpoint: s.endpoint, keys: s.keys }, favorites: fav, lang: LANG }).then(function (d) { lsSet(SIG_KEY, sigOf(fav)); return d; });
+      return api("POST", { subscription: { endpoint: s.endpoint, keys: s.keys }, favorites: fav, lang: LANG, prefs: prefsGet(), opts: optNow() }).then(function (d) { lsSet(SIG_KEY, sigOf(fav)); return d; });
     };
-    // ★が変わったら（このページでも、ほかのタブでも）少し待ってから送り直す
+    // ★や設定が変わったら（このページでも、ほかのタブでも）少し待ってから送り直す
     var syncT = null;
     var resync = function (force) {
       if (lsGet(PUSH_KEY) !== "1") return;
@@ -1329,24 +1348,75 @@
         }).catch(function () {});
       }, 1500);
     };
-    document.addEventListener("gp-fav", function () { resync(false); });
 
     var boxes = [].slice.call(document.querySelectorAll(".push-box"));
     var state = { on: false, busy: false };
+    var track = function (name, p) { if (window.gtag) try { gtag("event", name, p || {}); } catch (e) {} };
+
+    /* ---- オンにする・全部やめる（ボタンを押したときにだけ呼ぶ） ---- */
+    // patch：オンにするお知らせ（例 { stock: true }）。通知の許可 → 登録 → サーバーに保存
+    var turnOn = function (patch) {
+      var perm = "default"; try { perm = Notification.permission; } catch (e) {}
+      if (!supported) return Promise.reject(new Error("unsupported"));
+      if (perm === "denied") return Promise.reject(new Error("denied"));
+      var reqPerm = function () {
+        try {
+          return new Promise(function (res) { var p = Notification.requestPermission(res); if (p && p.then) p.then(res, function () { res("default"); }); });
+        } catch (e) { return Promise.resolve("default"); }
+      };
+      return reqPerm().then(function (p) {
+        if (p !== "granted") throw new Error(p === "denied" ? "denied" : "dismissed");
+        return navigator.serviceWorker.register("/sw.js", { scope: "/" }).then(function () { return navigator.serviceWorker.ready; });
+      }).then(function (reg) {
+        return reg.pushManager.getSubscription().then(function (sub) {
+          if (sub) return sub;
+          return fetch("/api/push/key").then(function (r) { return r.json(); }).then(function (d) {
+            if (!d || !d.key) throw new Error("key");
+            return reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: b64ToBytes(d.key) });
+          });
+        });
+      }).then(function (sub) {
+        var before = lsGet(OPT_KEY), o = optGet() || { rel: false, stock: false, lottery: false, weekly: false };
+        for (var k in (patch || {})) o[k] = !!patch[k];
+        lsSet(OPT_KEY, JSON.stringify(o));
+        return sync(sub).then(function () { return sub; }, function (e) { lsSet(OPT_KEY, before); if (!state.on) { try { sub.unsubscribe(); } catch (e2) {} } throw e; });
+      }).then(function (sub) {
+        lsSet(PUSH_KEY, "1"); state.on = true;
+        return sub;
+      });
+    };
+    var turnOff = function () {
+      return getSub().then(function (sub) {
+        if (!sub) return;
+        var ep = sub.endpoint;
+        return api("DELETE", { endpoint: ep }).catch(function () {}).then(function () { return sub.unsubscribe(); });
+      }).then(function () {
+        [PUSH_KEY, SIG_KEY, OPT_KEY, PREFS_KEY, WATCH_KEY].forEach(function (k) { lsSet(k, null); });
+        state.on = false; paintBells();
+      });
+    };
+    // 受け取り中ならそのまま、まだなら（ボタンを押した流れの中で）オンにする
+    var ensureOn = function (patch) {
+      if (!state.on) return turnOn(patch);
+      return getSub().then(function (sub) { if (!sub) { state.on = false; return turnOn(patch); } return sub; });
+    };
+
+    /* ---- これまでのボタン（マイリスト・商品ページの「発売日にお知らせを受け取る」） ---- */
     var paint = function (box) {
       var P = box._P, kind = box.classList.contains("push-ml") ? "ml" : "item";
-      var on = box.querySelector(".push-on"), off = box.querySelector(".push-off"), ios = box.querySelector(".push-ios");
+      var on = box.querySelector(".push-on"), off = box.querySelector(".push-off"), ios = box.querySelector(".push-ios"), set = box.querySelector(".np-open");
       if (!supported) {
         // iPhone・iPad の Safari（ホーム画面に追加していない）は、追加のしかただけ出す
-        box.hidden = !(isIOS && !standalone);
-        on.hidden = true; off.hidden = true; ios.hidden = box.hidden;
+        box.hidden = !iosHome;
+        on.hidden = true; off.hidden = true; ios.hidden = box.hidden; if (set) set.hidden = true;
         return;
       }
-      box.hidden = kind === "item" && state.on && !box._justOn;
+      var relOn = state.on && optNow().rel;
+      box.hidden = kind === "item" && relOn && !box._justOn;
       ios.hidden = true;
-      on.hidden = state.on; off.hidden = !state.on || kind === "item";
+      on.hidden = relOn; off.hidden = !state.on || kind === "item";
       on.disabled = off.disabled = state.busy;
-      if (kind === "ml" && state.on && !box._msgSet) showMsg(box, P.onNow);
+      if (kind === "ml" && relOn && !box._msgSet) showMsg(box, P.onNow);
     };
     var paintAll = function () { boxes.forEach(paint); };
     var showMsg = function (box, text) {
@@ -1365,28 +1435,10 @@
         // 商品ページで押したときは、その商品も★に入れておく
         var fid = box.getAttribute("data-fav-id");
         if (fid && favGet().indexOf(fid) === -1) { favToggle(fid); paintFav(); }
-        var reqPerm = function () {
-          try {
-            return new Promise(function (res) { var p = Notification.requestPermission(res); if (p && p.then) p.then(res, function () { res("default"); }); });
-          } catch (e) { return Promise.resolve("default"); }
-        };
-        reqPerm().then(function (p) {
-          if (p !== "granted") throw new Error(p === "denied" ? "denied" : "dismissed");
-          return navigator.serviceWorker.register("/sw.js", { scope: "/" }).then(function () { return navigator.serviceWorker.ready; });
-        }).then(function (reg) {
-          return reg.pushManager.getSubscription().then(function (sub) {
-            if (sub) return sub;
-            return fetch("/api/push/key").then(function (r) { return r.json(); }).then(function (d) {
-              if (!d || !d.key) throw new Error("key");
-              return reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: b64ToBytes(d.key) });
-            });
-          });
-        }).then(function (sub) {
-          return sync(sub).catch(function (e) { try { sub.unsubscribe(); } catch (e2) {} throw e; });
-        }).then(function () {
-          lsSet(PUSH_KEY, "1"); state.on = true; state.busy = false; box._justOn = true;
+        turnOn({ rel: true }).then(function () {
+          state.busy = false; box._justOn = true;
           paintAll(); showMsg(box, P.done);
-          try { document.dispatchEvent(new Event("gp-fav")); } catch (e) {}
+          track("push_on", { place: "release" });
         }).catch(function (e) {
           state.busy = false; paintAll();
           showMsg(box, e && e.message === "denied" ? P.denied : e && e.message === "dismissed" ? "" : P.error);
@@ -1395,23 +1447,317 @@
       box.querySelector(".push-off").addEventListener("click", function () {
         if (state.busy) return;
         state.busy = true; paintAll();
-        getSub().then(function (sub) {
-          if (!sub) return;
-          var ep = sub.endpoint;
-          return api("DELETE", { endpoint: ep }).catch(function () {}).then(function () { return sub.unsubscribe(); });
-        }).then(function () {
-          lsSet(PUSH_KEY, null); lsSet(SIG_KEY, null);
-          state.on = false; state.busy = false; paintAll(); showMsg(box, P.offDone);
+        turnOff().then(function () {
+          state.busy = false; paintAll(); showMsg(box, P.offDone);
         }).catch(function () { state.busy = false; paintAll(); showMsg(box, P.error); });
       });
     });
+
+    /* ---- ここから：入荷・抽選・お店のお知らせと「お知らせ設定」 ---- */
+    var NT = EN ? {
+      settings: "Notification settings", open: "🔔 Notification settings", close: "Close",
+      lead: "Choose what you want. We only send what you turn on here. No account needed.",
+      rel: "The week my ★ gacha are released (Monday morning)", stock: "My ★ gacha arrive or come back in stock", stockSub: "Only for shops in the prefectures you choose",
+      lottery: "A lottery opens for my ★ gacha", weekly: "Weekly roundup: new gacha out this week (Monday morning)",
+      prefAdd: "Add a prefecture", prefNeed: "Choose at least one prefecture.", pickOne: "Choose at least one notification.",
+      shopsH: "Shop alerts", shopsNone: "None yet. Tap 🔔 on a shop page or in an item's shop list.",
+      wItem: function (n) { return "Arrival / restock: " + n; }, wKw: function (k) { return "First arrival of “" + k + "”"; }, del: "Remove",
+      saveOn: "Turn on with these settings", save: "Save", allOff: "Stop all notifications", allOffDone: "All notifications are off and your settings were deleted.",
+      saved: "Saved.", busy: "Setting up…", denied: "Notifications are blocked. Please allow them for this site in your browser settings.", error: "Something went wrong. Please try again later.",
+      ios: "On iPhone/iPad, notifications work after adding this site to your Home Screen: tap Share (□↑) → “Add to Home Screen”, then open it from the new icon.",
+      fine: "Up to 3 a day, never at night (10pm–7am JST). We store only the push address and these settings.",
+      ask: "Get a notification when your ★ gacha arrive, restock or open a lottery?", askYes: "Notify me", askNo: "No thanks",
+      itemCta: "🔔 Notify me when this arrives or restocks", itemCtaOn: "🔔 Arrival alerts are on (settings)",
+      bell: "Notify me when it arrives or restocks at this shop", bellOn: "Stop this alert",
+      added: "🔔 We'll notify you when it arrives or restocks at this shop.", removed: "Alert removed.", max: "You can register up to 30 alerts. Please remove some in settings.", nostock: "Alerts aren't available for this shop.",
+      shopH: "🔔 Arrival alerts for this shop", shopLead: "Pick a word and we'll notify you when a gacha with that word in its name first arrives at this shop. Free, no account.",
+      kwPh: "Another word (e.g. Sumikko)", kwAdd: "Add", kwBad: "Please enter 2–20 characters.", shopBells: "Tap 🔔 on a gacha above to be notified when it arrives or restocks at this shop.",
+      kwAdded: function (k) { return "🔔 We'll notify you when “" + k + "” arrives at this shop."; }
+    } : {
+      settings: "お知らせ設定", open: "🔔 お知らせ設定", close: "閉じる",
+      lead: "受け取りたいものだけ選んでください。ここでオンにしたもの以外は送りません（無料・会員登録なし）。",
+      rel: "★のガチャが発売される週（月曜の朝）", stock: "★のガチャの入荷・在庫復活", stockSub: "選んだ都道府県のお店だけお知らせします",
+      lottery: "★のガチャの抽選がはじまったとき", weekly: "毎週の新作まとめ（月曜の朝に、今週発売のガチャ）",
+      prefAdd: "都道府県を追加", prefNeed: "都道府県を1つ以上選んでください。", pickOne: "受け取りたいお知らせを選んでください。",
+      shopsH: "お店のお知らせ", shopsNone: "まだありません。お店のページや、商品ページの取扱店の🔔から登録できます。",
+      wItem: function (n) { return "入荷・在庫復活：" + n; }, wKw: function (k) { return "「" + k + "」の入荷"; }, del: "削除",
+      saveOn: "この内容でお知らせを受け取る", save: "保存する", allOff: "全部やめる", allOffDone: "お知らせを全部やめました（設定も削除しました）。",
+      saved: "保存しました。", busy: "設定中…", denied: "通知がブロックされています。ブラウザの設定で、このサイトの通知を許可してください。", error: "うまくいきませんでした。時間をおいてもう一度お試しください。",
+      ios: "iPhone・iPadでは、ホーム画面に追加すると通知を受け取れます。Safariの共有ボタン（□↑）→「ホーム画面に追加」→ 追加したアイコンから開いて、もう一度お試しください。",
+      fine: "通知は1日に最大3通まで。夜（22時〜7時）は送りません。保存するのは通知の送り先と、この設定だけです。",
+      ask: "★のガチャの入荷・抽選をお知らせしますか？", askYes: "お知らせを受け取る", askNo: "いらない",
+      itemCta: "🔔 入荷・在庫復活をお知らせ", itemCtaOn: "🔔 入荷のお知らせ：受け取り中（設定）",
+      bell: "このお店に入荷・在庫復活したらお知らせ", bellOn: "このお知らせをやめる",
+      added: "🔔 このお店に入荷・在庫復活したらお知らせします。", removed: "お知らせを解除しました。", max: "登録できるのは30件までです。お知らせ設定で減らしてください。", nostock: "このお店はお知らせに対応していません。",
+      shopH: "🔔 このお店の入荷をお知らせ", shopLead: "気になる言葉を選ぶと、名前にその言葉が入ったガチャがこのお店に初めて入荷したときに、通知でお知らせします（無料・会員登録なし）。",
+      kwPh: "ほかの言葉（例：すみっコぐらし）", kwAdd: "追加", kwBad: "2〜20文字で入れてください。", shopBells: "上の一覧のガチャの🔔を押すと、そのガチャがこのお店に入荷・在庫復活したときにお知らせします。",
+      kwAdded: function (k) { return "🔔「" + k + "」がこのお店に入荷したらお知らせします。"; }
+    };
+    var KW_PRESET = ["めじるしアクセサリー", "ちいかわ", "サンリオ", "ポケモン", "たまごっち", "ディズニー"];
+    var PREF_ALL = "北海道,青森県,岩手県,宮城県,秋田県,山形県,福島県,茨城県,栃木県,群馬県,埼玉県,千葉県,東京都,神奈川県,新潟県,富山県,石川県,福井県,山梨県,長野県,岐阜県,静岡県,愛知県,三重県,滋賀県,京都府,大阪府,兵庫県,奈良県,和歌山県,鳥取県,島根県,岡山県,広島県,山口県,徳島県,香川県,愛媛県,高知県,福岡県,佐賀県,長崎県,熊本県,大分県,宮崎県,鹿児島県,沖縄県".split(",");
+    var usable = supported || iosHome;
+    var errText = function (e) {
+      var m = e && e.message;
+      return m === "denied" ? NT.denied : m === "dismissed" ? "" : m === "unsupported" ? (iosHome ? NT.ios : NT.error) : m === "max" ? NT.max : m === "nostock" ? NT.nostock : m === "kw" ? NT.kwBad : NT.error;
+    };
+
+    // 小さなひとこと（下に数秒だけ出す）
+    var toastEl = null, toastT = null;
+    var toast = function (text) {
+      if (!text) return;
+      if (!toastEl) { toastEl = document.createElement("div"); toastEl.className = "np-toast"; toastEl.setAttribute("role", "status"); document.body.appendChild(toastEl); }
+      toastEl.textContent = text; toastEl.hidden = false;
+      clearTimeout(toastT); toastT = setTimeout(function () { toastEl.hidden = true; }, 5000);
+    };
+
+    /* ---- お店のお知らせ（一覧はこの端末にも写しを置いて、🔔の色を付ける） ---- */
+    var watchGet = function () { var a = lsJSON(WATCH_KEY, []); return Array.isArray(a) ? a : []; };
+    var watchSet = function (a) { lsSet(WATCH_KEY, JSON.stringify(a || [])); paintBells(); drawShopMine(); };
+    var findWatch = function (kind, shop, x) {
+      var a = watchGet(), nx = kind === "kw" ? NORM(x) : x;
+      for (var i = 0; i < a.length; i++) if (a[i].kind === kind && a[i].shop === shop && (kind === "kw" ? NORM(a[i].kw) === nx : a[i].item_id === x)) return a[i];
+      return null;
+    };
+    var wcall = function (sub, body, retried) {
+      body.endpoint = sub.endpoint;
+      return call("/api/push/watch", "POST", body).then(function (d) { watchSet(d.watches); return d; }, function (e) {
+        // サーバー側の登録が消えていたら、登録し直してもう1回だけ
+        if (e && e.message === "nosub" && !retried) return sync(sub).then(function () { return wcall(sub, body, true); });
+        throw e;
+      });
+    };
+    var paintBells = function () {
+      [].forEach.call(document.querySelectorAll("[data-wshop]"), function (b) {
+        var on = state.on && !!findWatch("item", b.getAttribute("data-wshop"), b.getAttribute("data-witem"));
+        b.classList.toggle("is-on", on);
+        b.setAttribute("aria-pressed", on ? "true" : "false");
+        b.setAttribute("aria-label", on ? NT.bellOn : NT.bell); b.title = on ? NT.bellOn : NT.bell;
+      });
+      [].forEach.call(document.querySelectorAll("[data-wkw]"), function (b) {
+        var on = state.on && !!findWatch("kw", b.getAttribute("data-wkshop"), b.getAttribute("data-wkw"));
+        b.classList.toggle("is-on", on); b.setAttribute("aria-pressed", on ? "true" : "false");
+      });
+    };
+    // 🔔（お店×商品）を作る。商品ページの取扱店の行（render）と、お店のページの商品カードから使う
+    if (usable) NP.bell = function (shop, item, name) {
+      return '<button type="button" class="np-bell" data-wshop="' + esc(shop) + '" data-witem="' + esc(item) + '" data-wname="' + esc(name || "") + '" aria-pressed="false" aria-label="' + esc(NT.bell) + '" title="' + esc(NT.bell) + '"><i aria-hidden="true">🔔</i></button>';
+    };
+    NP.paint = function () { paintBells(); };
+    var toggleWatch = function (kind, shop, x, name) {
+      if (iosHome) { toast(NT.ios); return Promise.resolve(); }
+      var cur = state.on ? findWatch(kind, shop, x) : null;
+      // お店の🔔からはじめてオンにした人には、ほかのお知らせは増やさない
+      return ensureOn({}).then(function (sub) {
+        paintAll();
+        if (cur) return wcall(sub, { op: "del", id: cur.id }).then(function () { toast(NT.removed); });
+        var body = kind === "kw" ? { op: "add", kind: "kw", shop: shop, kw: x } : { op: "add", kind: "item", shop: shop, item_id: x, item_name: String(name || "").slice(0, 80) };
+        return wcall(sub, body).then(function () { toast(kind === "kw" ? NT.kwAdded(x) : NT.added); track("push_watch", { kind: kind }); });
+      }).catch(function (e) { paintAll(); paintBells(); toast(errText(e)); });
+    };
+    document.addEventListener("click", function (e) {
+      var b = e.target.closest && e.target.closest("[data-wshop], [data-wkw]");
+      if (!b) return;
+      e.preventDefault(); e.stopPropagation();
+      if (b.disabled) return;
+      b.disabled = true;
+      var p = b.hasAttribute("data-wkw") ? toggleWatch("kw", b.getAttribute("data-wkshop"), b.getAttribute("data-wkw"))
+        : toggleWatch("item", b.getAttribute("data-wshop"), b.getAttribute("data-witem"), b.getAttribute("data-wname"));
+      p.then(function () { b.disabled = false; });
+    }, true);
+
+    /* ---- お知らせ設定（1つの小さな窓。どのページからでも開ける） ---- */
+    var panel = null, pv = null; // pv：窓の中でいま選んでいるもの
+    var buildPanel = function () {
+      var back = document.createElement("div"); back.className = "np-back"; back.hidden = true;
+      var row = function (k, label, sub) { return '<label class="np-row"><input type="checkbox" data-o="' + k + '"><span><b>' + esc(label) + "</b>" + (sub ? "<small>" + esc(sub) + "</small>" : "") + "</span></label>"; };
+      back.innerHTML = '<div class="np" role="dialog" aria-modal="true" aria-label="' + esc(NT.settings) + '">' +
+        '<div class="np-head"><b>🔔 ' + esc(NT.settings) + '</b><button type="button" class="np-x" aria-label="' + esc(NT.close) + '">×</button></div>' +
+        '<div class="np-body"><p class="np-ios" hidden>' + esc(NT.ios) + '</p><p class="np-lead">' + esc(NT.lead) + "</p>" +
+        row("stock", NT.stock, NT.stockSub) +
+        '<div class="np-prefs" hidden><div class="np-pref-on"></div><select class="np-pref-sel" aria-label="' + esc(NT.prefAdd) + '"></select></div>' +
+        row("lottery", NT.lottery) + row("rel", NT.rel) + row("weekly", NT.weekly) +
+        '<p class="np-h">' + esc(NT.shopsH) + '</p><ul class="np-watches"></ul>' +
+        '<p class="np-msg" role="status" hidden></p>' +
+        '<div class="np-foot"><button type="button" class="btn btn-gold np-save"></button><button type="button" class="np-alloff">' + esc(NT.allOff) + "</button></div>" +
+        '<p class="np-fine">' + esc(NT.fine) + "</p></div></div>";
+      document.body.appendChild(back);
+      var q = function (s) { return back.querySelector(s); };
+      back.addEventListener("click", function (e) { if (e.target === back || e.target.closest(".np-x")) closePanel(); });
+      document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !back.hidden) closePanel(); });
+      [].forEach.call(back.querySelectorAll("[data-o]"), function (c) { c.addEventListener("change", function () { pv.o[c.getAttribute("data-o")] = c.checked; pmsg(""); drawPanel(); }); });
+      q(".np-pref-sel").addEventListener("change", function () {
+        var v = this.value; if (v && pv.prefs.indexOf(v) === -1 && pv.prefs.length < 5) pv.prefs.push(v);
+        pmsg(""); drawPanel();
+      });
+      q(".np-pref-on").addEventListener("click", function (e) {
+        var b = e.target.closest("[data-p]"); if (!b) return;
+        pv.prefs = pv.prefs.filter(function (p) { return p !== b.getAttribute("data-p"); }); drawPanel();
+      });
+      q(".np-watches").addEventListener("click", function (e) {
+        var b = e.target.closest("[data-del]"); if (!b || b.disabled) return;
+        b.disabled = true;
+        getSub().then(function (sub) { if (!sub) throw new Error("x"); return wcall(sub, { op: "del", id: Number(b.getAttribute("data-del")) }); })
+          .then(function () { drawPanel(); }, function () { b.disabled = false; pmsg(NT.error); });
+      });
+      q(".np-save").addEventListener("click", function () {
+        if (state.busy) return;
+        if (iosHome) { pmsg(NT.ios); return; }
+        if (pv.o.stock && !pv.prefs.length) { pmsg(NT.prefNeed); return; }
+        if (!state.on && !pv.o.rel && !pv.o.stock && !pv.o.lottery && !pv.o.weekly) { pmsg(NT.pickOne); return; }
+        var oldO = lsGet(OPT_KEY), oldP = lsGet(PREFS_KEY), was = state.on;
+        lsSet(PREFS_KEY, JSON.stringify(pv.prefs));
+        // 商品ページの「入荷をお知らせ」から開いたときは、その商品も★に入れる（★のガチャが対象なので。保存を押したときだけ）
+        if (pv.fav && pv.o.stock && favGet().indexOf(pv.fav) === -1) { askSkip = true; favToggle(pv.fav); paintFav(); try { document.dispatchEvent(new Event("gp-fav")); } catch (e0) {} }
+        state.busy = true; pmsg(NT.busy); drawPanel();
+        var job = state.on
+          ? getSub().then(function (sub) { if (!sub) { state.on = false; return turnOn(pv.o); } lsSet(OPT_KEY, JSON.stringify(pv.o)); return sync(sub); })
+          : turnOn(pv.o);
+        job.then(function () {
+          state.busy = false; paintAll(); paintBells(); drawPanel(); drawItemCta(); pmsg(NT.saved);
+          if (!was) track("push_on", { place: "panel", stock: pv.o.stock ? 1 : 0, lottery: pv.o.lottery ? 1 : 0, weekly: pv.o.weekly ? 1 : 0 });
+        }).catch(function (e) {
+          lsSet(OPT_KEY, oldO); lsSet(PREFS_KEY, oldP);
+          state.busy = false; paintAll(); drawPanel(); pmsg(errText(e));
+        });
+      });
+      // 全部やめる：1回押すだけで、登録も設定もサーバーから消す
+      q(".np-alloff").addEventListener("click", function () {
+        if (state.busy) return;
+        state.busy = true; drawPanel();
+        turnOff().then(function () {
+          state.busy = false; pv = { o: { rel: false, stock: false, lottery: false, weekly: false }, prefs: [], fav: "" };
+          paintAll(); drawPanel(); drawItemCta(); pmsg(NT.allOffDone); track("push_off", {});
+        }).catch(function () { state.busy = false; drawPanel(); pmsg(NT.error); });
+      });
+      return back;
+    };
+    var pmsg = function (text) { var m = panel.querySelector(".np-msg"); m.textContent = text || ""; m.hidden = !text; };
+    var drawPanel = function () {
+      if (!panel || panel.hidden) return;
+      var q = function (s) { return panel.querySelector(s); };
+      q(".np-ios").hidden = !iosHome;
+      [].forEach.call(panel.querySelectorAll("[data-o]"), function (c) { c.checked = !!pv.o[c.getAttribute("data-o")]; c.disabled = state.busy || iosHome; });
+      q(".np-prefs").hidden = !pv.o.stock;
+      q(".np-pref-on").innerHTML = pv.prefs.map(function (p) { return '<button type="button" class="np-chip is-on" data-p="' + esc(p) + '">' + esc(p) + " ×</button>"; }).join("");
+      var sel = q(".np-pref-sel");
+      sel.innerHTML = '<option value="">' + esc(NT.prefAdd) + "</option>" + PREF_ALL.filter(function (p) { return pv.prefs.indexOf(p) === -1; }).map(function (p) { return '<option value="' + esc(p) + '">' + esc(p) + "</option>"; }).join("");
+      sel.hidden = pv.prefs.length >= 5; sel.disabled = state.busy;
+      var w = state.on ? watchGet() : [];
+      q(".np-watches").innerHTML = w.length ? w.map(function (x) {
+        return '<li><span><b>' + esc(x.shop_name || x.shop) + "</b><small>" + esc(x.kind === "kw" ? NT.wKw(x.kw) : NT.wItem(x.item_name || x.item_id)) + '</small></span><button type="button" data-del="' + Number(x.id) + '">' + esc(NT.del) + "</button></li>";
+      }).join("") : '<li class="np-none">' + esc(NT.shopsNone) + "</li>";
+      var save = q(".np-save"); save.textContent = state.on ? NT.save : NT.saveOn; save.disabled = state.busy; save.hidden = iosHome;
+      var off = q(".np-alloff"); off.hidden = !state.on; off.disabled = state.busy;
+    };
+    var closePanel = function () { if (panel) panel.hidden = true; };
+    // preset：開いたときにチェックを入れておくもの（その言葉のボタンを押して開いたときだけ。保存を押すまではオンにならない）
+    var openPanel = function (preset, favId) {
+      if (!panel) panel = buildPanel();
+      var o = state.on ? optNow() : { rel: false, stock: false, lottery: false, weekly: false };
+      for (var k in (preset || {})) o[k] = !!preset[k];
+      var prefs = prefsGet();
+      // 都道府県がまだなら、取扱店の一覧で選んだ都道府県を入れておく（保存を押すまでは送らない）
+      if (!prefs.length) { var gp = lsGet("gp-pref"); if (gp && PREF_ALL.indexOf(gp) !== -1) prefs = [gp]; }
+      pv = { o: o, prefs: prefs, fav: favId || "" };
+      panel.hidden = false; pmsg(""); drawPanel();
+      // お店のお知らせの一覧は、開いたときにサーバーの最新をもらう
+      if (state.on) getSub().then(function (sub) { if (sub) return wcall(sub, { op: "list" }); }).then(function () { drawPanel(); }).catch(function () {});
+      try { panel.querySelector(".np-x").focus(); } catch (e) {}
+    };
+    document.addEventListener("click", function (e) {
+      var b = e.target.closest && e.target.closest(".np-open");
+      if (!b) return;
+      e.preventDefault();
+      var preset = null; try { preset = JSON.parse(b.getAttribute("data-preset") || "null"); } catch (e2) {}
+      openPanel(preset, b.getAttribute("data-fav-id"));
+    });
+
+    /* ---- 入口：フッター・マイリスト・商品ページ・お店のページ ---- */
+    if (usable) {
+      var fnav = document.querySelector(".site-footer nav");
+      if (fnav) { var fa = document.createElement("a"); fa.href = "#"; fa.className = "np-open"; fa.textContent = NT.open; fnav.appendChild(fa); }
+      boxes.forEach(function (box) {
+        if (!box.classList.contains("push-ml")) return;
+        var row = box.querySelector(".push-row"), b = document.createElement("button");
+        b.type = "button"; b.className = "push-off np-open"; b.textContent = NT.open; row.appendChild(b);
+      });
+    }
+    // 商品ページ：取扱店の一覧の上に「入荷・在庫復活をお知らせ」
+    var itemCta = null, stockBox = document.getElementById("stock");
+    var drawItemCta = function () {
+      if (!itemCta) return;
+      var on = state.on && optNow().stock && prefsGet().length > 0;
+      itemCta.textContent = on ? NT.itemCtaOn : NT.itemCta;
+      itemCta.classList.toggle("is-on", on);
+    };
+    if (usable && stockBox) {
+      var tools = stockBox.querySelector(".stock-tools"), im = /api\/stock\/([a-z0-9-]+)/.exec(stockBox.getAttribute("data-api") || "");
+      if (tools && im) {
+        itemCta = document.createElement("button"); itemCta.type = "button"; itemCta.className = "np-cta np-open";
+        itemCta.setAttribute("data-preset", '{"stock":true}'); itemCta.setAttribute("data-fav-id", im[1]);
+        tools.appendChild(itemCta); drawItemCta();
+      }
+    }
+    // お店のページ：在庫のデータがあるお店（公式の取扱のあるお店）だけ。商品カードに🔔、一覧の下に「キーワードでお知らせ」
+    var shopEl = document.getElementById("shop"), shopOff = document.querySelector(".shop-off"), shopMine = null;
+    var shopId = shopEl ? String(shopEl.getAttribute("data-id") || "") : "";
+    var drawShopMine = function () {
+      if (!shopMine) return;
+      var w = state.on ? watchGet().filter(function (x) { return x.shop === shopId; }) : [];
+      shopMine.hidden = !w.length;
+      shopMine.innerHTML = w.map(function (x) { return "<li>" + esc(x.kind === "kw" ? NT.wKw(x.kw) : NT.wItem(x.item_name || x.item_id)) + "</li>"; }).join("");
+    };
+    if (usable && shopEl && shopOff && /^s\d+$/.test(shopId)) {
+      [].forEach.call(shopOff.querySelectorAll('a.card[href*="item/"]'), function (cd) {
+        var m = /item\/([a-z0-9-]+)/.exec(cd.getAttribute("href") || ""), th = cd.querySelector(".thumb"), nm = cd.querySelector(".card-name");
+        if (!m || !th || th.querySelector(".np-bell")) return;
+        th.insertAdjacentHTML("beforeend", NP.bell(shopId, m[1], nm ? nm.textContent : ""));
+      });
+      var sec = document.createElement("section"); sec.className = "section section-tight np-shop";
+      sec.innerHTML = '<div class="np-shop-in"><p class="np-shop-h">' + esc(NT.shopH) + '</p><p class="fine">' + esc(NT.shopLead) + "</p>" +
+        '<div class="np-chips">' + KW_PRESET.map(function (k) { return '<button type="button" class="np-chip" data-wkw="' + esc(k) + '" data-wkshop="' + esc(shopId) + '" aria-pressed="false">' + esc(k) + "</button>"; }).join("") + "</div>" +
+        '<form class="np-kwf"><input type="text" maxlength="20" placeholder="' + esc(NT.kwPh) + '" aria-label="' + esc(NT.kwPh) + '"><button type="submit" class="sort">' + esc(NT.kwAdd) + "</button></form>" +
+        '<ul class="np-mine" hidden></ul><p class="fine">' + esc(NT.shopBells) + '</p><p class="fine"><a href="#" class="np-open">' + esc(NT.open) + "</a></p></div>";
+      shopOff.parentNode.insertBefore(sec, shopOff.nextSibling);
+      shopMine = sec.querySelector(".np-mine");
+      sec.querySelector(".np-kwf").addEventListener("submit", function (e) {
+        e.preventDefault();
+        var inp = this.querySelector("input"), v = String(inp.value || "").replace(/\s+/g, " ").trim();
+        if (NORM(v).length < 2 || v.length > 20) { toast(NT.kwBad); return; }
+        if (state.on && findWatch("kw", shopId, v)) { inp.value = ""; return; }
+        toggleWatch("kw", shopId, v).then(function () { if (findWatch("kw", shopId, v)) inp.value = ""; });
+      });
+    }
+
+    /* ---- はじめて★を押したとき：小さなカードを1回だけ（通知の許可の画面は、ここでは出さない） ---- */
+    var askSkip = false, favN = favGet().length, askEl = null;
+    var askClose = function () { if (askEl) { askEl.remove(); askEl = null; } };
+    var askShow = function () {
+      if (askEl || !usable || lsGet(ASK_KEY) || (panel && !panel.hidden)) return;
+      if (state.on && optNow().stock) return; // もう受け取っている人には出さない
+      var perm = "default"; try { perm = Notification.permission; } catch (e) {}
+      if (perm === "denied") return;
+      lsSet(ASK_KEY, "1"); // 出すのは1回だけ（「いらない」でも、閉じても、もう出さない）
+      askEl = document.createElement("div"); askEl.className = "np-ask"; askEl.setAttribute("role", "region"); askEl.setAttribute("aria-label", NT.settings);
+      askEl.innerHTML = '<p>🔔 ' + esc(NT.ask) + '</p><div><button type="button" class="np-ask-yes">' + esc(NT.askYes) + '</button><button type="button" class="np-ask-no">' + esc(NT.askNo) + "</button></div>";
+      document.body.appendChild(askEl);
+      askEl.querySelector(".np-ask-no").addEventListener("click", function () { askClose(); track("push_ask", { answer: "no" }); });
+      askEl.querySelector(".np-ask-yes").addEventListener("click", function () { askClose(); track("push_ask", { answer: "yes" }); openPanel({ stock: true, lottery: true }); });
+    };
+    document.addEventListener("gp-fav", function () {
+      var n = favGet().length, added = n > favN; favN = n;
+      if (added && !askSkip) askShow();
+      askSkip = false;
+      resync(false);
+    });
+
     paintAll();
     // いまお知らせを受け取っているか（ブラウザの登録を見る。登録が消えていたら印も消す）
     if (supported && (boxes.length || lsGet(PUSH_KEY) === "1")) {
       getSub().then(function (sub) {
         state.on = !!sub && lsGet(PUSH_KEY) === "1";
         if (!sub && lsGet(PUSH_KEY) === "1") { lsSet(PUSH_KEY, null); lsSet(SIG_KEY, null); }
-        paintAll();
+        paintAll(); paintBells(); drawShopMine(); drawItemCta();
         if (state.on) resync(false);
       });
     }

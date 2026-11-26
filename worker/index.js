@@ -5,6 +5,7 @@
  * 1件ごとに2秒あけ、公式サイトへの負担を抑える。
  */
 import { getVapidKeys, sendPush } from "../lib/webpush.js";
+import { eventStatements, detectLottery, fanOut, sendQueue, dropSubStatements, pruneStatements, isQuiet } from "../lib/pushwatch.js";
 const BATCH = 6;
 const WAIT_MS = 2000;
 const PREF_EN = { "北海道": "Hokkaido", "青森県": "Aomori", "岩手県": "Iwate", "宮城県": "Miyagi", "秋田県": "Akita", "山形県": "Yamagata", "福島県": "Fukushima", "茨城県": "Ibaraki", "栃木県": "Tochigi", "群馬県": "Gunma", "埼玉県": "Saitama", "千葉県": "Chiba", "東京都": "Tokyo", "神奈川県": "Kanagawa", "新潟県": "Niigata", "富山県": "Toyama", "石川県": "Ishikawa", "福井県": "Fukui", "山梨県": "Yamanashi", "長野県": "Nagano", "岐阜県": "Gifu", "静岡県": "Shizuoka", "愛知県": "Aichi", "三重県": "Mie", "滋賀県": "Shiga", "京都府": "Kyoto", "大阪府": "Osaka", "兵庫県": "Hyogo", "奈良県": "Nara", "和歌山県": "Wakayama", "鳥取県": "Tottori", "島根県": "Shimane", "岡山県": "Okayama", "広島県": "Hiroshima", "山口県": "Yamaguchi", "徳島県": "Tokushima", "香川県": "Kagawa", "愛媛県": "Ehime", "高知県": "Kochi", "福岡県": "Fukuoka", "佐賀県": "Saga", "長崎県": "Nagasaki", "熊本県": "Kumamoto", "大分県": "Oita", "宮崎県": "Miyazaki", "鹿児島県": "Kagoshima", "沖縄県": "Okinawa" };
@@ -62,17 +63,19 @@ async function recordArrivals(env, itemId, raw, nowIso) {
   const { results } = await env.DB.prepare("SELECT shop, in_now FROM seen WHERE item_id = ?1").bind(itemId).all();
   const known = new Map((results || []).map((r) => [r.shop, r.in_now]));
   const st = [];
+  const changes = []; // お知らせ用：入荷（new）・在庫復活（restock）のあったお店
   let added = 0, back = 0;
   for (const [shop, v] of cur) {
     if (!known.has(shop)) {
       st.push(env.DB.prepare("INSERT INTO seen (item_id, shop, pref, name, first_seen, last_seen, in_now, restocks, baseline) VALUES (?1, ?2, ?3, ?4, ?5, ?5, 1, 0, ?6)")
         .bind(itemId, shop, v.pref, v.name, nowIso, firstTime ? 1 : 0));
-      if (!firstTime) added++;
+      if (!firstTime) { added++; if (v.code) changes.push({ kind: "new", shop: v.code, name: v.name, pref: v.pref }); }
       // ガチャマップのお店にも登録（すでにあれば何もしない）
       if (v.code && v.lat && v.lng) st.push(env.DB.prepare("INSERT OR IGNORE INTO shops (id, name, pref, address, lat, lng, src, created_at) VALUES (?1, ?2, ?3, ?4, ?5, ?6, 'bandai', ?7)").bind(v.code, v.name, v.pref, v.address, v.lat, v.lng, nowIso));
     } else if (!known.get(shop)) {
       st.push(env.DB.prepare("UPDATE seen SET in_now = 1, restocks = restocks + 1, last_seen = ?3 WHERE item_id = ?1 AND shop = ?2").bind(itemId, shop, nowIso));
       back++;
+      if (v.code) changes.push({ kind: "restock", shop: v.code, name: v.name, pref: v.pref });
     }
   }
   for (const [shop, inNow] of known) {
@@ -86,11 +89,18 @@ async function recordArrivals(env, itemId, raw, nowIso) {
       .bind(itemId, back, cur.size, kind, nowIso));
   }
   for (let i = 0; i < st.length; i += 50) await env.DB.batch(st.slice(i, i + 50));
+  // お知らせ：だれかが待っている動きだけ push_events に書く（ここで失敗しても、在庫の記録は止めない）
+  if (changes.length) {
+    try {
+      const ev = await eventStatements(env.DB, itemId, changes, nowIso);
+      for (let i = 0; i < ev.length; i += 50) await env.DB.batch(ev.slice(i, i + 50));
+    } catch (e) { console.log(`push events ${itemId}: ${e.message}`); }
+  }
 }
 
 async function run(env) {
   const targets = await (await fetch(`${env.SITE_URL}/data/stock-targets.json`, { cf: { cacheTtl: 300 } })).json();
-  if (!Array.isArray(targets) || !targets.length) return;
+  if (!Array.isArray(targets) || !targets.length) return [];
   const row = await env.DB.prepare("SELECT v FROM meta WHERE k = 'cursor'").first();
   let cursor = row ? Number(row.v) || 0 : 0;
   if (cursor >= targets.length) cursor = 0;
@@ -101,12 +111,14 @@ async function run(env) {
   }
   cursor = (cursor + BATCH) % targets.length;
   await env.DB.prepare("INSERT INTO meta (k, v) VALUES ('cursor', ?1) ON CONFLICT(k) DO UPDATE SET v = ?1").bind(String(cursor)).run();
+  return targets;
 }
 
 /*
  * 発売週のお知らせ（Web Push）。日本時間の月曜8:00〜火曜8:00のあいだ、10分ごとに少しずつ送る。
  * 送った人には last_sent_week（その週の月曜日）を書いて、同じ週に2回送らない。
- * ★のガチャが今週発売でない人にも印だけ付ける（通知はしない）。送り先が無くなっていたら（404・410）登録を消す
+ * ★のガチャが今週発売でない人には、「毎週の新作まとめ」を自分でオンにした人にだけ「今週発売◯シリーズ」を送る。
+ * オンにしていない人は印だけ付ける（通知はしない）。送り先が無くなっていたら（404・410）登録を消す
  */
 const PUSH_SEND_MAX = 25; // 1回に送る通知の数（Workers の回数の上限に余裕を持たせる）
 const PUSH_MSG = {
@@ -115,6 +127,14 @@ const PUSH_MSG = {
   "zh-cn": { title: "你收藏的扭蛋本周发售", one: (n) => `本周发售：${n}`, more: (n, k) => `本周发售：${n} 等另外${k}件` },
   "zh-tw": { title: "你收藏的扭蛋本週發售", one: (n) => `本週發售：${n}`, more: (n, k) => `本週發售：${n} 等另外${k}件` },
   ko: { title: "저장한 가챠가 이번 주 발매돼요", one: (n) => `이번 주 발매: ${n}`, more: (n, k) => `이번 주 발매: ${n} 외 ${k}건` },
+};
+// 毎週の新作まとめ（お知らせ設定でオンにした人だけ）
+const DIGEST_MSG = {
+  ja: { title: (n) => `今週発売のガチャ ${n}シリーズ`, body: (a, k) => `${a.join("、")}${k ? ` ほか${k}件` : ""}` },
+  en: { title: (n) => `${n} new gacha series this week`, body: (a, k) => `${a.join(", ")}${k ? ` and ${k} more` : ""}` },
+  "zh-cn": { title: (n) => `本周发售的扭蛋 ${n}个系列`, body: (a, k) => `${a.join("、")}${k ? ` 等另外${k}件` : ""}` },
+  "zh-tw": { title: (n) => `本週發售的扭蛋 ${n}個系列`, body: (a, k) => `${a.join("、")}${k ? ` 等另外${k}件` : ""}` },
+  ko: { title: (n) => `이번 주 발매 가챠 ${n}시리즈`, body: (a, k) => `${a.join(", ")}${k ? ` 외 ${k}건` : ""}` },
 };
 function pushWindow(now = new Date()) {
   const j = new Date(now.getTime() + 9 * 3600e3);
@@ -125,29 +145,36 @@ function pushWindow(now = new Date()) {
 }
 async function runPush(env) {
   const week = pushWindow();
-  if (!week) return;
+  if (!week) return 0;
   const pending = await env.DB.prepare("SELECT count(*) n FROM push_subs WHERE last_sent_week IS NULL OR last_sent_week != ?1").bind(week).first();
-  if (!pending || !pending.n) return;
+  if (!pending || !pending.n) return 0;
   const pw = await (await fetch(`${env.SITE_URL}/data/push-week.json`, { cf: { cacheTtl: 300 } })).json();
   const wk = (pw.weeks || [pw]).find((w) => w && w.week_key === week);
-  if (!wk) { console.log(`push: no data for ${week}`); return; }
+  if (!wk) { console.log(`push: no data for ${week}`); return 0; }
+  const all = wk.items || [];
   const byId = new Map((wk.items || []).map((x) => [x.id, x]));
   const vapid = await getVapidKeys(env.DB);
   const jwtCache = new Map();
   let sent = 0;
   const site = env.SITE_URL || "https://gachapla.com";
   while (sent < PUSH_SEND_MAX) {
-    const { results } = await env.DB.prepare("SELECT endpoint, p256dh, auth, lang, favorites FROM push_subs WHERE last_sent_week IS NULL OR last_sent_week != ?1 LIMIT 100").bind(week).all();
+    const { results } = await env.DB.prepare("SELECT s.endpoint, s.p256dh, s.auth, s.lang, s.favorites, o.weekly, o.rel FROM push_subs s LEFT JOIN push_opt o ON o.endpoint = s.endpoint WHERE s.last_sent_week IS NULL OR s.last_sent_week != ?1 LIMIT 100").bind(week).all();
     if (!results || !results.length) break;
     const mark = [], drop = [];
     for (const r of results) {
       let fav = []; try { fav = JSON.parse(r.favorites || "[]"); } catch {}
-      const hits = (Array.isArray(fav) ? fav : []).map((id) => byId.get(id)).filter(Boolean);
-      if (!hits.length) { mark.push(r.endpoint); continue; }
+      // ★のガチャの発売週：これまでの登録の人（設定なし）はそのまま送る。設定でオフにした人（rel=0）には送らない
+      const hits = r.rel === 0 ? [] : (Array.isArray(fav) ? fav : []).map((id) => byId.get(id)).filter(Boolean);
+      const digest = !hits.length;
+      if (digest && (r.weekly !== 1 || !all.length)) { mark.push(r.endpoint); continue; }
       if (sent >= PUSH_SEND_MAX) continue;
-      const lang = PUSH_MSG[r.lang] ? r.lang : "ja", M = PUSH_MSG[lang];
-      const nm = hits[0][`name_${lang}`] || hits[0].name_en || hits[0].name_ja;
-      const data = {
+      const lang = PUSH_MSG[r.lang] ? r.lang : "ja", M = PUSH_MSG[lang], D = DIGEST_MSG[lang];
+      const nameOf = (x) => x[`name_${lang}`] || x.name_en || x.name_ja;
+      const nm = digest ? "" : nameOf(hits[0]);
+      const data = digest ? {
+        title: D.title(all.length), body: D.body(all.slice(0, 2).map(nameOf), Math.max(0, all.length - 2)),
+        url: `${site}/${lang === "ja" ? "" : lang + "/"}week?utm_source=webpush&utm_medium=push&utm_campaign=weekly`, icon: `${site}/images/icons/icon-192.png`, tag: `week-${week}`,
+      } : {
         title: M.title, body: hits.length > 1 ? M.more(nm, hits.length - 1) : M.one(nm),
         url: `${site}/${lang === "ja" ? "" : lang + "/"}mylist`, icon: `${site}/images/icons/icon-192.png`, tag: `week-${week}`,
       };
@@ -161,17 +188,46 @@ async function runPush(env) {
     }
     const st = [
       ...mark.map((e) => env.DB.prepare("UPDATE push_subs SET last_sent_week = ?2 WHERE endpoint = ?1").bind(e, week)),
-      ...drop.map((e) => env.DB.prepare("DELETE FROM push_subs WHERE endpoint = ?1").bind(e)),
+      ...drop.flatMap((e) => dropSubStatements(env.DB, e)),
     ];
     for (let i = 0; i < st.length; i += 50) await env.DB.batch(st.slice(i, i + 50));
     if (!mark.length && !drop.length) break; // 送り直し待ちだけが残った
   }
+  return sent;
+}
+
+/*
+ * ★のガチャの入荷・在庫復活／抽選開始／お店のお知らせ（lib/pushwatch.js）。
+ * 在庫の確認で見つけた動き（push_events）を、受け取る人ごとに1通にまとめて、少しずつ送る。
+ * 1回に送る数は、発売週のお知らせと合わせて PUSH_SEND_MAX 通まで（Workers の回数の上限のため）
+ */
+async function runAlerts(env, targets, max) {
+  const now = new Date(), site = env.SITE_URL || "https://gachapla.com";
+  try { await detectLottery(env, { now }); } catch (e) { console.log(`lottery check: ${e.message}`); }
+  // 商品の名前（stock-targets.json の n・e）。名前がまだ配られていないあいだは、まとめずに待つ
+  const names = new Map((targets || []).filter((t) => t && t.n).map((t) => [t.id, { ja: t.n, en: t.e || "" }]));
+  if (names.size) await fanOut(env.DB, { now, names, site });
+  else await env.DB.prepare("DELETE FROM push_events WHERE created_at < ?1").bind(new Date(now.getTime() - 12 * 3600e3).toISOString()).run();
+  // 古い「送った記録」の掃除（日本時間の朝4時台に1回）
+  const j = new Date(now.getTime() + 9 * 3600e3);
+  if (j.getUTCHours() === 4 && j.getUTCMinutes() < 10) await env.DB.batch(pruneStatements(env.DB, now));
+  if (isQuiet(now)) return 0; // 夜（22時〜7時）は送らない。朝になってから送る
+  const has = await env.DB.prepare("SELECT id FROM push_queue LIMIT 1").first();
+  if (!has) return 0;
+  const vapid = await getVapidKeys(env.DB), jwtCache = new Map();
+  const sent = await sendQueue(env.DB, { now, max, send: (sub, data) => sendPush(sub, data, { vapid, subject: `${site}/about`, jwtCache, ttl: 6 * 3600 }) });
+  return sent;
 }
 
 export default {
   async scheduled(event, env, ctx) {
-    ctx.waitUntil(runPush(env).catch((e) => console.log(`push failed: ${e.message}`)));
-    ctx.waitUntil(run(env));
+    ctx.waitUntil((async () => {
+      let used = 0, targets = [];
+      try { used = (await runPush(env)) || 0; } catch (e) { console.log(`push failed: ${e.message}`); }
+      try { targets = (await run(env)) || []; } catch (e) { console.log(`stock run failed: ${e.message}`); }
+      // 発売週のお知らせで使った分をのぞいた残り（月曜の朝でも、少なくとも5通ぶんは残す）
+      try { await runAlerts(env, targets, Math.max(5, PUSH_SEND_MAX - used)); } catch (e) { console.log(`alerts failed: ${e.message}`); }
+    })());
   },
   async fetch() { return new Response("gacha-planet stock worker", { status: 200 }); },
 };

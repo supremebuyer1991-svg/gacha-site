@@ -1308,7 +1308,7 @@ const ogPlan = (rel, title, sub, list) => { OG_PLAN[rel] = { title, sub, ids: li
   const from = new Date(Date.UTC(nowJST.getUTCFullYear(), nowJST.getUTCMonth() - 1, 1)).toISOString().slice(0, 7);
   const targets = items
     .filter((it) => it.release >= from)
-    .map((it) => ({ id: it.id, code: ((it.official_url || "").match(/gashapon\.jp\/products\/detail\.php\?jan_code=(\d{13})/) || [])[1] }))
+    .map((it) => ({ id: it.id, code: ((it.official_url || "").match(/gashapon\.jp\/products\/detail\.php\?jan_code=(\d{13})/) || [])[1], n: it.name, ...(it.name_en ? { e: it.name_en } : {}) })) // n・e：お知らせ（入荷・在庫復活）の文に使う商品名
     .filter((t) => t.code);
   write("data/stock-targets.json", JSON.stringify(targets));
 }
@@ -3565,7 +3565,7 @@ ${feed.map((it) => `<item><title>${esc(nameOf(it, lang))}</title><link>${esc(can
       ["みんなの報告・コメントについて", "ガチャマップへの在庫報告・評価・コメントは、名前を出さずに表示します。いたずら防止のため、端末を見分けるための読めない符号を記録しますが、IPアドレスそのものは保存しません。"],
       ["位置情報について", "「現在地から探す」などで使う現在地は、近いお店を並べる計算だけに使い、どこにも送信しません。"],
       ["マイリスト（★保存）・ハートについて", "★で保存したガチャ（マイリスト）と、ハートを押した記録は、お使いのブラウザの中（ローカルストレージ）だけに保存され、当サイトのサーバーには送信されません。ブラウザのデータを消すと、保存した内容も消えます。ハートの数（人気ランキング）だけは、名前などを含まない形で集計しています。"],
-      ["発売日のお知らせ（プッシュ通知）について", "「発売日にお知らせを受け取る」を選んだ場合だけ、通知の送り先（ブラウザが発行するプッシュ通知用のアドレスと暗号化の鍵）と、★で保存したガチャの番号・表示言語を当サイトのサーバーに保存します。名前・メールアドレスなどは受け取りません。いたずら防止のため、端末を見分けるための読めない符号も記録します（IPアドレスそのものは保存しません）。「お知らせをやめる」を押せば、いつでもすぐに削除されます。"],
+      ["お知らせ（プッシュ通知）について", "お知らせ（発売日・入荷・在庫復活・抽選開始・毎週の新作まとめ・お店のお知らせ）は、ご自分でボタンを押してオンにしたものだけを送ります。オンにした場合だけ、通知の送り先（ブラウザが発行するプッシュ通知用のアドレスと暗号化の鍵）と、★で保存したガチャの番号・表示言語・お知らせ用に選んだ都道府県・お知らせを登録したお店と商品（またはキーワード）を当サイトのサーバーに保存します。名前・メールアドレスなどは受け取りません。いたずら防止のため、端末を見分けるための読めない符号も記録します（IPアドレスそのものは保存しません）。「お知らせをやめる」「全部やめる」を押せば、いつでもすぐに削除されます。"],
       ["免責事項", "掲載している発売日・価格・取扱店・在庫などの情報は、公式情報とみんなの報告をもとにしていますが、正確さを保証するものではありません。最新の情報は各メーカーの公式サイトやお店でご確認ください。"],
       ["改定", "この方針は、必要に応じて変更することがあります。"],
     ];
@@ -3655,6 +3655,11 @@ write("data/mercari-item-ids.json", JSON.stringify({ ids: [...MERCARI_ITEM_IDS] 
   const weeks = [wk(WEEK), wk(NEXT_WEEK)];
   write("data/push-week.json", JSON.stringify({ ...weeks[0], weeks }));
 }
+// 抽選開始のお知らせ（Web Push）：ワーカーが読む「受付中・これからの抽選と、結びついた商品」。★にしている人に、受付が始まったら知らせる
+write("data/push-lottery.json", JSON.stringify({ entries: LOT_GROUPS.flatMap((g) => {
+  const ids = [...new Set(g.parts.map((x) => x.it).filter(Boolean).map((it) => it.id))];
+  return ids.length ? g.list.filter((x) => x.start && x.end).map((x) => ({ k: crypto.createHash("md5").update(`${x.store}|${x.title}|${x.end}`).digest("hex").slice(0, 12), ids, title: x.title, store: x.store, pref: x.pref || "", start: x.start, end: x.end })) : [];
+}) }));
 // 通知を受け取るための Service Worker（通知の表示と、押したときにページを開くだけ。キャッシュはしない）
 write("sw.js", fs.readFileSync(path.join(__dirname, "sw.js"), "utf8"));
 write("x-img.html", fs.readFileSync(path.join(__dirname, "tpl", "x-img.html"), "utf8").replace("__FONTS__", FONTS));

@@ -1178,6 +1178,66 @@ em.rel-st { padding: 2px 8px; border-radius: 999px; }
 .push-msg, .push-ios { margin: 8px 0 0; font-size: 12.5px; line-height: 1.6; color: var(--muted); }
 .push-ios { color: #6a5300; }
 .push-item { display: flex; flex-direction: column; max-width: 100%; }
+/* ---------- お知らせ（入荷・抽選・お店のお知らせ）：🔔・お知らせ設定の窓・はじめての★のあとの小さなカード ---------- */
+.np-bell { display: inline-grid; place-items: center; width: 36px; height: 36px; padding: 0; border: 1.5px solid var(--line-strong); border-radius: 50%; background: #fff; font-size: 16px; line-height: 1; cursor: pointer; filter: grayscale(1); opacity: .7; }
+.np-bell i { font-style: normal; }
+.np-bell.is-on { filter: none; opacity: 1; border-color: #ffd36b; background: #fff7df; }
+.np-bell:disabled { opacity: .4; cursor: default; }
+.thumb .np-bell:not(.is-on) { opacity: .9; }
+.thumb .np-bell { position: absolute; right: 6px; bottom: 6px; width: 34px; height: 34px; border: 0; background: rgba(255,255,255,.94); box-shadow: 0 2px 6px rgba(29,33,64,.18); }
+.np-cta { display: inline-flex; align-items: center; min-height: 46px; padding: 0 16px; border-radius: 999px; border: 2px solid #b9c6ff; background: #eef2ff; color: #2f43b8; font: 700 14px var(--font-body); cursor: pointer; }
+.np-cta.is-on { border-color: #ffd36b; background: #fff7df; color: #6a5300; }
+.np-back { position: fixed; inset: 0; z-index: 200; display: flex; align-items: flex-end; justify-content: center; background: rgba(29,33,64,.45); }
+.np-back[hidden], .np-toast[hidden] { display: none; }
+.np { width: min(520px, 100%); max-height: 88vh; overflow-y: auto; -webkit-overflow-scrolling: touch; border-radius: 20px 20px 0 0; background: #fff; color: var(--text); box-shadow: 0 -10px 40px rgba(0,0,0,.25); }
+@media (min-width: 640px) { .np-back { align-items: center; } .np { border-radius: 20px; } }
+.np-head { position: sticky; top: 0; display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; border-bottom: 1px solid var(--line); background: #fff; font-size: 16px; }
+.np-x { width: 40px; height: 40px; border: 0; border-radius: 50%; background: var(--surface-2); font-size: 22px; line-height: 1; cursor: pointer; color: var(--text); }
+.np-body { padding: 14px 16px calc(18px + env(safe-area-inset-bottom)); }
+.np-lead, .np-fine, .np-ios, .np-msg { margin: 0 0 12px; font-size: 13px; line-height: 1.7; color: var(--muted); }
+.np-ios { padding: 10px 12px; border-radius: 12px; background: #fff7df; color: #6a5300; }
+.np-msg { margin-top: 12px; font-weight: 700; color: #2f43b8; }
+.np-row { display: flex; align-items: flex-start; gap: 12px; padding: 12px 0; border-top: 1px solid var(--line); cursor: pointer; }
+.np-row input { flex: none; width: 22px; height: 22px; margin: 1px 0 0; accent-color: #2f43b8; }
+.np-row b { display: block; font-size: 14.5px; line-height: 1.5; }
+.np-row small { display: block; font-size: 12px; color: var(--muted); }
+.np-prefs { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 0 0 12px 34px; }
+.np-pref-on { display: contents; }
+.np-prefs select { min-height: 40px; padding: 0 10px; border: 1px solid var(--line-strong); border-radius: 10px; background: #fff; color: var(--text); font: 14px var(--font-body); }
+.np-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+.np-chip { min-height: 40px; padding: 0 14px; border-radius: 999px; border: 2px solid var(--line-strong); background: #fff; color: var(--text); font: 700 13.5px var(--font-body); cursor: pointer; }
+.np-chip.is-on { border-color: #ffd36b; background: #fff7df; color: #6a5300; }
+.np-chip[data-wkw].is-on::before { content: "🔔 "; }
+.np-chip:disabled { opacity: .5; }
+.np-h { margin: 6px 0 0; padding-top: 14px; border-top: 1px solid var(--line); font-size: 14.5px; font-weight: 700; }
+.np-watches, .np-mine { list-style: none; margin: 8px 0 0; padding: 0; }
+.np-watches li { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 0; font-size: 13.5px; }
+.np-watches li b, .np-watches li small { display: block; }
+.np-watches li small { color: var(--muted); font-size: 12.5px; }
+.np-watches li.np-none { color: var(--muted); font-size: 13px; }
+.np-watches button { flex: none; min-height: 36px; padding: 0 12px; border-radius: 999px; border: 1.5px solid var(--line-strong); background: #fff; color: var(--text-2); font: 700 12.5px var(--font-body); cursor: pointer; }
+.np-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 16px 0 12px; }
+.np-foot .np-save { min-height: 48px; }
+.np-alloff { min-height: 44px; margin-left: auto; padding: 0 16px; border-radius: 999px; border: 2px solid #f0b4b4; background: #fff; color: #b3261e; font: 700 13.5px var(--font-body); cursor: pointer; }
+.np-alloff[hidden], .np-save[hidden] { display: none; }
+.np-toast { position: fixed; left: 12px; right: 12px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 210; max-width: 480px; margin: 0 auto; padding: 12px 16px; border-radius: 14px; background: #1d2140; color: #fff; font-size: 13.5px; font-weight: 700; line-height: 1.6; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+.np-ask { position: fixed; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); z-index: 55; max-width: 440px; margin: 0 auto; padding: 14px 16px; border-radius: 16px; background: #fff; border: 2px solid #b9c6ff; box-shadow: 0 10px 30px rgba(29,33,64,.22); }
+.np-ask p { margin: 0 0 10px; font-size: 14px; font-weight: 700; line-height: 1.6; }
+.np-ask div { display: flex; gap: 8px; }
+.np-ask button { min-height: 44px; padding: 0 16px; border-radius: 999px; font: 700 13.5px var(--font-body); cursor: pointer; }
+.np-ask-yes { flex: 1; border: 2px solid #2f43b8; background: #2f43b8; color: #fff; }
+.np-ask-no { border: 2px solid var(--line-strong); background: #fff; color: var(--text-2); }
+@media (max-width: 960px) { body:has(.item-bar) .np-ask, body:has(.item-bar) .np-toast { bottom: calc(76px + env(safe-area-inset-bottom)); } }
+.np-shop-in { padding: 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface, #fff); }
+.np-shop-h { margin: 0 0 6px; font-size: 16px; font-weight: 700; }
+.np-shop .fine { margin: 6px 0 0; }
+.np-kwf { display: flex; gap: 8px; margin: 0 0 8px; }
+.np-kwf input { flex: 1; min-width: 0; min-height: 44px; padding: 0 12px; border: 1px solid var(--line-strong); border-radius: 10px; background: #fff; color: var(--text); font: 16px var(--font-body); }
+.np-mine { margin: 8px 0; padding: 10px 12px; border-radius: 10px; background: #fff7df; font-size: 13px; color: #6a5300; }
+.np-mine[hidden] { display: none; }
+.np-mine li::before { content: "🔔 "; }
+.site-footer nav .np-open { white-space: nowrap; }
+
 .push-item .push-msg, .push-item .push-ios { max-width: 34em; }
 
 /* ---------- 商品ページ：発売の状態・公式の店舗検索・下のバー ---------- */
