@@ -30,3 +30,18 @@ CREATE INDEX IF NOT EXISTS push_subs_who ON push_subs (who, created_at);
 CREATE TABLE IF NOT EXISTS push_keys (id INTEGER PRIMARY KEY, public_raw TEXT NOT NULL, private_jwk TEXT NOT NULL, created_at TEXT);
 
 CREATE TABLE IF NOT EXISTS contrib (token TEXT PRIMARY KEY, who TEXT, created_at TEXT);
+-- お知らせの設定：選んだ都道府県と、どのお知らせを受け取るか（どれも本人がオンにしたものだけ。rel＝★のガチャの発売週〔これまでのお知らせ〕、stock＝入荷・在庫復活、lottery＝抽選開始、weekly＝毎週の新作まとめ）、きょう送った数
+CREATE TABLE IF NOT EXISTS push_opt (endpoint TEXT PRIMARY KEY, prefs TEXT NOT NULL DEFAULT '[]', rel INTEGER NOT NULL DEFAULT 1, stock INTEGER NOT NULL DEFAULT 0, lottery INTEGER NOT NULL DEFAULT 0, weekly INTEGER NOT NULL DEFAULT 0, sent_day TEXT, sent_n INTEGER NOT NULL DEFAULT 0, updated_at TEXT);
+-- ★のガチャ（商品の番号から、待っている人をすぐ引けるように push_subs.favorites を写したもの）
+CREATE TABLE IF NOT EXISTS push_fav (item_id TEXT NOT NULL, endpoint TEXT NOT NULL, PRIMARY KEY (item_id, endpoint));
+CREATE INDEX IF NOT EXISTS push_fav_ep ON push_fav (endpoint);
+-- お店のお知らせ：kind='item'（このお店×この商品の入荷・在庫復活）、kind='kw'（このお店に、名前に kw を含む商品が初めて入荷）
+CREATE TABLE IF NOT EXISTS push_watch (id INTEGER PRIMARY KEY AUTOINCREMENT, endpoint TEXT NOT NULL, kind TEXT NOT NULL, shop TEXT NOT NULL, item_id TEXT NOT NULL DEFAULT '', kw TEXT NOT NULL DEFAULT '', shop_name TEXT, item_name TEXT, created_at TEXT NOT NULL, UNIQUE (endpoint, kind, shop, item_id, kw));
+CREATE INDEX IF NOT EXISTS push_watch_shop ON push_watch (shop);
+-- 在庫の動き・抽選の開始（だれかが待っているものだけ書く。まとめたら消す）
+CREATE TABLE IF NOT EXISTS push_events (id INTEGER PRIMARY KEY AUTOINCREMENT, kind TEXT NOT NULL, item_id TEXT NOT NULL, shop TEXT NOT NULL DEFAULT '', shop_name TEXT, pref TEXT, info TEXT, created_at TEXT NOT NULL);
+-- 送る予定のお知らせ（送ったら消す）
+CREATE TABLE IF NOT EXISTS push_queue (id INTEGER PRIMARY KEY AUTOINCREMENT, endpoint TEXT NOT NULL, payload TEXT NOT NULL, created_at TEXT NOT NULL);
+CREATE INDEX IF NOT EXISTS push_queue_ep ON push_queue (endpoint);
+-- 最近送ったもの（同じ商品のお知らせを繰り返さないため。3日で消す）
+CREATE TABLE IF NOT EXISTS push_sent (endpoint TEXT NOT NULL, k TEXT NOT NULL, at TEXT NOT NULL, PRIMARY KEY (endpoint, k));

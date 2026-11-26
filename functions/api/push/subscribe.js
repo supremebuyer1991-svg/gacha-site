@@ -1,7 +1,8 @@
 // 発売週のお知らせ（Web Push）の登録・更新（POST）と取り消し（DELETE）
-// 保存するのは「通知の送り先（endpoint と鍵）・言語・★のガチャの番号」だけ
+// 保存するのは「通知の送り先（endpoint と鍵）・言語・★のガチャの番号・選んだ都道府県・どのお知らせを受け取るか」だけ
 import { json, whoHash, todayJST } from "../../../lib/api-util.js";
 import { validEndpoint, validKeys } from "../../../lib/webpush.js";
+import { syncFavs, saveOpt, dropSubStatements } from "../../../lib/pushwatch.js";
 const LANGS = new Set(["ja", "en", "zh-cn", "zh-tw", "ko"]);
 const MAX_BODY = 16 * 1024, MAX_FAV = 200, NEW_PER_DAY = 10;
 
@@ -11,6 +12,15 @@ async function readBody(request) {
   const text = await request.text();
   if (!text || text.length > MAX_BODY) return null;
   try { return JSON.parse(text); } catch { return null; }
+}
+
+// ★のガチャの写し（push_fav）と、お知らせの設定（push_opt）。古い画面（設定を送ってこない）からの登録では設定は変えない。
+// ここで失敗しても、もとの登録（発売週のお知らせ）は成功のままにする
+async function saveExtras(env, endpoint, b, fav, now) {
+  try {
+    await syncFavs(env.DB, endpoint, fav);
+    if (b.opts && typeof b.opts === "object") await saveOpt(env.DB, endpoint, { prefs: b.prefs, opts: b.opts }, now);
+  } catch (e) { console.log(`push extras: ${e && e.message}`); }
 }
 
 export async function onRequestPost({ env, request }) {
@@ -27,6 +37,7 @@ export async function onRequestPost({ env, request }) {
   if (old) {
     await env.DB.prepare("UPDATE push_subs SET p256dh = ?2, auth = ?3, lang = ?4, favorites = ?5, updated_at = ?6 WHERE endpoint = ?1")
       .bind(s.endpoint, keys.p256dh, keys.auth, lang, JSON.stringify(fav), now).run();
+    await saveExtras(env, s.endpoint, b, fav, now);
     return json({ ok: true, n: fav.length }, 200, 0);
   }
   // 新しい登録は、1つの端末から1日 NEW_PER_DAY 件まで（いたずら防止）
@@ -35,6 +46,7 @@ export async function onRequestPost({ env, request }) {
   if (c && c.n >= NEW_PER_DAY) return json({ ok: false, error: "limit" }, 429, 0);
   await env.DB.prepare("INSERT INTO push_subs (endpoint, p256dh, auth, lang, favorites, created_at, updated_at, last_sent_week, who) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?6, NULL, ?7) ON CONFLICT(endpoint) DO UPDATE SET p256dh = ?2, auth = ?3, lang = ?4, favorites = ?5, updated_at = ?6")
     .bind(s.endpoint, keys.p256dh, keys.auth, lang, JSON.stringify(fav), now, who).run();
+  await saveExtras(env, s.endpoint, b, fav, now);
   return json({ ok: true, n: fav.length }, 200, 0);
 }
 
@@ -44,5 +56,7 @@ export async function onRequestDelete({ env, request }) {
   const endpoint = b && (b.endpoint || (b.subscription && b.subscription.endpoint));
   if (!validEndpoint(endpoint)) return json({ ok: false, error: "bad" }, 400, 0);
   await env.DB.prepare("DELETE FROM push_subs WHERE endpoint = ?1").bind(endpoint).run();
+  // 都道府県・お店のお知らせ・送る予定なども全部消す
+  try { await env.DB.batch(dropSubStatements(env.DB, endpoint)); } catch (e) { console.log(`push drop: ${e && e.message}`); }
   return json({ ok: true }, 200, 0);
 }
