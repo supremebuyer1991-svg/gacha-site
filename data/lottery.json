@@ -2,30 +2,6 @@
   "note": "ガチャの抽選販売・整理券・入場抽選。時刻は日本時間。毎晩の見回りで追加・更新。 新しく足した抽選には added（足した日 \"2026-11-06\" の形）を入れる。20時のXポストは added が今日の抽選だけを載せる。",
   "entries": [
     {
-      "title": "サンリオキャラクターズ 雪だるまふわふわめじるしアクセサリー",
-      "store": "#C-pla 博多駅博多口",
-      "pref": "福岡県",
-      "kind": "item",
-      "start": "2026-11-21T18:45",
-      "end": "2026-11-25T23:59",
-      "method": "LivePocket",
-      "url": "https://livepocket.jp/e/dujpw",
-      "note": "販売日は11/29。当選発表は11/26ごろ",
-      "added": "2026-11-23"
-    },
-    {
-      "title": "“ディズニーキャラクター” 雪だるまふわふわめじるしアクセサリー",
-      "store": "#C-pla 博多駅博多口",
-      "pref": "福岡県",
-      "kind": "item",
-      "start": "2026-11-21T18:45",
-      "end": "2026-11-25T23:59",
-      "method": "LivePocket",
-      "url": "https://livepocket.jp/e/1a089",
-      "note": "販売日は11/29。当選発表は11/26ごろ",
-      "added": "2026-11-23"
-    },
-    {
       "title": "どうぶつの森 めじるしアクセサリー",
       "store": "ガシャポンバンダイオフィシャルショップ 未来屋書店 明石",
       "pref": "兵庫県",
@@ -98,6 +74,102 @@
       "added": "2026-11-27"
     },
     {
+      "title": "サンリオキャラクターズ 雪だるまふわふわめじるしアクセサリー",
+      "store": "#C-pla 川西阪急スクエア",
+      "pref": "兵庫県",
+      "kind": "item",
+      "start": "2026-11-26T10:00",
+      "end": "2026-11-29T23:59",
+      "method": "LivePocket",
+      "url": "https://livepocket.jp/e/8cqr4",
+      "note": "販売日は12/3。1人2個まで",
+      "added": "2026-11-28"
+    },
+    {
+      "title": "“ディズニーキャラクター” 雪だるまふわふわめじるしアクセサリー",
+      "store": "#C-pla minamoa広島",
+      "pref": "広島県",
+      "kind": "item",
+      "start": "2026-11-27T10:00",
+      "end": "2026-11-29T23:59",
+      "method": "LivePocket",
+      "url": "https://livepocket.jp/e/kawco",
+      "note": "販売日は12/3。1人4個まで",
+      "added": "2026-11-28"
+    },
+    {
+      "title": "サンリオキャラクターズ 雪だるまふわふわめじるしアクセサリー",
+      "store": "#C-pla minamoa広島",
+      "pref": "広島県",
+      "kind": "item",
+      "start": "2026-11-27T10:00",
+      "end": "2026-11-29T23:59",
+      "method": "LivePocket",
+      "url": "https://livepocket.jp/e/lcyay",
+      "note": "販売日は12/3。1人4個まで",
+      "added": "2026-11-28"
+    },
+    {
+      "title": "“ディズニーキャラクター” 雪だるまふわふわめじるしアクセサリー",
+      "store": "#C-pla ゆめタウン徳島",
+      "pref": "徳島県",
+      "kind": "item",
+      "start": "2026-11-27T10:00",
+      "end": "2026-11-29T23:59",
+      "method": "LivePocket",
+      "url": "https://livepocket.jp/e/zpzqx",
+      "note": "販売日は12/3。1人2個まで",
+      "added": "2026-11-28"
+    },
+    {
+      "title": "サンリオキャラクターズ 雪だるまふわふわめじるしアクセサリー",
+      "store": "#C-pla ゆめタウン徳島",
+      "pref": "徳島県",
+      "kind": "item",
+      "start": "2026-11-27T10:00",
+      "end": "2026-11-29T23:59",
+      "method": "LivePocket",
+      "url": "https://livepocket.jp/e/gbmrz",
+      "note": "販売日は12/3。1人3個まで",
+      "added": "2026-11-28"
+    },
+    {
+      "title": "サンリオキャラクターズ 雪だるまふわふわめじるしアクセサリー",
+      "store": "#C-pla ベルフローラかわにし",
+      "pref": "兵庫県",
+      "kind": "item",
+      "start": "2026-11-26T10:00",
+      "end": "2026-11-29T23:59",
+      "method": "LivePocket",
+      "url": "https://livepocket.jp/e/o91nr",
+      "note": "販売日は12/4。1人2個まで",
+      "added": "2026-11-28"
+    },
+    {
+      "title": "“ディズニーキャラクター” 雪だるまふわふわめじるしアクセサリー",
+      "store": "#C-pla ゆめタウン高松",
+      "pref": "香川県",
+      "kind": "item",
+      "start": "2026-11-27T10:00",
+      "end": "2026-11-29T23:59",
+      "method": "LivePocket",
+      "url": "https://livepocket.jp/e/34s4a",
+      "note": "販売日は12/7。1人2個まで",
+      "added": "2026-11-28"
+    },
+    {
+      "title": "サンリオキャラクターズ 雪だるまふわふわめじるしアクセサリー",
+      "store": "#C-pla ゆめタウン高松",
+      "pref": "香川県",
+      "kind": "item",
+      "start": "2026-11-27T10:00",
+      "end": "2026-11-29T23:59",
+      "method": "LivePocket",
+      "url": "https://livepocket.jp/e/f87sn",
+      "note": "販売日は12/7。1人3個まで",
+      "added": "2026-11-28"
+    },
+    {
       "title": "“ディズニーキャラクター” 雪だるまふわふわめじるしアクセサリー",
       "store": "#C-pla+ mozoワンダーシティ",
       "pref": "愛知県",
@@ -120,6 +192,30 @@
       "url": "https://livepocket.jp/e/qihc8",
       "note": "12月4日（金）の入場時間枠を抽選。結果は12/1。特定の商品の購入は約束されません",
       "added": "2026-11-27"
+    },
+    {
+      "title": "ナルミヤキャラクターズ めじるしアクセサリー2",
+      "store": "#C-pla カラフルタウン岐阜",
+      "pref": "岐阜県",
+      "kind": "item",
+      "start": "2026-11-26T15:00",
+      "end": "2026-11-30T23:59",
+      "method": "LivePocket",
+      "url": "https://livepocket.jp/e/y8gzc",
+      "note": "販売日は12/4。1人4個まで。結果は12/1",
+      "added": "2026-11-28"
+    },
+    {
+      "title": "オープン3日間の入店抽選",
+      "store": "gashacoco ポートウォークみなと",
+      "pref": "愛知県",
+      "kind": "open",
+      "start": "2026-11-27T15:00",
+      "end": "2026-11-30T23:59",
+      "method": "アプリ（gashacoco公式アプリ）",
+      "url": "",
+      "note": "12/4〜12/6の一部時間帯が対象。くわしくはお店の公式Xで",
+      "added": "2026-11-28"
     }
   ]
 }
