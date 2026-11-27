@@ -235,15 +235,19 @@ function music(file, secs, beats) {
     for (let i = 1; i < frames.length; i++) { off += frames[i - 1][1] - T; fc += `;[${last}][v${i}]xfade=transition=${trans[(i - 1) % trans.length]}:duration=${T}:offset=${off.toFixed(2)}[x${i}]`; last = `x${i}`; }
     const file = `reel-${x.today}.mp4`;
     args.push("-filter_complex", fc, "-map", `[${last}]`, "-map", `${frames.length}:a`, "-c:v", "libx264", "-preset", "veryfast", "-crf", "23", "-pix_fmt", "yuv420p", "-r", "30", "-c:a", "aac", "-b:a", "128k", "-shortest", "-movflags", "+faststart", path.join(OUT, file));
-    execFileSync("ffmpeg", args, { stdio: ["ignore", "ignore", "pipe"] });
-    // TikTok 用の音なし版（アプリで流行りの曲をのせるため）
-    execFileSync("ffmpeg", ["-y", "-i", path.join(OUT, file), "-c:v", "copy", "-an", "-movflags", "+faststart", path.join(OUT, file.replace(/\.mp4$/, "-silent.mp4"))], { stdio: ["ignore", "ignore", "pipe"] });
+    // 動画づくり（ffmpeg）が失敗しても、TikTok の写真スライドと social-reel.json は作る（11/26 に ffmpeg が無くて丸ごと止まった）
+    let videoOk = true;
+    try {
+      execFileSync("ffmpeg", args, { stdio: ["ignore", "ignore", "pipe"] });
+      // TikTok 用の音なし版（アプリで流行りの曲をのせるため）
+      execFileSync("ffmpeg", ["-y", "-i", path.join(OUT, file), "-c:v", "copy", "-an", "-movflags", "+faststart", path.join(OUT, file.replace(/\.mp4$/, "-silent.mp4"))], { stdio: ["ignore", "ignore", "pipe"] });
+    } catch (e) { videoOk = false; console.log(`⚠ リール動画は作れず（写真スライドだけ作る）: ${e.message}`); }
     await sharp(frames[0][0]).jpeg({ quality: 86 }).toFile(path.join(OUT, file.replace(/\.mp4$/, ".jpg"))); // リールの表紙（グリッドに出る画像）
     // TikTok の写真スライド用：1枚ずつの画像（reel-日付-s1.jpg 〜）
     const slides = [];
     for (let k = 0; k < frames.length; k++) { const sf = file.replace(/\.mp4$/, `-s${k + 1}.jpg`); await sharp(frames[k][0]).jpeg({ quality: 88 }).toFile(path.join(OUT, sf)); slides.push(`https://gachapla.com/images/social/${sf}?v=${ver(path.join(OUT, sf))}`); }
     fs.rmSync(TMP, { recursive: true, force: true });
-    fs.writeFileSync(path.join(ROOT, "dist", "data", "social-reel.json"), JSON.stringify({ date: x.today, title, sub, word, kawaii: kw.map((i) => i.id), slides, url: `https://gachapla.com/images/social/${file}?v=${ver(path.join(OUT, file))}`, cover: `https://gachapla.com/images/social/${file.replace(/\.mp4$/, ".jpg")}?v=${ver(path.join(OUT, file.replace(/\.mp4$/, ".jpg")))}`, items: pool.map((i) => ({ id: i.id, name: clean(i.name), price: i.price, lineup: i.lineup })) }));
+    fs.writeFileSync(path.join(ROOT, "dist", "data", "social-reel.json"), JSON.stringify({ date: x.today, title, sub, word, kawaii: kw.map((i) => i.id), slides, url: videoOk ? `https://gachapla.com/images/social/${file}?v=${ver(path.join(OUT, file))}` : "", cover: `https://gachapla.com/images/social/${file.replace(/\.mp4$/, ".jpg")}?v=${ver(path.join(OUT, file.replace(/\.mp4$/, ".jpg")))}`, items: pool.map((i) => ({ id: i.id, name: clean(i.name), price: i.price, lineup: i.lineup })) }));
     console.log(`リール：${title}（${pool.length}商品・${total.toFixed(1)}秒）`);
   } catch (e) { console.log(`⚠ リール: ${e.message}`); fs.rmSync(TMP, { recursive: true, force: true }); }
 })();

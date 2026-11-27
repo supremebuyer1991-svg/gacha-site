@@ -204,6 +204,7 @@ async function igReel(tok, caption, videoUrl, coverUrl) {
     let rl = null;
     try { rl = LOCAL ? JSON.parse(fs.readFileSync(path.join(ROOT, "dist", "data", "social-reel.json"), "utf8")) : await getJSON(`${SITE}/data/social-reel.json`); } catch (e) { log("⚠ リールのデータが読めません", e.message); }
     if (!rl || rl.date !== today) log("今日のリールがまだありません");
+    else if (!rl.url) log("今日はリール動画が作れなかったので Instagram リールは休み（TikTok の写真スライドはある）");
     else if (st.reel_date === today) log("今日のリールはもう投稿済み");
     else {
       const kw = new Set(rl.kawaii || []);
