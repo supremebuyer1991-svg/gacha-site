@@ -68878,7 +68878,7 @@
   {
     "id": "tarts-y911279",
     "name": "もちにまる そのよん",
-    "name_en": "",
+    "name_en": "Mochinimaru Part 4",
     "maker": "タカラトミーアーツ",
     "maker_en": "Takara Tomy A.R.T.S",
     "price": 300,
@@ -68905,16 +68905,18 @@
     "description": "",
     "description_en": "",
     "auto": true,
-    "q_subs": [],
+    "q_subs": [
+      "kawaii:animal",
+      "kawaii:mascot"
+    ],
     "q_ages": [
+      "10",
       "20",
-      "30",
-      "40"
+      "30"
     ],
     "q_genders": [
-      "female",
-      "male"
+      "female"
     ],
-    "tags_auto": true
+    "tags_auto": false
   }
 ]
