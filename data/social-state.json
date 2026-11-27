@@ -1,7 +1,6 @@
 {
  "threads": {
   "posted": {
-   "bandai-4570118206145": "2026-11-12",
    "tarts-y911767": "2026-11-13",
    "bandai-4570118206565": "2026-11-14",
    "bandai-4582769708473": "2026-11-19",
@@ -26,11 +25,13 @@
    "tarts-y912337": "2026-11-27",
    "bandai-4570118186768": "2026-11-27",
    "bandai-4582769889400": "2026-11-27",
-   "bandai-4582770026993": "2026-11-27"
+   "bandai-4582770026993": "2026-11-27",
+   "bandai-4582770071016": "2026-11-27"
   },
-  "refreshed_at": "2026-11-06T21:03:40.289Z",
+  "refreshed_at": "2026-11-27T04:54:32.379Z",
   "secret_hash": "e8d6075023e32369",
-  "deadline_date": "2026-11-26"
+  "deadline_date": "2026-11-26",
+  "token_enc": "ZFT6QKGqsEjwMPxjOQtMSvLC7EliKeMAskUTh+NH75lljwW7l/zm5l9YU5vWvpwppoZvTn6Au8AwW+kiByKxcOVYdER2K8BK9ffAvkdQcoBwVfBFdqYWRhd8jyrNTLh+EuYqmPs3jyPkeIjEgLtLHJUqY+5J17mhkPaPqFKQU9zJjcFoYkBuT/cTuQ0DM6ylyeZCSPi5m6ugnsiyyiW0FzeuSfFqMM1OaGJ8fXzfFKKQaR77BAn4szSWl0o="
  },
  "instagram": {
   "posted": {
